@@ -3,6 +3,11 @@
 <h2>Initialisation du projet</h2>
 <p>Etape 0 => (git hub) créer un projet (dejà fait)</p>
 <p>Etape 1 => (unity) Créer un projet unity</p>
+<p>Etape 1.5 => (unity) Edit -> Project Setting -> Editor</p>
+
+            Version Controller      Visible Meta Files (Permet de rendre visible les modifications faites sur l'interface unity)
+            Asset Serialization     Force Text    
+            
 <p>Etape 2 => supprimer le dossier ProjectSetting et .collabignore (si existant)</p>
 <p>Etape 3 => (source tree) Cloner/Nouveau -> Créer un nouveau dépôt -> choisir comme destination le répertoire créer au dessus</p>
 <p>Etape 4 => (source tree) ajouter le serveur distant </p>
