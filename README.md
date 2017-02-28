@@ -13,7 +13,7 @@
             Type de l'hôte : github
             Identifiant : le vôtre 
 <p>Etape 5 => Récupérer (si la branche master n'apparait pas appuyez sur rafraichir</p>
-<p>Etape 6 => Enjoye !!</p>
+<p>Etape 6 => Enjoy !!</p>
 
 
 <h2>GitIgnore</h2>
