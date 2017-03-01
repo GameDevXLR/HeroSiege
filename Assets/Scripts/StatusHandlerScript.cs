@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class StatusHandlerScript : MonoBehaviour {
 
@@ -23,12 +24,12 @@ public class StatusHandlerScript : MonoBehaviour {
 	}
 	IEnumerator CCprocedure ( float CCTime)
 	{
-		MoveScript.enabled = false;
+		GetComponent<NavMeshAgent> ().Stop ();
 		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		//ajouter la désactivation de l'autoA;
 		yield return new WaitForSeconds (CCTime);
 		//réactiver l'autoA;
-		MoveScript.enabled = true;
+		GetComponent<NavMeshAgent> ().Resume ();
 	}
 
 	public void MakeHimRoot(float rootDuration)
@@ -37,10 +38,10 @@ public class StatusHandlerScript : MonoBehaviour {
 	}
 	IEnumerator RootProcedure (float rootTime)
 	{
-		MoveScript.enabled = false;
+		GetComponent<NavMeshAgent> ().Stop ();
 		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		yield return new WaitForSeconds (rootTime);
-		MoveScript.enabled = true;	
+		GetComponent<NavMeshAgent> ().Resume ();
 	}
 	
 	// Update is called once per frame

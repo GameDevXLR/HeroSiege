@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 	public void LooseALife()
 	{
 		lifeOfTheTeam -= 1;
-		if (lifeOfTheTeam <=0)
+		if (lifeOfTheTeam <= 0)
 		{
 			Debug.Log ("GameOver");
 			//faire ici ce qui doit se passer si on a pu de vie et que la partie est donc finie.
