@@ -11,7 +11,7 @@ public class FountainRegenScript : MonoBehaviour {
 
 	void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject.layer.ToString () == "Player") 
+		if (other.gameObject.layer == 8) //layer 8 is Player.
 		{
 			other.GetComponent<GenericLifeScript> ().currentHp += regenHp;
 			other.GetComponent<GenericManaScript> ().currentMp += regenMp;

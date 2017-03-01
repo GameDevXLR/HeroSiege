@@ -24,6 +24,7 @@ public class StatusHandlerScript : MonoBehaviour {
 	IEnumerator CCprocedure ( float CCTime)
 	{
 		MoveScript.enabled = false;
+		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		//ajouter la désactivation de l'autoA;
 		yield return new WaitForSeconds (CCTime);
 		//réactiver l'autoA;
@@ -37,6 +38,7 @@ public class StatusHandlerScript : MonoBehaviour {
 	IEnumerator RootProcedure (float rootTime)
 	{
 		MoveScript.enabled = false;
+		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		yield return new WaitForSeconds (rootTime);
 		MoveScript.enabled = true;	
 	}
@@ -44,6 +46,10 @@ public class StatusHandlerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (Input.GetKeyDown (KeyCode.A)) 
+		{
+			MakeHimCC (2f);
+		}
 		
 	}
 }
