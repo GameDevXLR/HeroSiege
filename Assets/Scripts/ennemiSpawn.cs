@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ennemiSpawn : MonoBehaviour {
 
+	// ce script gere le spawn des ennemis : il contient une variable "level" qui détermine le niveau de la vague et donc le mob associé.
+	// la variable "waves" correspond au nombre total de monstres qui spawn par level.
+	// la coroutine s'arrete si le level est supérieur au nombre d'objets a faire spawn (nombre de gameobjects dans l'array ennemi)...
+
 	public GameObject[] ennemi;
 	public Transform inibTransform;
 	public float waves;
@@ -21,15 +25,16 @@ public class ennemiSpawn : MonoBehaviour {
 
 	IEnumerator spawn()
 	{
-		for (float i = 0; i < waves; i++) 
-		{
-			if (i == 0) 
-			{
-				yield return new WaitForSeconds (2);
+		if (level < ennemi.Length) {
+			for (float i = 0; i < waves; i++) {
+				if (i == 0) {
+					yield return new WaitForSeconds (2);
+				}
+				GameObject newEnnemi = Instantiate (ennemi [level], inibTransform.position, inibTransform.rotation) as GameObject;
+				actualWave++;
+
+				yield return new WaitForSeconds (timeBetweenWaves);
 			}
-			GameObject newEnnemi = Instantiate (ennemi[level], inibTransform.position, inibTransform.rotation) as GameObject;
-			actualWave++;
-			yield return new WaitForSeconds (timeBetweenWaves);
 		}
 	}
 	void Update()
@@ -38,10 +43,11 @@ public class ennemiSpawn : MonoBehaviour {
 		{
 			actualWave = 0;
 			level++;
-			if (level > ennemi.Length) 
+			if (level >= ennemi.Length) 
 			{
-				Debug.Log ("fin du spawn");
+				return;
 			}
+			StartCoroutine (spawn ());
 		}
 	}
 }
