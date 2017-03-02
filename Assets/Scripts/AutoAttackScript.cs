@@ -41,11 +41,17 @@ public class AutoAttackScript : MonoBehaviour {
 					StopAttacking ();
 				}
 			}
+			if (gameObject.layer == 9) 
+			{
+				agent.SetDestination (target.transform.position);
+			}
 		}
 		if (target == null && isAttacking) 
 		{
+			if(gameObject.layer == 8){
 			agent.SetDestination (transform.position);
-			StopAttacking ();
+			}
+				StopAttacking ();
 		}
 	}
 	public void AttackTheTarget()
@@ -57,13 +63,27 @@ public class AutoAttackScript : MonoBehaviour {
 	{
 		isAttacking = false;
 		agent.Resume ();
+		if (gameObject.layer == 9) 
+		{
+			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+
+		}
 	}
 	public void AcquireTarget(GameObject newTarget)
 	{
 		target = newTarget;
+		if (gameObject.layer == 9) 
+		{
+			agent.SetDestination (target.transform.position);
+
+		}
 	}
 	public void LooseTarget()
 	{
 		target = null;
+		if (gameObject.layer == 9) 
+		{
+			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+		}
 	}
 }

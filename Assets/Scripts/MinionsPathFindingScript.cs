@@ -11,12 +11,12 @@ public class MinionsPathFindingScript : MonoBehaviour {
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
 		target = GameObject.Find ("EndPointForMobs").transform;
-		agent.SetDestination (target.position);
-
+		GoToEndGame ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
+	public void GoToEndGame()
+	{
+		agent.SetDestination (target.position);
+		agent.Resume ();
 	}
 }

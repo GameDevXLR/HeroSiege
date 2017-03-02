@@ -8,8 +8,10 @@ public class PlayerClicToMove : MonoBehaviour {
 	public NavMeshAgent agentPlayer;
 	public AutoAttackScript attackScript;
 	public GameObject target;
+	int layer_mask;
 	// Use this for initialization
 	void Start () {
+		layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
 		agentPlayer = GetComponent<NavMeshAgent> ();
 		attackScript = GetComponent<AutoAttackScript> ();
 	}
@@ -20,7 +22,7 @@ public class PlayerClicToMove : MonoBehaviour {
 		if (Input.GetMouseButtonDown (1)) {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit)) {	
+			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
 				agentPlayer.destination = hit.point;
 				
 				if (hit.collider.gameObject.layer == 9) {

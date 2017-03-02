@@ -27,9 +27,11 @@ public class EnnemiAggroManagerScript : MonoBehaviour {
 		}
 	}
 		void OnTriggerExit(Collider other)
-		{
-		autoAScript.LooseTarget ();
+	{
+		if (other.gameObject.layer == 8) {
+			autoAScript.LooseTarget ();
 		}
+	}
 		
 	}
 
