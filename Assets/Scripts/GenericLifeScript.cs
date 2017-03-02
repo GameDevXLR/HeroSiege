@@ -7,7 +7,7 @@ public class GenericLifeScript : MonoBehaviour {
 	// ce script sert a gerer la vie de l'objet auquel il est attacher. en cas de mort; l'objet est détruit sauf si c'est un joueur : dans ce cas faut écrire le code pour le moment c'est pas préciser...
 
 	public int maxHp = 1000;
-	public int currentHp = 80;
+	public int currentHp = 800;
 	public int regenHp;
 	public Transform respawnTransform; // placer ici un transform qui correspond a l'endroit ou doit respawn l'objet.
 
@@ -54,8 +54,7 @@ public class GenericLifeScript : MonoBehaviour {
 				return;
 			} 
 			if (armorScore > 0) {
-				float multiplicatorArmor = 100 / (100 + armorScore);
-
+				float multiplicatorArmor = (float) 100f / (100f + armorScore);
 				currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
 				return;
 			}else
