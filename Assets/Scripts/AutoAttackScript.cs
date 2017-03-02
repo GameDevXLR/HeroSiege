@@ -27,7 +27,6 @@ public class AutoAttackScript : MonoBehaviour {
 			previousAttackTime = Time.time + attackRate;
 
 			if (isAttacking && target) {
-				Debug.Log ("toucher");
 				target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false);
 			}
 		
@@ -41,29 +40,54 @@ public class AutoAttackScript : MonoBehaviour {
 					StopAttacking ();
 				}
 			}
+			if (gameObject.layer == 9) 
+			{
+				agent.SetDestination (target.transform.position);
+			}
+			if (target.GetComponent<GenericLifeScript> ().isDead) 
+			{
+				StopAttacking ();
+			}
 		}
 		if (target == null && isAttacking) 
 		{
+			if(gameObject.layer == 8){
 			agent.SetDestination (transform.position);
-			StopAttacking ();
+			}
+				StopAttacking ();
 		}
 	}
 	public void AttackTheTarget()
 	{
-		agent.Stop ();
+			agent.Stop ();
+
 		isAttacking = true;
 	}
 	public void StopAttacking()
 	{
 		isAttacking = false;
 		agent.Resume ();
+		if (gameObject.layer == 9) 
+		{
+			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+
+		}
 	}
 	public void AcquireTarget(GameObject newTarget)
 	{
 		target = newTarget;
+		if (gameObject.layer == 9) 
+		{
+			agent.SetDestination (target.transform.position);
+
+		}
 	}
 	public void LooseTarget()
 	{
 		target = null;
+		if (gameObject.layer == 9) 
+		{
+			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+		}
 	}
 }
