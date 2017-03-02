@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class moveCamera : MonoBehaviour {
-    public float speed = 1.5;
+    public float speed = 1.5f;
     // Use this for initialization
     void Start () {
 		
