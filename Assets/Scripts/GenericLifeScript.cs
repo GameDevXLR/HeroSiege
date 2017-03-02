@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GenericLifeScript : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class GenericLifeScript : MonoBehaviour {
 	public int armorScore = 1;
 
 
-	private bool isDead;
+	public bool isDead;
 	private float lastTic;
 	public float timeBetweenTic = 1f;
 
@@ -47,7 +48,8 @@ public class GenericLifeScript : MonoBehaviour {
 	}
 
 	public void LooseHealth(int dmg, bool trueDmg)
-	{
+	{		StartCoroutine(HitAnimation());
+		
 		if (currentHp > 0) {
 			if (trueDmg) {
 				currentHp -= dmg;
@@ -69,7 +71,7 @@ public class GenericLifeScript : MonoBehaviour {
 	}
 	public void MakeHimDie ()
 	{
-		if (gameObject.layer.ToString() == "Player") 
+		if (gameObject.layer == 8) 
 		{
 			//faire ici ce qui se passe pour un joueur qui meurt
 			PlayerRespawnProcess();
@@ -83,11 +85,40 @@ public class GenericLifeScript : MonoBehaviour {
 	}
 		IEnumerator RespawnEnum()
 	{
-		yield return new WaitForSeconds (5f);
+		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
+		GetComponent<AutoAttackScript> ().enabled = false;
+		GetComponent<Renderer> ().enabled = false;
+		GetComponent<PlayerClicToMove> ().enabled = false;
+		GetComponent<NavMeshAgent> ().SetDestination (transform.position);
+		GetComponent<CapsuleCollider> ().enabled = false;
+		yield return new WaitForSeconds (0.8f);
+		GetComponent<Renderer> ().enabled = false;
+		Debug.Log ("5sec before respawn");
+		yield return new WaitForSeconds (4.2f);
+		GetComponent<NavMeshAgent> ().SetDestination (respawnTransform.position);
+		GetComponent<Renderer> ().enabled = true;
+		GetComponent<PlayerClicToMove> ().enabled = true;
+		GetComponent<CapsuleCollider> ().enabled = true;
+		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
+		GetComponent<AutoAttackScript> ().enabled = true;
+
 		gameObject.transform.position = respawnTransform.position;
 		gameObject.transform.rotation = respawnTransform.rotation;
 		currentHp = maxHp;
 		isDead = false;
 		}
-
+	IEnumerator HitAnimation()
+	{
+		GetComponent<Renderer> ().enabled = false;
+		yield return new WaitForSeconds (0.1f);
+		GetComponent<Renderer> ().enabled = true;
+		yield return new WaitForSeconds (0.1f);
+		GetComponent<Renderer> ().enabled = false;
+		yield return new WaitForSeconds (0.1f);
+		GetComponent<Renderer> ().enabled = true;
+		yield return new WaitForSeconds (0.1f);
+		GetComponent<Renderer> ().enabled = false;
+		yield return new WaitForSeconds (0.1f);
+		GetComponent<Renderer> ().enabled = true;
+	}
 }

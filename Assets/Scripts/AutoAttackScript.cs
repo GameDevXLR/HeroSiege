@@ -27,7 +27,6 @@ public class AutoAttackScript : MonoBehaviour {
 			previousAttackTime = Time.time + attackRate;
 
 			if (isAttacking && target) {
-				Debug.Log ("toucher");
 				target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false);
 			}
 		
@@ -45,6 +44,10 @@ public class AutoAttackScript : MonoBehaviour {
 			{
 				agent.SetDestination (target.transform.position);
 			}
+			if (target.GetComponent<GenericLifeScript> ().isDead) 
+			{
+				StopAttacking ();
+			}
 		}
 		if (target == null && isAttacking) 
 		{
@@ -56,7 +59,8 @@ public class AutoAttackScript : MonoBehaviour {
 	}
 	public void AttackTheTarget()
 	{
-		agent.Stop ();
+			agent.Stop ();
+
 		isAttacking = true;
 	}
 	public void StopAttacking()
