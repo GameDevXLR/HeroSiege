@@ -37,10 +37,15 @@ public class AutoAttackScript : MonoBehaviour {
 				AttackTheTarget ();
 			}
 			if (isAttacking) {
-				if (agent.remainingDistance > attackRange) {
+				if (agent.remainingDistance > attackRange+0.5f) {
 					StopAttacking ();
 				}
 			}
+		}
+		if (target == null && isAttacking) 
+		{
+			agent.SetDestination (transform.position);
+			StopAttacking ();
 		}
 	}
 	public void AttackTheTarget()
