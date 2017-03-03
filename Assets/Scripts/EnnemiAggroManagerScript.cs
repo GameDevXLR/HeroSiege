@@ -10,6 +10,8 @@ public class EnnemiAggroManagerScript : MonoBehaviour {
 	// il doit contenir obligatoirement un collider Trigger ! qui correspondra donc a la zone d'aggro du mob.
 	//Si un mob n'a plus de cible, il va directement en chercher une autre.
 
+	Animator anim;
+
 	private NavMeshAgent agentParent;
 	private AutoAttackScript autoAScript;
 	// Use this for initialization

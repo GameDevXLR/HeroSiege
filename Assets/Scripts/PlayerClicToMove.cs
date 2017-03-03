@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class PlayerClicToMove : MonoBehaviour {
 
+	Animator anim;
+//	bool walk;
 	public NavMeshAgent agentPlayer;
 	public AutoAttackScript attackScript;
 	public GameObject target;
@@ -14,16 +16,23 @@ public class PlayerClicToMove : MonoBehaviour {
 		layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
 		agentPlayer = GetComponent<NavMeshAgent> ();
 		attackScript = GetComponent<AutoAttackScript> ();
+		anim = GetComponentInChildren<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetMouseButtonDown (1)) {
+		if (Input.GetMouseButtonUp (1)) {
+			anim.SetBool ("stopwalk", false);
+
+//			walk = false;
+			attackScript.stopWalk = false;
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
-				agentPlayer.destination = hit.point;
+
+//				Vector3 tempHitPoint = new Vector3 (hit.point.x, 1f, hit.point.z);
+				agentPlayer.destination =hit.point;
 				GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
 				
 				if (hit.collider.gameObject.layer == 9) {
