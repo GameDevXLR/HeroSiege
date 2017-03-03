@@ -87,7 +87,7 @@ public class GenericLifeScript : MonoBehaviour {
 	{
 		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 		GetComponent<AutoAttackScript> ().enabled = false;
-		GetComponent<Renderer> ().enabled = false;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().enabled = false;
 		GetComponent<NavMeshAgent> ().SetDestination (transform.position);
 		GetComponent<CapsuleCollider> ().enabled = false;
@@ -96,7 +96,7 @@ public class GenericLifeScript : MonoBehaviour {
 		Debug.Log ("5sec before respawn");
 		yield return new WaitForSeconds (4.2f);
 		GetComponent<NavMeshAgent> ().SetDestination (respawnTransform.position);
-		GetComponent<Renderer> ().enabled = true;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
 		GetComponent<CapsuleCollider> ().enabled = true;
 		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
@@ -109,16 +109,16 @@ public class GenericLifeScript : MonoBehaviour {
 		}
 	IEnumerator HitAnimation()
 	{
-		GetComponent<Renderer> ().enabled = false;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (0.1f);
-		GetComponent<Renderer> ().enabled = true;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		yield return new WaitForSeconds (0.1f);
-		GetComponent<Renderer> ().enabled = false;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (0.1f);
-		GetComponent<Renderer> ().enabled = true;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		yield return new WaitForSeconds (0.1f);
-		GetComponent<Renderer> ().enabled = false;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (0.1f);
-		GetComponent<Renderer> ().enabled = true;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 	}
 }

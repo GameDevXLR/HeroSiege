@@ -7,7 +7,7 @@ public class AutoAttackScript : MonoBehaviour {
 
 	//ce script gere l'auto attack de l'objet auquel il est attacher.
 	Animator anim;
-	bool stopWalk;
+	public bool stopWalk; //pour l animation
 	bool charge;
 	bool attackAnim;
 	public NavMeshAgent agent;
@@ -52,22 +52,31 @@ public class AutoAttackScript : MonoBehaviour {
 				StopAttacking ();
 			}
 		}
-		if (target == null && isAttacking) 
-		{
-			if(gameObject.layer == 8){
-			agent.SetDestination (transform.position);
-			}
+		if (target == null ) 
+		{					
+			LooseTarget ();
+			
+			if (isAttacking) {
+				if (gameObject.layer == 8) {
+					agent.SetDestination (transform.position);
+				}
 				StopAttacking ();
+			}
 		}
 		// si il est arreter
-		if (agent.remainingDistance <= agent.stoppingDistance && !isAttacking && !agent.hasPath) 
+		if (!agent.pathPending) 
 		{
-			if (gameObject.layer == 8)
-				// si c'est le joueur
+			if (agent.remainingDistance <= agent.stoppingDistance) 
 			{
-				//ecrire ici ton animation de joueur idle.
-				stopWalk = true;
-				anim.SetBool("stopwalk", stopWalk);
+				if(!agent.hasPath || agent.velocity.sqrMagnitude == 0f){
+				if (gameObject.layer == 8) {		
+					// si c'est le joueur
+					if (!stopWalk) {
+						//ecrire ici ton animation de joueur idle.
+						stopWalk = true;
+						anim.SetBool ("stopwalk", stopWalk);
+						}}
+				}
 			}
 		}
 	}
@@ -77,15 +86,22 @@ public class AutoAttackScript : MonoBehaviour {
 
 		isAttacking = true;
 		attackAnim = true;
-		anim.SetBool ("attack", attackAnim);
+		if (gameObject.layer == 8) {
+			anim.SetBool ("attack", attackAnim);
+		}
+		if(gameObject.layer == 9){
 		anim.SetBool ("attackEnnemi", attackAnim);
-	}
+		}}
 	public void StopAttacking()
 	{
 		isAttacking = false;
 		attackAnim = false;
-		anim.SetBool ("attack", attackAnim);
-		anim.SetBool ("attackEnnemi", attackAnim);
+		if (gameObject.layer == 8) {
+			anim.SetBool ("attack", attackAnim);
+		}
+		if (gameObject.layer == 9) {
+			anim.SetBool ("attackEnnemi", attackAnim);
+		}
 		agent.Resume ();
 		if (gameObject.layer == 9) 
 		{
@@ -114,7 +130,7 @@ public class AutoAttackScript : MonoBehaviour {
 		{
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 		}
-		if (gameObject.layer == 8) 
+		if (gameObject.layer == 8 && charge) 
 		{
 			//faire ici l'arret de la charge.
 			charge = false;
