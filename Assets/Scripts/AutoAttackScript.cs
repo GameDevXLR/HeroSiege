@@ -18,6 +18,8 @@ public class AutoAttackScript : MonoBehaviour {
 	public bool isAttacking;
 	public GameObject target;
 
+	private Vector3 targetTempPos;
+	private bool isActualizingPos;
 	void Start()
 	{
 		agent = GetComponent<NavMeshAgent> ();
@@ -26,60 +28,62 @@ public class AutoAttackScript : MonoBehaviour {
 
 	void Update ()
 	{
-		if (Time.time > previousAttackTime) {
-			previousAttackTime = Time.time + attackRate;
-
-			if (isAttacking && target) {
-				target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false);
-			}
-		
-		}
 		if (target) {
-			if (agent.remainingDistance <= attackRange) {
-				AttackTheTarget ();
+			if (!isAttacking) {
+				if (Vector3.Distance (transform.position, target.transform.position) <= attackRange) {
+					AttackTheTarget ();
+				} else {
+					if (gameObject.layer == 9) {
+						if (Vector3.Distance (targetTempPos, target.transform.position) > 0 && !isActualizingPos) {
+							StartCoroutine (ActualizeTargetPos());
+						}
+					}
+
+				}
 			}
+
 			if (isAttacking) {
-				if (agent.remainingDistance > attackRange+0.5f) {
+				if (Time.time > previousAttackTime) {
+					previousAttackTime = Time.time + attackRate;
+					target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false);
+				}
+				if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) {
 					StopAttacking ();
 				}
 			}
-			if (gameObject.layer == 9) 
-			{
-				agent.SetDestination (target.transform.position);
-			}
-			if (target.GetComponent<GenericLifeScript> ().isDead) 
-			{
-				StopAttacking ();
-			}
-		}
-		if (target == null ) 
-		{					
+		} else {
 			LooseTarget ();
-			
 			if (isAttacking) {
+				StopAttacking ();
 				if (gameObject.layer == 8) {
 					agent.SetDestination (transform.position);
+
 				}
-				StopAttacking ();
 			}
 		}
-		// si il est arreter
-		if (!agent.pathPending) 
-		{
-			if (agent.remainingDistance <= agent.stoppingDistance) 
-			{
-				if(!agent.hasPath || agent.velocity.sqrMagnitude == 0f){
-				if (gameObject.layer == 8) {		
-					// si c'est le joueur
-					if (!stopWalk) {
-						//ecrire ici ton animation de joueur idle.
-						stopWalk = true;
-						anim.SetBool ("stopwalk", stopWalk);
-						}}
+
+		if (gameObject.layer == 8) {
+			if (!agent.pathPending) {
+				if (agent.remainingDistance <= agent.stoppingDistance) {
+					if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
+						if (!stopWalk) {
+							stopWalk = true;
+							anim.SetBool ("stopwalk", stopWalk);
+						}
+					}
 				}
 			}
 		}
 	}
+	IEnumerator ActualizeTargetPos()
+		{
+			isActualizingPos = true;
+			agent.SetDestination (target.transform.position);
+			targetTempPos = target.transform.position;
+			yield return new WaitForSeconds (0.2f);
+			isActualizingPos = false;
+		}
+
 	public void AttackTheTarget()
 	{
 			agent.Stop ();
@@ -115,6 +119,7 @@ public class AutoAttackScript : MonoBehaviour {
 		if (gameObject.layer == 9) 
 		{
 			agent.SetDestination (target.transform.position);
+			targetTempPos = target.transform.position;
 		}
 		if (gameObject.layer == 8) 
 		{

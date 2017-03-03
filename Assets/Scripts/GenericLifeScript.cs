@@ -25,27 +25,35 @@ public class GenericLifeScript : MonoBehaviour {
 
 	void Update () {
 
-		if (isDead == false) {
+		if (isDead) 
+		{
+			return;
+		}
 
-			if (Time.time > lastTic) {
+			if (Time.time > lastTic) 
+			{
 				lastTic = Time.time + timeBetweenTic;
 				RegenYourHP ();
 			}
 
 
-			if (currentHp > maxHp) {
+			if (currentHp > maxHp) 
+			{
 				currentHp = maxHp;
+				return;
 			}
 
-			if (currentHp < 0) {
+			if (currentHp < 0) 
+			{
 				currentHp = 0;
 			}
-			if (currentHp == 0) {
+			if (currentHp == 0) 
+			{
 				isDead = true;
 				MakeHimDie ();
 			}
 		}
-	}
+
 
 	public void LooseHealth(int dmg, bool trueDmg)
 	{		StartCoroutine(HitAnimation());
@@ -116,9 +124,6 @@ public class GenericLifeScript : MonoBehaviour {
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (0.1f);
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
-		yield return new WaitForSeconds (0.1f);
-		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
-		yield return new WaitForSeconds (0.1f);
-		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
+
 	}
 }
