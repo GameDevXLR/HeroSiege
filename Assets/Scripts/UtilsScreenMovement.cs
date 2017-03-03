@@ -1,8 +1,25 @@
-﻿using UnityEngine;
+﻿/***
+ * 
+ * UtilsScreenMovement is a util class which will contain 
+ * severall userfull function for the camera movement 
+ * 
+ * */
+
+
+using UnityEngine;
 
 public static class UtilsScreenMovement
 {
-	public static void moveScreenWithMouse(Camera cameraCible,int zoneDetectionMouse,  int speed)
+	/***
+	 * 
+	 * move the screen depend of the mouse position 
+	 * param Camera => camera target
+	 * param zoneDetectionMouse => detection zone in the border
+	 * param speed 
+	 * 
+	 * 
+	 * */
+	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed)
     {
         if (Input.mousePosition.x >= 0 && Input.mousePosition.x <= zoneDetectionMouse)
         {

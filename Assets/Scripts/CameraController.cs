@@ -2,14 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/**
+ * 
+ * class : CameraController
+ * A script to controll the camera
+ * 
+ * */
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
-    public bool selectedPlayer = false;
-    public int speed = 1;
+	// our personnage
+    public GameObject player; 
+
+	// selectedPlayer
+	// true : camera lock in the perso
+	// false : camera free from the perso
+    public bool selectedPlayer = false; 
+
+	//speed move of the camera when move with mouse
+    public int speed = 5;
+
+	// detection zone of the mouse in the border
     public int zoneDetectionMouse = 100;
+
+	// initial distance player / camera
     private Vector3 offset;
+
+	// initial y, allow to block the y axis
     private float yvalue;
 
 	Camera cameraCible;
@@ -23,21 +41,11 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-		if (Input.GetKey (KeyCode.L))
+		if (Input.GetKeyDown (KeyCode.L))
 			selectedPlayer = !selectedPlayer;
+		
 		if (!Input.GetKey ("space") && !selectedPlayer) {
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed);
-//			if (Input.mousePosition.x >= 0 && Input.mousePosition.x <= zoneDetectionMouse) {
-//				transform.Translate (new Vector3 (-speed * Time.deltaTime, 0, 0));
-//			} else if (Input.mousePosition.x <= Screen.width && Input.mousePosition.x >= Screen.width - zoneDetectionMouse) {
-//				transform.Translate (new Vector3 (speed * Time.deltaTime, 0, 0));
-//			}
-//
-//			if (Input.mousePosition.y >= 0 && Input.mousePosition.y <= zoneDetectionMouse) {
-//				transform.Translate (new Vector3 (0, 0, -speed * Time.deltaTime));
-//			} else if (Input.mousePosition.y <= Screen.height && Input.mousePosition.y >= Screen.height - zoneDetectionMouse) {
-//				transform.Translate (new Vector3 (0, 0, speed * Time.deltaTime));
-//			}
 		}
         
     }
@@ -47,6 +55,8 @@ public class CameraController : MonoBehaviour
 		if (selectedPlayer || Input.GetKey ("space")) {
 			transform.position = player.transform.position + offset;
 		}
+
+		// allow to block y axis
         gameObject.transform.position = new Vector3()
         {
             x = gameObject.transform.position.x,
