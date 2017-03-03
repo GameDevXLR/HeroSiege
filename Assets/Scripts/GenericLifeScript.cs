@@ -25,7 +25,7 @@ public class GenericLifeScript : MonoBehaviour {
 
 	void Update () {
 
-		if (isDead) 
+		if (isDead || currentHp == maxHp) 
 		{
 			return;
 		}
@@ -100,7 +100,7 @@ public class GenericLifeScript : MonoBehaviour {
 		GetComponent<NavMeshAgent> ().SetDestination (transform.position);
 		GetComponent<CapsuleCollider> ().enabled = false;
 		yield return new WaitForSeconds (0.8f);
-		GetComponent<Renderer> ().enabled = false;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		Debug.Log ("5sec before respawn");
 		yield return new WaitForSeconds (4.2f);
 		GetComponent<NavMeshAgent> ().SetDestination (respawnTransform.position);

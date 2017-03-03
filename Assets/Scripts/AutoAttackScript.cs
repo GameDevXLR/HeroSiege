@@ -17,13 +17,14 @@ public class AutoAttackScript : MonoBehaviour {
 	public int damage;
 	public bool isAttacking;
 	public GameObject target;
-
+	public float rotSpeed = 5;
 	private Vector3 targetTempPos;
 	private bool isActualizingPos;
 	void Start()
 	{
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponentInChildren<Animator> ();
+
 	}
 
 	void Update ()
@@ -43,6 +44,9 @@ public class AutoAttackScript : MonoBehaviour {
 			}
 
 			if (isAttacking) {
+				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
+				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
+				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
 				if (Time.time > previousAttackTime) {
 					previousAttackTime = Time.time + attackRate;
 					target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false);
@@ -80,7 +84,7 @@ public class AutoAttackScript : MonoBehaviour {
 			isActualizingPos = true;
 			agent.SetDestination (target.transform.position);
 			targetTempPos = target.transform.position;
-			yield return new WaitForSeconds (0.2f);
+			yield return new WaitForSeconds (0.5f);
 			isActualizingPos = false;
 		}
 
@@ -90,12 +94,18 @@ public class AutoAttackScript : MonoBehaviour {
 
 		isAttacking = true;
 		attackAnim = true;
-		if (gameObject.layer == 8) {
+		if (gameObject.layer == 8) 
+		{
 			anim.SetBool ("attack", attackAnim);
 		}
-		if(gameObject.layer == 9){
+		if(gameObject.layer == 9)
+		{
+			agent.enabled = false;
+			GetComponent<NavMeshObstacle> ().enabled = true;
+
 		anim.SetBool ("attackEnnemi", attackAnim);
-		}}
+		}
+	}
 	public void StopAttacking()
 	{
 		isAttacking = false;
@@ -103,7 +113,11 @@ public class AutoAttackScript : MonoBehaviour {
 		if (gameObject.layer == 8) {
 			anim.SetBool ("attack", attackAnim);
 		}
-		if (gameObject.layer == 9) {
+		if (gameObject.layer == 9) 
+		{
+			agent.enabled = true;
+			GetComponent<NavMeshObstacle> ().enabled = false;
+
 			anim.SetBool ("attackEnnemi", attackAnim);
 		}
 		agent.Resume ();
