@@ -28,7 +28,7 @@ public class ennemiSpawn : MonoBehaviour {
 		if (level < ennemi.Length) {
 			for (float i = 0; i < waves; i++) {
 				if (i == 0) {
-					yield return new WaitForSeconds (2);
+					yield return new WaitForSeconds (5);
 				}
 				GameObject newEnnemi = Instantiate (ennemi [level], inibTransform.position, inibTransform.rotation) as GameObject;
 				actualWave++;
@@ -45,8 +45,15 @@ public class ennemiSpawn : MonoBehaviour {
 			level++;
 			if (level >= ennemi.Length) 
 			{
-				return;
+				level = 0;
+				waves *= 2;
+				timeBetweenWaves /= 2;
+				if (timeBetweenWaves < 1) 
+				{
+					timeBetweenWaves = 1;
+				}
 			}
+
 			StartCoroutine (spawn ());
 		}
 	}

@@ -24,6 +24,7 @@ public class PlayerClicToMove : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
 				agentPlayer.destination = hit.point;
+				GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
 				
 				if (hit.collider.gameObject.layer == 9) {
 					target = hit.collider.gameObject;

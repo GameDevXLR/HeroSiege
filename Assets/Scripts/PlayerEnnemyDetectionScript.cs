@@ -30,4 +30,16 @@ public class PlayerEnnemyDetectionScript : MonoBehaviour {
 			}
 		}
 	}
+	void Update()
+	{
+		if (Input.GetKeyUp (KeyCode.S)) 
+		{
+			autoTargetting = false;
+			playerAgent.SetDestination (GetComponentInParent<Transform> ().position);
+			if (autoAScript.isAttacking) 
+			{
+				autoAScript.LooseTarget ();
+			}
+		}
+	}
 }
