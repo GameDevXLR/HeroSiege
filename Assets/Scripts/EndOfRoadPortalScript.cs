@@ -19,7 +19,8 @@ public class EndOfRoadPortalScript : MonoBehaviour {
 	{
 		if (other.gameObject.layer == 9) // layer9 is Ennemies.
 		{
-			other.GetComponent<GenericLifeScript> ().currentHp = 0;
+			other.gameObject.GetComponent<GenericLifeScript> ().guyAttackingMe = null;
+			other.gameObject.GetComponent<GenericLifeScript> ().MakeHimDie();
 			GameManager.instanceGM.LooseALife ();
 		}
 	}

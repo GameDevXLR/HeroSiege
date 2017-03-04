@@ -15,11 +15,13 @@ public class AutoAttackScript : MonoBehaviour {
 	public float attackRate;
 	private float previousAttackTime;
 	public int damage;
+	public int levelUpBonusDamage;
 	public bool isAttacking;
 	public GameObject target;
 	public float rotSpeed = 5;
 	private Vector3 targetTempPos;
 	private bool isActualizingPos;
+	private GameObject targetObj; // l'objet qui t'attaque ! 
 	void Start()
 	{
 		agent = GetComponent<NavMeshAgent> ();
@@ -47,9 +49,10 @@ public class AutoAttackScript : MonoBehaviour {
 				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
-				if (Time.time > previousAttackTime) {
+				if (Time.time > previousAttackTime) 
+				{
 					previousAttackTime = Time.time + attackRate;
-					target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false);
+					target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
 				}
 				if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) {
 					StopAttacking ();
@@ -84,7 +87,7 @@ public class AutoAttackScript : MonoBehaviour {
 			isActualizingPos = true;
 			agent.SetDestination (target.transform.position);
 			targetTempPos = target.transform.position;
-			yield return new WaitForSeconds (0.5f);
+		yield return new WaitForSeconds (Random.Range( 0.5f, 0.7f));
 			isActualizingPos = false;
 		}
 
@@ -155,5 +158,10 @@ public class AutoAttackScript : MonoBehaviour {
 			charge = false;
 			anim.SetBool ("charge", charge);
 		}
+	}
+	public void LevelUp()
+	{
+		damage += levelUpBonusDamage;
+
 	}
 }
