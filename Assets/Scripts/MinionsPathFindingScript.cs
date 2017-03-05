@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
-public class MinionsPathFindingScript : MonoBehaviour {
+public class MinionsPathFindingScript : NetworkBehaviour {
 	public NavMeshAgent agent;
 	public Transform target;
 	public float stopTime = 2f;
@@ -16,7 +17,8 @@ public class MinionsPathFindingScript : MonoBehaviour {
 	
 	public void GoToEndGame()
 	{
-		agent.SetDestination (target.position);
-		agent.Resume ();
+			agent.SetDestination (target.position);
+			agent.Resume ();
+	
 	}
 }

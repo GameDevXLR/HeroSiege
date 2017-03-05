@@ -11,19 +11,25 @@ public class CameraController : MonoBehaviour
     public int zoneDetectionMouse = 100;
     private Vector3 offset;
     private float yvalue;
+	private bool isReady;
 
 	Camera cameraCible;
 
-    void Start()
+	public void Initialize()
     {
         offset = transform.position - player.transform.position;
         cameraCible = GetComponent<Camera>();
         yvalue = gameObject.transform.position.y;
+		isReady = true;
     }
 
     void Update()
     {
-		if (Input.GetKey (KeyCode.L))
+		if (!isReady) 
+		{
+			return;
+		}
+		if (Input.GetKeyUp (KeyCode.L))
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey ("space") && !selectedPlayer) {
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed);
@@ -44,6 +50,10 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+		if (!isReady) 
+		{
+			return;
+		}
 		if (selectedPlayer || Input.GetKey ("space")) {
 			transform.position = player.transform.position + offset;
 		}

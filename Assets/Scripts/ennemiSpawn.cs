@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ennemiSpawn : MonoBehaviour {
+public class ennemiSpawn : NetworkBehaviour {
 
 	// ce script gere le spawn des ennemis : il contient une variable "level" qui détermine le niveau de la vague et donc le mob associé.
 	// la variable "waves" correspond au nombre total de monstres qui spawn par level.
@@ -32,6 +33,7 @@ public class ennemiSpawn : MonoBehaviour {
 				}
 				GameObject newEnnemi = Instantiate (ennemi [level], inibTransform.position, inibTransform.rotation) as GameObject;
 				actualWave++;
+				NetworkServer.Spawn (newEnnemi);
 
 				yield return new WaitForSeconds (timeBetweenWaves);
 			}

@@ -13,4 +13,9 @@ public class PlayerGoldScript : MonoBehaviour {
 		ActualGold += gold;
 		goldDisplay.text = ActualGold.ToString();
 	}
+
+	void Start()
+	{
+		goldDisplay = GameObject.Find ("PlayerGold").GetComponent<Text> ();
+	}
 }

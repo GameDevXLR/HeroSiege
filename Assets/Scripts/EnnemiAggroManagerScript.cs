@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnnemiAggroManagerScript : MonoBehaviour {
+public class EnnemiAggroManagerScript : MonoBehaviour 
+{
 
 	//ce script gere l'aggro : la zone d'aggro; le switch d'aggro; et tout ce qui va avec.
 	// il doit etre placer sur un enfant de l'objet qui doit détecter l'aggro (le mob).
@@ -15,25 +16,32 @@ public class EnnemiAggroManagerScript : MonoBehaviour {
 	private NavMeshAgent agentParent;
 	private AutoAttackScript autoAScript;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		agentParent =GetComponentInParent<NavMeshAgent> ();
 		autoAScript = GetComponentInParent<AutoAttackScript> ();
 		
 	}
 	
-	void OnTriggerStay(Collider other){
-		if (other.gameObject.layer == 8) {
-			if (autoAScript.target == null) {
-				autoAScript.AcquireTarget (other.gameObject);
+	void OnTriggerStay(Collider other)
+	{
+
+		if (other.gameObject.layer == 8) 
+		{
+			if (autoAScript.target == null) 
+			{
+				GetComponentInParent<ChildrenHandlerForMob>().SetTheTarget(other.gameObject);
 			}
 		}
 	}
 		void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.layer == 8) {
-			autoAScript.LooseTarget ();
+		if (other.gameObject.layer == 8) 
+		{
+			GetComponentInParent<ChildrenHandlerForMob>().LooseThatTarget();
 		}
 	}
 		
-	}
+		
+}
 

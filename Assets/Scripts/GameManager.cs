@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class GameManager : MonoBehaviour {
+
+public class GameManager : NetworkBehaviour {
 	public Text gameOverTxt;
 	public static GameManager instanceGM = null;
 	public GameObject[] ennemies;
+	public GameObject playerObj;
 
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
@@ -28,7 +31,6 @@ public class GameManager : MonoBehaviour {
 		lifeOfTheTeam -= 1;
 		if (lifeOfTheTeam <= 0)
 		{
-			Debug.Log ("GameOver");
 			ennemies = GameObject.FindObjectsOfType<GameObject> ();
 			foreach (GameObject g in ennemies) 
 			{
@@ -51,7 +53,10 @@ public class GameManager : MonoBehaviour {
 	{
 		gameOverTxt.enabled = true;
 		yield return new WaitForSeconds (3f);
-		SceneManager.LoadSceneAsync (0);
+		if (isServer) 
+		{
+			NetworkManager.singleton.ServerChangeScene ("scene2");		
+		}
 
 	}
 }

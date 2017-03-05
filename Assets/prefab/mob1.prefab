@@ -464,6 +464,8 @@ GameObject:
   - component: {fileID: 114002337453437636}
   - component: {fileID: 114984326133745796}
   - component: {fileID: 208883239641083638}
+  - component: {fileID: 114550509820544456}
+  - component: {fileID: 114577216152578906}
   m_Layer: 9
   m_Name: mob1
   m_TagString: Untagged
@@ -1356,7 +1358,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428138532016874}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9d3d7061b155cc4da2a67c3a188bf8e, type: 3}
   m_Name: 
@@ -1425,6 +1427,49 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114550509820544456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607321022530426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 246
+    i1: 2
+    i2: 30
+    i3: 11
+    i4: 141
+    i5: 83
+    i6: 46
+    i7: 180
+    i8: 11
+    i9: 98
+    i10: 152
+    i11: 252
+    i12: 135
+    i13: 29
+    i14: 28
+    i15: 73
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114577216152578906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607321022530426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee852830f69d3e4ba6af37362f10e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114635520145944314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1436,14 +1481,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xpGiven: 50
+  goldGiven: 5
   lifeBar: {fileID: 224410816351006932}
   maxHp: 45
   currentHp: 45
   regenHp: 1
+  levelUpBonusHP: 10
   respawnTransform: {fileID: 0}
   armorScore: 1
   dodge: 0
   respawnTime: 5
+  respawnTxt: {fileID: 0}
   isDead: 0
   timeBetweenTic: 1
   guyAttackingMe: {fileID: 0}
@@ -1509,6 +1558,7 @@ MonoBehaviour:
   maxMp: 100
   currentMp: 90
   regenMp: 1
+  levelUpBonusMP: 0
   timeBetweenTic: 1
   manaBar: {fileID: 224979754317363938}
 --- !u!114 &114886597796118110
@@ -1550,6 +1600,7 @@ MonoBehaviour:
   attackRange: 0.8
   attackRate: 1.5
   damage: 2
+  levelUpBonusDamage: 0
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5

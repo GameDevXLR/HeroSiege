@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
-public class AutoAttackScript : MonoBehaviour {
+public class AutoAttackScript : NetworkBehaviour {
 
 	//ce script gere l'auto attack de l'objet auquel il est attacher.
 	Animator anim;
@@ -24,6 +25,7 @@ public class AutoAttackScript : MonoBehaviour {
 	private GameObject targetObj; // l'objet qui t'attaque ! 
 	void Start()
 	{
+		
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponentInChildren<Animator> ();
 
@@ -62,9 +64,9 @@ public class AutoAttackScript : MonoBehaviour {
 			LooseTarget ();
 			if (isAttacking) {
 				StopAttacking ();
-				if (gameObject.layer == 8) {
+				if (gameObject.layer == 8) 
+				{
 					agent.SetDestination (transform.position);
-
 				}
 			}
 		}
@@ -93,6 +95,7 @@ public class AutoAttackScript : MonoBehaviour {
 
 	public void AttackTheTarget()
 	{
+		
 			agent.Stop ();
 
 		isAttacking = true;
@@ -101,10 +104,11 @@ public class AutoAttackScript : MonoBehaviour {
 		{
 			anim.SetBool ("attack", attackAnim);
 		}
-		if(gameObject.layer == 9)
+		if(gameObject.layer == 9 )
 		{
-			agent.enabled = false;
-			GetComponent<NavMeshObstacle> ().enabled = true;
+			
+				agent.enabled = false;
+				GetComponent<NavMeshObstacle> ().enabled = true;
 
 		anim.SetBool ("attackEnnemi", attackAnim);
 		}
@@ -114,18 +118,23 @@ public class AutoAttackScript : MonoBehaviour {
 		isAttacking = false;
 		attackAnim = false;
 		if (gameObject.layer == 8) {
+
+				agent.Resume ();
+
 			anim.SetBool ("attack", attackAnim);
 		}
 		if (gameObject.layer == 9) 
 		{
-			agent.enabled = true;
-			GetComponent<NavMeshObstacle> ().enabled = false;
+	
+				agent.enabled = true;
+				GetComponent<NavMeshObstacle> ().enabled = false;
 
 			anim.SetBool ("attackEnnemi", attackAnim);
 		}
-		agent.Resume ();
+
 		if (gameObject.layer == 9) 
 		{
+			agent.Resume ();
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 
 		}
@@ -133,7 +142,7 @@ public class AutoAttackScript : MonoBehaviour {
 	public void AcquireTarget(GameObject newTarget)
 	{
 		target = newTarget;
-		if (gameObject.layer == 9) 
+		if (gameObject.layer == 9 ) 
 		{
 			agent.SetDestination (target.transform.position);
 			targetTempPos = target.transform.position;

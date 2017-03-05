@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class GenericLifeScript : MonoBehaviour {
+public class GenericLifeScript : NetworkBehaviour {
 
 	// ce script sert a gerer la vie de l'objet auquel il est attacher. en cas de mort; l'objet est détruit sauf si c'est un joueur : dans ce cas faut écrire le code pour le moment c'est pas préciser...
 	public int xpGiven = 50;
@@ -21,12 +22,15 @@ public class GenericLifeScript : MonoBehaviour {
 	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
 
 	public float respawnTime = 5f;
+	public Text respawnTxt;
 	public bool isDead;
 	private float lastTic;
 	public float timeBetweenTic = 1f;
 	public GameObject guyAttackingMe;
 	void Start () {
 		lastTic = 0f;
+		respawnTransform = GameObject.Find ("PlayerRespawnPoint").transform;
+		respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
 	}
 
 	void Update () {
@@ -70,6 +74,13 @@ public class GenericLifeScript : MonoBehaviour {
 		{
 			guyAttackingMe = attacker;
 		}
+		if (attacker != GetComponent<AutoAttackScript> ().target && gameObject.layer ==9) //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
+		{
+			if (Random.Range (0, 2) != 0) //2 est exclusif car c'est un int. et ouais.
+			{
+				GetComponent<AutoAttackScript> ().target = attacker;
+			}
+		}
 		float y = Random.Range (0, 100);
 		if (y > dodge) {
 			StartCoroutine (HitAnimation ());
@@ -100,7 +111,7 @@ public class GenericLifeScript : MonoBehaviour {
 	}
 	public void MakeHimDie ()
 	{
-		if (gameObject.layer == 8) 
+		if (gameObject.layer == 8 && isLocalPlayer) 
 		{
 			//faire ici ce qui se passe pour un joueur qui meurt
 			PlayerRespawnProcess();
@@ -114,7 +125,7 @@ public class GenericLifeScript : MonoBehaviour {
 	{
 		if (guyAttackingMe) 
 		{
-			if (guyAttackingMe.tag == "Player") 
+			if (guyAttackingMe == GameManager.instanceGM.playerObj) 
 			{
 				guyAttackingMe.GetComponent<PlayerXPScript> ().GetXP (xpGiven);
 				guyAttackingMe.GetComponent<PlayerGoldScript> ().GetGold (goldGiven);
@@ -122,15 +133,23 @@ public class GenericLifeScript : MonoBehaviour {
 			}
 		}
 		yield return new WaitForEndOfFrame ();
+		if (isServer) 
+		{
+			NetworkServer.Destroy (gameObject);
+		}
 		Destroy (gameObject);
 	}
 
+
 	//ce qu'il se passe si un JOUEUR meurt...
-	public void PlayerRespawnProcess(){
+	public void PlayerRespawnProcess()
+	{
 		StartCoroutine (RespawnEnum ());
+		StartCoroutine (RespawnTimer ());
 	}
 		IEnumerator RespawnEnum()
 	{
+		//ajouter par ici une anime de mort un de ces 4...
 		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 		GetComponent<AutoAttackScript> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
@@ -151,22 +170,38 @@ public class GenericLifeScript : MonoBehaviour {
 		gameObject.transform.rotation = respawnTransform.rotation;
 		currentHp = maxHp;
 		isDead = false;
+	}
+
+	IEnumerator RespawnTimer()
+	{
+		respawnTxt.enabled = true;
+		int z = (int)respawnTime;
+		for (int j = 0; j <z; j++)
+		{
+			yield return new WaitForEndOfFrame ();
+			int k = z - j;
+			respawnTxt.text = "Respawning in " + k + " seconds.";
+			yield return new WaitForSeconds (1f);
+			if (k == 1) 
+			{
+				respawnTxt.enabled = false;
+			}
 		}
+
+		
+	}
 	IEnumerator HitAnimation()
 	{
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (0.1f);
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
-//		yield return new WaitForSeconds (0.1f);
-//		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
-//		yield return new WaitForSeconds (0.1f);
-//		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
-
 	}
+
 
 	public void LevelUp()
 	{
 		maxHp += levelUpBonusHP;
 		currentHp = maxHp;
+		respawnTime += 4f;
 	}
 }
