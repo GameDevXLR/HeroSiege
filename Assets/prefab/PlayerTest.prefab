@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e39239c2bcdee9c4c8bb53688abd6d41, type: 3}
   m_Name: 
@@ -1329,7 +1329,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f6a7fdf50f74af4797332492246947d, type: 3}
   m_Name: 
@@ -1443,9 +1443,9 @@ MonoBehaviour:
   xpGiven: 50
   goldGiven: 5
   lifeBar: {fileID: 224552685445617892}
-  maxHp: 100
-  currentHp: 100
-  regenHp: 1
+  maxHp: 5000
+  currentHp: 2500
+  regenHp: 500
   levelUpBonusHP: 10
   respawnTransform: {fileID: 0}
   armorScore: 1

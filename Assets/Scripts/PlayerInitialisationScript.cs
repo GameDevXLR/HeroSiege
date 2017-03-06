@@ -12,8 +12,8 @@ public class PlayerInitialisationScript : NetworkBehaviour {
 		if (isLocalPlayer) {
 			CameraController.instanceCamera.target = gameObject;
 			CameraController.instanceCamera.Initialize ();
-			GetComponent<PlayerXPScript> ().enabled = true;
-			GetComponent<PlayerGoldScript> ().enabled = true;
+//			GetComponent<PlayerXPScript> ().enabled = true;
+//			GetComponent<PlayerGoldScript> ().enabled = true;
 //			GetComponent<PlayerClicToMove> ().enabled = true;
 //			GetComponent<NavMeshAgent> ().enabled = true;
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;

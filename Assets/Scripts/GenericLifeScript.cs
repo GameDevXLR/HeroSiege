@@ -12,7 +12,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public int goldGiven = 5;
 	public RectTransform lifeBar;
 	public int maxHp = 1000;
-	public int currentHp = 800;
+	[SyncVar(hook="RescaleTheLifeBarIG")]public int currentHp = 800;
 	public int regenHp;
 	public int levelUpBonusHP = 10;
 
@@ -70,6 +70,10 @@ public class GenericLifeScript : NetworkBehaviour {
 
 	public void LooseHealth(int dmg, bool trueDmg, GameObject attacker)
 	{	
+		if (!isServer) 
+		{
+			return;
+		}
 		if (attacker != guyAttackingMe || guyAttackingMe == null) 
 		{
 			guyAttackingMe = attacker;
@@ -84,8 +88,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		float y = Random.Range (0, 100);
 		if (y > dodge) {
 			StartCoroutine (HitAnimation ());
-			float x = (float)currentHp / maxHp;
-			lifeBar.localScale = new Vector3 (x, 1f, 1f);
+			RescaleTheLifeBarIG (currentHp);
 			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
 			if (currentHp > 0) {
 				if (trueDmg) {
@@ -103,11 +106,20 @@ public class GenericLifeScript : NetworkBehaviour {
 		}
 
 	}
+	public void RescaleTheLifeBarIG(int life)
+	{
+		currentHp = life;
+		float x = (float) currentHp/maxHp;
+		lifeBar.GetComponentInParent<Canvas> ().enabled = true;
+
+		lifeBar.localScale = new Vector3 (x, 1f, 1f);
+
+	}
 	public void	RegenYourHP ()
 	{
 		currentHp += regenHp;
-		float x = (float) currentHp/maxHp;
-		lifeBar.localScale = new Vector3 (x, 1f, 1f);
+
+		RescaleTheLifeBarIG (currentHp);
 	}
 	public void MakeHimDie ()
 	{
@@ -125,19 +137,19 @@ public class GenericLifeScript : NetworkBehaviour {
 	{
 		if (guyAttackingMe) 
 		{
-			if (guyAttackingMe == GameManager.instanceGM.playerObj) 
-			{
+//			if (guyAttackingMe == GameManager.instanceGM.playerObj) 
+//			{
 				guyAttackingMe.GetComponent<PlayerXPScript> ().GetXP (xpGiven);
 				guyAttackingMe.GetComponent<PlayerGoldScript> ().GetGold (goldGiven);
 				//faire ici ce qui se passe si un mob est tué par un joueur.
-			}
+//			}
 		}
 		yield return new WaitForEndOfFrame ();
 		if (isServer) 
 		{
 			NetworkServer.Destroy (gameObject);
 		}
-		Destroy (gameObject);
+//		Destroy (gameObject);
 	}
 
 

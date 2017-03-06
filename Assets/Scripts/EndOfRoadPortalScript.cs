@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class EndOfRoadPortalScript : MonoBehaviour {
+public class EndOfRoadPortalScript : NetworkBehaviour {
 	//portail de fin de route pour les mobs : si ils l'atteignent  : on perd une vie. si le nombre de vie tombe a zero : on a perdu la game.
 
 	// Use this for initialization
 	void Start () 
 	{
-			
+		if (!isServer) 
+		{
+			this.enabled = false;
+		}
 	}
 	
 	// Update is called once per frame
@@ -17,6 +21,7 @@ public class EndOfRoadPortalScript : MonoBehaviour {
 	}
 	public void OnTriggerEnter(Collider other)
 	{
+		
 		if (other.gameObject.layer == 9) // layer9 is Ennemies.
 		{
 			other.gameObject.GetComponent<GenericLifeScript> ().guyAttackingMe = null;

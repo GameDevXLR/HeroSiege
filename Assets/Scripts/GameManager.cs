@@ -11,6 +11,7 @@ public class GameManager : NetworkBehaviour {
 	public static GameManager instanceGM = null;
 	public GameObject[] ennemies;
 	public GameObject playerObj;
+	[SyncVar(hook = "LooseLife")]public int lifeOfTheTeam = 5;
 
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
@@ -24,11 +25,14 @@ public class GameManager : NetworkBehaviour {
 		}
 		
 	}
-	public int lifeOfTheTeam = 5;
+	public void LooseLife(int life)
+	{
+		lifeOfTheTeam = life;
+	}
 
 	public void LooseALife()
 	{
-		lifeOfTheTeam -= 1;
+		lifeOfTheTeam -= 1 ;
 		if (lifeOfTheTeam <= 0)
 		{
 			ennemies = GameObject.FindObjectsOfType<GameObject> ();

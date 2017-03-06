@@ -9,9 +9,9 @@ public class ChildrenHandlerForMob : NetworkBehaviour
 
 	void Start()
 	{
-		if (isServer) 
+		if (!isServer) 
 		{
-			GetComponentInChildren<EnnemiAggroManagerScript> ().enabled = true;
+			GetComponentInChildren<SphereCollider> ().enabled = false;
 		}
 		autoAScript = GetComponent<AutoAttackScript> ();
 	}

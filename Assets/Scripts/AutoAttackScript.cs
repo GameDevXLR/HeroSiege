@@ -23,6 +23,8 @@ public class AutoAttackScript : NetworkBehaviour {
 	private Vector3 targetTempPos;
 	private bool isActualizingPos;
 	private GameObject targetObj; // l'objet qui t'attaque ! 
+
+
 	void Start()
 	{
 		

@@ -17,8 +17,13 @@ public class MinionsPathFindingScript : NetworkBehaviour {
 	
 	public void GoToEndGame()
 	{
-			agent.SetDestination (target.position);
-			agent.Resume ();
-	
+		StartCoroutine (GoToEndGameRoutine());
+	}
+
+	IEnumerator GoToEndGameRoutine()
+	{
+		yield return new WaitForEndOfFrame ();
+		agent.SetDestination (target.position);
+		agent.Resume ();
 	}
 }
