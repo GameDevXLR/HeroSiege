@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
-public class PlayerClicToMove : MonoBehaviour {
+public class PlayerClicToMove : NetworkBehaviour {
 
 	Animator anim;
-	bool walk;
 	public NavMeshAgent agentPlayer;
 	public AutoAttackScript attackScript;
+	private PlayerEnnemyDetectionScript aggroArea;
 	public GameObject target;
 	int layer_mask;
+
 	// Use this for initialization
-	void Start () {
-		layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
+	void Start () 
+	{
+		if (isLocalPlayer) 
+		{
+			layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
+			aggroArea = GetComponentInChildren<PlayerEnnemyDetectionScript> ();
+		}
 		agentPlayer = GetComponent<NavMeshAgent> ();
 		attackScript = GetComponent<AutoAttackScript> ();
 		anim = GetComponentInChildren<Animator> ();
@@ -22,26 +29,30 @@ public class PlayerClicToMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetMouseButtonDown (1)) {
+		if (Input.GetMouseButtonUp (1) && isLocalPlayer) 
+		{
+			
+
+
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
-				walk = true;
-				anim.SetBool ("walk", walk);
-				agentPlayer.destination = hit.point;
-				GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
-				
-				if (hit.collider.gameObject.layer == 9) {
+			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) 
+			{	
+
+
+				if (hit.collider.gameObject.layer == 9) 
+				{
+					aggroArea.autoTargetting = true;
 					target = hit.collider.gameObject;
-					agentPlayer.stoppingDistance = 1;
-					attackScript.AcquireTarget (target);
+					CmdSendNewTarget(target.GetComponent<NetworkIdentity> ().netId);
 
+				} else 
+				{
+					aggroArea.autoTargetting = false;
+					CmdSendNewDestination (hit.point);
 
-				} else {
-					target = null;
-					agentPlayer.stoppingDistance = 0;
-					attackScript.LooseTarget ();
 				}
+
 			}
 		
 		}
@@ -49,6 +60,43 @@ public class PlayerClicToMove : MonoBehaviour {
 		{
 			agentPlayer.SetDestination (target.transform.position);
 		}
+
 	}
+	[Command]
+	public void CmdSendNewDestination(Vector3 dest)
+	{
+		agentPlayer.SetDestination (dest);
+		RpcNewDestination (dest);
+	}
+	[ClientRpc]
+	public void RpcNewDestination(Vector3 desti)
+	{
+
+			agentPlayer.SetDestination (desti);
+			target = null;
+			agentPlayer.stoppingDistance = 0;
+			attackScript.LooseTarget ();
+			anim.SetBool ("stopwalk", false);
+			attackScript.stopWalk = false;
+	}
+
+	[Command]
+	public void CmdSendNewTarget(NetworkInstanceId targetID)
+	{
+		target = ClientScene.FindLocalObject (targetID);
+
+		RpcReceiveNewTarget (targetID);
+	}
+	[ClientRpc]
+	public void RpcReceiveNewTarget(NetworkInstanceId targetID)
+	{
+
+		target = ClientScene.FindLocalObject (targetID);
+		agentPlayer.stoppingDistance = 1;
+		attackScript.AcquireTarget (target);
+		anim.SetBool ("stopwalk", false);
+		attackScript.stopWalk = false;
+	}
+
 }
 

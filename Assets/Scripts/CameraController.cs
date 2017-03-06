@@ -10,9 +10,15 @@ using UnityEngine;
  * */
 public class CameraController : MonoBehaviour
 {
+	public static CameraController instanceCamera = null;
 	// our personnage
-    public GameObject player; 
+    public GameObject target; 
 
+	// key to lock and center the camera on the player
+	public KeyCode lockKey = KeyCode.L;
+
+	// key to center back the camera on the player
+	public KeyCode centerBackKey = KeyCode.Space;
 	// selectedPlayer
 	// true : camera lock in the perso
 	// false : camera free from the perso
@@ -25,35 +31,54 @@ public class CameraController : MonoBehaviour
     public int zoneDetectionMouse = 100;
 
 	// initial distance player / camera
-    private Vector3 offset;
+	[SerializeField] Vector3 offset = new Vector3(3.7f,4.8f,0.2f);
+
+
 
 	// initial y, allow to block the y axis
     private float yvalue;
+	private bool isReady;
 
 	Camera cameraCible;
 
-    void Start()
+	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
+	void Awake(){
+		if (instanceCamera == null) {
+			instanceCamera = this;
+		} else if (instanceCamera != this) 
+		{
+			Destroy (gameObject);
+		}
+	}
+
+	public void Initialize()
     {
-        offset = transform.position - player.transform.position;
         cameraCible = GetComponent<Camera>();
         yvalue = gameObject.transform.position.y;
+		isReady = true;
     }
 
     void Update()
     {
-		if (Input.GetKeyDown (KeyCode.L))
+		if (!isReady) 
+		{
+			return;
+		}
+		if (Input.GetKeyUp (lockKey))
 			selectedPlayer = !selectedPlayer;
-		
-		if (!Input.GetKey ("space") && !selectedPlayer) {
+		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed);
 		}
-        
     }
 
     void LateUpdate()
     {
-		if (selectedPlayer || Input.GetKey ("space")) {
-			transform.position = player.transform.position + offset;
+		if (!isReady) 
+		{
+			return;
+		}
+		if (selectedPlayer || Input.GetKey (centerBackKey)) {
+			CenterBackCameraOnTarget();
 		}
 
 		// allow to block y axis
@@ -64,6 +89,12 @@ public class CameraController : MonoBehaviour
             z = gameObject.transform.position.z
         };
     }
+
+
+	public void CenterBackCameraOnTarget(){
+		transform.position = target.transform.position + offset;
+	}
+
 
 }
 
