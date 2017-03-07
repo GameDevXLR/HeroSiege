@@ -39,6 +39,8 @@ public class CameraController : MonoBehaviour
     private float yvalue;
 	private bool isReady;
 
+	int layer_mask;
+
 	Camera cameraCible;
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
@@ -56,6 +58,7 @@ public class CameraController : MonoBehaviour
         cameraCible = GetComponent<Camera>();
         yvalue = gameObject.transform.position.y;
 		isReady = true;
+		layer_mask = LayerMask.GetMask ("Ground"); // ground layer 10
     }
 
     void Update()
@@ -68,7 +71,16 @@ public class CameraController : MonoBehaviour
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed);
+			Vector3 collision;
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay (new Vector3 (gameObject.transform.position.x, 0, gameObject.transform.position.z));
+			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
+				collision = hit.collider.gameObject.transform.position;
+			}
+			Debug.Log (collision);
+
 		}
+
     }
 
     void LateUpdate()

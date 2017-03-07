@@ -42,8 +42,6 @@ public class PlayerClicToMove : NetworkBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) 
 			{	
-
-
 				if (hit.collider.gameObject.layer == 9) 
 				{
 					aggroArea.autoTargetting = true;
