@@ -76,21 +76,22 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public void RpcNewDestination(Vector3 desti)
 	{
 
-			agentPlayer.SetDestination (desti);
-			target = null;
-			agentPlayer.stoppingDistance = 0;
-			attackScript.LooseTarget ();
-			anim.SetBool ("stopwalk", false);
-			attackScript.stopWalk = false;
-		audioS.clip = walkSound;
-		audioS.Play ();
+		agentPlayer.SetDestination (desti);
+		target = null;
+		agentPlayer.stoppingDistance = 0;
+		attackScript.LooseTarget ();
+		anim.SetBool ("stopwalk", false);
+		attackScript.stopWalk = false;
+		if (isLocalPlayer) {
+			audioS.clip = walkSound;
+			audioS.Play ();
+		}
 	}
 
 	[Command]
 	public void CmdSendNewTarget(NetworkInstanceId targetID)
 	{
 		target = ClientScene.FindLocalObject (targetID);
-
 		RpcReceiveNewTarget (targetID);
 	}
 	[ClientRpc]

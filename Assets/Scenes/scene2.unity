@@ -4983,26 +4983,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 417748, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 417748, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.49999988
-      objectReference: {fileID: 0}
-    - target: {fileID: 417748, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.49999988
-      objectReference: {fileID: 0}
-    - target: {fileID: 178508, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 139446, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
   m_IsPrefabParent: 0
@@ -5329,7 +5309,7 @@ GameObject:
   - component: {fileID: 808143105}
   - component: {fileID: 808143104}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PlayerInterface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6680,7 +6660,7 @@ MonoBehaviour:
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
-  m_MaxDelay: 0.01
+  m_MaxDelay: 0.1
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 1677075611022148, guid: d533b97bfb3e8eb4eaafd710e696cf82,
     type: 2}
@@ -6692,13 +6672,14 @@ MonoBehaviour:
   - {fileID: 1607321022530426, guid: f6021e0b8d532eb40b6298fc871d1c49, type: 2}
   - {fileID: 1853418556211758, guid: 105d8c58bbcf7f143bc03b90a42dd95a, type: 2}
   - {fileID: 1840545334792104, guid: 6e1c6fc78d4673b45ae4f4cdaf17e7f6, type: 2}
-  m_CustomConfig: 0
+  - {fileID: 1134211014724214, guid: c2541f206d37d8c42b88d40d0cae6d58, type: 2}
+  m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:
     m_PacketSize: 1500
     m_FragmentSize: 500
     m_ResendTimeout: 1200
-    m_DisconnectTimeout: 2000
+    m_DisconnectTimeout: 5000
     m_ConnectTimeout: 2000
     m_MinUpdateTimeout: 10
     m_PingTimeout: 500
@@ -6718,15 +6699,15 @@ MonoBehaviour:
   m_GlobalConfig:
     m_ThreadAwakeTimeout: 1
     m_ReactorModel: 0
-    m_ReactorMaximumReceivedMessages: 1024
-    m_ReactorMaximumSentMessages: 1024
+    m_ReactorMaximumReceivedMessages: 2048
+    m_ReactorMaximumSentMessages: 2048
     m_MaxPacketSize: 2000
   m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 1
-  m_SimulatedLatency: 68
+  m_SimulatedLatency: 39
   m_PacketLossPercentage: 0
-  m_MaxBufferedPackets: 16
+  m_MaxBufferedPackets: 32
   m_AllowFragmentation: 1
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443

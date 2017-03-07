@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
+[NetworkSettings(channel = 0, sendInterval = 0.3f)]
 public class GenericLifeScript : NetworkBehaviour {
 
 	// ce script sert a gerer la vie de l'objet auquel il est attacher. en cas de mort; l'objet est détruit sauf si c'est un joueur : dans ce cas faut écrire le code pour le moment c'est pas préciser...
@@ -34,6 +35,10 @@ public class GenericLifeScript : NetworkBehaviour {
 	}
 
 	void Update () {
+		if (!isServer) 
+		{
+			return;
+		}
 
 		if (isDead || currentHp == maxHp) 
 		{
@@ -44,6 +49,7 @@ public class GenericLifeScript : NetworkBehaviour {
 
 			if (Time.time > lastTic) 
 			{
+			
 				lastTic = Time.time + timeBetweenTic;
 				RegenYourHP ();
 			}
@@ -80,11 +86,16 @@ public class GenericLifeScript : NetworkBehaviour {
 		}
 		if (attacker != GetComponent<AutoAttackScript> ().target && gameObject.layer ==9) //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
 		{
-			if (Random.Range (0, 2) != 0) //2 est exclusif car c'est un int. et ouais.
+			if (Random.Range (0, 2) != 0) //2 est exclusif car c'est un int.
 			{
 				GetComponent<AutoAttackScript> ().target = attacker;
 			}
 		}
+//		if (gameObject.layer == 8 && GetComponent<AutoAttackScript>().target == null) 
+//		{
+//			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
+//
+//		}
 		float y = Random.Range (0, 100);
 		if (y > dodge) {
 			StartCoroutine (HitAnimation ());
