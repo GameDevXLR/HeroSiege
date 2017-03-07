@@ -110,7 +110,8 @@ public class AutoAttackScript : NetworkBehaviour {
 		if (gameObject.layer == 8) 
 		{
 			anim.SetBool ("attack", attackAnim);
-			audioSource.PlayOneShot (playerSounds[0],0.5f);
+			audioSource.clip = playerSounds [0];
+			audioSource.Play();
 
 		}
 		if(gameObject.layer == 9 )
@@ -120,7 +121,8 @@ public class AutoAttackScript : NetworkBehaviour {
 				GetComponent<NavMeshObstacle> ().enabled = true;
 
 		anim.SetBool ("attackEnnemi", attackAnim);
-			audioSource.PlayOneShot (ennemiSounds [0], 0.5f);
+			audioSource.clip = ennemiSounds [0];
+			audioSource.Play();
 		}
 	}
 	public void StopAttacking()
@@ -130,7 +132,7 @@ public class AutoAttackScript : NetworkBehaviour {
 		if (gameObject.layer == 8) {
 
 				agent.Resume ();
-
+			audioSource.Stop ();
 			anim.SetBool ("attack", attackAnim);
 		}
 		if (gameObject.layer == 9) 
@@ -138,7 +140,7 @@ public class AutoAttackScript : NetworkBehaviour {
 	
 				agent.enabled = true;
 				GetComponent<NavMeshObstacle> ().enabled = false;
-
+			audioSource.Stop ();
 			anim.SetBool ("attackEnnemi", attackAnim);
 		}
 
@@ -162,6 +164,7 @@ public class AutoAttackScript : NetworkBehaviour {
 			//faire ici ton animation de charge.
 			charge = true;
 			anim.SetBool ("charge", charge);
+			audioSource.PlayOneShot (playerSounds [1], .6f);
 		}
 	}
 	public void LooseTarget()

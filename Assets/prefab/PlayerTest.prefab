@@ -1084,7 +1084,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1274,6 +1274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9e78a5fd7cf964587edc800e4ff605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicSound: {fileID: 8300000, guid: ccb5b38b76e4be84d841a93328a40c41, type: 3}
+  walkSound: {fileID: 8300000, guid: f55b2d70c978c124e81dd968ca774706, type: 3}
   agentPlayer: {fileID: 0}
   attackScript: {fileID: 0}
   target: {fileID: 0}

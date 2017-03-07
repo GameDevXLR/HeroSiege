@@ -7,6 +7,9 @@ using UnityEngine.Networking;
 
 
 public class GameManager : NetworkBehaviour {
+
+	public AudioClip LooseLifeSound;
+
 	public Text gameOverTxt;
 	public static GameManager instanceGM = null;
 	public GameObject[] ennemies;
@@ -33,6 +36,7 @@ public class GameManager : NetworkBehaviour {
 	public void LooseALife()
 	{
 		lifeOfTheTeam -= 1 ;
+		GetComponent<AudioSource> ().PlayOneShot (LooseLifeSound);
 		if (lifeOfTheTeam <= 0)
 		{
 			ennemies = GameObject.FindObjectsOfType<GameObject> ();

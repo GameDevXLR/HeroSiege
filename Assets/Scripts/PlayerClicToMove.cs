@@ -7,6 +7,9 @@ using UnityEngine.Networking;
 public class PlayerClicToMove : NetworkBehaviour {
 
 	Animator anim;
+	private AudioSource audioS;
+	public AudioClip clicSound;
+	public AudioClip walkSound;
 	public NavMeshAgent agentPlayer;
 	public AutoAttackScript attackScript;
 	private PlayerEnnemyDetectionScript aggroArea;
@@ -18,6 +21,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	{
 		if (isLocalPlayer) 
 		{
+			audioS = GetComponent<AudioSource> ();
 			layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
 			aggroArea = GetComponentInChildren<PlayerEnnemyDetectionScript> ();
 		}
@@ -32,7 +36,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		if (Input.GetMouseButtonUp (1) && isLocalPlayer) 
 		{
 			
-
+			audioS.PlayOneShot (clicSound, .6f);
 
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -78,6 +82,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 			attackScript.LooseTarget ();
 			anim.SetBool ("stopwalk", false);
 			attackScript.stopWalk = false;
+		audioS.clip = walkSound;
+		audioS.Play ();
 	}
 
 	[Command]
