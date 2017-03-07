@@ -7,6 +7,10 @@ using UnityEngine.Networking;
 public class AutoAttackScript : NetworkBehaviour {
 
 	//ce script gere l'auto attack de l'objet auquel il est attacher.
+	public AudioSource audioSource;
+	public AudioClip[] playerSounds;
+	public AudioClip[] ennemiSounds;
+
 	Animator anim;
 	public bool stopWalk; //pour l animation
 	bool charge;
@@ -30,6 +34,7 @@ public class AutoAttackScript : NetworkBehaviour {
 		
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponentInChildren<Animator> ();
+		audioSource = GetComponent<AudioSource> ();
 
 	}
 
@@ -105,6 +110,8 @@ public class AutoAttackScript : NetworkBehaviour {
 		if (gameObject.layer == 8) 
 		{
 			anim.SetBool ("attack", attackAnim);
+			audioSource.PlayOneShot (playerSounds[0],0.5f);
+
 		}
 		if(gameObject.layer == 9 )
 		{
@@ -113,6 +120,7 @@ public class AutoAttackScript : NetworkBehaviour {
 				GetComponent<NavMeshObstacle> ().enabled = true;
 
 		anim.SetBool ("attackEnnemi", attackAnim);
+			audioSource.PlayOneShot (ennemiSounds [0], 0.5f);
 		}
 	}
 	public void StopAttacking()
