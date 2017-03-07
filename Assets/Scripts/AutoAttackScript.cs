@@ -74,6 +74,8 @@ public class AutoAttackScript : NetworkBehaviour {
 				if (gameObject.layer == 8) 
 				{
 					agent.SetDestination (transform.position);
+					audioSource.Stop ();
+
 				}
 			}
 		}
@@ -85,6 +87,7 @@ public class AutoAttackScript : NetworkBehaviour {
 						if (!stopWalk) {
 							stopWalk = true;
 							anim.SetBool ("stopwalk", stopWalk);
+							audioSource.Stop ();
 						}
 					}
 				}

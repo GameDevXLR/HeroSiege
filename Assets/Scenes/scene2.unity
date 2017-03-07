@@ -2474,6 +2474,91 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 780d55bf443a9c74d91bf1291263a77a, type: 2}
   m_PrefabInternal: {fileID: 327474241}
+--- !u!1 &329823940 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1735137487550638, guid: 247314a2e20cd72489e9ddc22974df56,
+    type: 2}
+  m_PrefabInternal: {fileID: 1659416897}
+--- !u!82 &329823947
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 329823940}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dcd5560491f944e4ab5abdefe71b45a7, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &341285220
 Prefab:
   m_ObjectHideFlags: 0
@@ -6487,94 +6572,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i0
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i1
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i2
-      value: 108
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i3
-      value: 95
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i4
-      value: 181
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i5
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i6
-      value: 59
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i7
-      value: 228
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i8
-      value: 233
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i9
-      value: 239
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i10
-      value: 141
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i11
-      value: 249
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i12
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i13
-      value: 196
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i14
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_AssetId.i15
-      value: 61
-      objectReference: {fileID: 0}
     - target: {fileID: 1005679582538874, guid: 128c6c5fb5a03be4e9ef8df96ec4463d, type: 2}
       propertyPath: m_Name
       value: inib
-      objectReference: {fileID: 0}
-    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
-        type: 2}
-      propertyPath: m_ServerOnly
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 128c6c5fb5a03be4e9ef8df96ec4463d, type: 2}
@@ -6690,6 +6690,8 @@ MonoBehaviour:
   m_OnlineScene: scene2
   m_SpawnPrefabs:
   - {fileID: 1607321022530426, guid: f6021e0b8d532eb40b6298fc871d1c49, type: 2}
+  - {fileID: 1853418556211758, guid: 105d8c58bbcf7f143bc03b90a42dd95a, type: 2}
+  - {fileID: 1840545334792104, guid: 6e1c6fc78d4673b45ae4f4cdaf17e7f6, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -9390,7 +9392,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -8,7 +8,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 	Animator anim;
 	private AudioSource audioS;
-	public AudioClip clicSound;
+//	public AudioClip clicSound;
 	public AudioClip walkSound;
 	public NavMeshAgent agentPlayer;
 	public AutoAttackScript attackScript;
@@ -36,7 +36,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		if (Input.GetMouseButtonUp (1) && isLocalPlayer) 
 		{
 			
-			audioS.PlayOneShot (clicSound, .6f);
+//			audioS.PlayOneShot (clicSound, .6f);
 
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
