@@ -36,7 +36,10 @@ public class CameraController : MonoBehaviour
 
 
 	// initial y, allow to block the y axis
-    private float yvalue;
+	private float yvalue;
+
+	private float yvalueDiff;
+
 	private bool isReady;
 
 	int layer_mask;
@@ -71,13 +74,12 @@ public class CameraController : MonoBehaviour
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed);
-			Vector3 collision;
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (new Vector3 (gameObject.transform.position.x, 0, gameObject.transform.position.z));
 			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
-				collision = hit.collider.gameObject.transform.position;
+				yvalueDiff = hit.collider.gameObject.transform.position.y - target.transform.position.y;
 			}
-			Debug.Log (collision);
+
 
 		}
 
@@ -90,16 +92,22 @@ public class CameraController : MonoBehaviour
 			return;
 		}
 		if (selectedPlayer || Input.GetKey (centerBackKey)) {
-			CenterBackCameraOnTarget();
-		}
+			CenterBackCameraOnTarget ();
+		
 
-		// allow to block y axis
-        gameObject.transform.position = new Vector3()
-        {
-            x = gameObject.transform.position.x,
-            y = yvalue,
-            z = gameObject.transform.position.z
-        };
+			// allow to block y axis
+			gameObject.transform.position = new Vector3 () {
+				x = gameObject.transform.position.x,
+				y = yvalue,
+				z = gameObject.transform.position.z
+			};
+		} else {
+			gameObject.transform.position = new Vector3 () {
+				x = gameObject.transform.position.x,
+				y = yvalue + yvalueDiff ,
+				z = gameObject.transform.position.z
+			};
+		}
     }
 
 
