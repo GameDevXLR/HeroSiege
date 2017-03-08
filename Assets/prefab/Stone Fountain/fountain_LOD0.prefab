@@ -10,12 +10,12 @@ GameObject:
   - component: {fileID: 422104}
   - component: {fileID: 3362406}
   - component: {fileID: 2377078}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: fountain_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &178508
 GameObject:
@@ -28,12 +28,13 @@ GameObject:
   - component: {fileID: 3359438}
   - component: {fileID: 2354436}
   - component: {fileID: 20518526}
-  m_Layer: 0
+  - component: {fileID: 65744515991541732}
+  m_Layer: 10
   m_Name: fountain_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &417748
 Transform:
@@ -42,8 +43,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178508}
   m_LocalRotation: {x: -4.32978e-17, y: 0.7071067, z: 0.7071068, w: -4.3297806e-17}
-  m_LocalPosition: {x: -75.23468, y: 38.74, z: 47.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.74, y: -0.05548477, z: 2.24}
+  m_LocalScale: {x: 0.5, y: 0.49999988, z: 0.49999988}
   m_Children:
   - {fileID: 422104}
   m_Father: {fileID: 0}
@@ -173,3 +174,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178508}
   m_IsPrefabParent: 1
+--- !u!65 &65744515991541732
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178508}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.670269, y: 3.6702685, z: 2.8826082}
+  m_Center: {x: -0.00000017881393, y: 0.00000014551313, z: 1.4413042}
