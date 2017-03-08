@@ -34,10 +34,23 @@ public class CameraController : MonoBehaviour
 	[SerializeField] Vector3 offset = new Vector3(3.7f,4.8f,0.2f);
 
 
+	//for the lerp
+	float lerpTime = 1f;
+	float currentLerpTime;
+
+	Vector3 startPos;
+	Vector3 endPos;
+
+
 
 	// initial y, allow to block the y axis
-    private float yvalue;
+	private float yvalue;
+
+	private float yvalueDiff;
+
 	private bool isReady;
+
+	int layer_mask;
 
 	Camera cameraCible;
 
@@ -56,6 +69,7 @@ public class CameraController : MonoBehaviour
         cameraCible = GetComponent<Camera>();
         yvalue = gameObject.transform.position.y;
 		isReady = true;
+		layer_mask = LayerMask.GetMask ("Ground"); // ground layer 10
     }
 
     void Update()
@@ -68,7 +82,15 @@ public class CameraController : MonoBehaviour
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed);
+
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay (new Vector3 (gameObject.transform.position.x, 0, gameObject.transform.position.z));
+			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
+				yvalueDiff = hit.collider.gameObject.transform.position.y - target.transform.position.y;
+				yvalueDiff = hit.point.y - target.transform.position.y;
+			}
 		}
+
     }
 
     void LateUpdate()
@@ -78,16 +100,25 @@ public class CameraController : MonoBehaviour
 			return;
 		}
 		if (selectedPlayer || Input.GetKey (centerBackKey)) {
-			CenterBackCameraOnTarget();
-		}
+			CenterBackCameraOnTarget ();
+		
 
-		// allow to block y axis
-        gameObject.transform.position = new Vector3()
-        {
-            x = gameObject.transform.position.x,
-            y = yvalue,
-            z = gameObject.transform.position.z
-        };
+			// allow to block y axis
+			gameObject.transform.position = new Vector3 () {
+				x = gameObject.transform.position.x,
+				y = yvalue,
+				z = gameObject.transform.position.z
+			};
+		} else {
+			Vector3 destination = new Vector3 () {
+				x = gameObject.transform.position.x,
+				y = yvalue + yvalueDiff ,
+				z = gameObject.transform.position.z
+			};
+					
+			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, destination, Time.deltaTime);
+
+		}
     }
 
 
