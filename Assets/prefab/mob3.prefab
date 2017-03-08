@@ -2478,8 +2478,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840545334792104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.22, y: 1.253, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 163.00644, y: 0, z: 16.038559}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4298698974758552}
   - {fileID: 224422231645949226}
@@ -3036,9 +3036,9 @@ MonoBehaviour:
   - {fileID: 0}
   stopWalk: 0
   agent: {fileID: 0}
-  attackRange: 0.8
-  attackRate: 1.5
-  damage: 2
+  attackRange: 2.5
+  attackRate: 0.5
+  damage: 20
   levelUpBonusDamage: 0
   isAttacking: 0
   target: {fileID: 0}
@@ -3110,12 +3110,12 @@ MonoBehaviour:
   xpGiven: 50
   goldGiven: 5
   lifeBar: {fileID: 224766238517520706}
-  maxHp: 45
-  currentHp: 45
-  regenHp: 1
+  maxHp: 100
+  currentHp: 100
+  regenHp: 5
   levelUpBonusHP: 10
   respawnTransform: {fileID: 0}
-  armorScore: 1
+  armorScore: 10
   dodge: 0
   respawnTime: 5
   respawnTxt: {fileID: 0}
@@ -3473,17 +3473,17 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840545334792104}
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Speed: 0.8
+  m_Radius: 0.6
+  m_Speed: 5
   m_Acceleration: 8000
-  avoidancePriority: 50
+  avoidancePriority: 45
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 0
-  m_Height: 1
-  m_BaseOffset: 0.5
+  m_Height: 1.5
+  m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 1
 --- !u!208 &208017372164430212
@@ -3495,7 +3495,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.3, y: 0.5, z: 0.3}
+  m_Extents: {x: 0.6, y: 0.5, z: 0.6}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -3580,7 +3580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 1.74}
   m_SizeDelta: {x: 0.5, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224098983583436324
@@ -3636,7 +3636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 1.74}
   m_SizeDelta: {x: 0.5, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224766238517520706

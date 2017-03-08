@@ -1495,7 +1495,7 @@ Transform:
   m_GameObject: {fileID: 1853418556211758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.22, y: 1.253, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4958784758136238}
   - {fileID: 224053548153624130}
@@ -1792,9 +1792,9 @@ MonoBehaviour:
   - {fileID: 0}
   stopWalk: 0
   agent: {fileID: 0}
-  attackRange: 0.8
-  attackRate: 1.5
-  damage: 2
+  attackRange: 6
+  attackRate: 1
+  damage: 4
   levelUpBonusDamage: 0
   isAttacking: 0
   target: {fileID: 0}
@@ -2000,13 +2000,13 @@ MonoBehaviour:
   xpGiven: 50
   goldGiven: 5
   lifeBar: {fileID: 224013841328478006}
-  maxHp: 45
-  currentHp: 45
+  maxHp: 60
+  currentHp: 60
   regenHp: 1
   levelUpBonusHP: 10
   respawnTransform: {fileID: 0}
   armorScore: 1
-  dodge: 0
+  dodge: 20
   respawnTime: 5
   respawnTxt: {fileID: 0}
   isDead: 0
@@ -2918,16 +2918,16 @@ NavMeshAgent:
   m_GameObject: {fileID: 1853418556211758}
   m_Enabled: 1
   m_Radius: 0.3
-  m_Speed: 0.8
+  m_Speed: 3
   m_Acceleration: 8000
-  avoidancePriority: 50
+  avoidancePriority: 55
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 0
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0.2
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 1
 --- !u!208 &208272402118463098
