@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class GenericManaScript : MonoBehaviour {
+public class GenericManaScript : NetworkBehaviour {
 
 	//ce script gere la mana de l'objet auquel il est attaché.
 
 	public int maxMp = 100;
-	public int currentMp = 80;
+	[SyncVar]public int currentMp = 80;
 	public int regenMp;
 	public int levelUpBonusMP;
 	public float timeBetweenTic = 1f;
@@ -23,6 +24,10 @@ public class GenericManaScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!isServer) 
+		{
+			return;
+		}
 		if (Time.time > lastTic) 
 		{
 			lastTic = Time.time + timeBetweenTic;
@@ -44,6 +49,8 @@ public class GenericManaScript : MonoBehaviour {
 		{
 			currentMp += regenMp;
 			float x = (float)currentMp / maxMp;
+			manaBar.GetComponentInParent<Canvas> ().enabled = true;
+
 			manaBar.localScale = new Vector3 (x, 1f, 1f);
 		} else 
 		{

@@ -6,7 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerCastSpellOne : NetworkBehaviour 
 {
+	public int spellCost = 30;
+	public int spellDmg = 50;
+	public float spellCD;
+	public float spellDuration = 1.5f;
 	public GameObject spellObj;
+	[SyncVar]private bool onCD;
 	// Use this for initialization
 	void Start () 
 	{
@@ -19,21 +24,37 @@ public class PlayerCastSpellOne : NetworkBehaviour
 	[Command]
 	public void CmdCastSpell()
 	{
-		GameObject go = Instantiate (spellObj, transform.position, transform.localRotation);
-		go.GetComponent<SpellAreaDamage> ().caster = gameObject;
-		go.GetComponent<AlwaysMove> ().target = gameObject;
-		NetworkServer.Spawn (go);
+		if (GetComponent<GenericManaScript> ().currentMp > spellCost) 
+		{
+			StartCoroutine(SpellOnCD());
+
+			GameObject go = Instantiate (spellObj, transform.position, transform.localRotation);
+			go.GetComponent<SpellAreaDamage> ().caster = gameObject;
+			go.GetComponent<AlwaysMove> ().target = gameObject;
+			go.GetComponent<SpellAreaDamage> ().spellDamage = spellDmg;
+			go.GetComponent<SpellAreaDamage> ().duration = spellDuration;
+			NetworkServer.Spawn (go);
+			GetComponent<GenericManaScript> ().LooseManaPoints (spellCost);
+		}
 	}
 
 	void Update()
 	{
-		if (!isLocalPlayer) 
-		{
+		if (!isLocalPlayer) {
 			return;
 		}
-		if(Input.GetKeyUp(KeyCode.A))
+
+			if (Input.GetKeyUp (KeyCode.A) && !onCD) 
 			{
-				CmdCastSpell();
+				CmdCastSpell ();
 			}
+
+	}
+
+	IEnumerator SpellOnCD()
+	{
+		onCD = true;
+		yield return new WaitForSeconds (spellCD);
+		onCD = false;
 	}
 }

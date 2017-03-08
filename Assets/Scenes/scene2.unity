@@ -6699,13 +6699,13 @@ MonoBehaviour:
   m_GlobalConfig:
     m_ThreadAwakeTimeout: 1
     m_ReactorModel: 0
-    m_ReactorMaximumReceivedMessages: 2048
-    m_ReactorMaximumSentMessages: 2048
+    m_ReactorMaximumReceivedMessages: 4096
+    m_ReactorMaximumSentMessages: 4096
     m_MaxPacketSize: 2000
   m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 1
-  m_SimulatedLatency: 39
+  m_SimulatedLatency: 32
   m_PacketLossPercentage: 0
   m_MaxBufferedPackets: 32
   m_AllowFragmentation: 1
