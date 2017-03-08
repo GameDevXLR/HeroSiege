@@ -16,6 +16,7 @@ public class GameManager : NetworkBehaviour {
 	public GameObject playerObj;
 	[SyncVar(hook = "LooseLife")]public int lifeOfTheTeam = 5;
 
+	public int gameDifficulty = 1;
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){

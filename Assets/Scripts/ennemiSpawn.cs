@@ -16,6 +16,7 @@ public class ennemiSpawn : NetworkBehaviour {
 	public float timeBetweenWaves;
 	public int level = 0;
 
+
 	private GameObject newEnnemi;
 
 	void Start () 
@@ -26,10 +27,12 @@ public class ennemiSpawn : NetworkBehaviour {
 
 	IEnumerator spawn()
 	{
-		if (level < ennemi.Length) {
+		if (level <= ennemi.Length) 
+		{
 			for (float i = 0; i < waves; i++) {
-				if (i == 0) {
-					yield return new WaitForSeconds (5);
+				if (i == 0) 
+				{
+					yield return new WaitForSeconds (5); //tps entre 2 levels.
 				}
 				GameObject newEnnemi = Instantiate (ennemi [level], inibTransform.position, inibTransform.rotation) as GameObject;
 				actualWave++;
@@ -52,11 +55,12 @@ public class ennemiSpawn : NetworkBehaviour {
 				timeBetweenWaves /= 2;
 				if (timeBetweenWaves < 1) 
 				{
-					timeBetweenWaves = 1;
+					timeBetweenWaves = 1f;
 				}
 			}
 
 			StartCoroutine (spawn ());
 		}
 	}
+
 }
