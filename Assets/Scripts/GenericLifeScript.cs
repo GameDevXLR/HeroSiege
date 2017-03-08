@@ -12,7 +12,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public int xpGiven = 50;
 	public int goldGiven = 5;
 	public RectTransform lifeBar;
-	public int maxHp = 1000;
+	[SyncVar]public int maxHp = 1000;
 	[SyncVar(hook="RescaleTheLifeBarIG")]public int currentHp = 800;
 	public int regenHp;
 	public int levelUpBonusHP = 10;
