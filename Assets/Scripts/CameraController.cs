@@ -34,6 +34,14 @@ public class CameraController : MonoBehaviour
 	[SerializeField] Vector3 offset = new Vector3(3.7f,4.8f,0.2f);
 
 
+	//for the lerp
+	float lerpTime = 1f;
+	float currentLerpTime;
+
+	Vector3 startPos;
+	Vector3 endPos;
+
+
 
 	// initial y, allow to block the y axis
 	private float yvalue;
@@ -102,11 +110,19 @@ public class CameraController : MonoBehaviour
 				z = gameObject.transform.position.z
 			};
 		} else {
-			gameObject.transform.position = new Vector3 () {
+			Vector3 destination = new Vector3 () {
 				x = gameObject.transform.position.x,
 				y = yvalue + yvalueDiff ,
 				z = gameObject.transform.position.z
 			};
+
+//			gameObject.transform.position = new Vector3 () {
+//				x = gameObject.transform.position.x,
+//				y = yvalue + yvalueDiff ,
+//				z = gameObject.transform.position.z
+//			};
+			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, destination, Time.deltaTime);
+
 		}
     }
 
