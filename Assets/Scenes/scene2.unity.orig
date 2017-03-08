@@ -5263,6 +5263,27 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+    - target: {fileID: 417748, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 417748, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.49999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 417748, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.49999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 178508, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 139446, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 178508, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
       propertyPath: m_Layer
       value: 10
@@ -5271,6 +5292,8 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+=======
+>>>>>>> 1fe89e25c8e8d7ae47bd521f102240fd6805ddb2
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8142860b8f89a564faf152e3c8b743e7, type: 2}
   m_IsPrefabParent: 0
@@ -6924,6 +6947,12 @@ Prefab:
       propertyPath: m_Name
       value: inib
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+    - target: {fileID: 114772228000309674, guid: 128c6c5fb5a03be4e9ef8df96ec4463d,
+        type: 2}
+      propertyPath: m_ServerOnly
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1704765472449730, guid: 128c6c5fb5a03be4e9ef8df96ec4463d, type: 2}
       propertyPath: m_Layer
       value: 10
@@ -6936,6 +6965,8 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+=======
+>>>>>>> 1fe89e25c8e8d7ae47bd521f102240fd6805ddb2
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 128c6c5fb5a03be4e9ef8df96ec4463d, type: 2}
   m_IsPrefabParent: 0
@@ -7091,13 +7122,13 @@ MonoBehaviour:
   m_GlobalConfig:
     m_ThreadAwakeTimeout: 1
     m_ReactorModel: 0
-    m_ReactorMaximumReceivedMessages: 4096
-    m_ReactorMaximumSentMessages: 4096
+    m_ReactorMaximumReceivedMessages: 2048
+    m_ReactorMaximumSentMessages: 2048
     m_MaxPacketSize: 2000
   m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 1
-  m_SimulatedLatency: 32
+  m_SimulatedLatency: 39
   m_PacketLossPercentage: 0
   m_MaxBufferedPackets: 32
   m_AllowFragmentation: 1

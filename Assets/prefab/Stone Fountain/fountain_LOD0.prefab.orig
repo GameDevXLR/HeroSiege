@@ -10,7 +10,11 @@ GameObject:
   - component: {fileID: 422104}
   - component: {fileID: 3362406}
   - component: {fileID: 2377078}
+<<<<<<< HEAD
   m_Layer: 10
+=======
+  m_Layer: 0
+>>>>>>> 1fe89e25c8e8d7ae47bd521f102240fd6805ddb2
   m_Name: fountain_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,8 +32,12 @@ GameObject:
   - component: {fileID: 3359438}
   - component: {fileID: 2354436}
   - component: {fileID: 20518526}
+<<<<<<< HEAD
   - component: {fileID: 65744515991541732}
   m_Layer: 10
+=======
+  m_Layer: 0
+>>>>>>> 1fe89e25c8e8d7ae47bd521f102240fd6805ddb2
   m_Name: fountain_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +55,10 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.49999988, z: 0.49999988}
   m_Children:
   - {fileID: 422104}
+<<<<<<< HEAD
+=======
   - {fileID: 4371114348462286}
+>>>>>>> 1fe89e25c8e8d7ae47bd521f102240fd6805ddb2
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -89.980194, y: -180, z: 0}
@@ -175,6 +186,20 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178508}
   m_IsPrefabParent: 1
+<<<<<<< HEAD
+--- !u!65 &65744515991541732
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178508}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.670269, y: 3.6702685, z: 2.8826082}
+  m_Center: {x: -0.00000017881393, y: 0.00000014551313, z: 1.4413042}
+=======
 --- !u!1 &1176980464967520
 GameObject:
   m_ObjectHideFlags: 1
@@ -13444,15 +13469,4 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
---- !u!65 &65744515991541732
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 178508}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.670269, y: 3.6702685, z: 2.8826082}
-  m_Center: {x: -0.00000017881393, y: 0.00000014551313, z: 1.4413042}
+>>>>>>> 1fe89e25c8e8d7ae47bd521f102240fd6805ddb2
