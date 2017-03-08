@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
+[NetworkSettings(channel = 0, sendInterval = 0.3f)]
 public class AutoAttackScript : NetworkBehaviour {
 
 	//ce script gere l'auto attack de l'objet auquel il est attacher.
@@ -73,7 +74,10 @@ public class AutoAttackScript : NetworkBehaviour {
 				StopAttacking ();
 				if (gameObject.layer == 8) 
 				{
+					
 					agent.SetDestination (transform.position);
+					audioSource.Stop ();
+
 				}
 			}
 		}
@@ -85,6 +89,7 @@ public class AutoAttackScript : NetworkBehaviour {
 						if (!stopWalk) {
 							stopWalk = true;
 							anim.SetBool ("stopwalk", stopWalk);
+							audioSource.Stop ();
 						}
 					}
 				}
@@ -161,7 +166,7 @@ public class AutoAttackScript : NetworkBehaviour {
 		}
 		if (gameObject.layer == 8) 
 		{
-			//faire ici ton animation de charge.
+//			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 			charge = true;
 			anim.SetBool ("charge", charge);
 			audioSource.PlayOneShot (playerSounds [1], .6f);
@@ -176,6 +181,7 @@ public class AutoAttackScript : NetworkBehaviour {
 		}
 		if (gameObject.layer == 8 && charge) 
 		{
+
 			//faire ici l'arret de la charge.
 			charge = false;
 			anim.SetBool ("charge", charge);

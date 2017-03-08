@@ -8,7 +8,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 	Animator anim;
 	private AudioSource audioS;
-	public AudioClip clicSound;
+//	public AudioClip clicSound;
 	public AudioClip walkSound;
 	public NavMeshAgent agentPlayer;
 	public AutoAttackScript attackScript;
@@ -36,7 +36,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		if (Input.GetMouseButtonUp (1) && isLocalPlayer) 
 		{
 			
-			audioS.PlayOneShot (clicSound, .6f);
+//			audioS.PlayOneShot (clicSound, .6f);
 
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -74,21 +74,22 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public void RpcNewDestination(Vector3 desti)
 	{
 
-			agentPlayer.SetDestination (desti);
-			target = null;
-			agentPlayer.stoppingDistance = 0;
-			attackScript.LooseTarget ();
-			anim.SetBool ("stopwalk", false);
-			attackScript.stopWalk = false;
-		audioS.clip = walkSound;
-		audioS.Play ();
+		agentPlayer.SetDestination (desti);
+		target = null;
+		agentPlayer.stoppingDistance = 0;
+		attackScript.LooseTarget ();
+		anim.SetBool ("stopwalk", false);
+		attackScript.stopWalk = false;
+		if (isLocalPlayer) {
+			audioS.clip = walkSound;
+			audioS.Play ();
+		}
 	}
 
 	[Command]
 	public void CmdSendNewTarget(NetworkInstanceId targetID)
 	{
 		target = ClientScene.FindLocalObject (targetID);
-
 		RpcReceiveNewTarget (targetID);
 	}
 	[ClientRpc]

@@ -43,14 +43,5 @@ public class StatusHandlerScript : MonoBehaviour {
 		yield return new WaitForSeconds (rootTime);
 		GetComponent<NavMeshAgent> ().Resume ();
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if (Input.GetKeyDown (KeyCode.A)) 
-		{
-			MakeHimCC (2f);
-		}
-		
-	}
+
 }
