@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
 {
 	public static CameraController instanceCamera = null;
 	// our personnage
-    public GameObject target; 
+	public GameObject target; 
 
 	// key to lock and center the camera on the player
 	public KeyCode lockKey = KeyCode.L;
@@ -90,6 +90,8 @@ public class CameraController : MonoBehaviour
 				yvalueDiff = hit.point.y - target.transform.position.y;
 			}
 		}
+
+
 
     }
 
