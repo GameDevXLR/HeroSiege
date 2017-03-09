@@ -45,8 +45,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 	[Command]
 	public void CmdCastSpell()
 	{
-		if (GetComponent<GenericManaScript> ().currentMp > spellCost) 
-		{
+
 
 			GameObject go = Instantiate (spellObj, transform.position, transform.localRotation);
 			go.GetComponent<SpellAreaDamage> ().caster = gameObject;
@@ -55,13 +54,15 @@ public class PlayerCastSpellOne : NetworkBehaviour
 			go.GetComponent<SpellAreaDamage> ().duration = spellDuration;
 			NetworkServer.Spawn (go);
 			GetComponent<GenericManaScript> ().LooseManaPoints (spellCost);
-		}
+
 	}
 	public void CastThatSpell()
 	{
+		if (GetComponent<GenericManaScript> ().currentMp > spellCost && !onCD) 
+	{
 		CmdCastSpell ();
 		StartCoroutine(SpellOnCD());
-
+		}
 	}
 	void Update()
 	{
