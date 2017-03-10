@@ -96,16 +96,20 @@ public class GenericLifeScript : NetworkBehaviour {
 //			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
 //
 //		}
-		float y = Random.Range (0, 100);
-		if (y > dodge) {
+
 			StartCoroutine (HitAnimation ());
 			RescaleTheLifeBarIG (currentHp);
 			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
-			if (currentHp > 0) {
-				if (trueDmg) {
-					currentHp -= dmg;
-					return;
-				} 
+		if (currentHp > 0) 
+		{
+			if (trueDmg) 
+			{
+				currentHp -= dmg;
+				return;
+			}
+			float y = Random.Range (0, 100);
+			if (y > dodge) 
+			{
 				if (armorScore > 0) {
 					float multiplicatorArmor = (float)100f / (100f + armorScore);
 					currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
@@ -115,6 +119,7 @@ public class GenericLifeScript : NetworkBehaviour {
 				}
 			}
 		}
+		
 
 	}
 	public void RescaleTheLifeBarIG(int life)
@@ -148,16 +153,23 @@ public class GenericLifeScript : NetworkBehaviour {
 	{
 		if (guyAttackingMe) 
 		{
+			if(guyAttackingMe.tag == "Player")
+			{
 //			if (guyAttackingMe == GameManager.instanceGM.playerObj) 
 //			{
 				guyAttackingMe.GetComponent<PlayerXPScript> ().GetXP (xpGiven);
 				guyAttackingMe.GetComponent<PlayerGoldScript> ().GetGold (goldGiven);
 				//faire ici ce qui se passe si un mob est tué par un joueur.
 //			}
+				}
 		}
 		yield return new WaitForEndOfFrame ();
 		if (isServer) 
 		{
+			if (gameObject.tag == "PNJ") 
+			{
+				GameManager.instanceGM.LooseALife ();
+			}
 			NetworkServer.Destroy (gameObject);
 		}
 //		Destroy (gameObject);

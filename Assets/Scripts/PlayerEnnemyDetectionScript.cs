@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 	//permet au perso du joueur de cibler automatiquement l'ennemi le plus proche.
 
-	private bool isTheLocalP;
+	public bool isTheLocalP;
 	public bool autoTargetting;
 	public AutoAttackScript autoAScript;
 	public NavMeshAgent playerAgent;

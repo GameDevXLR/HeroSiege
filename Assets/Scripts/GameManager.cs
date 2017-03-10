@@ -12,8 +12,9 @@ public class GameManager : NetworkBehaviour {
 
 	public Text gameOverTxt;
 	public static GameManager instanceGM = null;
-	public GameObject[] ennemies;
+	private GameObject[] ennemies;
 	public GameObject playerObj;
+	public NetworkInstanceId ID;
 	[SyncVar(hook = "LooseLife")]public int lifeOfTheTeam = 5;
 
 	public int gameDifficulty = 1;
