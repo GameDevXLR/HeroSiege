@@ -6,10 +6,11 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 
 
-public class GameManager : NetworkBehaviour {
+public class GameManager : NetworkBehaviour 
+{
 
 	public AudioClip LooseLifeSound;
-
+	public Text generalTxt;
 	public Text gameOverTxt;
 	public static GameManager instanceGM = null;
 	private GameObject[] ennemies;
@@ -17,7 +18,7 @@ public class GameManager : NetworkBehaviour {
 	public NetworkInstanceId ID;
 	[SyncVar(hook = "LooseLife")]public int lifeOfTheTeam = 5;
 
-	public int gameDifficulty = 1;
+	[SyncVar]public int gameDifficulty = 1;
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){
@@ -30,9 +31,14 @@ public class GameManager : NetworkBehaviour {
 		}
 		
 	}
+	void Start()
+	{
+		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
+	}
 	public void LooseLife(int life)
 	{
 		lifeOfTheTeam = life;
+		StartCoroutine (LooseALifeAlert ());
 	}
 
 	public void LooseALife()
@@ -68,5 +74,18 @@ public class GameManager : NetworkBehaviour {
 			NetworkManager.singleton.ServerChangeScene ("scene2");		
 		}
 
+	}
+	IEnumerator LooseALifeAlert()
+	{
+		generalTxt.enabled = true;
+		generalTxt.text = lifeOfTheTeam + " vie(s) restante...";
+		yield return new WaitForSeconds (2f);
+		generalTxt.text = "";
+		generalTxt.enabled = false;
+	}
+
+	public void StopPlayerFromJoining()
+	{
+//		NetworkManager.singleton.matchMaker.SetMatchAttributes(UnityEngine.Networking.Types.NetworkID, false, 1, basic
 	}
 }

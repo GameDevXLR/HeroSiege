@@ -6,8 +6,19 @@ using UnityEngine.Events;
 
 public class ItemManager : NetworkBehaviour 
 {
+	public Transform guardSpawnPoint;
 	public UnityEvent[] itemEvents;
 	public GameObject targetplayer;
+	public GameObject guard1Prefab;
+
+	public void Start()
+	{
+		if (!isServer) 
+		{
+			return;
+		}
+		guardSpawnPoint = GameObject.Find ("GuardSpawnPoint").transform;
+	}
 
 	public void BuyItem(int itemID, int itemPrice)
 	{
@@ -32,5 +43,13 @@ public class ItemManager : NetworkBehaviour
 	public void UpMyDamage()
 	{
 		targetplayer.GetComponent<AutoAttackScript> ().damage += 5;
+	}
+	public void RecruteAGuard()
+	{
+		int x = GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr;
+		GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr++;
+		GameObject newGuard = Instantiate (guard1Prefab, guardSpawnPoint.position, guardSpawnPoint.rotation) as GameObject;
+		newGuard.GetComponent<PlayerClicToMove> ().startingPos = GameManager.instanceGM.GetComponent<PNJManager> ().campGuardPositions [x].position;
+		NetworkServer.Spawn (newGuard);
 	}
 }

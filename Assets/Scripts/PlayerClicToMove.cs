@@ -15,7 +15,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	private PlayerEnnemyDetectionScript aggroArea;
 	public GameObject target;
 	int layer_mask;
-	private Vector3 startingPos;
+	[SyncVar]public Vector3 startingPos;
 
 	// Use this for initialization
 	void Start () 
@@ -29,7 +29,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		agentPlayer = GetComponent<NavMeshAgent> ();
 		attackScript = GetComponent<AutoAttackScript> ();
 		anim = GetComponentInChildren<Animator> ();
-		if (gameObject.tag == "PNJ") 
+		if (gameObject.tag == "PNJ" && startingPos == Vector3.zero) 
 		{
 			startingPos = gameObject.transform.position;
 		}
@@ -112,6 +112,11 @@ public class PlayerClicToMove : NetworkBehaviour {
 		attackScript.AcquireTarget (target);
 		anim.SetBool ("stopwalk", false);
 		attackScript.stopWalk = false;
+	}
+
+	public void SetThatTargetFromAggro(NetworkInstanceId targetid)
+	{
+		CmdSendNewTarget (targetid);
 	}
 
 }

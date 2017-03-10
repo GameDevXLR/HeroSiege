@@ -1311,6 +1311,7 @@ MonoBehaviour:
   agentPlayer: {fileID: 0}
   attackScript: {fileID: 0}
   target: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114371008046197868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1443,6 +1444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7d2bb38ce99af46bba64d070abf080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guardSpawnPoint: {fileID: 0}
   itemEvents:
   - m_PersistentCalls:
       m_Calls:
@@ -1489,7 +1491,24 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: RecruteAGuard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   targetplayer: {fileID: 0}
+  guard1Prefab: {fileID: 1498430331498804, guid: 1777822f51750cd42bfef99045fa30e4,
+    type: 2}
 --- !u!114 &114648224865163368
 MonoBehaviour:
   m_ObjectHideFlags: 1

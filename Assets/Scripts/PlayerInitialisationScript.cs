@@ -7,10 +7,13 @@ using UnityEngine.Networking;
 public class PlayerInitialisationScript : NetworkBehaviour {
 	public SpriteRenderer minimapIcon;
 	public Color mainPlayerColor;
+	public GameObject difficultyPanel;
 	// Use this for initialization
 	void Start ()
 	{
-		if (isLocalPlayer) {
+		if (isLocalPlayer) 
+		{
+			difficultyPanel = GameObject.Find ("DifficultyPanel");
 			minimapIcon.color = mainPlayerColor;
 			CameraController.instanceCamera.target = gameObject;
 			CameraController.instanceCamera.Initialize ();
@@ -19,6 +22,10 @@ public class PlayerInitialisationScript : NetworkBehaviour {
 //			GetComponent<PlayerClicToMove> ().enabled = true;
 //			GetComponent<NavMeshAgent> ().enabled = true;
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
+			if (!isServer) 
+			{
+				difficultyPanel.SetActive(false);
+			}
 		} 
 	}
 	
@@ -32,4 +39,5 @@ public class PlayerInitialisationScript : NetworkBehaviour {
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
 		base.OnStartLocalPlayer ();
 	}
+
 }

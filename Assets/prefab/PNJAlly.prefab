@@ -810,7 +810,7 @@ Transform:
   m_GameObject: {fileID: 1245825530695958}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 4274982124758196}
   m_RootOrder: 1
@@ -1429,6 +1429,7 @@ MonoBehaviour:
   agentPlayer: {fileID: 0}
   attackScript: {fileID: 0}
   target: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114600032261464364
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -161,17 +161,19 @@ public class GenericLifeScript : NetworkBehaviour {
 				guyAttackingMe.GetComponent<PlayerGoldScript> ().GetGold (goldGiven);
 				//faire ici ce qui se passe si un mob est tué par un joueur.
 //			}
-				}
+			}
 		}
-		yield return new WaitForEndOfFrame ();
 		if (isServer) 
 		{
 			if (gameObject.tag == "PNJ") 
 			{
 				GameManager.instanceGM.LooseALife ();
 			}
-			NetworkServer.Destroy (gameObject);
 		}
+		yield return new WaitForEndOfFrame ();
+
+			NetworkServer.Destroy (gameObject);
+		
 //		Destroy (gameObject);
 	}
 
