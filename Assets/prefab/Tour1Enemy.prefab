@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 114242284621082882}
   - component: {fileID: 114434191293487954}
   - component: {fileID: 82419341695430880}
+  - component: {fileID: 114789686187944512}
   m_Layer: 9
   m_Name: Tour1Enemy
   m_TagString: Untagged
@@ -1004,7 +1005,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306258721357086}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -108.2, y: 1.4, z: 4.35}
+  m_LocalPosition: {x: -108.2, y: 1.4, z: 25.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4125021401974784}
@@ -1220,7 +1221,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306258721357086}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_MotionVectors: 0
@@ -1634,6 +1635,95 @@ MonoBehaviour:
   isDead: 0
   timeBetweenTic: 1
   guyAttackingMe: {fileID: 0}
+--- !u!114 &114789686187944512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1306258721357086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe65ef9dfc0d34d990203dc33b0d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayIcon: {fileID: 2800000, guid: a0e7c5834c68cfe489f26f94bdaa7b26, type: 3}
+  IconColour: {r: 0.3897059, g: 0, b: 0, a: 1}
+  Display_1_Type: 1
+  Distance_1_Units: 25
+  Display_1_Timer: 5
+  Display_1_Text: Tower
+  Text_1_Colour: {r: 0.7607843, g: 0.78039217, b: 0.8509804, a: 1}
+  Display_2_Type: 2
+  Distance_2_Units: 
+  Display_2_Timer: 0
+  Display_2_Text: 
+  Text_2_Colour: {r: 1, g: 1, b: 1, a: 1}
+  PointerArrowIcon: {fileID: 2800000, guid: ba884c539d44c104399533fb6cd593cf, type: 3}
+  PointerColour: {r: 0.58823526, g: 0.23356402, b: 0.23356402, a: 1}
+  DisplayStyle: 0
+  PulsingAnimation: 1
+  PulsingSpeed: 1
+  FadeOverDistance: 1
+  MaxFadeDistance: 150
+  FadeDistances:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.008333334
+      value: 0.006210923
+      inSlope: 0.24962108
+      outSlope: 0.24962108
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.14212903
+      value: 0.03960915
+      inSlope: -0.11440682
+      outSlope: -0.11440682
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.18751414
+      value: 0.44717458
+      inSlope: 5.841482
+      outSlope: 5.841482
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.3437268
+      value: 0.86938727
+      inSlope: 1.6991668
+      outSlope: 1.6991668
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.5019231
+      value: 0.97941697
+      inSlope: 0.049661547
+      outSlope: 0.049661547
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.7987769
+      value: 0.8024317
+      inSlope: -1.1709036
+      outSlope: -1.1709036
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.9408663
+      value: 0.40683472
+      inSlope: -4.6546516
+      outSlope: -4.6546516
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1.0041667
+      value: -0.006210819
+      inSlope: -6.5251613
+      outSlope: -6.5251613
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  DisplayOnScreen: 1
+  DisplayOffScreen: 1
+  Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
+    type: 3}
+  LastTimerUpdate: 0
 --- !u!114 &114827198834668594
 MonoBehaviour:
   m_ObjectHideFlags: 1

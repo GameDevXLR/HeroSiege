@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 82398038703196926}
   - component: {fileID: 114890351963484026}
   - component: {fileID: 114351357169285738}
+  - component: {fileID: 114421874561989310}
   m_Layer: 8
   m_Name: PNJAlly
   m_TagString: PNJ
@@ -1414,6 +1415,95 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specPts: 1
   spell1LvlUpBtn: {fileID: 0}
+--- !u!114 &114421874561989310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1498430331498804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe65ef9dfc0d34d990203dc33b0d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayIcon: {fileID: 2800000, guid: 70fbc300e2222384ead2a18d1ca008b2, type: 3}
+  IconColour: {r: 0.45043954, g: 0.67058825, b: 0.38039216, a: 1}
+  Display_1_Type: 1
+  Distance_1_Units: 25
+  Display_1_Timer: 5
+  Display_1_Text: Ally
+  Text_1_Colour: {r: 0.7607843, g: 0.78039217, b: 0.8509804, a: 1}
+  Display_2_Type: 0
+  Distance_2_Units: 
+  Display_2_Timer: 0
+  Display_2_Text: 
+  Text_2_Colour: {r: 1, g: 1, b: 1, a: 1}
+  PointerArrowIcon: {fileID: 2800000, guid: ba884c539d44c104399533fb6cd593cf, type: 3}
+  PointerColour: {r: 0.38039216, g: 0.67058825, b: 0.44243407, a: 1}
+  DisplayStyle: 0
+  PulsingAnimation: 0
+  PulsingSpeed: 0
+  FadeOverDistance: 1
+  MaxFadeDistance: 100
+  FadeDistances:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.008333334
+      value: 0.006210923
+      inSlope: 0.24962108
+      outSlope: 0.24962108
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.14212903
+      value: 0.03960915
+      inSlope: -0.11440682
+      outSlope: -0.11440682
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.18751414
+      value: 0.44717458
+      inSlope: 5.841482
+      outSlope: 5.841482
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.3437268
+      value: 0.86938727
+      inSlope: 1.6991668
+      outSlope: 1.6991668
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.5019231
+      value: 0.97941697
+      inSlope: 0.049661547
+      outSlope: 0.049661547
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.7987769
+      value: 0.8024317
+      inSlope: -1.1709036
+      outSlope: -1.1709036
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.9408663
+      value: 0.40683472
+      inSlope: -4.6546516
+      outSlope: -4.6546516
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1.0041667
+      value: -0.006210819
+      inSlope: -6.5251613
+      outSlope: -6.5251613
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  DisplayOnScreen: 1
+  DisplayOffScreen: 1
+  Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
+    type: 3}
+  LastTimerUpdate: 0
 --- !u!114 &114577200640440102
 MonoBehaviour:
   m_ObjectHideFlags: 1
