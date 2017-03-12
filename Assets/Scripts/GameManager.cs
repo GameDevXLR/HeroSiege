@@ -14,6 +14,7 @@ public class GameManager : NetworkBehaviour
 	public Text gameOverTxt;
 	public static GameManager instanceGM = null;
 	private GameObject[] ennemies;
+	public AlertMessageManager messageManager;
 	public GameObject playerObj;
 	public NetworkInstanceId ID;
 	[SyncVar(hook = "LooseLife")]public int lifeOfTheTeam = 5;
@@ -42,7 +43,7 @@ public class GameManager : NetworkBehaviour
 	public void LooseLife(int life)
 	{
 		lifeOfTheTeam = life;
-		StartCoroutine (LooseALifeAlert ());
+		messageManager.SendAnAlertMess ("We just loosed a life...", Color.red);
 	}
 
 	public void LooseALife()
@@ -79,14 +80,7 @@ public class GameManager : NetworkBehaviour
 		}
 
 	}
-	IEnumerator LooseALifeAlert()
-	{
-		generalTxt.enabled = true;
-		generalTxt.text = lifeOfTheTeam + " vie(s) restante...";
-		yield return new WaitForSeconds (2f);
-		generalTxt.text = "";
-		generalTxt.enabled = false;
-	}
+
 
 	public void StopPlayerFromJoining()
 	{
@@ -141,9 +135,14 @@ public class GameManager : NetworkBehaviour
 			return;
 		
 		}
+		if (!isServer) 
+		{
+			messageManager.SendAnAlertMess("The host has chosen a game difficulty of "+gameDifficulty+ ". Good Luck !", Color.green);
+		}
 	}
 	public void NightStartingEvents(int nbrOfPlayers)
 	{
+		messageManager.SendAnAlertMess ("It's night time. Better be ready.", Color.red);
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = true;
@@ -164,6 +163,8 @@ public class GameManager : NetworkBehaviour
 	}
 	public void DayStartingEvents(int nbrOfPlayers)
 	{
+		messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
+
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = false;

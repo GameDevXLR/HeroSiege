@@ -30,6 +30,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 	public void NormalMode()
 	{
 		GameManager.instanceGM.gameDifficulty = 1;
+		GameManager.instanceGM.messageManager.SendAnAlertMess ("Normal mode activated...pussy!", Color.green);
 		inib1.GetComponent<SpawnManager>().enabled = true;
 		gameMode = difficultySettings.normal;
 		gameObject.SetActive (false);

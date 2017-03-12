@@ -55,7 +55,7 @@ Transform:
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6371198, y: 0.3177445, z: 1.4736843}
-  m_LocalScale: {x: 0.075, y: 0.075, z: 0.075}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
@@ -76,26 +76,10 @@ MonoBehaviour:
   Display_1_Text: 
   Display_2_Text: 
   FadeOverDistance: 0
-  IconColour:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
-  Text_1_Colour:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  Text_2_Colour:
-    r: 1
-    g: 1
-    b: 1
-    a: 0
-  PointerColour:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
+  IconColour: {r: 1, g: 0, b: 0, a: 1}
+  Text_1_Colour: {r: 0, g: 0, b: 0, a: 0}
+  Text_2_Colour: {r: 1, g: 1, b: 1, a: 0}
+  PointerColour: {r: 1, g: 0, b: 0, a: 1}
   Distance: 26.09248
   SmoothAlpha: 1.0984703
   Secondary_Text_Display: {fileID: 13200000}

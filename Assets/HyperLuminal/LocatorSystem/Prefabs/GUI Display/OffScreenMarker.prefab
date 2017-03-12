@@ -84,7 +84,7 @@ Transform:
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.87456936, y: 0.5179662, z: 1.4736843}
-  m_LocalScale: {x: 0.05, y: 0.075, z: 0.05}
+  m_LocalScale: {x: 0.025, y: 0.05, z: 0.025}
   m_Children:
   - {fileID: 400000}
   - {fileID: 400002}
@@ -103,11 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowTexture: {fileID: 2800000, guid: f9a59ecb387f1754bbddf4fd1a1603e7, type: 3}
-  ArrowColor:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
+  ArrowColor: {r: 1, g: 0, b: 0, a: 1}
   RotationValue: 87.253914
   thisCamera: {fileID: 0}
 --- !u!114 &11400002
@@ -125,26 +121,10 @@ MonoBehaviour:
   Display_1_Text: 
   Display_2_Text: 
   FadeOverDistance: 0
-  IconColour:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
-  Text_1_Colour:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  Text_2_Colour:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  PointerColour:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
+  IconColour: {r: 1, g: 0, b: 0, a: 1}
+  Text_1_Colour: {r: 0, g: 0, b: 0, a: 0}
+  Text_2_Colour: {r: 0, g: 0, b: 0, a: 0}
+  PointerColour: {r: 1, g: 0, b: 0, a: 1}
   Distance: 26.09248
   SmoothAlpha: 1.0984703
   DirectionArrow: {fileID: 11400000}
