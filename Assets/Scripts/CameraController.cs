@@ -14,11 +14,12 @@ public class CameraController : MonoBehaviour
 	// our personnage
 	public GameObject target; 
 
-	// key to lock and center the camera on the player
+	// key to lock and center the camera on the target
 	public KeyCode lockKey = KeyCode.L;
 
-	// key to center back the camera on the player
+	// key to center back the camera on the target
 	public KeyCode centerBackKey = KeyCode.Space;
+
 	// selectedPlayer
 	// true : camera lock in the perso
 	// false : camera free from the perso
@@ -34,18 +35,10 @@ public class CameraController : MonoBehaviour
 	[SerializeField] Vector3 offset = new Vector3(3.7f,4.8f,0.2f);
 
 
-	//for the lerp
-	float lerpTime = 1f;
-	float currentLerpTime;
-
-	Vector3 startPos;
-	Vector3 endPos;
-
-
-
 	// initial y, allow to block the y axis
 	private float yvalue;
 
+	// y difference use to move the y value
 	private float yvalueDiff;
 
 	private bool isReady;
@@ -53,6 +46,10 @@ public class CameraController : MonoBehaviour
 	int layer_mask;
 
 	Camera cameraCible;
+
+	// limite map
+	public Vector3 boundaries = new Vector3(10,10,10);
+
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){
@@ -81,14 +78,15 @@ public class CameraController : MonoBehaviour
 		if (Input.GetKeyUp (lockKey))
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed);
 
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (new Vector3 (gameObject.transform.position.x, 0, gameObject.transform.position.z));
 			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
-				yvalueDiff = hit.collider.gameObject.transform.position.y - target.transform.position.y;
 				yvalueDiff = hit.point.y - target.transform.position.y;
 			}
+
+			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalueDiff);
+
 		}
 
 

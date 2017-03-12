@@ -7,6 +7,8 @@
 
 
 using UnityEngine;
+using System;
+using System.Collections.Generic; 
 
 public static class UtilsScreenMovement
 {
@@ -19,44 +21,70 @@ public static class UtilsScreenMovement
 	 * 
 	 * 
 	 * */
-	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed)
+	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed, Vector3 boundaries, float yDiff)
     {
-		float y = cameraCible.transform.position.y;
+
+		int layer_mask = Layers.Ground; 
+		float yInitial = cameraCible.transform.position.y;
 		// move to the left
         if (Input.mousePosition.x >= 0 && Input.mousePosition.x <= zoneDetectionMouse)
         {
-			cameraCible.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (new Vector3 (-speed * Time.deltaTime, 0, 0));
+
+			if (hadDetectTheLayer ( destination, layer_mask)) 
+				cameraCible.transform.position = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
+
 
         }
 		//move to the right
         else if (Input.mousePosition.x <= Screen.width && Input.mousePosition.x >= Screen.width - zoneDetectionMouse)
         {
-            cameraCible.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (new Vector3 (speed * Time.deltaTime, 0, 0));
+
+			if (hadDetectTheLayer ( destination,  layer_mask)) 
+				cameraCible.transform.position = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
         }
 
 		//move backward
         if (Input.mousePosition.y >= 0 && Input.mousePosition.y <= zoneDetectionMouse)
         {
-			
-            cameraCible.transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
-			Vector3 destination = new Vector3 () {
-				x = cameraCible.transform.position.x,
-				y = y ,
-				z = cameraCible.transform.position.z
-			};
-			cameraCible.transform.position = destination;
+			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (-Vector3.forward * speed * Time.deltaTime);
+
+			if(hadDetectTheLayer(destination,  layer_mask)){
+				cameraCible.transform.position = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
+
+			}
 
         }
 		//move forward
         else if (Input.mousePosition.y <= Screen.height && Input.mousePosition.y >= Screen.height - zoneDetectionMouse)
         {
-            cameraCible.transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
-			Vector3 destination = new Vector3 () {
-				x = cameraCible.transform.position.x,
-				y = y ,
-				z = cameraCible.transform.position.z
-			};
-			cameraCible.transform.position = destination;
+			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (Vector3.forward * speed * Time.deltaTime);
+
+			if(hadDetectTheLayer(destination, layer_mask)){
+
+				cameraCible.transform.localPosition = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
+
+			}
         }
+		cameraCible.transform.position = new Vector3 () {
+			x = cameraCible.transform.position.x,
+			y = yInitial,
+			z = cameraCible.transform.position.z
+		};
+
     }
+
+	public static Boolean hadDetectTheLayer(Vector3 position, int layer_mask){
+
+
+		RaycastHit hit;
+
+		if (Physics.Raycast (position, -Vector3.up, out hit)) {	
+			return hit.collider.gameObject.layer == layer_mask;
+		}
+		return false;
+	}
+
+
 }
