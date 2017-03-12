@@ -31,7 +31,7 @@ public static class UtilsScreenMovement
         {
 			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (new Vector3 (-speed * Time.deltaTime, 0, 0));
 
-			if (hadDetectTheLayer ( destination, layer_mask)) 
+			if (Utils.hadDetectTheLayer ( destination, layer_mask)) 
 				cameraCible.transform.position = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
 
 
@@ -41,7 +41,7 @@ public static class UtilsScreenMovement
         {
 			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (new Vector3 (speed * Time.deltaTime, 0, 0));
 
-			if (hadDetectTheLayer ( destination,  layer_mask)) 
+			if (Utils.hadDetectTheLayer ( destination,  layer_mask)) 
 				cameraCible.transform.position = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
         }
 
@@ -50,7 +50,7 @@ public static class UtilsScreenMovement
         {
 			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (-Vector3.forward * speed * Time.deltaTime);
 
-			if(hadDetectTheLayer(destination,  layer_mask)){
+			if(Utils.hadDetectTheLayer(destination,  layer_mask)){
 				cameraCible.transform.position = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
 
 			}
@@ -61,7 +61,7 @@ public static class UtilsScreenMovement
         {
 			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (Vector3.forward * speed * Time.deltaTime);
 
-			if(hadDetectTheLayer(destination, layer_mask)){
+			if(Utils.hadDetectTheLayer(destination, layer_mask)){
 
 				cameraCible.transform.localPosition = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
 
@@ -75,16 +75,7 @@ public static class UtilsScreenMovement
 
     }
 
-	public static Boolean hadDetectTheLayer(Vector3 position, int layer_mask){
 
-
-		RaycastHit hit;
-
-		if (Physics.Raycast (position, -Vector3.up, out hit)) {	
-			return hit.collider.gameObject.layer == layer_mask;
-		}
-		return false;
-	}
 
 
 }

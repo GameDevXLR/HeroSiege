@@ -85,6 +85,9 @@ public class CameraController : MonoBehaviour
 				yvalueDiff = hit.point.y - target.transform.position.y;
 			}
 
+
+
+
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalueDiff);
 
 		}
@@ -110,6 +113,7 @@ public class CameraController : MonoBehaviour
 				z = gameObject.transform.position.z
 			};
 		} else {
+			
 			Vector3 destination = new Vector3 () {
 				x = gameObject.transform.position.x,
 				y = yvalue + yvalueDiff ,
