@@ -37,20 +37,6 @@ public class PlayerXPScript : NetworkBehaviour
 		}
 		actualXP += xp;
 
-//		if (actualXP >= requiredXPToUp) 
-//		{
-//			actualLevel++;
-//			StartCoroutine (LevelUpMessage ());
-//			actualXP = 0;
-//			requiredXPToUp *= 1 + actualLevel;
-//			playerLvl.text = actualLevel.ToString ();
-//			GetComponent<GenericLifeScript> ().LevelUp ();
-//			GetComponent<GenericManaScript> ().LevelUp ();
-//			GetComponent<AutoAttackScript> ().LevelUp ();
-//
-//		}
-//		float x = (float)actualXP / requiredXPToUp;
-//		xpDisplay.localScale = new Vector3 (x, 1f, 1f);
 	}
 
 	IEnumerator LevelUpMessage()
@@ -59,6 +45,7 @@ public class PlayerXPScript : NetworkBehaviour
 		generalTxt.text = "You have reach level " + actualLevel + " .";
 		yield return new WaitForSeconds (2f);
 		generalTxt.enabled = false;
+		GetComponent<PlayerLevelUpManager> ().GetAlevel ();
 
 	}
 	public void XPActualize(int xp)
@@ -69,9 +56,11 @@ public class PlayerXPScript : NetworkBehaviour
 			actualLevel++;
 			actualXP = 0;
 			requiredXPToUp *= 1 + actualLevel;
-			if (isLocalPlayer) {
+			if (isLocalPlayer) 
+			{
 				StartCoroutine (LevelUpMessage ());
 				playerLvl.text = actualLevel.ToString ();
+
 			}
 			GetComponent<GenericLifeScript> ().LevelUp ();
 			GetComponent<GenericManaScript> ().LevelUp ();
