@@ -85,15 +85,8 @@ public class CameraController : MonoBehaviour
 				yvalueDiff = hit.point.y - target.transform.position.y;
 			}
 
-
-
-
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalueDiff);
-
+			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalueDiff, layer_mask);
 		}
-
-
-
     }
 
     void LateUpdate()

@@ -8,10 +8,12 @@ public static class Utils
 
 		RaycastHit hit;
 
-		if (Physics.Raycast (position, -Vector3.up, out hit)) {	
-			return hit.collider.gameObject.layer == layer_mask;
+		if (Physics.Raycast (position, -Vector3.up, out hit, layer_mask)) {	
+			return true;
 		}
 		return false;
 	}
+
+
 }
 

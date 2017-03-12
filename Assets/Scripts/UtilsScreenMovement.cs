@@ -21,10 +21,9 @@ public static class UtilsScreenMovement
 	 * 
 	 * 
 	 * */
-	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed, Vector3 boundaries, float yDiff)
+	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed, Vector3 boundaries, float yDiff, int layer_mask)
     {
 
-		int layer_mask = Layers.Ground; 
 		float yInitial = cameraCible.transform.position.y;
 		// move to the left
         if (Input.mousePosition.x >= 0 && Input.mousePosition.x <= zoneDetectionMouse)
