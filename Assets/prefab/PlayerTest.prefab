@@ -1534,7 +1534,7 @@ MonoBehaviour:
   maxMp: 100
   currentMp: 80
   regenMp: 5
-  levelUpBonusMP: 5
+  levelUpBonusMP: 10
   timeBetweenTic: 2
   manaBar: {fileID: 224744315606201176}
 --- !u!114 &114758573513645128
@@ -1617,6 +1617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapIcon: {fileID: 212341552016347012}
   mainPlayerColor: {r: 0.019139292, g: 0.44631925, b: 0.86764705, a: 1}
+  difficultyPanel: {fileID: 0}
 --- !u!114 &114924662801619198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1673,10 +1674,10 @@ MonoBehaviour:
   xpGiven: 50
   goldGiven: 5
   lifeBar: {fileID: 224552685445617892}
-  maxHp: 5000
-  currentHp: 2500
-  regenHp: 500
-  levelUpBonusHP: 10
+  maxHp: 250
+  currentHp: 250
+  regenHp: 5
+  levelUpBonusHP: 20
   respawnTransform: {fileID: 0}
   armorScore: 1
   dodge: 10

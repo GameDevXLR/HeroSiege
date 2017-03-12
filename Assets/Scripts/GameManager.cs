@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 public class GameManager : NetworkBehaviour 
 {
-
+	public GameObject difficultyPanel;
 	public AudioClip LooseLifeSound;
 	public Text generalTxt;
 	public Text gameOverTxt;
@@ -17,8 +17,10 @@ public class GameManager : NetworkBehaviour
 	public GameObject playerObj;
 	public NetworkInstanceId ID;
 	[SyncVar(hook = "LooseLife")]public int lifeOfTheTeam = 5;
+	[SyncVar(hook = "DayNightEvents")]public bool nightTime;
+	public int Days = 1;
 
-	[SyncVar]public int gameDifficulty = 1;
+	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){
@@ -34,6 +36,8 @@ public class GameManager : NetworkBehaviour
 	void Start()
 	{
 		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
+		difficultyPanel = GameObject.Find ("DifficultyPanel");
+
 	}
 	public void LooseLife(int life)
 	{
@@ -87,5 +91,95 @@ public class GameManager : NetworkBehaviour
 	public void StopPlayerFromJoining()
 	{
 //		NetworkManager.singleton.matchMaker.SetMatchAttributes(UnityEngine.Networking.Types.NetworkID, false, 1, basic
+	}
+	public void DayNightEvents(bool night)
+	{
+		nightTime = night;
+		if (night) 
+		{
+			Debug.Log ("it's night time...");
+			if (isServer) 
+			{
+				int coPlayers;
+				coPlayers = NetworkServer.connections.Count;
+				Debug.Log (coPlayers);
+				NightStartingEvents (coPlayers);
+				Debug.Log ("NightMobs : spawn them here in the code");
+			}
+		} else 
+		{
+			Debug.Log ("The sun is shining.");
+			Days++;
+			if (isServer) 
+			{
+				int coPlayers;
+				coPlayers = NetworkServer.connections.Count;
+				Debug.Log (coPlayers);
+				DayStartingEvents (coPlayers);
+				Debug.Log ("spawn them here in the code");
+			}
+		}
+	}
+	public void SyncDifficulty(int dif)
+	{
+		gameDifficulty = dif;
+		switch (gameDifficulty) 
+		{
+		case 1:
+			
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		case 4:
+
+			break;
+		default :
+			return;
+		
+		}
+	}
+	public void NightStartingEvents(int nbrOfPlayers)
+	{
+		if (gameDifficulty == 1 || gameDifficulty == 2) 
+		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = true;
+		}
+		if (gameDifficulty == 3) 
+		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = true;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = true;
+
+		}
+		if (gameDifficulty == 4) 
+		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = true;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = true;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = true;
+
+		}
+	}
+	public void DayStartingEvents(int nbrOfPlayers)
+	{
+		if (gameDifficulty == 1 || gameDifficulty == 2) 
+		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = false;
+		}
+		if (gameDifficulty == 3) 
+		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = false;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = false;
+
+		}
+		if (gameDifficulty == 4) 
+		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = false;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = false;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = false;
+
+		}
 	}
 }
