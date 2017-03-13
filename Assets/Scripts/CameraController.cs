@@ -79,17 +79,23 @@ public class CameraController : MonoBehaviour
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
 
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay (new Vector3 (gameObject.transform.position.x, 0, gameObject.transform.position.z));
-			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
-				yvalueDiff = hit.point.y - target.transform.position.y;
+//			RaycastHit hit;
+//			Ray ray = Camera.main.ScreenPointToRay (new Vector3 (gameObject.transform.position.x, 0, gameObject.transform.position.z));
+//			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
+//				yvalueDiff = hit.point.y - target.transform.position.y;
+//			}
+
+			Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 20);
+			int i = 0;
+			float yMax = 5;
+			while (i < hitColliders.Length) {
+				Debug.Log(hitColliders[i].transform.position);
+				yMax = Mathf.Max (yMax, hitColliders [i].transform.position.y);
+				i++;
 			}
+				yvalueDiff = yMax - target.transform.position.y;
 
-
-
-
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalueDiff);
-
+			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalue + yvalueDiff);
 		}
 
 
