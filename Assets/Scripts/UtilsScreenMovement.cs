@@ -80,12 +80,15 @@ public static class UtilsScreenMovement
 			zValueDeplacement = -speed * Time.deltaTime;
 
         }
-		Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (new Vector3 (xValueDeplacement, yValue, zValueDeplacement));
 
-		if(Utils.hadDetectTheLayer(destination, layer_mask)){
+		if(xValueDeplacement != 0 || zValueDeplacement != 0){
+			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (new Vector3 (xValueDeplacement, yValue, zValueDeplacement));
 
-			cameraCible.transform.localPosition = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
+			if(Utils.hadDetectTheLayer(destination, layer_mask)){
 
+				cameraCible.transform.localPosition = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
+
+			}
 		}
 
 //		cameraCible.transform.position = new Vector3 () {
