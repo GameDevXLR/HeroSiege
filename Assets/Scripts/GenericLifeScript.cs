@@ -17,7 +17,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public int regenHp;
 	public int levelUpBonusHP = 10;
 
-	public Transform respawnTransform; // placer ici un transform qui correspond a l'endroit ou doit respawn l'objet.
+	public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn l'objet.
 
 	public int armorScore = 1;
 	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
@@ -31,7 +31,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	void Start () {
 		lastTic = 0f;
 		if (gameObject.layer == Layers.Player) {
-			respawnTransform = GameObject.Find ("PlayerRespawnPoint").transform;
+			respawnPoint = GameObject.Find ("PlayerRespawnPoint");
 			respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
 		}
 	}
@@ -149,7 +149,7 @@ public class GenericLifeScript : NetworkBehaviour {
 			{
 				//faire ici ce qui se passe pour un joueur qui meurt
 			}
-			PlayerRespawnProcess ();
+			RpcPlayerRespawnProcess ();
 
 			return;
 		}
@@ -189,36 +189,50 @@ public class GenericLifeScript : NetworkBehaviour {
 
 
 	//ce qu'il se passe si un JOUEUR meurt...
-	public void PlayerRespawnProcess()
+	[ClientRpc]
+	public void RpcPlayerRespawnProcess()
 	{
 		StopAllCoroutines ();
 		StartCoroutine (RespawnEnum ());
-		StartCoroutine (RespawnTimer ());
+		if (isLocalPlayer) {
+			StartCoroutine (RespawnTimer ());
+		}
 	}
 		IEnumerator RespawnEnum()
 	{
 		//ajouter par ici une anime de mort un de ces 4...
+		if(isLocalPlayer)
+		{
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 
-		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
+		}
+		GetComponent<AutoAttackScript> ().StopAllCoroutines ();
 		GetComponent<AutoAttackScript> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().enabled = false;
-		GetComponent<NavMeshAgent> ().ResetPath();
+		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
+		GetComponent<NavMeshAgent> ().enabled = false;
 		GetComponent<CapsuleCollider> ().enabled = false;
 		yield return new WaitForEndOfFrame ();
-		transform.position = respawnTransform.position;
-//		transform.Translate (respawnTransform.position, Space.World);
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+
+		transform.localPosition = respawnPoint.transform.position;
 
 		yield return new WaitForSeconds (0.8f);
-		transform.position = respawnTransform.position;
 
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (respawnTime);
-		GetComponent<NavMeshAgent> ().SetDestination (respawnTransform.localPosition);
+		GetComponent<NavMeshAgent> ().enabled = true;
+
+		GetComponent<NavMeshAgent> ().SetDestination (respawnPoint.transform.localPosition);
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
 		GetComponent<CapsuleCollider> ().enabled = true;
-		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
+		if(isLocalPlayer)
+		{
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
+
+		}
 		GetComponent<AutoAttackScript> ().enabled = true;
 		currentHp = maxHp;
 		isDead = false;

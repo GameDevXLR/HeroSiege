@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class PlayerInitialisationScript : NetworkBehaviour {
 	public SpriteRenderer minimapIcon;
@@ -30,8 +31,9 @@ public class PlayerInitialisationScript : NetworkBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void LateUpdate () 
+	{
+		this.enabled = false;
 	}
 	public override void OnStartLocalPlayer ()
 	{
@@ -39,5 +41,21 @@ public class PlayerInitialisationScript : NetworkBehaviour {
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
 		base.OnStartLocalPlayer ();
 	}
+
+//
+//	void OnEnable()
+//	{
+//		SceneManager.sceneLoaded += OnLevelLoadedOrReloaded;
+//	}
+//	void OnDisable()
+//	{
+//		SceneManager.sceneLoaded -= OnLevelLoadedOrReloaded;
+//
+//	}
+//
+//	void OnLevelLoadedOrReloaded(Scene scene, LoadSceneMode mode)
+//	{
+//		Debug.Log ("reloaded");
+//	}
 
 }
