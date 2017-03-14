@@ -25277,6 +25277,11 @@ Prefab:
     - target: {fileID: 114700895480209066, guid: 247314a2e20cd72489e9ddc22974df56,
         type: 2}
       propertyPath: speed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114700895480209066, guid: 247314a2e20cd72489e9ddc22974df56,
+        type: 2}
+      propertyPath: zoneDetectionMouse
       value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -26610,7 +26615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64371547f94cec844b0742ae3211c433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 0
   nightSpeedFactor: 2
   isNight: 0
 --- !u!1001 &1811503578

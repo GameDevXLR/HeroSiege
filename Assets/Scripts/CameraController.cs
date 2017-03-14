@@ -41,6 +41,12 @@ public class CameraController : MonoBehaviour
 	// y difference use to move the y value
 	private float yvalueDiff;
 
+	// y Minimum
+	public float yMin = -10;
+
+	// yMaximum
+	public float yMax = 15;
+
 	private bool isReady;
 
 	int layer_mask;
@@ -85,17 +91,21 @@ public class CameraController : MonoBehaviour
 //				yvalueDiff = hit.point.y - target.transform.position.y;
 //			}
 
-			Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 20);
+			Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, yMax);
 			int i = 0;
-			float yMax = 5;
+			float yMaxCollider = yMin;
 			while (i < hitColliders.Length) {
 				Debug.Log(hitColliders[i].transform.position);
-				yMax = Mathf.Max (yMax, hitColliders [i].transform.position.y);
+				yMaxCollider = Mathf.Max (yMaxCollider, hitColliders [i].transform.position.y);
 				i++;
 			}
+			if (yvalue + yvalueDiff <= yMax) {
+				yvalueDiff = yMaxCollider - target.transform.position.y;
+			}
+			else{
 				yvalueDiff = yMax - target.transform.position.y;
-
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalue + yvalueDiff);
+			}
+			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalue + yvalueDiff, layer_mask);
 		}
 
 
@@ -120,13 +130,13 @@ public class CameraController : MonoBehaviour
 			};
 		} else {
 			
-			Vector3 destination = new Vector3 () {
-				x = gameObject.transform.position.x,
-				y = yvalue + yvalueDiff ,
-				z = gameObject.transform.position.z
-			};
-					
-			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, destination, Time.deltaTime);
+//			Vector3 destination = new Vector3 () {
+//				x = gameObject.transform.position.x,
+//				y = yvalue + yvalueDiff ,
+//				z = gameObject.transform.position.z
+//			};
+//					
+//			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, destination, Time.deltaTime);
 
 		}
     }
