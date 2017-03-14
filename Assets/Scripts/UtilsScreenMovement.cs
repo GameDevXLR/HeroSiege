@@ -21,7 +21,7 @@ public static class UtilsScreenMovement
 	 * 
 	 * 
 	 * */
-	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed, Vector3 boundaries, float yValue, int layer_mask)
+	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed,float yValue, int layer_mask)
     {
 
 		float yInitial = cameraCible.transform.position.y;
@@ -48,9 +48,7 @@ public static class UtilsScreenMovement
 		//move forward
         else if (Input.mousePosition.y <= Screen.height && Input.mousePosition.y >= Screen.height - zoneDetectionMouse)
         {
-
 			zValueDeplacement = speed * Time.deltaTime;
-
         }
 
 		if(xValueDeplacement != 0 || zValueDeplacement != 0){
