@@ -43,6 +43,7 @@ public class ItemManager : NetworkBehaviour
 	public void UpMyDamage()
 	{
 		targetplayer.GetComponent<AutoAttackScript> ().damage += 5;
+		targetplayer.GetComponent<AutoAttackScript> ().damageDisplay.text = targetplayer.GetComponent<AutoAttackScript> ().damage.ToString();
 	}
 	public void RecruteAGuard()
 	{

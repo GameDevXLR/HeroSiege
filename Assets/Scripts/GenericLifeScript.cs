@@ -11,7 +11,10 @@ public class GenericLifeScript : NetworkBehaviour {
 	// ce script sert a gerer la vie de l'objet auquel il est attacher. en cas de mort; l'objet est détruit sauf si c'est un joueur : dans ce cas faut écrire le code pour le moment c'est pas préciser...
 	public int xpGiven = 50;
 	public int goldGiven = 5;
+
 	public RectTransform lifeBar;
+	public RectTransform lifeBarMain; // lifebar de l'interface player.
+	public Text playerHPTxt;
 	[SyncVar]public int maxHp = 1000;
 	[SyncVar(hook="RescaleTheLifeBarIG")]public int currentHp = 800;
 	public int regenHp;
@@ -38,21 +41,26 @@ public class GenericLifeScript : NetworkBehaviour {
 			respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
 			armorDisplay = GameObject.Find ("ArmorLog").GetComponent<Text> ();
 			armorDisplay.text = armorScore.ToString();
+			lifeBarMain = GameObject.Find ("PlayerLifeBarMain").GetComponent<RectTransform> ();
+			playerHPTxt = GameObject.Find ("PlayerHPTxt").GetComponent<Text> ();
+			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
 		}
 	}
 
 	void Update () {
-		if (!isServer) 
-		{
-			return;
-		}
-
 		if (isDead || currentHp == maxHp) 
 		{
 			lifeBar.GetComponentInParent<Canvas> ().enabled = false;
 
 			return;
 		}
+
+		if (!isServer) 
+		{
+			return;
+		}
+
+
 
 			if (Time.time > lastTic) 
 			{
@@ -66,6 +74,10 @@ public class GenericLifeScript : NetworkBehaviour {
 			{
 				currentHp = maxHp;
 			lifeBar.GetComponentInParent<Canvas> ().enabled = false;
+			if (isLocalPlayer) 
+			{
+				playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+			}
 				return;
 			}
 
@@ -83,10 +95,10 @@ public class GenericLifeScript : NetworkBehaviour {
 
 	public void LooseHealth(int dmg, bool trueDmg, GameObject attacker)
 	{	
-		if (!isServer) 
+		if (isServer) 
 		{
-			return;
-		}
+			
+		
 		if (attacker != guyAttackingMe || guyAttackingMe == null) 
 		{
 			guyAttackingMe = attacker;
@@ -103,29 +115,34 @@ public class GenericLifeScript : NetworkBehaviour {
 //			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
 //
 //		}
+			if (currentHp > 0) 
+			{
+				if (trueDmg) 
+				{
+					currentHp -= dmg;
+					return;
+				}
+				float y = Random.Range (0, 100);
+				if (y > dodge) 
+				{
+					if (armorScore > 0) 
+					{
+						float multiplicatorArmor = (float)100f / (100f + armorScore);
+						currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
+						return;
+					} else 
+					{
+						currentHp -= dmg;
+					}
+				}
+			}
+		
+		}
 
 			StartCoroutine (HitAnimation ());
 			RescaleTheLifeBarIG (currentHp);
 			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
-		if (currentHp > 0) 
-		{
-			if (trueDmg) 
-			{
-				currentHp -= dmg;
-				return;
-			}
-			float y = Random.Range (0, 100);
-			if (y > dodge) 
-			{
-				if (armorScore > 0) {
-					float multiplicatorArmor = (float)100f / (100f + armorScore);
-					currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
-					return;
-				} else {
-					currentHp -= dmg;
-				}
-			}
-		}
+
 		
 
 	}
@@ -138,6 +155,12 @@ public class GenericLifeScript : NetworkBehaviour {
 			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
 
 			lifeBar.localScale = new Vector3 (x, 1f, 1f);
+			if (isLocalPlayer) 
+			{
+				lifeBarMain.localScale = new Vector3 (x, 1f, 1f);
+				playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+
+			}
 		}
 	}
 	public void	RegenYourHP ()
@@ -274,5 +297,11 @@ public class GenericLifeScript : NetworkBehaviour {
 		maxHp += levelUpBonusHP;
 		currentHp = maxHp;
 		respawnTime += 4f;
+		if (isLocalPlayer) 
+		{
+			lifeBarMain.localScale = new Vector3 (1, 1f, 1f);
+			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+
+		}
 	}
 }

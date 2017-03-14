@@ -28,8 +28,8 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 	// Update is called once per frame
 	void OnTriggerStay (Collider other)
 	{
-		if (isTheLocalP) 
-		{
+//		if (isTheLocalP) 
+//		{
 			if (autoTargetting) 
 			{
 				if (playerAgent.velocity == Vector3.zero) 
@@ -45,7 +45,7 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 					}
 				}
 			}
-		}
+//		}
 	}
 	void Update()
 	{

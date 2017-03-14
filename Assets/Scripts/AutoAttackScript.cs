@@ -197,6 +197,7 @@ public class AutoAttackScript : NetworkBehaviour {
 	public void LevelUp()
 	{
 		damage += levelUpBonusDamage;
+		damageDisplay.text = damage.ToString ();
 
 	}
 }
