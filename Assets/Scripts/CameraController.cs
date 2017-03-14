@@ -80,24 +80,8 @@ public class CameraController : MonoBehaviour
 		if (Input.GetKeyUp (lockKey))
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
-
-			// permet de détecter tout les collider dans une sphere de rayon yMax
-			Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, yMax);
-			int i = 0;
-			float yMaxCollider = yMin;
-			while (i < hitColliders.Length) {
-				Debug.Log(hitColliders[i].transform.position);
-				yMaxCollider = Mathf.Max (yMaxCollider, hitColliders [i].transform.position.y);
-				i++;
-			}
-			// permet d'avoir une hauteur maximale
-			if (yvalue + yvalueDiff <= yMax) {
-				yvalueDiff = yMaxCollider - target.transform.position.y;
-			}
-			else{
-				yvalueDiff = yMax - target.transform.position.y;
-			}
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, yvalue + yvalueDiff, layer_mask);
+			
+			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, yvalue, layer_mask);
 		}
 
 
@@ -112,7 +96,6 @@ public class CameraController : MonoBehaviour
 		}
 		if (selectedPlayer || Input.GetKey (centerBackKey)) {
 			CenterBackCameraOnTarget ();
-		
 
 			// allow to block y axis
 			gameObject.transform.position = new Vector3 () {

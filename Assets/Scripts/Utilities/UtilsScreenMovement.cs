@@ -21,10 +21,9 @@ public static class UtilsScreenMovement
 	 * 
 	 * 
 	 * */
-	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed,float yValue, int layer_mask)
+	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed,float yRef, int layer_mask)
     {
 
-		float yInitial = cameraCible.transform.position.y;
 		float xValueDeplacement = 0;
 		float zValueDeplacement = 0;
 
@@ -53,9 +52,10 @@ public static class UtilsScreenMovement
 
 		if(xValueDeplacement != 0 || zValueDeplacement != 0){
 			Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection (new Vector3 (xValueDeplacement, 0, zValueDeplacement));
-			destination.y = yValue;
+			Vector3 hitPoint = new Vector3();
 
-			if(Utils.hadDetectTheLayer(destination, layer_mask)){
+			if(Utils.hadDetectTheLayer (destination, layer_mask, out hitPoint)){
+				destination.y = hitPoint.y + yRef;
 				cameraCible.transform.localPosition = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
 			}
 		}
