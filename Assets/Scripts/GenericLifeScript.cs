@@ -20,6 +20,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn l'objet.
 
 	public int armorScore = 1;
+	public Text armorDisplay;
 	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
 
 	public float respawnTime = 5f;
@@ -28,11 +29,15 @@ public class GenericLifeScript : NetworkBehaviour {
 	private float lastTic;
 	public float timeBetweenTic = 1f;
 	public GameObject guyAttackingMe;
-	void Start () {
+	void Start () 
+	{
 		lastTic = 0f;
-		if (gameObject.layer == Layers.Player) {
+		if (isLocalPlayer) 
+		{
 			respawnPoint = GameObject.Find ("PlayerRespawnPoint");
 			respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
+			armorDisplay = GameObject.Find ("ArmorLog").GetComponent<Text> ();
+			armorDisplay.text = armorScore.ToString();
 		}
 	}
 

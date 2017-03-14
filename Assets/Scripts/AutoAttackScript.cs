@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 [NetworkSettings(channel = 0, sendInterval = 0.3f)]
 public class AutoAttackScript : NetworkBehaviour {
@@ -21,6 +22,7 @@ public class AutoAttackScript : NetworkBehaviour {
 	public float attackRate;
 	private float previousAttackTime;
 	public int damage;
+	public Text damageDisplay;
 	public int levelUpBonusDamage;
 	public bool isAttacking;
 	public GameObject target;
@@ -36,6 +38,11 @@ public class AutoAttackScript : NetworkBehaviour {
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponentInChildren<Animator> ();
 		audioSource = GetComponent<AudioSource> ();
+		if (isLocalPlayer) 
+		{
+			damageDisplay = GameObject.Find ("DamageLog").GetComponent<Text> ();
+			damageDisplay.text = damage.ToString ();
+		}
 
 	}
 
