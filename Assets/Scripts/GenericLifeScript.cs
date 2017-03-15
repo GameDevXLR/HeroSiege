@@ -207,11 +207,12 @@ public class GenericLifeScript : NetworkBehaviour {
 			{
 				GameManager.instanceGM.LooseALife ();
 			}
-		}
-		yield return new WaitForEndOfFrame ();
+			yield return new WaitForEndOfFrame ();
 
 			NetworkServer.Destroy (gameObject);
-		
+
+		}
+
 //		Destroy (gameObject);
 	}
 
