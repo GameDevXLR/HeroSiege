@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 114780299539588170}
   - component: {fileID: 114021642633644984}
   - component: {fileID: 82970786219410336}
+  - component: {fileID: 114125860377542452}
   m_Layer: 9
   m_Name: mob2
   m_TagString: Untagged
@@ -1771,6 +1772,26 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114125860377542452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853418556211758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 1
+  m_SyncRotationAxis: 2
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114221084788021322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2034,7 +2055,7 @@ MonoBehaviour:
   currentHp: 60
   regenHp: 1
   levelUpBonusHP: 10
-  respawnTransform: {fileID: 0}
+  respawnPoint: {fileID: 0}
   armorScore: 1
   dodge: 20
   respawnTime: 5

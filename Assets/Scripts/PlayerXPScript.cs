@@ -9,6 +9,7 @@ public class PlayerXPScript : NetworkBehaviour
 	public Text playerLvl;
 	public Text generalTxt;
 	public RectTransform xpDisplay;
+	public Text xpText;
 	[SyncVar (hook= "XPActualize")]public int actualXP;
 	public int requiredXPToUp = 50;
 	public int actualLevel = 1;
@@ -22,6 +23,8 @@ public class PlayerXPScript : NetworkBehaviour
 		playerLvl = GameObject.Find ("PlayerLevel").GetComponent<Text> ();
 		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text> ();
 		xpDisplay = GameObject.Find ("ActualXP").GetComponent<RectTransform> ();
+		xpText = GameObject.Find ("XPTextDisplay").GetComponent<Text> ();
+		xpText.text = actualXP.ToString () + " / "+ requiredXPToUp.ToString();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +39,11 @@ public class PlayerXPScript : NetworkBehaviour
 			return;
 		}
 		actualXP += xp;
+		if (isLocalPlayer) 
+		{
+			xpText.text = actualXP.ToString () + " / "+ requiredXPToUp.ToString();
+
+		}
 
 	}
 
@@ -70,6 +78,8 @@ public class PlayerXPScript : NetworkBehaviour
 		if (isLocalPlayer) {
 			float x = (float)actualXP / requiredXPToUp;
 			xpDisplay.localScale = new Vector3 (x, 1f, 1f);
+			xpText.text = actualXP.ToString () + " / "+ requiredXPToUp.ToString();
+
 		}
 	}
 }

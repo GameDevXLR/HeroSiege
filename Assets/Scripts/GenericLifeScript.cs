@@ -11,15 +11,19 @@ public class GenericLifeScript : NetworkBehaviour {
 	// ce script sert a gerer la vie de l'objet auquel il est attacher. en cas de mort; l'objet est détruit sauf si c'est un joueur : dans ce cas faut écrire le code pour le moment c'est pas préciser...
 	public int xpGiven = 50;
 	public int goldGiven = 5;
+
 	public RectTransform lifeBar;
+	public RectTransform lifeBarMain; // lifebar de l'interface player.
+	public Text playerHPTxt;
 	[SyncVar]public int maxHp = 1000;
 	[SyncVar(hook="RescaleTheLifeBarIG")]public int currentHp = 800;
 	public int regenHp;
 	public int levelUpBonusHP = 10;
 
-	public Transform respawnTransform; // placer ici un transform qui correspond a l'endroit ou doit respawn l'objet.
+	public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn l'objet.
 
 	public int armorScore = 1;
+	public Text armorDisplay;
 	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
 
 	public float respawnTime = 5f;
@@ -28,26 +32,35 @@ public class GenericLifeScript : NetworkBehaviour {
 	private float lastTic;
 	public float timeBetweenTic = 1f;
 	public GameObject guyAttackingMe;
-	void Start () {
+	void Start () 
+	{
 		lastTic = 0f;
-		if (gameObject.layer == Layers.Player) {
-			respawnTransform = GameObject.Find ("PlayerRespawnPoint").transform;
+		if (isLocalPlayer) 
+		{
+			respawnPoint = GameObject.Find ("PlayerRespawnPoint");
 			respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
+			armorDisplay = GameObject.Find ("ArmorLog").GetComponent<Text> ();
+			armorDisplay.text = armorScore.ToString();
+			lifeBarMain = GameObject.Find ("PlayerLifeBarMain").GetComponent<RectTransform> ();
+			playerHPTxt = GameObject.Find ("PlayerHPTxt").GetComponent<Text> ();
+			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
 		}
 	}
 
 	void Update () {
-		if (!isServer) 
-		{
-			return;
-		}
-
 		if (isDead || currentHp == maxHp) 
 		{
 			lifeBar.GetComponentInParent<Canvas> ().enabled = false;
 
 			return;
 		}
+
+		if (!isServer) 
+		{
+			return;
+		}
+
+
 
 			if (Time.time > lastTic) 
 			{
@@ -61,6 +74,10 @@ public class GenericLifeScript : NetworkBehaviour {
 			{
 				currentHp = maxHp;
 			lifeBar.GetComponentInParent<Canvas> ().enabled = false;
+			if (isLocalPlayer) 
+			{
+				playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+			}
 				return;
 			}
 
@@ -78,10 +95,10 @@ public class GenericLifeScript : NetworkBehaviour {
 
 	public void LooseHealth(int dmg, bool trueDmg, GameObject attacker)
 	{	
-		if (!isServer) 
+		if (isServer) 
 		{
-			return;
-		}
+			
+		
 		if (attacker != guyAttackingMe || guyAttackingMe == null) 
 		{
 			guyAttackingMe = attacker;
@@ -98,29 +115,34 @@ public class GenericLifeScript : NetworkBehaviour {
 //			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
 //
 //		}
+			if (currentHp > 0) 
+			{
+				if (trueDmg) 
+				{
+					currentHp -= dmg;
+					return;
+				}
+				float y = Random.Range (0, 100);
+				if (y > dodge) 
+				{
+					if (armorScore > 0) 
+					{
+						float multiplicatorArmor = (float)100f / (100f + armorScore);
+						currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
+						return;
+					} else 
+					{
+						currentHp -= dmg;
+					}
+				}
+			}
+		
+		}
 
 			StartCoroutine (HitAnimation ());
 			RescaleTheLifeBarIG (currentHp);
 			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
-		if (currentHp > 0) 
-		{
-			if (trueDmg) 
-			{
-				currentHp -= dmg;
-				return;
-			}
-			float y = Random.Range (0, 100);
-			if (y > dodge) 
-			{
-				if (armorScore > 0) {
-					float multiplicatorArmor = (float)100f / (100f + armorScore);
-					currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
-					return;
-				} else {
-					currentHp -= dmg;
-				}
-			}
-		}
+
 		
 
 	}
@@ -133,6 +155,12 @@ public class GenericLifeScript : NetworkBehaviour {
 			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
 
 			lifeBar.localScale = new Vector3 (x, 1f, 1f);
+			if (isLocalPlayer) 
+			{
+				lifeBarMain.localScale = new Vector3 (x, 1f, 1f);
+				playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+
+			}
 		}
 	}
 	public void	RegenYourHP ()
@@ -149,7 +177,7 @@ public class GenericLifeScript : NetworkBehaviour {
 			{
 				//faire ici ce qui se passe pour un joueur qui meurt
 			}
-			PlayerRespawnProcess ();
+			RpcPlayerRespawnProcess ();
 
 			return;
 		}
@@ -189,36 +217,50 @@ public class GenericLifeScript : NetworkBehaviour {
 
 
 	//ce qu'il se passe si un JOUEUR meurt...
-	public void PlayerRespawnProcess()
+	[ClientRpc]
+	public void RpcPlayerRespawnProcess()
 	{
 		StopAllCoroutines ();
 		StartCoroutine (RespawnEnum ());
-		StartCoroutine (RespawnTimer ());
+		if (isLocalPlayer) {
+			StartCoroutine (RespawnTimer ());
+		}
 	}
 		IEnumerator RespawnEnum()
 	{
 		//ajouter par ici une anime de mort un de ces 4...
+		if(isLocalPlayer)
+		{
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 
-		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
+		}
+		GetComponent<AutoAttackScript> ().StopAllCoroutines ();
 		GetComponent<AutoAttackScript> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().enabled = false;
-		GetComponent<NavMeshAgent> ().ResetPath();
+		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
+		GetComponent<NavMeshAgent> ().enabled = false;
 		GetComponent<CapsuleCollider> ().enabled = false;
 		yield return new WaitForEndOfFrame ();
-		transform.position = respawnTransform.position;
-//		transform.Translate (respawnTransform.position, Space.World);
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+
+		transform.localPosition = respawnPoint.transform.position;
 
 		yield return new WaitForSeconds (0.8f);
-		transform.position = respawnTransform.position;
 
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (respawnTime);
-		GetComponent<NavMeshAgent> ().SetDestination (respawnTransform.localPosition);
+		GetComponent<NavMeshAgent> ().enabled = true;
+
+		GetComponent<NavMeshAgent> ().SetDestination (respawnPoint.transform.localPosition);
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
 		GetComponent<CapsuleCollider> ().enabled = true;
-		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
+		if(isLocalPlayer)
+		{
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
+
+		}
 		GetComponent<AutoAttackScript> ().enabled = true;
 		currentHp = maxHp;
 		isDead = false;
@@ -255,5 +297,11 @@ public class GenericLifeScript : NetworkBehaviour {
 		maxHp += levelUpBonusHP;
 		currentHp = maxHp;
 		respawnTime += 4f;
+		if (isLocalPlayer) 
+		{
+			lifeBarMain.localScale = new Vector3 (1, 1f, 1f);
+			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+
+		}
 	}
 }

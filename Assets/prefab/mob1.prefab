@@ -483,6 +483,7 @@ GameObject:
   - component: {fileID: 114550509820544456}
   - component: {fileID: 114577216152578906}
   - component: {fileID: 82546882242454104}
+  - component: {fileID: 114642977850370408}
   m_Layer: 9
   m_Name: mob1
   m_TagString: Untagged
@@ -1599,7 +1600,7 @@ MonoBehaviour:
   currentHp: 45
   regenHp: 1
   levelUpBonusHP: 10
-  respawnTransform: {fileID: 0}
+  respawnPoint: {fileID: 0}
   armorScore: 1
   dodge: 0
   respawnTime: 5
@@ -1607,6 +1608,26 @@ MonoBehaviour:
   isDead: 0
   timeBetweenTic: 1
   guyAttackingMe: {fileID: 0}
+--- !u!114 &114642977850370408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607321022530426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 1
+  m_SyncRotationAxis: 2
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114665928832872106
 MonoBehaviour:
   m_ObjectHideFlags: 1

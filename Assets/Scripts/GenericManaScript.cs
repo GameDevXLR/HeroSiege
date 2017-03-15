@@ -16,10 +16,19 @@ public class GenericManaScript : NetworkBehaviour {
 	private float lastTic;
 
 	public RectTransform manaBar;
+	public RectTransform manaBarMain;
+	public Text playerMPTxt;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		lastTic = 0f;
+		if (isLocalPlayer) 
+		{
+			manaBarMain = GameObject.Find ("PlayerManaBarMain").GetComponent<RectTransform> ();
+			playerMPTxt = GameObject.Find ("PlayerMpText").GetComponent<Text>();
+			playerMPTxt.text = currentMp.ToString () + " / " + maxMp.ToString ();
 
+		}
 	}
 	
 	// Update is called once per frame
@@ -36,10 +45,16 @@ public class GenericManaScript : NetworkBehaviour {
 		if (currentMp > maxMp) 
 		{
 			currentMp = maxMp;
+			manaBar.GetComponentInParent<Canvas> ().enabled = false;
+			if (isLocalPlayer) {
+				playerMPTxt.text = currentMp.ToString () + " / " + maxMp.ToString ();
+			}
+
 		}
 		if (currentMp < 0) 
 		{
 			currentMp = 0;
+
 		}
 	}
 
@@ -52,6 +67,12 @@ public class GenericManaScript : NetworkBehaviour {
 			manaBar.GetComponentInParent<Canvas> ().enabled = true;
 
 			manaBar.localScale = new Vector3 (x, 1f, 1f);
+			if (isLocalPlayer) 
+			{
+				manaBarMain.localScale = new Vector3 (x, 1f, 1f);
+				playerMPTxt.text = currentMp.ToString () + " / " + maxMp.ToString ();
+
+			}
 		} else 
 		{
 			manaBar.GetComponentInParent<Canvas> ().enabled = false;
@@ -63,11 +84,24 @@ public class GenericManaScript : NetworkBehaviour {
 		currentMp -= mana;
 		float x = (float)currentMp / maxMp;
 		manaBar.localScale = new Vector3 (x, 1f, 1f);
+		if (isLocalPlayer) 
+		{
+			manaBarMain.localScale = new Vector3 (x, 1f, 1f);
+			playerMPTxt.text = currentMp.ToString () + " / " + maxMp.ToString ();
+
+		}
 		manaBar.GetComponentInParent<Canvas> ().enabled = true;
 	}
 	public void LevelUp()
 	{
 		maxMp += levelUpBonusMP;
 		currentMp = maxMp;
+		if (isLocalPlayer) 
+		{
+			manaBarMain.localScale = new Vector3 (1, 1f, 1f);
+			playerMPTxt.text = currentMp.ToString () + " / " + maxMp.ToString ();
+
+
+		}
 	}
 }

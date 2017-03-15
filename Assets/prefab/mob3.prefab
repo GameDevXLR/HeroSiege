@@ -1370,6 +1370,7 @@ GameObject:
   - component: {fileID: 114257656910930764}
   - component: {fileID: 114324005329208284}
   - component: {fileID: 82418099285641342}
+  - component: {fileID: 114367223657461276}
   m_Layer: 9
   m_Name: mob3
   m_TagString: Untagged
@@ -3144,7 +3145,7 @@ MonoBehaviour:
   currentHp: 100
   regenHp: 5
   levelUpBonusHP: 10
-  respawnTransform: {fileID: 0}
+  respawnPoint: {fileID: 0}
   armorScore: 10
   dodge: 0
   respawnTime: 5
@@ -3287,6 +3288,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee852830f69d3e4ba6af37362f10e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114367223657461276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840545334792104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114631584799000606
 MonoBehaviour:
   m_ObjectHideFlags: 1
