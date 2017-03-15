@@ -7,10 +7,11 @@ public class ShopScript : MonoBehaviour
 {
 	public Transform shopPanel;
 	private bool isOpen;
+	public string shopName;
 
 	public void Start()
 	{
-		shopPanel = GameObject.Find ("Shop1Panel").transform;
+		shopPanel = GameObject.Find (shopName).transform;
 		shopPanel.gameObject.SetActive (false);
 
 	}

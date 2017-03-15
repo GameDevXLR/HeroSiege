@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 114479448282006862}
   - component: {fileID: 114828828187903228}
   - component: {fileID: 114630074160520858}
+  - component: {fileID: 114106380856186856}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -890,7 +891,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 178.4, y: 1.5, z: 13.714516}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4719505669950706}
@@ -1201,6 +1202,95 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114106380856186856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe65ef9dfc0d34d990203dc33b0d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayIcon: {fileID: 2800000, guid: 3403f22420e57524db0d4448260edcd6, type: 3}
+  IconColour: {r: 0.38039216, g: 0.67058825, b: 0.40640974, a: 1}
+  Display_1_Type: 1
+  Distance_1_Units: 
+  Display_1_Timer: 5
+  Display_1_Text: Player
+  Text_1_Colour: {r: 0.7607843, g: 0.78039217, b: 0.8509804, a: 1}
+  Display_2_Type: 0
+  Distance_2_Units: 
+  Display_2_Timer: 0
+  Display_2_Text: 
+  Text_2_Colour: {r: 1, g: 1, b: 1, a: 1}
+  PointerArrowIcon: {fileID: 2800000, guid: ba884c539d44c104399533fb6cd593cf, type: 3}
+  PointerColour: {r: 0.38039216, g: 0.67058825, b: 0.6117647, a: 1}
+  DisplayStyle: 1
+  PulsingAnimation: 0
+  PulsingSpeed: 0
+  FadeOverDistance: 1
+  MaxFadeDistance: 150
+  FadeDistances:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: -0.00088633964
+      value: -0.00066407677
+      inSlope: 0.68631065
+      outSlope: 0.68631065
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.00020601903
+      value: 0.000085620675
+      inSlope: -0.11440682
+      outSlope: -0.11440682
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.18751414
+      value: 0.44717458
+      inSlope: 2.544862
+      outSlope: 2.544862
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.3437268
+      value: 0.86938727
+      inSlope: 1.6991668
+      outSlope: 1.6991668
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.5019231
+      value: 0.97941697
+      inSlope: 0.049661547
+      outSlope: 0.049661547
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.7987769
+      value: 0.8024317
+      inSlope: -1.1709036
+      outSlope: -1.1709036
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.9408663
+      value: 0.40683472
+      inSlope: -4.6546516
+      outSlope: -4.6546516
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1.0041667
+      value: -0.006210819
+      inSlope: -6.5251613
+      outSlope: -6.5251613
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  DisplayOnScreen: 1
+  DisplayOffScreen: 1
+  Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
+    type: 3}
+  LastTimerUpdate: 0
 --- !u!114 &114177369281728286
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -41,7 +41,5 @@ public static class Utils
 		hitPoint = new Vector3 ();
 		return false;
 	}
-
-
 }
 

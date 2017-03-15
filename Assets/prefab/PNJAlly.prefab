@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 82398038703196926}
   - component: {fileID: 114890351963484026}
   - component: {fileID: 114351357169285738}
+  - component: {fileID: 114421874561989310}
   m_Layer: 8
   m_Name: PNJAlly
   m_TagString: PNJ
@@ -681,7 +682,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1498430331498804}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 21.2, y: 0.88, z: 8.6}
+  m_LocalPosition: {x: -209.1, y: 0.88, z: 8.6}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 4668640763752058}
@@ -1122,8 +1123,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 88
   DopplerLevel: 0
-  MinDistance: 1
-  MaxDistance: 14.7
+  MinDistance: 25.5
+  MaxDistance: 59
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1414,6 +1415,131 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specPts: 1
   spell1LvlUpBtn: {fileID: 0}
+--- !u!114 &114421874561989310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1498430331498804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe65ef9dfc0d34d990203dc33b0d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayIcon: {fileID: 2800000, guid: 70fbc300e2222384ead2a18d1ca008b2, type: 3}
+  IconColour: {r: 0.45043954, g: 0.67058825, b: 0.38039216, a: 1}
+  Display_1_Type: 1
+  Distance_1_Units: 25
+  Display_1_Timer: 5
+  Display_1_Text: Ally
+  Text_1_Colour: {r: 0.7607843, g: 0.78039217, b: 0.8509804, a: 1}
+  Display_2_Type: 0
+  Distance_2_Units: 
+  Display_2_Timer: 0
+  Display_2_Text: 
+  Text_2_Colour: {r: 1, g: 1, b: 1, a: 1}
+  PointerArrowIcon: {fileID: 2800000, guid: ba884c539d44c104399533fb6cd593cf, type: 3}
+  PointerColour: {r: 0.38039216, g: 0.67058825, b: 0.44243407, a: 1}
+  DisplayStyle: 0
+  PulsingAnimation: 0
+  PulsingSpeed: 0
+  FadeOverDistance: 1
+  MaxFadeDistance: 100
+  FadeDistances:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.008333334
+      value: 0.006210923
+      inSlope: 0.2600128
+      outSlope: 0.2600128
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.1130839
+      value: 0.03344741
+      inSlope: 0.95951647
+      outSlope: 0.95951647
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.16406813
+      value: 0.19410336
+      inSlope: 8.024099
+      outSlope: 8.024099
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.18751414
+      value: 0.44717458
+      inSlope: 7.9291015
+      outSlope: 7.9291015
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.2156925
+      value: 0.58988154
+      inSlope: 3.3885581
+      outSlope: 3.3885581
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.26076943
+      value: 0.728322
+      inSlope: 2.38583
+      outSlope: 2.38583
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.3437268
+      value: 0.86938727
+      inSlope: 1.1979904
+      outSlope: 1.1979904
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.5019231
+      value: 0.97941697
+      inSlope: 0.18430936
+      outSlope: 0.18430936
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.6669276
+      value: 0.9254757
+      inSlope: -0.6815791
+      outSlope: -0.6815791
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.7987769
+      value: 0.8024317
+      inSlope: -1.1709036
+      outSlope: -1.1709036
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.8678645
+      value: 0.66928107
+      inSlope: -2.7105212
+      outSlope: -2.7105212
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.9408663
+      value: 0.40683472
+      inSlope: -4.915043
+      outSlope: -4.915043
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.9792362
+      value: 0.1675977
+      inSlope: -6.6033654
+      outSlope: -6.6033654
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1.0041667
+      value: -0.006210819
+      inSlope: -6.9717116
+      outSlope: -6.9717116
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  DisplayOnScreen: 1
+  DisplayOffScreen: 1
+  Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
+    type: 3}
+  LastTimerUpdate: 0
 --- !u!114 &114577200640440102
 MonoBehaviour:
   m_ObjectHideFlags: 1

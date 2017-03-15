@@ -30,8 +30,10 @@ public class GenericLifeScript : NetworkBehaviour {
 	public GameObject guyAttackingMe;
 	void Start () {
 		lastTic = 0f;
-		respawnTransform = GameObject.Find ("PlayerRespawnPoint").transform;
-		respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
+		if (gameObject.layer == Layers.Player) {
+			respawnTransform = GameObject.Find ("PlayerRespawnPoint").transform;
+			respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
+		}
 	}
 
 	void Update () {
@@ -126,10 +128,12 @@ public class GenericLifeScript : NetworkBehaviour {
 	{
 		currentHp = life;
 		float x = (float) currentHp/maxHp;
-		lifeBar.GetComponentInParent<Canvas> ().enabled = true;
+		if (currentHp != maxHp) 
+		{
+			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
 
-		lifeBar.localScale = new Vector3 (x, 1f, 1f);
-
+			lifeBar.localScale = new Vector3 (x, 1f, 1f);
+		}
 	}
 	public void	RegenYourHP ()
 	{
@@ -139,14 +143,20 @@ public class GenericLifeScript : NetworkBehaviour {
 	}
 	public void MakeHimDie ()
 	{
-		if (gameObject.layer == 8 && isLocalPlayer) 
+		if (gameObject.layer == 8 && gameObject.tag == "Player") 
 		{
-			//faire ici ce qui se passe pour un joueur qui meurt
-			PlayerRespawnProcess();
+			if (isLocalPlayer) 
+			{
+				//faire ici ce qui se passe pour un joueur qui meurt
+			}
+			PlayerRespawnProcess ();
+
 			return;
 		}
 		StartCoroutine (KillTheMob());
 	}
+
+
 
 	//ce qu'il se passe si un mob meurt...
 	IEnumerator KillTheMob()
@@ -181,30 +191,35 @@ public class GenericLifeScript : NetworkBehaviour {
 	//ce qu'il se passe si un JOUEUR meurt...
 	public void PlayerRespawnProcess()
 	{
+		StopAllCoroutines ();
 		StartCoroutine (RespawnEnum ());
 		StartCoroutine (RespawnTimer ());
 	}
 		IEnumerator RespawnEnum()
 	{
 		//ajouter par ici une anime de mort un de ces 4...
+
 		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 		GetComponent<AutoAttackScript> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().enabled = false;
-		GetComponent<NavMeshAgent> ().SetDestination (transform.position);
+		GetComponent<NavMeshAgent> ().ResetPath();
 		GetComponent<CapsuleCollider> ().enabled = false;
+		yield return new WaitForEndOfFrame ();
+		transform.position = respawnTransform.position;
+//		transform.Translate (respawnTransform.position, Space.World);
+
 		yield return new WaitForSeconds (0.8f);
+		transform.position = respawnTransform.position;
+
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (respawnTime);
-		GetComponent<NavMeshAgent> ().SetDestination (respawnTransform.position);
+		GetComponent<NavMeshAgent> ().SetDestination (respawnTransform.localPosition);
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
 		GetComponent<CapsuleCollider> ().enabled = true;
 		GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
 		GetComponent<AutoAttackScript> ().enabled = true;
-
-		gameObject.transform.position = respawnTransform.position;
-		gameObject.transform.rotation = respawnTransform.rotation;
 		currentHp = maxHp;
 		isDead = false;
 	}

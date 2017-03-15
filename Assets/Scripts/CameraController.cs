@@ -41,12 +41,6 @@ public class CameraController : MonoBehaviour
 	// y difference use to move the y value
 	private float yvalueDiff;
 
-	// y Minimum
-	public float yMin = -10;
-
-	// yMaximum
-	public float yMax = 15;
-
 	private bool isReady;
 
 	int layer_mask;
@@ -83,9 +77,6 @@ public class CameraController : MonoBehaviour
 			
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, yvalue, layer_mask);
 		}
-
-
-
     }
 
     void LateUpdate()
@@ -96,6 +87,7 @@ public class CameraController : MonoBehaviour
 		}
 		if (selectedPlayer || Input.GetKey (centerBackKey)) {
 			CenterBackCameraOnTarget ();
+		
 
 			// allow to block y axis
 			gameObject.transform.position = new Vector3 () {

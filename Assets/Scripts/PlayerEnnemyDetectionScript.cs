@@ -65,6 +65,7 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 
 	public void TellHeroHisDest(NetworkInstanceId id)
 	{
+
 		GetComponentInParent<PlayerClicToMove> ().SetThatTargetFromAggro(id);
 	} 
 }
