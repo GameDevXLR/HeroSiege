@@ -47,10 +47,6 @@ public class CameraController : MonoBehaviour
 
 	Camera cameraCible;
 
-	// limite map
-	public Vector3 boundaries = new Vector3(10,10,10);
-
-
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){
 		if (instanceCamera == null) {
@@ -78,14 +74,8 @@ public class CameraController : MonoBehaviour
 		if (Input.GetKeyUp (lockKey))
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
-
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay (new Vector3 (gameObject.transform.position.x, 0, gameObject.transform.position.z));
-			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
-				yvalueDiff = hit.point.y - target.transform.position.y;
-			}
-
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalueDiff, layer_mask);
+			
+			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, yvalue, layer_mask);
 		}
     }
 
@@ -105,17 +95,7 @@ public class CameraController : MonoBehaviour
 				y = yvalue,
 				z = gameObject.transform.position.z
 			};
-		} else {
-			
-			Vector3 destination = new Vector3 () {
-				x = gameObject.transform.position.x,
-				y = yvalue + yvalueDiff ,
-				z = gameObject.transform.position.z
-			};
-					
-			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, destination, Time.deltaTime);
-
-		}
+		} 
     }
 
 
