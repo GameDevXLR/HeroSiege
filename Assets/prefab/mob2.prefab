@@ -1791,7 +1791,7 @@ MonoBehaviour:
   m_MovementTheshold: 0.001
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  m_InterpolateMovement: 500
 --- !u!114 &114221084788021322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1846,6 +1846,7 @@ MonoBehaviour:
   attackRange: 6
   attackRate: 1
   damage: 4
+  damageDisplay: {fileID: 0}
   levelUpBonusDamage: 0
   isAttacking: 0
   target: {fileID: 0}
@@ -2051,12 +2052,15 @@ MonoBehaviour:
   xpGiven: 50
   goldGiven: 5
   lifeBar: {fileID: 224013841328478006}
+  lifeBarMain: {fileID: 0}
+  playerHPTxt: {fileID: 0}
   maxHp: 60
   currentHp: 60
   regenHp: 1
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
   armorScore: 1
+  armorDisplay: {fileID: 0}
   dodge: 20
   respawnTime: 5
   respawnTxt: {fileID: 0}
@@ -2107,6 +2111,8 @@ MonoBehaviour:
   levelUpBonusMP: 0
   timeBetweenTic: 1
   manaBar: {fileID: 224451676589333044}
+  manaBarMain: {fileID: 0}
+  playerMPTxt: {fileID: 0}
 --- !u!135 &135601847089593812
 SphereCollider:
   m_ObjectHideFlags: 1

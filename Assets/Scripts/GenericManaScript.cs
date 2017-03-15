@@ -98,7 +98,7 @@ public class GenericManaScript : NetworkBehaviour {
 		currentMp = maxMp;
 		if (isLocalPlayer) 
 		{
-			manaBarMain.localScale = new Vector3 (1, 1f, 1f);
+			manaBarMain.localScale = new Vector3 (1f, 1f, 1f);
 			playerMPTxt.text = currentMp.ToString () + " / " + maxMp.ToString ();
 
 

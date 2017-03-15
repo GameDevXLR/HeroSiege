@@ -3070,6 +3070,7 @@ MonoBehaviour:
   attackRange: 3
   attackRate: 0.5
   damage: 20
+  damageDisplay: {fileID: 0}
   levelUpBonusDamage: 0
   isAttacking: 0
   target: {fileID: 0}
@@ -3141,12 +3142,15 @@ MonoBehaviour:
   xpGiven: 50
   goldGiven: 5
   lifeBar: {fileID: 224766238517520706}
+  lifeBarMain: {fileID: 0}
+  playerHPTxt: {fileID: 0}
   maxHp: 100
   currentHp: 100
   regenHp: 5
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
   armorScore: 10
+  armorDisplay: {fileID: 0}
   dodge: 0
   respawnTime: 5
   respawnTxt: {fileID: 0}
@@ -3300,14 +3304,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 1
-  m_SyncRotationAxis: 7
+  m_SendInterval: 0.16666667
+  m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  m_InterpolateRotation: 50
+  m_InterpolateMovement: 5
 --- !u!114 &114631584799000606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3362,6 +3366,8 @@ MonoBehaviour:
   levelUpBonusMP: 0
   timeBetweenTic: 1
   manaBar: {fileID: 224098983583436324}
+  manaBarMain: {fileID: 0}
+  playerMPTxt: {fileID: 0}
 --- !u!114 &114920441024994274
 MonoBehaviour:
   m_ObjectHideFlags: 1
