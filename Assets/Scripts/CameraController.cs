@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
 	// selectedPlayer
 	// true : camera lock in the perso
 	// false : camera free from the perso
-    public bool selectedPlayer = false; 
+    public bool selectedPlayer = true; 
 
 	//speed move of the camera when move with mouse
     public int speed = 5;
@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
 
 
 	// initial y, allow to block the y axis
-	private float yvalue;
+	private float yRef;
 
 	// y difference use to move the y value
 	private float yvalueDiff;
@@ -60,7 +60,7 @@ public class CameraController : MonoBehaviour
 	public void Initialize()
     {
         cameraCible = GetComponent<Camera>();
-        yvalue = gameObject.transform.position.y;
+        yRef = gameObject.transform.position.y;
 		isReady = true;
 		layer_mask = LayerMask.GetMask ("Ground"); // ground layer 10
     }
@@ -75,7 +75,7 @@ public class CameraController : MonoBehaviour
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
 			
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, yvalue, layer_mask);
+			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, layer_mask);
 		}
     }
 
@@ -92,7 +92,7 @@ public class CameraController : MonoBehaviour
 			// allow to block y axis
 			gameObject.transform.position = new Vector3 () {
 				x = gameObject.transform.position.x,
-				y = yvalue,
+				y = yRef,
 				z = gameObject.transform.position.z
 			};
 		} 
