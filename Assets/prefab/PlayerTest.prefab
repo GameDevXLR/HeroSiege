@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 114828828187903228}
   - component: {fileID: 114630074160520858}
   - component: {fileID: 114106380856186856}
+  - component: {fileID: 114292457117260086}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -891,7 +892,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -56.5, y: 0, z: 15.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4719505669950706}
@@ -1355,10 +1356,31 @@ MonoBehaviour:
   attackRange: 3
   attackRate: 0.5
   damage: 15
+  damageDisplay: {fileID: 0}
   levelUpBonusDamage: 5
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
+--- !u!114 &114292457117260086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.5
+  m_SyncRotationAxis: 2
+  m_RotationSyncCompression: 2
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 50
+  m_InterpolateMovement: 500
 --- !u!114 &114351349833853824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1627,6 +1649,8 @@ MonoBehaviour:
   levelUpBonusMP: 10
   timeBetweenTic: 2
   manaBar: {fileID: 224744315606201176}
+  manaBarMain: {fileID: 0}
+  playerMPTxt: {fileID: 0}
 --- !u!114 &114758573513645128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1641,6 +1665,7 @@ MonoBehaviour:
   playerLvl: {fileID: 0}
   generalTxt: {fileID: 0}
   xpDisplay: {fileID: 0}
+  xpText: {fileID: 0}
   actualXP: 0
   requiredXPToUp: 50
   actualLevel: 1
@@ -1678,6 +1703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specPts: 1
   spell1LvlUpBtn: {fileID: 0}
+  spectPtIcon: {fileID: 0}
 --- !u!114 &114845116257301452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1764,12 +1790,15 @@ MonoBehaviour:
   xpGiven: 50
   goldGiven: 5
   lifeBar: {fileID: 224552685445617892}
+  lifeBarMain: {fileID: 0}
+  playerHPTxt: {fileID: 0}
   maxHp: 250
   currentHp: 250
   regenHp: 5
   levelUpBonusHP: 20
-  respawnTransform: {fileID: 0}
+  respawnPoint: {fileID: 0}
   armorScore: 1
+  armorDisplay: {fileID: 0}
   dodge: 10
   respawnTime: 5
   respawnTxt: {fileID: 0}
@@ -1881,7 +1910,7 @@ NavMeshAgent:
   m_Height: 2.5
   m_BaseOffset: 0.6
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 4
 --- !u!212 &212341552016347012
 SpriteRenderer:
   m_ObjectHideFlags: 1

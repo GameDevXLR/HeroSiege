@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
 	// selectedPlayer
 	// true : camera lock in the perso
 	// false : camera free from the perso
-    public bool selectedPlayer = false; 
+    public bool selectedPlayer = true; 
 
 	//speed move of the camera when move with mouse
     public int speed = 5;
@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
 
 
 	// initial y, allow to block the y axis
-	private float yvalue;
+	private float yRef;
 
 	// y difference use to move the y value
 	private float yvalueDiff;
@@ -46,10 +46,6 @@ public class CameraController : MonoBehaviour
 	int layer_mask;
 
 	Camera cameraCible;
-
-	// limite map
-	public Vector3 boundaries = new Vector3(10,10,10);
-
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){
@@ -64,7 +60,7 @@ public class CameraController : MonoBehaviour
 	public void Initialize()
     {
         cameraCible = GetComponent<Camera>();
-        yvalue = gameObject.transform.position.y;
+        yRef = gameObject.transform.position.y;
 		isReady = true;
 		layer_mask = LayerMask.GetMask ("Ground"); // ground layer 10
     }
@@ -78,14 +74,8 @@ public class CameraController : MonoBehaviour
 		if (Input.GetKeyUp (lockKey))
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
-
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay (new Vector3 (gameObject.transform.position.x, 0, gameObject.transform.position.z));
-			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) {	
-				yvalueDiff = hit.point.y - target.transform.position.y;
-			}
-
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, boundaries, yvalueDiff, layer_mask);
+			
+			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, layer_mask);
 		}
     }
 
@@ -102,20 +92,10 @@ public class CameraController : MonoBehaviour
 			// allow to block y axis
 			gameObject.transform.position = new Vector3 () {
 				x = gameObject.transform.position.x,
-				y = yvalue,
+				y = yRef,
 				z = gameObject.transform.position.z
 			};
-		} else {
-			
-			Vector3 destination = new Vector3 () {
-				x = gameObject.transform.position.x,
-				y = yvalue + yvalueDiff ,
-				z = gameObject.transform.position.z
-			};
-					
-			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, destination, Time.deltaTime);
-
-		}
+		} 
     }
 
 
