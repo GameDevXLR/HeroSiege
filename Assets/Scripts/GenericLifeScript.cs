@@ -37,7 +37,6 @@ public class GenericLifeScript : NetworkBehaviour {
 		lastTic = 0f;
 		if (isLocalPlayer) 
 		{
-			respawnPoint = GameObject.Find ("PlayerRespawnPoint");
 			respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
 			armorDisplay = GameObject.Find ("ArmorLog").GetComponent<Text> ();
 			armorDisplay.text = armorScore.ToString();
@@ -205,7 +204,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		{
 			if (gameObject.tag == "PNJ") 
 			{
-				GameManager.instanceGM.LooseALife ();
+				GameManager.instanceGM.Team1LooseALife ();
 			}
 			yield return new WaitForEndOfFrame ();
 
@@ -288,7 +287,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	IEnumerator HitAnimation()
 	{
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (0.05f);
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 	}
 

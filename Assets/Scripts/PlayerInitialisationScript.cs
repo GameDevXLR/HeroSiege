@@ -18,10 +18,6 @@ public class PlayerInitialisationScript : NetworkBehaviour {
 			minimapIcon.color = mainPlayerColor;
 			CameraController.instanceCamera.target = gameObject;
 			CameraController.instanceCamera.Initialize ();
-//			GetComponent<PlayerXPScript> ().enabled = true;
-//			GetComponent<PlayerGoldScript> ().enabled = true;
-//			GetComponent<PlayerClicToMove> ().enabled = true;
-//			GetComponent<NavMeshAgent> ().enabled = true;
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
 			if (!isServer) 
 			{

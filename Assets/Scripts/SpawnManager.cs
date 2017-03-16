@@ -12,7 +12,7 @@ public class SpawnManager : NetworkBehaviour
 	private float lastTic; //dernier proc en temps global.
 	public float timeBetweenTic; //temps entre 2 mobs d'une meme vague.
 	public int level = 0; // niveau de la vague. (détermine le type de mob)
-
+	public string targetObjName; // ecrire ici le nom du point de fin pour le mob (en fonction de sa team c'est pas pareil)
 	public GameObject[] ennemi; //array des mobs spawnable.
 	public Transform spawnpoint; //point de spawn du mob.
 	public int numberOfMobs; // nombre de mobs dans la vague.
@@ -54,6 +54,7 @@ public class SpawnManager : NetworkBehaviour
 		newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
 		newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
 		newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor;
+		newEnnemi.GetComponent<MinionsPathFindingScript>().target = GameObject.Find (targetObjName).transform;
 		NetworkServer.Spawn (newEnnemi);
 	}
 

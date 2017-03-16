@@ -91,12 +91,14 @@ public class AutoAttackScript : NetworkBehaviour {
 
 		if (gameObject.layer == 8) {
 			if (!agent.pathPending) {
-				if (agent.remainingDistance <= agent.stoppingDistance) {
-					if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
-						if (!stopWalk) {
-							stopWalk = true;
-							anim.SetBool ("stopwalk", stopWalk);
-							audioSource.Stop ();
+				if(!agent.hasPath){
+					if (agent.remainingDistance <= agent.stoppingDistance) {
+						if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
+							if (!stopWalk) {
+								stopWalk = true;
+								anim.SetBool ("stopwalk", stopWalk);
+								audioSource.Stop ();
+							}
 						}
 					}
 				}

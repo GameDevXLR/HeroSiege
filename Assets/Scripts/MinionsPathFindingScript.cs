@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
-public class MinionsPathFindingScript : NetworkBehaviour {
+public class MinionsPathFindingScript : NetworkBehaviour 
+{
 	public NavMeshAgent agent;
 	public Transform target;
 	public float stopTime = 2f;
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
-		target = GameObject.Find ("EndPointForMobs").transform;
+		if (target == null) 
+		{
+			target = this.transform;
+		}
 		GoToEndGame ();
 	}
 	
@@ -22,8 +26,10 @@ public class MinionsPathFindingScript : NetworkBehaviour {
 
 	IEnumerator GoToEndGameRoutine()
 	{
-		yield return new WaitForEndOfFrame ();
-		agent.SetDestination (target.position);
-		agent.Resume ();
+		if (agent) {
+			yield return new WaitForEndOfFrame ();
+			agent.SetDestination (target.position);
+			agent.Resume ();
+		}
 	}
 }
