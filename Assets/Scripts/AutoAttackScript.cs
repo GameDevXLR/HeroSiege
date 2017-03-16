@@ -91,7 +91,7 @@ public class AutoAttackScript : NetworkBehaviour {
 
 		if (gameObject.layer == 8) {
 			if (!agent.pathPending) {
-				if(!agent.hasPath){
+//				if(!agent.hasPath){
 					if (agent.remainingDistance <= agent.stoppingDistance) {
 						if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
 							if (!stopWalk) {
@@ -102,7 +102,7 @@ public class AutoAttackScript : NetworkBehaviour {
 						}
 					}
 				}
-			}
+//			}
 		}
 	}
 	IEnumerator ActualizeTargetPos()
@@ -199,7 +199,8 @@ public class AutoAttackScript : NetworkBehaviour {
 	public void LevelUp()
 	{
 		damage += levelUpBonusDamage;
-		damageDisplay.text = damage.ToString ();
-
+		if (isLocalPlayer) {
+			damageDisplay.text = damage.ToString ();
+		}
 	}
 }

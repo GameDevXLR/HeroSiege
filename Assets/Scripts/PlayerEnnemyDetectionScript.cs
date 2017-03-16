@@ -20,16 +20,16 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 		if (GameManager.instanceGM.playerObj == gameObject.transform.parent.gameObject) 
 		{
 			autoTargetting = true;
-
 			isTheLocalP = true;
 		}
+
 	}
 	
 	// Update is called once per frame
 	void OnTriggerStay (Collider other)
 	{
-//		if (isTheLocalP) 
-//		{
+		if (isTheLocalP) 
+		{
 			if (autoTargetting) 
 			{
 				if (playerAgent.velocity == Vector3.zero) 
@@ -45,7 +45,7 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 					}
 				}
 			}
-//		}
+		}
 	}
 	void Update()
 	{

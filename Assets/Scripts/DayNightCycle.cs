@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class DayNightCycle : MonoBehaviour {
+public class DayNightCycle : NetworkBehaviour {
 
-	public float speed = 0.05f;
+	[SyncVar]public float speed = 0f;
 	public int nightSpeedFactor = 2;
 	public bool isNight;
 	// Use this for initialization

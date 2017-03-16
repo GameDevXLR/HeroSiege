@@ -18,12 +18,16 @@ public class PlayerInitialisationScript : NetworkBehaviour {
 			minimapIcon.color = mainPlayerColor;
 			CameraController.instanceCamera.target = gameObject;
 			CameraController.instanceCamera.Initialize ();
-			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
+//			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
 			if (!isServer) 
 			{
 				difficultyPanel.SetActive(false);
 			}
-		} 
+		}
+		if (isServer) 
+		{
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
+		}
 	}
 	
 	// Update is called once per frame

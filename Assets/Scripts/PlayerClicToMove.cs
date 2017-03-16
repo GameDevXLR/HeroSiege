@@ -116,11 +116,10 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 	public void SetThatTargetFromAggro(NetworkInstanceId targetid)
 	{
-		if (!isServer) 
-		{
-			return;
+		if (hasAuthority) {
+
+			CmdSendNewTarget (targetid);
 		}
-		CmdSendNewTarget (targetid);
 	}
 
 }

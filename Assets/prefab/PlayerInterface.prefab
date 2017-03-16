@@ -1967,7 +1967,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 733313514ddfada409e5e3386e176765, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
@@ -2394,7 +2394,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 733313514ddfada409e5e3386e176765, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
@@ -4392,13 +4392,15 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 30
-    m_Alignment: 4
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choose your difficulty level
+  m_Text: 'Choose your difficulty level
+
+    WAIT FOR ALL PLAYERS BEFORE SELECTING THE GAME MODE!'
 --- !u!114 &114774511316395330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4999,7 +5001,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 4
     m_Right: 0
-    m_Top: 10
+    m_Top: 20
     m_Bottom: 0
   m_ChildAlignment: 1
   m_StartCorner: 0
@@ -5149,6 +5151,9 @@ MonoBehaviour:
   inib1: {fileID: 0}
   inib2: {fileID: 0}
   inib3: {fileID: 0}
+  inib1B: {fileID: 0}
+  inib2B: {fileID: 0}
+  inib3B: {fileID: 0}
   gameMode: 0
 --- !u!114 &114882937791572672
 MonoBehaviour:

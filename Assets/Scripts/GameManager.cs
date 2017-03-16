@@ -53,7 +53,7 @@ public class GameManager : NetworkBehaviour
 	{
 		lifeOfTheTeam1 = life;
 		if (isTeam1) {
-			messageManager.SendAnAlertMess ("We've loosed a life. " + lifeOfTheTeam1.ToString () + " lives remaining.", Color.red);
+			messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam1.ToString () + " lives remaining.", Color.red);
 			return;
 		} else 
 		{
@@ -67,7 +67,7 @@ public class GameManager : NetworkBehaviour
 	{
 		lifeOfTheTeam2 = life;
 		if (isTeam2) {
-			messageManager.SendAnAlertMess ("We've loosed a life. " + lifeOfTheTeam2.ToString () + "  lives remaining.", Color.red);
+			messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam2.ToString () + "  lives remaining.", Color.red);
 			return;
 		} else 
 		{
