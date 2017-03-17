@@ -4,7 +4,8 @@ using UnityEngine;
 //using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerLevelUpManager : MonoBehaviour {
+public class PlayerLevelUpManager : MonoBehaviour 
+{
 
 	//ce script gere les options de lvlup d'un joueur.
 	// il dit au joueur quoi faire en cas de up

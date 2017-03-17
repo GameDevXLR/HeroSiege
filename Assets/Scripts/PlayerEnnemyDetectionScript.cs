@@ -9,13 +9,13 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 
 	public bool isTheLocalP;
 	public bool autoTargetting;
-	public AutoAttackScript autoAScript;
+	public PlayerAutoAttack autoAScript;
 	public NavMeshAgent playerAgent;
 	// Use this for initialization
 
 	void Start () 
 	{
-		autoAScript = GetComponentInParent<AutoAttackScript> ();
+		autoAScript = GetComponentInParent<PlayerAutoAttack> ();
 		playerAgent = GetComponentInParent<NavMeshAgent> ();
 		if (GameManager.instanceGM.playerObj == gameObject.transform.parent.gameObject) 
 		{
@@ -38,8 +38,6 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 					{
 						if (autoAScript.target == null) 
 						{
-//							playerAgent.SetDestination (other.transform.position);
-//							autoAScript.AcquireTarget (other.gameObject);
 							TellHeroHisDest (other.gameObject.GetComponent<NetworkIdentity> ().netId);
 						}
 					}

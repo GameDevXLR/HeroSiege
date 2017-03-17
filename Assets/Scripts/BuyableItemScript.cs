@@ -24,6 +24,8 @@ public class BuyableItemScript : MonoBehaviour
 		if (GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript> ().ActualGold >= itemPrice) 
 		{
 			StartCoroutine (DisableTheButtonTemporarily ());
+			player = GameManager.instanceGM.playerObj;
+
 			player.GetComponent<ItemManager> ().BuyItem (itemID, itemPrice);
 		}
 	}

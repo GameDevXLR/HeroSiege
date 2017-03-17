@@ -14,6 +14,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public int goldGiven = 5;
 
 	public RectTransform lifeBar; // barre de vie IG
+
 	public RectTransform lifeBarMain; // lifebar de l'interface player.
 	public Text playerHPTxt;
 	[SyncVar]public int maxHp = 1000;
@@ -103,18 +104,14 @@ public class GenericLifeScript : NetworkBehaviour {
 		{
 			guyAttackingMe = attacker;
 		}
-		if (attacker != GetComponent<AutoAttackScript> ().target && gameObject.layer ==9) //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
-		{
-			if (Random.Range (0, 2) != 0) //2 est exclusif car c'est un int.
-			{
-				GetComponent<AutoAttackScript> ().target = attacker;
+			if (gameObject.layer == 9) { //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
+				if (attacker != GetComponent<AutoAttackScript> ().target) {
+					if (Random.Range (0, 2) != 0) { //2 est exclusif car c'est un int.
+						GetComponent<AutoAttackScript> ().target = attacker;
+					}
+				}
 			}
-		}
-//		if (gameObject.layer == 8 && GetComponent<AutoAttackScript>().target == null) 
-//		{
-//			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
-//
-//		}
+
 			if (currentHp > 0) 
 			{
 				if (trueDmg) 
@@ -230,8 +227,8 @@ public class GenericLifeScript : NetworkBehaviour {
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 
 		}
-		GetComponent<AutoAttackScript> ().StopAllCoroutines ();
-		GetComponent<AutoAttackScript> ().enabled = false;
+		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();
+		GetComponent<PlayerAutoAttack> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
@@ -257,7 +254,7 @@ public class GenericLifeScript : NetworkBehaviour {
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
 
 		}
-		GetComponent<AutoAttackScript> ().enabled = true;
+		GetComponent<PlayerAutoAttack> ().enabled = true;
 		currentHp = maxHp;
 		isDead = false;
 	}

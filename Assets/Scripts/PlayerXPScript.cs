@@ -70,7 +70,7 @@ public class PlayerXPScript : NetworkBehaviour
 			}
 			GetComponent<GenericLifeScript> ().LevelUp ();
 			GetComponent<GenericManaScript> ().LevelUp ();
-			GetComponent<AutoAttackScript> ().LevelUp ();
+			GetComponent<PlayerAutoAttack> ().LevelUp ();
 
 		}
 		if (isLocalPlayer) {

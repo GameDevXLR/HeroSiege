@@ -12,20 +12,17 @@ public class AutoAttackScript : NetworkBehaviour
 	//ce script gere l'auto attack de l'objet auquel il est attacher.
 	// il a besoin d'etre sous divisé (un pour le joueur; un pour les mobs, et un autre pour les tours meme)
 	public AudioSource audioSource; // qui joue le son
-	public AudioClip[] playerSounds; //quel sons pour le joueur
 	public AudioClip[] ennemiSounds; //quels sons pour les ennemis (tous)
 
 	Animator anim; // l'animator qui gere les anim lié a ce script
 	public bool stopWalk; //pour l animation : arrete de marcher
-	bool charge; // animation et code : charge vers un ennemi / mob
+
 	bool attackAnim; // dois je jouer l'animation d'attaque ? 
 	public NavMeshAgent agent; // l'agent qui permet de déplacer l'objet attacher
 	public float attackRange; // la portée des auto attaques
 	public float attackRate; // le rate d'attaque par seconde
 	private float previousAttackTime; // privé : le temps global de la derniere attaque
 	public int damage; // combien de dégats brut (hors armure) on fait.
-	public Text damageDisplay; // le display de la force d'attaque (joueur only)
-	public int levelUpBonusDamage; // (joueur) combien de damage en plus si lvl up 
 	public bool isAttacking; //suis je en train d'attaquer ? 
 	public GameObject target; // qui est ma cible ? 
 	public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
@@ -40,11 +37,6 @@ public class AutoAttackScript : NetworkBehaviour
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponentInChildren<Animator> ();
 		audioSource = GetComponent<AudioSource> ();
-		if (isLocalPlayer) 
-		{
-			damageDisplay = GameObject.Find ("DamageLog").GetComponent<Text> ();
-			damageDisplay.text = damage.ToString ();
-		}
 
 	}
 
@@ -58,12 +50,11 @@ public class AutoAttackScript : NetworkBehaviour
 					AttackTheTarget ();
 				} else 
 				{
-					if (gameObject.layer == 9) 
-					{
+
 						if (Vector3.Distance (targetTempPos, target.transform.position) > 0 && !isActualizingPos) {
 							StartCoroutine (ActualizeTargetPos());
 						}
-					}
+
 				}
 			}
 
@@ -82,36 +73,15 @@ public class AutoAttackScript : NetworkBehaviour
 					StopAttacking ();
 				}
 			}
-		} else {
+		} else 
+		{
 			LooseTarget ();
 			if (isAttacking) 
 			{
 				StopAttacking ();
-				if (gameObject.layer == 8) 
-				{
-					
-					agent.SetDestination (transform.position);
-					audioSource.Stop ();
-
-				}
 			}
 		}
 
-		if (gameObject.layer == 8) {
-			if (!agent.pathPending) {
-				if(agent.isOnNavMesh){
-					if (agent.remainingDistance <= agent.stoppingDistance) {
-						if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
-							if (!stopWalk) {
-								stopWalk = true;
-								anim.SetBool ("stopwalk", stopWalk);
-								audioSource.Stop ();
-							}
-						}
-					}
-				}
-			}
-		}
 	}
 	IEnumerator ActualizeTargetPos()
 		{
@@ -125,91 +95,45 @@ public class AutoAttackScript : NetworkBehaviour
 	public void AttackTheTarget()
 	{
 		
-			agent.Stop ();
-
+		agent.Stop ();
 		isAttacking = true;
 		attackAnim = true;
-		if (gameObject.layer == 8) 
-		{
-			anim.SetBool ("attack", attackAnim);
-			audioSource.clip = playerSounds [0];
-			audioSource.Play();
-
-		}
-		if(gameObject.layer == 9 )
-		{
-			
-				agent.enabled = false;
-				GetComponent<NavMeshObstacle> ().enabled = true;
-
+		agent.enabled = false;
+		GetComponent<NavMeshObstacle> ().enabled = true;
 		anim.SetBool ("attackEnnemi", attackAnim);
-			audioSource.clip = ennemiSounds [0];
-			audioSource.Play();
-		}
+		audioSource.clip = ennemiSounds [0];
+		audioSource.Play();
+		
 	}
 	public void StopAttacking()
 	{
 		isAttacking = false;
 		attackAnim = false;
-		if (gameObject.layer == 8) {
+		GetComponent<NavMeshObstacle> ().enabled = false;
 
-				agent.Resume ();
-			audioSource.Stop ();
-			anim.SetBool ("attack", attackAnim);
-		}
-		if (gameObject.layer == 9) 
-		{
-	
-				agent.enabled = true;
-				GetComponent<NavMeshObstacle> ().enabled = false;
-			audioSource.Stop ();
-			anim.SetBool ("attackEnnemi", attackAnim);
-		}
+		agent.enabled = true;
+		audioSource.Stop ();
+		anim.SetBool ("attackEnnemi", attackAnim);
+		agent.Resume ();
+		GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 
-		if (gameObject.layer == 9) 
-		{
-			agent.Resume ();
-			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-
-		}
 	}
 	public void AcquireTarget(GameObject newTarget)
 	{
 		target = newTarget;
-		if (gameObject.layer == 9 ) 
-		{
+		if (agent.isOnNavMesh) {
 			agent.SetDestination (target.transform.position);
-			targetTempPos = target.transform.position;
 		}
-		if (gameObject.layer == 8) 
-		{
-//			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
-			charge = true;
-			anim.SetBool ("charge", charge);
-			audioSource.PlayOneShot (playerSounds [1], .6f);
-		}
+		targetTempPos = target.transform.position;
+
+
 	}
 	public void LooseTarget()
 	{
 		target = null;
-		if (gameObject.layer == 9) 
-		{
-			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-		}
-		if (gameObject.layer == 8 && charge) 
-		{
+		GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 
-			//faire ici l'arret de la charge.
-			charge = false;
-			anim.SetBool ("charge", charge);
-		}
+
 	}
-	public void LevelUp()
-	{
-		damage += levelUpBonusDamage;
-		if (isLocalPlayer) 
-		{
-			damageDisplay.text = damage.ToString ();
-		}
-	}
+
 }

@@ -19,7 +19,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 	public float spellDuration = 1.5f;
 	public GameObject spellObj;
 	public int spellLvl = 1;
-	[SyncVar]private bool onCD;
+	private bool onCD;
 	private Button spell1Btn;
 	private Button spell1LvlUpBtn;
 //	private GameObject spell1DescriptionObj;
@@ -52,7 +52,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 			go.GetComponent<SpellAreaDamage> ().spellDamage = spellDmg;
 			go.GetComponent<SpellAreaDamage> ().duration = spellDuration;
 			NetworkServer.Spawn (go);
-			GetComponent<GenericManaScript> ().LooseManaPoints (spellCost);
+			GetComponent<GenericManaScript> ().CmdLooseManaPoints (spellCost);
 
 	}
 	//cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
@@ -71,6 +71,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 	}
 
 	//si t'es un joueur; tu peux cast ce sort avec la touche A : voir pour opti ca en fonction du clavier des gars.
+
 	void Update()
 	{
 		if (!isLocalPlayer) 

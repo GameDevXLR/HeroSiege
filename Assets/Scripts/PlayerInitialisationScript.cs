@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+
+[NetworkSettings(channel = 1, sendInterval =5f)]
 
 public class PlayerInitialisationScript : NetworkBehaviour 
 {
@@ -13,6 +16,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	//il se désactive au premier "lateupdate" pour pu faire chier aprés. ATTENTION.
 	public SpriteRenderer minimapIcon;
 	public Color mainPlayerColor;
+	public Color enemyPlayerColor;
 	public GameObject difficultyPanel;
 	// Use this for initialization
 	void Start ()
@@ -20,47 +24,51 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isLocalPlayer) 
 		{
 			difficultyPanel = GameObject.Find ("DifficultyPanel");
+			GetComponent<PlayerLevelUpManager> ().enabled = true;
 			minimapIcon.color = mainPlayerColor;
 			CameraController.instanceCamera.target = gameObject;
 			CameraController.instanceCamera.Initialize ();
-//			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
+			GameObject.Find ("PlayerInterface").GetComponent<Canvas> ().enabled = true;
+
 			if (!isServer) 
 			{
-				difficultyPanel.SetActive(false);
+				difficultyPanel.SetActive (false);
+			}
+		} else 
+		{
+			if(GameManager.instanceGM.team1ID.Contains(this.netId))
+				{
+					if(GameManager.instanceGM.isTeam1)
+					{
+						return;
+					}else
+					{
+						minimapIcon.color = enemyPlayerColor;
+					}
+				}
+			if(GameManager.instanceGM.team2ID.Contains(this.netId))
+			{
+				if(GameManager.instanceGM.isTeam2)
+				{
+					return;
+				}else
+				{
+					minimapIcon.color = enemyPlayerColor;
+				}
 			}
 		}
 		if (isServer) 
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
+			GameObject.Find ("DifficultyPanel").GetComponent<ChooseDifficultyScript> ().enabled = true;
 		}
 	}
-	
-	// Update is called once per frame
-	void LateUpdate () 
-	{
-		this.enabled = false;
-	}
+
 	public override void OnStartLocalPlayer ()
 	{
 		GameManager.instanceGM.playerObj = gameObject;
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
 		base.OnStartLocalPlayer ();
 	}
-
-//
-//	void OnEnable()
-//	{
-//		SceneManager.sceneLoaded += OnLevelLoadedOrReloaded;
-//	}
-//	void OnDisable()
-//	{
-//		SceneManager.sceneLoaded -= OnLevelLoadedOrReloaded;
-//
-//	}
-//
-//	void OnLevelLoadedOrReloaded(Scene scene, LoadSceneMode mode)
-//	{
-//		Debug.Log ("reloaded");
-//	}
 
 }

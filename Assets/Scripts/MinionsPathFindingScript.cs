@@ -27,9 +27,10 @@ public class MinionsPathFindingScript : NetworkBehaviour
 
 	IEnumerator GoToEndGameRoutine()
 	{
+
+			yield return new WaitForEndOfFrame ();
 		if (agent.isOnNavMesh) 
 		{
-			yield return new WaitForEndOfFrame ();
 			agent.SetDestination (target.position);
 			agent.Resume ();
 		}

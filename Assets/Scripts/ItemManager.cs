@@ -50,10 +50,10 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcUpMyDamage()
 	{
-		targetplayer.GetComponent<AutoAttackScript> ().damage += 5;
+		targetplayer.GetComponent<PlayerAutoAttack> ().damage += 5;
 		if (isLocalPlayer) 
 		{
-			targetplayer.GetComponent<AutoAttackScript> ().damageDisplay.text = targetplayer.GetComponent<AutoAttackScript> ().damage.ToString ();
+			targetplayer.GetComponent<PlayerAutoAttack> ().damageDisplay.text = targetplayer.GetComponent<PlayerAutoAttack> ().damage.ToString ();
 		}
 	}
 	[ClientRpc]

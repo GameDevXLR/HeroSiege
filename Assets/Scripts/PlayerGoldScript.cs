@@ -22,7 +22,8 @@ public class PlayerGoldScript : NetworkBehaviour
 
 	void Start()
 	{
-		if (isLocalPlayer) {
+		if (isLocalPlayer) 
+		{
 			goldDisplay = GameObject.Find ("PlayerGold").GetComponent<Text> ();
 		}
 	}
@@ -30,7 +31,8 @@ public class PlayerGoldScript : NetworkBehaviour
 	public void GoldActualize(int goldygold)
 	{
 		ActualGold = goldygold;
-		if (isLocalPlayer) {
+		if (isLocalPlayer) 
+		{
 			goldDisplay.text = ActualGold.ToString ();
 		}
 	}

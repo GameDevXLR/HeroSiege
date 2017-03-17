@@ -14,7 +14,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 //	public AudioClip clicSound;
 	public AudioClip walkSound;
 	public NavMeshAgent agentPlayer;
-	public AutoAttackScript attackScript;
+	public PlayerAutoAttack attackScript;
 	private PlayerEnnemyDetectionScript aggroArea;
 	public GameObject target;
 	int layer_mask;
@@ -30,7 +30,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 			aggroArea = GetComponentInChildren<PlayerEnnemyDetectionScript> ();
 		}
 		agentPlayer = GetComponent<NavMeshAgent> ();
-		attackScript = GetComponent<AutoAttackScript> ();
+		attackScript = GetComponent<PlayerAutoAttack> ();
 		anim = GetComponentInChildren<Animator> ();
 		if (gameObject.tag == "PNJ" && startingPos == Vector3.zero) 
 		{
@@ -48,7 +48,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit, 50f, layer_mask)) 
+			if (Physics.Raycast (ray, out hit, 80f, layer_mask)) 
 			{	
 				if (hit.collider.gameObject.layer == Layers.Ennemies) 
 				{
@@ -87,7 +87,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcNewDestination(Vector3 desti)
 	{
-
+		agentPlayer.Resume ();
 		agentPlayer.SetDestination (desti);
 		target = null;
 		agentPlayer.stoppingDistance = 0;
@@ -119,7 +119,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 	public void SetThatTargetFromAggro(NetworkInstanceId targetid)
 	{
-		if (hasAuthority) {
+		if (hasAuthority) 
+		{
 
 			CmdSendNewTarget (targetid);
 		}

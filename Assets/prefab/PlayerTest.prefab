@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 114630074160520858}
   - component: {fileID: 114106380856186856}
   - component: {fileID: 114292457117260086}
+  - component: {fileID: 114604599503415050}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -1341,23 +1342,18 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4c57bb83b896cf4cb97d2fe0fd27676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  playerSounds:
-  - {fileID: 8300000, guid: cdf0c54277866b64db8b5c0d35ce7d53, type: 3}
-  - {fileID: 8300000, guid: f55b2d70c978c124e81dd968ca774706, type: 3}
   ennemiSounds: []
   stopWalk: 0
   agent: {fileID: 0}
   attackRange: 3
   attackRate: 0.5
   damage: 15
-  damageDisplay: {fileID: 0}
-  levelUpBonusDamage: 5
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
@@ -1372,15 +1368,15 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
+  m_TransformSyncMode: 3
   m_SendInterval: 0.09090909
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
-  m_MovementTheshold: 0.001
+  m_MovementTheshold: 0.15
   m_SnapThreshold: 5
   m_InterpolateRotation: 50
-  m_InterpolateMovement: 5
+  m_InterpolateMovement: 10
 --- !u!114 &114351349833853824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1474,7 +1470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldDisplay: {fileID: 0}
-  ActualGold: 0
+  ActualGold: 500
 --- !u!114 &114500921820713584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1534,6 +1530,30 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114604599503415050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d363b3323b3afb948a1d10318542783b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSounds:
+  - {fileID: 8300000, guid: cdf0c54277866b64db8b5c0d35ce7d53, type: 3}
+  - {fileID: 8300000, guid: f55b2d70c978c124e81dd968ca774706, type: 3}
+  stopWalk: 0
+  agent: {fileID: 0}
+  attackRange: 3
+  attackRate: 0.5
+  damage: 15
+  damageDisplay: {fileID: 0}
+  levelUpBonusDamage: 5
+  isAttacking: 0
+  target: {fileID: 0}
+  rotSpeed: 5
 --- !u!114 &114613663393574606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1733,6 +1753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapIcon: {fileID: 212341552016347012}
   mainPlayerColor: {r: 0.019139292, g: 0.44631925, b: 0.86764705, a: 1}
+  enemyPlayerColor: {r: 0.5588235, g: 0.12718053, b: 0, a: 0}
   difficultyPanel: {fileID: 0}
 --- !u!114 &114924662801619198
 MonoBehaviour:
