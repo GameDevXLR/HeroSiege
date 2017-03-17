@@ -574,7 +574,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 18951273}
-  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
+  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
   m_LocalPosition: {x: -133.0537, y: 13.596641, z: 35.511982}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -21904,7 +21904,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872472613}
-  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
+  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
   m_LocalPosition: {x: -133.0537, y: 13.596641, z: 35.511982}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -28088,7 +28088,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1021939556}
-  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
+  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
   m_LocalPosition: {x: -133.0537, y: 13.016641, z: 0.5419818}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -43578,7 +43578,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1517417618}
-  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
+  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
   m_LocalPosition: {x: -133.0537, y: 13.016641, z: 0.5419818}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -44317,6 +44317,21 @@ MonoBehaviour:
   Display_Minimap: 0
   Minimap_Prefab: {fileID: 0}
   Minimap_GameObject: {fileID: 0}
+--- !u!114 &1535012681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1535012672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979e632c10a6e664b96ceda65074fafa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomInLimite: 20
+  normal: 60
+  zoomOutLimite: 80
+  smooth: 5
 --- !u!1 &1535854575
 GameObject:
   m_ObjectHideFlags: 0
