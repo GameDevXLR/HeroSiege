@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerCastSpellOne : NetworkBehaviour 
 {
+	//premier sort: a mettre sur l'objet joueur.
+	// sort de zone avec dégat over time aprés.
+	//le sort fait spawn un prefab qui est configuré ici (dégats etc)
+	//le prefab doit etre enregistrer par le networkmanagerObj
+	//le sort peut up.
+
 	string spellDescription;
 	public int spellCost = 30;
 	public int spellDmg = 50;
@@ -33,23 +39,13 @@ public class PlayerCastSpellOne : NetworkBehaviour
 
 		}
 	}
-	
-//	public void ShowSpellDescription()
-//	{
-//		spell1DescriptionObj.GetComponent<Text> ().text = "";
-//		spell1DescriptionObj.SetActive (true);
-//	}
-//	public void HideSpellDescription()
-//	{
-//		spell1DescriptionObj.GetComponent<Text> ().text = "";
-//		spell1DescriptionObj.SetActive (false);
-//	}
-	
+
+	//lance le sort sur le serveur.
+	//le spawn du préfab est un networkspawn : du coup il apparaitra sur tous les pc..il fera ses trucs sur le serveur
+	//bien sur.
 	[Command]
 	public void CmdCastSpell()
 	{
-
-
 			GameObject go = Instantiate (spellObj, transform.position, transform.localRotation);
 			go.GetComponent<SpellAreaDamage> ().caster = gameObject;
 			go.GetComponent<AlwaysMove> ().target = gameObject;
@@ -59,18 +55,22 @@ public class PlayerCastSpellOne : NetworkBehaviour
 			GetComponent<GenericManaScript> ().LooseManaPoints (spellCost);
 
 	}
+	//cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
+	//demander le lancement du sort sur le serveur...normal.
 	public void CastThatSpell()
 	{
 		if (GetComponent<GenericLifeScript> ().isDead) 
 		{
 			return;
 		}
-		if (GetComponent<GenericManaScript> ().currentMp > spellCost && !onCD) 
-	{
+		if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) 
+		{
 		CmdCastSpell ();
 		StartCoroutine(SpellOnCD());
 		}
 	}
+
+	//si t'es un joueur; tu peux cast ce sort avec la touche A : voir pour opti ca en fonction du clavier des gars.
 	void Update()
 	{
 		if (!isLocalPlayer) 
@@ -94,11 +94,15 @@ public class PlayerCastSpellOne : NetworkBehaviour
 		onCD = false;
 	}
 
+	//si on clic sur level up; ca le dit au serveur.
 	[Command]
 	public void CmdLevelUpTheSpell()
 	{
 		RpcLvlUpSpell ();
 	}
+
+	//le serveur dit a tous les clients y compris lui meme que
+	//le sort de ce joueur est devenu plus puissant
 	[ClientRpc]
 	public void RpcLvlUpSpell()
 	{
@@ -118,6 +122,8 @@ public class PlayerCastSpellOne : NetworkBehaviour
 			//changer ici l'interface du joueur.
 		}
 	}
+
+	//suffit de linké ca a un bouton d'interface et boom
 	public void levelUp()
 	{
 		CmdLevelUpTheSpell ();

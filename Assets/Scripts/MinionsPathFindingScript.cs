@@ -7,10 +7,11 @@ using UnityEngine.Networking;
 public class MinionsPathFindingScript : NetworkBehaviour 
 {
 	public NavMeshAgent agent;
-	public Transform target;
-	public float stopTime = 2f;
+	public Transform target; // si ya pas de target; alors il va mettre son point de départ comme target...
+//	public float stopTime = 2f;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		agent = GetComponent<NavMeshAgent> ();
 		if (target == null) 
 		{
@@ -26,7 +27,8 @@ public class MinionsPathFindingScript : NetworkBehaviour
 
 	IEnumerator GoToEndGameRoutine()
 	{
-		if (agent) {
+		if (agent.isOnNavMesh) 
+		{
 			yield return new WaitForEndOfFrame ();
 			agent.SetDestination (target.position);
 			agent.Resume ();

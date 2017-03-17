@@ -5,7 +5,12 @@ using UnityEngine.AI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class PlayerInitialisationScript : NetworkBehaviour {
+public class PlayerInitialisationScript : NetworkBehaviour 
+{
+	//ce script active/ désactive les autres scripts sur le joueur lorsqu'un joueur se connecte en fonction de
+	// si il est le localplayer ou si il est sur le serveur etc...
+	//il gere du coup tout ce qui touche q l'initialisation d'un joueur.
+	//il se désactive au premier "lateupdate" pour pu faire chier aprés. ATTENTION.
 	public SpriteRenderer minimapIcon;
 	public Color mainPlayerColor;
 	public GameObject difficultyPanel;

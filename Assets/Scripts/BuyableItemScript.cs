@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class BuyableItemScript : MonoBehaviour 
 {
+	//ce script permet d'acheter un objet du ItemManager.
+	//il doit etre configurer manuellement.
+	//a placer sur un bouton.
 
 	public GameObject player;
 	public int itemID;
@@ -18,7 +21,7 @@ public class BuyableItemScript : MonoBehaviour
 
 	public void BuyThatItem()
 	{
-		if (GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript> ().ActualGold > itemPrice) 
+		if (GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript> ().ActualGold >= itemPrice) 
 		{
 			StartCoroutine (DisableTheButtonTemporarily ());
 			player.GetComponent<ItemManager> ().BuyItem (itemID, itemPrice);

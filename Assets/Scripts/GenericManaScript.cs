@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
+[NetworkSettings(channel = 0, sendInterval = 0.5f)]
 public class GenericManaScript : NetworkBehaviour {
 
 	//ce script gere la mana de l'objet auquel il est attaché.

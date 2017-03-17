@@ -5,6 +5,10 @@ using UnityEngine.Networking;
 public class TeamSelectorScript : NetworkBehaviour 
 {
 
+	//ce script va sur un collider trigger qui doit etre placé la ou spawn les joueurs.
+	//en fonction du TeamNbr; le joueur qui collide est assigné a l'équipe correspondante.
+	//une fois la partie démarrée (difficulté choisie): l'objet est détruit.
+
 	public int teamNbr; // DOIT ETRE COMPLETER : détermine a quel team appartiendra l'objet qui entrera en collision.
 
 	void OnTriggerEnter(Collider other)

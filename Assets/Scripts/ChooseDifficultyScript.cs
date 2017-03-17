@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ChooseDifficultyScript : MonoBehaviour 
 {
+
+	//permet de choisir la difficulté de la partie.
+	//seul le joueur Host pourra avoir acces a ce menu / il est désactiver au démarrage sur les autres joueurs.
+	// en fonction de la difficultée choisi : les inibs sont activer.
+	//une fois la difficulté choisi; le gamemanger lancera la partie.
+	//le gamemanager garde trace de la difficulté choisie.
+
 	public GameObject difficultyPanel;
 	public GameObject inib1;
 	public GameObject inib2;

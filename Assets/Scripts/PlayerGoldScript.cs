@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class PlayerGoldScript : NetworkBehaviour {
-
+public class PlayerGoldScript : NetworkBehaviour 
+{
+	//petit script qui gere l'or d'un joueur. rien de fou : synchro sur réseau.
 	public Text goldDisplay;
 	[SyncVar(hook ="GoldActualize" )]public int ActualGold;
 

@@ -8,6 +8,14 @@ using UnityEngine.Networking;
 
 public class GameManager : NetworkBehaviour 
 {
+
+	// ci-git le game manager ! Oyez Oyez... Il est unique, un seul par utilisateur. il est sync sur le réseau. Il gere tout ce qui est
+	// vies des équipes; membres des equipes; infos globales sur qui est le vrai joueur ici...
+	// quoi faire en cas de win / loose.
+	// clean la scene une fois la partie finie.
+	//il gere également les evenements importants genre : event de nuit / jour.
+	//il gere aussi le spawn entre guillemets (active / désactive les spawners de mobs)
+	// gere pas grand chose lié au réseau parcontre : voir NetworkManagerObj pour ca (dans la hierarchy)
 	public GameObject difficultyPanel;
 	public AudioClip LooseLifeSound;
 	public Text generalTxt;
@@ -24,8 +32,8 @@ public class GameManager : NetworkBehaviour
 	[SyncVar]public int teamWhoWon;
 
 	public NetworkInstanceId ID;
-	[SyncVar(hook = "T1SyncLooseLife")]public int lifeOfTheTeam1 = 5;
-	[SyncVar(hook = "T2SyncLooseLife")]public int lifeOfTheTeam2 = 5;
+	[SyncVar(hook = "T1SyncLooseLife")]public int lifeOfTheTeam1 = 15;
+	[SyncVar(hook = "T2SyncLooseLife")]public int lifeOfTheTeam2 = 15;
 	[SyncVar(hook = "DayNightEvents")]public bool nightTime;
 	public int Days = 1;
 
@@ -297,6 +305,6 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcMessageToAll()
 	{
-		messageManager.SendAnAlertMess ("The game is starting!", Color.blue);
+		messageManager.SendAnAlertMess ("The game is starting!", Color.green);
 	}
 }

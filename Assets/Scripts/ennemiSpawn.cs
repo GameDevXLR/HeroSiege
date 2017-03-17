@@ -9,8 +9,8 @@ public class ennemiSpawn : NetworkBehaviour {
 	// la variable "waves" correspond au nombre total de monstres qui spawn par level.
 	// la coroutine s'arrete si le level est supérieur au nombre d'objets a faire spawn (nombre de gameobjects dans l'array ennemi)...
 
-	public GameObject[] ennemi;
-	public Transform inibTransform;
+	public GameObject[] ennemi; //placer ici tous les prefabs d'ennemis que ce point doit spawn.
+	public Transform inibTransform; //la ou on spawn
 	public float waves;
 	private int actualWave;
 	public float timeBetweenWaves;

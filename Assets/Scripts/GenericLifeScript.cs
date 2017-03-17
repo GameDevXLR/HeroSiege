@@ -8,11 +8,12 @@ using UnityEngine.Networking;
 [NetworkSettings(channel = 0, sendInterval = 0.3f)]
 public class GenericLifeScript : NetworkBehaviour {
 
-	// ce script sert a gerer la vie de l'objet auquel il est attacher. en cas de mort; l'objet est détruit sauf si c'est un joueur : dans ce cas faut écrire le code pour le moment c'est pas préciser...
+	// ce script sert a gerer la vie de l'objet auquel il est attacher. 
+	// il a grand besoin d'etre diviser en un pour mob / un pour joueur / un pour tour ptete meme 1 pour pnj.
 	public int xpGiven = 50;
 	public int goldGiven = 5;
 
-	public RectTransform lifeBar;
+	public RectTransform lifeBar; // barre de vie IG
 	public RectTransform lifeBarMain; // lifebar de l'interface player.
 	public Text playerHPTxt;
 	[SyncVar]public int maxHp = 1000;
@@ -20,7 +21,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public int regenHp;
 	public int levelUpBonusHP = 10;
 
-	public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn l'objet.
+	public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn le joueur.
 
 	public int armorScore = 1;
 	public Text armorDisplay;
@@ -202,12 +203,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		}
 		if (isServer) 
 		{
-			if (gameObject.tag == "PNJ") 
-			{
-				GameManager.instanceGM.Team1LooseALife ();
-			}
 			yield return new WaitForEndOfFrame ();
-
 			NetworkServer.Destroy (gameObject);
 
 		}

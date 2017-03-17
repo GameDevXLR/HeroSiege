@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 
 public class PlayerXPScript : NetworkBehaviour 
 {
+	//gere l'xp d'un joueur; l'xp est sync sur le réseau mais le lvl up se fait en local.
+
 	public Text playerLvl;
 	public Text generalTxt;
 	public RectTransform xpDisplay;
@@ -27,11 +29,7 @@ public class PlayerXPScript : NetworkBehaviour
 		xpText.text = actualXP.ToString () + " / "+ requiredXPToUp.ToString();
 	}
 	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
+
 	public void GetXP(int xp)
 	{
 		if (!isServer) 

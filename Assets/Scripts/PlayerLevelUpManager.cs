@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerLevelUpManager : NetworkBehaviour {
+public class PlayerLevelUpManager : MonoBehaviour {
 
 	//ce script gere les options de lvlup d'un joueur.
+	// il dit au joueur quoi faire en cas de up
 	public int specPts; //points de spécialisation
 	public GameObject spell1LvlUpBtn;
 	public GameObject spectPtIcon;
@@ -14,14 +15,9 @@ public class PlayerLevelUpManager : NetworkBehaviour {
 	void Start () 
 	{
 		spell1LvlUpBtn = GameObject.Find ("Spell1LvlUpBtn");
+		//rajouter ici les futurs sorts a faire up.
 		spectPtIcon = GameObject.Find ("CompPtsIcon");
 
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
 	}
 
 	public void GetAlevel()

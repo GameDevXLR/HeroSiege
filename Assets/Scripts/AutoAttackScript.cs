@@ -6,29 +6,31 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 [NetworkSettings(channel = 0, sendInterval = 0.3f)]
-public class AutoAttackScript : NetworkBehaviour {
+public class AutoAttackScript : NetworkBehaviour 
+{
 
 	//ce script gere l'auto attack de l'objet auquel il est attacher.
-	public AudioSource audioSource;
-	public AudioClip[] playerSounds;
-	public AudioClip[] ennemiSounds;
+	// il a besoin d'etre sous divisé (un pour le joueur; un pour les mobs, et un autre pour les tours meme)
+	public AudioSource audioSource; // qui joue le son
+	public AudioClip[] playerSounds; //quel sons pour le joueur
+	public AudioClip[] ennemiSounds; //quels sons pour les ennemis (tous)
 
-	Animator anim;
-	public bool stopWalk; //pour l animation
-	bool charge;
-	bool attackAnim;
-	public NavMeshAgent agent;
-	public float attackRange;
-	public float attackRate;
-	private float previousAttackTime;
-	public int damage;
-	public Text damageDisplay;
-	public int levelUpBonusDamage;
-	public bool isAttacking;
-	public GameObject target;
-	public float rotSpeed = 5;
-	private Vector3 targetTempPos;
-	private bool isActualizingPos;
+	Animator anim; // l'animator qui gere les anim lié a ce script
+	public bool stopWalk; //pour l animation : arrete de marcher
+	bool charge; // animation et code : charge vers un ennemi / mob
+	bool attackAnim; // dois je jouer l'animation d'attaque ? 
+	public NavMeshAgent agent; // l'agent qui permet de déplacer l'objet attacher
+	public float attackRange; // la portée des auto attaques
+	public float attackRate; // le rate d'attaque par seconde
+	private float previousAttackTime; // privé : le temps global de la derniere attaque
+	public int damage; // combien de dégats brut (hors armure) on fait.
+	public Text damageDisplay; // le display de la force d'attaque (joueur only)
+	public int levelUpBonusDamage; // (joueur) combien de damage en plus si lvl up 
+	public bool isAttacking; //suis je en train d'attaquer ? 
+	public GameObject target; // qui est ma cible ? 
+	public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
+	private Vector3 targetTempPos; //calcul de position (privé)
+	private bool isActualizingPos; // suis je déja en train d'envoyer ma nouvelle position ? 
 	private GameObject targetObj; // l'objet qui t'attaque ! 
 
 
@@ -48,21 +50,25 @@ public class AutoAttackScript : NetworkBehaviour {
 
 	void Update ()
 	{
-		if (target) {
-			if (!isAttacking) {
+		if (target) 
+		{
+			if (!isAttacking) 
+			{
 				if (Vector3.Distance (transform.position, target.transform.position) <= attackRange) {
 					AttackTheTarget ();
-				} else {
-					if (gameObject.layer == 9) {
+				} else 
+				{
+					if (gameObject.layer == 9) 
+					{
 						if (Vector3.Distance (targetTempPos, target.transform.position) > 0 && !isActualizingPos) {
 							StartCoroutine (ActualizeTargetPos());
 						}
 					}
-
 				}
 			}
 
-			if (isAttacking) {
+			if (isAttacking) 
+			{
 				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
@@ -71,13 +77,15 @@ public class AutoAttackScript : NetworkBehaviour {
 					previousAttackTime = Time.time + attackRate;
 					target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
 				}
-				if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) {
+				if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
+				{
 					StopAttacking ();
 				}
 			}
 		} else {
 			LooseTarget ();
-			if (isAttacking) {
+			if (isAttacking) 
+			{
 				StopAttacking ();
 				if (gameObject.layer == 8) 
 				{
@@ -91,7 +99,7 @@ public class AutoAttackScript : NetworkBehaviour {
 
 		if (gameObject.layer == 8) {
 			if (!agent.pathPending) {
-//				if(!agent.hasPath){
+				if(agent.isOnNavMesh){
 					if (agent.remainingDistance <= agent.stoppingDistance) {
 						if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
 							if (!stopWalk) {
@@ -102,7 +110,7 @@ public class AutoAttackScript : NetworkBehaviour {
 						}
 					}
 				}
-//			}
+			}
 		}
 	}
 	IEnumerator ActualizeTargetPos()
@@ -199,7 +207,8 @@ public class AutoAttackScript : NetworkBehaviour {
 	public void LevelUp()
 	{
 		damage += levelUpBonusDamage;
-		if (isLocalPlayer) {
+		if (isLocalPlayer) 
+		{
 			damageDisplay.text = damage.ToString ();
 		}
 	}

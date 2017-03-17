@@ -15,11 +15,7 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 			this.enabled = false;
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 	public void OnTriggerEnter(Collider other)
 	{
 		

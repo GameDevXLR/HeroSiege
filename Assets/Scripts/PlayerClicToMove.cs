@@ -6,6 +6,9 @@ using UnityEngine.Networking;
 
 public class PlayerClicToMove : NetworkBehaviour {
 
+
+	//ce script est gaté. Ca c'est dit.
+	// il gere le déplacement du joueur.
 	Animator anim;
 	private AudioSource audioS;
 //	public AudioClip clicSound;

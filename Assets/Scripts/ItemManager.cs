@@ -6,6 +6,11 @@ using UnityEngine.Events;
 
 public class ItemManager : NetworkBehaviour 
 {
+	//ce script doit etre placé sur le joueur pour des raisons d'autorité sur le réseau.
+	// il contient une liste de fonction appelée par l'achat d'un objet voir le script : 
+	// BuyableItemScript qui gere lui l'action de selectionner un objet a acheter puis fait
+	//appel a ce script pour l'achat sur le réseau.
+
 	public Transform guardSpawnPoint;
 	public UnityEvent[] itemEvents;
 	public GameObject targetplayer;
@@ -32,20 +37,27 @@ public class ItemManager : NetworkBehaviour
 		itemEvents [itemID].Invoke ();
 	}
 
-	public void UpMyLife()
+	[ClientRpc]
+	public void RpcUpMyLife()
 	{
 		targetplayer.GetComponent<GenericLifeScript> ().maxHp += 20;
 	}
-	public void UpMyMana()
+	[ClientRpc]
+	public void RpcUpMyMana()
 	{
 		targetplayer.GetComponent<GenericManaScript> ().maxMp += 20;
 	}
-	public void UpMyDamage()
+	[ClientRpc]
+	public void RpcUpMyDamage()
 	{
 		targetplayer.GetComponent<AutoAttackScript> ().damage += 5;
-		targetplayer.GetComponent<AutoAttackScript> ().damageDisplay.text = targetplayer.GetComponent<AutoAttackScript> ().damage.ToString();
+		if (isLocalPlayer) 
+		{
+			targetplayer.GetComponent<AutoAttackScript> ().damageDisplay.text = targetplayer.GetComponent<AutoAttackScript> ().damage.ToString ();
+		}
 	}
-	public void RecruteAGuard()
+	[ClientRpc]
+	public void RpcRecruteAGuard()
 	{
 		int x = GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr;
 		GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr++;

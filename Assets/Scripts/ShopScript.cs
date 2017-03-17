@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class ShopScript : MonoBehaviour 
 {
+	//ce script est a placé sur un collider trigger
+	//il permet d'ouvrir un shop si on est a portée de l'objet qui a le script.
+	//ATTENTION : il faut ecrire dans le shopName le nom exact du gameobject d'interface joueur lié a ce menu.
+	//ATTENTION : un seul menu par shop. pour le moment...(a corriger)
 	public Transform shopPanel;
 	private bool isOpen;
 	public string shopName;

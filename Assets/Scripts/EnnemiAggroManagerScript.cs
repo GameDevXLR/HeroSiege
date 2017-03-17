@@ -25,10 +25,9 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 	
 	void OnTriggerStay(Collider other)
 	{
-
-		if (other.gameObject.layer == 8) 
+		if (autoAScript.target == null) 
 		{
-			if (autoAScript.target == null) 
+		if (other.gameObject.layer == 8) 
 			{
 				GetComponentInParent<ChildrenHandlerForMob> ().SetTheTarget(other.gameObject);
 			}
@@ -36,9 +35,10 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 	}
 		void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.layer == 8) 
-		{
-			GetComponentInParent<ChildrenHandlerForMob> ().LooseThatTarget();
+		if (autoAScript.target != null) {
+			if (other.gameObject.layer == 8) {
+				GetComponentInParent<ChildrenHandlerForMob> ().LooseThatTarget ();
+			}
 		}
 	}
 

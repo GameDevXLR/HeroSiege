@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class AlertMessageManager : MonoBehaviour 
 {
+
+	//ce script permet de faire pop un message en local dans le "messagePanel".
 	public GameObject messPrefab;
 	private Transform messagesBox;
 

@@ -11,7 +11,7 @@ public class FountainRegenScript : MonoBehaviour {
 
 	void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject.layer == 8) //layer 8 is Player.
+		if (other.gameObject.tag == "Player") //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
 		{
 			other.GetComponent<GenericLifeScript> ().currentHp += regenHp;
 			other.GetComponent<GenericManaScript> ().currentMp += regenMp;

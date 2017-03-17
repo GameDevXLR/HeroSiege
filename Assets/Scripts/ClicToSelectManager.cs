@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 
-public class ClicToSelectManager : NetworkBehaviour 
+public class ClicToSelectManager : MonoBehaviour 
 {
 	public LayerMask layer_mask;
 
