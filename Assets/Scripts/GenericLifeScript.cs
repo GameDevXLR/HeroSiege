@@ -23,7 +23,6 @@ public class GenericLifeScript : NetworkBehaviour {
 	public int levelUpBonusHP = 10;
 
 	public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn le joueur.
-
 	public int armorScore = 1;
 	public Text armorDisplay;
 	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
@@ -202,6 +201,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		{
 			yield return new WaitForEndOfFrame ();
 			NetworkServer.Destroy (gameObject);
+			//faire ici la remise dans le pool.
 
 		}
 
@@ -222,7 +222,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		IEnumerator RespawnEnum()
 	{
 		//ajouter par ici une anime de mort un de ces 4...
-		if(isLocalPlayer)
+		if(isServer)
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 
@@ -249,7 +249,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
 		GetComponent<CapsuleCollider> ().enabled = true;
-		if(isLocalPlayer)
+		if(isServer)
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
 
@@ -290,6 +290,8 @@ public class GenericLifeScript : NetworkBehaviour {
 		maxHp += levelUpBonusHP;
 		currentHp = maxHp;
 		respawnTime += 4f;
+		lifeBar.localScale = new Vector3 (1, 1f, 1f);
+
 		if (isLocalPlayer) 
 		{
 			lifeBarMain.localScale = new Vector3 (1, 1f, 1f);

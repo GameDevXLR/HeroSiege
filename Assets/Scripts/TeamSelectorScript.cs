@@ -17,18 +17,29 @@ public class TeamSelectorScript : NetworkBehaviour
 		{
 
 			GameManager.instanceGM.AddPlayerToTeam (teamNbr, other.GetComponent<NetworkIdentity>().netId);
-			if (other.gameObject == GameManager.instanceGM.playerObj) {
+			if (other.gameObject == GameManager.instanceGM.playerObj) 
+			{
 				if (teamNbr == 1) 
 				{
 					GameManager.instanceGM.isTeam1 = true;
 					other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
+					return;
 
 				} else 
 				{
 					GameManager.instanceGM.isTeam2 = true;
 					other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT2");
-
+					return;
 				}
+			}
+			if (teamNbr == 1) 
+			{
+				other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
+				return;
+
+			} else 
+			{
+				other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT2");
 			}
 		}
 	}
