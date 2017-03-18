@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 	//permet au perso du joueur de cibler automatiquement l'ennemi le plus proche.
 
-	public bool isTheLocalP;
+//	public bool isTheLocalP;
 	public bool autoTargetting;
 	public PlayerAutoAttack autoAScript;
 	public NavMeshAgent playerAgent;
@@ -17,18 +17,18 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 	{
 		autoAScript = GetComponentInParent<PlayerAutoAttack> ();
 		playerAgent = GetComponentInParent<NavMeshAgent> ();
-		if (GameManager.instanceGM.playerObj == gameObject.transform.parent.gameObject) 
-		{
-			autoTargetting = true;
-			isTheLocalP = true;
-		}
-
+//		if (GameManager.instanceGM.playerObj == gameObject.transform.parent.gameObject) 
+//		{
+//			autoTargetting = true;
+//			isTheLocalP = true;
+//		}
+//
 	}
 	
 	// Update is called once per frame
 	void OnTriggerStay (Collider other)
 	{
-		if (isTheLocalP) 
+		if (GetComponentInParent<NetworkIdentity>().isServer) 
 		{
 			if (autoTargetting) 
 			{
@@ -45,22 +45,22 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 			}
 		}
 	}
-	void Update()
-	{
-		if (isTheLocalP) 
-		{
-			if (Input.GetKeyUp (KeyCode.S)) 
-			{
-				autoTargetting = false;
-				playerAgent.SetDestination (GetComponentInParent<Transform> ().position);
-				if (autoAScript.isAttacking) 
-				{
-					GetComponentInParent<PlayerClicToMove> ().CmdSendNewDestination (transform.parent.transform.position);
-				}
-			}
-		}
-	}
-
+//	void Update()
+//	{
+//		if (isTheLocalP) 
+//		{
+//			if (Input.GetKeyUp (KeyCode.S)) 
+//			{
+//				autoTargetting = false;
+//				playerAgent.SetDestination (GetComponentInParent<Transform> ().position);
+//				if (autoAScript.isAttacking) 
+//				{
+//					GetComponentInParent<PlayerClicToMove> ().CmdSendNewDestination (transform.parent.transform.position);
+//				}
+//			}
+//		}
+//	}
+//
 	public void TellHeroHisDest(NetworkInstanceId id)
 	{
 

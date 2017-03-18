@@ -59,10 +59,11 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcRecruteAGuard()
 	{
+		return; //provisoire
 		int x = GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr;
 		GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr++;
 		GameObject newGuard = Instantiate (guard1Prefab, guardSpawnPoint.position, guardSpawnPoint.rotation) as GameObject;
-		newGuard.GetComponent<PlayerClicToMove> ().startingPos = GameManager.instanceGM.GetComponent<PNJManager> ().campGuardPositions [x].position;
+//		newGuard.GetComponent<PlayerClicToMove> ().startingPos = GameManager.instanceGM.GetComponent<PNJManager> ().campGuardPositions [x].position;
 		NetworkServer.Spawn (newGuard);
 	}
 }

@@ -723,13 +723,11 @@ GameObject:
   - component: {fileID: 114451575287444900}
   - component: {fileID: 195436564916210786}
   - component: {fileID: 114559340069610518}
-  - component: {fileID: 114264787324429846}
   - component: {fileID: 208272402118463098}
   - component: {fileID: 114780299539588170}
   - component: {fileID: 114021642633644984}
   - component: {fileID: 82970786219410336}
-  - component: {fileID: 114125860377542452}
-  - component: {fileID: 54180257846860442}
+  - component: {fileID: 114887921810659502}
   m_Layer: 9
   m_Name: mob2
   m_TagString: Untagged
@@ -1626,21 +1624,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1381899470255746}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54180257846860442
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853418556211758}
-  serializedVersion: 2
-  m_Mass: 5
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 2
 --- !u!65 &65582747420792480
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1788,26 +1771,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114125860377542452
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853418556211758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
-  m_SendInterval: 0.11111111
-  m_SyncRotationAxis: 2
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.01
-  m_SnapThreshold: 0.01
-  m_InterpolateRotation: 50
-  m_InterpolateMovement: 50
 --- !u!114 &114221084788021322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1840,28 +1803,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114264787324429846
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853418556211758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4c57bb83b896cf4cb97d2fe0fd27676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  ennemiSounds:
-  - {fileID: 8300000, guid: 1a156c0c8ed01424eb6fe170ca93a496, type: 3}
-  stopWalk: 0
-  agent: {fileID: 0}
-  attackRange: 6
-  attackRate: 1
-  damage: 4
-  isAttacking: 0
-  target: {fileID: 0}
-  rotSpeed: 5
 --- !u!114 &114348377555897910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1950,6 +1891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742c60d627e827f489b5603afb95e237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTeam1: 0
   agent: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &114644589171139748
@@ -2048,6 +1990,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114887921810659502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853418556211758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa91d09dc81e9f4dbe7bbcdf9a0ae38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiSounds:
+  - {fileID: 8300000, guid: 1a156c0c8ed01424eb6fe170ca93a496, type: 3}
+  agent: {fileID: 0}
+  attackRange: 6
+  attackRate: 1
+  damage: 4
+  isAttacking: 0
+  target: {fileID: 0}
+  rotSpeed: 5
 --- !u!114 &114889827600163824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2985,14 +2947,14 @@ NavMeshAgent:
   m_GameObject: {fileID: 1853418556211758}
   m_Enabled: 1
   m_Radius: 0.5
-  m_Speed: 3
-  m_Acceleration: 8000
+  m_Speed: 7
+  m_Acceleration: 500
   avoidancePriority: 55
-  m_AngularSpeed: 120
+  m_AngularSpeed: 9999
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 0
+  m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
-  m_AutoRepath: 0
+  m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0.5
   m_WalkableMask: 1

@@ -60,7 +60,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isServer) 
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
+			if(isLocalPlayer){
 			GameObject.Find ("DifficultyPanel").GetComponent<ChooseDifficultyScript> ().enabled = true;
+			}
 		}
 	}
 
@@ -69,6 +71,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GameManager.instanceGM.playerObj = gameObject;
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
 		base.OnStartLocalPlayer ();
+	}
+	public override void OnStartClient ()
+	{
+		
+		base.OnStartClient ();
 	}
 
 }

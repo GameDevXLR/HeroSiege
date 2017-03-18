@@ -105,9 +105,9 @@ public class GenericLifeScript : NetworkBehaviour {
 			guyAttackingMe = attacker;
 		}
 			if (gameObject.layer == 9) { //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
-				if (attacker != GetComponent<AutoAttackScript> ().target) {
+				if (attacker != GetComponent<EnemyAutoAttackScript> ().target) {
 					if (Random.Range (0, 2) != 0) { //2 est exclusif car c'est un int.
-						GetComponent<AutoAttackScript> ().target = attacker;
+						GetComponent<ChildrenHandlerForMob>().SetTheTarget(attacker);
 					}
 				}
 			}

@@ -18,7 +18,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	private PlayerEnnemyDetectionScript aggroArea;
 	public GameObject target;
 	int layer_mask;
-	[SyncVar]public Vector3 startingPos;
+//	[SyncVar]public Vector3 startingPos;
 
 	// Use this for initialization
 	void Start () 
@@ -27,15 +27,19 @@ public class PlayerClicToMove : NetworkBehaviour {
 		{
 			audioS = GetComponent<AudioSource> ();
 			layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
+		}
+		if (isServer) 
+		{
 			aggroArea = GetComponentInChildren<PlayerEnnemyDetectionScript> ();
+
 		}
 		agentPlayer = GetComponent<NavMeshAgent> ();
 		attackScript = GetComponent<PlayerAutoAttack> ();
 		anim = GetComponentInChildren<Animator> ();
-		if (gameObject.tag == "PNJ" && startingPos == Vector3.zero) 
-		{
-			startingPos = gameObject.transform.position;
-		}
+//		if (gameObject.tag == "PNJ" && startingPos == Vector3.zero) 
+//		{
+//			startingPos = gameObject.transform.position;
+//		}
 	}
 	
 	// Update is called once per frame
@@ -52,13 +56,13 @@ public class PlayerClicToMove : NetworkBehaviour {
 			{	
 				if (hit.collider.gameObject.layer == Layers.Ennemies) 
 				{
-					aggroArea.autoTargetting = true;
+//					aggroArea.autoTargetting = true;
 					target = hit.collider.gameObject;
 					CmdSendNewTarget(target.GetComponent<NetworkIdentity> ().netId);
 
 				} else 
 				{
-					aggroArea.autoTargetting = false;
+//					
 					CmdSendNewDestination (hit.point);
 
 				}
@@ -69,18 +73,20 @@ public class PlayerClicToMove : NetworkBehaviour {
 		if (target) 
 		{
 			agentPlayer.SetDestination (target.transform.position);
-		} else 
-		{
-			if (gameObject.tag == "PNJ") 
-			{
-				agentPlayer.SetDestination (startingPos);
-			}
-		}
+		} 
+//		else 
+//		{
+//			if (gameObject.tag == "PNJ") 
+//			{
+//				agentPlayer.SetDestination (startingPos);
+//			}
+//		}
 
 	}
 	[Command]
 	public void CmdSendNewDestination(Vector3 dest)
 	{
+		aggroArea.autoTargetting = false;
 		agentPlayer.SetDestination (dest);
 		RpcNewDestination (dest);
 	}
@@ -103,9 +109,15 @@ public class PlayerClicToMove : NetworkBehaviour {
 	[Command]
 	public void CmdSendNewTarget(NetworkInstanceId targetID)
 	{
-		target = ClientScene.FindLocalObject (targetID);
+		aggroArea.autoTargetting = true;
 		RpcReceiveNewTarget (targetID);
 	}
+	public void SetTargetOnServer(NetworkInstanceId targetID)
+	{
+		aggroArea.autoTargetting = true;
+		RpcReceiveNewTarget (targetID);
+	}
+
 	[ClientRpc]
 	public void RpcReceiveNewTarget(NetworkInstanceId targetID)
 	{
@@ -119,11 +131,13 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 	public void SetThatTargetFromAggro(NetworkInstanceId targetid)
 	{
-		if (hasAuthority) 
+		if (isServer) 
 		{
 
-			CmdSendNewTarget (targetid);
+			SetTargetOnServer (targetid);
+			return;
 		}
+		Debug.Log ("bug");
 	}
 
 }

@@ -7,15 +7,16 @@ using UnityEngine.Networking;
 
 public class ChildrenHandlerForMob : NetworkBehaviour 
 {
-	private AutoAttackScript autoAScript;
+	private EnemyAutoAttackScript autoAScript;
 
 	void Start()
 	{
 		if (!isServer) 
 		{
+			GetComponentInChildren<EnnemiAggroManagerScript> ().enabled = false;
 			GetComponentInChildren<SphereCollider> ().enabled = false;
 		}
-		autoAScript = GetComponent<AutoAttackScript> ();
+		autoAScript = GetComponent<EnemyAutoAttackScript> ();
 	}
 
 	public void SetTheTarget(GameObject Go)

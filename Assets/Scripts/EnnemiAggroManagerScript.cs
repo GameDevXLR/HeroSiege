@@ -14,17 +14,17 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 	Animator anim;
 
 	private NavMeshAgent agentParent;
-	private AutoAttackScript autoAScript;
+	private EnemyAutoAttackScript autoAScript;
 	// Use this for initialization
 	void Start () 
 	{
 		agentParent =GetComponentInParent<NavMeshAgent> ();
-		autoAScript = GetComponentInParent<AutoAttackScript> ();
-		
+		autoAScript = GetComponentInParent<EnemyAutoAttackScript> ();
 	}
-	
+
 	void OnTriggerStay(Collider other)
 	{
+
 		if (autoAScript.target == null) 
 		{
 		if (other.gameObject.layer == 8) 
@@ -35,7 +35,8 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 	}
 		void OnTriggerExit(Collider other)
 	{
-		if (autoAScript.target != null) {
+		if (autoAScript.target != null) 
+		{
 			if (other.gameObject.layer == 8) {
 				GetComponentInParent<ChildrenHandlerForMob> ().LooseThatTarget ();
 			}

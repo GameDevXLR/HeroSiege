@@ -29,7 +29,6 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public GameObject target; // qui est ma cible ? a sync ! ! ! 
 	public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
 	private Vector3 targetTempPos; //calcul de position (privé)
-	private bool isActualizingPos; // suis je déja en train d'envoyer ma nouvelle position ? 
 	private GameObject targetObj; // l'objet qui t'attaque ! 
 
 

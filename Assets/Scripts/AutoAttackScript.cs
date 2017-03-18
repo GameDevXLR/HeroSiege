@@ -15,7 +15,6 @@ public class AutoAttackScript : NetworkBehaviour
 	public AudioClip[] ennemiSounds; //quels sons pour les ennemis (tous)
 
 	Animator anim; // l'animator qui gere les anim lié a ce script
-	public bool stopWalk; //pour l animation : arrete de marcher
 
 	bool attackAnim; // dois je jouer l'animation d'attaque ? 
 	public NavMeshAgent agent; // l'agent qui permet de déplacer l'objet attacher
@@ -88,7 +87,7 @@ public class AutoAttackScript : NetworkBehaviour
 			isActualizingPos = true;
 			agent.SetDestination (target.transform.position);
 			targetTempPos = target.transform.position;
-		yield return new WaitForSeconds (Random.Range( 0.5f, 0.7f));
+		yield return new WaitForSeconds (Random.Range( 0.2f, 0.3f));
 			isActualizingPos = false;
 		}
 
