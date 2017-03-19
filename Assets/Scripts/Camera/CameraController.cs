@@ -105,7 +105,11 @@ public class CameraController : MonoBehaviour
 			transform.position = target.transform.position + offset;
 		}
 		}
+	public void LockUnlockCamera()
+	{
+		selectedPlayer = !selectedPlayer;
 
+	}
 
 }
 

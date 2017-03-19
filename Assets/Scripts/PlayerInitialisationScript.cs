@@ -72,10 +72,12 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
 		base.OnStartLocalPlayer ();
 	}
-	public override void OnStartClient ()
+	public override void OnStartServer ()
 	{
-		
-		base.OnStartClient ();
+
+			GameManager.instanceGM.messageManager.SendAnAlertMess ("A new player has joined the game.", Color.green);
+		base.OnStartServer ();
 	}
+
 
 }

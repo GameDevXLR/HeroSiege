@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+[NetworkSettings (channel = 2, sendInterval = 0.1f)]
 public class PlayerCastSpellOne : NetworkBehaviour 
 {
 	//premier sort: a mettre sur l'objet joueur.
@@ -72,7 +73,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 
 	//si t'es un joueur; tu peux cast ce sort avec la touche A : voir pour opti ca en fonction du clavier des gars.
 
-	void Update()
+	public void Update()
 	{
 		if (!isLocalPlayer) 
 		{
