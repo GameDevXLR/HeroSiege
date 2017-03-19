@@ -37,6 +37,9 @@ public class GameManager : NetworkBehaviour
 	[SyncVar(hook = "T2SyncLooseLife")]public int lifeOfTheTeam2 = 15;
 	[SyncVar(hook = "DayNightEvents")]public bool nightTime;
 	public int Days = 1;
+	public Image dayNightDisplay;
+	public Sprite dayIcon;
+	public Sprite nightIcon;
 
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
 
@@ -56,7 +59,7 @@ public class GameManager : NetworkBehaviour
 	{
 		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
-
+		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
 	}
 	public void T1SyncLooseLife(int life)
 	{
@@ -184,6 +187,7 @@ public class GameManager : NetworkBehaviour
 	public void DayNightEvents(bool night)
 	{
 		nightTime = night;
+		dayNightDisplay.sprite = nightIcon;
 		if (night) 
 		{
 			messageManager.SendAnAlertMess ("It's night time. Better be ready.", Color.red);
@@ -200,6 +204,7 @@ public class GameManager : NetworkBehaviour
 		} else 
 		{
 			Days++;
+			dayNightDisplay.sprite = dayIcon;
 			messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
 
 			if (isServer) 
@@ -287,7 +292,7 @@ public class GameManager : NetworkBehaviour
 		if (Days == 2) 
 		{
 			//si c'est le "premier vrai jour" : on multiplie le nombre de mobs par vague par le nombre de joueurs. ca fou direct le bordel. oh yeah.
-			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().numberOfMobs *= coPlayers;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().numberOfMobs *= coPlayers+1;
 		}
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{

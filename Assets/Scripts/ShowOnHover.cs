@@ -17,12 +17,12 @@ public class ShowOnHover : MonoBehaviour
 		panelToShow = transform.GetChild(0);	
 	}
 	
-	public void ShowHover(){
+	public  void ShowHover(){
 		panelToShow.gameObject.SetActive (true);
 		
 	}
 
-	public void HideOnEndHover()
+	public  void HideOnEndHover()
 	{
 		panelToShow.gameObject.SetActive (false);
 
