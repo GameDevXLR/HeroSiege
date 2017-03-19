@@ -30,6 +30,7 @@ public class GameManager : NetworkBehaviour
 	public bool isTeam2;
 	public int coPlayers; //nombre Total! de joueurs connectés. utile que si t'es le serveur pour le moment...
 	[SyncVar]public int teamWhoWon;
+	[SyncVar(hook = "GameRestarting")]private bool isRestarting;
 
 	public NetworkInstanceId ID;
 	[SyncVar(hook = "T1SyncLooseLife")]public int lifeOfTheTeam1 = 15;
@@ -87,49 +88,61 @@ public class GameManager : NetworkBehaviour
 
 	public void Team1LooseALife()
 	{
+		if (isRestarting) 
+		{
+			return;
+		}
 		lifeOfTheTeam1 -= 1 ;
 		GetComponent<AudioSource> ().PlayOneShot (LooseLifeSound);
 		if (lifeOfTheTeam1 <= 0)
 		{
 			teamWhoWon = 2;
-
-			ennemies = GameObject.FindObjectsOfType<GameObject> ();
-			foreach (GameObject g in ennemies) 
-			{
-				if (g.layer == 9) 
-				{
-					Destroy (g);
-				}
-				if (g.layer == 8) 
-				{
-					g.SetActive (false);
-				}
-			}
+			isRestarting = true;
 			StartCoroutine (RestartTheLevel ());
+
+//			ennemies = GameObject.FindObjectsOfType<GameObject> ();
+//			foreach (GameObject g in ennemies) 
+//			{
+//				if (g.layer == 9) 
+//				{
+//					Destroy (g);
+//				}
+//				if (g.layer == 8) 
+//				{
+//					g.SetActive (false);
+//				}
+//			}
 
 			//faire ici ce qui doit se passer si on a pu de vie et que la partie est donc finie.
 		}
 	}
 	public void Team2LooseALife()
 	{
+		if (isRestarting) 
+		{
+			return;
+		}
 		lifeOfTheTeam2 -= 1 ;
 		GetComponent<AudioSource> ().PlayOneShot (LooseLifeSound);
 		if (lifeOfTheTeam2 <= 0)
 		{
 			teamWhoWon = 1;
-			ennemies = GameObject.FindObjectsOfType<GameObject> ();
-			foreach (GameObject g in ennemies) 
-			{
-				if (g.layer == 9) 
-				{
-					Destroy (g);
-				}
-				if (g.layer == 8) 
-				{
-					g.SetActive (false);
-				}
-			}
+			isRestarting = true;
+
 			StartCoroutine (RestartTheLevel ());
+
+//			ennemies = GameObject.FindObjectsOfType<GameObject> ();
+//			foreach (GameObject g in ennemies) 
+//			{
+//				if (g.layer == 9) 
+//				{
+//					Destroy (g);
+//				}
+//				if (g.layer == 8) 
+//				{
+//					g.SetActive (false);
+//				}
+//			}
 
 			//faire ici ce qui doit se passer si on a pu de vie et que la partie est donc finie.
 		}
@@ -137,16 +150,8 @@ public class GameManager : NetworkBehaviour
 
 	IEnumerator RestartTheLevel()
 	{
-		if (teamWhoWon == 1 && isTeam1 || teamWhoWon == 2 && isTeam2) 
-		{
-			gameOverTxt.text = "Victory!!!";
-		} else 
-		{
-			gameOverTxt.text = "Deafeat...";
 
-		}
-		gameOverTxt.enabled = true;
-		yield return new WaitForSeconds (3f);
+		yield return new WaitForSeconds (5f);
 		if (isServer) 
 		{
 			NetworkManager.singleton.ServerChangeScene ("scene2");	//utilise onserverloadscene pour dire aux joueurs quoi faire une fois load.	
@@ -154,6 +159,21 @@ public class GameManager : NetworkBehaviour
 
 	}
 
+	public void GameRestarting(bool restarting)
+	{
+		isRestarting = restarting;
+
+		if (teamWhoWon == 1 && isTeam1 || teamWhoWon == 2 && isTeam2) 
+		{
+			gameOverTxt.text = "Victory!!!";
+			gameOverTxt.color = Color.green;
+		} else 
+		{
+			gameOverTxt.text = "Deafeat...";
+
+		}
+		gameOverTxt.enabled = true;
+	}
 
 	public void StopPlayerFromJoining()
 	{

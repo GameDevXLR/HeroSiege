@@ -22,7 +22,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public float attackRange; // la portée des auto attaques
 	public float attackRate; // le rate d'attaque par seconde
 	private float previousAttackTime; // privé : le temps global de la derniere attaque
-	public int damage; // combien de dégats brut (hors armure) on fait.
+	[SyncVar(hook = "ActualizeDamage")]public int damage; // combien de dégats brut (hors armure) on fait.
 	public Text damageDisplay; // le display de la force d'attaque (joueur only)
 	public int levelUpBonusDamage; // (joueur) combien de damage en plus si lvl up 
 	public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
@@ -30,7 +30,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
 	private Vector3 targetTempPos; //calcul de position (privé)
 	private GameObject targetObj; // l'objet qui t'attaque ! 
-
+	public bool isActualizingPos;
 
 	void Start()
 	{
@@ -81,6 +81,16 @@ public class PlayerAutoAttack: NetworkBehaviour
 			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
 			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
+			if (!isAttacking) 
+			{
+				if (Vector3.Distance (targetTempPos, target.transform.position) > 0 && !isActualizingPos) 
+				{
+					if (Vector3.Distance (transform.position, target.transform.position) > attackRange) 
+					{
+						StartCoroutine (ActualizeTargetPos ());
+					}
+				}
+			}
 		}
 
 		if (!agent.pathPending) 
@@ -107,14 +117,24 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[ClientRpc]
 	public void RpcAttackTarget()
 	{
+		if (isLocalPlayer) 
+		{
+			CmdTellThemMyLocalPos (transform.position);
+		}
+
 		charge = false;
-		anim.SetBool ("charge", charge);
+		anim.SetBool ("charge", false);
 		agent.Stop ();
 		isAttacking = true;
 		attackAnim = true;
 		anim.SetBool ("attack", attackAnim);
 		audioSource.clip = playerSounds [0];
 		audioSource.Play();
+	}
+	[Command]
+	public void CmdTellThemMyLocalPos(Vector3 pos)
+	{
+		transform.Translate( pos);
 	}
 
 	[ClientRpc]
@@ -157,7 +177,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 			//faire ici l'arret de la charge.
 			charge = false;
-			anim.SetBool ("charge", charge);
+			anim.SetBool ("charge", false);
 		}
 	}
 
@@ -168,5 +188,22 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 			damageDisplay.text = damage.ToString ();
 		}
+	}
+
+	public void ActualizeDamage(int dmg)
+	{
+		damage = dmg;
+		if (isLocalPlayer) 
+		{
+			damageDisplay.text = damage.ToString ();
+		}
+	}
+	IEnumerator ActualizeTargetPos()
+	{
+		isActualizingPos = true;
+		agent.SetDestination (target.transform.position);
+		targetTempPos = target.transform.position;
+		yield return new WaitForSeconds (Random.Range( 0.1f, 0.2f));
+		isActualizingPos = false;
 	}
 }

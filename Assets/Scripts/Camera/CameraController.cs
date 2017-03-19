@@ -99,9 +99,12 @@ public class CameraController : MonoBehaviour
     }
 
 
-	public void CenterBackCameraOnTarget(){
-		transform.position = target.transform.position + offset;
-	}
+	public void CenterBackCameraOnTarget()
+	{
+		if (target != null) {
+			transform.position = target.transform.position + offset;
+		}
+		}
 
 
 }

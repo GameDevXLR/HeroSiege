@@ -14,6 +14,7 @@ public class ItemManager : NetworkBehaviour
 	public Transform guardSpawnPoint;
 	public UnityEvent[] itemEvents;
 	public GameObject targetplayer;
+	[SyncVar]public NetworkInstanceId targetID;
 	public GameObject guard1Prefab;
 
 	public void Start()
@@ -32,6 +33,7 @@ public class ItemManager : NetworkBehaviour
 	[Command]
 	public void CmdBuyThatForHim (int itemID, int itemPrice, NetworkInstanceId ID)
 	{
+		targetID = ID;
 		targetplayer = NetworkServer.FindLocalObject (ID);
 		targetplayer.GetComponent<PlayerGoldScript> ().ActualGold -= itemPrice;
 		itemEvents [itemID].Invoke ();
@@ -40,30 +42,38 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcUpMyLife()
 	{
-		targetplayer.GetComponent<GenericLifeScript> ().maxHp += 20;
+		targetplayer = NetworkServer.FindLocalObject (targetID);
+		if (isServer) {
+			targetplayer.GetComponent<GenericLifeScript> ().maxHp += 20;
+		}
 	}
 	[ClientRpc]
 	public void RpcUpMyMana()
 	{
-		targetplayer.GetComponent<GenericManaScript> ().maxMp += 20;
+		targetplayer = NetworkServer.FindLocalObject (targetID);
+		if (isServer) {
+			targetplayer.GetComponent<GenericManaScript> ().maxMp += 20;
+		}
 	}
 	[ClientRpc]
 	public void RpcUpMyDamage()
 	{
-		targetplayer.GetComponent<PlayerAutoAttack> ().damage += 5;
-		if (isLocalPlayer) 
+		targetplayer = NetworkServer.FindLocalObject (targetID);
+
+		if (isServer) 
 		{
-			targetplayer.GetComponent<PlayerAutoAttack> ().damageDisplay.text = targetplayer.GetComponent<PlayerAutoAttack> ().damage.ToString ();
+			targetplayer.GetComponent<PlayerAutoAttack> ().damage += 5;
 		}
+
 	}
 	[ClientRpc]
 	public void RpcRecruteAGuard()
 	{
 		return; //provisoire
-		int x = GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr;
-		GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr++;
-		GameObject newGuard = Instantiate (guard1Prefab, guardSpawnPoint.position, guardSpawnPoint.rotation) as GameObject;
-//		newGuard.GetComponent<PlayerClicToMove> ().startingPos = GameManager.instanceGM.GetComponent<PNJManager> ().campGuardPositions [x].position;
-		NetworkServer.Spawn (newGuard);
+//		int x = GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr;
+//		GameManager.instanceGM.GetComponent<PNJManager> ().GuardNbr++;
+//		GameObject newGuard = Instantiate (guard1Prefab, guardSpawnPoint.position, guardSpawnPoint.rotation) as GameObject;
+////		newGuard.GetComponent<PlayerClicToMove> ().startingPos = GameManager.instanceGM.GetComponent<PNJManager> ().campGuardPositions [x].position;
+//		NetworkServer.Spawn (newGuard);
 	}
 }
