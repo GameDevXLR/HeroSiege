@@ -17,6 +17,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public PlayerAutoAttack attackScript;
 	private PlayerEnnemyDetectionScript aggroArea;
 	public GameObject target;
+	public Vector3 targetTmpPos;
 	int layer_mask;
 //	[SyncVar]public Vector3 startingPos;
 
@@ -64,23 +65,22 @@ public class PlayerClicToMove : NetworkBehaviour {
 				{
 //					
 					CmdSendNewDestination (hit.point);
-
+					agentPlayer.SetDestination (hit.point);
 				}
 
 			}
 		
 		}
-		if (target) 
+		if (target)  
 		{
-			agentPlayer.SetDestination (target.transform.position);
-		} 
-//		else 
-//		{
-//			if (gameObject.tag == "PNJ") 
-//			{
-//				agentPlayer.SetDestination (startingPos);
-//			}
-//		}
+			if(Vector3.Distance(agentPlayer.destination, target.transform.position)>1.2f)
+			{
+				Debug.Log (Vector3.Distance (agentPlayer.destination, target.transform.position));
+			targetTmpPos = target.transform.position;
+			agentPlayer.SetDestination (targetTmpPos);
+			} 
+		}
+
 
 	}
 	[Command]
@@ -94,7 +94,11 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public void RpcNewDestination(Vector3 desti)
 	{
 		agentPlayer.Resume ();
-		agentPlayer.SetDestination (desti);
+		if (!isLocalPlayer) 
+		{
+			agentPlayer.SetDestination (desti);
+
+		}
 		target = null;
 		agentPlayer.stoppingDistance = 0;
 		attackScript.LooseTarget ();
@@ -121,6 +125,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcReceiveNewTarget(NetworkInstanceId targetID)
 	{
+		agentPlayer.stoppingDistance = 2;
 
 		target = ClientScene.FindLocalObject (targetID);
 		agentPlayer.stoppingDistance = 1;
@@ -137,7 +142,6 @@ public class PlayerClicToMove : NetworkBehaviour {
 			SetTargetOnServer (targetid);
 			return;
 		}
-		Debug.Log ("bug");
 	}
 
 }

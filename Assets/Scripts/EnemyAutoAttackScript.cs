@@ -156,6 +156,8 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			target = null;
 			isAttacking = false;
 			attackAnim = false;
+			GetComponent<NavMeshObstacle> ().enabled = false;
+			agent.enabled = true;
 			agent.Resume ();
 			audioSource.Stop ();
 			anim.SetBool ("attackEnnemi", attackAnim);

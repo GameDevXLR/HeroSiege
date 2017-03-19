@@ -117,7 +117,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[ClientRpc]
 	public void RpcAttackTarget()
 	{
-		if (isLocalPlayer) 
+		if (isLocalPlayer && !isServer) 
 		{
 			CmdTellThemMyLocalPos (transform.position);
 		}
