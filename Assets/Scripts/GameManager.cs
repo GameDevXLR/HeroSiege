@@ -28,7 +28,7 @@ public class GameManager : NetworkBehaviour
 	public List<NetworkInstanceId> team2ID;
 	public bool isTeam1;
 	public bool isTeam2;
-
+	public int coPlayers; //nombre Total! de joueurs connectés. utile que si t'es le serveur pour le moment...
 	[SyncVar]public int teamWhoWon;
 
 	public NetworkInstanceId ID;
@@ -139,7 +139,11 @@ public class GameManager : NetworkBehaviour
 	{
 		if (teamWhoWon == 1 && isTeam1 || teamWhoWon == 2 && isTeam2) 
 		{
-			gameOverTxt.text = "Well Done! You won!!!";
+			gameOverTxt.text = "Victory!!!";
+		} else 
+		{
+			gameOverTxt.text = "Deafeat...";
+
 		}
 		gameOverTxt.enabled = true;
 		yield return new WaitForSeconds (3f);
@@ -153,27 +157,34 @@ public class GameManager : NetworkBehaviour
 
 	public void StopPlayerFromJoining()
 	{
-//		NetworkManager.singleton.matchMaker.SetMatchAttributes(UnityEngine.Networking.Types.NetworkID, false, 1, basic
+		NetworkManager.singleton.matchMaker.SetMatchAttributes(NetworkManager.singleton.matchInfo.networkId, false, NetworkManager.singleton.matchInfo.domain, NetworkLobbyManager.singleton.OnSetMatchAttributes);
 	}
+
+
 	public void DayNightEvents(bool night)
 	{
 		nightTime = night;
 		if (night) 
 		{
+			messageManager.SendAnAlertMess ("It's night time. Better be ready.", Color.red);
+
 			if (isServer) 
 			{
-				int coPlayers;
-				coPlayers = NetworkServer.connections.Count;
-				Debug.Log (coPlayers);
+				if (Days == 1) 
+				{
+					coPlayers = NetworkServer.connections.Count;
+				}
 				NightStartingEvents (coPlayers);
-				Debug.Log ("NightMobs : spawn them here in the code");
+				//NightMobs : spawn them here in the code;
 			}
 		} else 
 		{
 			Days++;
+			messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
+
 			if (isServer) 
 			{
-				int coPlayers;
+				
 				coPlayers = NetworkServer.connections.Count; // le nombre de joueurs connectés.
 				DayStartingEvents (coPlayers);
 				Debug.Log ("spawn them here in the code...There is " + coPlayers.ToString() +" players connected.");
@@ -182,6 +193,7 @@ public class GameManager : NetworkBehaviour
 	}
 	public void SyncDifficulty(int dif)
 	{
+		
 		gameDifficulty = dif;
 		switch (gameDifficulty) 
 		{
@@ -218,15 +230,13 @@ public class GameManager : NetworkBehaviour
 		NetworkServer.Destroy (GameObject.Find ("StartingBarricade2"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector2"));
-
+		StopPlayerFromJoining ();
 		RpcMessageToAll ();
 	}
 
 
 	public void NightStartingEvents(int nbrOfPlayers)
 	{
-		messageManager.SendAnAlertMess ("It's night time. Better be ready.", Color.red);
-//		RpcMessageToAll ();
 
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{
@@ -254,8 +264,11 @@ public class GameManager : NetworkBehaviour
 	}
 	public void DayStartingEvents(int nbrOfPlayers)
 	{
-		messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
-//		RpcMessageToAll ();
+		if (Days == 2) 
+		{
+			//si c'est le "premier vrai jour" : on multiplie le nombre de mobs par vague par le nombre de joueurs. ca fou direct le bordel. oh yeah.
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().numberOfMobs *= coPlayers;
+		}
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = false;
