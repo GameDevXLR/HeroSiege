@@ -63,8 +63,9 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 				} else 
 				{
-//					
+
 					CmdSendNewDestination (hit.point);
+					agentPlayer.Resume ();
 					agentPlayer.SetDestination (hit.point);
 				}
 
@@ -73,9 +74,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 		}
 		if (target)  
 		{
-			if(Vector3.Distance(agentPlayer.destination, target.transform.position)>1.2f)
+			if(Vector3.Distance(targetTmpPos, target.transform.position)>0.2f)
 			{
-				Debug.Log (Vector3.Distance (agentPlayer.destination, target.transform.position));
 			targetTmpPos = target.transform.position;
 			agentPlayer.SetDestination (targetTmpPos);
 			} 
