@@ -146,8 +146,16 @@ public class GenericLifeScript : NetworkBehaviour {
 	{
 		currentHp = life;
 		float x = (float) currentHp/maxHp;
+		if (x > 1f) 
+		{
+			x = 1f;
+		}
 		if (currentHp != maxHp) 
 		{
+			if (currentHp > maxHp) 
+			{
+				currentHp = maxHp;
+			}
 			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
 
 			lifeBar.localScale = new Vector3 (x, 1f, 1f);

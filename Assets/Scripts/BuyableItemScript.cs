@@ -13,6 +13,7 @@ public class BuyableItemScript : MonoBehaviour
 	public int itemID;
 	public int itemPrice;
 	public Button thisBtn;
+	public bool recquireSlot;
 
 	void Start()
 	{
@@ -26,7 +27,7 @@ public class BuyableItemScript : MonoBehaviour
 			StartCoroutine (DisableTheButtonTemporarily ());
 			player = GameManager.instanceGM.playerObj;
 
-			player.GetComponent<ItemManager> ().BuyItem (itemID, itemPrice);
+			player.GetComponent<ItemManager> ().BuyItem (itemID, itemPrice, recquireSlot);
 		}
 	}
 

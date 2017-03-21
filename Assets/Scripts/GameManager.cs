@@ -102,21 +102,6 @@ public class GameManager : NetworkBehaviour
 			teamWhoWon = 2;
 			isRestarting = true;
 			StartCoroutine (RestartTheLevel ());
-
-//			ennemies = GameObject.FindObjectsOfType<GameObject> ();
-//			foreach (GameObject g in ennemies) 
-//			{
-//				if (g.layer == 9) 
-//				{
-//					Destroy (g);
-//				}
-//				if (g.layer == 8) 
-//				{
-//					g.SetActive (false);
-//				}
-//			}
-
-			//faire ici ce qui doit se passer si on a pu de vie et que la partie est donc finie.
 		}
 	}
 	public void Team2LooseALife()
@@ -133,21 +118,6 @@ public class GameManager : NetworkBehaviour
 			isRestarting = true;
 
 			StartCoroutine (RestartTheLevel ());
-
-//			ennemies = GameObject.FindObjectsOfType<GameObject> ();
-//			foreach (GameObject g in ennemies) 
-//			{
-//				if (g.layer == 9) 
-//				{
-//					Destroy (g);
-//				}
-//				if (g.layer == 8) 
-//				{
-//					g.SetActive (false);
-//				}
-//			}
-
-			//faire ici ce qui doit se passer si on a pu de vie et que la partie est donc finie.
 		}
 	}
 
