@@ -15,9 +15,11 @@ public class PlayerXPScript : NetworkBehaviour
 	[SyncVar (hook= "XPActualize")]public int actualXP;
 	public int requiredXPToUp = 50;
 	public int actualLevel = 1;
+	private ParticleSystem LvlUpParticle;
 	// Use this for initialization
 	void Start () 
 	{
+		LvlUpParticle = GetComponentInChildren <ParticleSystem> ();
 		if (!isLocalPlayer) 
 		{
 			return;
@@ -60,6 +62,7 @@ public class PlayerXPScript : NetworkBehaviour
 		if (actualXP >= requiredXPToUp) 
 		{
 			actualLevel++;
+			LvlUpParticle.Play ();
 			actualXP = 0;
 			requiredXPToUp *= 1 + actualLevel;
 			if (isLocalPlayer) 
