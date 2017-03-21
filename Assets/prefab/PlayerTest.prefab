@@ -1732,7 +1732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapIcon: {fileID: 212341552016347012}
   mainPlayerColor: {r: 0.019139292, g: 0.44631925, b: 0.86764705, a: 1}
-  enemyPlayerColor: {r: 0.5588235, g: 0.12718053, b: 0, a: 0}
+  enemyPlayerColor: {r: 0.5588235, g: 0.12718053, b: 0, a: 1}
   difficultyPanel: {fileID: 0}
 --- !u!114 &114924662801619198
 MonoBehaviour:
@@ -1902,7 +1902,7 @@ NavMeshAgent:
   m_Acceleration: 500
   avoidancePriority: 75
   m_AngularSpeed: 99999
-  m_StoppingDistance: 3
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

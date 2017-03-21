@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-[NetworkSettings(channel = 1, sendInterval =5f)]
+[NetworkSettings(channel = 0, sendInterval =0.5f)]
 
 public class PlayerInitialisationScript : NetworkBehaviour 
 {
@@ -36,6 +36,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			}
 		} else 
 		{
+			StartCoroutine (SetProperColor ());
 			if(GameManager.instanceGM.team1ID.Contains(this.netId))
 				{
 					if(GameManager.instanceGM.isTeam1)
@@ -70,14 +71,52 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		GameManager.instanceGM.playerObj = gameObject;
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
+		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
 		base.OnStartLocalPlayer ();
 	}
 	public override void OnStartServer ()
 	{
-
-			GameManager.instanceGM.messageManager.SendAnAlertMess ("A new player has joined the game.", Color.green);
+		StartCoroutine (TellNewPlayerHasJoin ());
 		base.OnStartServer ();
+
 	}
 
+	IEnumerator SetProperColor()
+	{
+		yield return new WaitForSeconds (0.1f); // attendre que la collision est register le joueur en fait...faudra opti.
+		if(GameManager.instanceGM.team1ID.Contains(this.netId))
+		{
+			if(GameManager.instanceGM.isTeam1)
+			{
+				yield return null;
+			}else
+			{
+				minimapIcon.color = enemyPlayerColor;
+			}
+		}
+		if(GameManager.instanceGM.team2ID.Contains(this.netId))
+		{
+			if(GameManager.instanceGM.isTeam2)
+			{
+				yield return null;
+			}else
+			{
+				minimapIcon.color = enemyPlayerColor;
+			}
+		}
+	}
+	[ClientRpc]
+	public void RpcCallMessage(string mess)
+	{
+		GameManager.instanceGM.messageManager.SendAnAlertMess (mess, Color.green);
+
+	}
+
+	IEnumerator TellNewPlayerHasJoin()
+	{
+		yield return new WaitForSeconds (0.2f);
+		RpcCallMessage ("A new player has joined the game.");
+
+	}
 
 }
