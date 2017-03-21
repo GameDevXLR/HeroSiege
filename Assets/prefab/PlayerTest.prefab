@@ -1114,7 +1114,8 @@ AudioSource:
   m_GameObject: {fileID: 1677075611022148}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243358345002240646, guid: f53275b0b299b98478e54f8554ae7abc,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: cdf0c54277866b64db8b5c0d35ce7d53, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
@@ -1123,7 +1124,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 88
+  Priority: 138
   DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 14.7
@@ -1397,6 +1398,7 @@ MonoBehaviour:
   agentPlayer: {fileID: 0}
   attackScript: {fileID: 0}
   target: {fileID: 0}
+  targetTmpPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114371008046197868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1531,6 +1533,7 @@ MonoBehaviour:
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
+  isActualizingPos: 0
 --- !u!114 &114613663393574606
 MonoBehaviour:
   m_ObjectHideFlags: 1

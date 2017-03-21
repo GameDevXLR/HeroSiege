@@ -165,6 +165,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			audioSource.Stop ();
 			anim.SetBool ("attackEnnemi", attackAnim);
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+		particule.Stop ();
 
 		}
 	IEnumerator ActualizeTargetPos()

@@ -1584,7 +1584,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853418556211758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -81.65999, y: 1.132, z: 7.569744}
+  m_LocalPosition: {x: -80.8401, y: 1.096, z: 11.43811}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4958784758136238}
@@ -1706,7 +1706,8 @@ AudioSource:
   m_GameObject: {fileID: 1853418556211758}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243816396346128242, guid: f53275b0b299b98478e54f8554ae7abc,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.1
@@ -1715,7 +1716,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 158
+  Priority: 138
   DopplerLevel: 4
   MinDistance: 30
   MaxDistance: 90
@@ -3076,12 +3077,12 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1243665561
+  randomSeed: -1883948995
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.9
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4090,31 +4091,37 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.008849561
+          value: -0.004048583
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.19331394
-          value: -1
+          time: 0.1902439
+          value: 1.0080972
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 0.5201432
+          value: -0.98380566
           inSlope: -0.00864733
           outSlope: -0.00864733
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.3939985
+          time: 0.6870028
           value: 1
-          inSlope: 1.4539063
-          outSlope: 1.4539063
+          inSlope: -0.087320805
+          outSlope: -0.087320805
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.7078655
+          time: 0.8542069
           value: -1
           inSlope: -0.005206093
           outSlope: -0.005206093
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.8953488
-          value: -0.026548669
+          time: 1
+          value: -0.034645833
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -4192,7 +4199,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.42182893
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -5761,7 +5768,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2078098644
+  randomSeed: -831473830
   InitialModule:
     serializedVersion: 3
     enabled: 1
