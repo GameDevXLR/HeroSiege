@@ -126,10 +126,15 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		{
 		GetComponent<NavMeshObstacle> ().enabled = false;
 		agent.enabled = true;
-			if (target == null) 
-			{
+
+		if (target == null) 
+		{
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-			}
+		}else if (target.GetComponent<GenericLifeScript> ().isDead) 
+		{
+			target = null;
+			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+		}
 			isAttacking = false;
 			attackAnim = false;
 			agent.Resume ();
@@ -166,9 +171,16 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 	IEnumerator ActualizeTargetPos()
 	{
+
 		isActualizingPos = true;
-		agent.SetDestination (target.transform.position);
-		targetTempPos = target.transform.position;
+		if (target.GetComponent<GenericLifeScript> ().isDead) 
+		{
+			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+		} else 
+		{
+			agent.SetDestination (target.transform.position);
+			targetTempPos = target.transform.position;
+		}
 		yield return new WaitForSeconds (Random.Range( 0.2f, 0.3f));
 		isActualizingPos = false;
 	}

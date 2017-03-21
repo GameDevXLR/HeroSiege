@@ -45,22 +45,7 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 			}
 		}
 	}
-//	void Update()
-//	{
-//		if (isTheLocalP) 
-//		{
-//			if (Input.GetKeyUp (KeyCode.S)) 
-//			{
-//				autoTargetting = false;
-//				playerAgent.SetDestination (GetComponentInParent<Transform> ().position);
-//				if (autoAScript.isAttacking) 
-//				{
-//					GetComponentInParent<PlayerClicToMove> ().CmdSendNewDestination (transform.parent.transform.position);
-//				}
-//			}
-//		}
-//	}
-//
+
 	public void TellHeroHisDest(NetworkInstanceId id)
 	{
 

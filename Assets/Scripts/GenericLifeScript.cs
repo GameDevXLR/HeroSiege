@@ -26,10 +26,10 @@ public class GenericLifeScript : NetworkBehaviour {
 	public int armorScore = 1;
 	public Text armorDisplay;
 	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
-
-	public float respawnTime = 5f;
 	public Text respawnTxt;
 	public bool isDead;
+	[SyncVar]public int playerDeathCount; //nombre de morts du joueur.
+	public float respawnTime = 5f;
 	private float lastTic;
 	public float timeBetweenTic = 1f;
 	public GameObject guyAttackingMe;
@@ -225,8 +225,11 @@ public class GenericLifeScript : NetworkBehaviour {
 		if(isServer)
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
-
+			playerDeathCount++;
+			respawnTime += playerDeathCount*2;
 		}
+		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = false;
+		gameObject.layer = 16; //passe en layer Ignore
 		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();
 		GetComponent<PlayerAutoAttack> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
@@ -244,7 +247,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (respawnTime);
 		GetComponent<NavMeshAgent> ().enabled = true;
-
+		gameObject.layer = 8;
 		GetComponent<NavMeshAgent> ().SetDestination (respawnPoint.transform.localPosition);
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
@@ -289,7 +292,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	{
 		maxHp += levelUpBonusHP;
 		currentHp = maxHp;
-		respawnTime += 4f;
+		respawnTime += 1f;
 		lifeBar.localScale = new Vector3 (1, 1f, 1f);
 
 		if (isLocalPlayer) 

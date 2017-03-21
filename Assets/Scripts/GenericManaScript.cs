@@ -74,6 +74,11 @@ public class GenericManaScript : NetworkBehaviour
 	//auto regen des mp tous les timeTic;
 	public void RegenerateMp ()
 	{
+		if (GetComponent<GenericLifeScript> ().isDead) 
+		{
+			manaBar.GetComponentInParent<Canvas> ().enabled = false;
+			return;
+		}
 		if (currentMp < maxMp) 
 		{
 			currentMp += regenMp;
@@ -103,6 +108,11 @@ public class GenericManaScript : NetworkBehaviour
 	[ClientRpc]
 	public void RpcActualizeThatMana()
 	{
+		if(GetComponent<GenericLifeScript>().isDead)
+			{
+			manaBar.GetComponentInParent<Canvas> ().enabled = false;
+			return;
+			}
 		
 		float x = (float)currentMp / maxMp;
 		manaBar.localScale = new Vector3 (x, 1f, 1f);
