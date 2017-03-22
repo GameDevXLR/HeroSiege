@@ -221,7 +221,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcPlayerRespawnProcess()
 	{
-//		StopAllCoroutines ();
+		StopAllCoroutines ();
 		StartCoroutine (RespawnEnum ());
 		if (isLocalPlayer) {
 			StartCoroutine (RespawnTimer ());
@@ -238,11 +238,11 @@ public class GenericLifeScript : NetworkBehaviour {
 		}
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = false;
 		gameObject.layer = 16; //passe en layer Ignore
-//		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();
+		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();
 		GetComponent<PlayerAutoAttack> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().enabled = false;
-//		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
+		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
 		GetComponent<NavMeshAgent> ().enabled = false;
 		GetComponent<CapsuleCollider> ().enabled = false;
 		yield return new WaitForEndOfFrame ();
