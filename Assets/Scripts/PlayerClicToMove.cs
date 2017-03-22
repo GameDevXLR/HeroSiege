@@ -93,7 +93,10 @@ public class PlayerClicToMove : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcNewDestination(Vector3 desti)
 	{
-		agentPlayer.Resume ();
+		if (agentPlayer.isOnNavMesh) 
+		{
+			agentPlayer.Resume ();
+		}
 		if (!isLocalPlayer) 
 		{
 			agentPlayer.SetDestination (desti);
