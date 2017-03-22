@@ -27,7 +27,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		private Vector3 targetTempPos; //calcul de position (privé)
 		private GameObject targetObj; // l'objet qui t'attaque ! 
 		private bool isActualizingPos; // suis je déja en train d'actualiser la position de ma cible?
-
+		private ParticleSystem particule;
 
 		void Start()
 		{
@@ -35,6 +35,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			agent = GetComponent<NavMeshAgent> ();
 			anim = GetComponentInChildren<Animator> ();
 			audioSource = GetComponent<AudioSource> ();
+		particule = GetComponentInChildren<ParticleSystem> ();
 
 
 		}
@@ -101,8 +102,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			agent.enabled = false;
 			GetComponent<NavMeshObstacle> ().enabled = true;
 			anim.SetBool ("attackEnnemi", attackAnim);
+		if (particule != null) {
+			particule.Play ();
+		}
 			audioSource.clip = enemiSounds [0];
 			audioSource.Play();
+			
 
 		}
 
@@ -158,6 +163,9 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			audioSource.Stop ();
 			anim.SetBool ("attackEnnemi", attackAnim);
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+		if (particule != null) {
+			particule.Stop ();
+		}
 
 		}
 	IEnumerator ActualizeTargetPos()

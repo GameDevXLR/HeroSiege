@@ -17,4 +17,22 @@ public class FountainRegenScript : MonoBehaviour {
 			other.GetComponent<GenericManaScript> ().currentMp += regenMp;
 		}
 	}
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.tag == "Player") //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
+		{
+			other.gameObject.transform.GetChild (1).GetComponent<ParticleSystem> ().Play(true);
+			other.gameObject.transform.GetChild (2).GetComponent<ParticleSystem> ().Play(true);
+
+		}
+	}
+	void OnTriggerExit(Collider other)
+	{
+		if (other.gameObject.tag == "Player") //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
+		{
+			other.gameObject.transform.GetChild (1).GetComponent<ParticleSystem> ().Stop(true);
+			other.gameObject.transform.GetChild (2).GetComponent<ParticleSystem> ().Stop(true);
+
+		}
+	}
 }
