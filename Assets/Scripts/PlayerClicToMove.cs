@@ -128,10 +128,10 @@ public class PlayerClicToMove : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcReceiveNewTarget(NetworkInstanceId targetID)
 	{
-		agentPlayer.stoppingDistance = 2;
+		agentPlayer.stoppingDistance = attackScript.attackRange;
 
 		target = ClientScene.FindLocalObject (targetID);
-		agentPlayer.stoppingDistance = 1;
+//		agentPlayer.stoppingDistance = 1;
 		attackScript.AcquireTarget (target);
 		anim.SetBool ("stopwalk", false);
 		attackScript.stopWalk = false;

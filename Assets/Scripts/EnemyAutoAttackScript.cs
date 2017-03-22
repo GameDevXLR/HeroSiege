@@ -5,15 +5,14 @@ using UnityEngine.AI;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-[NetworkSettings(channel = 0, sendInterval = 0.1f)]
+[NetworkSettings(channel = 0, sendInterval = 0.3f)]
 public class EnemyAutoAttackScript : NetworkBehaviour {
 	
 
 		//ce script gere l'auto attack de l'objet auquel il est attacher.
-		//subidivision special player.
+		//subidivision special ennemy.
 		private AudioSource audioSource; // qui joue le son
-		public AudioClip[] enemiSounds; //quel sons pour le joueur
-
+		public AudioClip[] enemiSounds; //quel sons pour les mobs. 
 		Animator anim; // l'animator qui gere les anim lié a ce script
 //		public bool stopWalk; //pour l animation : arrete de marcher
 		bool attackAnim; // dois je jouer l'animation d'attaque ? 
@@ -22,8 +21,8 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		public float attackRate; // le rate d'attaque par seconde
 		private float previousAttackTime; // privé : le temps global de la derniere attaque
 		public int damage; // combien de dégats brut (hors armure) on fait.
-		public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
-		public GameObject target; // qui est ma cible ? a sync ! ! ! 
+	[SyncVar]public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
+	[SyncVar]public GameObject target; // qui est ma cible ? ( sur le serveur..retransmis)
 		public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
 		private Vector3 targetTempPos; //calcul de position (privé)
 		private GameObject targetObj; // l'objet qui t'attaque ! 
@@ -79,31 +78,17 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
 			if (!isAttacking) 
 			{
-				if (Vector3.Distance (targetTempPos, target.transform.position) > 0 && !isActualizingPos) 
+				if (Vector3.Distance (targetTempPos, target.transform.position) > 0f && !isActualizingPos) 
 				{
 					if (Vector3.Distance (transform.position, target.transform.position) > attackRange) 
 					{
 						StartCoroutine (ActualizeTargetPos ());
 					}
 				}
-			}
-			}
 
-			if (!agent.pathPending) 
-			{
-				if(agent.isOnNavMesh)
-				{
-					if (agent.remainingDistance <= agent.stoppingDistance) 
-					{
-						if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) 
-						{
-								audioSource.Stop ();
-
-						}
-					}
-				}
 			}
 
+			}
 		}
 
 		[ClientRpc]
@@ -142,19 +127,25 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			anim.SetBool ("attackEnnemi", attackAnim);
 		}
 
-		public void AcquireTarget(GameObject newTarget)
+	public void AcquireTarget(NetworkInstanceId id)
 		{
-			
-		target = newTarget;
+		StartCoroutine (AcquireTargetProcess (id));
+		//			audioSource.PlayOneShot (enemiSounds [1], .6f); // jouer un son d'aggro
+		}
+	IEnumerator AcquireTargetProcess(NetworkInstanceId id)
+	{
+		target = ClientScene.FindLocalObject (id);
+		yield return new WaitForSeconds (0.2f);
 		if (agent.isOnNavMesh) 
 		{
-			agent.SetDestination (target.transform.position);
-		}
-		targetTempPos = target.transform.position;
+			agent.SetDestination (ClientScene.FindLocalObject (id).transform.position); //obliger de refaire la recherche pour le moment :/ sinon ya pas forcemment le temps de faire la recherche :/
+			agent.stoppingDistance = attackRange;
 
-
-//			audioSource.PlayOneShot (enemiSounds [1], .6f); // jouer un son d'aggro
 		}
+		if (target != null) {
+			targetTempPos = target.transform.position;
+		}
+	}
 
 		public void LooseTarget()
 		{

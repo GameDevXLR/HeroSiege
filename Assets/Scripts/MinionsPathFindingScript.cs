@@ -8,7 +8,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 {
 	[SyncVar]public bool isTeam1;
 	public NavMeshAgent agent;
-	public Transform target; // si ya pas de target; alors il va mettre son point de départ comme target...
+	public Transform target;
 //	public float stopTime = 2f;
 	// Use this for initialization
 	void Start () 

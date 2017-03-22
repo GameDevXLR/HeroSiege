@@ -27,7 +27,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public Text armorDisplay;
 	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
 	public Text respawnTxt;
-	public bool isDead;
+	[SyncVar]public bool isDead;
 	[SyncVar]public int playerDeathCount; //nombre de morts du joueur.
 	public float respawnTime = 5f;
 	private float lastTic;
@@ -207,7 +207,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		}
 		if (isServer) 
 		{
-			yield return new WaitForEndOfFrame ();
+			yield return new WaitForSeconds (0.1f);
 			NetworkServer.Destroy (gameObject);
 			//faire ici la remise dans le pool.
 
@@ -221,7 +221,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcPlayerRespawnProcess()
 	{
-		StopAllCoroutines ();
+//		StopAllCoroutines ();
 		StartCoroutine (RespawnEnum ());
 		if (isLocalPlayer) {
 			StartCoroutine (RespawnTimer ());
@@ -238,11 +238,11 @@ public class GenericLifeScript : NetworkBehaviour {
 		}
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = false;
 		gameObject.layer = 16; //passe en layer Ignore
-		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();
+//		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();
 		GetComponent<PlayerAutoAttack> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().enabled = false;
-		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
+//		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
 		GetComponent<NavMeshAgent> ().enabled = false;
 		GetComponent<CapsuleCollider> ().enabled = false;
 		yield return new WaitForEndOfFrame ();
@@ -263,11 +263,13 @@ public class GenericLifeScript : NetworkBehaviour {
 		if(isServer)
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
+			isDead = false;
 
 		}
+		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = true;
+
 		GetComponent<PlayerAutoAttack> ().enabled = true;
 		currentHp = maxHp;
-		isDead = false;
 	}
 
 	IEnumerator RespawnTimer()

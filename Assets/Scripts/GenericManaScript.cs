@@ -79,7 +79,7 @@ public class GenericManaScript : NetworkBehaviour
 			manaBar.GetComponentInParent<Canvas> ().enabled = false;
 			return;
 		}
-		if (currentMp < maxMp) 
+		if (currentMp <= maxMp) 
 		{
 			currentMp += regenMp;
 			RpcActualizeThatMana ();

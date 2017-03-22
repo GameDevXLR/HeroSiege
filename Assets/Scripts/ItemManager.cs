@@ -14,7 +14,7 @@ public class ItemManager : NetworkBehaviour
 	public Transform guardSpawnPoint;
 	public UnityEvent[] itemEvents;
 	public GameObject targetplayer;
-	[SyncVar]public NetworkInstanceId targetID;
+	public NetworkInstanceId targetID;
 	public GameObject guard1Prefab;
 	public Transform inventoryPanel;
 	public Transform selectableSlot;
@@ -33,8 +33,9 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (recquireSlot) 
 		{
-			targetplayer = NetworkServer.FindLocalObject (targetID);
-			for (int i = 0; i < 8; i++) {
+//			targetplayer = NetworkServer.FindLocalObject (targetID);
+			for (int i = 0; i < 8; i++) 
+			{
 				if (inventoryPanel.GetChild (i).childCount == 0) 
 				{
 					selectableSlot = inventoryPanel.GetChild (i).transform;
@@ -59,8 +60,17 @@ public class ItemManager : NetworkBehaviour
 		targetID = ID;
 		targetplayer = NetworkServer.FindLocalObject (ID);
 		targetplayer.GetComponent<PlayerGoldScript> ().ActualGold -= itemPrice;
-		itemEvents [itemID].Invoke ();
+		RpcInvokeTheGoodEvent (itemID);
 	}
+
+	[ClientRpc]
+	public void RpcInvokeTheGoodEvent(int itemID)
+	{
+
+			itemEvents [itemID].Invoke ();
+
+	}
+
 	[Command]
 	public void CmdRefundAnObject(int gold)
 	{
@@ -109,6 +119,7 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
+
 			GameObject go = Instantiate (healthPotionPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
 		}

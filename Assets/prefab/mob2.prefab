@@ -1744,6 +1744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee852830f69d3e4ba6af37362f10e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetEnemy: {fileID: 0}
 --- !u!114 &114097914063295410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1809,7 +1810,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1381899470255746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9d3d7061b155cc4da2a67c3a188bf8e, type: 3}
   m_Name: 
@@ -2003,7 +2004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiSounds:
   - {fileID: 8300000, guid: 1a156c0c8ed01424eb6fe170ca93a496, type: 3}
-  agent: {fileID: 0}
+  agent: {fileID: 195436564916210786}
   attackRange: 6
   attackRate: 1
   damage: 4
@@ -2034,9 +2035,10 @@ MonoBehaviour:
   armorScore: 1
   armorDisplay: {fileID: 0}
   dodge: 20
-  respawnTime: 5
   respawnTxt: {fileID: 0}
   isDead: 0
+  playerDeathCount: 0
+  respawnTime: 5
   timeBetweenTic: 1
   guyAttackingMe: {fileID: 0}
 --- !u!114 &114911413729773554
@@ -2093,7 +2095,7 @@ SphereCollider:
   m_GameObject: {fileID: 1381899470255746}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -2952,9 +2954,9 @@ NavMeshAgent:
   avoidancePriority: 55
   m_AngularSpeed: 9999
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoRepath: 0
   m_Height: 1
   m_BaseOffset: 0.5
   m_WalkableMask: 1

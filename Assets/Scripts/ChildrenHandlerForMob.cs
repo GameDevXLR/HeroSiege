@@ -3,25 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[NetworkSettings(channel = 2, sendInterval = 0.5f)]
+[NetworkSettings(channel = 0, sendInterval = 0.1f)]
 
 public class ChildrenHandlerForMob : NetworkBehaviour 
 {
 	private EnemyAutoAttackScript autoAScript;
-
+	[SyncVar(hook= "SyncEnemy")] public NetworkInstanceId enemyID;
+	public GameObject targetEnemy;
 	void Start()
 	{
-		if (!isServer) 
+		if (isServer) 
 		{
-			GetComponentInChildren<EnnemiAggroManagerScript> ().enabled = false;
-			GetComponentInChildren<SphereCollider> ().enabled = false;
+			GetComponentInChildren<EnnemiAggroManagerScript> ().enabled = true;
+			GetComponentInChildren<SphereCollider> ().enabled = true;
 		}
 		autoAScript = GetComponent<EnemyAutoAttackScript> ();
 	}
 
 	public void SetTheTarget(GameObject Go)
 	{
-		RpcGetTarget (Go.GetComponent<NetworkIdentity> ().netId);
+		if (isServer) 
+		{
+			enemyID = Go.GetComponent<NetworkIdentity> ().netId;
+//			RpcGetTarget ();
+		}
 	}
 
 	public void LooseThatTarget()
@@ -30,9 +35,9 @@ public class ChildrenHandlerForMob : NetworkBehaviour
 	}
 
 	[ClientRpc]
-	public void RpcGetTarget( NetworkInstanceId id)
+	public void RpcGetTarget( )
 	{
-		autoAScript.AcquireTarget (ClientScene.FindLocalObject(id));
+		autoAScript.AcquireTarget (enemyID);
 
 	}
 	[ClientRpc]
@@ -40,6 +45,12 @@ public class ChildrenHandlerForMob : NetworkBehaviour
 	{
 		autoAScript.LooseTarget ();
 
+	}
+
+	public void SyncEnemy(NetworkInstanceId id)
+	{
+		enemyID = id;
+		autoAScript.AcquireTarget (enemyID);
 	}
 
 }
