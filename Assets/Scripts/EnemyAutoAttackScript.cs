@@ -159,7 +159,9 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		public void LooseTarget()
 		{
 			target = null;
+		if (isServer) {
 			isAttacking = false;
+		}
 			attackAnim = false;
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
@@ -167,7 +169,8 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			audioSource.Stop ();
 			anim.SetBool ("attackEnnemi", attackAnim);
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-		if (particule != null) {
+		if (particule != null) 
+		{
 			particule.Stop ();
 		}
 
@@ -184,7 +187,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			agent.SetDestination (target.transform.position);
 			targetTempPos = target.transform.position;
 		}
-		yield return new WaitForSeconds (Random.Range( 0.3f, 0.4f));
+		yield return new WaitForSeconds (Random.Range( 0.30f, 0.40f));
 		isActualizingPos = false;
 	}
 

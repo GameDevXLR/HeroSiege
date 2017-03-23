@@ -19,8 +19,9 @@ public class ItemManager : NetworkBehaviour
 	public Transform inventoryPanel;
 	public Transform selectableSlot;
 	public GameObject healthPotionPrefab;
-
-
+	public GameObject manaPotionPrefab;
+	public GameObject tpScrollPrefab;
+	public GameObject tpBackPortalPrefab;
 	public void Start()
 	{
 		if (isLocalPlayer) 
@@ -130,6 +131,44 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			GetComponent<GenericLifeScript> ().currentHp += 100;
+		}
+	}
+
+	[ClientRpc]
+	public void RpcBuyManaPotion()
+	{
+		if (isLocalPlayer) 
+		{
+
+			GameObject go = Instantiate (manaPotionPrefab, selectableSlot);
+			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+		}
+	}
+	[ClientRpc]
+	public void RpcUseManaPotion()
+	{
+		if (isServer) 
+		{
+			GetComponent<GenericManaScript> ().currentMp += 200;
+		}
+	}
+	[ClientRpc]
+	public void RpcBuyTPScroll()
+	{
+		if (isLocalPlayer) 
+		{
+
+			GameObject go = Instantiate (tpScrollPrefab, selectableSlot);
+			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+		}
+	}
+	[ClientRpc]
+	public void RpcUseTPScroll()
+	{
+		if (isServer) 
+		{
+			GameObject go = Instantiate (tpBackPortalPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f));
+			NetworkServer.Spawn (go);
 		}
 	}
 }

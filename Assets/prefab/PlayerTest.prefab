@@ -2020,12 +2020,78 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: RpcBuyManaPotion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: RpcUseManaPotion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: RpcBuyTPScroll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: RpcUseTPScroll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   targetplayer: {fileID: 0}
   guard1Prefab: {fileID: 1498430331498804, guid: 1777822f51750cd42bfef99045fa30e4,
     type: 2}
   inventoryPanel: {fileID: 0}
   selectableSlot: {fileID: 0}
   healthPotionPrefab: {fileID: 1462563177764482, guid: 61c21d2faafe93045b4e5d8de7588d82,
+    type: 2}
+  manaPotionPrefab: {fileID: 1462563177764482, guid: 234c0a11ff531e9468d8176bdf8a6f32,
+    type: 2}
+  tpScrollPrefab: {fileID: 1462563177764482, guid: 2b1a74f5d7a5cc1429004020bd6ec0c0,
+    type: 2}
+  tpBackPortalPrefab: {fileID: 1343218928825644, guid: f5a8e65b673dcf646a395ce5089966cb,
     type: 2}
 --- !u!114 &114648224865163368
 MonoBehaviour:

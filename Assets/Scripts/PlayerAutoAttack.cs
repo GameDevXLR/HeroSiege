@@ -209,7 +209,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		isActualizingPos = true;
 		agent.SetDestination (target.transform.position);
 		targetTempPos = target.transform.position;
-		yield return new WaitForSeconds (Random.Range( 0.1f, 0.2f));
+		yield return new WaitForSeconds (Random.Range( 0.10f, 0.20f));
 		isActualizingPos = false;
 	}
 }
