@@ -28,7 +28,7 @@ public class ChildrenHandlerForMob : NetworkBehaviour
 //			RpcGetTarget ();
 		}
 	}
-
+	[Server]
 	public void LooseThatTarget()
 	{
 		RpcLooseTarget ();

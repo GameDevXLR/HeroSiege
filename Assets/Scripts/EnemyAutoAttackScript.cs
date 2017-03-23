@@ -116,7 +116,10 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		{
 		GetComponent<NavMeshObstacle> ().enabled = false;
 		agent.enabled = true;
-
+		agent.ResetPath ();
+		if (particule != null) {
+			particule.Stop ();
+		}
 		if (target == null) 
 		{
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
@@ -141,6 +144,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	{
 		target = ClientScene.FindLocalObject (id);
 		yield return new WaitForSeconds (0.2f);
+
 		if (agent.isOnNavMesh) 
 		{
 			agent.SetDestination (ClientScene.FindLocalObject (id).transform.position); //obliger de refaire la recherche pour le moment :/ sinon ya pas forcemment le temps de faire la recherche :/
@@ -180,7 +184,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			agent.SetDestination (target.transform.position);
 			targetTempPos = target.transform.position;
 		}
-		yield return new WaitForSeconds (Random.Range( 0.2f, 0.3f));
+		yield return new WaitForSeconds (Random.Range( 0.3f, 0.4f));
 		isActualizingPos = false;
 	}
 
