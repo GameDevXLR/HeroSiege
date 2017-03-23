@@ -33,6 +33,8 @@ public class GenericLifeScript : NetworkBehaviour {
 	private float lastTic;
 	public float timeBetweenTic = 1f;
 	public GameObject guyAttackingMe;
+	public ParticleSystem rezParticule;
+
 	void Start () 
 	{
 		lastTic = 0f;
@@ -266,6 +268,7 @@ public class GenericLifeScript : NetworkBehaviour {
 			isDead = false;
 
 		}
+		rezParticule.Play (true);
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = true;
 
 		GetComponent<PlayerAutoAttack> ().enabled = true;
