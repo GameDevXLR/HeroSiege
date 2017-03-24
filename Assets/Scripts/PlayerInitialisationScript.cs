@@ -83,7 +83,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 
 	IEnumerator SetProperColor()
 	{
-		yield return new WaitForSeconds (0.1f); // attendre que la collision est register le joueur en fait...faudra opti.
+		yield return new WaitForSeconds (0.2f); // attendre que la collision est register le joueur en fait...faudra opti.
 		if(GameManager.instanceGM.team1ID.Contains(this.netId))
 		{
 			if(GameManager.instanceGM.isTeam1)

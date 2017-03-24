@@ -48,7 +48,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 		GameManager.instanceGM.messageManager.SendAnAlertMess ("Normal mode activated...pussy!", Color.green);
 		inib1.GetComponent<SpawnManager>().enabled = true;
 		inib1B.GetComponent<SpawnManager>().enabled = true;
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.15f;
+		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
 		gameMode = difficultySettings.normal;
 		gameObject.SetActive (false);
 
@@ -58,7 +58,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 		GameManager.instanceGM.gameDifficulty = 2;
 		inib1.GetComponent<SpawnManager>().enabled = true;
 		inib1B.GetComponent<SpawnManager>().enabled = true;
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.15f;
+		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
 
 		gameMode = difficultySettings.hard;
 
@@ -74,7 +74,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 		inib2B.GetComponent<SpawnManager>().enabled = true;
 		inib3B.GetComponent<SpawnManager>().enabled = true;
 		gameMode = difficultySettings.nightmare;
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.15f;
+		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
 
 		gameObject.SetActive (false);
 
@@ -91,7 +91,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 		inib2B.GetComponent<SpawnManager>().enabled = true;
 		inib3B.GetComponent<SpawnManager>().enabled = true;
 		gameMode = difficultySettings.madness;
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.15f;
+		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
 
 		gameObject.SetActive (false);
 

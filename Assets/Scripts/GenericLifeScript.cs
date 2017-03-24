@@ -235,9 +235,10 @@ public class GenericLifeScript : NetworkBehaviour {
 		if(isServer)
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
-			playerDeathCount++;
-			respawnTime += playerDeathCount*2;
+
 		}
+		playerDeathCount++;
+		respawnTime += playerDeathCount*2;
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = false;
 		gameObject.layer = 16; //passe en layer Ignore
 		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();

@@ -22,7 +22,8 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		private float previousAttackTime; // privé : le temps global de la derniere attaque
 		public int damage; // combien de dégats brut (hors armure) on fait.
 	[SyncVar]public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
-	[SyncVar]public GameObject target; // qui est ma cible ? ( sur le serveur..retransmis)
+	[SyncVar(hook ="GetTargetFromID" )]public NetworkInstanceId targetID; // la target.
+	public GameObject target; // qui est ma cible ? ( sur le serveur..retransmis)
 		public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
 		private Vector3 targetTempPos; //calcul de position (privé)
 		private GameObject targetObj; // l'objet qui t'attaque ! 
@@ -79,7 +80,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
 			if (!isAttacking) 
 			{
-				if (Vector3.Distance (targetTempPos, target.transform.position) > 0f && !isActualizingPos) 
+				if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 0f && !isActualizingPos) 
 				{
 					if (Vector3.Distance (transform.position, target.transform.position) > attackRange) 
 					{
@@ -137,22 +138,26 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	public void AcquireTarget(NetworkInstanceId id)
 		{
-		StartCoroutine (AcquireTargetProcess (id));
+//		if(isServer)
+//		{
+		StartCoroutine (AcquireTargetProcess ());
 		//			audioSource.PlayOneShot (enemiSounds [1], .6f); // jouer un son d'aggro
-		}
-	IEnumerator AcquireTargetProcess(NetworkInstanceId id)
+//		}
+	}
+	IEnumerator AcquireTargetProcess()
 	{
-		target = ClientScene.FindLocalObject (id);
-		yield return new WaitForSeconds (0.2f);
+//		yield return target = ClientScene.FindLocalObject (t);
+		yield return new WaitForEndOfFrame ();
 
-		if (agent.isOnNavMesh) 
-		{
-			agent.SetDestination (ClientScene.FindLocalObject (id).transform.position); //obliger de refaire la recherche pour le moment :/ sinon ya pas forcemment le temps de faire la recherche :/
-			agent.stoppingDistance = attackRange;
 
-		}
 		if (target != null) {
-			targetTempPos = target.transform.position;
+			if (agent.isOnNavMesh) 
+			{
+				agent.SetDestination (target.transform.localPosition); //obliger de refaire la recherche pour le moment :/ sinon ya pas forcemment le temps de faire la recherche :/
+				agent.stoppingDistance = attackRange;
+
+			}
+			targetTempPos = target.transform.localPosition;
 		}
 	}
 
@@ -179,16 +184,23 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	{
 
 		isActualizingPos = true;
-		if (target.GetComponent<GenericLifeScript> ().isDead) 
-		{
-			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-		} else 
-		{
-			agent.SetDestination (target.transform.position);
-			targetTempPos = target.transform.position;
-		}
+//		if (target.GetComponent<GenericLifeScript> ().isDead) 
+//		{
+//			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+//		} else 
+//		{
+			agent.SetDestination (target.transform.localPosition);
+			targetTempPos = target.transform.localPosition;
+//		}
 		yield return new WaitForSeconds (Random.Range( 0.30f, 0.40f));
 		isActualizingPos = false;
 	}
 
+	public void GetTargetFromID(NetworkInstanceId id)
+	{
+		targetID = id;
+		target = ClientScene.FindLocalObject (id);
+		StartCoroutine (AcquireTargetProcess ());
+
+	}
 }

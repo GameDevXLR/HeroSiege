@@ -9,7 +9,7 @@ public class ChildrenHandlerForMob : NetworkBehaviour
 {
 	private EnemyAutoAttackScript autoAScript;
 	[SyncVar(hook= "SyncEnemy")] public NetworkInstanceId enemyID;
-	public GameObject targetEnemy;
+//	public GameObject targetEnemy;
 	void Start()
 	{
 		if (isServer) 
@@ -25,6 +25,7 @@ public class ChildrenHandlerForMob : NetworkBehaviour
 		if (isServer) 
 		{
 			enemyID = Go.GetComponent<NetworkIdentity> ().netId;
+			autoAScript.targetID = enemyID;
 //			RpcGetTarget ();
 		}
 	}
