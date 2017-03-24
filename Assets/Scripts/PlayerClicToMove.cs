@@ -18,6 +18,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	private PlayerEnnemyDetectionScript aggroArea;
 	public GameObject target;
 	public Vector3 targetTmpPos;
+	public GameObject cursorTargetter;
 	int layer_mask;
 //	[SyncVar]public Vector3 startingPos;
 
@@ -28,6 +29,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		{
 			audioS = GetComponent<AudioSource> ();
 			layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
+			cursorTargetter = GameObject.Find ("ClickArrowFull");
 		}
 		if (isServer) 
 		{
@@ -63,7 +65,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 				} else 
 				{
-
+					cursorTargetter.transform.localPosition = hit.point;
+//					cursorTargetter.GetComponent<Animator> ().Play("ClickArrowAnim");
 					CmdSendNewDestination (hit.point);
 					agentPlayer.Resume ();
 					agentPlayer.SetDestination (hit.point);

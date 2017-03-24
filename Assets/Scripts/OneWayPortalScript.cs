@@ -25,8 +25,7 @@ public class OneWayPortalScript : NetworkBehaviour {
 	private NetworkInstanceId targetID;
 	public ParticleSystem tpEffect;
 	public bool isPlayingEffect;
-	public GameObject campDestinationT1;
-	public GameObject campDestinationT2;
+	public string tpdestination;
 	[ServerCallback]
 	public void OnTriggerEnter(Collider other)
 	{
@@ -102,15 +101,9 @@ public class OneWayPortalScript : NetworkBehaviour {
 		yield return new WaitForEndOfFrame ();
 		playerToTP.GetComponent<NavMeshAgent> ().ResetPath ();
 		playerToTP.GetComponent<NavMeshAgent> ().enabled = false;
-		if (isTeam1) 
-		{
-			playerToTP.transform.localPosition = campDestinationT1.transform.position;
-			playerToTP.transform.GetChild (3).GetComponent<ParticleSystem> ().Play (true);	
-		} else 
-		{
-			playerToTP.transform.localPosition = campDestinationT2.transform.position;
-			playerToTP.transform.GetChild (3).GetComponent<ParticleSystem> ().Play (true);
-		}
+		playerToTP.transform.localPosition = GameObject.Find(tpdestination).transform.position;
+		playerToTP.transform.GetChild (3).GetComponent<ParticleSystem> ().Play (true);	
+
 		yield return new WaitForEndOfFrame ();
 		playerToTP.GetComponent<NavMeshAgent> ().enabled = true;
 
