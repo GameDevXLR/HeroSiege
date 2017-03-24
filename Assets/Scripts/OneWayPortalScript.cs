@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.AI;
+public class OneWayPortalScript : NetworkBehaviour {
 
-public class TPBackPortalScript : NetworkBehaviour 
-{
 	// ce script fait que : 
 	//si on entre dans sa zone et qu'il est pas isbeingused, il le devient
 	//si le joueur dans la zone sort de la zone, il arrete de l'etre : il faut sortir et rerentrer pour retry.
@@ -18,7 +17,7 @@ public class TPBackPortalScript : NetworkBehaviour
 	public bool isBeingUsed;
 	public float timeToTP = 2;
 	private float timeOfActivation;
-//	private float timeOfCreation;
+	//	private float timeOfCreation;
 	private GameObject childParticuleObj;
 	private Vector3 targetOfTP;
 	private GameObject targetPlayer;
@@ -26,7 +25,8 @@ public class TPBackPortalScript : NetworkBehaviour
 	private NetworkInstanceId targetID;
 	public ParticleSystem tpEffect;
 	public bool isPlayingEffect;
-
+	public GameObject campDestinationT1;
+	public GameObject campDestinationT2;
 	[ServerCallback]
 	public void OnTriggerEnter(Collider other)
 	{
@@ -37,7 +37,7 @@ public class TPBackPortalScript : NetworkBehaviour
 				isBeingUsed = true;
 				targetPlayer = other.gameObject;
 				TpProcess ();
-			
+
 			}
 		}
 	}
@@ -81,7 +81,7 @@ public class TPBackPortalScript : NetworkBehaviour
 				}
 				targetPlayer = null;
 				RpcTpThatPlayer (targetID, isPlayerInTeam1);
-				StartCoroutine (destroyThatTP ());
+//				StartCoroutine (destroyThatTP ());
 			}
 			yield return new WaitForSeconds (0.1f);
 		}
@@ -104,11 +104,11 @@ public class TPBackPortalScript : NetworkBehaviour
 		playerToTP.GetComponent<NavMeshAgent> ().enabled = false;
 		if (isTeam1) 
 		{
-			playerToTP.transform.localPosition = GameObject.Find ("PlayerRespawnPointT1").transform.position;
+			playerToTP.transform.localPosition = campDestinationT1.transform.position;
 			playerToTP.transform.GetChild (3).GetComponent<ParticleSystem> ().Play (true);	
 		} else 
 		{
-			playerToTP.transform.localPosition = GameObject.Find ("PlayerRespawnPointT2").transform.position;
+			playerToTP.transform.localPosition = campDestinationT2.transform.position;
 			playerToTP.transform.GetChild (3).GetComponent<ParticleSystem> ().Play (true);
 		}
 		yield return new WaitForEndOfFrame ();
@@ -122,9 +122,9 @@ public class TPBackPortalScript : NetworkBehaviour
 		tpEffect.Play (true);
 	}
 
-	IEnumerator destroyThatTP ()
-	{
-		yield return new WaitForSeconds (1.5f);
-		NetworkServer.Destroy (gameObject);
-	}
+//	IEnumerator destroyThatTP ()
+//	{
+//		yield return new WaitForSeconds (1.5f);
+//		NetworkServer.Destroy (gameObject);
+//	}
 }
