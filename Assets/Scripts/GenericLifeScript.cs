@@ -49,11 +49,11 @@ public class GenericLifeScript : NetworkBehaviour {
 		}
 	}
 
-	void Update () {
+	void Update () 
+	{
 		if (isDead || currentHp == maxHp) 
 		{
 			lifeBar.GetComponentInParent<Canvas> ().enabled = false;
-
 			return;
 		}
 
@@ -152,21 +152,29 @@ public class GenericLifeScript : NetworkBehaviour {
 		{
 			x = 1f;
 		}
-		if (currentHp != maxHp) 
+		if (currentHp == maxHp) 
 		{
+			lifeBar.GetComponentInParent<Canvas> ().enabled = false;
+		}else
+			if (currentHp != maxHp && currentHp !=0) 
+		{
+			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
+
 			if (currentHp > maxHp) 
 			{
 				currentHp = maxHp;
-			}
-			lifeBar.GetComponentInParent<Canvas> ().enabled = true;
-
-			lifeBar.localScale = new Vector3 (x, 1f, 1f);
-			if (isLocalPlayer) 
-			{
-				lifeBarMain.localScale = new Vector3 (x, 1f, 1f);
-				playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+				lifeBar.GetComponentInParent<Canvas> ().enabled = false;
 
 			}
+
+
+		}
+		lifeBar.localScale = new Vector3 (x, 1f, 1f);
+		if (isLocalPlayer) 
+		{
+			lifeBarMain.localScale = new Vector3 (x, 1f, 1f);
+			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+
 		}
 	}
 	public void	RegenYourHP ()

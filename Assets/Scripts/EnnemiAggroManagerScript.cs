@@ -29,7 +29,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 		{
 		if (other.gameObject.layer == 8) 
 			{
-				GetComponentInParent<ChildrenHandlerForMob> ().SetTheTarget(other.gameObject);
+				GetComponentInParent<EnemyAutoAttackScript> ().SetTheTarget(other.gameObject);
 			}
 		}
 	}
@@ -38,7 +38,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 		if (autoAScript.target != null) 
 		{
 			if (other.gameObject.layer == 8) {
-				GetComponentInParent<ChildrenHandlerForMob> ().LooseThatTarget ();
+				GetComponentInParent<EnemyAutoAttackScript> ().LooseTarget ();
 			}
 		}
 	}

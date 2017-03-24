@@ -1597,12 +1597,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1607321022530426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ee852830f69d3e4ba6af37362f10e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetEnemy: {fileID: 0}
 --- !u!114 &114635520145944314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1633,6 +1632,7 @@ MonoBehaviour:
   respawnTime: 5
   timeBetweenTic: 1
   guyAttackingMe: {fileID: 0}
+  rezParticule: {fileID: 0}
 --- !u!114 &114665928832872106
 MonoBehaviour:
   m_ObjectHideFlags: 1

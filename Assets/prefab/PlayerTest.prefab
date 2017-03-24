@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 114106380856186856}
   - component: {fileID: 114292457117260086}
   - component: {fileID: 114604599503415050}
+  - component: {fileID: 114489449535516312}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -1771,6 +1772,7 @@ MonoBehaviour:
   attackScript: {fileID: 0}
   target: {fileID: 0}
   targetTmpPos: {x: 0, y: 0, z: 0}
+  cursorTargetter: {fileID: 0}
 --- !u!114 &114371008046197868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1809,6 +1811,17 @@ MonoBehaviour:
   spellDuration: 1.5
   spellObj: {fileID: 1134211014724214, guid: c2541f206d37d8c42b88d40d0cae6d58, type: 2}
   spellLvl: 1
+--- !u!114 &114489449535516312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9550f1a51a7d3d4ebb0a398df7ecefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114496493479518042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2375,7 +2388,7 @@ NavMeshAgent:
   m_Radius: 1
   m_Speed: 7.5
   m_Acceleration: 500
-  avoidancePriority: 75
+  avoidancePriority: 10
   m_AngularSpeed: 99999
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -2384,7 +2397,7 @@ NavMeshAgent:
   m_Height: 2.5
   m_BaseOffset: 0.6
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 3
 --- !u!198 &198168849872845458
 ParticleSystem:
   m_ObjectHideFlags: 1

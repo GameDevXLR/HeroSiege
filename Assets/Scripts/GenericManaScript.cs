@@ -108,12 +108,7 @@ public class GenericManaScript : NetworkBehaviour
 	[ClientRpc]
 	public void RpcActualizeThatMana()
 	{
-		if(GetComponent<GenericLifeScript>().isDead)
-			{
-			manaBar.GetComponentInParent<Canvas> ().enabled = false;
-			return;
-			}
-		
+
 		float x = (float)currentMp / maxMp;
 		manaBar.localScale = new Vector3 (x, 1f, 1f);
 		if (isLocalPlayer) 
@@ -139,5 +134,10 @@ public class GenericManaScript : NetworkBehaviour
 		{
 			manaBar.GetComponentInParent<Canvas> ().enabled = false;
 		}
+		if(GetComponent<GenericLifeScript>().isDead)
+		{
+			manaBar.GetComponentInParent<Canvas> ().enabled = false;
+		}
+
 	}
 }

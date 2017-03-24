@@ -40,6 +40,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		audioSource = GetComponent<AudioSource> ();
 		if (isLocalPlayer) 
 		{
+			agent.avoidancePriority = 75;
 			damageDisplay = GameObject.Find ("DamageLog").GetComponent<Text> ();
 			damageDisplay.text = damage.ToString ();
 		}

@@ -1395,13 +1395,11 @@ GameObject:
   - component: {fileID: 65786770890892350}
   - component: {fileID: 23556485433596340}
   - component: {fileID: 114228326696123210}
-  - component: {fileID: 114816695809968510}
   - component: {fileID: 114728830765816148}
   - component: {fileID: 195843032128776594}
   - component: {fileID: 114674540444219230}
   - component: {fileID: 208017372164430212}
   - component: {fileID: 114257656910930764}
-  - component: {fileID: 114324005329208284}
   - component: {fileID: 82418099285641342}
   - component: {fileID: 114331526849518090}
   m_Layer: 9
@@ -3193,6 +3191,7 @@ MonoBehaviour:
   respawnTime: 5
   timeBetweenTic: 1
   guyAttackingMe: {fileID: 0}
+  rezParticule: {fileID: 0}
 --- !u!114 &114252200921075486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3317,18 +3316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d3d7061b155cc4da2a67c3a188bf8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114324005329208284
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1840545334792104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee852830f69d3e4ba6af37362f10e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetEnemy: {fileID: 0}
 --- !u!114 &114331526849518090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3349,6 +3336,7 @@ MonoBehaviour:
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
+  detectionRange: 10
 --- !u!114 &114631584799000606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3386,25 +3374,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   underCC: 0
---- !u!114 &114816695809968510
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1840545334792104}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854f9df7952158641b3edc7503fefacc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMp: 100
-  currentMp: 90
-  regenMp: 1
-  levelUpBonusMP: 0
-  timeBetweenTic: 1
-  manaBar: {fileID: 224098983583436324}
-  manaBarMain: {fileID: 0}
-  playerMPTxt: {fileID: 0}
 --- !u!114 &114920441024994274
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -77,10 +77,10 @@ public class PlayerClicToMove : NetworkBehaviour {
 		}
 		if (target)  
 		{
-			if(Vector3.Distance(targetTmpPos, target.transform.position)>0.2f)
+			if(Vector3.Distance(targetTmpPos, target.transform.localPosition)>1f)
 			{
-			targetTmpPos = target.transform.position;
-			agentPlayer.SetDestination (targetTmpPos);
+				targetTmpPos = target.transform.localPosition;
+				agentPlayer.SetDestination (targetTmpPos);
 			} 
 		}
 
@@ -90,7 +90,6 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public void CmdSendNewDestination(Vector3 dest)
 	{
 		aggroArea.autoTargetting = false;
-		agentPlayer.SetDestination (dest);
 		RpcNewDestination (dest);
 	}
 	[ClientRpc]
@@ -99,12 +98,10 @@ public class PlayerClicToMove : NetworkBehaviour {
 		if (agentPlayer.isOnNavMesh) 
 		{
 			agentPlayer.Resume ();
-		}
-		if (!isLocalPlayer) 
-		{
 			agentPlayer.SetDestination (desti);
 
 		}
+
 		target = null;
 		agentPlayer.stoppingDistance = 0;
 		attackScript.LooseTarget ();
@@ -146,7 +143,9 @@ public class PlayerClicToMove : NetworkBehaviour {
 		{
 
 			SetTargetOnServer (targetid);
-			return;
+		} else 
+		{
+			Debug.Log ("impossible de set une new target depuis un client!");
 		}
 	}
 
