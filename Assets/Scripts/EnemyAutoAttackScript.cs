@@ -21,15 +21,16 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		public float attackRate; // le rate d'attaque par seconde
 		private float previousAttackTime; // privé : le temps global de la derniere attaque
 		public int damage; // combien de dégats brut (hors armure) on fait.
-	[SyncVar]public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
-	[SyncVar(hook ="GetTargetFromID" )]public NetworkInstanceId targetID; // la target.
-	public GameObject target; // qui est ma cible ? ( sur le serveur..retransmis)
+		[SyncVar]public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
+		[SyncVar(hook ="GetTargetFromID" )]public NetworkInstanceId targetID; // la target.
+		public GameObject target; // qui est ma cible ? ( sur le serveur..retransmis)
 		public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
 		private Vector3 targetTempPos; //calcul de position (privé)
 		private GameObject targetObj; // l'objet qui t'attaque ! 
 		private bool isActualizingPos; // suis je déja en train d'actualiser la position de ma cible?
 		private ParticleSystem particule;
-	public float detectionRange = 20f;
+		public float detectionRange = 20f;
+		public Vector3 desiredPos; // ou est ce que le serveur me dit que jdevrais etre. lerp vers ca.
 
 		void Start()
 		{
@@ -57,7 +58,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 				{
 					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) 
 					{
-
 						RpcAttackTarget (transform.localPosition);
 					}
 				} else 
@@ -71,7 +71,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 					{
 						RpcStopAttacking ();
 					}
-//
 				}
 			}
 			if (target == null && isAttacking) 
@@ -88,19 +87,26 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			{
 				if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 0 && !isActualizingPos) 
 				{
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange) 
-					{
+					if (Vector3.Distance (transform.position, target.transform.position) > attackRange + 0.5f) {
 						StartCoroutine (ActualizeTargetPos ());
+					} else 
+					{
+						if (Vector3.Distance (desiredPos, transform.position) > 0.5f && desiredPos != Vector3.zero) 
+						{
+							transform.position = Vector3.Lerp (transform.position, desiredPos, 5 * Time.deltaTime);
+						}
 					}
 				}
 			}
+
 		}
+
 		}
 
 		[ClientRpc]
 	public void RpcAttackTarget(Vector3 pos)
 		{
-		transform.localPosition = pos;
+		desiredPos = pos;
 			agent.Stop ();
 			isAttacking = true;
 			attackAnim = true;
@@ -121,15 +127,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	{
 		GetComponent<NavMeshObstacle> ().enabled = false;
 		agent.enabled = true;
-//
-//		if (target == null) 
-//		{
-//			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-//		}else if (target.GetComponent<GenericLifeScript> ().isDead) 
-//		{
-//			target = null;
-//			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-//		}
 		isAttacking = false;
 		attackAnim = false;
 		agent.Resume ();
@@ -142,27 +139,21 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	public void AcquireTarget(NetworkInstanceId id)
 		{
-//		if(isServer)
-//		{
 		StartCoroutine (AcquireTargetProcess ());
-		//			audioSource.PlayOneShot (enemiSounds [1], .6f); // jouer un son d'aggro
-//		}
 	}
 	IEnumerator AcquireTargetProcess()
 	{
-//		yield return target = ClientScene.FindLocalObject (t);
+
 		yield return new WaitForSeconds(0.1f);
 		if (target != null) {
 			if (agent.isOnNavMesh) {
-				agent.SetDestination (target.transform.localPosition); //obliger de refaire la recherche pour le moment :/ sinon ya pas forcemment le temps de faire la recherche :/
+				agent.SetDestination (target.transform.localPosition); 
 				agent.stoppingDistance = attackRange;
 				targetTempPos = target.transform.localPosition;
 				yield return null;
 			}
 		} else 
 		{
-			Debug.Log ("acquire target process failed");
-
 			GetTargetFromID (targetID);
 		}
 	}
@@ -225,7 +216,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	public void RpcActualizeAttackerPosition(Vector3 pos)
 	{
 		if (!isServer) {
-			transform.position = pos;
+			desiredPos = pos;
 		}
 	}
 }

@@ -20,6 +20,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public Vector3 targetTmpPos;
 	public GameObject cursorTargetter;
 	int layer_mask;
+	NetworkClient nClient;
 //	[SyncVar]public Vector3 startingPos;
 
 	// Use this for initialization
@@ -30,6 +31,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 			audioS = GetComponent<AudioSource> ();
 			layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
 			cursorTargetter = GameObject.Find ("ClickArrowFull");
+			nClient = GameObject.Find ("NetworkManagerObj").GetComponent<NetworkManager> ().client;
 		}
 		if (isServer) 
 		{
@@ -65,6 +67,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 				} else 
 				{
+					StartCoroutine (MoveFirst ((float)nClient.GetRTT(), hit.point));
 					cursorTargetter.transform.localPosition = hit.point;
 //					cursorTargetter.GetComponent<Animator> ().Play("ClickArrowAnim");
 					CmdSendNewDestination (hit.point);
@@ -86,6 +89,13 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 
 	}
+	IEnumerator MoveFirst(float ping, Vector3 desti)
+	{
+		yield return new WaitForSeconds (ping/2000);
+		audioS.clip = walkSound;
+		audioS.Play ();
+		MovingProcedure (desti);
+	}
 	[Command]
 	public void CmdSendNewDestination(Vector3 dest)
 	{
@@ -95,10 +105,19 @@ public class PlayerClicToMove : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcNewDestination(Vector3 desti)
 	{
+		if (isLocalPlayer) 
+		{
+			return;
+		}
+
+		MovingProcedure (desti);
+	}
+	public void MovingProcedure(Vector3 dest)
+	{
 		if (agentPlayer.isOnNavMesh) 
 		{
 			agentPlayer.Resume ();
-			agentPlayer.SetDestination (desti);
+			agentPlayer.SetDestination (dest);
 
 		}
 
@@ -107,10 +126,6 @@ public class PlayerClicToMove : NetworkBehaviour {
 		attackScript.LooseTarget ();
 		anim.SetBool ("stopwalk", false);
 		attackScript.stopWalk = false;
-		if (isLocalPlayer) {
-			audioS.clip = walkSound;
-			audioS.Play ();
-		}
 	}
 
 	[Command]
