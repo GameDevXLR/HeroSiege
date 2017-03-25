@@ -89,6 +89,10 @@ public class GenericManaScript : NetworkBehaviour
 	[Command]
 	public void CmdLooseManaPoints(int mana)
 	{
+		if (GetComponent<GenericLifeScript> ().isDead) 
+		{
+			return;
+		}
 		currentMp -= mana;
 		RpcActualizeThatMana ();
 	}

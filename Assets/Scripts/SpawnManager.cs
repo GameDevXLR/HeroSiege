@@ -40,6 +40,10 @@ public class SpawnManager : NetworkBehaviour
 			lastTic = Time.time + timeBetweenTic;
 			actualNbr++;
 			SpawnAMob ();
+			if (level == 2) 
+			{
+				SpawnAMob ();
+			}
 			if (actualNbr == numberOfMobs) 
 			{
 				LevelUpTheWaves ();
@@ -54,8 +58,17 @@ public class SpawnManager : NetworkBehaviour
 		newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
 		newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
 		newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor;
+		newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/10;
 		newEnnemi.GetComponent<MinionsPathFindingScript>().isTeam1 = isTeam1;
+		if (level == 2) //si c'est la vague Boss (mob3) bennn faire péter hein...
+		{
+			newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
+			newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
+			newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor;
+			newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/10;
+		}
 		NetworkServer.Spawn (newEnnemi);
+
 	}
 
 	//que se passe t-il quand on change de vague d'ennemi ? 

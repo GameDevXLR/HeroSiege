@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class ennemiSpawn : NetworkBehaviour {
-
+	//ANCIEN SCRIPT : NE COMPTE PLUS. a nettoyer a l'occase.voir "SpawnManager" script maintenant
 	// ce script gere le spawn des ennemis : il contient une variable "level" qui détermine le niveau de la vague et donc le mob associé.
 	// la variable "waves" correspond au nombre total de monstres qui spawn par level.
 	// la coroutine s'arrete si le level est supérieur au nombre d'objets a faire spawn (nombre de gameobjects dans l'array ennemi)...

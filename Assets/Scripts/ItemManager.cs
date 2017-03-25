@@ -81,26 +81,26 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcUpMyLife()
 	{
-		targetplayer = NetworkServer.FindLocalObject (targetID);
 		if (isServer) {
+			targetplayer = NetworkServer.FindLocalObject (targetID);
 			targetplayer.GetComponent<GenericLifeScript> ().maxHp += 20;
 		}
 	}
 	[ClientRpc]
 	public void RpcUpMyMana()
 	{
-		targetplayer = NetworkServer.FindLocalObject (targetID);
 		if (isServer) {
+			targetplayer = NetworkServer.FindLocalObject (targetID);
 			targetplayer.GetComponent<GenericManaScript> ().maxMp += 20;
 		}
 	}
 	[ClientRpc]
 	public void RpcUpMyDamage()
 	{
-		targetplayer = NetworkServer.FindLocalObject (targetID);
 
 		if (isServer) 
 		{
+			targetplayer = NetworkServer.FindLocalObject (targetID);
 			targetplayer.GetComponent<PlayerAutoAttack> ().damage += 5;
 		}
 

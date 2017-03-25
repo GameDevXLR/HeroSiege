@@ -14,7 +14,7 @@ public class OneWayPortalScript : NetworkBehaviour {
 	//il est autodétruit si time.time > timeofLife + timeofCreation(+durée de l'effet particule TP+ petit délai histoire d'etre sur...);
 	//il reste tant qu'un joueur l'a pas utilisé
 
-	public bool isBeingUsed;
+	public bool isBeingUsed = true; //je le met en utilisé au début tant que la partie est pas lancée.
 	public float timeToTP = 2;
 	private float timeOfActivation;
 	//	private float timeOfCreation;

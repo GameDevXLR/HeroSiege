@@ -64,10 +64,12 @@ public class PlayerCastSpellOne : NetworkBehaviour
 		{
 			return;
 		}
-		if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) 
+		if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) {
+			CmdCastSpell ();
+			StartCoroutine (SpellOnCD ());
+		} else 
 		{
-		CmdCastSpell ();
-		StartCoroutine(SpellOnCD());
+			GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
 		}
 	}
 

@@ -190,6 +190,8 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 		} else 
 		{
+//			GetComponent<NavMeshObstacle> ().enabled = false;
+//			agent.Resume();
 			agent.SetDestination (target.transform.position);
 			targetTempPos = target.transform.position;
 		}

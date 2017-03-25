@@ -25,7 +25,9 @@ public class GameManager : NetworkBehaviour
 	public AlertMessageManager messageManager;
 	public GameObject playerObj;
 	public List<NetworkInstanceId> team1ID;
+//	public int[] playersScoreT1;
 	public List<NetworkInstanceId> team2ID;
+//	public int[] playersScoreT2;
 	public bool isTeam1;
 	public bool isTeam2;
 	public int coPlayers; //nombre Total! de joueurs connectés. utile que si t'es le serveur pour le moment...
@@ -221,6 +223,8 @@ public class GameManager : NetworkBehaviour
 	//détruit ce qui bloque le joueur pour qu'il puisse commencer a avancer.
 	public void StartTheGameForAll()
 	{
+		GameObject.Find ("CastleToCampPortal").GetComponent<OneWayPortalScript> ().isBeingUsed = false;
+		GameObject.Find ("CastleToCampPortalT2").GetComponent<OneWayPortalScript> ().isBeingUsed = false;
 		NetworkServer.Destroy (GameObject.Find ("StartingBarricade1"));
 		NetworkServer.Destroy (GameObject.Find ("StartingBarricade2"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector"));
@@ -315,4 +319,5 @@ public class GameManager : NetworkBehaviour
 	{
 		messageManager.SendAnAlertMess ("The game is starting!", Color.green);
 	}
+
 }

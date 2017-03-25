@@ -97,6 +97,10 @@ public class GenericLifeScript : NetworkBehaviour {
 
 	public void LooseHealth(int dmg, bool trueDmg, GameObject attacker)
 	{	
+		if (isDead) 
+		{
+			return;
+		}
 		if (isServer) 
 		{
 			
@@ -108,7 +112,7 @@ public class GenericLifeScript : NetworkBehaviour {
 			if (gameObject.layer == 9) { //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
 				if (attacker != GetComponent<EnemyAutoAttackScript> ().target) {
 					if (Random.Range (0, 2) != 0) { //2 est exclusif car c'est un int.
-						GetComponent<ChildrenHandlerForMob>().SetTheTarget(attacker);
+						GetComponent<EnemyAutoAttackScript>().SetTheTarget(attacker);
 					}
 				}
 			}
@@ -207,12 +211,13 @@ public class GenericLifeScript : NetworkBehaviour {
 		{
 			if(guyAttackingMe.tag == "Player")
 			{
-//			if (guyAttackingMe == GameManager.instanceGM.playerObj) 
-//			{
 				guyAttackingMe.GetComponent<PlayerXPScript> ().GetXP (xpGiven);
 				guyAttackingMe.GetComponent<PlayerGoldScript> ().GetGold (goldGiven);
-				//faire ici ce qui se passe si un mob est tué par un joueur.
-//			}
+//				if (isServer) 
+//				{
+//					NetworkInstanceId id = guyAttackingMe.GetComponent<NetworkIdentity> ().netId;
+////					GameManager.instanceGM.GiveAKillToHim (id);
+//				}
 			}
 		}
 		if (isServer) 
@@ -258,7 +263,6 @@ public class GenericLifeScript : NetworkBehaviour {
 		GetComponent<CapsuleCollider> ().enabled = false;
 		yield return new WaitForEndOfFrame ();
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
-
 		transform.localPosition = respawnPoint.transform.position;
 
 		yield return new WaitForSeconds (0.8f);
@@ -281,6 +285,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = true;
 
 		GetComponent<PlayerAutoAttack> ().enabled = true;
+		GetComponent<PlayerAutoAttack> ().target = null;
 		currentHp = maxHp;
 	}
 
