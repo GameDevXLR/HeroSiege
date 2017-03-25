@@ -38,34 +38,16 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		} else 
 		{
 			StartCoroutine (SetProperColor ());
-			if(GameManager.instanceGM.team1ID.Contains(this.netId))
-				{
-					if(GameManager.instanceGM.isTeam1)
-					{
-						return;
-					}else
-					{
-						minimapIcon.color = enemyPlayerColor;
-					}
-				}
-			if(GameManager.instanceGM.team2ID.Contains(this.netId))
-			{
-				if(GameManager.instanceGM.isTeam2)
-				{
-					return;
-				}else
-				{
-					minimapIcon.color = enemyPlayerColor;
-				}
-			}
 		}
 		if (isServer) 
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
-			if(isLocalPlayer){
+			if(isLocalPlayer)
+			{
 			GameObject.Find ("DifficultyPanel").GetComponent<ChooseDifficultyScript> ().enabled = true;
 			}
 		}
+		gameObject.name = "Player" + netId.ToString ();
 	}
 
 	public override void OnStartLocalPlayer ()

@@ -47,63 +47,60 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 		}
 
-		void Update ()
+	void Update ()
+	{
+		if (isServer) 
 		{
-			if (isServer) 
-			{
-				if (target) 
-				{
-					if (!isAttacking) 
-					{
-					if (Vector3.Distance (transform.position, target.transform.position) <= attackRange) 
-						{
-//						Debug.Log ("attacking");
-						RpcAttackTarget (transform.position);
-						}
-					} else 
-					{
-						if (Time.time > previousAttackTime) 
-						{
-							previousAttackTime = Time.time + attackRate;
-							target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
-						}
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange ||  target.GetComponent<GenericLifeScript> ().isDead) 
-						{
-							RpcStopAttacking ();
-						}
-
-					}
-				}
-				if (target == null && isAttacking) 
-				{
-					RpcStopAttacking ();
-				}
-			}
 			if (target) 
 			{
-				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
-				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
-				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
-			if (isAttacking) 
-			{
-				if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 0f && !isActualizingPos) 
+				if (!isAttacking) 
 				{
-					
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) 
+					{
+
+						RpcAttackTarget (transform.localPosition);
+					}
+				} else 
+				{
+					if (Time.time > previousAttackTime) 
+					{
+						previousAttackTime = Time.time + attackRate;
+						target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
+					}
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null|| target.GetComponent<GenericLifeScript> ().isDead) 
+					{
+						RpcStopAttacking ();
+					}
+//
+				}
+			}
+			if (target == null && isAttacking) 
+			{
+				RpcStopAttacking ();
+			}
+		}
+		if (target) 
+		{
+			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
+			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
+			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
+			if (!isAttacking) 
+			{
+				if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 0 && !isActualizingPos) 
+				{
 					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange) 
 					{
 						StartCoroutine (ActualizeTargetPos ());
 					}
 				}
-
 			}
-
-			}
+		}
 		}
 
 		[ClientRpc]
 	public void RpcAttackTarget(Vector3 pos)
 		{
-			transform.position = pos;
+		transform.localPosition = pos;
 			agent.Stop ();
 			isAttacking = true;
 			attackAnim = true;
@@ -120,36 +117,28 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 
 		[ClientRpc]
-		public void RpcStopAttacking()
-		{
-		if (target != null) {
-			if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 30f) {
-				Debug.Log ("loosingtarget");
-				target = null;
-
-			}
-		}
+	public void RpcStopAttacking()
+	{
 		GetComponent<NavMeshObstacle> ().enabled = false;
 		agent.enabled = true;
-		agent.ResetPath ();
-		if (particule != null) 
-		{
+//
+//		if (target == null) 
+//		{
+//			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+//		}else if (target.GetComponent<GenericLifeScript> ().isDead) 
+//		{
+//			target = null;
+//			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+//		}
+		isAttacking = false;
+		attackAnim = false;
+		agent.Resume ();
+		audioSource.Stop ();
+		anim.SetBool ("attackEnnemi", attackAnim);
+		if (particule != null) {
 			particule.Stop ();
 		}
-		if (target == null) 
-		{
-			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-		}else if (target.GetComponent<GenericLifeScript> ().isDead) 
-		{
-			target = null;
-			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-		}
-//			isAttacking = false;
-			attackAnim = false;
-			agent.Resume ();
-			audioSource.Stop ();
-			anim.SetBool ("attackEnnemi", attackAnim);
-		}
+	}
 
 	public void AcquireTarget(NetworkInstanceId id)
 		{
@@ -162,16 +151,19 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	IEnumerator AcquireTargetProcess()
 	{
 //		yield return target = ClientScene.FindLocalObject (t);
-		yield return new WaitForSeconds(0.5f);
-		if (target != null) 
-		{
-			if (agent.isOnNavMesh) 
-			{
+		yield return new WaitForSeconds(0.1f);
+		if (target != null) {
+			if (agent.isOnNavMesh) {
 				agent.SetDestination (target.transform.localPosition); //obliger de refaire la recherche pour le moment :/ sinon ya pas forcemment le temps de faire la recherche :/
 				agent.stoppingDistance = attackRange;
 				targetTempPos = target.transform.localPosition;
-
+				yield return null;
 			}
+		} else 
+		{
+			Debug.Log ("acquire target process failed");
+
+			GetTargetFromID (targetID);
 		}
 	}
 	public void LooseTarget()
@@ -182,7 +174,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcLooseTarget()
 	{
-//		Debug.Log ("loosingTarget");
 			target = null;
 			attackAnim = false;
 			GetComponent<NavMeshObstacle> ().enabled = false;
@@ -200,16 +191,18 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	}
 	IEnumerator ActualizeTargetPos()
 	{
-		yield return new WaitForEndOfFrame ();
-		isActualizingPos = true;
-		GetComponent<NavMeshObstacle> ().enabled = false;
-		agent.enabled = true;
 
-		if (agent.isOnNavMesh && target != null) {
-			agent.SetDestination (target.transform.localPosition);
-			targetTempPos = target.transform.localPosition;
+		isActualizingPos = true;
+		if (target.GetComponent<GenericLifeScript> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
+		{
+			target = null;
+			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+		} else 
+		{
+			agent.SetDestination (target.transform.position);
+			targetTempPos = target.transform.position;
 		}
-		yield return new WaitForSeconds (Random.Range( 0.30f, 0.40f));
+		yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));
 		isActualizingPos = false;
 	}
 

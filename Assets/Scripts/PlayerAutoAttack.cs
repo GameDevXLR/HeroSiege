@@ -66,7 +66,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 						previousAttackTime = Time.time + attackRate;
 						target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
 					}
-					if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target == null|| target.GetComponent<GenericLifeScript> ().isDead) 
+					if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
 					{
 						RpcStopAttacking ();
 					}
@@ -138,7 +138,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[Command]
 	public void CmdTellThemMyLocalPos(Vector3 pos)
 	{
-		transform.Translate( pos);
+		transform.position = pos;
 	}
 
 	[ClientRpc]
