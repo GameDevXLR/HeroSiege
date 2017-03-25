@@ -753,13 +753,11 @@ GameObject:
   - component: {fileID: 65582747420792480}
   - component: {fileID: 23556919481109334}
   - component: {fileID: 114889827600163824}
-  - component: {fileID: 114996612065441446}
   - component: {fileID: 114451575287444900}
   - component: {fileID: 195436564916210786}
   - component: {fileID: 114559340069610518}
   - component: {fileID: 208272402118463098}
   - component: {fileID: 114780299539588170}
-  - component: {fileID: 114021642633644984}
   - component: {fileID: 82970786219410336}
   - component: {fileID: 114887921810659502}
   m_Layer: 9
@@ -1748,7 +1746,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1796,17 +1794,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114021642633644984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853418556211758}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee852830f69d3e4ba6af37362f10e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114097914063295410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2067,12 +2054,13 @@ MonoBehaviour:
   enemiSounds:
   - {fileID: 8300000, guid: 1a156c0c8ed01424eb6fe170ca93a496, type: 3}
   agent: {fileID: 195436564916210786}
-  attackRange: 6
+  attackRange: 5
   attackRate: 1
   damage: 4
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
+  detectionRange: 20
 --- !u!114 &114889827600163824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2131,25 +2119,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114996612065441446
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853418556211758}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854f9df7952158641b3edc7503fefacc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMp: 100
-  currentMp: 90
-  regenMp: 1
-  levelUpBonusMP: 0
-  timeBetweenTic: 1
-  manaBar: {fileID: 224451676589333044}
-  manaBarMain: {fileID: 0}
-  playerMPTxt: {fileID: 0}
 --- !u!135 &135601847089593812
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -3016,7 +2985,7 @@ NavMeshAgent:
   m_Acceleration: 500
   avoidancePriority: 55
   m_AngularSpeed: 9999
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1

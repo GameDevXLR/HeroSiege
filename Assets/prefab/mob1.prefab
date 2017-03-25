@@ -474,13 +474,11 @@ GameObject:
   - component: {fileID: 65937548807810354}
   - component: {fileID: 23329275224470162}
   - component: {fileID: 114635520145944314}
-  - component: {fileID: 114820565867443494}
   - component: {fileID: 114901467962025362}
   - component: {fileID: 195000901155981128}
   - component: {fileID: 114002337453437636}
   - component: {fileID: 208883239641083638}
   - component: {fileID: 114550509820544456}
-  - component: {fileID: 114577216152578906}
   - component: {fileID: 82546882242454104}
   - component: {fileID: 114470108822854068}
   m_Layer: 9
@@ -1321,7 +1319,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1559,6 +1557,7 @@ MonoBehaviour:
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
+  detectionRange: 20
 --- !u!114 &114550509820544456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1591,17 +1590,6 @@ MonoBehaviour:
     i15: 73
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114577216152578906
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1607321022530426}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee852830f69d3e4ba6af37362f10e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114635520145944314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1681,25 +1669,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114820565867443494
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1607321022530426}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854f9df7952158641b3edc7503fefacc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMp: 100
-  currentMp: 90
-  regenMp: 1
-  levelUpBonusMP: 0
-  timeBetweenTic: 1
-  manaBar: {fileID: 224979754317363938}
-  manaBarMain: {fileID: 0}
-  playerMPTxt: {fileID: 0}
 --- !u!114 &114886597796118110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1815,7 +1784,7 @@ NavMeshAgent:
   m_Acceleration: 8000
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1

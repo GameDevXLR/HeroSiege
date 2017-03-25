@@ -3033,7 +3033,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3330,13 +3330,13 @@ MonoBehaviour:
   enemiSounds:
   - {fileID: 8300000, guid: a6ca8b7ab03ea1344903ed55145ed90c, type: 3}
   agent: {fileID: 195843032128776594}
-  attackRange: 3
+  attackRange: 4
   attackRate: 0.5
   damage: 15
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
-  detectionRange: 10
+  detectionRange: 30
 --- !u!114 &114631584799000606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3541,7 +3541,7 @@ NavMeshAgent:
   m_Acceleration: 500
   avoidancePriority: 45
   m_AngularSpeed: 9999
-  m_StoppingDistance: 0
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1

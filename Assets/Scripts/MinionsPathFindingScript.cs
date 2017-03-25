@@ -27,6 +27,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 	
 	public void GoToEndGame()
 	{
+		StopAllCoroutines ();
 		StartCoroutine (GoToEndGameRoutine());
 	}
 

@@ -23,6 +23,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
+			
 			difficultyPanel = GameObject.Find ("DifficultyPanel");
 			GetComponent<PlayerLevelUpManager> ().enabled = true;
 			minimapIcon.color = mainPlayerColor;

@@ -29,7 +29,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		private GameObject targetObj; // l'objet qui t'attaque ! 
 		private bool isActualizingPos; // suis je déja en train d'actualiser la position de ma cible?
 		private ParticleSystem particule;
-	public float detectionRange = 15f;
+	public float detectionRange = 20f;
 
 		void Start()
 		{
@@ -57,7 +57,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 					{
 					if (Vector3.Distance (transform.position, target.transform.position) <= attackRange) 
 						{
-
+//						Debug.Log ("attacking");
 						RpcAttackTarget (transform.position);
 						}
 					} else 
@@ -67,7 +67,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 							previousAttackTime = Time.time + attackRate;
 							target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
 						}
-					if (Vector3.Distance (transform.position, target.transform.position) > detectionRange || target == null|| target.GetComponent<GenericLifeScript> ().isDead) 
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange ||  target.GetComponent<GenericLifeScript> ().isDead) 
 						{
 							RpcStopAttacking ();
 						}
@@ -84,12 +84,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
-			if (!isAttacking) 
+			if (isAttacking) 
 			{
 				if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 0f && !isActualizingPos) 
 				{
-					Debug.Log (Vector3.Distance (transform.position, target.transform.position));
-					if (Vector3.Distance (transform.position, target.transform.position) > attackRange) 
+					
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange) 
 					{
 						StartCoroutine (ActualizeTargetPos ());
 					}
@@ -122,6 +122,13 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		[ClientRpc]
 		public void RpcStopAttacking()
 		{
+		if (target != null) {
+			if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 30f) {
+				Debug.Log ("loosingtarget");
+				target = null;
+
+			}
+		}
 		GetComponent<NavMeshObstacle> ().enabled = false;
 		agent.enabled = true;
 		agent.ResetPath ();
@@ -137,7 +144,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			target = null;
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 		}
-			isAttacking = false;
+//			isAttacking = false;
 			attackAnim = false;
 			agent.Resume ();
 			audioSource.Stop ();
@@ -155,20 +162,18 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	IEnumerator AcquireTargetProcess()
 	{
 //		yield return target = ClientScene.FindLocalObject (t);
-		yield return new WaitForEndOfFrame ();
-
-
-		if (target != null) {
+		yield return new WaitForSeconds(0.5f);
+		if (target != null) 
+		{
 			if (agent.isOnNavMesh) 
 			{
 				agent.SetDestination (target.transform.localPosition); //obliger de refaire la recherche pour le moment :/ sinon ya pas forcemment le temps de faire la recherche :/
 				agent.stoppingDistance = attackRange;
+				targetTempPos = target.transform.localPosition;
 
 			}
-			targetTempPos = target.transform.localPosition;
 		}
 	}
-	[Server]
 	public void LooseTarget()
 	{
 		RpcLooseTarget ();	
@@ -177,6 +182,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcLooseTarget()
 	{
+//		Debug.Log ("loosingTarget");
 			target = null;
 			attackAnim = false;
 			GetComponent<NavMeshObstacle> ().enabled = false;
@@ -194,9 +200,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	}
 	IEnumerator ActualizeTargetPos()
 	{
-
+		yield return new WaitForEndOfFrame ();
 		isActualizingPos = true;
-		if(agent.isActiveAndEnabled){
+		GetComponent<NavMeshObstacle> ().enabled = false;
+		agent.enabled = true;
+
+		if (agent.isOnNavMesh && target != null) {
 			agent.SetDestination (target.transform.localPosition);
 			targetTempPos = target.transform.localPosition;
 		}
@@ -208,14 +217,16 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	{
 		targetID = id;
 		target = ClientScene.FindLocalObject (id);
+		targetTempPos = target.transform.localPosition;
 		StartCoroutine (AcquireTargetProcess ());
 
 	}
 	[Server]
 	public void SetTheTarget(GameObject targ)
 	{
-		targetID = targ.GetComponent<NetworkIdentity> ().netId;
-		RpcActualizeAttackerPosition (transform.position);
+			targetID = targ.GetComponent<NetworkIdentity> ().netId;
+			RpcActualizeAttackerPosition (transform.localPosition);
+
 	}
 	[ClientRpc]
 	public void RpcActualizeAttackerPosition(Vector3 pos)

@@ -68,8 +68,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 					cursorTargetter.transform.localPosition = hit.point;
 //					cursorTargetter.GetComponent<Animator> ().Play("ClickArrowAnim");
 					CmdSendNewDestination (hit.point);
-					agentPlayer.Resume ();
-					agentPlayer.SetDestination (hit.point);
+//					agentPlayer.Resume ();
+//					agentPlayer.SetDestination (hit.point);
 				}
 
 			}
