@@ -134,6 +134,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                     desc.item = item;
                                     desc.sourceCell = sourceCell;
                                     desc.destinationCell = this;
+
                                     // Send message with DragAndDrop info to parents GameObjects
                                     StartCoroutine(NotifyOnDragEnd(desc));
                                     if (currentItem != null)
@@ -146,12 +147,12 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                         StartCoroutine(NotifyOnDragEnd(desc));
                                     }
                                     break;
-                                default:
-                                    PlaceItem(item.gameObject);             // Place dropped item in this cell
+						default:
+							PlaceItem (item.gameObject);             // Place dropped item in this cell
                                     // Fill event descriptor
-                                    desc.item = item;
-                                    desc.sourceCell = sourceCell;
-                                    desc.destinationCell = this;
+							desc.item = item;
+							desc.sourceCell = sourceCell;
+							desc.destinationCell = this;
                                     // Send message with DragAndDrop info to parents GameObjects
                                     StartCoroutine(NotifyOnDragEnd(desc));
                                     break;
@@ -163,6 +164,9 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                             desc.item = item;
                             desc.sourceCell = sourceCell;
                             desc.destinationCell = this;
+						//ajouts persos.
+						desc.item.GetComponent<ItemSellManager> ().SellBackItem ();
+
                             // Send message with DragAndDrop info to parents GameObjects
                             StartCoroutine(NotifyOnDragEnd(desc));
                             break;

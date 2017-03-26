@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222675925955538398}
   - component: {fileID: 114034166525334604}
   m_Layer: 5
-  m_Name: PotionDesc
+  m_Name: Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,14 +39,14 @@ GameObject:
   - component: {fileID: 222121507288449108}
   - component: {fileID: 114088259708048310}
   - component: {fileID: 114301967297048058}
-  - component: {fileID: 114472848894171388}
   - component: {fileID: 114460510510113266}
   - component: {fileID: 114939995070144230}
   - component: {fileID: 114058814522982226}
   - component: {fileID: 114806265408220530}
   - component: {fileID: 114029507062500080}
+  - component: {fileID: 114738708766001894}
   m_Layer: 5
-  m_Name: HealthPotion
+  m_Name: ArchimageRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,18 @@ MonoBehaviour:
   toDoWhenSelling:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114472848894171388}
+      - m_Target: {fileID: 114939995070144230}
+        m_MethodName: BuyThatItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114738708766001894}
         m_MethodName: SellBackItem
         m_Mode: 1
         m_Arguments:
@@ -182,14 +193,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8862745, g: 0.40784314, b: 0.21960784, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 94edcf0ca39e2d645a516b2e7d05b0b8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ceca56694793c144da7cb717974b73de, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -247,18 +258,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114939995070144230}
-        m_MethodName: BuyThatItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 114472848894171388}
+      - m_Target: {fileID: 0}
         m_MethodName: LooseOneCharge
         m_Mode: 1
         m_Arguments:
@@ -271,22 +271,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114472848894171388
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1462563177764482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661062f1c32ed594e879a64238aabb7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sellingPrice: 1
-  potionCharges: 3
-  chargesDisplay: {fileID: 114540357357680238}
-  potionDesc: 'Heal for 100HP. '
-  DesiredSellPrice: 25
 --- !u!114 &114540357357680238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,7 +303,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Heal for 100 HP. 3 available.
+  m_Text: +50 MaxMP +2regenMP.Sell for almost nothing.
+--- !u!114 &114738708766001894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462563177764482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d791e4365068c8f47a3250523671b396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sellingPrice: 1
+  desiredPrice: 50
 --- !u!114 &114806265408220530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -344,7 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  itemID: 5
+  itemID: 11
   itemPrice: 0
   thisBtn: {fileID: 114460510510113266}
   recquireSlot: 0

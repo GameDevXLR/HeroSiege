@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Events;
+using UnityEngine.AI;
 
 public class ItemManager : NetworkBehaviour 
 {
@@ -18,10 +19,14 @@ public class ItemManager : NetworkBehaviour
 	public GameObject guard1Prefab;
 	public Transform inventoryPanel;
 	public Transform selectableSlot;
+	[Header ("Prefabs achetable/spawnable")]
 	public GameObject healthPotionPrefab;
 	public GameObject manaPotionPrefab;
 	public GameObject tpScrollPrefab;
 	public GameObject tpBackPortalPrefab;
+	public GameObject ArchiRingPrefab;
+	public GameObject RunnerBootsPrefab;
+	public GameObject IgdraBraceletPrefab;
 	public void Start()
 	{
 		if (isLocalPlayer) 
@@ -53,6 +58,11 @@ public class ItemManager : NetworkBehaviour
 		{
 			CmdBuyThatForHim (itemID, itemPrice, GameManager.instanceGM.ID);
 		}
+	}
+
+	public void AskForRefund(int goldy)
+	{
+		CmdRefundAnObject (goldy);
 	}
 
 	[Command]
@@ -115,6 +125,9 @@ public class ItemManager : NetworkBehaviour
 ////		newGuard.GetComponent<PlayerClicToMove> ().startingPos = GameManager.instanceGM.GetComponent<PNJManager> ().campGuardPositions [x].position;
 //		NetworkServer.Spawn (newGuard);
 	}
+
+	#region Consommables (potions / parchemins etc)
+
 	[ClientRpc]
 	public void RpcBuyHealthPotion()
 	{
@@ -135,6 +148,7 @@ public class ItemManager : NetworkBehaviour
 	}
 
 	[ClientRpc]
+	//rend 200 mana par charge. voir objet pour charges associés.
 	public void RpcBuyManaPotion()
 	{
 		if (isLocalPlayer) 
@@ -152,7 +166,9 @@ public class ItemManager : NetworkBehaviour
 			GetComponent<GenericManaScript> ().currentMp += 200;
 		}
 	}
+
 	[ClientRpc]
+	//TP back le gars qui marche dessus. une charge de base
 	public void RpcBuyTPScroll()
 	{
 		if (isLocalPlayer) 
@@ -171,4 +187,77 @@ public class ItemManager : NetworkBehaviour
 			NetworkServer.Spawn (go);
 		}
 	}
+	#endregion
+	#region Stuffs (equipement divers)
+
+	[ClientRpc]
+	//anneau qui boost la mana mais se revend pas cher une merde...
+	public void RpcBuyArchimageRing()
+	{
+		if (isServer) 
+		{
+			GetComponent<GenericManaScript> ().maxMp += 50;
+			GetComponent<GenericManaScript> ().regenMp += 2;
+		}
+		if (isLocalPlayer) 
+		{
+			GameObject go = Instantiate (ArchiRingPrefab, selectableSlot);
+			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+		}
+	}
+	[ClientRpc]
+	public void RpcSellArchimageRing()
+	{
+		if (isServer) 
+		{
+			GetComponent<GenericManaScript> ().maxMp -= 50;
+			GetComponent<GenericManaScript> ().regenMp -= 2;
+		}
+
+	}
+	[ClientRpc]
+	//des bottes qui te speed up.
+	public void RpcBuyRunnerBoots()
+	{
+		GetComponent<NavMeshAgent> ().speed += 0.5f;
+		if (isLocalPlayer) 
+		{
+			GameObject go = Instantiate (RunnerBootsPrefab, selectableSlot);
+			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+		}
+	}
+	[ClientRpc]
+	public void RpcSellRunnerBoots()
+	{
+		GetComponent<NavMeshAgent> ().speed -= 0.5f;
+
+	}
+	[ClientRpc]
+	//un putin de bracelet bien cheaté.
+	public void RpcBuyIgdrasilBracelet()
+	{
+		if (isServer) 
+		{
+			GetComponent<GenericLifeScript> ().maxHp += 150;
+			GetComponent<GenericLifeScript> ().regenHp += 5;
+
+		}
+		if (isLocalPlayer) 
+		{
+			GameObject go = Instantiate (IgdraBraceletPrefab, selectableSlot);
+			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+		}
+	}
+	[ClientRpc]
+	public void RpcSellIgdrasilBracelet()
+	{
+		if (isServer) 
+		{
+			GetComponent<GenericLifeScript> ().maxHp -= 150;
+			GetComponent<GenericLifeScript> ().regenHp -= 5;
+
+		}
+	}
+
+	#endregion
 }

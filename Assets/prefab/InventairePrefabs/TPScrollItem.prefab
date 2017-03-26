@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114939995070144230}
   - component: {fileID: 114058814522982226}
   - component: {fileID: 114806265408220530}
+  - component: {fileID: 114314276600301894}
   m_Layer: 5
   m_Name: TPScrollItem
   m_TagString: Untagged
@@ -180,6 +181,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c67a56d62e94747b8f17db1b0ffc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114314276600301894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462563177764482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce0d56c8e3b4554f851531c2b3daa42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toDoWhenSelling:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114472848894171388}
+        m_MethodName: SellBackItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114460510510113266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,9 +282,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661062f1c32ed594e879a64238aabb7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sellingPrice: 0
   potionCharges: 1
   chargesDisplay: {fileID: 114540357357680238}
   potionDesc: 'Invoke a portal. '
+  DesiredSellPrice: 25
 --- !u!114 &114540357357680238
 MonoBehaviour:
   m_ObjectHideFlags: 1
