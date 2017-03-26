@@ -1558,6 +1558,7 @@ MonoBehaviour:
   target: {fileID: 0}
   rotSpeed: 5
   detectionRange: 20
+  desiredPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114550509820544456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1781,7 +1782,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_Radius: 0.3
   m_Speed: 4
-  m_Acceleration: 8000
+  m_Acceleration: 500
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 2.5

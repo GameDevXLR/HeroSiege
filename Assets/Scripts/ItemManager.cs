@@ -27,6 +27,7 @@ public class ItemManager : NetworkBehaviour
 	public GameObject ArchiRingPrefab;
 	public GameObject RunnerBootsPrefab;
 	public GameObject IgdraBraceletPrefab;
+	public GameObject OrbOfPowerPrefab;
 	public void Start()
 	{
 		if (isLocalPlayer) 
@@ -34,7 +35,7 @@ public class ItemManager : NetworkBehaviour
 			inventoryPanel = GameObject.Find ("InventoryPanel").transform;
 		}
 	}
-
+	#region Ne pas toucher : Fonctions de bases.
 	public void BuyItem(int itemID, int itemPrice, bool recquireSlot)
 	{
 		if (recquireSlot) 
@@ -126,6 +127,8 @@ public class ItemManager : NetworkBehaviour
 //		NetworkServer.Spawn (newGuard);
 	}
 
+	#endregion
+
 	#region Consommables (potions / parchemins etc)
 
 	[ClientRpc]
@@ -188,6 +191,8 @@ public class ItemManager : NetworkBehaviour
 		}
 	}
 	#endregion
+
+
 	#region Stuffs (equipement divers)
 
 	[ClientRpc]
@@ -255,6 +260,32 @@ public class ItemManager : NetworkBehaviour
 		{
 			GetComponent<GenericLifeScript> ().maxHp -= 150;
 			GetComponent<GenericLifeScript> ().regenHp -= 5;
+
+		}
+	}
+	[ClientRpc]
+	//une orbe qui boost les dégats et augmente l'armure.
+	public void RpcBuyOrbOfPower()
+	{
+		if (isServer) 
+		{
+			GetComponent<PlayerAutoAttack> ().damage += 100;
+			GetComponent<GenericLifeScript> ().armorScore += 50;
+
+		}
+		if (isLocalPlayer) 
+		{
+			GameObject go = Instantiate (OrbOfPowerPrefab, selectableSlot);
+			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+		}
+	}
+	[ClientRpc]
+	public void RpcSellOrbOfPower()
+	{
+		if (isServer) 
+		{
+			GetComponent<PlayerAutoAttack> ().damage -= 100;
+			GetComponent<GenericLifeScript> ().armorScore -= 50;
 
 		}
 	}

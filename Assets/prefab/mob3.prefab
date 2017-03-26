@@ -2553,7 +2553,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840545334792104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 163.00644, y: 0, z: 16.038559}
+  m_LocalPosition: {x: -291.40756, y: 0.00000011920929, z: 17.656803}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4298698974758552}
@@ -2982,7 +2982,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!82 &82418099285641342
 AudioSource:
   m_ObjectHideFlags: 1
@@ -3337,6 +3337,7 @@ MonoBehaviour:
   target: {fileID: 0}
   rotSpeed: 5
   detectionRange: 30
+  desiredPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114631584799000606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3536,7 +3537,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840545334792104}
   m_Enabled: 1
-  m_Radius: 0.6
+  m_Radius: 0.3
   m_Speed: 5
   m_Acceleration: 500
   avoidancePriority: 45
@@ -8926,11 +8927,11 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.6, y: 0.5, z: 0.6}
+  m_Extents: {x: 0.5, y: 0.85, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.7, z: 0}
   m_TimeToStationary: 0.5
 --- !u!212 &212323581163289272
 SpriteRenderer:

@@ -23,7 +23,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public int levelUpBonusHP = 10;
 
 	public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn le joueur.
-	public int armorScore = 1;
+	[SyncVar (hook = "ActualizeArmor")]public int armorScore = 1;
 	public Text armorDisplay;
 	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
 	public Text respawnTxt;
@@ -327,6 +327,14 @@ public class GenericLifeScript : NetworkBehaviour {
 			lifeBarMain.localScale = new Vector3 (1, 1f, 1f);
 			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
 
+		}
+	}
+	public void ActualizeArmor(int armor)
+	{
+		armorScore = armor;
+		if (isLocalPlayer) 
+		{
+			armorDisplay.text = armorScore.ToString ();
 		}
 	}
 }

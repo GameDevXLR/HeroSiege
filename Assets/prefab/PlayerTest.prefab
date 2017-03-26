@@ -2183,6 +2183,36 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: RpcBuyOrbOfPower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: RpcSellOrbOfPower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   targetplayer: {fileID: 0}
   guard1Prefab: {fileID: 1498430331498804, guid: 1777822f51750cd42bfef99045fa30e4,
     type: 2}
@@ -2201,6 +2231,8 @@ MonoBehaviour:
   RunnerBootsPrefab: {fileID: 1462563177764482, guid: 9346c8200eba0ca44986283c7833acc1,
     type: 2}
   IgdraBraceletPrefab: {fileID: 1462563177764482, guid: 5a87caaaf516f69429737e64a971d537,
+    type: 2}
+  OrbOfPowerPrefab: {fileID: 1462563177764482, guid: 6105e080d374e244e821ffc265a431c3,
     type: 2}
 --- !u!114 &114648224865163368
 MonoBehaviour:
