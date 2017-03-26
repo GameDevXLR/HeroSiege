@@ -62,17 +62,20 @@ public class PlayerClicToMove : NetworkBehaviour {
 				if (hit.collider.gameObject.layer == Layers.Ennemies) 
 				{
 //					aggroArea.autoTargetting = true;
+					cursorTargetter.transform.position = Vector3.zero;
 					target = hit.collider.gameObject;
 					CmdSendNewTarget(target.GetComponent<NetworkIdentity> ().netId);
 
 				} else 
 				{
 					StartCoroutine (MoveFirst ((float)nClient.GetRTT(), hit.point));
-					cursorTargetter.transform.localPosition = hit.point;
-//					cursorTargetter.GetComponent<Animator> ().Play("ClickArrowAnim");
+					cursorTargetter.transform.position = hit.point;
+					cursorTargetter.GetComponent<Animator> ().Play ("ClickArrowAnim");
 					CmdSendNewDestination (hit.point);
-//					agentPlayer.Resume ();
-//					agentPlayer.SetDestination (hit.point);
+					CancelInvoke ();
+//					cursorTargetter.GetComponent<Animator> ().
+					Invoke ("StopThePosTargeter", 1.5f);
+//					cursorTargetter.GetComponent<Animator> ().Play("ClickArrowAnim");
 				}
 
 			}
@@ -87,6 +90,11 @@ public class PlayerClicToMove : NetworkBehaviour {
 			} 
 		}
 
+
+	}
+	public void StopThePosTargeter()
+	{
+		cursorTargetter.transform.position = Vector3.zero;
 
 	}
 	IEnumerator MoveFirst(float ping, Vector3 desti)

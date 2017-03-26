@@ -2,34 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
-public class StatusHandlerScript : MonoBehaviour {
+public class StatusHandlerScript : NetworkBehaviour 
+{
 
 	//ce script gere les différents statuts d'un personnage : CC  / root / saignement / slow etc...
 
 	public bool underCC;
 	private GenericLifeScript lifeScript;
-	private ennemiMover MoveScript;
 	// ajouter le script d'autoAttack.
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		lifeScript = GetComponent<GenericLifeScript> ();
-		MoveScript = GetComponent<ennemiMover> ();
-		
 	}
+	[Server]
 	public void MakeHimCC(float CCDuration)
 	{
-		StartCoroutine (CCprocedure ( CCDuration));
+//		if (underCC) 
+//		{
+//			return;
+//		}
+		RpcCCTheObject (CCDuration);
+		GetComponent<EnemyAutoAttackScript> ().GetCC (CCDuration);
+	}
+	[ClientRpc]
+	public void RpcCCTheObject(float duration)
+	{
+		StartCoroutine (CCprocedure (duration));
 	}
 	IEnumerator CCprocedure ( float CCTime)
 	{
-		GetComponent<NavMeshAgent> ().Stop ();
-		GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		underCC = true;
+//		GetComponent<NavMeshAgent> ().Stop ();
+//		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		//ajouter la désactivation de l'autoA;
 		yield return new WaitForSeconds (CCTime);
+		underCC = false;
 		//réactiver l'autoA;
-		GetComponent<NavMeshAgent> ().Resume ();
+//		GetComponent<NavMeshAgent> ().Resume ();
 	}
 
 	public void MakeHimRoot(float rootDuration)

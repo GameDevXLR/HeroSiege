@@ -31,8 +31,9 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		private ParticleSystem particule;
 		public float detectionRange = 20f;
 		public Vector3 desiredPos; // ou est ce que le serveur me dit que jdevrais etre. lerp vers ca.
+		public bool isUnderCC;
 
-		void Start()
+	void Start()
 		{
 
 			agent = GetComponent<NavMeshAgent> ();
@@ -50,6 +51,10 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	void Update ()
 	{
+		if (isUnderCC) 
+		{
+			return;
+		}
 		if (isServer) 
 		{
 			if (target) 
@@ -129,12 +134,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		agent.enabled = true;
 		isAttacking = false;
 		attackAnim = false;
-		agent.Resume ();
 		audioSource.Stop ();
 		anim.SetBool ("attackEnnemi", attackAnim);
 		if (particule != null) {
 			particule.Stop ();
 		}
+		agent.Resume ();
 	}
 
 	public void AcquireTarget(NetworkInstanceId id)
@@ -221,4 +226,50 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			desiredPos = pos;
 		}
 	}
+	public void GetCC(float dur)
+	{
+		RpcGetCCForTimer (dur);
+	}
+	[ClientRpc]
+	public void RpcGetCCForTimer(float dura)
+	{
+		StartCoroutine(UnderCCProcedure(dura));
+	}
+
+	IEnumerator UnderCCProcedure(float durat)
+	{
+		isUnderCC = true;
+		if (isAttacking) 
+		{
+			audioSource.Stop ();
+			if (particule != null) 
+			{
+				particule.Stop ();
+			}
+			anim.SetBool ("attackEnnemi", false);
+		}
+		if (agent.isActiveAndEnabled) 
+		{
+			agent.Stop ();
+		}
+		anim.enabled = false;
+		yield return new WaitForSeconds (durat);
+		if (agent.isActiveAndEnabled) 
+		{
+			agent.Resume ();
+		}
+		if (isAttacking) 
+		{
+			audioSource.Play ();
+			if (particule != null) 
+			{
+				particule.Play ();
+			}
+			anim.SetBool ("attackEnnemi", true);
+		}
+		anim.enabled = true;
+
+		isUnderCC = false;
+	}
+		
 }
