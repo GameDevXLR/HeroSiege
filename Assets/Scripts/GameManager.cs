@@ -47,7 +47,8 @@ public class GameManager : NetworkBehaviour
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){
-		if (instanceGM == null) {
+		if (instanceGM == null) 
+		{
 			instanceGM = this;
 			
 		} else if (instanceGM != this) 
@@ -317,6 +318,7 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcMessageToAll()
 	{
+		playerObj.GetComponent<PlayerGoldScript> ().enabled = true;
 		messageManager.SendAnAlertMess ("The game is starting!", Color.green);
 	}
 
