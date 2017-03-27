@@ -14,10 +14,11 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		//le sort peut up.
 
 		string spellDescription;
-		public int spellCost = 30;
+		public int spellCost = 80;
 		public int spellDmg = 50;
 		public float spellCD;
 		public float spellDuration = 1.5f;
+	public float spellRange = 25f;
 		public GameObject spellObj;
 		public int spellLvl = 1;
 		private bool onCD;
@@ -62,25 +63,10 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		//demander le lancement du sort sur le serveur...normal.
 		public void CastThatSpell()
 		{
-			if (GetComponent<GenericLifeScript> ().isDead) 
-			{
-				return;
-			}
-			if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) 
-		{
-			isTargeting = true;
-			} else 
-			{
-			if (isTargeting == true) 
-			{
-				isTargeting = false;
-				spellTargeter.transform.position = Vector3.zero;
-			}
-				GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
-			}
+		StartCoroutine (ShowTargeter ()); // on a besoin d'attendre la fin de frame pour pas que mouseUp soit détecter direct et que le sort se lance cash en cliquant sur l'icone de sort.
 		}
 
-		//si t'es un joueur; tu peux cast ce sort avec la touche A : voir pour opti ca en fonction du clavier des gars.
+		//si t'es un joueur; tu peux cast ce sort avec la touche Z : voir pour opti ca en fonction du clavier des gars.
 
 		public void Update()
 	{
@@ -103,27 +89,42 @@ public class PlayerCastCCSpell : NetworkBehaviour
 			spellTargeter.transform.position = hit.point;
 			if (Input.GetMouseButtonUp (0)) 
 			{
+				if(Vector3.Distance( spellTargeter.transform.position, transform.position)>spellRange ||GetComponent<GenericManaScript> ().currentMp >= spellCost  )
+				{
+					isTargeting = false;
+					spellTargeter.transform.position = Vector3.zero;
+					return;
+				}
 				castPosDesired = spellTargeter.transform.position;
 				CmdCastSpell (castPosDesired);
 				GetComponent<GenericManaScript> ().CmdLooseManaPoints (spellCost);
-				isTargeting = false;
 
 				StartCoroutine (SpellOnCD ());
-				spellTargeter.transform.position = Vector3.zero;
+
 			}
 
 		}
 	}
-//	public void LateUpdate()
-//	{
-//		if (isLocalPlayer) 
-//		{
-//			if (isTargeting) 
-//			{
-//				spellTargeter.transform.position = new Vector3 (spellTargeter.transform.position.x, 0.5f, spellTargeter.transform.position.z);
-//			}
-//		}
-//	}
+	IEnumerator ShowTargeter()
+	{
+		yield return new WaitForEndOfFrame ();
+		if (GetComponent<GenericLifeScript> ().isDead) 
+		{
+			yield return null;
+		}
+		if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) 
+		{
+			isTargeting = true;
+		} else 
+		{
+			if (isTargeting == true) 
+			{
+				isTargeting = false;
+				spellTargeter.transform.position = Vector3.zero;
+			}
+			GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
+		}
+	}
 
 		IEnumerator SpellOnCD()
 		{
