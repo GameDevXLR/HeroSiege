@@ -562,6 +562,7 @@ GameObject:
   - component: {fileID: 114292457117260086}
   - component: {fileID: 114604599503415050}
   - component: {fileID: 114489449535516312}
+  - component: {fileID: 114105691579488900}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -1577,6 +1578,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114105691579488900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4324d645e7bbf7b4a98dc3f3fa2131cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellCost: 30
+  spellDmg: 150
+  spellCD: 10
+  spellDuration: 5
+  spellObj: {fileID: 1101485968794934, guid: d9e2b567b3b624b489c12c96adca4827, type: 2}
+  spellLvl: 1
+  spellTargeter: {fileID: 0}
+  isTargeting: 0
+  layer_mask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &114106380856186856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2316,6 +2339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specPts: 1
   spell1LvlUpBtn: {fileID: 0}
+  spell2LvlUpBtn: {fileID: 0}
   spectPtIcon: {fileID: 0}
 --- !u!114 &114845116257301452
 MonoBehaviour:

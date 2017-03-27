@@ -22,17 +22,17 @@ using UnityEngine.Networking;
 			timer = Time.time;
 			dotTimer = Time.time;
 		}
-	[Server]
+	[ServerCallback]
 	void Update()
 	{
 		if (Time.time > timer + duration) 
 		{
 			timer = Time.time; //juste pour m'assurer que ce soit jouer qu'une fois. inutile je crois.
-			Network.Destroy (gameObject);
+			NetworkServer.Destroy (gameObject);
 		}
 			
 	}
-	[Server]
+	[ServerCallback]
 	void OnTriggerEnter(Collider other)
 	{
 	if (other.gameObject.layer == 9) 
@@ -41,7 +41,7 @@ using UnityEngine.Networking;
 		}
 
 	}	
-	[Server]
+	[ServerCallback]
 	void OnTriggerStay (Collider other)
 	{
 		if (other.gameObject.layer == 9) 

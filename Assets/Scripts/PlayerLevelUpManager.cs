@@ -11,11 +11,13 @@ public class PlayerLevelUpManager : MonoBehaviour
 	// il dit au joueur quoi faire en cas de up
 	public int specPts; //points de spécialisation
 	public GameObject spell1LvlUpBtn;
+	public GameObject spell2LvlUpBtn;
 	public GameObject spectPtIcon;
 	// Use this for initialization
 	void Start () 
 	{
 		spell1LvlUpBtn = GameObject.Find ("Spell1LvlUpBtn");
+		spell2LvlUpBtn = GameObject.Find ("Spell2LvlUpBtn");
 		//rajouter ici les futurs sorts a faire up.
 		spectPtIcon = GameObject.Find ("CompPtsIcon");
 
@@ -26,6 +28,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 		specPts++;
 		spectPtIcon.SetActive (true);
 		spell1LvlUpBtn.SetActive (true);
+		spell2LvlUpBtn.SetActive (true);
 	}
 	public void LooseASpecPt()
 	{
@@ -34,6 +37,8 @@ public class PlayerLevelUpManager : MonoBehaviour
 		{
 			spectPtIcon.SetActive (false);
 			spell1LvlUpBtn.SetActive (false);
+			spell2LvlUpBtn.SetActive (false);
+
 		}
 	}
 }
