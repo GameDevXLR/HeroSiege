@@ -3172,24 +3172,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xpGiven: 50
-  goldGiven: 5
+  xpGiven: 10
+  goldGiven: 10
   lifeBar: {fileID: 224766238517520706}
   lifeBarMain: {fileID: 0}
   playerHPTxt: {fileID: 0}
   maxHp: 100
   currentHp: 100
-  regenHp: 5
+  regenHp: 25
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
-  armorScore: 10
+  armorScore: 20
   armorDisplay: {fileID: 0}
   dodge: 0
   respawnTxt: {fileID: 0}
   isDead: 0
   playerDeathCount: 0
   respawnTime: 5
-  timeBetweenTic: 1
+  timeBetweenTic: 5
   guyAttackingMe: {fileID: 0}
   rezParticule: {fileID: 0}
 --- !u!114 &114252200921075486
@@ -3332,12 +3332,13 @@ MonoBehaviour:
   agent: {fileID: 195843032128776594}
   attackRange: 4
   attackRate: 0.5
-  damage: 15
+  damage: 12
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
   detectionRange: 30
   desiredPos: {x: 0, y: 0, z: 0}
+  isUnderCC: 0
 --- !u!114 &114631584799000606
 MonoBehaviour:
   m_ObjectHideFlags: 1

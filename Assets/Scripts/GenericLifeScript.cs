@@ -255,10 +255,14 @@ public class GenericLifeScript : NetworkBehaviour {
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = false;
 		gameObject.layer = 16; //passe en layer Ignore
 		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();
+		GetComponent<PlayerAutoAttack> ().target = null;
 		GetComponent<PlayerAutoAttack> ().enabled = false;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+		GetComponent<PlayerClicToMove> ().target = null;
 		GetComponent<PlayerClicToMove> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
+		GetComponent<NavMeshAgent> ().SetDestination (respawnPoint.transform.position);
+
 		GetComponent<NavMeshAgent> ().enabled = false;
 		GetComponent<CapsuleCollider> ().enabled = false;
 		yield return new WaitForEndOfFrame ();
@@ -269,9 +273,9 @@ public class GenericLifeScript : NetworkBehaviour {
 
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (respawnTime);
+
 		GetComponent<NavMeshAgent> ().enabled = true;
 		gameObject.layer = 8;
-		GetComponent<NavMeshAgent> ().SetDestination (respawnPoint.transform.localPosition);
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
 		GetComponent<CapsuleCollider> ().enabled = true;
@@ -283,10 +287,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		}
 		rezParticule.Play (true);
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = true;
-
 		GetComponent<PlayerAutoAttack> ().enabled = true;
-		GetComponent<PlayerAutoAttack> ().target = null;
-		GetComponent<NavMeshAgent> ().SetDestination( transform.position);
 		currentHp = maxHp;
 		GetComponent<GenericManaScript> ().currentMp = GetComponent<GenericManaScript> ().maxMp;
 	}

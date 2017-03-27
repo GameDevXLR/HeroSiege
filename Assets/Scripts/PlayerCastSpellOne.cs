@@ -34,7 +34,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 			spell1Btn.onClick.AddListener (CastThatSpell );
 			spell1LvlUpBtn.onClick.AddListener (levelUp );
 			int x =(int) spellDmg / 5;
-			spellDescription = "Inflige " + spellDmg.ToString() + " dégats a l'impact puis " + x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString()+ " MP.";
+			spellDescription = "Inflige " + spellDmg.ToString() + " dégats a l'impact puis " + x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString()+ " MP. CD: "+ spellCD.ToString();
 			spell1Btn.transform.GetChild (0).GetComponentInChildren<Text> ().text = spellDescription;
 
 
@@ -92,9 +92,9 @@ public class PlayerCastSpellOne : NetworkBehaviour
 	IEnumerator SpellOnCD()
 	{
 		onCD = true;
-		spell1Btn.GetComponent<Image> ().enabled = false;
+		spell1Btn.interactable = false;
 		yield return new WaitForSeconds (spellCD);
-		spell1Btn.GetComponent<Image> ().enabled = true;
+		spell1Btn.interactable = true;
 		onCD = false;
 	}
 
@@ -117,10 +117,10 @@ public class PlayerCastSpellOne : NetworkBehaviour
 		spellDuration += 0.5f;
 		if (isLocalPlayer) 
 		{
-			GetComponent<PlayerLevelUpManager> ().LooseASpecPt ();
+			GetComponent<PlayerLevelUpManager> ().LooseASpecPt (false);
 			int x =(int) spellDmg / 5;
 
-			spellDescription = "Inflige " + spellDmg.ToString() + " dégats a l'impact puis " + x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString() +" MP.";
+			spellDescription = "Inflige " + spellDmg.ToString() + " dégats a l'impact puis " + x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString() +" MP.CD: "+ spellCD.ToString();
 
 			spell1Btn.transform.GetChild (0).GetComponentInChildren<Text> ().text = spellDescription;
 			//changer ici l'interface du joueur.

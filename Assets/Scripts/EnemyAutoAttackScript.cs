@@ -216,7 +216,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	public void SetTheTarget(GameObject targ)
 	{
 			targetID = targ.GetComponent<NetworkIdentity> ().netId;
-			RpcActualizeAttackerPosition (transform.localPosition);
+		RpcActualizeAttackerPosition (transform.position);
 
 	}
 	[ClientRpc]

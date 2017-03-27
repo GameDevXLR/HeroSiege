@@ -1553,12 +1553,13 @@ MonoBehaviour:
   agent: {fileID: 195000901155981128}
   attackRange: 2.5
   attackRate: 1.5
-  damage: 2
+  damage: 5
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
   detectionRange: 20
   desiredPos: {x: 0, y: 0, z: 0}
+  isUnderCC: 0
 --- !u!114 &114550509820544456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1602,14 +1603,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xpGiven: 50
-  goldGiven: 5
+  xpGiven: 5
+  goldGiven: 3
   lifeBar: {fileID: 224410816351006932}
   lifeBarMain: {fileID: 0}
   playerHPTxt: {fileID: 0}
-  maxHp: 45
-  currentHp: 45
-  regenHp: 1
+  maxHp: 50
+  currentHp: 50
+  regenHp: 0
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
   armorScore: 1

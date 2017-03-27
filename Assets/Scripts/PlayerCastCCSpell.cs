@@ -137,9 +137,9 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		IEnumerator SpellOnCD()
 		{
 			onCD = true;
-			spell2Btn.GetComponent<Image> ().enabled = false;
+		spell2Btn.interactable = false;
 			yield return new WaitForSeconds (spellCD);
-			spell2Btn.GetComponent<Image> ().enabled = true;
+		spell2Btn.interactable = true;
 			onCD = false;
 		}
 
@@ -162,7 +162,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 			spellDuration += 0.5f;
 			if (isLocalPlayer) 
 			{
-				GetComponent<PlayerLevelUpManager> ().LooseASpecPt ();
+			GetComponent<PlayerLevelUpManager> ().LooseASpecPt (true);
 				int x =(int) spellDmg / 5;
 			spellDescription = "Stun et Inflige " + x.ToString () + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString () + " secondes. Cout: " + spellCost.ToString () + " MP. CD: " + spellCD.ToString ();
 				spell2Btn.transform.GetChild (0).GetComponentInChildren<Text> ().text = spellDescription;

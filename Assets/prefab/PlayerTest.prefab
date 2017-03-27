@@ -2338,9 +2338,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be9522bc7a15694cac2d10151e65cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLvl: 1
   specPts: 1
+  ultiSpecPts: 0
   spell1LvlUpBtn: {fileID: 0}
+  spell1Lvl: 1
   spell2LvlUpBtn: {fileID: 0}
+  spell2Lvl: 1
   spectPtIcon: {fileID: 0}
 --- !u!114 &114845116257301452
 MonoBehaviour:
@@ -2425,7 +2429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xpGiven: 50
+  xpGiven: 30
   goldGiven: 5
   lifeBar: {fileID: 224552685445617892}
   lifeBarMain: {fileID: 0}
@@ -2433,7 +2437,7 @@ MonoBehaviour:
   maxHp: 250
   currentHp: 250
   regenHp: 5
-  levelUpBonusHP: 20
+  levelUpBonusHP: 30
   respawnPoint: {fileID: 0}
   armorScore: 1
   armorDisplay: {fileID: 0}
@@ -2550,7 +2554,7 @@ NavMeshAgent:
   m_Height: 2.5
   m_BaseOffset: 0.6
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 2
 --- !u!198 &198168849872845458
 ParticleSystem:
   m_ObjectHideFlags: 1
