@@ -98,7 +98,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 				if(agent.isOnNavMesh)
 			{
-					if (agent.remainingDistance <= agent.stoppingDistance) 
+					if (agent.remainingDistance <= agent.stoppingDistance + 0.5f) 
 				{
 						if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) 
 				{

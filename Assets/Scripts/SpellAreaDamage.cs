@@ -16,20 +16,34 @@ public class SpellAreaDamage : NetworkBehaviour
 	public int spellDamage = 50;
 	private float timer;
 	private float dotTimer;
+	public float impactTime;
+	public List<GameObject> spellTargets;
 
 	void Start()
 	{
 		timer = Time.time;
 		dotTimer = Time.time;
+		impactTime = Time.time;
 	}
 
 	void Update()
 	{
-		if (isServer) {
-			if (Time.time > timer + duration) {
+		if (isServer) 
+		{
+			if (Time.time > timer + duration) 
+			{
 				timer = Time.time; //juste pour m'assurer que ce soit jouer qu'une fois. inutile je crois.
-				Network.Destroy (gameObject);
+				NetworkServer.Destroy (gameObject);
 			}
+		}
+	}
+	[ServerCallback]
+	public void LateUpdate()
+	{
+		if (Time.time > dotTimer + 0.5f) 
+		{
+			dotTimer = dotTimer + 0.5f;
+			spellTargets.Clear ();
 		}
 	}
 
@@ -37,6 +51,10 @@ public class SpellAreaDamage : NetworkBehaviour
 	{
 		if (isServer) 
 		{
+			if (Time.time > impactTime + 0.5f) 
+			{
+				return;
+			}
 			
 			if (other.gameObject.layer == 9) 
 			{
@@ -49,16 +67,18 @@ public class SpellAreaDamage : NetworkBehaviour
 		if (isServer) 
 		{
 
-			if (other.gameObject.layer == 9) 
-			{
 
-				if (Time.time > dotTimer + 0.5f) 
+				if(!spellTargets.Contains(other.gameObject))
 				{
-					other.gameObject.GetComponent<GenericLifeScript> ().LooseHealth ((int)spellDamage / 5, true, caster);	
-					dotTimer = dotTimer + 0.5f;
+					if (other.gameObject.layer == 9) 
+					{
+
+						spellTargets.Add(other.gameObject);
+						other.gameObject.GetComponent<GenericLifeScript> ().LooseHealth ((int)spellDamage / 5, true, caster);	
+					}
 
 				}
-			}
+
 		}
 	}
 

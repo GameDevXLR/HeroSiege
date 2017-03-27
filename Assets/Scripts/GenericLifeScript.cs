@@ -286,7 +286,9 @@ public class GenericLifeScript : NetworkBehaviour {
 
 		GetComponent<PlayerAutoAttack> ().enabled = true;
 		GetComponent<PlayerAutoAttack> ().target = null;
+		GetComponent<NavMeshAgent> ().SetDestination( transform.position);
 		currentHp = maxHp;
+		GetComponent<GenericManaScript> ().currentMp = GetComponent<GenericManaScript> ().maxMp;
 	}
 
 	IEnumerator RespawnTimer()

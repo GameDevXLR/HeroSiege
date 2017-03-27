@@ -40,7 +40,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 				spell2Btn.onClick.AddListener (CastThatSpell );
 				spell2LvlUpBtn.onClick.AddListener (levelUp );
 				int x =(int) spellDmg / 5;
-				spellDescription = "Stun et Inflige "+ x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString()+ " MP.";
+			spellDescription = "Stun et Inflige "+ x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString()+ " MP.CD: " + spellCD.ToString ();
 				spell2Btn.transform.GetChild (0).GetComponentInChildren<Text> ().text = spellDescription;
 			}
 			spellTargeter = GameObject.Find ("AreaTargeter");
@@ -164,7 +164,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 			{
 				GetComponent<PlayerLevelUpManager> ().LooseASpecPt ();
 				int x =(int) spellDmg / 5;
-				spellDescription = "Stun et Inflige "+ x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString()+ " MP.";
+			spellDescription = "Stun et Inflige " + x.ToString () + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString () + " secondes. Cout: " + spellCost.ToString () + " MP. CD: " + spellCD.ToString ();
 				spell2Btn.transform.GetChild (0).GetComponentInChildren<Text> ().text = spellDescription;
 				//changer ici l'interface du joueur.
 			}

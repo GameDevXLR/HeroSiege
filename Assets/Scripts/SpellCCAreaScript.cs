@@ -12,6 +12,7 @@ using UnityEngine.Networking;
 
 
 		public GameObject caster;
+	public List<GameObject> spellTargets;
 		public float duration;
 		public int spellDamage = 50;
 		private float timer;
@@ -33,6 +34,15 @@ using UnityEngine.Networking;
 			
 	}
 	[ServerCallback]
+	public void LateUpdate()
+	{
+		if (Time.time > dotTimer + 0.5f) 
+		{
+			dotTimer = dotTimer + 0.5f;
+			spellTargets.Clear();
+		}
+	}
+	[ServerCallback]
 	void OnTriggerEnter(Collider other)
 	{
 	if (other.gameObject.layer == 9) 
@@ -44,13 +54,15 @@ using UnityEngine.Networking;
 	[ServerCallback]
 	void OnTriggerStay (Collider other)
 	{
+		if(!spellTargets.Contains(other.gameObject))
+		{
 		if (other.gameObject.layer == 9) 
 		{
-			if (Time.time > dotTimer + 0.5f) 
-			{
-				other.gameObject.GetComponent<GenericLifeScript> ().LooseHealth ((int)spellDamage / 5, true, caster);	
-				dotTimer = dotTimer + 0.5f;
-			}
+
+				spellTargets.Add(other.gameObject);
+			other.gameObject.GetComponent<GenericLifeScript> ().LooseHealth ((int)spellDamage / 5, true, caster);	
+		}
+
 		}
 	}
 }

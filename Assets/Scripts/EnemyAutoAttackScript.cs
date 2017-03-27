@@ -63,7 +63,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 				{
 					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) 
 					{
-						RpcAttackTarget (transform.localPosition);
+						RpcAttackTarget (transform.position);
 					}
 				} else 
 				{
