@@ -86,25 +86,33 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		if (Physics.Raycast (ray, out hit, 80f, layer_mask)) 
 		{	
-			spellTargeter.transform.position = hit.point;
-			if (Input.GetMouseButtonUp (0)) 
-			{
-				if(Vector3.Distance( spellTargeter.transform.position, transform.position)>spellRange ||GetComponent<GenericManaScript> ().currentMp >= spellCost  )
+			if(Input.GetMouseButtonUp(1))
 				{
+				isTargeting = false;
+				spellTargeter.transform.position = Vector3.zero;
+				return;
+				}
+			if (Input.GetMouseButtonUp (0)) {
+				if (Vector3.Distance (hit.point, transform.position) > spellRange || GetComponent<GenericManaScript> ().currentMp < spellCost) {
+					Debug.Log (Vector3.Distance (hit.point, transform.position));
 					isTargeting = false;
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-				castPosDesired = spellTargeter.transform.position;
+				castPosDesired = hit.point;
+				spellTargeter.transform.position = Vector3.zero;
 				CmdCastSpell (castPosDesired);
 				GetComponent<GenericManaScript> ().CmdLooseManaPoints (spellCost);
-
+				isTargeting = false;
+				spellTargeter.transform.position = Vector3.zero;
 				StartCoroutine (SpellOnCD ());
-
+				return;
 			}
-
+				spellTargeter.transform.position = hit.point;
+			
 		}
 	}
+
 	IEnumerator ShowTargeter()
 	{
 		yield return new WaitForEndOfFrame ();
