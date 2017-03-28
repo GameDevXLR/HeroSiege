@@ -26,6 +26,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		private Button spell2LvlUpBtn;
 	private Vector3 castPosDesired;
 	public GameObject spellTargeter;
+	public GameObject spellRangeArea;
 	public bool isTargeting; // savoir si le joueur cible pour lancer le sort. 
 	public LayerMask layer_mask;
 
@@ -33,6 +34,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 
 		void Start () 
 		{
+		spellRangeArea.SetActive (false);
 			if(isLocalPlayer)
 			{
 				spell2Btn = GameObject.Find ("Spell2Btn").GetComponent<Button> ();
@@ -89,6 +91,8 @@ public class PlayerCastCCSpell : NetworkBehaviour
 			if(Input.GetMouseButtonUp(1))
 				{
 				isTargeting = false;
+				spellRangeArea.SetActive (false);
+
 				spellTargeter.transform.position = Vector3.zero;
 				return;
 				}
@@ -96,6 +100,8 @@ public class PlayerCastCCSpell : NetworkBehaviour
 				if (Vector3.Distance (hit.point, transform.position) > spellRange || GetComponent<GenericManaScript> ().currentMp < spellCost) {
 					Debug.Log (Vector3.Distance (hit.point, transform.position));
 					isTargeting = false;
+					spellRangeArea.SetActive (false);
+
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
@@ -104,6 +110,8 @@ public class PlayerCastCCSpell : NetworkBehaviour
 				CmdCastSpell (castPosDesired);
 				GetComponent<GenericManaScript> ().CmdLooseManaPoints (spellCost);
 				isTargeting = false;
+				spellRangeArea.SetActive (false);
+
 				spellTargeter.transform.position = Vector3.zero;
 				StartCoroutine (SpellOnCD ());
 				return;
@@ -123,11 +131,15 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) 
 		{
 			isTargeting = true;
+			spellRangeArea.SetActive (true);
+
 		} else 
 		{
 			if (isTargeting == true) 
 			{
 				isTargeting = false;
+				spellRangeArea.SetActive (false);
+
 				spellTargeter.transform.position = Vector3.zero;
 			}
 			GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);

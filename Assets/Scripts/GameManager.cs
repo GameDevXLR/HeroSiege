@@ -20,10 +20,13 @@ public class GameManager : NetworkBehaviour
 	public AudioClip LooseLifeSound;
 	public Text generalTxt;
 	public Text gameOverTxt;
+	public Text team1LivesDisplay;
+	public Text team2LivesDisplay;
 	public static GameManager instanceGM = null;
 	private GameObject[] ennemies;
 	public AlertMessageManager messageManager;
 	public GameObject playerObj;
+	public bool soloGame;
 	public List<NetworkInstanceId> team1ID;
 //	public int[] playersScoreT1;
 	public List<NetworkInstanceId> team2ID;
@@ -60,12 +63,24 @@ public class GameManager : NetworkBehaviour
 	}
 	void Start()
 	{
+		team1LivesDisplay = GameObject.Find ("LivesDisplayT1").GetComponent<Text> ();
+		team2LivesDisplay = GameObject.Find ("LivesDisplayT2").GetComponent<Text> ();
 		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
 		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
 	}
+	public bool IsItSolo()
+	{
+		coPlayers = NetworkServer.connections.Count;
+		if (coPlayers == 1) 
+		{
+			soloGame = true;
+		}
+		return soloGame;
+	}
 	public void T1SyncLooseLife(int life)
 	{
+		team1LivesDisplay.text = "Team 1 remaining lives: " + life.ToString ();
 		lifeOfTheTeam1 = life;
 		if (isTeam1) {
 			messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam1.ToString () + " lives remaining.", Color.red);
@@ -80,6 +95,7 @@ public class GameManager : NetworkBehaviour
 
 	public void T2SyncLooseLife(int life)
 	{
+		team2LivesDisplay.text = "Team 2 remaining lives: " + life.ToString ();
 		lifeOfTheTeam2 = life;
 		if (isTeam2) {
 			messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam2.ToString () + "  lives remaining.", Color.red);
@@ -153,7 +169,8 @@ public class GameManager : NetworkBehaviour
 
 	public void StopPlayerFromJoining()
 	{
-		NetworkManager.singleton.matchMaker.SetMatchAttributes(NetworkManager.singleton.matchInfo.networkId, false, NetworkManager.singleton.matchInfo.domain, NetworkLobbyManager.singleton.OnSetMatchAttributes);
+			NetworkManager.singleton.matchMaker.SetMatchAttributes (NetworkManager.singleton.matchInfo.networkId, false, NetworkManager.singleton.matchInfo.domain, NetworkLobbyManager.singleton.OnSetMatchAttributes);
+
 	}
 
 

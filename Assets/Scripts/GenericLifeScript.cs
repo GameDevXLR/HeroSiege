@@ -34,9 +34,11 @@ public class GenericLifeScript : NetworkBehaviour {
 	public float timeBetweenTic = 1f;
 	public GameObject guyAttackingMe;
 	public ParticleSystem rezParticule;
+	private Animator Anim;
 
 	void Start () 
 	{
+		Anim = GetComponentInChildren<Animator> ();
 		lastTic = 0f;
 		if (isLocalPlayer) 
 		{
@@ -220,9 +222,11 @@ public class GenericLifeScript : NetworkBehaviour {
 //				}
 			}
 		}
+		Anim.SetBool ("isDead", true);
 		if (isServer) 
 		{
-			yield return new WaitForSeconds (0.1f);
+			
+			yield return new WaitForSeconds (2.0f);
 			NetworkServer.Destroy (gameObject);
 			//faire ici la remise dans le pool.
 

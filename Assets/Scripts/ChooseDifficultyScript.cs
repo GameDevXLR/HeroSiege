@@ -10,7 +10,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 	// en fonction de la difficultée choisi : les inibs sont activer.
 	//une fois la difficulté choisi; le gamemanger lancera la partie.
 	//le gamemanager garde trace de la difficulté choisie.
-
+	public bool isSolo;
 	public GameObject difficultyPanel;
 	public GameObject inib1;
 	public GameObject inib2;
@@ -41,62 +41,102 @@ public class ChooseDifficultyScript : MonoBehaviour
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
 
 	}
-
 	public void NormalMode()
 	{
+		Invoke ("NormalModeExe", 0.1f);
+	}
+	public void NormalModeExe()
+	{
 		GameManager.instanceGM.gameDifficulty = 1;
+		gameMode = difficultySettings.normal;
 		GameManager.instanceGM.messageManager.SendAnAlertMess ("Normal mode activated...pussy!", Color.green);
 		inib1.GetComponent<SpawnManager>().enabled = true;
+		if (isSolo) 
+		{
+			return;
+		}
 		inib1B.GetComponent<SpawnManager>().enabled = true;
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
-		gameMode = difficultySettings.normal;
-		gameObject.SetActive (false);
+
 
 	}
 	public void HardMode()
 	{
+		Invoke ("HardModeExe", 0.1f);
+
+	}
+	public void HardModeExe()
+	{
 		GameManager.instanceGM.gameDifficulty = 2;
-		inib1.GetComponent<SpawnManager>().enabled = true;
-		inib1B.GetComponent<SpawnManager>().enabled = true;
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
-
 		gameMode = difficultySettings.hard;
+		inib1.GetComponent<SpawnManager>().enabled = true;
+		if (isSolo) 
+		{
+			return;
+		}
+		inib1B.GetComponent<SpawnManager>().enabled = true;
 
-		gameObject.SetActive (false);
 
 
 	}
 	public void NightmareMode()
 	{
+		Invoke ("NightmareModeExe", 0.1f);
+
+	}
+	public void NightmareModeExe()
+	{
 		GameManager.instanceGM.gameDifficulty = 4;
+		gameMode = difficultySettings.nightmare;
 		inib2.GetComponent<SpawnManager>().enabled = true;
 		inib3.GetComponent<SpawnManager>().enabled = true;
+		if (isSolo) 
+		{
+			return;
+		}
 		inib2B.GetComponent<SpawnManager>().enabled = true;
 		inib3B.GetComponent<SpawnManager>().enabled = true;
-		gameMode = difficultySettings.nightmare;
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
 
-		gameObject.SetActive (false);
 
 	}
 	public void MadnessMode()
 	{
+		Invoke ("MadnessModeExe", 0.1f);
+
+	}
+	public void MadnessModeExe()
+	{
 		GameManager.instanceGM.gameDifficulty = 10;
 		GameManager.instanceGM.messageManager.SendAnAlertMess ("Madness?! Run! You fool...", Color.red);
+		gameMode = difficultySettings.madness;
 
 		inib1.GetComponent<SpawnManager>().enabled = true;
 		inib2.GetComponent<SpawnManager>().enabled = true;
 		inib3.GetComponent<SpawnManager>().enabled = true;
+		if (isSolo) 
+		{
+			return;
+		}
 		inib1B.GetComponent<SpawnManager>().enabled = true;
 		inib2B.GetComponent<SpawnManager>().enabled = true;
 		inib3B.GetComponent<SpawnManager>().enabled = true;
-		gameMode = difficultySettings.madness;
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
 
-		gameObject.SetActive (false);
 
 	}
 
+	public void GenericStart()
+	{
+		if (GameManager.instanceGM.IsItSolo ()) 
+		{
+			isSolo = true;
+		}
+		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
+		Invoke ("HidePanel", 0.3f);
+	}
+
+	public void HidePanel()
+	{
+		gameObject.SetActive (false);
+	}
 
 
 }
