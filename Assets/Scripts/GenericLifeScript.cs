@@ -226,7 +226,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		if (isServer) 
 		{
 			
-			yield return new WaitForSeconds (2.0f);
+			yield return new WaitForSeconds (3f);
 			NetworkServer.Destroy (gameObject);
 			//faire ici la remise dans le pool.
 
