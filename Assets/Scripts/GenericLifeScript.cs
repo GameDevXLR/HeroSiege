@@ -222,11 +222,11 @@ public class GenericLifeScript : NetworkBehaviour {
 //				}
 			}
 		}
-		Anim.SetBool ("isDead", true);
+//		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
 		if (isServer) 
 		{
 			
-			yield return new WaitForSeconds (2.0f);
+			yield return new WaitForSeconds (0.1f);
 			NetworkServer.Destroy (gameObject);
 			//faire ici la remise dans le pool.
 

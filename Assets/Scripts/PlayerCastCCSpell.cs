@@ -98,7 +98,6 @@ public class PlayerCastCCSpell : NetworkBehaviour
 				}
 			if (Input.GetMouseButtonUp (0)) {
 				if (Vector3.Distance (hit.point, transform.position) > spellRange || GetComponent<GenericManaScript> ().currentMp < spellCost) {
-					Debug.Log (Vector3.Distance (hit.point, transform.position));
 					isTargeting = false;
 					spellRangeArea.SetActive (false);
 
