@@ -12,6 +12,7 @@ public class ShopScript : MonoBehaviour
 	public Transform shopPanel;
 	private bool isOpen;
 	public string shopName;
+	public bool isAccessible = true;
 
 	public void Start()
 	{
@@ -22,8 +23,11 @@ public class ShopScript : MonoBehaviour
 
 	public void OpenYourMenu()
 	{
+		if (isAccessible) 
+		{
 		shopPanel.gameObject.SetActive (true);
 		isOpen = true;
+		}
 	}
 	public void CloseYourMenu()
 	{

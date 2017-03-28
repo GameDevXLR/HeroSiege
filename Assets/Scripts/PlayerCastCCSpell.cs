@@ -173,7 +173,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		{
 			spellLvl++;
 			spellCost += 5;
-			spellCD -= 0.5f;
+			spellCD -= 1f;
 			spellDmg += 100;
 			spellDuration += 0.5f;
 			if (isLocalPlayer) 

@@ -346,6 +346,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1667122938}
   - {fileID: 1831442326}
   - {fileID: 918964445}
   - {fileID: 1948464109}
@@ -6358,8 +6359,10 @@ GameObject:
   - component: {fileID: 262913167}
   - component: {fileID: 262913166}
   - component: {fileID: 262913165}
+  - component: {fileID: 262913169}
+  - component: {fileID: 262913168}
   m_Layer: 0
-  m_Name: Camp
+  m_Name: CampT1
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6461,7 +6464,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 262913164}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 20
@@ -6473,12 +6476,58 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 262913164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.4900002, y: 0.28, z: 0.4384539}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_Children: []
-  m_Father: {fileID: 1968208487}
-  m_RootOrder: 59
+  m_LocalPosition: {x: -1.9217987, y: 134.38943, z: -161.02786}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2066823920}
+  m_Father: {fileID: 1122461773}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &262913168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 262913164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &262913169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 262913164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bffd30cfc9d6a644b958049bfc95222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  belongsTo: 2
+  canBeOwnedBy: 0
 --- !u!4 &273948479 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 4a3fd121990df8948b2a3e7c6725fd81, type: 2}
@@ -20813,7 +20862,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58ae8fcab3dd17943982ba076bcbfa6f, type: 3}
       propertyPath: m_RootOrder
-      value: 60
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58ae8fcab3dd17943982ba076bcbfa6f, type: 3}
       propertyPath: m_LocalScale.x
@@ -22259,7 +22308,6 @@ GameObject:
   - component: {fileID: 918964450}
   - component: {fileID: 918964449}
   - component: {fileID: 918964448}
-  - component: {fileID: 918964447}
   - component: {fileID: 918964446}
   m_Layer: 5
   m_Name: Shop2T2
@@ -22280,7 +22328,7 @@ Transform:
   m_Children:
   - {fileID: 1641934702}
   m_Father: {fileID: 9674334}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &918964446
 MonoBehaviour:
@@ -22335,38 +22383,6 @@ MonoBehaviour:
   Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
     type: 3}
   LastTimerUpdate: 0
---- !u!114 &918964447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 918964444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &918964448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27892,8 +27908,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 262913167}
   - {fileID: 1430450191}
-  - {fileID: 2066823920}
   - {fileID: 1869216207}
   - {fileID: 1096132186}
   m_Father: {fileID: 578435221}
@@ -37135,7 +37151,6 @@ GameObject:
   - component: {fileID: 1430450194}
   - component: {fileID: 1430450193}
   - component: {fileID: 1430450195}
-  - component: {fileID: 1430450192}
   - component: {fileID: 1430450196}
   m_Layer: 5
   m_Name: Shop1
@@ -37156,40 +37171,8 @@ Transform:
   m_Children:
   - {fileID: 1384129546}
   m_Father: {fileID: 1122461773}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1430450192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1430450190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!65 &1430450193
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43876,7 +43859,7 @@ GameObject:
   - component: {fileID: 1667122940}
   - component: {fileID: 1667122939}
   m_Layer: 0
-  m_Name: Camp
+  m_Name: CampT2
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -43889,11 +43872,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1667122937}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.4900002, y: 0.28, z: 0.4384539}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: -1.9217987, y: 134.38943, z: 138.47214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1973716862}
-  m_RootOrder: 59
+  m_Father: {fileID: 9674334}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1667122939
 MonoBehaviour:
@@ -44780,7 +44763,7 @@ Transform:
   - {fileID: 1357414460}
   - {fileID: 743701146}
   m_Father: {fileID: 9674334}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1702421499
 Prefab:
@@ -47248,7 +47231,6 @@ GameObject:
   - component: {fileID: 1831442331}
   - component: {fileID: 1831442330}
   - component: {fileID: 1831442329}
-  - component: {fileID: 1831442328}
   - component: {fileID: 1831442327}
   m_Layer: 5
   m_Name: Shop1T2
@@ -47269,7 +47251,7 @@ Transform:
   m_Children:
   - {fileID: 248670293}
   m_Father: {fileID: 9674334}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1831442327
 MonoBehaviour:
@@ -47324,38 +47306,6 @@ MonoBehaviour:
   Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
     type: 3}
   LastTimerUpdate: 0
---- !u!114 &1831442328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1831442325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &1831442329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49311,7 +49261,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58ae8fcab3dd17943982ba076bcbfa6f, type: 3}
       propertyPath: m_RootOrder
-      value: 60
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58ae8fcab3dd17943982ba076bcbfa6f, type: 3}
       propertyPath: m_LocalScale.x
@@ -50643,7 +50593,7 @@ Transform:
   m_Children:
   - {fileID: 1131868406}
   m_Father: {fileID: 9674334}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
 --- !u!114 &1948464110
 MonoBehaviour:
@@ -51096,7 +51046,6 @@ Transform:
   - {fileID: 754448616}
   - {fileID: 433544775}
   - {fileID: 2146610157}
-  - {fileID: 262913167}
   - {fileID: 1895901886}
   m_Father: {fileID: 1096132186}
   m_RootOrder: 1
@@ -51185,7 +51134,6 @@ Transform:
   - {fileID: 732001628}
   - {fileID: 1064633450}
   - {fileID: 1444952910}
-  - {fileID: 1667122938}
   - {fileID: 862156225}
   m_Father: {fileID: 1699142151}
   m_RootOrder: 1
@@ -53986,7 +53934,6 @@ GameObject:
   - component: {fileID: 2066823924}
   - component: {fileID: 2066823923}
   - component: {fileID: 2066823922}
-  - component: {fileID: 2066823921}
   - component: {fileID: 2066823925}
   m_Layer: 5
   m_Name: Shop2
@@ -54002,52 +53949,20 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2066823919}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.2332, y: 135.41443, z: -175.27286}
+  m_LocalPosition: {x: 8.154999, y: 1.0249939, z: -14.244995}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 1963830160}
-  m_Father: {fileID: 1122461773}
-  m_RootOrder: 1
+  m_Father: {fileID: 262913167}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2066823921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2066823919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &2066823922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2066823919}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f36886a6627ff745aa801c84c2aa69f, type: 3}
   m_Name: 
