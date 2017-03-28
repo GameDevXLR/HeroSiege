@@ -6528,6 +6528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   belongsTo: 2
   canBeOwnedBy: 0
+  playersIn: []
+  enemiesIn: []
+  timeToCapture: 10
 --- !u!4 &273948479 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 4a3fd121990df8948b2a3e7c6725fd81, type: 2}
@@ -22396,6 +22399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 0}
   shopName: ShopCampT2
+  isAccessible: 1
 --- !u!65 &918964449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37205,6 +37209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 0}
   shopName: ShopCastle
+  isAccessible: 1
 --- !u!114 &1430450196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47319,6 +47324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 0}
   shopName: ShopCastleT2
+  isAccessible: 1
 --- !u!65 &1831442330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48331,6 +48337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 0}
   shopName: ShopForgeT1
+  isAccessible: 1
 --- !u!65 &1869216211
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50693,6 +50700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 0}
   shopName: ShopForgeT2
+  isAccessible: 1
 --- !u!65 &1948464113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53962,13 +53970,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2066823919}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f36886a6627ff745aa801c84c2aa69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 0}
   shopName: ShopCamp
+  isAccessible: 1
 --- !u!65 &2066823923
 BoxCollider:
   m_ObjectHideFlags: 0
