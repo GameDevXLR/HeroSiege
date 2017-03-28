@@ -49,6 +49,11 @@ public class PlayerGoldScript : NetworkBehaviour
 		ActualGold = goldygold;
 		if (isLocalPlayer) 
 		{
+			if (goldDisplay == null) 
+			{
+				goldDisplay = GameObject.Find ("PlayerGold").GetComponent<Text> ();
+
+			}
 			goldDisplay.text = ActualGold.ToString ();
 		}
 	}

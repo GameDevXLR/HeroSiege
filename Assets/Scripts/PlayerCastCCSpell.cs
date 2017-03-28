@@ -65,6 +65,10 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		//demander le lancement du sort sur le serveur...normal.
 		public void CastThatSpell()
 		{
+		if (GetComponent<GenericLifeScript> ().isDead) 
+		{
+			return;
+		}
 		StartCoroutine (ShowTargeter ()); // on a besoin d'attendre la fin de frame pour pas que mouseUp soit détecter direct et que le sort se lance cash en cliquant sur l'icone de sort.
 		}
 
@@ -97,7 +101,8 @@ public class PlayerCastCCSpell : NetworkBehaviour
 				return;
 				}
 			if (Input.GetMouseButtonUp (0)) {
-				if (Vector3.Distance (hit.point, transform.position) > spellRange || GetComponent<GenericManaScript> ().currentMp < spellCost) {
+				if (Vector3.Distance (hit.point, transform.position) > spellRange || GetComponent<GenericManaScript> ().currentMp < spellCost ||GetComponent<GenericLifeScript> ().isDead) 
+				{
 					isTargeting = false;
 					spellRangeArea.SetActive (false);
 
