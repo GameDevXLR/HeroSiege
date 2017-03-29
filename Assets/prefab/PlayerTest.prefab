@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 114604599503415050}
   - component: {fileID: 114489449535516312}
   - component: {fileID: 114105691579488900}
+  - component: {fileID: 114797765490164106}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -2473,6 +2474,22 @@ MonoBehaviour:
   actualXP: 0
   requiredXPToUp: 50
   actualLevel: 1
+--- !u!114 &114797765490164106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3cfb80a22dbf7a46ba766ed50ebc90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killCount: 0
+  playerNickname: test
+  UIPrefab: {fileID: 1587382832268106, guid: 9206b6cbf3a057d488a960a59d43cd23, type: 2}
+  playerUI: {fileID: 0}
+  playersStatsView: {fileID: 0}
 --- !u!114 &114819530815222618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2598,6 +2615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpGiven: 30
   goldGiven: 5
+  killCount: 0
   lifeBar: {fileID: 224552685445617892}
   lifeBarMain: {fileID: 0}
   playerHPTxt: {fileID: 0}

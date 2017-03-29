@@ -12,7 +12,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	// il a grand besoin d'etre diviser en un pour mob / un pour joueur / un pour tour ptete meme 1 pour pnj.
 	public int xpGiven = 50;
 	public int goldGiven = 5;
-
+	public int killCount;
 	public RectTransform lifeBar; // barre de vie IG
 
 	public RectTransform lifeBarMain; // lifebar de l'interface player.
@@ -115,7 +115,8 @@ public class GenericLifeScript : NetworkBehaviour {
 				if (!attacker.GetComponent<GenericLifeScript> ().isDead) 
 				{
 					
-					if (attacker != GetComponent<EnemyAutoAttackScript> ().target) {
+					if (attacker != GetComponent<EnemyAutoAttackScript> ().target) 
+					{
 						if (Random.Range (0, 2) != 0) { //2 est exclusif car c'est un int.
 							GetComponent<EnemyAutoAttackScript> ().SetTheTarget (attacker);
 						}
@@ -128,6 +129,10 @@ public class GenericLifeScript : NetworkBehaviour {
 				if (trueDmg) 
 				{
 					currentHp -= dmg;
+					if (gameObject.layer == Layers.Ennemies && currentHp <= 0) 
+					{
+						attacker.GetComponent<PlayerManager> ().killCount++;
+					}
 					return;
 				}
 				float y = Random.Range (0, 100);
@@ -137,10 +142,18 @@ public class GenericLifeScript : NetworkBehaviour {
 					{
 						float multiplicatorArmor = (float)100f / (100f + armorScore);
 						currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
+						if (gameObject.layer == Layers.Ennemies && currentHp <= 0) 
+						{
+							attacker.GetComponent<PlayerManager> ().killCount++;
+						}
 						return;
 					} else 
 					{
 						currentHp -= dmg;
+						if (gameObject.layer == Layers.Ennemies && currentHp <= 0) 
+						{
+							attacker.GetComponent<PlayerManager> ().killCount++;
+						}
 					}
 				}
 			}
