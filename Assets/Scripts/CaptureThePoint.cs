@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HyperLuminalGames;
 using UnityEngine.Networking;
 
 public class CaptureThePoint : NetworkBehaviour 
@@ -82,19 +83,42 @@ public class CaptureThePoint : NetworkBehaviour
 			}
 			break;
 		case PointOwner.team1:
-			if (other.gameObject.layer == Layers.Ennemies && playersIn.Count == 0) 
+			if (other.gameObject.layer == Layers.Ennemies) 
 			{
-				timeToCapture -= Time.smoothDeltaTime;
-				if (timeToCapture <= 0f) 
+				if (playersIn.Count > 0) 
 				{
-					timeToCapture = initialTimeToCapt;
-					belongsTo = PointOwner.neutral;
-
+					playersIn.ForEach (CheckIfPlayersAreAlive);
+				}
+				if(playersIn.Count == 0)
+				{
+					timeToCapture -= Time.smoothDeltaTime;
+					if (timeToCapture <= 0f) 
+					{
+						timeToCapture = initialTimeToCapt;
+						belongsTo = PointOwner.neutral;
+					}
 				}
 
 			}
 			break;
 		case PointOwner.team2:
+			if (other.gameObject.layer == Layers.Ennemies) 
+			{
+				if (playersIn.Count > 0) 
+				{
+					playersIn.ForEach (CheckIfPlayersAreAlive);
+				}
+				if(playersIn.Count == 0)
+				{
+					timeToCapture -= Time.smoothDeltaTime;
+					if (timeToCapture <= 0f) 
+					{
+						timeToCapture = initialTimeToCapt;
+						belongsTo = PointOwner.neutral;
+					}
+				}
+
+			}
 			break;
 		default:
 			break;
@@ -102,19 +126,67 @@ public class CaptureThePoint : NetworkBehaviour
 		
 	}
 
+	public void CheckIfPlayersAreAlive(GameObject player)
+	{
+		if (player.GetComponent<GenericLifeScript> ().isDead) 
+		{
+			playersIn.Remove (player);
+		}
+		
+	}
+		
 	public void ChangeOwner(PointOwner newOwner)
 	{
 		belongsTo = newOwner;
 		if (canBeOwnedBy == newOwner) 
 		{
+			GetComponent<Location> ().IconColour = Color.green;
 			GetComponentInChildren<ShopScript> ().isAccessible = true;
-			GameManager.instanceGM.messageManager.SendAnAlertMess ("The camp has been captured.", Color.green);
-		} else 
+			transform.GetChild (0).GetComponent<Location> ().enabled = true;
+			if (GameManager.instanceGM.isTeam1) 
+			{
+				if (belongsTo == PointOwner.team1) 
+				{
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our camp has been captured.", Color.green);
+				} else 
+				{
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy camp has been captured", Color.red);
+				}
+			} else 
+			{
+				if (belongsTo == PointOwner.team1) 
+				{
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy camp has been captured", Color.red);
+				} else 
+				{
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our camp has been captured.", Color.green);
+				}
+			}
+		}else 
 		{
+			GetComponent<Location> ().IconColour = Color.yellow;
+			transform.GetChild (0).GetComponent<Location> ().enabled = false;
 			GetComponentInChildren<ShopScript> ().isAccessible = false;
 			GetComponentInChildren<ShopScript> ().CloseYourMenu ();
-			GameManager.instanceGM.messageManager.SendAnAlertMess ("The camp has been lost.", Color.red);
-
+			if (GameManager.instanceGM.isTeam1) 
+			{
+				if (belongsTo == PointOwner.team1) 
+				{
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our camp has been lost.", Color.red);
+				} else 
+				{
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy camp has been lost!", Color.green);
+				}
+			} else 
+			{
+				if (belongsTo == PointOwner.team1) 
+				{
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy camp has been lost", Color.green);
+				} else 
+				{
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our camp has been lost!.", Color.red);
+				}
+			}
 		}
 	}
 		

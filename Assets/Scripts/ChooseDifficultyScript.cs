@@ -129,14 +129,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 		{
 			isSolo = true;
 		}
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.3f;
-		Invoke ("HidePanel", 0.3f);
+		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.4f;
+		gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
 	}
-
-	public void HidePanel()
-	{
-		gameObject.SetActive (false);
-	}
-
-
 }

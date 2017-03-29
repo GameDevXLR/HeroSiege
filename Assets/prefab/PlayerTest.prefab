@@ -1850,7 +1850,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   DisplayOnScreen: 1
-  DisplayOffScreen: 1
+  DisplayOffScreen: 0
   Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
     type: 3}
   LastTimerUpdate: 0
@@ -2016,14 +2016,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e39239c2bcdee9c4c8bb53688abd6d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   goldDisplay: {fileID: 0}
-  timeBetweenGoldDrop: 10
-  goldPerDrop: 5
+  timeBetweenGoldDrop: 2
+  goldPerDrop: 1
+  isDropping: 0
   ActualGold: 500
 --- !u!114 &114500921820713584
 MonoBehaviour:

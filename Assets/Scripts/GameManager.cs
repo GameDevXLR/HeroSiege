@@ -123,6 +123,7 @@ public class GameManager : NetworkBehaviour
 			StartCoroutine (RestartTheLevel ());
 		}
 	}
+
 	public void Team2LooseALife()
 	{
 		if (isRestarting) 
@@ -172,8 +173,7 @@ public class GameManager : NetworkBehaviour
 			NetworkManager.singleton.matchMaker.SetMatchAttributes (NetworkManager.singleton.matchInfo.networkId, false, NetworkManager.singleton.matchInfo.domain, NetworkLobbyManager.singleton.OnSetMatchAttributes);
 
 	}
-
-
+		
 	public void DayNightEvents(bool night)
 	{
 		nightTime = night;
@@ -206,6 +206,7 @@ public class GameManager : NetworkBehaviour
 			}
 		}
 	}
+
 	public void SyncDifficulty(int dif)
 	{
 		
@@ -249,9 +250,27 @@ public class GameManager : NetworkBehaviour
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector2"));
 		StopPlayerFromJoining ();
 		RpcMessageToAll ();
+		ActivateGoldPerSec ();
 	}
 
+	[Server]
+	public void ActivateGoldPerSec ()
+	{
+		StartCoroutine (ActivateGoldPerSecExe ());
+	}
 
+	IEnumerator ActivateGoldPerSecExe ()
+	{
+		GameObject[] allPlayers;
+		allPlayers = GameObject.FindGameObjectsWithTag ("Player");
+		yield return new WaitForSeconds (0.1f);
+		for (int i = 0; i < allPlayers.Length; i++) 
+		{
+			allPlayers [i].GetComponent<PlayerGoldScript> ().isDropping = true;
+
+		}
+	}
+		
 	public void NightStartingEvents(int nbrOfPlayers)
 	{
 
@@ -291,6 +310,7 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().enabled = true;
 		}
 	}
+
 	public void DayStartingEvents(int nbrOfPlayers)
 	{
 		if (Days == 2) 
@@ -359,7 +379,7 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcMessageToAll()
 	{
-		playerObj.GetComponent<PlayerGoldScript> ().enabled = true;
+//		playerObj.GetComponent<PlayerGoldScript> ().enabled = true;
 		messageManager.SendAnAlertMess ("The game is starting!", Color.green);
 	}
 

@@ -11,6 +11,7 @@ public class PlayerGoldScript : NetworkBehaviour
 	public float timeBetweenGoldDrop;
 	private float lastGoldDrop;
 	public int goldPerDrop;
+	[SyncVar]public bool isDropping;
 	[SyncVar(hook ="GoldActualize" )]public int ActualGold;
 
 	public void GetGold(int gold)
@@ -20,7 +21,6 @@ public class PlayerGoldScript : NetworkBehaviour
 			return;
 		}
 		ActualGold += gold;
-//		goldDisplay.text = ActualGold.ToString();
 	}
 
 	void Start()
@@ -34,12 +34,15 @@ public class PlayerGoldScript : NetworkBehaviour
 			lastGoldDrop = Time.time + timeBetweenGoldDrop;
 		}
 	}
-	[ServerCallback]
 	public void Update()
 	{
+		if (!isServer || !isDropping) 
+		{
+			return;
+		}
 		if (Time.time > lastGoldDrop) 
 		{
-			lastGoldDrop += timeBetweenGoldDrop;
+			lastGoldDrop = Time.time + timeBetweenGoldDrop;
 			ActualGold += goldPerDrop;
 		}
 	}
