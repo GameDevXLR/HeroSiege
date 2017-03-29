@@ -35,6 +35,9 @@ public class GenericLifeScript : NetworkBehaviour {
 	public GameObject guyAttackingMe;
 	public ParticleSystem rezParticule;
 	private Animator Anim;
+	public GameObject deadAnimChildEffect;
+	public GameObject deadAnimChildMesh;
+	public GameObject mobDeadAnimChildMesh;
 
 	void Start () 
 	{
@@ -49,6 +52,16 @@ public class GenericLifeScript : NetworkBehaviour {
 			playerHPTxt = GameObject.Find ("PlayerHPTxt").GetComponent<Text> ();
 			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
 		}
+		if (gameObject.layer == Layers.Player) 
+		{
+			deadAnimChildMesh = transform.GetChild (5).gameObject;
+			deadAnimChildEffect= transform.GetChild (4).gameObject;
+		}
+		if (gameObject.layer == Layers.Ennemies) 
+		{
+			mobDeadAnimChildMesh = transform.GetChild (3).gameObject;
+		}
+
 	}
 
 	void Update () 
@@ -242,15 +255,24 @@ public class GenericLifeScript : NetworkBehaviour {
 //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
 		if (isServer) 
 		{
-			
+			RpcKillTheMob ();
 			yield return new WaitForSeconds (0.1f);
 			NetworkServer.Destroy (gameObject);
 			//faire ici la remise dans le pool.
 
 		}
 
-//		Destroy (gameObject);
 	}
+	[ClientRpc]
+	public void RpcKillTheMob()
+	{
+		mobDeadAnimChildMesh.GetComponent<Animator> ().enabled = true;
+		mobDeadAnimChildMesh.GetComponent<Animator> ().SetBool ("isDead", true);
+		mobDeadAnimChildMesh.GetComponent<DeathByTime> ().enabled = true;
+		mobDeadAnimChildMesh.transform.parent = null;
+	}
+
+
 
 
 	//ce qu'il se passe si un JOUEUR meurt...
@@ -271,6 +293,7 @@ public class GenericLifeScript : NetworkBehaviour {
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = false;
 
 		}
+		deadAnimChildMesh.GetComponent<Animator> ().SetBool ("isDead", true);
 		playerDeathCount++;
 		respawnTime += playerDeathCount*2;
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = false;
@@ -278,23 +301,30 @@ public class GenericLifeScript : NetworkBehaviour {
 		GetComponent<PlayerAutoAttack> ().StopAllCoroutines ();
 		GetComponent<PlayerAutoAttack> ().target = null;
 		GetComponent<PlayerAutoAttack> ().enabled = false;
-		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
+		deadAnimChildMesh.transform.parent = null;
 		GetComponent<PlayerClicToMove> ().target = null;
 		GetComponent<PlayerClicToMove> ().enabled = false;
 		GetComponent<PlayerClicToMove> ().StopAllCoroutines ();
 		GetComponent<NavMeshAgent> ().SetDestination (respawnPoint.transform.position);
-
+		deadAnimChildEffect.GetComponent<ParticleSystem> ().Play (true);
+		deadAnimChildEffect.transform.parent = null;
 		GetComponent<NavMeshAgent> ().enabled = false;
 		GetComponent<CapsuleCollider> ().enabled = false;
 		yield return new WaitForEndOfFrame ();
-		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+//		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+
 		transform.localPosition = respawnPoint.transform.position;
 
-		yield return new WaitForSeconds (0.8f);
-
-		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+//		yield return new WaitForSeconds (0.8f);
+//		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (respawnTime);
+		deadAnimChildMesh.transform.parent = this.transform;
+		deadAnimChildMesh.transform.localPosition = new Vector3 (0f,-0.7f,0f); // le mesh est légerement en dessous...allez pigé...a revoir ca !
+		deadAnimChildMesh.GetComponent<Animator> ().SetBool ("isDead", false);
 
+		deadAnimChildEffect.transform.parent = this.transform;
+		deadAnimChildEffect.transform.localPosition = Vector3.zero;
 		GetComponent<NavMeshAgent> ().enabled = true;
 		gameObject.layer = 8;
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
@@ -335,7 +365,10 @@ public class GenericLifeScript : NetworkBehaviour {
 	{
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
 		yield return new WaitForSeconds (0.05f);
-		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
+		if (GetComponentInChildren<SkinnedMeshRenderer> ()) 
+		{
+			GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
+		}
 	}
 
 

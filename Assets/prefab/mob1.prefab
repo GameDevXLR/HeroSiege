@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4303594423438494}
   - component: {fileID: 95358165018094194}
+  - component: {fileID: 114828540660305886}
   m_Layer: 0
   m_Name: DungeonSkeleton_demo
   m_TagString: Untagged
@@ -770,7 +771,7 @@ Transform:
   m_LocalScale: {x: 12, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 4484915551070368}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4243643620857942
 Transform:
@@ -829,7 +830,7 @@ Transform:
   - {fileID: 4581424259418004}
   - {fileID: 4400628723083254}
   m_Father: {fileID: 4484915551070368}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4338144043331694
 Transform:
@@ -921,13 +922,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1607321022530426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 447.8249, y: 289.95538, z: -174.64221}
+  m_LocalPosition: {x: -64.502266, y: 8, z: 31.350388}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
-  - {fileID: 4303594423438494}
   - {fileID: 4232605768510818}
   - {fileID: 224282508279725032}
   - {fileID: 224696937062645358}
+  - {fileID: 4303594423438494}
   - {fileID: 4810214140379506}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1621,6 +1622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpGiven: 5
   goldGiven: 3
+  killCount: 0
   lifeBar: {fileID: 224410816351006932}
   lifeBarMain: {fileID: 0}
   playerHPTxt: {fileID: 0}
@@ -1639,6 +1641,9 @@ MonoBehaviour:
   timeBetweenTic: 1
   guyAttackingMe: {fileID: 0}
   rezParticule: {fileID: 0}
+  deadAnimChildEffect: {fileID: 0}
+  deadAnimChildMesh: {fileID: 0}
+  mobDeadAnimChildMesh: {fileID: 0}
 --- !u!114 &114665928832872106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1687,6 +1692,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114828540660305886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1349325771747286}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ca80cb628febb46b40b10a3017d40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 3
 --- !u!114 &114886597796118110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1710,9 +1727,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   underCC: 0
-  objRenderer: {fileID: 137669977249832116}
-  stunMat: {fileID: 2100000, guid: 2647f0d892faa7e46850e855ee226307, type: 2}
-  normalMat: {fileID: 2100000, guid: 286bfe7af7bc3674b8c59fbc601e9291, type: 2}
 --- !u!135 &135633682344695856
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -1938,7 +1952,7 @@ RectTransform:
   - {fileID: 224434525327728026}
   - {fileID: 224410816351006932}
   m_Father: {fileID: 4484915551070368}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2012,7 +2026,7 @@ RectTransform:
   - {fileID: 224452715580603876}
   - {fileID: 224979754317363938}
   m_Father: {fileID: 4484915551070368}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

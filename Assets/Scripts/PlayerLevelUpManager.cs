@@ -21,6 +21,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		
 		spell1LvlUpBtn = GameObject.Find ("Spell1LvlUpBtn");
 		spell2LvlUpBtn = GameObject.Find ("Spell2LvlUpBtn");
 		//rajouter ici les futurs sorts a faire up.

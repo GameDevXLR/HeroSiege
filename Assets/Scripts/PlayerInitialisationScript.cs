@@ -37,6 +37,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			}
 		} else 
 		{
+			GetComponent<PlayerLevelUpManager> ().enabled = false;
 			StartCoroutine (SetProperColor ());
 		}
 		if (isServer) 
