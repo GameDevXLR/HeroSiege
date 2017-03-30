@@ -23,18 +23,12 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
     {
         Vector3 localHit = transform.InverseTransformPoint(eventData.position);
         if (Input.GetMouseButtonDown(0))
-            moveCamera(localHit);
-
-
-        else if (Input.GetMouseButtonDown(1))
-            Debug.Log("Pressed left click.");
-        
+            moveCamera(localHit);      
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 localHit = transform.InverseTransformPoint(eventData.position);
-        Debug.Log(localHit);
         if (Input.GetMouseButton(0))
         {
             
