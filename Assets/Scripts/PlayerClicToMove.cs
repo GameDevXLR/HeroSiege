@@ -59,7 +59,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (Physics.Raycast (ray, out hit, 80f, layer_mask)) 
 			{
-                if (hit.collider.gameObject.layer == Layers.UIBlock)
+                if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
                     return;
                 }
