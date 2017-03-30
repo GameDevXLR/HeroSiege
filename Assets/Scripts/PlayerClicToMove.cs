@@ -29,7 +29,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		if (isLocalPlayer) 
 		{
 			audioS = GetComponent<AudioSource> ();
-			layer_mask = LayerMask.GetMask ("Ground", "Ennemies");
+			layer_mask = LayerMask.GetMask ("Ground", "Ennemies", "UI");
 			cursorTargetter = GameObject.Find ("ClickArrowFull");
 			nClient = GameObject.Find ("NetworkManagerObj").GetComponent<NetworkManager> ().client;
 		}
@@ -49,7 +49,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+       
 		if (Input.GetMouseButtonUp (1) && isLocalPlayer) 
 		{
 			
@@ -58,7 +58,11 @@ public class PlayerClicToMove : NetworkBehaviour {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (Physics.Raycast (ray, out hit, 80f, layer_mask)) 
-			{	
+			{
+                if (hit.collider.gameObject.layer == Layers.UIBlock)
+                {
+                    return;
+                }
 				if (hit.collider.gameObject.layer == Layers.Ennemies) 
 				{
 //					aggroArea.autoTargetting = true;
@@ -92,6 +96,31 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 
 	}
+
+    public void movePlayer(RaycastHit hit)
+    {
+        
+        if (hit.collider.gameObject.layer == Layers.Ennemies)
+        {
+            //					aggroArea.autoTargetting = true;
+            cursorTargetter.transform.position = Vector3.zero;
+            target = hit.collider.gameObject;
+            CmdSendNewTarget(target.GetComponent<NetworkIdentity>().netId);
+
+        }
+        else
+        {
+            StartCoroutine(MoveFirst((float)nClient.GetRTT(), hit.point));
+            cursorTargetter.transform.position = hit.point;
+            cursorTargetter.GetComponent<Animator>().Play("ClickArrowAnim");
+            CmdSendNewDestination(hit.point);
+            CancelInvoke();
+            //					cursorTargetter.GetComponent<Animator> ().
+            Invoke("StopThePosTargeter", 1.5f);
+            //					cursorTargetter.GetComponent<Animator> ().Play("ClickArrowAnim");
+        }
+    }
+
 	public void StopThePosTargeter()
 	{
 		cursorTargetter.transform.position = Vector3.zero;

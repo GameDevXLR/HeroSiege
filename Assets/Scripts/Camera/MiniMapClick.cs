@@ -23,7 +23,9 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
     {
         Vector3 localHit = transform.InverseTransformPoint(eventData.position);
         if (Input.GetMouseButtonDown(0))
-            moveCamera(localHit);      
+            moveCamera(localHit);
+        if (Input.GetMouseButtonDown(1))
+            movePLayer(localHit);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -48,6 +50,19 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         if (Physics.Raycast(ray, out hit))
         {
             Camera.main.GetComponent<CameraController>().MoveCameraTo(hit.point);
+
+        }
+    }
+
+    private void movePLayer(Vector3 localHit)
+    {
+        Vector3 vector = new Vector3(Math.Abs(localHit.x / minimapWidth), 1 - Math.Abs(localHit.y / minimapHeight), 0);
+        Ray ray = cam.ViewportPointToRay(vector);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameManager.instanceGM.playerObj.GetComponent<PlayerClicToMove>().movePlayer(hit);
+           
 
         }
     }
