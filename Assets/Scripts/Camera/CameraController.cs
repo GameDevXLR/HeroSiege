@@ -104,8 +104,23 @@ public class CameraController : MonoBehaviour
 		if (target != null) {
 			transform.position = target.transform.position + offset;
 		}
-		}
-	public void LockUnlockCamera()
+	}
+
+    public void MoveCameraTo(Vector3 vect)
+    {
+        if (vect != null)
+        {
+            transform.position = vect + offset;
+            gameObject.transform.position = new Vector3()
+            {
+                x = gameObject.transform.position.x,
+                y = yRef,
+                z = gameObject.transform.position.z
+            };
+        }
+    }
+
+    public void LockUnlockCamera()
 	{
 		selectedPlayer = !selectedPlayer;
 
