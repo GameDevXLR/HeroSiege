@@ -33,7 +33,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			minimapIcon.color = mainPlayerColor;
 			CameraController.instanceCamera.target = gameObject;
 			CameraController.instanceCamera.Initialize ();
-			GameObject.Find ("PlayerInterface").GetComponent<Canvas> ().enabled = true;
+			GameObject.Find ("PlayerInterface2.0").GetComponent<Canvas> ().enabled = true;
 
 			if (!isServer) 
 			{
