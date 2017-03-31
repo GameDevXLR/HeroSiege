@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class PlayerManager : NetworkBehaviour 
 {
 	[SyncVar(hook = "ActualizeKillCount")]public int killCount;
+//	[SyncVar(hook= "ActualizeMyNN")]
 	public string playerNickname;
 	public GameObject UIPrefab;
 	public GameObject playerUI;
@@ -19,7 +20,7 @@ public class PlayerManager : NetworkBehaviour
 		ActualizeKillCount (killCount);
 
 		//systeme de nom provisoire juste pour distinguer : en attendant le menu avant jeu.
-		playerUI.transform.GetChild (0).GetComponent<Text> ().text = gameObject.name.Substring (0, 8);
+		playerUI.transform.GetChild (0).GetComponent<Text> ().text = playerNickname;
 	}
 
 	public void SpawnPlayerUI()
@@ -36,6 +37,11 @@ public class PlayerManager : NetworkBehaviour
 		playerUI.transform.GetChild (1).GetComponent<Text> ().text = killCount.ToString ();
 	}
 
+//	public void ActualizeMyNN(string NN)
+//	{
+//		playerNickname = NN;
+//		playerUI.transform.GetChild (0).GetComponent<Text> ().text = NN;
+//	}
 
 	public void OnDestroy()
 	{

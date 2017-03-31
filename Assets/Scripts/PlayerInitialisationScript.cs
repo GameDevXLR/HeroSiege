@@ -18,12 +18,16 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Color mainPlayerColor;
 	public Color enemyPlayerColor;
 	public GameObject difficultyPanel;
+	[SyncVar(hook = "ChangeMyName")]public string playerNickName = "NewPlayer";
 	// Use this for initialization
 	void Start ()
 	{
 		if (isLocalPlayer) 
 		{
-			
+			string playerNN;
+			playerNN = PlayerPrefs.GetString ("PlayerNN");
+			ChangeMyName (playerNN);
+			CmdChangeName (playerNN);
 			difficultyPanel = GameObject.Find ("DifficultyPanel");
 			GetComponent<PlayerLevelUpManager> ().enabled = true;
 			minimapIcon.color = mainPlayerColor;
@@ -42,7 +46,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		}
 		if (isServer) 
 		{
-			RpcChangeName ();
+//			RpcChangeName ();
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
 			if(isLocalPlayer)
 			{
@@ -58,13 +62,37 @@ public class PlayerInitialisationScript : NetworkBehaviour
 //		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
 		base.OnStartLocalPlayer ();
 	}
-
-	[ClientRpc]
-	public void RpcChangeName ()
+	public override void OnStartClient ()
 	{
-		gameObject.name = "Player" + netId.ToString ();
-
+		if (!isLocalPlayer) {
+			ChangeMyName (playerNickName);
+			base.OnStartClient ();
+		}
 	}
+	public void ChangeMyName (string str)
+	{
+		playerNickName = str;
+		gameObject.name = playerNickName + netId.ToString();
+		GetComponent<PlayerManager> ().playerNickname = playerNickName;
+	}
+
+	[Command]
+	public void CmdChangeName (string nickName)
+	{
+		playerNickName = nickName;
+		GetComponent<PlayerManager> ().playerNickname = nickName;
+		if (!isLocalPlayer) 
+		{
+			GetComponent<PlayerManager> ().playerUI.transform.GetChild (0).GetComponent<Text> ().text = nickName;
+		}
+	}
+
+//	[ClientRpc]
+//	public void RpcChangeName ()
+//	{
+//		gameObject.name = "Player" + netId.ToString ();
+//
+//	}
 	public override void OnStartServer ()
 	{
 		StartCoroutine (TellNewPlayerHasJoin ());
