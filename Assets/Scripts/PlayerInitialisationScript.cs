@@ -42,21 +42,28 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		}
 		if (isServer) 
 		{
+			RpcChangeName ();
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
 			if(isLocalPlayer)
 			{
 			GameObject.Find ("DifficultyPanel").GetComponent<ChooseDifficultyScript> ().enabled = true;
 			}
 		}
-		gameObject.name = "Player" + netId.ToString ();
 	}
 
 	public override void OnStartLocalPlayer ()
 	{
 		GameManager.instanceGM.playerObj = gameObject;
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
-		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
+//		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
 		base.OnStartLocalPlayer ();
+	}
+
+	[ClientRpc]
+	public void RpcChangeName ()
+	{
+		gameObject.name = "Player" + netId.ToString ();
+
 	}
 	public override void OnStartServer ()
 	{
