@@ -34,7 +34,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			CameraController.instanceCamera.target = gameObject;
 			CameraController.instanceCamera.Initialize ();
 			GameObject.Find ("PlayerInterface2.0").GetComponent<Canvas> ().enabled = true;
-
+			GameObject.Find ("PlayerNickNameTxt").GetComponent<Text> ().text = playerNN;
 			if (!isServer) 
 			{
 				difficultyPanel.SetActive (false);
@@ -64,7 +64,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	public override void OnStartClient ()
 	{
-		if (!isLocalPlayer) {
+		if (!isLocalPlayer) 
+		{
 			ChangeMyName (playerNickName);
 			base.OnStartClient ();
 		}
@@ -74,6 +75,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		playerNickName = str;
 		gameObject.name = playerNickName + netId.ToString();
 		GetComponent<PlayerManager> ().playerNickname = playerNickName;
+		if (!isLocalPlayer) 
+		{
+			GetComponent<PlayerManager> ().playerUI.transform.GetChild (0).GetComponent<Text> ().text = str;
+
+		}
 	}
 
 	[Command]
@@ -83,6 +89,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerManager> ().playerNickname = nickName;
 		if (!isLocalPlayer) 
 		{
+			GetComponent<PlayerManager> ().playerNNTxt.text = nickName;
 			GetComponent<PlayerManager> ().playerUI.transform.GetChild (0).GetComponent<Text> ().text = nickName;
 		}
 	}
@@ -134,7 +141,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	IEnumerator TellNewPlayerHasJoin()
 	{
 		yield return new WaitForSeconds (0.2f);
-		RpcCallMessage ("A new player has joined the game.");
+		RpcCallMessage (playerNickName + " has joined the game.");
 
 	}
 

@@ -63,7 +63,7 @@ namespace HyperLuminalGames
 			{
 				// loop over each layer that has been set and ensure it exists.
 				for(int i = 0; i < DisplayLayerNames.Count; i++)
-				{
+				{ 
 					// if layer int is returned as -1 it is not found.
 					if(LayerMask.NameToLayer(DisplayLayerNames[i]) < 0)
 					{

@@ -206,11 +206,17 @@ public class GenericLifeScript : NetworkBehaviour {
 
 		}
 		lifeBar.localScale = new Vector3 (x, 1f, 1f);
-		if (isLocalPlayer) 
-		{
+		if (isLocalPlayer) {
 			lifeBarMain.localScale = new Vector3 (x, 1f, 1f);
 			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
 
+		} else 
+		{
+			if (gameObject.layer == Layers.Player) 
+			{
+				GetComponent<PlayerManager> ().playerLifeBar.localScale = new Vector3 (x, 1f, 1f);
+				GetComponent<PlayerManager>().playerLifeTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+			}
 		}
 	}
 	public void	RegenYourHP ()

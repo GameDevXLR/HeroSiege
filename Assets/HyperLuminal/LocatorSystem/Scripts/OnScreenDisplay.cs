@@ -20,7 +20,7 @@ namespace HyperLuminalGames
 		}
 
 		public void UpdateDisplayInfo()
-		{
+		{ 
 			base.UpdateDisplayInfo();
 			
 			// get the icon and text to use for this display.
