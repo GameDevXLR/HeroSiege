@@ -26,9 +26,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			string playerNN;
 			playerNN = PlayerPrefs.GetString ("PlayerNN");
-			ChangeMyName (playerNN);
-			CmdChangeName (playerNN);
-			difficultyPanel = GameObject.Find ("DifficultyPanel");
+//			ChangeMyName (playerNN);
 			GetComponent<PlayerLevelUpManager> ().enabled = true;
 			minimapIcon.color = mainPlayerColor;
 			CameraController.instanceCamera.target = gameObject;
@@ -60,18 +58,35 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GameManager.instanceGM.playerObj = gameObject;
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
 //		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
+		CmdChangeName (PlayerPrefs.GetString ("PlayerNN"));
+		difficultyPanel = GameObject.Find ("DifficultyPanel");
 		base.OnStartLocalPlayer ();
 	}
 	public override void OnStartClient ()
 	{
-		if (!isLocalPlayer) 
-		{
-			ChangeMyName (playerNickName);
+//			ChangeMyName (playerNickName);
 			base.OnStartClient ();
-		}
+
+	}
+	[Command]
+	public void CmdChangeName (string nickName)
+	{
+		playerNickName = nickName;
+		//		GetComponent<PlayerManager> ().playerNickname = nickName;
+		//		if (!isLocalPlayer) 
+		//		{
+		//			GetComponent<PlayerManager> ().playerNNTxt.text = nickName;
+		//			GetComponent<PlayerManager> ().playerUI.transform.GetChild (0).GetComponent<Text> ().text = nickName;
+		//		}
 	}
 	public void ChangeMyName (string str)
 	{
+		StartCoroutine(StartInitName(str));
+
+	}
+	IEnumerator StartInitName(string str)
+	{
+		yield return new WaitForSeconds (0.15f);
 		playerNickName = str;
 		gameObject.name = playerNickName + netId.ToString();
 		GetComponent<PlayerManager> ().playerNickname = playerNickName;
@@ -82,17 +97,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		}
 	}
 
-	[Command]
-	public void CmdChangeName (string nickName)
-	{
-		playerNickName = nickName;
-		GetComponent<PlayerManager> ().playerNickname = nickName;
-		if (!isLocalPlayer) 
-		{
-			GetComponent<PlayerManager> ().playerNNTxt.text = nickName;
-			GetComponent<PlayerManager> ().playerUI.transform.GetChild (0).GetComponent<Text> ().text = nickName;
-		}
-	}
 
 //	[ClientRpc]
 //	public void RpcChangeName ()
@@ -140,7 +144,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 
 	IEnumerator TellNewPlayerHasJoin()
 	{
-		yield return new WaitForSeconds (0.2f);
+		yield return new WaitForSeconds (0.25f);
 		RpcCallMessage (playerNickName + " has joined the game.");
 
 	}

@@ -39,6 +39,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 	{
 		specPts++;
 		playerLvl++;
+//		GetComponent<PlayerManager> ().GetALevel ();
 		if (playerLvl == 3 || playerLvl == 6 || playerLvl == 9 || playerLvl == 12) 
 		{
 			ultiSpecPts++;

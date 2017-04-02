@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class PlayerClicToMove : NetworkBehaviour {
@@ -21,13 +22,18 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public GameObject cursorTargetter;
 	int layer_mask;
 	NetworkClient nClient;
-//	[SyncVar]public Vector3 startingPos;
-
+	[SyncVar(hook = "ActualizePSpeed")]public float playerSpeed; // c'est pas link au nameshagent.speed attention!!! a corriger a l'occase. voir itemmanager qui fait appel pour le moment lors de l'achat des boots
+	public Text speedDisplay;
+	//	[SyncVar]public Vector3 startingPos; inutil now c'était pour les pnj...héritage d'un temps révolu.
 	// Use this for initialization
 	void Start () 
 	{
+		agentPlayer = GetComponent<NavMeshAgent> ();
+		attackScript = GetComponent<PlayerAutoAttack> ();
+		anim = GetComponentInChildren<Animator> ();
 		if (isLocalPlayer) 
 		{
+			speedDisplay = GameObject.Find ("SpeedLog").GetComponent<Text> ();
 			audioS = GetComponent<AudioSource> ();
 			layer_mask = LayerMask.GetMask ("Ground", "Ennemies", "UI");
 			cursorTargetter = GameObject.Find ("ClickArrowFull");
@@ -35,12 +41,10 @@ public class PlayerClicToMove : NetworkBehaviour {
 		}
 		if (isServer) 
 		{
+			playerSpeed = agentPlayer.speed;
 			aggroArea = GetComponentInChildren<PlayerEnnemyDetectionScript> ();
 
 		}
-		agentPlayer = GetComponent<NavMeshAgent> ();
-		attackScript = GetComponent<PlayerAutoAttack> ();
-		anim = GetComponentInChildren<Animator> ();
 //		if (gameObject.tag == "PNJ" && startingPos == Vector3.zero) 
 //		{
 //			startingPos = gameObject.transform.position;
@@ -128,7 +132,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	}
 	IEnumerator MoveFirst(float ping, Vector3 desti)
 	{
-		yield return new WaitForSeconds (ping/2000);
+		yield return new WaitForSeconds (ping/2000); // la moitié donc (1/2) d'un truc en milliseconds (000)  :ca fait X/2000
 		audioS.clip = walkSound;
 		audioS.Play ();
 		MovingProcedure (desti);
@@ -197,9 +201,18 @@ public class PlayerClicToMove : NetworkBehaviour {
 			SetTargetOnServer (targetid);
 		} else 
 		{
-			Debug.Log ("impossible de set une new target depuis un client!");
+			Debug.Log ("impossible de set une new target depuis un client!"); // ca apparait jamais je pense on peut delete soon ce délire.
 		}
 	}
 
+	public void ActualizePSpeed(float sp)
+	{
+		playerSpeed = sp;
+		int speedTmp = (int)(sp * 100);
+		if (isLocalPlayer) 
+		{
+			speedDisplay.text = speedTmp.ToString ();
+		}
+	}
 }
 

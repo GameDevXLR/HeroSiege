@@ -19,5 +19,6 @@ public class AlertMessageManager : MonoBehaviour
 		GameObject go = Instantiate (messPrefab, messagesBox, false);
 		go.GetComponentInChildren<Text> ().text = message;
 		go.GetComponentInChildren<Text> ().color = color;
+		go.transform.SetAsFirstSibling ();
 	}
 }

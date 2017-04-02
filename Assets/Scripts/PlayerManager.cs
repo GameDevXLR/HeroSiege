@@ -7,9 +7,12 @@ using UnityEngine.Networking;
 public class PlayerManager : NetworkBehaviour 
 {
 	[SyncVar(hook = "ActualizeKillCount")]public int killCount;
+	[SyncVar(hook = "ActuPlayerLvl")]public int playerLvl = 1; // le playerxpscript augmente ca quand c'est bon.
+	public Text playerLvlDisplay;
 //	[SyncVar(hook= "ActualizeMyNN")]
 	public string playerNickname;
 	public Text playerNNTxt;
+	public Text playerDeathsTxt;
 	public Text playerKillsTxt;
 	public Text playerLifeTxt; // en gros : 200/250 par exemple.
 	public Text playerManaTxt;
@@ -28,6 +31,11 @@ public class PlayerManager : NetworkBehaviour
 			SpawnPlayerUI ();
 			playerUI.transform.GetChild (0).GetComponent<Text> ().text = playerNickname;
 			//systeme de nom provisoire juste pour distinguer : en attendant le menu avant jeu.
+		}else
+		{
+			playerKillsTxt = GameObject.Find ("KillsCountLog").GetComponent<Text> ();
+			playerDeathsTxt = GameObject.Find ("DeathsCountLog").GetComponent<Text> ();
+			playerLvlDisplay = GameObject.Find ("PlayerLevel").GetComponent<Text> ();
 		}
 		ActualizeKillCount (killCount);
 
@@ -44,6 +52,8 @@ public class PlayerManager : NetworkBehaviour
 		playerLifeBar = playerUI.transform.Find ("AllyLifeBarMain/AllyActualLifeBar").transform;
 		playerManaTxt = playerUI.transform.Find ("AllyManaBarMain/AllyMpText").GetComponent<Text> ();
 		playerManaBar = playerUI.transform.Find ("AllyManaBarMain/AllyActualManaBar").transform;
+		playerDeathsTxt = playerUI.transform.Find ("AllyDeathsTxt").GetComponent<Text> ();
+		playerLvlDisplay = playerUI.transform.Find ("AllyLvl").GetComponent<Text> ();
 		playerLifeTxt.text = "250 / 250";
 		playerManaTxt.text = "150 / 150";
 		playerKillsTxt.text = "0";
@@ -52,18 +62,18 @@ public class PlayerManager : NetworkBehaviour
 	public void ActualizeKillCount(int kills)
 	{
 		killCount = kills;
-		if (isLocalPlayer) 
-		{
-			return;
-		}
+
 		playerKillsTxt.text = killCount.ToString ();
 	}
 
-//	public void ActualizeMyNN(string NN)
-//	{
-//		playerNickname = NN;
-//		playerUI.transform.GetChild (0).GetComponent<Text> ().text = NN;
-//	}
+	public void ActuPlayerLvl(int lvl)
+	{
+		playerLvl = lvl;
+		if (!isLocalPlayer) 
+		{
+			playerLvlDisplay.text = lvl.ToString ();
+		}
+	}
 
 	public void OnDestroy()
 	{
