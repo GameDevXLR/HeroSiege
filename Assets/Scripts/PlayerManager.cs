@@ -11,10 +11,12 @@ public class PlayerManager : NetworkBehaviour
 	public GameObject UIPrefab;
 	public GameObject playerUI;
 	public Transform playersStatsView;
+    public GameObject minimap;
 
 	public void Start()
 	{
 		playersStatsView = GameObject.Find ("PlayersStatsView").transform;
+        minimap = GameObject.Find("minimap");
 		SpawnPlayerUI ();
 		ActualizeKillCount (killCount);
 
@@ -41,4 +43,22 @@ public class PlayerManager : NetworkBehaviour
 	{
 		Destroy (playerUI);
 	}
+
+    // ping
+    public void recevePingPosition(Vector3 pingPos)
+    {
+        CmdSendAPing(pingPos);
+    }
+
+    [Command]
+    public void CmdSendAPing(Vector3 pingPos)
+    {
+        RpcReceiveAPing(pingPos);
+    }
+
+    [ClientRpc]
+    public void RpcReceiveAPing(Vector3 pingPos)
+    {
+        minimap.GetComponent<MiniMapClick>().sendPing(pingPos);
+    }
 }

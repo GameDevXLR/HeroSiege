@@ -74,7 +74,6 @@ public class CameraController : MonoBehaviour
 		if (Input.GetKeyUp (lockKey))
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
-			
 			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, layer_mask);
 		}
     }

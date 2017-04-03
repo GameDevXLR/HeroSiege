@@ -9,7 +9,9 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
    
     float minimapHeight;
     float minimapWidth;
+    //private KeyCode centerBackKey = KeyCode.Space;
     public Camera cam;
+    public GameObject ping;
 
 
     private void Start()
@@ -22,24 +24,35 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         Vector3 localHit = transform.InverseTransformPoint(eventData.position);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Debug.Log("controll");
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("activation + " + eventData.position);
+                
+                GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().recevePingPosition(eventData.position);
+            }
+                
+        }
+
+        else if (Input.GetMouseButtonDown(0))
             moveCamera(localHit);
-        if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1))
             movePLayer(localHit);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 localHit = transform.InverseTransformPoint(eventData.position);
-        if (Input.GetMouseButton(0))
+        if (localHit.x < minimapWidth && localHit.x > 0 && localHit.y > -minimapHeight && localHit.y < 0)
         {
-            
-            if (localHit.x < minimapWidth && localHit.x > 0 && localHit.y > -minimapHeight && localHit.y < 0)
-            {
+            if (Input.GetMouseButton(0))
                 moveCamera(localHit);
-            }
-        }
             
+            else if (Input.GetMouseButtonDown(1))
+                movePLayer(localHit);
+        }
     }
 
     private void moveCamera(Vector3 localHit)
@@ -65,6 +78,12 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
            
 
         }
+    }
+
+    public void sendPing(Vector3 pingPos)
+    {
+        ping.SetActive(true);
+        ping.transform.position = pingPos;
     }
 
 
