@@ -29,7 +29,7 @@ public class PlayerManager : NetworkBehaviour
 		if (!isLocalPlayer) 
 		{
 			SpawnPlayerUI ();
-			playerUI.transform.GetChild (0).GetComponent<Text> ().text = playerNickname;
+//			playerUI.transform.GetChild (0).GetComponent<Text> ().text = playerNickname;
 			//systeme de nom provisoire juste pour distinguer : en attendant le menu avant jeu.
 		}else
 		{

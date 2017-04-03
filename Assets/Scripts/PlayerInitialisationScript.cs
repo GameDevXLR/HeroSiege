@@ -18,7 +18,23 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Color mainPlayerColor;
 	public Color enemyPlayerColor;
 	public GameObject difficultyPanel;
-	[SyncVar(hook = "ChangeMyName")]public string playerNickName = "NewPlayer";
+	[SyncVar(hook = "ChangeMyName")]public string playerNickName;
+
+//	public override void OnStartClient ()
+//	{
+//		ChangeMyName (playerNickName);
+//		base.OnStartClient ();
+//	}
+
+	public override void OnStartLocalPlayer ()
+	{
+		GameManager.instanceGM.playerObj = gameObject;
+		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
+		//		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
+		CmdChangeName (PlayerPrefs.GetString ("PlayerNN"));
+		difficultyPanel = GameObject.Find ("DifficultyPanel");
+		base.OnStartLocalPlayer ();
+	}
 	// Use this for initialization
 	void Start ()
 	{
@@ -41,6 +57,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			GetComponent<PlayerLevelUpManager> ().enabled = false;
 			StartCoroutine (SetProperColor ());
+			if (!isServer) {
+				StartCoroutine (StartInitName (playerNickName));
+			}
 		}
 		if (isServer) 
 		{
@@ -53,21 +72,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		}
 	}
 
-	public override void OnStartLocalPlayer ()
-	{
-		GameManager.instanceGM.playerObj = gameObject;
-		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
-//		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
-		CmdChangeName (PlayerPrefs.GetString ("PlayerNN"));
-		difficultyPanel = GameObject.Find ("DifficultyPanel");
-		base.OnStartLocalPlayer ();
-	}
-	public override void OnStartClient ()
-	{
-//			ChangeMyName (playerNickName);
-			base.OnStartClient ();
-
-	}
 	[Command]
 	public void CmdChangeName (string nickName)
 	{
@@ -86,7 +90,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	IEnumerator StartInitName(string str)
 	{
-		yield return new WaitForSeconds (0.15f);
+		yield return new WaitForSeconds (0.4f);
 		playerNickName = str;
 		gameObject.name = playerNickName + netId.ToString();
 		GetComponent<PlayerManager> ().playerNickname = playerNickName;
@@ -144,7 +148,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 
 	IEnumerator TellNewPlayerHasJoin()
 	{
-		yield return new WaitForSeconds (0.25f);
+		yield return new WaitForSeconds (1f);
 		RpcCallMessage (playerNickName + " has joined the game.");
 
 	}
