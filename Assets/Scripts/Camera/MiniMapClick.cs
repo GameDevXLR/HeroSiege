@@ -89,7 +89,8 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         Debug.Log("position : " + truePos);
         //ping.transform.position = truePos;
         GameObject newPing = Instantiate(ping, truePos, ping.transform.rotation) as GameObject;
-        newPing.transform.parent = transform;
+        
+        newPing.transform.SetParent(transform);
     }
 
 
