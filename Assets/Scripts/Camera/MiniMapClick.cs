@@ -19,6 +19,7 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
        
         minimapHeight = GetComponent<RectTransform>().rect.height;
         minimapWidth = GetComponent<RectTransform>().rect.width;
+        
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -30,8 +31,8 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
             if (Input.GetMouseButtonDown(0))
             {
                 Debug.Log("activation + " + eventData.position);
-                
-                GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().recevePingPosition(eventData.position);
+                Vector3 pingPos = new Vector3(eventData.position.x / Screen.width ,eventData.position.y / Screen.height,0);
+                GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().recevePingPosition(pingPos);
             }
                 
         }
@@ -82,8 +83,13 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     public void sendPing(Vector3 pingPos)
     {
-        ping.SetActive(true);
-        ping.transform.position = pingPos;
+        
+        
+        Vector3 truePos = new Vector3(pingPos.x * Screen.width,pingPos.y * Screen.height,0);
+        Debug.Log("position : " + truePos);
+        //ping.transform.position = truePos;
+        GameObject newPing = Instantiate(ping, truePos, ping.transform.rotation) as GameObject;
+        newPing.transform.parent = transform;
     }
 
 
