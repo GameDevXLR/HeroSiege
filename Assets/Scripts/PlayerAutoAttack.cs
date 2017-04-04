@@ -47,6 +47,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 		}
 
+
 	}
 
 	void Update ()

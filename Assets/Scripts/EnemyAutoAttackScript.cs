@@ -101,8 +101,10 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	public void RpcAttackTarget(Vector3 pos)
 		{
 //		desiredPos = pos;
-		agent.isStopped = true;
-			isAttacking = true;
+
+			agent.isStopped = true;
+
+		isAttacking = true;
 			attackAnim = true;
 			agent.enabled = false;
 			GetComponent<NavMeshObstacle> ().enabled = true;
