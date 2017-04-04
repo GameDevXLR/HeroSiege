@@ -230,12 +230,19 @@ public class ItemManager : NetworkBehaviour
 			GameObject go = Instantiate (RunnerBootsPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
 		}
+		if (isServer) 
+		{
+			GetComponent<PlayerClicToMove> ().playerSpeed += 0.5f;
+		}
 	}
 	[ClientRpc]
 	public void RpcSellRunnerBoots()
 	{
 		GetComponent<NavMeshAgent> ().speed -= 0.5f;
-
+		if (isServer) 
+		{
+			GetComponent<PlayerClicToMove> ().playerSpeed -= 0.5f;
+		}
 	}
 	[ClientRpc]
 	//un putin de bracelet bien cheaté.

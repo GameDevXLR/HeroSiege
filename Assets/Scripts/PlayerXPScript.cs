@@ -71,12 +71,17 @@ public class PlayerXPScript : NetworkBehaviour
 				playerLvl.text = actualLevel.ToString ();
 
 			}
+			if (isServer) 
+			{
+				GetComponent<PlayerManager> ().playerLvl++;
+			}
 			GetComponent<GenericLifeScript> ().LevelUp ();
 			GetComponent<GenericManaScript> ().LevelUp ();
 			GetComponent<PlayerAutoAttack> ().LevelUp ();
 
 		}
-		if (isLocalPlayer) {
+		if (isLocalPlayer) 
+		{
 			float x = (float)actualXP / requiredXPToUp;
 			xpDisplay.localScale = new Vector3 (x, 1f, 1f);
 			xpText.text = actualXP.ToString () + " / "+ requiredXPToUp.ToString();

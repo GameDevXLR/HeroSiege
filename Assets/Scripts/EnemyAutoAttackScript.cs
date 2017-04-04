@@ -51,69 +51,60 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	void Update ()
 	{
-		if (isUnderCC) 
-		{
+		if (isUnderCC) {
 			return;
 		}
-		if (isServer) 
-		{
-			if (target) 
-			{
-				if (!isAttacking) 
-				{
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) 
-					{
+		if (isServer) {
+			if (target) {
+				if (!isAttacking) {
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) {
 						RpcAttackTarget (transform.position);
 					}
-				} else 
-				{
-					if (Time.time > previousAttackTime) 
-					{
+				} else {
+					if (Time.time > previousAttackTime) {
 						previousAttackTime = Time.time + attackRate;
 						target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
 					}
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null|| target.GetComponent<GenericLifeScript> ().isDead) 
-					{
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<GenericLifeScript> ().isDead) {
 						RpcStopAttacking ();
 					}
 				}
 			}
-			if (target == null && isAttacking) 
-			{
+			if (target == null && isAttacking) {
 				RpcStopAttacking ();
 			}
 		}
-		if (target) 
-		{
+			if (target) {
 			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
 			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
-			if (!isAttacking) 
-			{
-				if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 0 && !isActualizingPos) 
-				{
-					if (Vector3.Distance (transform.position, target.transform.position) > attackRange + 0.5f) {
-						StartCoroutine (ActualizeTargetPos ());
-					} else 
-					{
-						if (Vector3.Distance (desiredPos, transform.position) > 0.5f && desiredPos != Vector3.zero) 
-						{
-							transform.position = Vector3.Lerp (transform.position, desiredPos, 5 * Time.deltaTime);
+
+				if (!isAttacking) {
+					if (Vector3.Distance (targetTempPos, target.transform.localPosition) > 0 && !isActualizingPos) {
+						if (Vector3.Distance (transform.position, target.transform.position) > attackRange + 0.5f) {
+							StartCoroutine (ActualizeTargetPos ());
+//						} else 
+////					{
+//							if (Vector3.Distance (desiredPos, transform.position) > 0.5f && desiredPos != Vector3.zero) {
+//								transform.position = Vector3.Lerp (transform.position, desiredPos, 5 * Time.deltaTime);
+//							}
 						}
 					}
 				}
+
 			}
 
 		}
-
-		}
+	
 
 		[ClientRpc]
 	public void RpcAttackTarget(Vector3 pos)
 		{
-		desiredPos = pos;
-			agent.Stop ();
-			isAttacking = true;
+//		desiredPos = pos;
+
+			agent.isStopped = true;
+
+		isAttacking = true;
 			attackAnim = true;
 			agent.enabled = false;
 			GetComponent<NavMeshObstacle> ().enabled = true;
@@ -139,7 +130,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		if (particule != null) {
 			particule.Stop ();
 		}
-		agent.Resume ();
+		agent.isStopped = false;
 	}
 
 	public void AcquireTarget(NetworkInstanceId id)
@@ -174,7 +165,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			attackAnim = false;
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
-			agent.Resume ();
+		agent.isStopped = false;
 			audioSource.Stop ();
 			anim.SetBool ("attackEnnemi", attackAnim);
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
@@ -208,7 +199,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	{
 		targetID = id;
 		target = ClientScene.FindLocalObject (id);
-		targetTempPos = target.transform.localPosition;
+		targetTempPos = target.transform.position;
 		StartCoroutine (AcquireTargetProcess ());
 
 	}
@@ -216,16 +207,16 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	public void SetTheTarget(GameObject targ)
 	{
 			targetID = targ.GetComponent<NetworkIdentity> ().netId;
-		RpcActualizeAttackerPosition (transform.position);
+//		RpcActualizeAttackerPosition (transform.position);
 
 	}
-	[ClientRpc]
-	public void RpcActualizeAttackerPosition(Vector3 pos)
-	{
-		if (!isServer) {
-			desiredPos = pos;
-		}
-	}
+//	[ClientRpc]
+//	public void RpcActualizeAttackerPosition(Vector3 pos)
+//	{
+//		if (!isServer) {
+//			desiredPos = pos;
+//		}
+//	}
 	public void GetCC(float dur)
 	{
 		RpcGetCCForTimer (dur);
@@ -250,13 +241,13 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 		if (agent.isActiveAndEnabled) 
 		{
-			agent.Stop ();
+			agent.isStopped = true;
 		}
 		anim.enabled = false;
 		yield return new WaitForSeconds (durat);
 		if (agent.isActiveAndEnabled) 
 		{
-			agent.Resume ();
+			agent.isStopped = false;
 		}
 		if (isAttacking) 
 		{

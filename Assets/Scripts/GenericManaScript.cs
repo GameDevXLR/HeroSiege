@@ -52,13 +52,13 @@ public class GenericManaScript : NetworkBehaviour
 		if (currentMp > maxMp) 
 		{
 			currentMp = maxMp;
-			RpcActualizeThatMana ();
+			RpcActualizeThatMana (currentMp);
 
 		}
 		if (currentMp < 0) 
 		{
 			currentMp = 0;
-			RpcActualizeThatMana ();
+			RpcActualizeThatMana (currentMp);
 		}
 		if (Time.time > lastTic)	//si le temps entre 2 tics est écoulé : 
 		{  
@@ -82,7 +82,7 @@ public class GenericManaScript : NetworkBehaviour
 		if (currentMp <= maxMp) 
 		{
 			currentMp += regenMp;
-			RpcActualizeThatMana ();
+			RpcActualizeThatMana (currentMp);
 		}
 	}
 	//a invoquer sur le serveur pour faire perdre des mp au joueur.
@@ -94,7 +94,7 @@ public class GenericManaScript : NetworkBehaviour
 			return;
 		}
 		currentMp -= mana;
-		RpcActualizeThatMana ();
+		RpcActualizeThatMana (currentMp);
 	}
 
 	//fait up le joueur; dit a tous les clients que le joueur a up.
@@ -103,35 +103,36 @@ public class GenericManaScript : NetworkBehaviour
 		maxMp += levelUpBonusMP;
 		currentMp = maxMp;
 		if (isServer) {
-			RpcActualizeThatMana ();
+			RpcActualizeThatMana (currentMp);
 		}
 	}
 
 	//permet d'actualiser la mana sur tous les clients du jeu et en fonction de
 	//si c'est le localplayer ou pas; ca actualise l'interface aussi.
 	[ClientRpc]
-	public void RpcActualizeThatMana()
+	public void RpcActualizeThatMana(int curMP)
 	{
 
-		float x = (float)currentMp / maxMp;
+		float x = (float)curMP / maxMp;
 		manaBar.localScale = new Vector3 (x, 1f, 1f);
-		if (isLocalPlayer) 
-		{
-			if (manaBarMain == null) 
-			{
+		if (isLocalPlayer) {
+			if (manaBarMain == null) {
 				manaBarMain = GameObject.Find ("PlayerManaBarMain").GetComponent<RectTransform> ();
 
 			}
-			if (playerMPTxt == null) 
-			{
-				playerMPTxt = GameObject.Find ("PlayerMpText").GetComponent<Text>();
+			if (playerMPTxt == null) {
+				playerMPTxt = GameObject.Find ("PlayerMpText").GetComponent<Text> ();
 
 			}
 			manaBarMain.localScale = new Vector3 (x, 1f, 1f);
-			playerMPTxt.text = currentMp.ToString () + " / " + maxMp.ToString ();
+			playerMPTxt.text = curMP.ToString () + " / " + maxMp.ToString ();
 
+		} else 
+		{
+			GetComponent<PlayerManager> ().playerManaBar.localScale = new Vector3 (x, 1f, 1f);
+			GetComponent<PlayerManager>().playerManaTxt.text = curMP.ToString () + " / " + maxMp.ToString ();
 		}
-		if (currentMp < maxMp) 
+		if (curMP < maxMp) 
 		{
 			manaBar.GetComponentInParent<Canvas> ().enabled = true;
 		} else 

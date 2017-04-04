@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 222187028645661726}
   - component: {fileID: 114136075849890168}
   - component: {fileID: 114745866321385462}
-  - component: {fileID: 114797037972902896}
   - component: {fileID: 114317753525607516}
   m_Layer: 5
   m_Name: MessageAlertPrefab
@@ -60,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11724126, g: 0.303, b: 0, a: 1}
+  m_Color: {r: 0.11724126, g: 0.303, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -113,7 +112,7 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 30
-    m_Alignment: 4
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -158,35 +157,9 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114136075849890168}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114797037972902896}
-        m_MethodName: BuyThatItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114797037972902896
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1127924229170528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82c97e2522302964fb222f72ea3b49a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  itemID: 0
-  itemPrice: 50
-  thisBtn: {fileID: 114745866321385462}
 --- !u!222 &222187028645661726
 CanvasRenderer:
   m_ObjectHideFlags: 1

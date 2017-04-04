@@ -23,6 +23,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public float attackRate; // le rate d'attaque par seconde
 	private float previousAttackTime; // privé : le temps global de la derniere attaque
 	[SyncVar(hook = "ActualizeDamage")]public int damage; // combien de dégats brut (hors armure) on fait.
+
 	public Text damageDisplay; // le display de la force d'attaque (joueur only)
 	public int levelUpBonusDamage; // (joueur) combien de damage en plus si lvl up 
 	public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
@@ -43,7 +44,9 @@ public class PlayerAutoAttack: NetworkBehaviour
 			agent.avoidancePriority = 75;
 			damageDisplay = GameObject.Find ("DamageLog").GetComponent<Text> ();
 			damageDisplay.text = damage.ToString ();
+
 		}
+
 
 	}
 
@@ -203,6 +206,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		if (isLocalPlayer) 
 		{
 			damageDisplay.text = damage.ToString ();
+
 		}
 	}
 	IEnumerator ActualizeTargetPos()

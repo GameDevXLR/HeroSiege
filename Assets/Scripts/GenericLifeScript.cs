@@ -25,10 +25,11 @@ public class GenericLifeScript : NetworkBehaviour {
 	public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn le joueur.
 	[SyncVar (hook = "ActualizeArmor")]public int armorScore = 1;
 	public Text armorDisplay;
-	[Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
+	[SyncVar (hook = "ActualizeDodge")][Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
+	public Text dodgeDisplay;
 	public Text respawnTxt;
 	[SyncVar]public bool isDead;
-	[SyncVar]public int playerDeathCount; //nombre de morts du joueur.
+	[SyncVar(hook = "ActualizePlayerDeaths")]public int playerDeathCount; //nombre de morts du joueur.
 	public float respawnTime = 5f;
 	private float lastTic;
 	public float timeBetweenTic = 1f;
@@ -48,6 +49,8 @@ public class GenericLifeScript : NetworkBehaviour {
 			respawnTxt = GameObject.Find ("RespawnText").GetComponent<Text> ();
 			armorDisplay = GameObject.Find ("ArmorLog").GetComponent<Text> ();
 			armorDisplay.text = armorScore.ToString();
+			dodgeDisplay = GameObject.Find ("DodgeLog").GetComponent<Text> ();
+			ActualizeDodge (dodge);
 			lifeBarMain = GameObject.Find ("PlayerLifeBarMain").GetComponent<RectTransform> ();
 			playerHPTxt = GameObject.Find ("PlayerHPTxt").GetComponent<Text> ();
 			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
@@ -206,11 +209,17 @@ public class GenericLifeScript : NetworkBehaviour {
 
 		}
 		lifeBar.localScale = new Vector3 (x, 1f, 1f);
-		if (isLocalPlayer) 
-		{
+		if (isLocalPlayer) {
 			lifeBarMain.localScale = new Vector3 (x, 1f, 1f);
 			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
 
+		} else 
+		{
+			if (gameObject.layer == Layers.Player) 
+			{
+				GetComponent<PlayerManager> ().playerLifeBar.localScale = new Vector3 (x, 1f, 1f);
+				GetComponent<PlayerManager>().playerLifeTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
+			}
 		}
 	}
 	public void	RegenYourHP ()
@@ -393,5 +402,18 @@ public class GenericLifeScript : NetworkBehaviour {
 		{
 			armorDisplay.text = armorScore.ToString ();
 		}
+	}
+	public void ActualizeDodge(float dod)
+	{
+		dodge = dod;
+		if (isLocalPlayer) 
+		{
+			dodgeDisplay.text = dod.ToString ();
+		}
+	}
+	public void ActualizePlayerDeaths(int dea)
+	{
+		playerDeathCount = dea;
+		GetComponent<PlayerManager> ().playerDeathsTxt.text = dea.ToString ();
 	}
 }
