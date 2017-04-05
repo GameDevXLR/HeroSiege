@@ -73,7 +73,7 @@ MonoBehaviour:
   m_NetworkAddress: localhost
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
-  m_ScriptCRCCheck: 1
+  m_ScriptCRCCheck: 0
   m_MaxDelay: 0.1
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 1677075611022148, guid: d533b97bfb3e8eb4eaafd710e696cf82,
@@ -90,6 +90,7 @@ MonoBehaviour:
   - {fileID: 1498430331498804, guid: 1777822f51750cd42bfef99045fa30e4, type: 2}
   - {fileID: 1343218928825644, guid: f5a8e65b673dcf646a395ce5089966cb, type: 2}
   - {fileID: 1101485968794934, guid: d9e2b567b3b624b489c12c96adca4827, type: 2}
+  - {fileID: 1149734847917142, guid: 2991c5c190ea0eb4b9ca83f63bcb558b, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 10
   m_ConnectionConfig:
@@ -106,12 +107,19 @@ MonoBehaviour:
     m_OverflowDropThreshold: 5
     m_MaxConnectionAttempt: 10
     m_AckDelay: 33
+    m_SendDelay: 10
     m_MaxCombinedReliableMessageSize: 100
     m_MaxCombinedReliableMessageCount: 10
     m_MaxSentMessageQueueSize: 128
-    m_IsAcksLong: 0
+    m_AcksType: 1
     m_UsePlatformSpecificProtocols: 0
+    m_InitialBandwidth: 0
+    m_BandwidthPeakFactor: 2
     m_WebSocketReceiveBufferMaxSize: 0
+    m_UdpSocketReceiveBufferMaxSize: 0
+    m_SSLCertFilePath: 
+    m_SSLPrivateKeyFilePath: 
+    m_SSLCAFilePath: 
     m_Channels: []
   m_GlobalConfig:
     m_ThreadAwakeTimeout: 1
@@ -119,7 +127,13 @@ MonoBehaviour:
     m_ReactorMaximumReceivedMessages: 4096
     m_ReactorMaximumSentMessages: 4096
     m_MaxPacketSize: 2000
-  m_Channels: 050000000000000008000000
+    m_MaxHosts: 16
+    m_ThreadPoolSize: 1
+    m_MinTimerTimeout: 1
+    m_MaxTimerTimeout: 12000
+    m_MinNetSimulatorTimeout: 1
+    m_MaxNetSimulatorTimeout: 12000
+  m_Channels: 05000000000000000800000006000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 50
