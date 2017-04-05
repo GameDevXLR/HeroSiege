@@ -93,7 +93,7 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdSendAPing(Vector3 pingPos)
     {
-        GameObject ping = Instantiate(pingPrefab, pingPos, Quaternion.identity) as GameObject; 
+		GameObject ping = Instantiate(pingPrefab, pingPos, Quaternion.Euler(new Vector3(90f,0f,0f))) as GameObject; 
         NetworkServer.Spawn(ping);
 
     }
