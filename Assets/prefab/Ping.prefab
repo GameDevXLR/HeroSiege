@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222286915025989668}
   - component: {fileID: 114061876257903824}
   - component: {fileID: 114027666395883094}
+  - component: {fileID: 114922920687314220}
   m_Layer: 5
   m_Name: Ping
   m_TagString: Untagged
@@ -68,6 +69,38 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114922920687314220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365550084531718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 21
+    i1: 241
+    i2: 91
+    i3: 56
+    i4: 97
+    i5: 109
+    i6: 75
+    i7: 116
+    i8: 251
+    i9: 130
+    i10: 64
+    i11: 186
+    i12: 0
+    i13: 29
+    i14: 164
+    i15: 105
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!222 &222286915025989668
 CanvasRenderer:
   m_ObjectHideFlags: 1

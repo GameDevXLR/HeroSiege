@@ -19,6 +19,7 @@ public class PlayerManager : NetworkBehaviour
 	public Transform playerLifeBar; // a rescale en fonction des pv. lié au script Genericlifescript.
 	public Transform playerManaBar; //a noté que c'est que pour les alliés.
 
+	public GameObject pingPrefab;
 	public GameObject UIPrefab;
 	public GameObject playerUI;
 	public Transform playersStatsView;
@@ -99,4 +100,5 @@ public class PlayerManager : NetworkBehaviour
     {
         minimap.GetComponent<MiniMapClick>().sendPing(pingPos);
     }
+
 }
