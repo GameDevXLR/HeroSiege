@@ -1757,6 +1757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4324d645e7bbf7b4a98dc3f3fa2131cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpellCC: {fileID: 8300000, guid: 0f34dd62e512e8d4e83e85f7638a91ed, type: 3}
   spellCost: 80
   spellDmg: 150
   spellCD: 20
@@ -2001,6 +2002,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b720573fea4154a9207068bf147317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
+  Spell1: {fileID: 8300000, guid: 25b05f5212f823d49a1abd46bcf4e5a5, type: 3}
   spellCost: 30
   spellDmg: 30
   spellCD: 8
@@ -2506,6 +2509,7 @@ MonoBehaviour:
   UIPrefab: {fileID: 1587382832268106, guid: 9206b6cbf3a057d488a960a59d43cd23, type: 2}
   playerUI: {fileID: 0}
   playersStatsView: {fileID: 0}
+  minimap: {fileID: 0}
 --- !u!114 &114819530815222618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2589,6 +2593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fc55b5d0348724892fd32b9e512361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncRot: 0
+  timeBtwTic: 0.11
 --- !u!114 &114924662801619198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2641,6 +2647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDeath: {fileID: 8300000, guid: e5447a8243a89494a9685411422e7e6f, type: 3}
+  PlayerSpawn: {fileID: 8300000, guid: 2a85da6a9b7063841bbe8c6022aa8f37, type: 3}
   xpGiven: 30
   goldGiven: 5
   killCount: 0

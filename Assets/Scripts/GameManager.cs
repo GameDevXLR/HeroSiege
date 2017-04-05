@@ -18,6 +18,8 @@ public class GameManager : NetworkBehaviour
 	// gere pas grand chose lié au réseau parcontre : voir NetworkManagerObj pour ca (dans la hierarchy)
 	public GameObject difficultyPanel;
 	public AudioClip LooseLifeSound;
+	public AudioClip winSound;
+	public AudioClip looseSound;
 	public Text generalTxt;
 	public Text gameOverTxt;
 	public Text team1LivesDisplay;
@@ -160,9 +162,11 @@ public class GameManager : NetworkBehaviour
 		{
 			gameOverTxt.text = "Victory!!!";
 			gameOverTxt.color = Color.green;
+			GetComponent<AudioSource> ().PlayOneShot (winSound);
 		} else 
 		{
 			gameOverTxt.text = "Deafeat...";
+			GetComponent<AudioSource> ().PlayOneShot (looseSound);
 
 		}
 		gameOverTxt.enabled = true;

@@ -12,7 +12,8 @@ public class PlayerCastSpellOne : NetworkBehaviour
 	//le sort fait spawn un prefab qui est configuré ici (dégats etc)
 	//le prefab doit etre enregistrer par le networkmanagerObj
 	//le sort peut up.
-
+	public AudioClip OOM;
+	public AudioClip Spell1;
 	string spellDescription;
 	public int spellCost = 30;
 	public int spellDmg = 50;
@@ -47,6 +48,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 	[Command]
 	public void CmdCastSpell()
 	{
+			GetComponent<AudioSource> ().PlayOneShot (Spell1);
 			GameObject go = Instantiate (spellObj, transform.position, transform.localRotation);
 			go.GetComponent<SpellAreaDamage> ().caster = gameObject;
 			go.GetComponent<AlwaysMove> ().target = gameObject;
@@ -70,6 +72,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 		} else 
 		{
 			GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
+			GetComponent<AudioSource> ().PlayOneShot (OOM);
 		}
 	}
 

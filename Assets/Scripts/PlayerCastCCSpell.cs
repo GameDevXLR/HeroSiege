@@ -12,7 +12,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		//le sort fait spawn un prefab qui est configuré ici (dégats etc/ durée du CC)
 		//le prefab doit etre enregistrer par le networkmanagerObj
 		//le sort peut up.
-
+	public AudioClip SpellCC;
 		string spellDescription;
 		public int spellCost = 80;
 		public int spellDmg = 50;
@@ -54,6 +54,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		[Command]
 	public void CmdCastSpell(Vector3 pos)
 		{
+		GetComponent<AudioSource> ().PlayOneShot (SpellCC);
 		GameObject go = Instantiate (spellObj, pos, spellTargeter.transform.rotation);
 		go.GetComponent<SpellCCAreaScript> ().caster = gameObject;
 		go.GetComponent<SpellCCAreaScript> ().spellDamage = spellDmg;

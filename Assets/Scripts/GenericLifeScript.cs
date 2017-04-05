@@ -10,6 +10,8 @@ public class GenericLifeScript : NetworkBehaviour {
 
 	// ce script sert a gerer la vie de l'objet auquel il est attacher. 
 	// il a grand besoin d'etre diviser en un pour mob / un pour joueur / un pour tour ptete meme 1 pour pnj.
+	public AudioClip PlayerDeath;
+	public AudioClip PlayerSpawn;
 	public int xpGiven = 50;
 	public int goldGiven = 5;
 	public int killCount;
@@ -303,6 +305,7 @@ public class GenericLifeScript : NetworkBehaviour {
 
 		}
 		deadAnimChildMesh.GetComponent<Animator> ().SetBool ("isDead", true);
+		GetComponent<AudioSource> ().PlayOneShot (PlayerDeath);
 		playerDeathCount++;
 		respawnTime += playerDeathCount*2;
 		GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas> ().enabled = false;
@@ -339,6 +342,7 @@ public class GenericLifeScript : NetworkBehaviour {
 		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
 		GetComponent<CapsuleCollider> ().enabled = true;
+		GetComponent<AudioSource> ().PlayOneShot (PlayerSpawn);
 		if(isServer)
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
