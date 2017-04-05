@@ -23,12 +23,13 @@ public class PlayerManager : NetworkBehaviour
 	public GameObject playerUI;
 	public Transform playersStatsView;
     public GameObject minimap;
+    public GameObject pingPrefab;
 
 	public void Start()
 	{
 		playersStatsView = GameObject.Find ("PlayersStatsView").transform;
-		minimap = GameObject.Find("minimap");
-		if (!isLocalPlayer) 
+        minimap = GameObject.Find("minimap");
+        if (!isLocalPlayer) 
 		{
 			SpawnPlayerUI ();
 //			playerUI.transform.GetChild (0).GetComponent<Text> ().text = playerNickname;
@@ -85,18 +86,17 @@ public class PlayerManager : NetworkBehaviour
     // ping
     public void recevePingPosition(Vector3 pingPos)
     {
+
         CmdSendAPing(pingPos);
     }
 
     [Command]
     public void CmdSendAPing(Vector3 pingPos)
     {
-        RpcReceiveAPing(pingPos);
+        GameObject ping = Instantiate(pingPrefab, pingPos, Quaternion.identity) as GameObject; 
+        NetworkServer.Spawn(ping);
+
     }
 
-    [ClientRpc]
-    public void RpcReceiveAPing(Vector3 pingPos)
-    {
-        minimap.GetComponent<MiniMapClick>().sendPing(pingPos);
-    }
+
 }

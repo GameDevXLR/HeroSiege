@@ -30,9 +30,10 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
             Debug.Log("controll");
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("activation + " + eventData.position);
-                Vector3 pingPos = new Vector3(eventData.position.x / Screen.width ,eventData.position.y / Screen.height,0);
-                GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().recevePingPosition(pingPos);
+                //Debug.Log("activation + " + eventData.position);
+                //Vector3 pingPos = new Vector3(eventData.position.x / Screen.width ,eventData.position.y / Screen.height,0);
+                //GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().recevePingPosition(pingPos);
+                sendPing(localHit);
             }
                 
         }
@@ -81,17 +82,29 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         }
     }
 
-    public void sendPing(Vector3 pingPos)
+    private void sendPing(Vector3 localHit)
     {
-        
-        
-        Vector3 truePos = new Vector3(pingPos.x * Screen.width,pingPos.y * Screen.height,0);
-        Debug.Log("position : " + truePos);
-        //ping.transform.position = truePos;
-        GameObject newPing = Instantiate(ping, truePos, ping.transform.rotation) as GameObject;
-        
-        newPing.transform.SetParent(transform);
+        Vector3 vector = new Vector3(Math.Abs(localHit.x / minimapWidth), 1 - Math.Abs(localHit.y / minimapHeight), 0);
+        Ray ray = cam.ViewportPointToRay(vector);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().recevePingPosition(hit.point);
+            Debug.Log("moau");
+        }
     }
+
+    //public void sendPing(Vector3 pingPos)
+    //{
+        
+        
+    //    Vector3 truePos = new Vector3(pingPos.x * Screen.width,pingPos.y * Screen.height,0);
+    //    Debug.Log("position : " + truePos);
+    //    //ping.transform.position = truePos;
+    //    GameObject newPing = Instantiate(ping, truePos, ping.transform.rotation) as GameObject;
+        
+    //    newPing.transform.SetParent(transform);
+    //}
 
 
 
