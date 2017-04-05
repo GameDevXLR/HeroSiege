@@ -41,6 +41,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public GameObject deadAnimChildEffect;
 	public GameObject deadAnimChildMesh;
 	public GameObject mobDeadAnimChildMesh;
+	private Image playerDeathDisplay;
 
 	void Start () 
 	{
@@ -55,6 +56,7 @@ public class GenericLifeScript : NetworkBehaviour {
 			ActualizeDodge (dodge);
 			lifeBarMain = GameObject.Find ("PlayerLifeBarMain").GetComponent<RectTransform> ();
 			playerHPTxt = GameObject.Find ("PlayerHPTxt").GetComponent<Text> ();
+			playerDeathDisplay = GameObject.Find ("PlayerDeadAvatarImg").GetComponent<Image> ();
 			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
 		}
 		if (gameObject.layer == Layers.Player) 
@@ -358,16 +360,18 @@ public class GenericLifeScript : NetworkBehaviour {
 
 	IEnumerator RespawnTimer()
 	{
+		playerDeathDisplay.enabled = true;
 		respawnTxt.enabled = true;
 		int z = (int)respawnTime;
 		for (int j = 0; j <z; j++)
 		{
 			yield return new WaitForEndOfFrame ();
 			int k = z - j;
-			respawnTxt.text = "Respawning in " + k + " seconds.";
+			respawnTxt.text = k.ToString();
 			yield return new WaitForSeconds (1f);
 			if (k == 1) 
 			{
+				playerDeathDisplay.enabled = false;
 				respawnTxt.enabled = false;
 			}
 		}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TpMovement : MonoBehaviour {
 
 	public float RotationSpeed;
+	private Quaternion rot;
 	// Use this for initialization
 	void Start () 
 	{
@@ -14,6 +15,8 @@ public class TpMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		transform.Rotate (new Vector3 (2, 4, 10) * RotationSpeed * Time.deltaTime);
+		transform.rotation = rot;
+		transform.Rotate (Vector3.forward * RotationSpeed * Time.deltaTime);
+		rot = transform.rotation;
 	}
 }
