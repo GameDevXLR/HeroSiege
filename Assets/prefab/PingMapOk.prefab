@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 199518481600504642}
   - component: {fileID: 198413066036694334}
   - component: {fileID: 114813084489062736}
+  - component: {fileID: 114269022204017400}
   m_Layer: 11
   m_Name: PingMapOk
   m_TagString: Untagged
@@ -42,6 +43,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &114269022204017400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1149734847917142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ca80cb628febb46b40b10a3017d40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 1.8
 --- !u!114 &114813084489062736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3097,7 +3110,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 540c774d2adfb1e44bfa21f1595b65b0, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -3130,7 +3143,7 @@ ParticleSystemRenderer:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_VertexStreams: 0001030405
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
