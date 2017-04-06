@@ -11,8 +11,11 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 	//ce script gere l'auto attack de l'objet auquel il est attacher.
 	//subidivision special player.
-	private AudioSource audioSource; // qui joue le son
-	public AudioClip[] playerSounds; //quel sons pour le joueur
+	//private AudioSource audioSource; // qui joue le son
+	//public AudioClip[] playerSounds; //quel sons pour le joueur
+	public AudioClip Att1;
+	public AudioClip Att2;
+	public AudioClip Charge;
 
 	Animator anim; // l'animator qui gere les anim lié a ce script
 	public bool stopWalk; //pour l animation : arrete de marcher
@@ -38,7 +41,6 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponentInChildren<Animator> ();
-		audioSource = GetComponent<AudioSource> ();
 		if (isLocalPlayer) 
 		{
 			agent.avoidancePriority = 75;
@@ -135,13 +137,12 @@ public class PlayerAutoAttack: NetworkBehaviour
 		anim.SetBool ("attack", attackAnim);
 		int AttSound = Random.Range (0, 10);
 		if (AttSound > 5) {
-			audioSource.clip = playerSounds [1];
-			audioSource.Play ();
+			//audioSource.clip = playerSounds [1];
+			GetComponent<AudioSource> ().PlayOneShot (Att1);
 		}
 			else
-
-				audioSource.clip = playerSounds [0];
-				audioSource.Play ();
+			//audioSource.clip = playerSounds [0];
+			GetComponent<AudioSource> ().PlayOneShot (Att2);
 
 
 	}
@@ -176,7 +177,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		target = newTarget;
 		charge = true;
 		anim.SetBool ("charge", charge);
-		audioSource.PlayOneShot (playerSounds [2]);
+		GetComponent<AudioSource> ().PlayOneShot (Charge);
 	}
 
 	public void LooseTarget()
