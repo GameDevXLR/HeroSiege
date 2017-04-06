@@ -22,6 +22,7 @@ public class CaptureThePoint : NetworkBehaviour
 	public float timeToCapture;
 	private float timeCaptureStart;
 	private float initialTimeToCapt;
+	public AudioClip Capture;
 	// Use this for initialization
 	void Start () 
 	{		
@@ -140,6 +141,7 @@ public class CaptureThePoint : NetworkBehaviour
 		belongsTo = newOwner;
 		if (canBeOwnedBy == newOwner) 
 		{
+			GetComponent<AudioSource> ().PlayOneShot (Capture);
 			GetComponent<Location> ().IconColour = Color.green;
 			GetComponentInChildren<ShopScript> ().isAccessible = true;
 			transform.GetChild (0).GetComponent<Location> ().enabled = true;

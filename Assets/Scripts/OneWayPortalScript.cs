@@ -13,7 +13,7 @@ public class OneWayPortalScript : NetworkBehaviour {
 	//juste avant de tp le joueur lance l'effet de particule sur le réseau / il peut encore annuler le TP.
 	//il est autodétruit si time.time > timeofLife + timeofCreation(+durée de l'effet particule TP+ petit délai histoire d'etre sur...);
 	//il reste tant qu'un joueur l'a pas utilisé
-
+	public AudioClip Teleportation;
 	public bool isBeingUsed = true; //je le met en utilisé au début tant que la partie est pas lancée.
 	public float timeToTP = 2;
 	private float timeOfActivation;
@@ -69,6 +69,7 @@ public class OneWayPortalScript : NetworkBehaviour {
 			{
 				isPlayingEffect = true;
 				RpcPlayEffect ();
+				GetComponent<AudioSource> ().PlayOneShot (Teleportation);
 			}
 			if (Time.time > timeOfActivation + timeToTP) 
 			{
@@ -113,6 +114,7 @@ public class OneWayPortalScript : NetworkBehaviour {
 	public void RpcPlayEffect()
 	{
 		tpEffect.Play (true);
+
 	}
 
 //	IEnumerator destroyThatTP ()

@@ -8,6 +8,8 @@ public class DayNightCycle : NetworkBehaviour {
 	[SyncVar]public float speed = 0f;
 	public int nightSpeedFactor = 2;
 	public bool isNight;
+	public AudioClip Night;
+	public AudioClip Day;
 	// Use this for initialization
 	void Start () {
 		
@@ -21,12 +23,14 @@ public class DayNightCycle : NetworkBehaviour {
 		if (transform.rotation.eulerAngles.x > 180f && isNight == false) 
 		{
 			isNight = true;
+			GetComponent<AudioSource> ().PlayOneShot (Night);
 			GameManager.instanceGM.nightTime = true;
 			speed *= nightSpeedFactor;
 		}
 		if (transform.rotation.eulerAngles.x > 0f && transform.rotation.eulerAngles.x <180f&& isNight) 
 		{
 			isNight = false;
+			GetComponent<AudioSource> ().PlayOneShot (Day);
 			GameManager.instanceGM.nightTime = false;
 			speed /= nightSpeedFactor;
 		}

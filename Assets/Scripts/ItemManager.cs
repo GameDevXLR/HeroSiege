@@ -11,7 +11,7 @@ public class ItemManager : NetworkBehaviour
 	// il contient une liste de fonction appelée par l'achat d'un objet voir le script : 
 	// BuyableItemScript qui gere lui l'action de selectionner un objet a acheter puis fait
 	//appel a ce script pour l'achat sur le réseau.
-
+	public AudioClip Gold;
 	public Transform guardSpawnPoint;
 	public UnityEvent[] itemEvents;
 	public GameObject targetplayer;
@@ -73,6 +73,7 @@ public class ItemManager : NetworkBehaviour
 		targetplayer = NetworkServer.FindLocalObject (ID);
 		targetplayer.GetComponent<PlayerGoldScript> ().ActualGold -= itemPrice;
 		RpcInvokeTheGoodEvent (itemID);
+		GetComponent<AudioSource> ().PlayOneShot (Gold);
 	}
 
 	[ClientRpc]

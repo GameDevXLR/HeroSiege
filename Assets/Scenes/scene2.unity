@@ -2999,6 +2999,7 @@ MonoBehaviour:
   itemPrice: 30
   thisBtn: {fileID: 90738835}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &90738835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4338,6 +4339,7 @@ MonoBehaviour:
   itemPrice: 100
   thisBtn: {fileID: 124687628}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &124687628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5549,6 +5551,7 @@ MonoBehaviour:
   itemPrice: 100
   thisBtn: {fileID: 149438108}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &149438108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8293,6 +8296,7 @@ MonoBehaviour:
   itemPrice: 500
   thisBtn: {fileID: 245658171}
   recquireSlot: 0
+  Gold: {fileID: 0}
 --- !u!114 &245658171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9248,6 +9252,7 @@ GameObject:
   - component: {fileID: 262913165}
   - component: {fileID: 262913169}
   - component: {fileID: 262913168}
+  - component: {fileID: 262913170}
   m_Layer: 0
   m_Name: CampT1
   m_TagString: Untagged
@@ -9418,6 +9423,88 @@ MonoBehaviour:
   playersIn: []
   enemiesIn: []
   timeToCapture: 10
+  Capture: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
+--- !u!82 &262913170
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 262913164}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243765118687429670, guid: f53275b0b299b98478e54f8554ae7abc,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &273948479 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 4a3fd121990df8948b2a3e7c6725fd81, type: 2}
@@ -10267,6 +10354,7 @@ MonoBehaviour:
   itemPrice: 2500
   thisBtn: {fileID: 284956657}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &284956657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10714,6 +10802,7 @@ MonoBehaviour:
   itemPrice: 100
   thisBtn: {fileID: 296069116}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &296069116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11858,6 +11947,7 @@ MonoBehaviour:
   itemPrice: 30
   thisBtn: {fileID: 336866845}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &336866845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13866,6 +13956,7 @@ MonoBehaviour:
   itemPrice: 200
   thisBtn: {fileID: 391965090}
   recquireSlot: 0
+  Gold: {fileID: 0}
 --- !u!114 &391965090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17711,6 +17802,11 @@ Prefab:
       propertyPath: isBeingUsed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114410925176444332, guid: 469974d5176072247831bf26d4c4cc93,
+        type: 2}
+      propertyPath: Teleportation
+      value: 
+      objectReference: {fileID: 8300000, guid: 232efd82e671d5b4885c16f6823f5b44, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 469974d5176072247831bf26d4c4cc93, type: 2}
   m_IsPrefabParent: 0
@@ -17987,6 +18083,7 @@ MonoBehaviour:
   itemPrice: 100
   thisBtn: {fileID: 538481399}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &538481399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22269,6 +22366,7 @@ MonoBehaviour:
   itemPrice: 500
   thisBtn: {fileID: 677370651}
   recquireSlot: 0
+  Gold: {fileID: 0}
 --- !u!114 &677370651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26244,6 +26342,7 @@ MonoBehaviour:
   itemPrice: 50
   thisBtn: {fileID: 774809473}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &774809473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30784,6 +30883,7 @@ MonoBehaviour:
   itemPrice: 30
   thisBtn: {fileID: 885049853}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &885049853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36664,6 +36764,7 @@ MonoBehaviour:
   itemPrice: 4200
   thisBtn: {fileID: 1054996986}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1054996986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42338,6 +42439,7 @@ MonoBehaviour:
   itemPrice: 50
   thisBtn: {fileID: 1169282948}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1169282948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47855,6 +47957,7 @@ MonoBehaviour:
   itemPrice: 30
   thisBtn: {fileID: 1286097219}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1286097219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51914,6 +52017,7 @@ MonoBehaviour:
   itemPrice: 50
   thisBtn: {fileID: 1394135537}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1394135537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52002,6 +52106,43 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1394135534}
+--- !u!1 &1400031211 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1070669559500848, guid: 87dcde3cb70169c4d898edaff00345e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 707700907}
+--- !u!114 &1400031214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1400031211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 135
+    i1: 220
+    i2: 222
+    i3: 60
+    i4: 183
+    i5: 1
+    i6: 105
+    i7: 196
+    i8: 216
+    i9: 152
+    i10: 237
+    i11: 175
+    i12: 240
+    i13: 3
+    i14: 69
+    i15: 233
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1001 &1401879261
 Prefab:
   m_ObjectHideFlags: 0
@@ -56496,6 +56637,7 @@ MonoBehaviour:
   itemPrice: 6500
   thisBtn: {fileID: 1497739797}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1497739797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56717,6 +56859,7 @@ MonoBehaviour:
   itemPrice: 2500
   thisBtn: {fileID: 1501026371}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1501026371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60597,6 +60740,7 @@ MonoBehaviour:
   itemPrice: 1100
   thisBtn: {fileID: 1588156172}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1588156172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64085,6 +64229,7 @@ GameObject:
   - component: {fileID: 1667122939}
   - component: {fileID: 1667122942}
   - component: {fileID: 1667122941}
+  - component: {fileID: 1667122943}
   m_Layer: 0
   m_Name: CampT2
   m_TagString: Untagged
@@ -64223,6 +64368,7 @@ MonoBehaviour:
   playersIn: []
   enemiesIn: []
   timeToCapture: 10
+  Capture: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
 --- !u!114 &1667122942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64255,6 +64401,87 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!82 &1667122943
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667122937}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243765118687429670, guid: f53275b0b299b98478e54f8554ae7abc,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &1667620341
 Prefab:
   m_ObjectHideFlags: 0
@@ -67128,6 +67355,7 @@ MonoBehaviour:
   itemPrice: 50
   thisBtn: {fileID: 1773937134}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1773937134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68005,6 +68233,7 @@ GameObject:
   - component: {fileID: 1807621384}
   - component: {fileID: 1807621386}
   - component: {fileID: 1807621387}
+  - component: {fileID: 1807621388}
   m_Layer: 0
   m_Name: MainSun
   m_TagString: Untagged
@@ -68075,6 +68304,8 @@ MonoBehaviour:
   speed: 0
   nightSpeedFactor: 2
   isNight: 0
+  Night: {fileID: 8300000, guid: a808dc48c30aa1a48aae4272aada3783, type: 3}
+  Day: {fileID: 8300000, guid: 3359c8af262251a409878a4c7eddc9c4, type: 3}
 --- !u!114 &1807621387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68107,6 +68338,87 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!82 &1807621388
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1807621383}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243995075354108432, guid: f53275b0b299b98478e54f8554ae7abc,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &1811503578
 Prefab:
   m_ObjectHideFlags: 0
@@ -68544,6 +68856,7 @@ MonoBehaviour:
   itemPrice: 1100
   thisBtn: {fileID: 1826864085}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1826864085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69106,6 +69419,7 @@ MonoBehaviour:
   itemPrice: 6500
   thisBtn: {fileID: 1849652193}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1849652193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72956,6 +73270,7 @@ MonoBehaviour:
   itemPrice: 4200
   thisBtn: {fileID: 1921570318}
   recquireSlot: 1
+  Gold: {fileID: 0}
 --- !u!114 &1921570318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74438,6 +74753,7 @@ MonoBehaviour:
   itemPrice: 200
   thisBtn: {fileID: 1968312311}
   recquireSlot: 0
+  Gold: {fileID: 0}
 --- !u!114 &1968312311
 MonoBehaviour:
   m_ObjectHideFlags: 0
