@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class StatusHandlerScript : NetworkBehaviour 
@@ -10,6 +11,7 @@ public class StatusHandlerScript : NetworkBehaviour
 	//ce script gere les différents statuts d'un personnage : CC  / root / saignement / slow etc...
 
 	public bool underCC;
+	public SpriteRenderer CCTwistImg;
 //	public SkinnedMeshRenderer objRenderer;
 //	public Material stunMat;
 //	public Material normalMat;
@@ -38,12 +40,16 @@ public class StatusHandlerScript : NetworkBehaviour
 	}
 	IEnumerator CCprocedure ( float CCTime)
 	{
+		CCTwistImg.enabled = true;
+
 		underCC = true;
 //		objRenderer.materials[1] = stunMat;
 //		GetComponent<NavMeshAgent> ().Stop ();
 //		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		//ajouter la désactivation de l'autoA;
 		yield return new WaitForSeconds (CCTime);
+		CCTwistImg.enabled = false;
+
 		underCC = false;
 //		objRenderer.materials[1] = normalMat;
 		//réactiver l'autoA;
@@ -56,10 +62,10 @@ public class StatusHandlerScript : NetworkBehaviour
 	}
 	IEnumerator RootProcedure (float rootTime)
 	{
-		GetComponent<NavMeshAgent> ().Stop ();
+		GetComponent<NavMeshAgent> ().isStopped = true;
 		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		yield return new WaitForSeconds (rootTime);
-		GetComponent<NavMeshAgent> ().Resume ();
+		GetComponent<NavMeshAgent> ().isStopped = false;
 	}
 
 }

@@ -18,18 +18,18 @@ public class PlayerManager : NetworkBehaviour
 	public Text playerManaTxt;
 	public Transform playerLifeBar; // a rescale en fonction des pv. lié au script Genericlifescript.
 	public Transform playerManaBar; //a noté que c'est que pour les alliés.
-
+	public Image deadAvatarImg;
+	public GameObject pingPrefab;
 	public GameObject UIPrefab;
 	public GameObject playerUI;
 	public Transform playersStatsView;
     public GameObject minimap;
-    public GameObject pingPrefab;
 
 	public void Start()
 	{
 		playersStatsView = GameObject.Find ("PlayersStatsView").transform;
-        minimap = GameObject.Find("minimap");
-        if (!isLocalPlayer) 
+		minimap = GameObject.Find("minimap");
+		if (!isLocalPlayer) 
 		{
 			SpawnPlayerUI ();
 //			playerUI.transform.GetChild (0).GetComponent<Text> ().text = playerNickname;
@@ -57,6 +57,7 @@ public class PlayerManager : NetworkBehaviour
 		playerManaBar = playerUI.transform.Find ("AllyManaBarMain/AllyActualManaBar").transform;
 		playerDeathsTxt = playerUI.transform.Find ("AllyDeathsTxt").GetComponent<Text> ();
 		playerLvlDisplay = playerUI.transform.Find ("AllyLvl").GetComponent<Text> ();
+		deadAvatarImg = playerUI.transform.Find ("allyDeadAvatar").GetComponent<Image> ();
 		playerLifeTxt.text = "250 / 250";
 		playerManaTxt.text = "100 / 100";
 		playerKillsTxt.text = "0";
@@ -86,7 +87,6 @@ public class PlayerManager : NetworkBehaviour
     // ping
     public void recevePingPosition(Vector3 pingPos)
     {
-
         CmdSendAPing(pingPos);
     }
 
@@ -98,5 +98,5 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
-
+    
 }

@@ -404,7 +404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30, y: 209}
+  m_AnchoredPosition: {x: 4.5, y: 243}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &138998811
@@ -526,7 +526,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.000008, y: -29}
+  m_AnchoredPosition: {x: 4.5, y: 5}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &339451425
@@ -681,7 +681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Join Game
+  m_Text: JOIN
 --- !u!222 &461887378
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -843,7 +843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 93}
+  m_AnchoredPosition: {x: 4.5, y: 127}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &483136451
@@ -1238,6 +1238,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4570286692455482, guid: 57a189d9da793d245827a03338d244dc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -60
@@ -1270,7 +1275,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 1365550084531718, guid: 15f15b38616d4b74fb8240ba001da469,
+        type: 2}
+    m_RemovedComponents: [{fileID: 114963862718670464, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}]
   m_ParentPrefab: {fileID: 100100000, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &771548507
@@ -1700,7 +1712,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player Profile
+  m_Text: PROFILE
 --- !u!222 &1279153599
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1739,8 +1751,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150.29, y: -32}
-  m_SizeDelta: {x: 512, y: 256}
+  m_AnchoredPosition: {x: 180, y: -57.4}
+  m_SizeDelta: {x: 444.2, y: 222.1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1343052163
 MonoBehaviour:
@@ -1913,7 +1925,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit Game
+  m_Text: QUIT
 --- !u!222 &1462183579
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2313,8 +2325,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 10}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -118.2, y: 20}
+  m_SizeDelta: {x: 163.6, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1708571119
 MonoBehaviour:
@@ -2762,7 +2774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3, y: -266}
+  m_AnchoredPosition: {x: 4.5, y: -267}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1984289702
@@ -2917,7 +2929,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Game
+  m_Text: CREATE
 --- !u!222 &2065774996
 CanvasRenderer:
   m_ObjectHideFlags: 0

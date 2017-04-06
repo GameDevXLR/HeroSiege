@@ -30,7 +30,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	[SyncVar (hook = "ActualizeDodge")][Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
 	public Text dodgeDisplay;
 	public Text respawnTxt;
-	[SyncVar]public bool isDead;
+	[SyncVar(hook = "ActualizeDeadIcon")]public bool isDead;
 	[SyncVar(hook = "ActualizePlayerDeaths")]public int playerDeathCount; //nombre de morts du joueur.
 	public float respawnTime = 5f;
 	private float lastTic;
@@ -41,6 +41,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public GameObject deadAnimChildEffect;
 	public GameObject deadAnimChildMesh;
 	public GameObject mobDeadAnimChildMesh;
+	private Image playerDeathDisplay;
 
 	void Start () 
 	{
@@ -55,6 +56,7 @@ public class GenericLifeScript : NetworkBehaviour {
 			ActualizeDodge (dodge);
 			lifeBarMain = GameObject.Find ("PlayerLifeBarMain").GetComponent<RectTransform> ();
 			playerHPTxt = GameObject.Find ("PlayerHPTxt").GetComponent<Text> ();
+			playerDeathDisplay = GameObject.Find ("PlayerDeadAvatarImg").GetComponent<Image> ();
 			playerHPTxt.text = currentHp.ToString () + " / " + maxHp.ToString ();
 		}
 		if (gameObject.layer == Layers.Player) 
@@ -358,16 +360,18 @@ public class GenericLifeScript : NetworkBehaviour {
 
 	IEnumerator RespawnTimer()
 	{
+		playerDeathDisplay.enabled = true;
 		respawnTxt.enabled = true;
 		int z = (int)respawnTime;
 		for (int j = 0; j <z; j++)
 		{
 			yield return new WaitForEndOfFrame ();
 			int k = z - j;
-			respawnTxt.text = "Respawning in " + k + " seconds.";
+			respawnTxt.text = k.ToString();
 			yield return new WaitForSeconds (1f);
 			if (k == 1) 
 			{
+				playerDeathDisplay.enabled = false;
 				respawnTxt.enabled = false;
 			}
 		}
@@ -419,5 +423,13 @@ public class GenericLifeScript : NetworkBehaviour {
 	{
 		playerDeathCount = dea;
 		GetComponent<PlayerManager> ().playerDeathsTxt.text = dea.ToString ();
+	}
+	public void ActualizeDeadIcon(bool isHeDead)
+	{
+		isDead = isHeDead;
+		if (!isLocalPlayer && gameObject.layer == Layers.Player || gameObject.layer == Layers.IgnoreLayer) 
+		{
+			GetComponent<PlayerManager> ().deadAvatarImg.enabled = isHeDead;
+		}
 	}
 }
