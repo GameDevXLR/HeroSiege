@@ -18,7 +18,7 @@ public class PlayerManager : NetworkBehaviour
 	public Text playerManaTxt;
 	public Transform playerLifeBar; // a rescale en fonction des pv. lié au script Genericlifescript.
 	public Transform playerManaBar; //a noté que c'est que pour les alliés.
-
+	public Image deadAvatarImg;
 	public GameObject pingPrefab;
 	public GameObject UIPrefab;
 	public GameObject playerUI;
@@ -57,6 +57,7 @@ public class PlayerManager : NetworkBehaviour
 		playerManaBar = playerUI.transform.Find ("AllyManaBarMain/AllyActualManaBar").transform;
 		playerDeathsTxt = playerUI.transform.Find ("AllyDeathsTxt").GetComponent<Text> ();
 		playerLvlDisplay = playerUI.transform.Find ("AllyLvl").GetComponent<Text> ();
+		deadAvatarImg = playerUI.transform.Find ("allyDeadAvatar").GetComponent<Image> ();
 		playerLifeTxt.text = "250 / 250";
 		playerManaTxt.text = "100 / 100";
 		playerKillsTxt.text = "0";

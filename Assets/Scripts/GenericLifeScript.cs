@@ -30,7 +30,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	[SyncVar (hook = "ActualizeDodge")][Range(0,100)]public float dodge; //chance d'esquiver entre 0 et 100
 	public Text dodgeDisplay;
 	public Text respawnTxt;
-	[SyncVar]public bool isDead;
+	[SyncVar(hook = "ActualizeDeadIcon")]public bool isDead;
 	[SyncVar(hook = "ActualizePlayerDeaths")]public int playerDeathCount; //nombre de morts du joueur.
 	public float respawnTime = 5f;
 	private float lastTic;
@@ -423,5 +423,13 @@ public class GenericLifeScript : NetworkBehaviour {
 	{
 		playerDeathCount = dea;
 		GetComponent<PlayerManager> ().playerDeathsTxt.text = dea.ToString ();
+	}
+	public void ActualizeDeadIcon(bool isHeDead)
+	{
+		isDead = isHeDead;
+		if (!isLocalPlayer && gameObject.layer == Layers.Player || gameObject.layer == Layers.IgnoreLayer) 
+		{
+			GetComponent<PlayerManager> ().deadAvatarImg.enabled = isHeDead;
+		}
 	}
 }

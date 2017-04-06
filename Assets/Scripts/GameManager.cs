@@ -383,7 +383,7 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcMessageToAll()
 	{
-//		playerObj.GetComponent<PlayerGoldScript> ().enabled = true;
+		GameObject.Find ("GameClock").GetComponent<GameClockMinSec> ().enabled = true;
 		messageManager.SendAnAlertMess ("The game is starting!", Color.green);
 	}
 
