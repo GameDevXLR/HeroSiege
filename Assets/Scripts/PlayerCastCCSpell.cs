@@ -13,6 +13,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		//le prefab doit etre enregistrer par le networkmanagerObj
 		//le sort peut up.
 	public AudioClip SpellCC;
+	public AudioClip OOM;
 		string spellDescription;
 		public int spellCost = 80;
 		public int spellDmg = 50;
@@ -147,6 +148,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 
 				spellTargeter.transform.position = Vector3.zero;
 			}
+			GetComponent<AudioSource> ().PlayOneShot (OOM);
 			GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
 		}
 	}

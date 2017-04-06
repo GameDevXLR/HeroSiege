@@ -1660,9 +1660,9 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: cdf0c54277866b64db8b5c0d35ce7d53, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1758,6 +1758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpellCC: {fileID: 8300000, guid: 0f34dd62e512e8d4e83e85f7638a91ed, type: 3}
+  OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   spellCost: 80
   spellDmg: 150
   spellCD: 20
@@ -1962,7 +1963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9e78a5fd7cf964587edc800e4ff605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSound: {fileID: 8300000, guid: f55b2d70c978c124e81dd968ca774706, type: 3}
+  walkSound: {fileID: 0}
   agentPlayer: {fileID: 0}
   attackScript: {fileID: 0}
   target: {fileID: 0}
@@ -2108,8 +2109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSounds:
-  - {fileID: 8300000, guid: cdf0c54277866b64db8b5c0d35ce7d53, type: 3}
-  - {fileID: 8300000, guid: f55b2d70c978c124e81dd968ca774706, type: 3}
+  - {fileID: 8300000, guid: 6df093105ed3eeb458ebe5d125dfb736, type: 3}
+  - {fileID: 8300000, guid: 5b445a1e5d09cbd4a8bdbb876db345fe, type: 3}
+  - {fileID: 0}
   stopWalk: 0
   agent: {fileID: 0}
   attackRange: 3
@@ -2143,7 +2145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7d2bb38ce99af46bba64d070abf080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gold: {fileID: 8300000, guid: 14e423af532e2ed409465ec735b11cdb, type: 3}
   guardSpawnPoint: {fileID: 0}
   itemEvents:
   - m_PersistentCalls:
@@ -2437,6 +2438,7 @@ MonoBehaviour:
     type: 2}
   OrbOfPowerPrefab: {fileID: 1462563177764482, guid: 6105e080d374e244e821ffc265a431c3,
     type: 2}
+  Gold: {fileID: 8300000, guid: 14e423af532e2ed409465ec735b11cdb, type: 3}
 --- !u!114 &114648224865163368
 MonoBehaviour:
   m_ObjectHideFlags: 1

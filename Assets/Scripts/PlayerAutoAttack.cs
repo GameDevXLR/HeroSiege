@@ -109,7 +109,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 						{
 								stopWalk = true;
 								anim.SetBool ("stopwalk", stopWalk);
-								audioSource.Stop ();
+								//audioSource.Stop ();
 							}
 						}
 					}
@@ -121,22 +121,29 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[ClientRpc]
 	public void RpcAttackTarget()
 	{
-		if (isLocalPlayer && !isServer) 
-		{
+		if (isLocalPlayer && !isServer) {
 			CmdTellThemMyLocalPos (transform.position);
 		}
 
 		charge = false;
 		anim.SetBool ("charge", false);
-		if (agent.isOnNavMesh ) 
-		{
+		if (agent.isOnNavMesh) {
 			agent.Stop ();
 		}
 		isAttacking = true;
 		attackAnim = true;
 		anim.SetBool ("attack", attackAnim);
-		audioSource.clip = playerSounds [0];
-		audioSource.Play();
+		int AttSound = Random.Range (0, 10);
+		if (AttSound > 5) {
+			audioSource.clip = playerSounds [1];
+			audioSource.Play ();
+		}
+			else
+
+				audioSource.clip = playerSounds [0];
+				audioSource.Play ();
+
+
 	}
 	[Command]
 	public void CmdTellThemMyLocalPos(Vector3 pos)
@@ -154,7 +161,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		isAttacking = false;
 		attackAnim = false;
 		agent.Resume ();
-		audioSource.Stop ();
+		//audioSource.Stop ();
 		anim.SetBool ("attack", attackAnim);
 		if (charge) 
 		{
@@ -169,7 +176,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		target = newTarget;
 		charge = true;
 		anim.SetBool ("charge", charge);
-		audioSource.PlayOneShot (playerSounds [1], .6f);
+		audioSource.PlayOneShot (playerSounds [2]);
 	}
 
 	public void LooseTarget()
@@ -181,7 +188,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 			agent.Resume ();
 		}
-		audioSource.Stop ();
+		//audioSource.Stop ();
 		anim.SetBool ("attack", attackAnim);
 		if (charge) 
 		{

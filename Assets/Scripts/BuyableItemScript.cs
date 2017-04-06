@@ -14,7 +14,6 @@ public class BuyableItemScript : MonoBehaviour
 	public int itemPrice;
 	public Button thisBtn;
 	public bool recquireSlot;
-	public AudioClip Gold;
 	void Start()
 	{
 		player = GameManager.instanceGM.playerObj;
@@ -26,9 +25,7 @@ public class BuyableItemScript : MonoBehaviour
 		{
 			StartCoroutine (DisableTheButtonTemporarily ());
 			player = GameManager.instanceGM.playerObj;
-
 			player.GetComponent<ItemManager> ().BuyItem (itemID, itemPrice, recquireSlot);
-			GetComponent<AudioSource> ().PlayOneShot (Gold);
 		}
 	}
 
