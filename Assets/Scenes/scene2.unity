@@ -661,7 +661,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 18951273}
-  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
+  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
   m_LocalPosition: {x: -133.0537, y: 13.596641, z: 35.511982}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -6563,6 +6563,7 @@ MonoBehaviour:
   playersIn: []
   enemiesIn: []
   timeToCapture: 10
+  Capture: {fileID: 0}
 --- !u!4 &273948479 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 4a3fd121990df8948b2a3e7c6725fd81, type: 2}
@@ -21200,7 +21201,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872472613}
-  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
+  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
   m_LocalPosition: {x: -133.0537, y: 13.596641, z: 35.511982}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -24660,7 +24661,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1021939556}
-  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
+  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
   m_LocalPosition: {x: -133.0537, y: 13.016641, z: 0.5419818}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -40233,7 +40234,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1517417618}
-  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
+  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
   m_LocalPosition: {x: -133.0537, y: 13.016641, z: 0.5419818}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -43680,9 +43681,31 @@ Prefab:
       value: 
       objectReference: {fileID: 243765118687429670, guid: f53275b0b299b98478e54f8554ae7abc,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114011375830618484, guid: 247314a2e20cd72489e9ddc22974df56, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 247314a2e20cd72489e9ddc22974df56, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1659416898 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1735137487550638, guid: 247314a2e20cd72489e9ddc22974df56,
+    type: 2}
+  m_PrefabInternal: {fileID: 1659416897}
+--- !u!114 &1659416899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1659416898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c65ee8945ab7ef4d820331e8ff0885d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugMode: 0
+  shakeAmount: 0
+  shakeDuration: 0
+  smooth: 0
+  smoothAmount: 5
 --- !u!1001 &1662059390
 Prefab:
   m_ObjectHideFlags: 0
@@ -43969,6 +43992,7 @@ MonoBehaviour:
   playersIn: []
   enemiesIn: []
   timeToCapture: 10
+  Capture: {fileID: 0}
 --- !u!114 &1667122942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46767,6 +46791,8 @@ MonoBehaviour:
   speed: 0
   nightSpeedFactor: 2
   isNight: 0
+  Night: {fileID: 0}
+  Day: {fileID: 0}
 --- !u!114 &1807621387
 MonoBehaviour:
   m_ObjectHideFlags: 0

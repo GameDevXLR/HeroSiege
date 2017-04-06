@@ -79,7 +79,7 @@ public class CameraShaker : MonoBehaviour
             if (smooth)
                 transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationOffset *  Quaternion.Euler(rotationAmount), Time.deltaTime * smoothAmount);
             else
-                transform.localRotation = rotationOffset * Quaternion.Euler(rotationAmount);//Set the local rotation the be the rotation amount.
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationOffset * Quaternion.Euler(rotationAmount), Time.deltaTime); ;//Set the local rotation the be the rotation amount.
 
             yield return null;
         }
