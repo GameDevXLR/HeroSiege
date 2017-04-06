@@ -26,6 +26,7 @@ public class TPBackPortalScript : NetworkBehaviour
 	private NetworkInstanceId targetID;
 	public ParticleSystem tpEffect;
 	public bool isPlayingEffect;
+	public AudioClip Teleportation;
 
 	[ServerCallback]
 	public void OnTriggerEnter(Collider other)
@@ -100,6 +101,7 @@ public class TPBackPortalScript : NetworkBehaviour
 		GameObject playerToTP;
 		playerToTP = ClientScene.FindLocalObject (id) ;
 		yield return new WaitForEndOfFrame ();
+		GetComponent<AudioSource> ().PlayOneShot (Teleportation);
 		playerToTP.GetComponent<NavMeshAgent> ().ResetPath ();
 		playerToTP.GetComponent<NavMeshAgent> ().enabled = false;
 		if (isTeam1) 

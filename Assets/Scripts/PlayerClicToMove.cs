@@ -11,7 +11,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	//ce script est gaté. Ca c'est dit.
 	// il gere le déplacement du joueur.
 	Animator anim;
-	private AudioSource audioS;
+	//private AudioSource audioS;
 //	public AudioClip clicSound;
 	public AudioClip walkSound;
 	public NavMeshAgent agentPlayer;
@@ -34,7 +34,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		if (isLocalPlayer) 
 		{
 			speedDisplay = GameObject.Find ("SpeedLog").GetComponent<Text> ();
-			audioS = GetComponent<AudioSource> ();
+			//audioS = GetComponent<AudioSource> ();
 			layer_mask = LayerMask.GetMask ("Ground", "Ennemies", "UI");
 			cursorTargetter = GameObject.Find ("ClickArrowFull");
 			nClient = GameObject.Find ("NetworkManagerObj").GetComponent<NetworkManager> ().client;
@@ -133,8 +133,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 	IEnumerator MoveFirst(float ping, Vector3 desti)
 	{
 		yield return new WaitForSeconds (ping/2000); // la moitié donc (1/2) d'un truc en milliseconds (000)  :ca fait X/2000
-		audioS.clip = walkSound;
-		audioS.Play ();
+		//audioS.clip = walkSound;
+		//audioS.Play ();
 		MovingProcedure (desti);
 	}
 	[Command]

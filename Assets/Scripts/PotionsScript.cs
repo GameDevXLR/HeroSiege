@@ -10,7 +10,7 @@ public class PotionsScript : InventoryItem
 	public Text chargesDisplay;
 	public string potionDesc;
 	public int DesiredSellPrice = 25;
-
+	public AudioClip Potion;
 	public void Start()
 	{
 		maxCharges = potionCharges;
@@ -21,7 +21,7 @@ public class PotionsScript : InventoryItem
 	{
 		if (potionCharges > 1) 
 		{
-
+			GetComponent<AudioSource> ().PlayOneShot (Potion);
 			potionCharges--;
 			chargesDisplay.text = potionDesc + potionCharges.ToString () + " available.";
 

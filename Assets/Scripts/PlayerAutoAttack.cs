@@ -11,8 +11,11 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 	//ce script gere l'auto attack de l'objet auquel il est attacher.
 	//subidivision special player.
-	private AudioSource audioSource; // qui joue le son
-	public AudioClip[] playerSounds; //quel sons pour le joueur
+	//private AudioSource audioSource; // qui joue le son
+	//public AudioClip[] playerSounds; //quel sons pour le joueur
+	public AudioClip Att1;
+	public AudioClip Att2;
+	public AudioClip Charge;
 
 	Animator anim; // l'animator qui gere les anim lié a ce script
 	public bool stopWalk; //pour l animation : arrete de marcher
@@ -38,7 +41,6 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponentInChildren<Animator> ();
-		audioSource = GetComponent<AudioSource> ();
 		if (isLocalPlayer) 
 		{
 			agent.avoidancePriority = 75;
@@ -109,7 +111,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 						{
 								stopWalk = true;
 								anim.SetBool ("stopwalk", stopWalk);
-								audioSource.Stop ();
+								//audioSource.Stop ();
 							}
 						}
 					}
@@ -121,22 +123,28 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[ClientRpc]
 	public void RpcAttackTarget()
 	{
-		if (isLocalPlayer && !isServer) 
-		{
+		if (isLocalPlayer && !isServer) {
 			CmdTellThemMyLocalPos (transform.position);
 		}
 
 		charge = false;
 		anim.SetBool ("charge", false);
-		if (agent.isOnNavMesh ) 
-		{
+		if (agent.isOnNavMesh) {
 			agent.Stop ();
 		}
 		isAttacking = true;
 		attackAnim = true;
 		anim.SetBool ("attack", attackAnim);
-		audioSource.clip = playerSounds [0];
-		audioSource.Play();
+		int AttSound = Random.Range (0, 10);
+		if (AttSound > 5) {
+			//audioSource.clip = playerSounds [1];
+			GetComponent<AudioSource> ().PlayOneShot (Att1);
+		}
+			else
+			//audioSource.clip = playerSounds [0];
+			GetComponent<AudioSource> ().PlayOneShot (Att2);
+
+
 	}
 	[Command]
 	public void CmdTellThemMyLocalPos(Vector3 pos)
@@ -154,7 +162,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		isAttacking = false;
 		attackAnim = false;
 		agent.Resume ();
-		audioSource.Stop ();
+		//audioSource.Stop ();
 		anim.SetBool ("attack", attackAnim);
 		if (charge) 
 		{
@@ -169,7 +177,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		target = newTarget;
 		charge = true;
 		anim.SetBool ("charge", charge);
-		audioSource.PlayOneShot (playerSounds [1], .6f);
+		GetComponent<AudioSource> ().PlayOneShot (Charge);
 	}
 
 	public void LooseTarget()
@@ -181,7 +189,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 			agent.Resume ();
 		}
-		audioSource.Stop ();
+		//audioSource.Stop ();
 		anim.SetBool ("attack", attackAnim);
 		if (charge) 
 		{

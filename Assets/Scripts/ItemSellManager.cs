@@ -10,9 +10,11 @@ public class ItemSellManager : MonoBehaviour
 	// toutes les fonctions placé dans UnityEvent seront exécuter.
 	//il marche donc en duo avec un script disant quoi faire en cas de vente (le script de l'objet généralement a ca; il hérite)
 	public UnityEvent toDoWhenSelling;
+	public AudioClip Gold;
 	// Use this for initialization
 	public void SellBackItem()
 	{
 		toDoWhenSelling.Invoke ();
+		GetComponent<AudioSource> ().PlayOneShot (Gold);
 	}
 }

@@ -11,7 +11,6 @@ public class ItemManager : NetworkBehaviour
 	// il contient une liste de fonction appelée par l'achat d'un objet voir le script : 
 	// BuyableItemScript qui gere lui l'action de selectionner un objet a acheter puis fait
 	//appel a ce script pour l'achat sur le réseau.
-
 	public Transform guardSpawnPoint;
 	public UnityEvent[] itemEvents;
 	public GameObject targetplayer;
@@ -28,6 +27,7 @@ public class ItemManager : NetworkBehaviour
 	public GameObject RunnerBootsPrefab;
 	public GameObject IgdraBraceletPrefab;
 	public GameObject OrbOfPowerPrefab;
+	public AudioClip Gold;
 	public void Start()
 	{
 		if (isLocalPlayer) 
@@ -139,6 +139,7 @@ public class ItemManager : NetworkBehaviour
 
 			GameObject go = Instantiate (healthPotionPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
 		}
 	}
 	[ClientRpc]
@@ -159,6 +160,7 @@ public class ItemManager : NetworkBehaviour
 
 			GameObject go = Instantiate (manaPotionPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
 		}
 	}
 	[ClientRpc]
@@ -179,6 +181,7 @@ public class ItemManager : NetworkBehaviour
 
 			GameObject go = Instantiate (tpScrollPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
 		}
 	}
 	[ClientRpc]
@@ -208,6 +211,7 @@ public class ItemManager : NetworkBehaviour
 		{
 			GameObject go = Instantiate (ArchiRingPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
 		}
 	}
 	[ClientRpc]
@@ -229,6 +233,7 @@ public class ItemManager : NetworkBehaviour
 		{
 			GameObject go = Instantiate (RunnerBootsPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
 		}
 		if (isServer) 
 		{
@@ -258,6 +263,7 @@ public class ItemManager : NetworkBehaviour
 		{
 			GameObject go = Instantiate (IgdraBraceletPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
 		}
 	}
 	[ClientRpc]
@@ -284,6 +290,7 @@ public class ItemManager : NetworkBehaviour
 		{
 			GameObject go = Instantiate (OrbOfPowerPrefab, selectableSlot);
 			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
 		}
 	}
 	[ClientRpc]
