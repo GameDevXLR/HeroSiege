@@ -427,7 +427,7 @@ public class GenericLifeScript : NetworkBehaviour {
 	public void ActualizeDeadIcon(bool isHeDead)
 	{
 		isDead = isHeDead;
-		if (!isLocalPlayer && gameObject.layer == Layers.Player || gameObject.layer == Layers.IgnoreLayer) 
+		if (!isLocalPlayer && (gameObject.layer == Layers.Player || gameObject.layer == Layers.IgnoreLayer))
 		{
 			GetComponent<PlayerManager> ().deadAvatarImg.enabled = isHeDead;
 		}

@@ -16347,6 +16347,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 418586, guid: faf71fff68cb5af44a019c4767abcfe9, type: 2}
   m_PrefabInternal: {fileID: 727440228}
+--- !u!114 &729156228 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114234772275401516, guid: f494d082b16df6947bbf305354b55946,
+    type: 2}
+  m_PrefabInternal: {fileID: 2066571119}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &729587464
 Prefab:
   m_ObjectHideFlags: 0
@@ -40692,7 +40698,7 @@ MonoBehaviour:
   winSound: {fileID: 8300000, guid: a837019e92fc9c94cb209c2c07a40c0a, type: 3}
   looseSound: {fileID: 8300000, guid: 54376ef8fb4ab9b47b3c0230d0c39fe5, type: 3}
   generalTxt: {fileID: 0}
-  gameOverTxt: {fileID: 0}
+  gameOverTxt: {fileID: 729156228}
   team1LivesDisplay: {fileID: 0}
   team2LivesDisplay: {fileID: 0}
   messageManager: {fileID: 1532891290}
@@ -43675,37 +43681,9 @@ Prefab:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 82248361282742708, guid: 247314a2e20cd72489e9ddc22974df56,
-        type: 2}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 243765118687429670, guid: f53275b0b299b98478e54f8554ae7abc,
-        type: 2}
-    m_RemovedComponents:
-    - {fileID: 114011375830618484, guid: 247314a2e20cd72489e9ddc22974df56, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 247314a2e20cd72489e9ddc22974df56, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1659416898 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1735137487550638, guid: 247314a2e20cd72489e9ddc22974df56,
-    type: 2}
-  m_PrefabInternal: {fileID: 1659416897}
---- !u!114 &1659416899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1659416898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c65ee8945ab7ef4d820331e8ff0885d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode: 0
-  shakeAmount: 0
-  shakeDuration: 0
-  smooth: 0
-  smoothAmount: 5
 --- !u!1001 &1662059390
 Prefab:
   m_ObjectHideFlags: 0

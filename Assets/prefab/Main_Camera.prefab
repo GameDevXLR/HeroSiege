@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 82248361282742708}
   - component: {fileID: 114102251444077726}
   - component: {fileID: 114099501229880830}
-  - component: {fileID: 114011375830618484}
+  - component: {fileID: 114030565715175200}
   m_Layer: 0
   m_Name: Main_Camera
   m_TagString: MainCamera
@@ -210,7 +210,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735137487550638}
   m_Enabled: 1
---- !u!114 &114011375830618484
+--- !u!114 &114030565715175200
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -218,12 +218,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1735137487550638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15698e44aa104b14b9078feb76cef4ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c65ee8945ab7ef4d820331e8ff0885d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 1
-  shakeAmount: 0.67
-  shakeDuration: 5.67
+  debugMode: 0
+  shakeAmount: 0
+  shakeDuration: 0
   smooth: 0
   smoothAmount: 5
 --- !u!114 &114099501229880830
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomInLimite: 15
-  normal: 60
+  normal: 75
   zoomOutLimite: 80
   smooth: 3
 --- !u!114 &114102251444077726
