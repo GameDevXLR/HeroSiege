@@ -19,9 +19,10 @@ public class CameraShaker : MonoBehaviour
     float startAmount;//The initial shake amount (to determine percentage), set when ShakeCamera is called.
     float startDuration;//The initial shake duration, set when ShakeCamera is called.
 
-    bool isRunning = false; //Is the coroutine running right now?
+    public bool isRunning = false; //Is the coroutine running right now?
 
-    public bool smooth;//Smooth rotation?
+    public bool smooth = true;//Smooth rotation?
+    [Range(1,2)]
     public float smoothAmount = 5f;//Amount to smooth
 
     private Quaternion rotationOffset;
@@ -30,7 +31,7 @@ public class CameraShaker : MonoBehaviour
     private void Start()
     {
         rotationOffset = transform.localRotation;
-       shakeCoroutine = Shake();
+        shakeCoroutine = Shake();
     }
 
     void Update()
@@ -51,13 +52,17 @@ public class CameraShaker : MonoBehaviour
 
     public void ShakeCamera(float amount, float duration)
     {
-
-        shakeAmount += amount;//Add to the current amount.
-        startAmount = shakeAmount;//Reset the start amount, to determine percentage.
-        shakeDuration += duration;//Add to the current time.
-        startDuration = shakeDuration;//Reset the start time.
         
-        if (!isRunning && shakeDuration > 0.01f) StartCoroutine(shakeCoroutine);//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
+        shakeAmount = amount;//Add to the current amount.
+        startAmount = shakeAmount;//Reset the start amount, to determine percentage.
+        if(duration > shakeDuration)
+        {
+            shakeDuration = duration;//Add to the current time.
+            startDuration = shakeDuration;//Reset the start time.
+        }
+
+        if (!isRunning )
+            StartCoroutine(Shake());//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
     }
 
 
@@ -85,7 +90,6 @@ public class CameraShaker : MonoBehaviour
         }
         transform.localRotation = rotationOffset;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
         isRunning = false;
-        Debug.Log("miaou");
     }
 
 }
