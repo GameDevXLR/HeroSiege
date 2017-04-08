@@ -15,6 +15,8 @@ public class GenericLifeScript : NetworkBehaviour
     public AudioClip PlayerSpawn;
     public int xpGiven = 50;
     public int goldGiven = 5;
+	public Text goldDisplay;
+	public GameObject goldCanvas;
     public int killCount;
     public RectTransform lifeBar; // barre de vie IG
 
@@ -309,6 +311,11 @@ public class GenericLifeScript : NetworkBehaviour
     [ClientRpc]
     public void RpcKillTheMob()
     {
+		goldDisplay.text = goldGiven.ToString ();
+		goldCanvas.GetComponent<Animator> ().enabled = true;
+		goldCanvas.GetComponent<Canvas> ().enabled = true;
+		goldCanvas.GetComponent<DeathByTime> ().enabled = true;
+//		goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);
         mobDeadAnimChildMesh.GetComponent<Animator>().enabled = true;
         mobDeadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         mobDeadAnimChildMesh.GetComponent<DeathByTime>().enabled = true;

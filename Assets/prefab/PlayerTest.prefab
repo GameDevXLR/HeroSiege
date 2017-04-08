@@ -1809,7 +1809,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432240476983956}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b1adb4171f0ca1443b565d43492169f3, type: 2}
   m_CullingMode: 0
@@ -1845,6 +1845,8 @@ MonoBehaviour:
   layer_mask:
     serializedVersion: 2
     m_Bits: 1024
+  durationShake: 10
+  amountShake: 10
 --- !u!114 &114106380856186856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2162,6 +2164,8 @@ MonoBehaviour:
   spellDuration: 1.5
   spellObj: {fileID: 1134211014724214, guid: c2541f206d37d8c42b88d40d0cae6d58, type: 2}
   spellLvl: 1
+  durationShake: 5
+  amountShake: 10
 --- !u!114 &114489449535516312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2850,6 +2854,8 @@ MonoBehaviour:
   PlayerSpawn: {fileID: 8300000, guid: 2a85da6a9b7063841bbe8c6022aa8f37, type: 3}
   xpGiven: 30
   goldGiven: 5
+  goldDisplay: {fileID: 0}
+  goldCanvas: {fileID: 0}
   killCount: 0
   lifeBar: {fileID: 224552685445617892}
   lifeBarMain: {fileID: 0}
@@ -2873,6 +2879,10 @@ MonoBehaviour:
   deadAnimChildEffect: {fileID: 0}
   deadAnimChildMesh: {fileID: 0}
   mobDeadAnimChildMesh: {fileID: 0}
+  durationShake: 5
+  amountShake: 10
+  threshold: 25
+  underThreshold: 0
 --- !u!135 &135227125065477978
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -48545,7 +48555,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432240476983956}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
