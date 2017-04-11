@@ -91,6 +91,7 @@ public class NetJoinGame : MonoBehaviour {
 
 	public void JoinRoom (MatchInfoSnapshot _match)
 	{
+		
 		networkManager.matchMaker.JoinMatch(_match.networkId, "", "", "", 0, 0, networkManager.OnMatchJoined);
 		StartCoroutine(WaitForJoin());
 	}
@@ -114,6 +115,11 @@ public class NetJoinGame : MonoBehaviour {
 			{
 				status.text = "JOINING... (" + countdown + ")";
 			}
+//			if (countdown == 3) 
+//			{
+//				LoadingScreenManager.LoadScene (2);
+//			}
+			//décommenter ci dessus si on veut afficher l'écran de chargement pour ceux qui rejoignent.
 			yield return new WaitForSeconds(1);
 
 			countdown--;
