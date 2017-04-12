@@ -82,7 +82,7 @@ public class GameManager : NetworkBehaviour
 	}
 	public void T1SyncLooseLife(int life)
 	{
-		team1LivesDisplay.text = "Team 1 remaining lives: " + life.ToString ();
+		team1LivesDisplay.text = "Blue Team : " + life.ToString ();
 		lifeOfTheTeam1 = life;
 		if (isTeam1) {
 			messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam1.ToString () + " lives remaining.", Color.red);
@@ -97,7 +97,7 @@ public class GameManager : NetworkBehaviour
 
 	public void T2SyncLooseLife(int life)
 	{
-		team2LivesDisplay.text = "Team 2 remaining lives: " + life.ToString ();
+		team2LivesDisplay.text = "Red Team : " + life.ToString ();
 		lifeOfTheTeam2 = life;
 		if (isTeam2) {
 			messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam2.ToString () + "  lives remaining.", Color.red);
