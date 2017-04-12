@@ -19,6 +19,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 	public GameObject inib1B;
 	public GameObject inib2B;
 	public GameObject inib3B;
+    public GameObject spawManager; // pour le pool 
 
 	public enum difficultySettings
 	{
@@ -38,6 +39,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 		inib1B = GameObject.Find ("InibB");
 		inib2B = GameObject.Find ("Inib2B");
 		inib3B = GameObject.Find ("Inib3B");
+        spawManager = GameObject.Find("SpawnManager");
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
 
 	}
@@ -51,6 +53,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 		gameMode = difficultySettings.normal;
 		GameManager.instanceGM.messageManager.SendAnAlertMess ("Normal mode activated...pussy!", Color.green);
 		inib1.GetComponent<SpawnManager>().enabled = true;
+        spawManager.GetComponent<ObjectPooling>().enabled = true;
 		if (isSolo) 
 		{
 			return;

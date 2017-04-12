@@ -16,16 +16,17 @@ public class ObjectPooling : NetworkBehaviour
 	public static ObjectPooling sharedInstance;
      
 
-	void Awake(){
-		sharedInstance = this;
-	}
+	void Start(){
+        CmdCreatePool();
+    }
 
 
 	public List<ObjectPoolItems> itemsToPool;
 	public List<GameObject> pooledObject;
     public List<NetworkInstanceId> listID;
     
-	void Start(){
+    void CmdCreatePool(){
+        
 		pooledObject = new List<GameObject> ();
 		foreach (ObjectPoolItems item in itemsToPool) {
 			for (int i = 0; i < item.amountToPool; i++) {
@@ -39,7 +40,7 @@ public class ObjectPooling : NetworkBehaviour
 
 	}
 
-	public GameObject GetPooledObject(string tag){
+    public GameObject GetPooledObject(string tag){
 		for(int i = 0; i < pooledObject.Count; i++){
 			if (!pooledObject [i].activeInHierarchy && pooledObject[i].tag == tag) {
 				return pooledObject [i];
@@ -57,9 +58,8 @@ public class ObjectPooling : NetworkBehaviour
 			
 		return null;
 	}
-
-
-	private GameObject addObjectInListe (GameObject objectToPool){
+    
+    private GameObject addObjectInListe (GameObject objectToPool){
 		GameObject obj = (GameObject)Instantiate (objectToPool);
 		obj.SetActive (false);
 		pooledObject.Add (obj);

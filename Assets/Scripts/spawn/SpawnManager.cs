@@ -26,6 +26,7 @@ public class SpawnManager : NetworkBehaviour
 	void Start () 
 	{
 		difficultyFactor = GameManager.instanceGM.gameDifficulty;
+        Debug.Log("start : SpawManager");
 	}
 	
 
