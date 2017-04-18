@@ -71,12 +71,9 @@ public class ObjectPooling : NetworkBehaviour
 
         for (int i = 0; i < listID.Count; i++)
         {
-            GameObject ship = ClientScene.FindLocalObject(listID[i]);
-
-            ship.SetActive(activate);
-
+            GameObject obj = ClientScene.FindLocalObject(listID[i]);
+            obj.SetActive(activate);
         }
-
     }
 
     [ClientRpc]
@@ -86,7 +83,7 @@ public class ObjectPooling : NetworkBehaviour
     }
 
     
-    public void receiveSetActiveObjectWithId(NetworkInstanceId id, bool activate)
+    public void ReceiveSetActiveObjectWithId(NetworkInstanceId id, bool activate)
     {
         CmdSetActivateObjectWithID(id, activate);
     }
