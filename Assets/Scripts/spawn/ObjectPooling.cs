@@ -14,25 +14,20 @@ public class ObjectPoolItems {
 public class ObjectPooling : NetworkBehaviour
 {
 	public static ObjectPooling sharedInstance;
-     
+	public List<ObjectPoolItems> itemsToPool;
+	public List<GameObject> pooledObject;
+    public List<NetworkInstanceId> listID;
 
-	void Start(){
+
+    void Start()
+    {
         if (isServer)
         {
             Debug.Log("Start ObjectPooling");
             CmdCreatePool();
         }
-            
-        
     }
 
-
-	public List<ObjectPoolItems> itemsToPool;
-	public List<GameObject> pooledObject;
-    
-    
-    public List<NetworkInstanceId> listID;
-    
     [Command]
     void CmdCreatePool(){
         
@@ -45,14 +40,9 @@ public class ObjectPooling : NetworkBehaviour
                 NetworkInstanceId id = obj.GetComponent<NetworkIdentity>().netId;
                 //listID.Add(id);
                 RpcAddNetworkID(id);
-
             }
-
 		}
-        RpcSetActiveObject();
-       
-
-
+        RpcSetActiveObject(false);
 
     }
 
@@ -76,15 +66,14 @@ public class ObjectPooling : NetworkBehaviour
 	}
 
     [ClientRpc]
-    void RpcSetActiveObject()
+    void RpcSetActiveObject(bool activate)
     {
-        //this.listID = listID;
-        Debug.Log("miaou");
+
         for (int i = 0; i < listID.Count; i++)
         {
             GameObject ship = ClientScene.FindLocalObject(listID[i]);
 
-            ship.SetActive(false);
+            ship.SetActive(activate);
 
         }
 
@@ -93,16 +82,32 @@ public class ObjectPooling : NetworkBehaviour
     [ClientRpc]
     void RpcAddNetworkID(NetworkInstanceId id)
     {
-        
          listID.Add(id);
-        
     }
 
+    
+    public void receiveSetActiveObjectWithId(NetworkInstanceId id, bool activate)
+    {
+        CmdSetActivateObjectWithID(id, activate);
+    }
+
+    [Command]
+    public void CmdSetActivateObjectWithID(NetworkInstanceId id, bool activate)
+    {
+        RpcSetActiveObjectWithID(id, activate);
+
+    }
+
+    [ClientRpc]
+    void RpcSetActiveObjectWithID(NetworkInstanceId id, bool activate)
+    {
+        GameObject obj = ClientScene.FindLocalObject(id);
+        obj.SetActive(activate);
+    }
 
 
     private GameObject addObjectInListe (GameObject objectToPool){
 		GameObject obj = (GameObject)Instantiate (objectToPool);
-        //obj.SetActive(false);
         pooledObject.Add (obj);
         return obj;
 	}
