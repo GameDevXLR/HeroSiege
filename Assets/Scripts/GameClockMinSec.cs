@@ -7,7 +7,8 @@ public class GameClockMinSec : MonoBehaviour
 	public int totalTime;
 	public int minutes;
 	public int seconds;
-
+	string secondsTmp;
+	string minutesTmp;
 
 	// Use this for initialization
 	void Start () 
@@ -27,7 +28,18 @@ public class GameClockMinSec : MonoBehaviour
 			totalTime += 1;
 			seconds = totalTime % 60;
 			minutes = (totalTime / 60);
-			GetComponent<Text>().text = minutes+ " : "+ seconds;
+			secondsTmp = seconds.ToString();
+			minutesTmp = minutes.ToString ();
+			if (seconds < 10) 
+			{
+				secondsTmp = "0" + seconds;
+			}
+			if (minutes<10) 
+			{
+				minutesTmp = "0" + minutes;
+			}
+
+			GetComponent<Text>().text = minutesTmp+ " : "+ secondsTmp;
 		}
 	}
 }
