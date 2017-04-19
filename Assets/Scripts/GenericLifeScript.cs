@@ -69,12 +69,12 @@ public class GenericLifeScript : NetworkBehaviour
         }
         if (gameObject.layer == Layers.Player)
         {
-            deadAnimChildMesh = transform.GetChild(5).gameObject;
+			deadAnimChildMesh = transform.GetChild(5).GetChild(0).gameObject;
             deadAnimChildEffect = transform.GetChild(4).gameObject;
         }
         if (gameObject.layer == Layers.Ennemies)
         {
-            mobDeadAnimChildMesh = transform.GetChild(3).gameObject;
+			mobDeadAnimChildMesh = transform.GetChild(3).GetChild(0).gameObject;
         }
 
     }
