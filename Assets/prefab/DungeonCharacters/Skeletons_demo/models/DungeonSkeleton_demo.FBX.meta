@@ -38,9 +38,6 @@ ModelImporter:
     100060: Bone_jaw
     100062: //RootNode
     100064: skeleton_mesh
-    100066: Camera
-    100068: Cube
-    100070: Lamp
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -74,13 +71,7 @@ ModelImporter:
     400060: Bone_jaw
     400062: //RootNode
     400064: skeleton_mesh
-    400066: Camera
-    400068: Cube
-    400070: Lamp
-    2300000: Cube
-    3300000: Cube
     4300000: skeleton_mesh
-    4300002: Cube
     9500000: //RootNode
     13700000: skeleton_mesh
   materials:
@@ -90,11 +81,9 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 1
+    resampleRotations: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -131,7 +120,6 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -142,10 +130,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
-    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
