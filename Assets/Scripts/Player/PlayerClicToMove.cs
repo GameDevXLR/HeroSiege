@@ -78,6 +78,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 				{
 					StartCoroutine (MoveFirst ((float)nClient.GetRTT(), hit.point));
 					cursorTargetter.transform.position = hit.point;
+					cursorTargetter.transform.position = new Vector3 (hit.point.x, 0.2f, hit.point.z);
 					cursorTargetter.GetComponent<Animator> ().Play ("ClickArrowAnim");
 					CmdSendNewDestination (hit.point);
 					CancelInvoke ();

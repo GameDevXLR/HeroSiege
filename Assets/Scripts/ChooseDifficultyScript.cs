@@ -33,15 +33,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 
 	void Start()
 	{
-		inib1 = GameObject.Find ("Inib");
-		inib2 = GameObject.Find ("Inib2");
-		inib3 = GameObject.Find ("Inib3");
-		inib1B = GameObject.Find ("InibB");
-		inib2B = GameObject.Find ("Inib2B");
-		inib3B = GameObject.Find ("Inib3B");
-        spawManager = GameObject.Find("SpawnManager");
-		difficultyPanel = GameObject.Find ("DifficultyPanel");
-
+		StartCoroutine (StartProcedure ());
 	}
 	public void NormalMode()
 	{
@@ -134,5 +126,18 @@ public class ChooseDifficultyScript : MonoBehaviour
 		}
 		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = 0.4f;
 		gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
+	}
+
+	IEnumerator StartProcedure()
+	{
+		yield return new WaitForSeconds (0.05f);
+		inib1 = GameObject.Find ("Inib");
+		inib2 = GameObject.Find ("Inib2");
+		inib3 = GameObject.Find ("Inib3");
+		inib1B = GameObject.Find ("InibB");
+		inib2B = GameObject.Find ("Inib2B");
+		inib3B = GameObject.Find ("Inib3B");
+		spawManager = GameObject.Find("SpawnManager");
+		difficultyPanel = GameObject.Find ("DifficultyPanel");
 	}
 }

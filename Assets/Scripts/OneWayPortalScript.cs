@@ -33,9 +33,9 @@ public class OneWayPortalScript : NetworkBehaviour {
 		{
 			if (other.gameObject.tag == "Player") 
 			{
-				isBeingUsed = true;
 				targetPlayer = other.gameObject;
 				TpProcess ();
+				isBeingUsed = true;
 
 			}
 		}
@@ -47,8 +47,8 @@ public class OneWayPortalScript : NetworkBehaviour {
 		{
 			if (other.gameObject == targetPlayer) 
 			{
-				isBeingUsed = false;
 				targetPlayer = null;
+				isBeingUsed = false;
 
 			}
 		}

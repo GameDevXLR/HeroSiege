@@ -155,13 +155,18 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[ClientRpc]
 	public void RpcStopAttacking()
 	{
-		if (target == null) 
-		{
-			agent.SetDestination (transform.position);
+		if (target == null) {
+			if (agent.isActiveAndEnabled) 
+			{
+				agent.SetDestination (transform.position);
+			}
 		}
 		isAttacking = false;
 		attackAnim = false;
-		agent.Resume ();
+		if (agent.isActiveAndEnabled) 
+		{
+			agent.Resume ();
+		}
 		//audioSource.Stop ();
 		anim.SetBool ("attack", attackAnim);
 		if (charge) 
