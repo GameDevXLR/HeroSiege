@@ -95,15 +95,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.4
-    agentHeight: 2
-    agentSlope: 22
-    agentClimb: 0.6
+    agentRadius: 1
+    agentHeight: 2.5
+    agentSlope: 15
+    agentClimb: 0.8
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.13333334
+    cellSize: 0.33333334
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -661,7 +661,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 18951273}
-  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
+  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
   m_LocalPosition: {x: -133.0537, y: 13.596641, z: 35.511982}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -1041,6 +1041,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5849a201c9842884dade51672c5c1337, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &30630388 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114858020450819214, guid: 5849a201c9842884dade51672c5c1337,
+    type: 2}
+  m_PrefabInternal: {fileID: 30630387}
+  m_Script: {fileID: 11500000, guid: 832495819392b3e40acc52a573bdeb9d, type: 3}
 --- !u!1001 &32577094
 Prefab:
   m_ObjectHideFlags: 0
@@ -5297,22 +5303,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &229650099
@@ -10217,22 +10223,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &405211522
@@ -11391,22 +11397,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!4 &478927735
@@ -12768,22 +12774,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &551294252
@@ -16172,22 +16178,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &702245670
@@ -21722,7 +21728,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872472613}
-  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
+  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
   m_LocalPosition: {x: -133.0537, y: 13.596641, z: 35.511982}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -23121,22 +23127,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &921406428
@@ -25185,7 +25191,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1021939556}
-  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
+  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
   m_LocalPosition: {x: -133.0537, y: 13.016641, z: 0.5419818}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -27086,22 +27092,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &1081229497
@@ -40146,7 +40152,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1517417618}
-  m_LocalRotation: {x: 0.68580306, y: -0.17226179, z: -0.6858031, w: -0.17226177}
+  m_LocalRotation: {x: 0.6858031, y: -0.1722618, z: -0.6858032, w: -0.17226179}
   m_LocalPosition: {x: -133.0537, y: 13.016641, z: 0.5419818}
   m_LocalScale: {x: 3.0498962, y: 0.78198147, z: 2.2939227}
   m_Children: []
@@ -50758,22 +50764,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!4 &1963830160 stripped
@@ -52438,22 +52444,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!4 &2016265332
@@ -52665,22 +52671,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 167
-    i1: 121
-    i2: 20
-    i3: 243
-    i4: 35
-    i5: 76
-    i6: 3
-    i7: 4
-    i8: 152
-    i9: 53
-    i10: 110
-    i11: 5
-    i12: 251
-    i13: 66
-    i14: 221
-    i15: 7
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &2027951221
@@ -55509,6 +55515,21 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 223016583982752224, guid: f494d082b16df6947bbf305354b55946,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114086515036585524, guid: f494d082b16df6947bbf305354b55946,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 30630388}
+    - target: {fileID: 114086515036585524, guid: f494d082b16df6947bbf305354b55946,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f494d082b16df6947bbf305354b55946, type: 2}

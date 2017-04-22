@@ -1032,7 +1032,7 @@ Transform:
   m_GameObject: {fileID: 1284708283028574}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 8, y: 8, z: 5}
   m_Children: []
   m_Father: {fileID: 4761200443502976}
   m_RootOrder: 6
@@ -1399,7 +1399,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -152.26099, y: 0, z: 16.873005}
+  m_LocalPosition: {x: -77.27997, y: 1.4515172, z: 18.472935}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4385223683264028}
@@ -2193,8 +2193,8 @@ MonoBehaviour:
   spellDuration: 1.5
   spellObj: {fileID: 1134211014724214, guid: c2541f206d37d8c42b88d40d0cae6d58, type: 2}
   spellLvl: 1
-  durationShake: 5
-  amountShake: 10
+  durationShake: 2
+  amountShake: 5
 --- !u!114 &114489449535516312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2298,7 +2298,7 @@ MonoBehaviour:
   stopWalk: 0
   agent: {fileID: 0}
   attackRange: 3
-  attackRate: 0.5
+  attackRate: 1
   damage: 15
   damageDisplay: {fileID: 0}
   levelUpBonusDamage: 5
@@ -2908,8 +2908,8 @@ MonoBehaviour:
   deadAnimChildEffect: {fileID: 0}
   deadAnimChildMesh: {fileID: 0}
   mobDeadAnimChildMesh: {fileID: 0}
-  durationShake: 5
-  amountShake: 10
+  durationShake: 3
+  amountShake: 4
   threshold: 25
   underThreshold: 0
 --- !u!135 &135227125065477978
@@ -2948,7 +2948,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.71, z: 0}
 --- !u!137 &137167594208467500
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3019,7 +3019,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1677075611022148}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.58
   m_Speed: 7.5
   m_Acceleration: 500
   avoidancePriority: 10
@@ -3029,9 +3029,9 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0.35
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 4
 --- !u!198 &198042538142677294
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -14941,7 +14941,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1926741487
+  randomSeed: -1489522124
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -35827,7 +35827,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1122595539
+  randomSeed: 516483168
   InitialModule:
     serializedVersion: 3
     enabled: 1
