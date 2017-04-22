@@ -1845,16 +1845,16 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1.4
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 158
-  DopplerLevel: 4
-  MinDistance: 30
-  MaxDistance: 90
+  Priority: 0
+  DopplerLevel: 0
+  MinDistance: 20
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2365,8 +2365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa91d09dc81e9f4dbe7bbcdf9a0ae38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiSounds:
-  - {fileID: 8300000, guid: 1a156c0c8ed01424eb6fe170ca93a496, type: 3}
+  ennemiAtt: {fileID: 8300000, guid: 2447c1fa332fea04299969084e8bdab8, type: 3}
   agent: {fileID: 195436564916210786}
   attackRange: 5
   attackRate: 1

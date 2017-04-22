@@ -11,8 +11,8 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 		//ce script gere l'auto attack de l'objet auquel il est attacher.
 		//subidivision special ennemy.
-		private AudioSource audioSource; // qui joue le son
-		public AudioClip[] enemiSounds; //quel sons pour les mobs. 
+		public AudioSource audioSource; // qui joue le son
+		public AudioClip ennemiAtt; //quel sons pour les mobs. 
 		Animator anim; // l'animator qui gere les anim lié a ce script
 //		public bool stopWalk; //pour l animation : arrete de marcher
 		bool attackAnim; // dois je jouer l'animation d'attaque ? 
@@ -109,11 +109,11 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			agent.enabled = false;
 			GetComponent<NavMeshObstacle> ().enabled = true;
 			anim.SetBool ("attackEnnemi", attackAnim);
+			audioSource.PlayOneShot(ennemiAtt);
 		if (particule != null) {
 			particule.Play ();
 		}
-			audioSource.clip = enemiSounds [0];
-			audioSource.Play();
+
 			
 
 		}
@@ -125,7 +125,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		agent.enabled = true;
 		isAttacking = false;
 		attackAnim = false;
-		audioSource.Stop ();
 		anim.SetBool ("attackEnnemi", attackAnim);
 		if (particule != null) {
 			particule.Stop ();
@@ -166,7 +165,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
 		agent.isStopped = false;
-			audioSource.Stop ();
 			anim.SetBool ("attackEnnemi", attackAnim);
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 			if (particule != null) 
@@ -232,7 +230,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		isUnderCC = true;
 		if (isAttacking) 
 		{
-			audioSource.Stop ();
 			if (particule != null) 
 			{
 				particule.Stop ();
@@ -251,7 +248,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 		if (isAttacking) 
 		{
-			audioSource.Play ();
 			if (particule != null) 
 			{
 				particule.Play ();
