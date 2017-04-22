@@ -45,7 +45,6 @@ public class ChooseDifficultyScript : MonoBehaviour
 		gameMode = difficultySettings.normal;
 		GameManager.instanceGM.messageManager.SendAnAlertMess ("Normal mode activated...pussy!", Color.green);
 		inib1.GetComponent<SpawnManager>().enabled = true;
-        spawManager.GetComponent<ObjectPooling>().enabled = true;
 		if (isSolo) 
 		{
 			return;
