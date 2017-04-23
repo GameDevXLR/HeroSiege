@@ -1424,10 +1424,10 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 138
+  Priority: 0
   DopplerLevel: 1
-  MinDistance: 30
-  MaxDistance: 90
+  MinDistance: 20
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1797,8 +1797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa91d09dc81e9f4dbe7bbcdf9a0ae38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiSounds:
-  - {fileID: 8300000, guid: 819de7c6607003f47831a49f984395b8, type: 3}
+  ennemiAtt: {fileID: 8300000, guid: 819de7c6607003f47831a49f984395b8, type: 3}
   agent: {fileID: 195000901155981128}
   attackRange: 2.5
   attackRate: 1.5

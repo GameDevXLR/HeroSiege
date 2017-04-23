@@ -11,7 +11,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 		//ce script gere l'auto attack de l'objet auquel il est attacher.
 		//subidivision special ennemy.
-		public AudioSource audioSource; // qui joue le son
+		private AudioSource audioSource; // qui joue le son
 		public AudioClip ennemiAtt; //quel sons pour les mobs. 
 		Animator anim; // l'animator qui gere les anim lié a ce script
 //		public bool stopWalk; //pour l animation : arrete de marcher
