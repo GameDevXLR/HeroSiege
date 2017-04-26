@@ -44,16 +44,25 @@ public class PlayerLevelUpManager : MonoBehaviour
 		{
 			ultiSpecPts++;
 		}
+		spell1LvlUpBtn.GetComponent<Animator> ().Play ("BtnCompPts");
 		spectPtIcon.SetActive (true);
 		spell1LvlUpBtn.SetActive (true);
+//		StartCoroutine (LevelUpProcess ());
 		if (ultiSpecPts > 0) 
 		{
 			spell2LvlUpBtn.SetActive (true);
 		}
 	}
+
+//	IEnumerator LevelUpProcess()
+//	{
+//		yield return new WaitForSeconds (0.66f);
+//	}
+
 	public void LooseASpecPt(bool isUlt)
 	{
-		if (isUlt) {
+		if (isUlt) 
+		{
 			ultiSpecPts--;
 			spell2Lvl++;
 			if (ultiSpecPts == 0) {

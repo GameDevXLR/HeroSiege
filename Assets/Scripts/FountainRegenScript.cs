@@ -8,13 +8,19 @@ public class FountainRegenScript : MonoBehaviour {
 
 	public int regenHp = 2;
 	public int regenMp = 1;
+	bool isReady = true;
 
 	void OnTriggerStay(Collider other)
 	{
+		if (!isReady) 
+		{
+			return;
+		}
 		if (other.gameObject.tag == "Player") //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
 		{
 			other.GetComponent<GenericLifeScript> ().currentHp += regenHp;
 			other.GetComponent<GenericManaScript> ().currentMp += regenMp;
+			StartCoroutine (GetReadyProcedure ());
 		}
 	}
 	void OnTriggerEnter(Collider other)
@@ -34,5 +40,12 @@ public class FountainRegenScript : MonoBehaviour {
 			other.gameObject.transform.GetChild (2).GetComponent<ParticleSystem> ().Stop(true);
 
 		}
+	}
+
+	IEnumerator GetReadyProcedure()
+	{
+		isReady = false;
+		yield return new WaitForSeconds (0.5f);
+		isReady = true;
 	}
 }
