@@ -38,9 +38,10 @@ public class PlayerCastSpellOne : NetworkBehaviour
             spell1Btn.onClick.AddListener(CastThatSpell);
             spell1LvlUpBtn.onClick.AddListener(levelUp);
             int x = (int)spellDmg / 5;
-            spellDescription = "Inflige " + spellDmg.ToString() + " dégats a l'impact puis " + x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString() + " MP. CD: " + spellCD.ToString();
+            spellDescription = "Deal " + spellDmg.ToString() + " damage on impact, then " + x.ToString() + " damage every 0.5sec for " + spellDuration.ToString() + " seconds.";
             spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
-
+			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
+			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
 
         }
     }
@@ -129,9 +130,12 @@ public class PlayerCastSpellOne : NetworkBehaviour
             GetComponent<PlayerLevelUpManager>().LooseASpecPt(false);
             int x = (int)spellDmg / 5;
 
-            spellDescription = "Inflige " + spellDmg.ToString() + " dégats a l'impact puis " + x.ToString() + " dégats toutes les 0,5secondes pendant " + spellDuration.ToString() + " secondes. Cout: " + spellCost.ToString() + " MP.CD: " + spellCD.ToString();
+			spellDescription = "Deal " + spellDmg.ToString() + " damage on impact, then " + x.ToString() + " damage every 0.5sec for " + spellDuration.ToString() + " seconds.";
 
             spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
+			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
+
             //changer ici l'interface du joueur.
         }
     }

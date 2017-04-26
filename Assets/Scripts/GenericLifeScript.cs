@@ -218,7 +218,7 @@ public class GenericLifeScript : NetworkBehaviour
         }
        
 
-        if (gameObject.layer == Layers.Player && ((float)currentHp / maxHp) * 100 <= threshold && !underThreshold)
+		if (gameObject.layer == Layers.Player && ((float)currentHp / maxHp) * 100 <= threshold && !underThreshold && isLocalPlayer)
         {
             underThreshold = true;
             Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
