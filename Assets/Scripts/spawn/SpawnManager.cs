@@ -15,6 +15,7 @@ public class SpawnManager : NetworkBehaviour
 	public bool isTeam1; // cocher si c'est un ennemi de la team1. sinon ce sera team 2 auto.
 	public GameObject[] ennemi; //array des mobs spawnable.
 	public Transform spawnpoint; //point de spawn du mob.
+	public Transform targetDestination;
 	public int numberOfMobs; // nombre de mobs dans la vague.
 	private int actualNbr; //C est le mob numero combien de la vague ? 
 	public float TimeBetweenMobs; //temps entre 2 mobs.
@@ -61,6 +62,7 @@ public class SpawnManager : NetworkBehaviour
 		newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor;
 		newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/(10*difficultyFactor);
 		newEnnemi.GetComponent<MinionsPathFindingScript>().isTeam1 = isTeam1;
+		newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
 		if (level == 2) //si c'est la vague Boss (mob3) bennn faire péter hein...
 		{
 			newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;

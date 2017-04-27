@@ -8,25 +8,29 @@ public class MinionsPathFindingScript : NetworkBehaviour
 {
 	[SyncVar]public bool isTeam1;
 	public NavMeshAgent agent;
-	public Transform target;
+	[SyncVar]public Transform target;
 //	public float stopTime = 2f;
 	// Use this for initialization
 	void Start () 
 	{
 		agent = GetComponent<NavMeshAgent> ();
-		if (isTeam1) 
-		{
-			target = GameObject.Find ("EndPointForMobs").transform;
-		} else 
-		{
-			target = GameObject.Find ("EndPointForMobsTeam2").transform;
-
-		}		
+//		if (isTeam1) 
+//		{
+//			target = GameObject.Find ("EndPointForMobs").transform;
+//		} else 
+//		{
+//			target = GameObject.Find ("EndPointForMobsTeam2").transform;
+//
+//		}		
 		GoToEndGame ();
 	}
 	
 	public void GoToEndGame()
 	{
+//		if (!isServer) 
+//		{
+//			return;
+//		}
 		StopAllCoroutines ();
 		StartCoroutine (GoToEndGameRoutine());
 	}
