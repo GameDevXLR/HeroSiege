@@ -61,7 +61,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit, 80f, layer_mask)) 
+			if (Physics.Raycast (ray, out hit, 150f, layer_mask)) 
 			{
                 if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
@@ -78,7 +78,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 				{
 					StartCoroutine (MoveFirst ((float)nClient.GetRTT(), hit.point));
 					cursorTargetter.transform.position = hit.point;
-					cursorTargetter.transform.position = new Vector3 (hit.point.x, 0.2f, hit.point.z);
+//					cursorTargetter.transform.position = new Vector3 (hit.point.x, 0.2f, hit.point.z);
 					cursorTargetter.GetComponent<Animator> ().Play ("ClickArrowAnim");
 					CmdSendNewDestination (hit.point);
 					CancelInvoke ();

@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 224098983583436324}
   - component: {fileID: 222344657158754658}
   - component: {fileID: 114016584971383308}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ActualMana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 114200934641731642}
   - component: {fileID: 114150411127763320}
   - component: {fileID: 114955841914868296}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ManaCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 224984736546425902}
   - component: {fileID: 222212762558656878}
   - component: {fileID: 114291765936621502}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: WholeMana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,7 +608,7 @@ GameObject:
   - component: {fileID: 224766238517520706}
   - component: {fileID: 222727665738282708}
   - component: {fileID: 114252200921075486}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ActualLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 224207015543561126}
   - component: {fileID: 222525695464965274}
   - component: {fileID: 114271972807736794}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: WholeLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1227,7 +1227,7 @@ GameObject:
   - component: {fileID: 224686938872680512}
   - component: {fileID: 222605458346575508}
   - component: {fileID: 114779982035895716}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1322,7 +1322,7 @@ GameObject:
   - component: {fileID: 222550464278417262}
   - component: {fileID: 114541807328704400}
   - component: {fileID: 114472757641313758}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: IconeGold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1521,7 +1521,7 @@ GameObject:
   - component: {fileID: 114920441024994274}
   - component: {fileID: 114198599505708224}
   - component: {fileID: 114631584799000606}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LifeCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1648,7 +1648,7 @@ GameObject:
   - component: {fileID: 114183709972937600}
   - component: {fileID: 95873344659539080}
   - component: {fileID: 114199844236847570}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GoldCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3060,7 +3060,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: d85eafb9a652ccc42903aac443da6a7c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3118,7 +3118,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9004073, y: 2.0618896, z: 2.131258}
+  m_Size: {x: 2, y: 4, z: 2}
   m_Center: {x: 0.05591178, y: 1.0309448, z: 0.039943933}
 --- !u!82 &82418099285641342
 AudioSource:
@@ -3946,7 +3946,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1513486630
+  randomSeed: 1865036652
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6949,7 +6949,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -693060189
+  randomSeed: -612499042
   InitialModule:
     serializedVersion: 3
     enabled: 1
