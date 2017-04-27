@@ -22,6 +22,8 @@ public class GameManager : NetworkBehaviour
 	public AudioClip looseSound;
 	public Text generalTxt;
 	public Text gameOverTxt;
+	public Sprite winSprite;
+	public Sprite looseSprite;
 	public Text team1LivesDisplay;
 	public Text team2LivesDisplay;
 	public static GameManager instanceGM = null;
@@ -160,12 +162,17 @@ public class GameManager : NetworkBehaviour
 
 		if (teamWhoWon == 1 && isTeam1 || teamWhoWon == 2 && isTeam2) 
 		{
-			gameOverTxt.text = "Victory!!!";
-			gameOverTxt.color = Color.green;
+//			gameOverTxt.text = "Victory!!!";
+//			gameOverTxt.color = Color.green;
+			gameOverTxt.transform.GetComponentInChildren<Image>().sprite = winSprite;
+			gameOverTxt.transform.GetComponentInChildren<Image> ().enabled = true;
 			GetComponent<AudioSource> ().PlayOneShot (winSound);
 		} else 
 		{
-			gameOverTxt.text = "Deafeat...";
+//			gameOverTxt.text = "Deafeat...";
+			gameOverTxt.transform.GetComponentInChildren<Image>().sprite = looseSprite;
+			gameOverTxt.transform.GetComponentInChildren<Image> ().enabled = true;
+
 			GetComponent<AudioSource> ().PlayOneShot (looseSound);
 
 		}

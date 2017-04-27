@@ -13,6 +13,9 @@ public class ShopScript : MonoBehaviour
 	private bool isOpen;
 	public string shopName;
 	public bool isAccessible = true;
+	public GameObject ShopIconObj;
+	public Sprite openedShopImg;
+	public Sprite closedShopImg;
 
 	public void Start()
 	{
@@ -25,14 +28,17 @@ public class ShopScript : MonoBehaviour
 	{
 		if (isAccessible) 
 		{
+			ShopIconObj.GetComponent<Image> ().sprite = openedShopImg;
 		shopPanel.gameObject.SetActive (true);
 		isOpen = true;
 		}
 	}
 	public void CloseYourMenu()
 	{
+		ShopIconObj.GetComponent<Image> ().sprite = closedShopImg;
 		shopPanel.gameObject.SetActive (false);
 		isOpen = false;
+
 	}
 
 	public void Update()

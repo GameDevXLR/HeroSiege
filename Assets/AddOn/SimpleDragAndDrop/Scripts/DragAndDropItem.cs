@@ -39,6 +39,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             // Display on top of all GUI (in parent canvas)
             icon.transform.SetParent(canvas.transform, true);                       // Set canvas as parent
             icon.transform.SetAsLastSibling();                                      // Set as last child in canvas transform
+			icon.transform.localScale = Vector3.one;
         }
         if (OnItemDragStartEvent != null)
         {

@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1333426277774014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.88, y: 1.031, z: 13.83}
+  m_LocalPosition: {x: -83.1, y: 1.031, z: 320.8}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,6 +75,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33808119579134948
 MeshFilter:
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73cdae5aba5020429dc607116226af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamNbr: 1
+  teamNbr: 2
 --- !u!114 &114648609353840706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,5 +153,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
