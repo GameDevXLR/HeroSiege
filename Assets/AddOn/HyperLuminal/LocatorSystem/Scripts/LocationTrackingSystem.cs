@@ -36,7 +36,7 @@ namespace HyperLuminalGames
 		{
 			// flag to detect if any errors have occured.
 			bool ErrorExists = false;
-
+			 
 			// check we are a camera object.
 			if(this.gameObject.GetComponent<Camera>() == null)
 			{

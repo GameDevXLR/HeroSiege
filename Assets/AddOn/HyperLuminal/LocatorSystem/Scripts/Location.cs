@@ -176,7 +176,7 @@ namespace HyperLuminalGames
 				thisOnScreenDisplay.GetComponent<OnScreenDisplay>().Init(this, thisTrackingSystem);
 				SetLayerOnAll(thisOnScreenDisplay, LayerMask.NameToLayer(layer));
 			}
-
+			 
 			// create the offscreen display object.
 			if(thisTrackingSystem.OffScreenDisplayPrefab != null)
 			{
