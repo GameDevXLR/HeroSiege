@@ -147,7 +147,7 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().currentHp += 100;
+			GetComponent<GenericLifeScript> ().currentHp += 250;
 		}
 	}
 
