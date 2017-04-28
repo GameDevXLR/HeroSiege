@@ -6,9 +6,9 @@ using UnityEngine.Networking;
 
 public class MinionsPathFindingScript : NetworkBehaviour 
 {
-	[SyncVar]public bool isTeam1;
+	[SyncVar] public bool isTeam1;
 	public NavMeshAgent agent;
-	[SyncVar]public Transform target;
+	[SyncVar] public Transform target;
 //	public float stopTime = 2f;
 	// Use this for initialization
 	void Start () 
@@ -38,7 +38,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 	IEnumerator GoToEndGameRoutine()
 	{
 
-			yield return new WaitForEndOfFrame ();
+			yield return new WaitForSeconds (0.66f);
 		if (agent.isOnNavMesh) 
 		{
 			agent.SetDestination (target.position);

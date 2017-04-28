@@ -1401,7 +1401,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1607321022530426}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 6, z: 3}
@@ -1800,12 +1800,12 @@ MonoBehaviour:
   ennemiAtt: {fileID: 8300000, guid: 819de7c6607003f47831a49f984395b8, type: 3}
   agent: {fileID: 195000901155981128}
   attackRange: 2.5
-  attackRate: 1.5
+  attackRate: 0.5
   damage: 5
   isAttacking: 0
   target: {fileID: 0}
-  rotSpeed: 20
-  detectionRange: 20
+  rotSpeed: 15
+  detectionRange: 30
   desiredPos: {x: 0, y: 0, z: 0}
   isUnderCC: 0
 --- !u!114 &114550509820544456
@@ -1941,7 +1941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncRot: 0
-  timeBtwTic: 0.31
+  timeBtwTic: 0.22
 --- !u!114 &114726004785686972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2122,7 +2122,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.6
-  m_Speed: 4
+  m_Speed: 3
   m_Acceleration: 500
   avoidancePriority: 50
   m_AngularSpeed: 120

@@ -13,9 +13,12 @@ public class PlayerXPScript : NetworkBehaviour
 	public RectTransform xpDisplay;
 	public Text xpText;
 	[SyncVar (hook= "XPActualize")]public int actualXP;
-	public int requiredXPToUp = 50;
+	public int requiredXPToUp = 150;
 	public int actualLevel = 1;
 	private ParticleSystem LvlUpParticle;
+	float requiredXpTmp;
+	int previousXpRec;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -63,29 +66,33 @@ public class PlayerXPScript : NetworkBehaviour
 		{
 			actualLevel++;
 			LvlUpParticle.Play ();
-			actualXP = 0;
-			requiredXPToUp *= 1 + actualLevel;
+			previousXpRec = requiredXPToUp;
+			requiredXpTmp = (float)requiredXPToUp * (1f + ((float)actualLevel / 5f));
+			requiredXPToUp = (int)requiredXpTmp + requiredXPToUp;
+
+			if (isServer) 
+			{
+				GetComponent<PlayerManager> ().playerLvl++;
+			}
 			if (isLocalPlayer) 
 			{
 				StartCoroutine (LevelUpMessage ());
 				playerLvl.text = actualLevel.ToString ();
 
 			}
-			if (isServer) 
-			{
-				GetComponent<PlayerManager> ().playerLvl++;
-			}
 			GetComponent<GenericLifeScript> ().LevelUp ();
 			GetComponent<GenericManaScript> ().LevelUp ();
 			GetComponent<PlayerAutoAttack> ().LevelUp ();
 
 		}
+
 		if (isLocalPlayer) 
 		{
-			float x = (float)actualXP / requiredXPToUp;
+			float x = (float)(actualXP-previousXpRec) / requiredXPToUp;
 			xpDisplay.localScale = new Vector3 (x, 1f, 1f);
 			xpText.text = actualXP.ToString () + " / "+ requiredXPToUp.ToString();
 
 		}
 	}
+
 }
