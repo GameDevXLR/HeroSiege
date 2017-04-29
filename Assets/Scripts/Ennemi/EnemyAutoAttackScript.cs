@@ -141,12 +141,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 		yield return new WaitForSeconds(0.1f);
 		if (target != null) {
-			if (agent.isOnNavMesh) {
+//			if (agent.isOnNavMesh) {
 				agent.SetDestination (target.transform.localPosition); 
 				agent.stoppingDistance = attackRange;
 				targetTempPos = target.transform.localPosition;
 				yield return null;
-			}
+//			}
 		} else 
 		{
 			GetTargetFromID (targetID);
@@ -195,6 +195,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	public void GetTargetFromID(NetworkInstanceId id)
 	{
+		Debug.Log ("truite");
 		targetID = id;
 		target = ClientScene.FindLocalObject (id);
 		targetTempPos = target.transform.position;

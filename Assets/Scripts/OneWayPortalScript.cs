@@ -26,6 +26,7 @@ public class OneWayPortalScript : NetworkBehaviour {
 	public ParticleSystem tpEffect;
 	public bool isPlayingEffect;
 	public string tpdestination;
+
 	[ServerCallback]
 	public void OnTriggerEnter(Collider other)
 	{
@@ -40,22 +41,24 @@ public class OneWayPortalScript : NetworkBehaviour {
 			}
 		}
 	}
-	[ServerCallback]
-	public void OnTriggerExit(Collider other)
-	{
-		if (isBeingUsed) 
-		{
-			if (other.gameObject == targetPlayer) 
-			{
-				isBeingUsed = false;
-				targetPlayer = null;
-
-			}
-		}
-	}
+//	[ServerCallback]
+//	public void OnTriggerExit(Collider other)
+//	{
+//		if (isBeingUsed) 
+//		{
+//			if (other.gameObject == targetPlayer) 
+//			{
+//				isBeingUsed = false;
+//				targetPlayer = null;
+//
+//			}
+//		}
+//	}
 	[ServerCallback]
 	public void TpProcess ()
 	{
+		targetID = targetPlayer.GetComponent<NetworkIdentity> ().netId;
+
 		timeOfActivation = Time.time;
 		StartCoroutine (TpProcessEnum ());
 	}
@@ -74,13 +77,12 @@ public class OneWayPortalScript : NetworkBehaviour {
 			if (Time.time > timeOfActivation + timeToTP) 
 			{
 				isBeingUsed = false;
-				targetID = targetPlayer.GetComponent<NetworkIdentity> ().netId;
 				if (GameManager.instanceGM.team1ID.Contains (targetID)) 
 				{
 					isPlayerInTeam1 = true;
 				}
-				targetPlayer = null;
 				RpcTpThatPlayer (targetID, isPlayerInTeam1);
+				targetPlayer = null;
 //				StartCoroutine (destroyThatTP ());
 			}
 			yield return new WaitForSeconds (0.1f);
