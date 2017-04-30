@@ -420,7 +420,7 @@ public class GenericLifeScript : NetworkBehaviour
     {
 		if (isDead) 
 		{
-			return;
+			yield return null;
 		}
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         yield return new WaitForSeconds(0.05f);
