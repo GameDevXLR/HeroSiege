@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class NetMoveSync : NetworkBehaviour
 {
 
-	NavMeshAgent agent;
+//	NavMeshAgent agent;
 	private Vector3 previousPos;
 
 	[SyncVar]
@@ -22,7 +22,7 @@ public class NetMoveSync : NetworkBehaviour
 	void Start()
 	{
 		realPosition = transform.position;
-		agent = GetComponent<NavMeshAgent>();
+//		agent = GetComponent<NavMeshAgent>();
 	}
 
 	void LateUpdate()

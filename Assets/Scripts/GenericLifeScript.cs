@@ -40,7 +40,7 @@ public class GenericLifeScript : NetworkBehaviour
     public float timeBetweenTic = 1f;
     public GameObject guyAttackingMe;
     public ParticleSystem rezParticule;
-    private Animator Anim;
+//    private Animator Anim;
     public GameObject deadAnimChildEffect;
     public GameObject deadAnimChildMesh;
     public GameObject mobDeadAnimChildMesh;
@@ -53,7 +53,7 @@ public class GenericLifeScript : NetworkBehaviour
 
     void Start()
     {
-        Anim = GetComponentInChildren<Animator>();
+//        Anim = GetComponentInChildren<Animator>();
         lastTic = 0f;
         if (isLocalPlayer)
         {

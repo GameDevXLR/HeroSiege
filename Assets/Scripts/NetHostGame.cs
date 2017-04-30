@@ -7,7 +7,9 @@ public class NetHostGame :  MonoBehaviour{
 		[SerializeField]
 		private uint roomSize = 10;
 
-		private string roomName;
+	private bool isCreating;
+
+	public string roomName;
 
 		private NetworkManager networkManager;
 
@@ -28,13 +30,25 @@ public class NetHostGame :  MonoBehaviour{
 
 		public void CreateRoom ()
 		{
+		if (isCreating) 
+		{
+			return;
+		}
 			if (roomName != "" && roomName != null)
 			{
 				Debug.Log("Creating Room: " + roomName + " with room for " + roomSize + " players.");
 //			LoadingScreenManager.LoadScene (2);
-				networkManager.matchMaker.CreateMatch (roomName, roomSize, true, "", "", "", 0, 0, networkManager.OnMatchCreate);
-			}
+			StartCoroutine (PreventDoubleGame ());
+			networkManager.matchMaker.CreateMatch (roomName, roomSize, true, "", "", "", 0, 0, networkManager.OnMatchCreate);
 		}
+		}
+
+	IEnumerator PreventDoubleGame()
+	{
+		isCreating = true;
+		yield return new WaitForSeconds (1f);
+		isCreating = false;
+	}
 
 	}
 

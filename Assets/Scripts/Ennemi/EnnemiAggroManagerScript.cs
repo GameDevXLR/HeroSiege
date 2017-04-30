@@ -13,12 +13,12 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 
 	Animator anim;
 
-	private NavMeshAgent agentParent;
+//	private NavMeshAgent agentParent;
 	private EnemyAutoAttackScript autoAScript;
 	// Use this for initialization
 	void Start () 
 	{
-		agentParent =GetComponentInParent<NavMeshAgent> ();
+//		agentParent =GetComponentInParent<NavMeshAgent> ();
 		autoAScript = GetComponentInParent<EnemyAutoAttackScript> ();
 	}
 

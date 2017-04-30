@@ -25,14 +25,14 @@ public class DayNightCycle : NetworkBehaviour {
 			isNight = true;
 			GetComponent<AudioSource> ().PlayOneShot (Night);
 			GameManager.instanceGM.nightTime = true;
-			speed *= nightSpeedFactor;
+			speed /= nightSpeedFactor;
 		}
 		if (transform.rotation.eulerAngles.x > 0f && transform.rotation.eulerAngles.x <180f&& isNight) 
 		{
 			isNight = false;
 			GetComponent<AudioSource> ().PlayOneShot (Day);
 			GameManager.instanceGM.nightTime = false;
-			speed /= nightSpeedFactor;
+			speed *= nightSpeedFactor;
 		}
 	
 	}

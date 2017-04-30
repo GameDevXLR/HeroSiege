@@ -86,7 +86,7 @@ public class LoadingScreenManager : MonoBehaviour {
 		yield return new WaitForSeconds(fadeDuration);
 
 		if (loadSceneMode == LoadSceneMode.Additive)
-			SceneManager.UnloadScene(currentScene.name);
+			SceneManager.UnloadSceneAsync(currentScene.name);
 		else
 			operation.allowSceneActivation = true;
 	}

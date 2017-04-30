@@ -42,7 +42,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 		if (agent.isOnNavMesh) 
 		{
 			agent.SetDestination (target.position);
-			agent.Resume ();
+			agent.isStopped = false;
 		}
 	}
 }

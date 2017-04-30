@@ -26,6 +26,7 @@ public class MainMenuManager : MonoBehaviour
 		{
 			PlayerNameDisplay.text = "NewPlayer";
 		}
+		GetComponent<NetHostGame> ().roomName = PlayerNickname + "'s room.";
 	}
 	public void ToggleFindGCanvas()
 	{

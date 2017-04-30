@@ -15,14 +15,14 @@ public class StatusHandlerScript : NetworkBehaviour
 //	public SkinnedMeshRenderer objRenderer;
 //	public Material stunMat;
 //	public Material normalMat;
-	private GenericLifeScript lifeScript;
+//	private GenericLifeScript lifeScript;
 	// ajouter le script d'autoAttack.
 
 	// Use this for initialization
-	void Start () 
-	{
-		lifeScript = GetComponent<GenericLifeScript> ();
-	}
+//	void Start () 
+//	{
+//		lifeScript = GetComponent<GenericLifeScript> ();
+//	}
 	[Server]
 	public void MakeHimCC(float CCDuration)
 	{

@@ -130,7 +130,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		charge = false;
 		anim.SetBool ("charge", false);
 		if (agent.isOnNavMesh) {
-			agent.Stop ();
+			agent.isStopped = true;
 		}
 		isAttacking = true;
 		attackAnim = true;
@@ -165,7 +165,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		attackAnim = false;
 		if (agent.isActiveAndEnabled) 
 		{
-			agent.Resume ();
+			agent.isStopped = false;
 		}
 		//audioSource.Stop ();
 		anim.SetBool ("attack", attackAnim);
@@ -192,7 +192,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		attackAnim = false;
 		if (agent.isOnNavMesh)
 		{
-			agent.Resume ();
+			agent.isStopped = false;
 		}
 		//audioSource.Stop ();
 		anim.SetBool ("attack", attackAnim);
