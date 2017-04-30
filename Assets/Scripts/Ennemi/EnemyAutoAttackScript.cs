@@ -195,7 +195,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	public void GetTargetFromID(NetworkInstanceId id)
 	{
-		Debug.Log ("truite");
 		targetID = id;
 		target = ClientScene.FindLocalObject (id);
 		targetTempPos = target.transform.position;

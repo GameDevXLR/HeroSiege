@@ -16,7 +16,7 @@ public class BuyableItemScript : MonoBehaviour
 	public bool recquireSlot;
 	void Start()
 	{
-		player = GameManager.instanceGM.playerObj;
+		StartCoroutine (DelayTheRegistration ());
 	}
 
 	public void BuyThatItem()
@@ -34,6 +34,13 @@ public class BuyableItemScript : MonoBehaviour
 		thisBtn.interactable = false;
 		yield return new WaitForSeconds (0.5f);
 		thisBtn.interactable = true;
+
+	}
+
+	IEnumerator DelayTheRegistration()
+	{
+		yield return new WaitForSeconds (1f);
+		player = GameManager.instanceGM.playerObj;
 
 	}
 }

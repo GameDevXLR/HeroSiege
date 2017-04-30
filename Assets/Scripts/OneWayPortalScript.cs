@@ -66,13 +66,14 @@ public class OneWayPortalScript : NetworkBehaviour {
 	[ServerCallback]
 	public IEnumerator TpProcessEnum ()
 	{
+		yield return new WaitForSeconds (0.1f);
 		while (isBeingUsed) 
 		{
 			if (Time.time > timeOfActivation + (float)timeToTP / 2 && !isPlayingEffect) 
 			{
 				isPlayingEffect = true;
 				RpcPlayEffect ();
-				GetComponent<AudioSource> ().PlayOneShot (Teleportation);
+//				GetComponent<AudioSource> ().PlayOneShot (Teleportation);
 			}
 			if (Time.time > timeOfActivation + timeToTP) 
 			{
