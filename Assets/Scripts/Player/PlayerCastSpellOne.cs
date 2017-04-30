@@ -18,6 +18,8 @@ public class PlayerCastSpellOne : NetworkBehaviour
     public int spellCost = 30;
     public int spellDmg = 50;
     public float spellCD;
+	public float timeSpent;
+	public Transform cdCountdown;
     public float spellDuration = 1.5f;
     public GameObject spellObj;
     public int spellLvl = 1;
@@ -35,6 +37,8 @@ public class PlayerCastSpellOne : NetworkBehaviour
         {
             spell1Btn = GameObject.Find("Spell1Btn").GetComponent<Button>();
             spell1LvlUpBtn = GameObject.Find("Spell1LvlUpBtn").GetComponent<Button>();
+			cdCountdown = spell1Btn.transform.Find ("CDCountdown");
+			cdCountdown.gameObject.SetActive (false);
             spell1Btn.onClick.AddListener(CastThatSpell);
             spell1LvlUpBtn.onClick.AddListener(levelUp);
             int x = (int)spellDmg / 5;
@@ -102,12 +106,32 @@ public class PlayerCastSpellOne : NetworkBehaviour
     IEnumerator SpellOnCD()
     {
         onCD = true;
+		StartCoroutine (ShowCDTimer());
+		cdCountdown.gameObject.SetActive (true);
+		int tmp = (int)(spellCD);
+		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
         spell1Btn.interactable = false;
         yield return new WaitForSeconds(spellCD);
         spell1Btn.interactable = true;
+		cdCountdown.gameObject.SetActive (false);
+		timeSpent = 0f;
         onCD = false;
     }
 
+
+	IEnumerator ShowCDTimer()
+	{
+		while (onCD) 
+		{
+			int tmp =(int) (spellCD - timeSpent);
+			if (tmp >= 0) 
+			{
+				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
+				timeSpent += 0.2f;
+			}
+			yield return new WaitForSeconds (0.2f);
+		}
+	}
     //si on clic sur level up; ca le dit au serveur.
     [Command]
     public void CmdLevelUpTheSpell()
@@ -136,7 +160,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
 //			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
-			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
+//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
             //changer ici l'interface du joueur.
         }
     }

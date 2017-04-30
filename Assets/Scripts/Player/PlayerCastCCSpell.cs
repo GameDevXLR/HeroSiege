@@ -23,6 +23,8 @@ public class PlayerCastCCSpell : NetworkBehaviour
     public GameObject spellObj;
     public int spellLvl = 1;
     private bool onCD;
+	private float timeSpent;
+	public Transform cdCountdown;
     private Button spell2Btn;
     private Button spell2LvlUpBtn;
     private Vector3 castPosDesired;
@@ -41,6 +43,9 @@ public class PlayerCastCCSpell : NetworkBehaviour
         {
             spell2Btn = GameObject.Find("Spell2Btn").GetComponent<Button>();
             spell2LvlUpBtn = GameObject.Find("Spell2LvlUpBtn").GetComponent<Button>();
+			cdCountdown = spell2Btn.transform.Find ("CDCountdown");
+			cdCountdown.gameObject.SetActive (false);
+
             spell2Btn.onClick.AddListener(CastThatSpell);
             spell2LvlUpBtn.onClick.AddListener(levelUp);
             int x = (int)spellDmg / 5;
@@ -167,11 +172,29 @@ public class PlayerCastCCSpell : NetworkBehaviour
     {
         onCD = true;
         spell2Btn.interactable = false;
+		StartCoroutine (ShowCDTimer());
+		cdCountdown.gameObject.SetActive (true);
+		int tmp = (int)(spellCD);
+		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
         yield return new WaitForSeconds(spellCD);
         spell2Btn.interactable = true;
+		cdCountdown.gameObject.SetActive (false);
+		timeSpent = 0f;
         onCD = false;
     }
-
+	IEnumerator ShowCDTimer()
+	{
+		while (onCD) 
+		{
+			int tmp =(int) (spellCD - timeSpent);
+			if (tmp >= 0) 
+			{
+				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
+				timeSpent += 0.2f;
+			}
+			yield return new WaitForSeconds (0.2f);
+		}
+	}
     //si on clic sur level up; ca le dit au serveur.
     [Command]
     public void CmdLevelUpTheSpell()
