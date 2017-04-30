@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using HyperLuminalGames;
 
 
 public class GameManager : NetworkBehaviour 
@@ -49,6 +50,7 @@ public class GameManager : NetworkBehaviour
 	public Image dayNightDisplay;
 	public Sprite dayIcon;
 	public Sprite nightIcon;
+	public LocationManager locManager;
 
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
 
@@ -72,6 +74,7 @@ public class GameManager : NetworkBehaviour
 		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
 		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
+		locManager = GameObject.Find ("LocationManager").GetComponent<LocationManager> ();
 	}
 	public bool IsItSolo()
 	{
@@ -392,6 +395,18 @@ public class GameManager : NetworkBehaviour
 	{
 		GameObject.Find ("GameClock").GetComponent<GameClockMinSec> ().enabled = true;
 		messageManager.SendAnAlertMess ("The game is starting!", Color.green);
+		ActualizeLocSystem ();
 	}
 
+	public void ActualizeLocSystem()
+	{
+		StartCoroutine (ActualizeTheLocator ());
+	}
+
+	IEnumerator ActualizeTheLocator()
+	{
+		locManager.Realtime_Updates = true;
+		yield return new WaitForSeconds (0.1f);
+		locManager.Realtime_Updates = false;
+	}
 }

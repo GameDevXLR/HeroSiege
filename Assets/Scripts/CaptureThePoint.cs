@@ -138,6 +138,7 @@ public class CaptureThePoint : NetworkBehaviour
 		
 	public void ChangeOwner(PointOwner newOwner)
 	{
+		GameManager.instanceGM.ActualizeLocSystem ();
 		belongsTo = newOwner;
 		if (canBeOwnedBy == newOwner) 
 		{

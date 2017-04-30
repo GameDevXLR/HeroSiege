@@ -30,11 +30,11 @@ namespace HyperLuminalGames
 		// a local copy of the minimap script if it is required.
 		private MinimapDisplay Minimap;
 
-		void Awake()
-		{
-			// when the level is loaded clear the list of systems.
-			LocationSystems.Clear();
-		}
+//		void Awake()
+//		{
+//			// when the level is loaded clear the list of systems.
+//			LocationSystems.Clear();
+//		}
 
 		// Initializationof the Location Manager.
 		public void Init (LocationTrackingSystem LocationSystem) 
