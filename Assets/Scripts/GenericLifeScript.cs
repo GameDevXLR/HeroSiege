@@ -418,6 +418,10 @@ public class GenericLifeScript : NetworkBehaviour
     }
     IEnumerator HitAnimation()
     {
+		if (isDead) 
+		{
+			return;
+		}
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         yield return new WaitForSeconds(0.05f);
         if (GetComponentInChildren<SkinnedMeshRenderer>())

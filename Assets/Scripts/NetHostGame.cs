@@ -15,7 +15,7 @@ public class NetHostGame :  MonoBehaviour{
 
 		void Start ()
 		{
-		roomName = "Default";
+//		roomName = "Default";
 			networkManager = NetworkManager.singleton;
 			if (networkManager.matchMaker == null)
 			{

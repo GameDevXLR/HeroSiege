@@ -23,6 +23,11 @@ public class PotionsScript : InventoryItem
 
 	public void LooseOneCharge()
 	{
+		if (GameManager.instanceGM.playerObj.GetComponent<GenericLifeScript> ().isDead) 
+		{
+			return;
+		}
+
 		if (potionCharges > 1) 
 		{
 			GetComponent<AudioSource> ().PlayOneShot (Potion);

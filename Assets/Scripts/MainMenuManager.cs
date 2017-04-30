@@ -20,8 +20,12 @@ public class MainMenuManager : MonoBehaviour
 	}
 	public void Start()
 	{
-//		DontDestroyOnLoad (gameObject);
+//		if (PlayerPrefs.GetString ("PlayerNN") == null) 
+//		{
+//			PlayerPrefs.SetString ("PlayerNN", "NoName");
+//		}		
 		PlayerNameDisplay.text = PlayerPrefs.GetString("PlayerNN");
+		PlayerNickname = PlayerPrefs.GetString ("PlayerNN");
 		if (PlayerNameDisplay.text == "") 
 		{
 			PlayerNameDisplay.text = "NewPlayer";
