@@ -158,7 +158,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 	{
         if (agentPlayer.isOnNavMesh)
         {
-            agentPlayer.Resume();
+			agentPlayer.isStopped = false;
             agentPlayer.SetDestination(dest);
 
         }

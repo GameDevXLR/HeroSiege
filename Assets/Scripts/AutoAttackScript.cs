@@ -94,7 +94,7 @@ public class AutoAttackScript : NetworkBehaviour
 	public void AttackTheTarget()
 	{
 		
-		agent.Stop ();
+		agent.isStopped = true;
 		isAttacking = true;
 		attackAnim = true;
 		agent.enabled = false;
@@ -113,7 +113,7 @@ public class AutoAttackScript : NetworkBehaviour
 		agent.enabled = true;
 		audioSource.Stop ();
 		anim.SetBool ("attackEnnemi", attackAnim);
-		agent.Resume ();
+		agent.isStopped = false;
 		GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 
 	}

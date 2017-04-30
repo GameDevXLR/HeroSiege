@@ -42,7 +42,7 @@ namespace HyperLuminalGames
 			}
 		}
 
-		public void UpdateDisplayInfo()
+		public new void UpdateDisplayInfo()
 		{
 			base.UpdateDisplayInfo();
 
