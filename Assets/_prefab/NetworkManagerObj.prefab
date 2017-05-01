@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4570286692455482}
   - component: {fileID: 114101508417045676}
   - component: {fileID: 114395821510757714}
-  - component: {fileID: 114504948814469456}
   m_Layer: 0
   m_Name: NetworkManagerObj
   m_TagString: Untagged
@@ -88,10 +87,10 @@ MonoBehaviour:
   - {fileID: 1853418556211758, guid: 105d8c58bbcf7f143bc03b90a42dd95a, type: 2}
   - {fileID: 1840545334792104, guid: 6e1c6fc78d4673b45ae4f4cdaf17e7f6, type: 2}
   - {fileID: 1134211014724214, guid: c2541f206d37d8c42b88d40d0cae6d58, type: 2}
-  - {fileID: 1498430331498804, guid: 1777822f51750cd42bfef99045fa30e4, type: 2}
   - {fileID: 1343218928825644, guid: f5a8e65b673dcf646a395ce5089966cb, type: 2}
   - {fileID: 1101485968794934, guid: d9e2b567b3b624b489c12c96adca4827, type: 2}
   - {fileID: 1149734847917142, guid: 2991c5c190ea0eb4b9ca83f63bcb558b, type: 2}
+  - {fileID: 1420677973341816, guid: fa39bb0b38746ab42aeb2fbbf1c3587b, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 10
   m_ConnectionConfig:
@@ -139,22 +138,11 @@ MonoBehaviour:
   m_UseSimulator: 0
   m_SimulatedLatency: 50
   m_PacketLossPercentage: 0
-  m_MaxBufferedPackets: 62
+  m_MaxBufferedPackets: 124
   m_AllowFragmentation: 1
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443
   matchName: default
   matchSize: 10
   isNetworkActive: 0
-  matchMaker: {fileID: 114504948814469456}
---- !u!114 &114504948814469456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1065471443572348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  matchMaker: {fileID: 0}

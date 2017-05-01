@@ -208,18 +208,20 @@ public class GameManager : NetworkBehaviour
 		} else 
 		{
 			Days++;
+			GetComponent<BossSpawnManager> ().bossLvlT1++;
+			GetComponent<BossSpawnManager> ().bossLvlT2++;
 			dayNightDisplay.sprite = dayIcon;
 			messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
 
 			if (isServer) 
 			{
-				
 				coPlayers = NetworkServer.connections.Count; // le nombre de joueurs connectés.
 				DayStartingEvents (coPlayers);
 				Debug.Log ("spawn them here in the code...There is " + coPlayers.ToString() +" players connected.");
 			}
 		}
 	}
+
 
 	public void SyncDifficulty(int dif)
 	{
@@ -332,6 +334,9 @@ public class GameManager : NetworkBehaviour
 			//si c'est le "premier vrai jour" : on multiplie le nombre de mobs par vague par le nombre de joueurs. ca fou direct le bordel. oh yeah.
 //			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().numberOfMobs *= coPlayers+1;
 		}
+
+		GetComponent<BossSpawnManager> ().SpawnBosses ();
+
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = false;
@@ -406,7 +411,7 @@ public class GameManager : NetworkBehaviour
 	IEnumerator ActualizeTheLocator()
 	{
 		locManager.Realtime_Updates = true;
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (0.3f);
 		locManager.Realtime_Updates = false;
 	}
 }

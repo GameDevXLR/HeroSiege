@@ -1867,6 +1867,7 @@ MonoBehaviour:
   spellRange: 25
   spellObj: {fileID: 1101485968794934, guid: d9e2b567b3b624b489c12c96adca4827, type: 2}
   spellLvl: 1
+  cdCountdown: {fileID: 0}
   spellTargeter: {fileID: 0}
   spellRangeArea: {fileID: 1310458255290858}
   isTargeting: 0
@@ -2168,6 +2169,8 @@ MonoBehaviour:
   spellCost: 30
   spellDmg: 30
   spellCD: 8
+  timeSpent: 0
+  cdCountdown: {fileID: 0}
   spellDuration: 1.5
   spellObj: {fileID: 1134211014724214, guid: c2541f206d37d8c42b88d40d0cae6d58, type: 2}
   spellLvl: 1
@@ -2568,6 +2571,36 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114630074160520858}
         m_MethodName: RpcSellOrbOfPower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: CallRpcUpTheBossT1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114630074160520858}
+        m_MethodName: CallRpcUpTheBossT2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

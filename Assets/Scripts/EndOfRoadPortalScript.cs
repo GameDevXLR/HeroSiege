@@ -26,11 +26,20 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 			if (teamNbr == 1) 
 			{
 				GameManager.instanceGM.Team1LooseALife ();
+				if (other.tag == "Boss") 
+				{
+					GameManager.instanceGM.Team1LooseALife ();
+					GameManager.instanceGM.Team1LooseALife ();
+				}
 			}
 			if (teamNbr == 2) 
 			{
 				GameManager.instanceGM.Team2LooseALife ();
-
+				if (other.tag == "Boss") 
+				{
+					GameManager.instanceGM.Team2LooseALife ();
+					GameManager.instanceGM.Team2LooseALife ();
+				}
 			}
 		}
 	}

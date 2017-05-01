@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 82135726241604874}
   - component: {fileID: 114390961700196786}
   - component: {fileID: 114187068329497642}
+  - component: {fileID: 114574788973545376}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -539,6 +540,7 @@ MonoBehaviour:
   dayNightDisplay: {fileID: 0}
   dayIcon: {fileID: 21300000, guid: 9820ce47de53dd245add704204f8f16b, type: 3}
   nightIcon: {fileID: 21300000, guid: d2b8408c566125e499ef117fabddb3ea, type: 3}
+  locManager: {fileID: 0}
   gameDifficulty: 0
 --- !u!114 &114187068329497642
 MonoBehaviour:
@@ -577,6 +579,27 @@ MonoBehaviour:
   - {fileID: 4018129355862478}
   - {fileID: 4995159820877416}
   GuardNbr: 0
+--- !u!114 &114574788973545376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1058267811540780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89456ff6ee88dc146a3908295c8dedf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossPrefab: {fileID: 1420677973341816, guid: fa39bb0b38746ab42aeb2fbbf1c3587b, type: 2}
+  bossSpawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bossLvlT1: 1
+  bossLvlT2: 1
+  targetTeam1Destination: {fileID: 0}
+  targetTeam2Destination: {fileID: 0}
 --- !u!114 &114718437280590848
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class DayNightCycle : NetworkBehaviour {
 
 	[SyncVar]public float speed = 0f;
-	public int nightSpeedFactor = 2;
+	public float nightSpeedFactor = 0.4f;
 	public bool isNight;
 	public AudioClip Night;
 	public AudioClip Day;
@@ -25,14 +25,14 @@ public class DayNightCycle : NetworkBehaviour {
 			isNight = true;
 			GetComponent<AudioSource> ().PlayOneShot (Night);
 			GameManager.instanceGM.nightTime = true;
-			speed /= nightSpeedFactor;
+			speed -= nightSpeedFactor;
 		}
 		if (transform.rotation.eulerAngles.x > 0f && transform.rotation.eulerAngles.x <180f&& isNight) 
 		{
 			isNight = false;
 			GetComponent<AudioSource> ().PlayOneShot (Day);
 			GameManager.instanceGM.nightTime = false;
-			speed *= nightSpeedFactor;
+			speed += nightSpeedFactor;
 		}
 	
 	}

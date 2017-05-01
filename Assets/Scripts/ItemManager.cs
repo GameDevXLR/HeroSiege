@@ -129,6 +129,47 @@ public class ItemManager : NetworkBehaviour
 
 	#endregion
 
+	#region Bosses (up de boss)
+
+	[ClientRpc]
+	public void RpcUpTheBossT1()
+	{
+		GameManager GM;
+		GM = GameManager.instanceGM;
+		if (GM.isTeam1) 
+		{
+			GM.messageManager.SendAnAlertMess ("Our boss is growing stronger", Color.green);
+		} else 
+		{
+			GM.messageManager.SendAnAlertMess ("The enemy boss is getting stronger.", Color.red);
+		}
+		if (isServer) 
+		{
+			GameManager.instanceGM.gameObject.GetComponent<BossSpawnManager> ().bossLvlT1++;
+		}
+
+	}
+	[ClientRpc]
+	public void RpcUpTheBossT2()
+	{
+		GameManager GM;
+		GM = GameManager.instanceGM;
+		if (GM.isTeam2) 
+		{
+			GM.messageManager.SendAnAlertMess ("Our boss is growing stronger", Color.green);
+		} else 
+		{
+			GM.messageManager.SendAnAlertMess ("The enemy boss is getting stronger.", Color.red);
+		}
+		if (isServer) 
+		{
+			GameManager.instanceGM.gameObject.GetComponent<BossSpawnManager> ().bossLvlT2++;
+		}
+
+	}
+
+	#endregion
+
 	#region Consommables (potions / parchemins etc)
 
 	[ClientRpc]
