@@ -21,6 +21,8 @@ public class ItemManager : NetworkBehaviour
 	[Header ("Prefabs achetable/spawnable")]
 	public GameObject healthPotionPrefab;
 	public GameObject manaPotionPrefab;
+	public GameObject bigHealthPotionPrefab;
+	public GameObject bigManaPotionPrefab;
 	public GameObject tpScrollPrefab;
 	public GameObject tpBackPortalPrefab;
 	public GameObject ArchiRingPrefab;
@@ -117,6 +119,29 @@ public class ItemManager : NetworkBehaviour
 
 	}
 	[ClientRpc]
+	public void RpcUpMyExp()
+	{
+
+		if (isServer) 
+		{
+			targetplayer = NetworkServer.FindLocalObject (targetID);
+			targetplayer.GetComponent<PlayerXPScript> ().GetXP (10000);
+		}
+
+	}
+	[ClientRpc]
+	public void RpcUpMyRegen()
+	{
+
+		if (isServer) 
+		{
+			targetplayer = NetworkServer.FindLocalObject (targetID);
+			targetplayer.GetComponent<GenericLifeScript> ().regenHp += 10;
+			targetplayer.GetComponent<GenericManaScript> ().regenMp += 10;
+		}
+
+	}
+	[ClientRpc]
 	public void RpcRecruteAGuard()
 	{
 		return; //provisoire
@@ -191,6 +216,25 @@ public class ItemManager : NetworkBehaviour
 			GetComponent<GenericLifeScript> ().currentHp += 250;
 		}
 	}
+	[ClientRpc]
+	public void RpcBuyBigHealthPotion()
+	{
+		if (isLocalPlayer) 
+		{
+
+			GameObject go = Instantiate (bigHealthPotionPrefab, selectableSlot);
+			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
+		}
+	}
+	[ClientRpc]
+	public void RpcUseBigHealthPotion()
+	{
+		if (isServer) 
+		{
+			GetComponent<GenericLifeScript> ().currentHp += 1000;
+		}
+	}
 
 	[ClientRpc]
 	//rend 200 mana par charge. voir objet pour charges associés.
@@ -210,6 +254,26 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			GetComponent<GenericManaScript> ().currentMp += 200;
+		}
+	}
+	[ClientRpc]
+	//rend 200 mana par charge. voir objet pour charges associés.
+	public void RpcBuyBigManaPotion()
+	{
+		if (isLocalPlayer) 
+		{
+
+			GameObject go = Instantiate (bigManaPotionPrefab, selectableSlot);
+			go.transform.localScale = new Vector3 (1f, 1f, 1f);
+			GetComponent<AudioSource> ().PlayOneShot (Gold);
+		}
+	}
+	[ClientRpc]
+	public void RpcUseBigManaPotion()
+	{
+		if (isServer) 
+		{
+			GetComponent<GenericManaScript> ().currentMp += 1000;
 		}
 	}
 
@@ -245,8 +309,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericManaScript> ().maxMp += 50;
-			GetComponent<GenericManaScript> ().regenMp += 2;
+			GetComponent<GenericManaScript> ().maxMp += 150;
+			GetComponent<GenericManaScript> ().regenMp += 5;
 		}
 		if (isLocalPlayer) 
 		{
@@ -260,8 +324,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericManaScript> ().maxMp -= 50;
-			GetComponent<GenericManaScript> ().regenMp -= 2;
+			GetComponent<GenericManaScript> ().maxMp -= 150;
+			GetComponent<GenericManaScript> ().regenMp -= 5;
 		}
 
 	}
@@ -279,6 +343,7 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			GetComponent<PlayerClicToMove> ().playerSpeed += 0.5f;
+			GetComponent<GenericLifeScript> ().dodge += 5f;
 		}
 	}
 	[ClientRpc]
@@ -288,6 +353,8 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			GetComponent<PlayerClicToMove> ().playerSpeed -= 0.5f;
+			GetComponent<GenericLifeScript> ().dodge -= 5f;
+
 		}
 	}
 	[ClientRpc]
@@ -296,8 +363,9 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().maxHp += 150;
-			GetComponent<GenericLifeScript> ().regenHp += 5;
+			GetComponent<GenericLifeScript> ().maxHp += 250;
+			GetComponent<GenericLifeScript> ().regenHp += 10;
+			GetComponent<GenericLifeScript> ().armorScore += 50;
 
 		}
 		if (isLocalPlayer) 
@@ -312,8 +380,9 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().maxHp -= 150;
-			GetComponent<GenericLifeScript> ().regenHp -= 5;
+			GetComponent<GenericLifeScript> ().maxHp -= 250;
+			GetComponent<GenericLifeScript> ().regenHp -= 10;
+			GetComponent<GenericLifeScript> ().armorScore -= 50;
 
 		}
 	}
@@ -324,7 +393,6 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			GetComponent<PlayerAutoAttack> ().damage += 100;
-			GetComponent<GenericLifeScript> ().armorScore += 50;
 
 		}
 		if (isLocalPlayer) 
@@ -340,7 +408,6 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			GetComponent<PlayerAutoAttack> ().damage -= 100;
-			GetComponent<GenericLifeScript> ().armorScore -= 50;
 
 		}
 	}

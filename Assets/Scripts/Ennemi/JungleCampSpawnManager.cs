@@ -53,6 +53,11 @@ public class JungleCampSpawnManager : NetworkBehaviour
 			jungCampMinion.Add (minion);
 			minion.GetComponent<GenericLifeScript> ().maxHp += CampLvl * scaleFactor;
 			minion.GetComponent<GenericLifeScript> ().currentHp += CampLvl * scaleFactor;
+			minion.GetComponent<GenericLifeScript> ().goldGiven += scaleFactor;
+			if (CampLvl > 2) 
+			{
+				minion.GetComponent<GenericLifeScript> ().xpGiven += (CampLvl * scaleFactor)-scaleFactor;
+			}
 			minion.GetComponent<MinionsPathFindingScript> ().target = tr;
 
 			NetworkServer.Spawn (minion);
@@ -65,6 +70,11 @@ public class JungleCampSpawnManager : NetworkBehaviour
 			minionboss.GetComponent<GenericLifeScript> ().maxHp += CampLvl * scaleFactor;
 			minionboss.GetComponent<GenericLifeScript> ().currentHp += CampLvl * scaleFactor;
 			minionboss.GetComponent<MinionsPathFindingScript> ().target = tr2;
+			if (CampLvl > 2) 
+			{
+				minionboss.GetComponent<EnemyAutoAttackScript> ().damage += CampLvl * 5;
+				minionboss.GetComponent<GenericLifeScript> ().xpGiven += (CampLvl * scaleFactor)-scaleFactor;
+			}
 		
 			NetworkServer.Spawn (minionboss);
 		}
