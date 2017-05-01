@@ -125,7 +125,7 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			targetplayer = NetworkServer.FindLocalObject (targetID);
-			targetplayer.GetComponent<PlayerXPScript> ().GetXP (10000);
+			targetplayer.GetComponent<PlayerXPScript> ().GetXP (100000);
 		}
 
 	}
