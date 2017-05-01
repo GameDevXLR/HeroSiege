@@ -145,9 +145,9 @@ public class PlayerCastSpellOne : NetworkBehaviour
     public void RpcLvlUpSpell()
     {
         spellLvl++;
-        spellCost += 10;
+        spellCost += 5;
         spellCD -= 0.5f;
-        spellDmg += 20;
+        spellDmg += 10;
         spellDuration += 0.5f;
         if (isLocalPlayer)
         {

@@ -52,6 +52,8 @@ public class GameManager : NetworkBehaviour
 	public Sprite nightIcon;
 	public LocationManager locManager;
 
+	public GameObject[] jungCamps;
+
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
 
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
@@ -75,6 +77,10 @@ public class GameManager : NetworkBehaviour
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
 		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
 		locManager = GameObject.Find ("LocationManager").GetComponent<LocationManager> ();
+//		if (isServer) 
+//		{
+//			jungCamps = GameObject.FindObjectsOfType(typeof( JungleCampSpawnManager)) as GameObject[];
+//		}
 	}
 	public bool IsItSolo()
 	{
@@ -208,6 +214,10 @@ public class GameManager : NetworkBehaviour
 		} else 
 		{
 			Days++;
+			foreach (GameObject go in jungCamps) 
+			{
+				go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
+			}
 			GetComponent<BossSpawnManager> ().bossLvlT1++;
 			GetComponent<BossSpawnManager> ().bossLvlT2++;
 			dayNightDisplay.sprite = dayIcon;
@@ -264,6 +274,10 @@ public class GameManager : NetworkBehaviour
 		NetworkServer.Destroy (GameObject.Find ("StartingBarricade2"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector2"));
+		foreach (GameObject go in jungCamps) 
+		{
+			go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
+		}
 		StopPlayerFromJoining ();
 		RpcMessageToAll ();
 		ActivateGoldPerSec ();

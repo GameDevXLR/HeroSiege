@@ -41,6 +41,10 @@ public class MinionsPathFindingScript : NetworkBehaviour
 			yield return new WaitForSeconds (0.66f);
 		if (agent.isOnNavMesh) 
 		{
+			if (target == null) 
+			{
+				target = transform;
+			}
 			agent.SetDestination (target.position);
 			agent.isStopped = false;
 		}

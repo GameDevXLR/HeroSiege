@@ -208,10 +208,10 @@ public class PlayerCastCCSpell : NetworkBehaviour
     public void RpcLvlUpSpell()
     {
         spellLvl++;
-        spellCost += 5;
-        spellCD -= 1f;
-        spellDmg += 100;
-        spellDuration += 0.5f;
+        spellCost += 8;
+        spellCD -= 2f;
+        spellDmg += 75;
+        spellDuration += 1f;
         if (isLocalPlayer)
         {
             GetComponent<PlayerLevelUpManager>().LooseASpecPt(true);
