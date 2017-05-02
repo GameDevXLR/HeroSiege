@@ -23,6 +23,7 @@ public class CaptureThePoint : NetworkBehaviour
 	private float timeCaptureStart;
 	private float initialTimeToCapt;
 	public AudioClip Capture;
+	int tmpTime;
 	// Use this for initialization
 	void Start () 
 	{		
@@ -65,6 +66,14 @@ public class CaptureThePoint : NetworkBehaviour
 	[ServerCallback]
 	public void OnTriggerStay(Collider other)
 	{
+		if (timeToCapture < 10f && timeToCapture > 0f) 
+		{
+			tmpTime = (int)timeToCapture;
+			GetComponent<Location> ().Display_2_Text = tmpTime.ToString ();
+		} else 
+		{
+			GetComponent<Location> ().Display_2_Text = "";
+		}
 		switch (belongsTo) 
 		{
 		case PointOwner.neutral:

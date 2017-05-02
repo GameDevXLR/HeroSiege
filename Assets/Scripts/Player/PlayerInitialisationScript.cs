@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using HyperLuminalGames;
 
 [NetworkSettings(channel = 0, sendInterval =0.5f)]
 
@@ -94,6 +95,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		playerNickName = str;
 		gameObject.name = playerNickName + netId.ToString();
 		GetComponent<PlayerManager> ().playerNickname = playerNickName;
+		GetComponent<Location> ().Display_1_Text = playerNickName;
 		if (!isLocalPlayer) 
 		{
 			GetComponent<PlayerManager> ().playerUI.transform.GetChild (0).GetComponent<Text> ().text = str;
