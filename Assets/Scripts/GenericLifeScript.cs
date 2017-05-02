@@ -201,7 +201,7 @@ public class GenericLifeScript : NetworkBehaviour
 
         }
 
-        StartCoroutine(HitAnimation());
+//        StartCoroutine(HitAnimation());
         RescaleTheLifeBarIG(currentHp);
         lifeBar.GetComponentInParent<Canvas>().enabled = true;
 
@@ -416,19 +416,19 @@ public class GenericLifeScript : NetworkBehaviour
 
 
     }
-    IEnumerator HitAnimation()
-    {
-		if (isDead) 
-		{
-			yield return null;
-		}
-        GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-        yield return new WaitForSeconds(0.05f);
-        if (GetComponentInChildren<SkinnedMeshRenderer>())
-        {
-            GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-        }
-    }
+//    IEnumerator HitAnimation()
+//    {
+//		if (isDead) 
+//		{
+//			yield return null;
+//		}
+//        GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+//        yield return new WaitForSeconds(0.05f);
+//        if (GetComponentInChildren<SkinnedMeshRenderer>())
+//        {
+//            GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+//        }
+//    }
 
 
     public void LevelUp()
