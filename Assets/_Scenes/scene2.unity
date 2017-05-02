@@ -9522,6 +9522,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114715812272573262, guid: 388b2bfd8c9663445930000418edf4d9,
+        type: 2}
+      propertyPath: scaleFactor
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 388b2bfd8c9663445930000418edf4d9, type: 2}
   m_IsPrefabParent: 0
@@ -10094,6 +10099,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114715812272573262, guid: 388b2bfd8c9663445930000418edf4d9,
+        type: 2}
+      propertyPath: scaleFactor
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 388b2bfd8c9663445930000418edf4d9, type: 2}
   m_IsPrefabParent: 0
@@ -10472,6 +10482,16 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715812272573262, guid: 388b2bfd8c9663445930000418edf4d9,
+        type: 2}
+      propertyPath: CampLvl
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715812272573262, guid: 388b2bfd8c9663445930000418edf4d9,
+        type: 2}
+      propertyPath: scaleFactor
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 388b2bfd8c9663445930000418edf4d9, type: 2}
@@ -13626,7 +13646,7 @@ Prefab:
     - target: {fileID: 114127148823258428, guid: fecf716e54bdd2441ae6bbed4169f904,
         type: 2}
       propertyPath: jungCamps.Array.size
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4446641092319616, guid: fecf716e54bdd2441ae6bbed4169f904, type: 2}
       propertyPath: m_LocalPosition.x
@@ -13749,12 +13769,12 @@ Prefab:
         type: 2}
       propertyPath: jungCamps.Array.data[10]
       value: 
-      objectReference: {fileID: 580918345}
+      objectReference: {fileID: 509020282}
     - target: {fileID: 114127148823258428, guid: fecf716e54bdd2441ae6bbed4169f904,
         type: 2}
       propertyPath: jungCamps.Array.data[11]
       value: 
-      objectReference: {fileID: 509020282}
+      objectReference: {fileID: 580918345}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fecf716e54bdd2441ae6bbed4169f904, type: 2}
   m_IsPrefabParent: 0
@@ -26630,6 +26650,16 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715812272573262, guid: 388b2bfd8c9663445930000418edf4d9,
+        type: 2}
+      propertyPath: CampLvl
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715812272573262, guid: 388b2bfd8c9663445930000418edf4d9,
+        type: 2}
+      propertyPath: scaleFactor
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 388b2bfd8c9663445930000418edf4d9, type: 2}
