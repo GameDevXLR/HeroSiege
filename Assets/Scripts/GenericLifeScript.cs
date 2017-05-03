@@ -301,7 +301,7 @@ public class GenericLifeScript : NetworkBehaviour
         if (isServer)
         {
             RpcKillTheMob();
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             NetworkServer.Destroy(gameObject);
             //faire ici la remise dans le pool.
 

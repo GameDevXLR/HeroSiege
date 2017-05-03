@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 
 public class MinionsPathFindingScript : NetworkBehaviour 
 {
+	bool walkAnim;
+	private Animator anim;
 	[SyncVar] public bool isTeam1;
 	public NavMeshAgent agent;
 	[SyncVar] public Transform target;
@@ -13,6 +15,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		anim = GetComponentInChildren<Animator> ();
 		agent = GetComponent<NavMeshAgent> ();
 //		if (isTeam1) 
 //		{
@@ -44,6 +47,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 			if (target == null) 
 			{
 				target = transform;
+
 			}
 			agent.SetDestination (target.position);
 			agent.isStopped = false;

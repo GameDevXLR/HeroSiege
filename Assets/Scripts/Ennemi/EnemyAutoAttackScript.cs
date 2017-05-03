@@ -16,6 +16,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		Animator anim; // l'animator qui gere les anim lié a ce script
 //		public bool stopWalk; //pour l animation : arrete de marcher
 		bool attackAnim; // dois je jouer l'animation d'attaque ? 
+		bool walkAnim;
 		public NavMeshAgent agent; // l'agent qui permet de déplacer l'objet attacher
 		public float attackRange; // la portée des auto attaques
 		public float attackRate; // le rate d'attaque par seconde
@@ -135,37 +136,41 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	public void AcquireTarget(NetworkInstanceId id)
 		{
 		StartCoroutine (AcquireTargetProcess ());
+
 	}
 	IEnumerator AcquireTargetProcess()
 	{
+		anim.SetBool("walk", walkAnim= true);
 
 		yield return new WaitForSeconds(0.1f);
 		if (target != null) {
 //			if (agent.isOnNavMesh) {
-				agent.SetDestination (target.transform.localPosition); 
-				agent.stoppingDistance = attackRange;
-				targetTempPos = target.transform.localPosition;
-				yield return null;
+			agent.SetDestination (target.transform.localPosition); 
+			agent.stoppingDistance = attackRange;
+			targetTempPos = target.transform.localPosition;
+			yield return null;
 //			}
 		} else 
 		{
 			GetTargetFromID (targetID);
+			anim.SetBool("walk", walkAnim = false);
 		}
 	}
 	public void LooseTarget()
 	{
 		RpcLooseTarget ();	
 		isAttacking = false;
+
 	}
 	[ClientRpc]
 	public void RpcLooseTarget()
 	{
 			target = null;
-			attackAnim = false;
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
-		agent.isStopped = false;
-			anim.SetBool ("attackEnnemi", attackAnim);
+			agent.isStopped = false;
+			anim.SetBool ("attackEnnemi", attackAnim = false);
+			anim.SetBool ("walk", walkAnim = false);
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 			if (particule != null) 
 			{
