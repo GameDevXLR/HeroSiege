@@ -10,7 +10,8 @@ public class TeamSelectorScript : NetworkBehaviour
 	//une fois la partie démarrée (difficulté choisie): l'objet est détruit.
 
 	public int teamNbr; // DOIT ETRE COMPLETER : détermine a quel team appartiendra l'objet qui entrera en collision.
-
+	public Sprite team1Icon;
+	public Sprite team2Icon;
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Player") 
@@ -35,13 +36,16 @@ public class TeamSelectorScript : NetworkBehaviour
 			if (teamNbr == 1) 
 			{
 				other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
+				other.gameObject.GetComponent<PlayerManager> ().myTeamSprite = team1Icon;
 				return;
 
 			} else 
 			{
 				other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT2");
+				other.gameObject.GetComponent<PlayerManager> ().myTeamSprite = team2Icon;
+
 			}
-		}
+		}		
 	}
 
 }

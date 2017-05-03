@@ -25,6 +25,9 @@ public class PlayerManager : NetworkBehaviour
 	public Transform playersStatsView;
     public GameObject minimap;
 
+	public Sprite myTeamSprite;
+	public Image myTeamIcon;
+
 	public void Start()
 	{
 		playersStatsView = GameObject.Find ("PlayersStatsView").transform;
@@ -55,12 +58,20 @@ public class PlayerManager : NetworkBehaviour
 		playerLifeBar = playerUI.transform.Find ("AllyLifeBarMain/AllyActualLifeBar").transform;
 		playerManaTxt = playerUI.transform.Find ("AllyManaBarMain/AllyMpText").GetComponent<Text> ();
 		playerManaBar = playerUI.transform.Find ("AllyManaBarMain/AllyActualManaBar").transform;
+		myTeamIcon = playerUI.transform.Find ("allyTeam").GetComponent<Image> ();
 		playerDeathsTxt = playerUI.transform.Find ("AllyDeathsTxt").GetComponent<Text> ();
 		playerLvlDisplay = playerUI.transform.Find ("AllyLvl").GetComponent<Text> ();
 		deadAvatarImg = playerUI.transform.Find ("allyDeadAvatar").GetComponent<Image> ();
 		playerLifeTxt.text = "250 / 250";
 		playerManaTxt.text = "100 / 100";
 		playerKillsTxt.text = "0";
+		StartCoroutine (DelayTheUIActu ());
+	}
+
+	IEnumerator DelayTheUIActu()
+	{
+		yield return new WaitForSeconds (1f);
+		myTeamIcon.sprite = myTeamSprite;
 	}
 
 	public void ActualizeKillCount(int kills)
