@@ -11598,7 +11598,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 0.24524222, g: 0.3405202, b: 0.39705884, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -25941,6 +25941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1228bbe9209824fa0bfa2aa0cdafd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moonLight: {fileID: 912119837}
   isSwitchingOFF: 0
   isSwitchingON: 0
   speed: 2

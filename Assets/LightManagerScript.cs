@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LightManagerScript : MonoBehaviour 
 {
+	public Light moonLight;
+
 	public bool isSwitchingOFF;
 	public bool isSwitchingON;
 	public float speed;
@@ -20,6 +22,22 @@ public class LightManagerScript : MonoBehaviour
 	}
 	public void SwitchTheTorches()
 	{
+		if (isSwitchingOFF) 
+		{
+			moonLight.intensity -= (tmpSpeed/4f);
+			if (moonLight.intensity < 0f) 
+			{
+				moonLight.intensity = 0f;
+			}
+		}
+		if (isSwitchingON) 
+		{
+			moonLight.intensity -= (tmpSpeed/4f);
+			if (moonLight.intensity >1f) 
+			{
+				moonLight.intensity = 1f;
+			}
+		}
 		for (int i = 0; i < count; i++) 
 		{
 			torches[i].GetComponentInChildren<Light>().range -= tmpSpeed;
@@ -31,10 +49,12 @@ public class LightManagerScript : MonoBehaviour
 		if (actualRange <= 5f && isSwitchingOFF) 
 		{
 			isSwitchingOFF = false;
+			moonLight.intensity = 0f;
 		}
 		if (actualRange >= 15f&& isSwitchingON) 
 		{
 			isSwitchingON = false;
+			moonLight.intensity = 1f;
 		}
 	}
 
