@@ -67,7 +67,7 @@ public class PlayerXPScript : NetworkBehaviour
 			actualLevel++;
 			LvlUpParticle.Play ();
 			previousXpRec = requiredXPToUp;
-			requiredXpTmp = (float)requiredXPToUp * (1f + ((float)actualLevel / 5f));
+			requiredXpTmp = (float)requiredXPToUp * (1f + ((float)actualLevel / 10f));
 			requiredXPToUp = (int)requiredXpTmp + requiredXPToUp;
 
 			if (isServer) 

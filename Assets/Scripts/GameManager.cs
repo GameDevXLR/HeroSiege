@@ -27,6 +27,7 @@ public class GameManager : NetworkBehaviour
 	public Sprite looseSprite;
 	public Text team1LivesDisplay;
 	public Text team2LivesDisplay;
+	public Text nbrWavesText;
 	public static GameManager instanceGM = null;
 	private GameObject[] ennemies;
 	public AlertMessageManager messageManager;
@@ -79,6 +80,8 @@ public class GameManager : NetworkBehaviour
 		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
 		locManager = GameObject.Find ("LocationManager").GetComponent<LocationManager> ();
 		lightM = GameObject.Find ("[Lights]").GetComponent<LightManagerScript> ();
+		nbrWavesText = GameObject.Find ("WavesCounter").GetComponent<Text> ();
+		nbrWavesText.text = "0";
 //		if (isServer) 
 //		{
 //			jungCamps = GameObject.FindObjectsOfType(typeof( JungleCampSpawnManager)) as GameObject[];
@@ -162,6 +165,8 @@ public class GameManager : NetworkBehaviour
 		yield return new WaitForSeconds (5f);
 		if (isServer) 
 		{
+			//penser a corriger ici le bug hyperluminal qui redémarre pas.
+			//ptete voir pour détruire tous les objets associés a hyperL avant de restart (tout sur layer player3)
 			NetworkManager.singleton.ServerChangeScene ("scene2");	//utilise onserverloadscene pour dire aux joueurs quoi faire une fois load.	
 		}
 

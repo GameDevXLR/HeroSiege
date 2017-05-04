@@ -127,7 +127,7 @@ public class GenericLifeScript : NetworkBehaviour
         if (underThreshold && ((float)currentHp / maxHp) * 100 > threshold)
         {
             underThreshold = false;
-            Debug.Log( "Update : " + underThreshold);
+//            Debug.Log( "Update : " + underThreshold);
         }
     }
 

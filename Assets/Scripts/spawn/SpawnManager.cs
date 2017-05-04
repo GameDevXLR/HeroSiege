@@ -20,14 +20,14 @@ public class SpawnManager : NetworkBehaviour
 	private int actualNbr; //C est le mob numero combien de la vague ? 
 	public float TimeBetweenMobs; //temps entre 2 mobs.
 
-	public int totalWaves; // le numéro de la vague d'ennemis.
+	[SyncVar (hook = "ActuNbrOfWaves")]public int totalWaves; // le numéro de la vague d'ennemis. nombre total de vagues depuis le début.
 	private GameObject newEnnemi;
 	public int difficultyFactor; // permet de gérer la difficulté du jeu. cette variable est rechercher sur le GameManager au lancement du script.
 
 	void Start () 
 	{
 		difficultyFactor = GameManager.instanceGM.gameDifficulty;
-        Debug.Log("start : SpawManager");
+//        Debug.Log("start : SpawManager");
 	}
 	
 
@@ -59,16 +59,16 @@ public class SpawnManager : NetworkBehaviour
 		int tmpFactor = totalWaves * 10 * difficultyFactor;
 		newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
 		newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
-		newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor;
-		newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/(10*difficultyFactor);
+		newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor/difficultyFactor;
+		newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/(5*difficultyFactor);
 		newEnnemi.GetComponent<MinionsPathFindingScript>().isTeam1 = isTeam1;
 		newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
 		if (level == 2) //si c'est la vague Boss (mob3) bennn faire péter hein...
 		{
 			newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
 			newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
-			newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor;
-			newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/10;
+			newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor/difficultyFactor;
+			newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/(5*difficultyFactor);
 		}
 		NetworkServer.Spawn (newEnnemi);
 
@@ -88,4 +88,9 @@ public class SpawnManager : NetworkBehaviour
 		}
 	}
 
+	public void ActuNbrOfWaves (int nbW)
+	{
+		numberOfMobs = nbW;
+		GameManager.instanceGM.nbrWavesText.text = nbW.ToString ();
+	}
 }

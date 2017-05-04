@@ -132,6 +132,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		charge = false;
 		anim.SetBool ("charge", false);
 		if (agent.isOnNavMesh) {
+			agent.velocity = Vector3.zero;
 			agent.isStopped = true;
 		}
 		isAttacking = true;

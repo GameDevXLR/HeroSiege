@@ -103,6 +103,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		{
 //		desiredPos = pos;
 
+		agent.velocity = Vector3.zero;
 			agent.isStopped = true;
 
 		isAttacking = true;
@@ -132,6 +133,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		if (particule != null) {
 			particule.Stop ();
 		}
+
 		agent.isStopped = false;
 	}
 
@@ -246,6 +248,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 		if (agent.isActiveAndEnabled) 
 		{
+			agent.velocity = Vector3.zero;
 			agent.isStopped = true;
 		}
 		anim.enabled = false;
