@@ -742,6 +742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4304838158598084}
   - component: {fileID: 95910699759771610}
+  - component: {fileID: 114138090450212974}
   m_Layer: 0
   m_Name: knightprefab
   m_TagString: Untagged
@@ -2691,7 +2692,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 2}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0.05591178, y: 1.0309448, z: 0.039943933}
 --- !u!82 &82002968782035306
 AudioSource:
@@ -2848,6 +2849,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   underCC: 0
   CCTwistImg: {fileID: 212963476257725238}
+--- !u!114 &114138090450212974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475222308317300}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ca80cb628febb46b40b10a3017d40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 0.5
 --- !u!114 &114162243405031384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9621,7 +9634,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 1.3, z: 0}
   m_TimeToStationary: 0.5
 --- !u!212 &212160170802095138
 SpriteRenderer:

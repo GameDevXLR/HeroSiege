@@ -19,7 +19,7 @@ public class CaptureThePoint : NetworkBehaviour
 	public PointOwner canBeOwnedBy = PointOwner.team1;
 	public List<GameObject> playersIn;
 	public List<GameObject> enemiesIn;
-	public float timeToCapture;
+	[SyncVar]public float timeToCapture;
 	private float timeCaptureStart;
 	private float initialTimeToCapt;
 	public AudioClip Capture;

@@ -51,6 +51,7 @@ public class GameManager : NetworkBehaviour
 	public Sprite dayIcon;
 	public Sprite nightIcon;
 	public LocationManager locManager;
+	public LightManagerScript lightM;
 
 	public GameObject[] jungCamps;
 
@@ -77,6 +78,7 @@ public class GameManager : NetworkBehaviour
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
 		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
 		locManager = GameObject.Find ("LocationManager").GetComponent<LocationManager> ();
+		lightM = GameObject.Find ("[Lights]").GetComponent<LightManagerScript> ();
 //		if (isServer) 
 //		{
 //			jungCamps = GameObject.FindObjectsOfType(typeof( JungleCampSpawnManager)) as GameObject[];
@@ -201,6 +203,7 @@ public class GameManager : NetworkBehaviour
 		if (night) 
 		{
 			messageManager.SendAnAlertMess ("It's night time. Better be ready.", Color.red);
+			lightM.isSwitchingON = true;
 
 			if (isServer) 
 			{
@@ -214,17 +217,18 @@ public class GameManager : NetworkBehaviour
 		} else 
 		{
 			Days++;
-			foreach (GameObject go in jungCamps) 
-			{
-				go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
-			}
 			GetComponent<BossSpawnManager> ().bossLvlT1++;
 			GetComponent<BossSpawnManager> ().bossLvlT2++;
 			dayNightDisplay.sprite = dayIcon;
 			messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
+			lightM.isSwitchingOFF = true;
 
 			if (isServer) 
 			{
+				foreach (GameObject go in jungCamps) 
+				{
+					go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
+				}
 				coPlayers = NetworkServer.connections.Count; // le nombre de joueurs connectés.
 				DayStartingEvents (coPlayers);
 				Debug.Log ("spawn them here in the code...There is " + coPlayers.ToString() +" players connected.");
@@ -303,7 +307,6 @@ public class GameManager : NetworkBehaviour
 		
 	public void NightStartingEvents(int nbrOfPlayers)
 	{
-
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = true;

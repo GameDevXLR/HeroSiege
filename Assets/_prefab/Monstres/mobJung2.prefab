@@ -528,6 +528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4211497941656454}
   - component: {fileID: 95182132404585664}
+  - component: {fileID: 114015459479402638}
   m_Layer: 0
   m_Name: Goblin_Ranger_R1
   m_TagString: Untagged
@@ -1320,6 +1321,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114015459479402638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836998045025764}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ca80cb628febb46b40b10a3017d40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2
 --- !u!114 &114037955262233484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1972,7 +1985,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 221436992
+  randomSeed: 804348481
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4945,7 +4958,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1029792713
+  randomSeed: -703568642
   InitialModule:
     serializedVersion: 3
     enabled: 1

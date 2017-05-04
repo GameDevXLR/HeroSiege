@@ -109,7 +109,9 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			attackAnim = true;
 			agent.enabled = false;
 			GetComponent<NavMeshObstacle> ().enabled = true;
+		if (anim != null) {
 			anim.SetBool ("attackEnnemi", attackAnim);
+		}
 			audioSource.PlayOneShot(ennemiAtt);
 		if (particule != null) {
 			particule.Play ();
@@ -140,6 +142,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	}
 	IEnumerator AcquireTargetProcess()
 	{
+		
 		anim.SetBool("walk", walkAnim= true);
 
 		yield return new WaitForSeconds(0.1f);

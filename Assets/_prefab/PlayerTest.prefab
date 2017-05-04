@@ -2280,9 +2280,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   attackRange: 3
   attackRate: 1
-  damage: 22
+  damage: 24
   damageDisplay: {fileID: 0}
-  levelUpBonusDamage: 7
+  levelUpBonusDamage: 10
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 5
@@ -2847,8 +2847,7 @@ MonoBehaviour:
   playerUI: {fileID: 0}
   playersStatsView: {fileID: 0}
   minimap: {fileID: 0}
-  team1Icon: {fileID: 21300000, guid: ff56e9b9cffa7fd4ead33d6c25e78cda, type: 3}
-  team2Icon: {fileID: 21300000, guid: 58b787e313db50f4fb1306405666ef4e, type: 3}
+  myTeamSprite: {fileID: 0}
   myTeamIcon: {fileID: 0}
 --- !u!114 &114819530815222618
 MonoBehaviour:
@@ -3002,7 +3001,7 @@ MonoBehaviour:
   regenHp: 5
   levelUpBonusHP: 30
   respawnPoint: {fileID: 0}
-  armorScore: 1
+  armorScore: 10
   armorDisplay: {fileID: 0}
   dodge: 10
   dodgeDisplay: {fileID: 0}
