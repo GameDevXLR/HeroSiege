@@ -31,6 +31,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		agentPlayer = GetComponent<NavMeshAgent> ();
 		attackScript = GetComponent<PlayerAutoAttack> ();
 		anim = GetComponentInChildren<Animator> ();
+
 		if (isLocalPlayer) 
 		{
 			speedDisplay = GameObject.Find ("SpeedLog").GetComponent<Text> ();
@@ -41,10 +42,10 @@ public class PlayerClicToMove : NetworkBehaviour {
 		}
 		if (isServer) 
 		{
-			playerSpeed = agentPlayer.speed;
 			aggroArea = GetComponentInChildren<PlayerEnnemyDetectionScript> ();
 
 		}
+		agentPlayer.speed = playerSpeed;
 //		if (gameObject.tag == "PNJ" && startingPos == Vector3.zero) 
 //		{
 //			startingPos = gameObject.transform.position;
@@ -210,6 +211,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public void ActualizePSpeed(float sp)
 	{
 		playerSpeed = sp;
+		agentPlayer.speed = playerSpeed;
+		anim.SetFloat ("moveSpeed", playerSpeed);
 		int speedTmp = (int)(sp * 100);
 		if (isLocalPlayer) 
 		{

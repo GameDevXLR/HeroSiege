@@ -23,10 +23,11 @@ public class PlayerAutoAttack: NetworkBehaviour
 	bool attackAnim; // dois je jouer l'animation d'attaque ? 
 	public NavMeshAgent agent; // l'agent qui permet de déplacer l'objet attacher
 	public float attackRange; // la portée des auto attaques
-	public float attackRate; // le rate d'attaque par seconde
+	public float attackRate; // le temps entre 2 attack
+	[SyncVar(hook = "ActualizeAttSpeed")]public float attackSpeedStat; //le multiplicateur par sec.
 	private float previousAttackTime; // privé : le temps global de la derniere attaque
 	[SyncVar(hook = "ActualizeDamage")]public int damage; // combien de dégats brut (hors armure) on fait.
-
+	public float attackAnimTime = 1f;
 	public Text damageDisplay; // le display de la force d'attaque (joueur only)
 	public int levelUpBonusDamage; // (joueur) combien de damage en plus si lvl up 
 	public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
@@ -46,8 +47,9 @@ public class PlayerAutoAttack: NetworkBehaviour
 			agent.avoidancePriority = 75;
 			damageDisplay = GameObject.Find ("DamageLog").GetComponent<Text> ();
 			damageDisplay.text = damage.ToString ();
-
+			attackRate = attackAnimTime / attackSpeedStat;
 		}
+		anim.SetFloat ("attackSpeed", attackSpeedStat);
 
 
 	}
@@ -229,5 +231,12 @@ public class PlayerAutoAttack: NetworkBehaviour
 		targetTempPos = target.transform.position;
 		yield return new WaitForSeconds (Random.Range( 0.10f, 0.20f));
 		isActualizingPos = false;
+	}
+	public void ActualizeAttSpeed(float aS)
+	{
+		attackSpeedStat = aS;
+		attackRate = attackAnimTime / attackSpeedStat;
+
+		anim.SetFloat ("attackSpeed", aS);
 	}
 }

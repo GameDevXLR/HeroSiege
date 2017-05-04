@@ -2097,7 +2097,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTmpPos: {x: 0, y: 0, z: 0}
   cursorTargetter: {fileID: 0}
-  playerSpeed: 0
+  playerSpeed: 7.5
   speedDisplay: {fileID: 0}
 --- !u!114 &114367673872765966
 MonoBehaviour:
@@ -2280,7 +2280,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   attackRange: 3
   attackRate: 1
+  attackSpeedStat: 1
   damage: 24
+  attackAnimTime: 1
   damageDisplay: {fileID: 0}
   levelUpBonusDamage: 10
   isAttacking: 0

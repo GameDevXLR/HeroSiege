@@ -333,7 +333,7 @@ public class ItemManager : NetworkBehaviour
 	//des bottes qui te speed up.
 	public void RpcBuyRunnerBoots()
 	{
-		GetComponent<NavMeshAgent> ().speed += 0.5f;
+//		GetComponent<NavMeshAgent> ().speed += 0.5f;
 		if (isLocalPlayer) 
 		{
 			GameObject go = Instantiate (RunnerBootsPrefab, selectableSlot);
@@ -342,6 +342,7 @@ public class ItemManager : NetworkBehaviour
 		}
 		if (isServer) 
 		{
+			
 			GetComponent<PlayerClicToMove> ().playerSpeed += 0.5f;
 			GetComponent<GenericLifeScript> ().dodge += 5f;
 		}
