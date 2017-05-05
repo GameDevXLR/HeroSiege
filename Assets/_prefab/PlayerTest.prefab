@@ -720,6 +720,7 @@ GameObject:
   - component: {fileID: 114105691579488900}
   - component: {fileID: 114797765490164106}
   - component: {fileID: 114870691904547754}
+  - component: {fileID: 114590318982864066}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -2324,6 +2325,38 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114590318982864066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6351474e45627fd429fe6258da90e406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCata: 0
+  cataChargePrice: 50
+  cataCharges: 1
+  SpellCata: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
+  OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
+  spellCost: 1
+  spellDmg: 200
+  spellCD: 10
+  spellObj: {fileID: 1379944559243352, guid: 052f2c5b4e2c12943a44355a4c3936e1, type: 2}
+  spellLvl: 1
+  cdCountdown: {fileID: 0}
+  spellCataBtn: {fileID: 0}
+  spellCataLoadBtn: {fileID: 0}
+  spellTargeter: {fileID: 0}
+  isTargeting: 0
+  layer_mask:
+    serializedVersion: 2
+    m_Bits: 1024
+  durationShake: 10
+  amountShake: 10
+  cataObj: {fileID: 0}
 --- !u!114 &114604599503415050
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -88,7 +88,7 @@ public class PlayerXPScript : NetworkBehaviour
 
 		if (isLocalPlayer) 
 		{
-			float x = (float)(actualXP-previousXpRec) / requiredXPToUp;
+			float x = (float)(actualXP - previousXpRec) / (requiredXPToUp - previousXpRec);
 			xpDisplay.localScale = new Vector3 (x, 1f, 1f);
 			xpText.text = actualXP.ToString () + " / "+ requiredXPToUp.ToString();
 
