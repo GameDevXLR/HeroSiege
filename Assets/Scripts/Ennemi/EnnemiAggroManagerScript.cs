@@ -27,7 +27,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 
 		if (autoAScript.target == null || autoAScript.target.layer != 8) 
 		{
-		if (other.gameObject.layer == 8) 
+			if (other.gameObject.layer == 8 || other.gameObject.layer == 9) 
 			{
 				GetComponentInParent<EnemyAutoAttackScript> ().SetTheTarget(other.gameObject);
 			}

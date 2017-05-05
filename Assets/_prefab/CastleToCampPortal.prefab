@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114366554039852608}
   - component: {fileID: 135134548041008888}
   - component: {fileID: 114873532059077778}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: CastleToCampPortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4856820436418002}
   - component: {fileID: 198411176156212626}
   - component: {fileID: 199231487973327792}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: BaseSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,8 +56,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4502438161814316}
-  - component: {fileID: 114783614858427656}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Rotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +71,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4162695871555394}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: TpToMidOutParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +88,7 @@ GameObject:
   - component: {fileID: 4628508809770244}
   - component: {fileID: 198982039129313128}
   - component: {fileID: 199981794768338560}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +105,7 @@ GameObject:
   - component: {fileID: 4425409603820408}
   - component: {fileID: 198321137488284070}
   - component: {fileID: 199074360091313322}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: TpAct3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +122,7 @@ GameObject:
   - component: {fileID: 4789019652921318}
   - component: {fileID: 198870364340646034}
   - component: {fileID: 199505722925676836}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: TpAct2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +139,7 @@ GameObject:
   - component: {fileID: 4602090231294260}
   - component: {fileID: 198056450061863444}
   - component: {fileID: 199731359583262402}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: TpAct1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +156,7 @@ GameObject:
   - component: {fileID: 4448947147789308}
   - component: {fileID: 198009135446630836}
   - component: {fileID: 199976259875677062}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Boule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,18 +359,6 @@ MonoBehaviour:
     i15: 147
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114783614858427656
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265351916527906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb6ac565fb178a4bb92eaaec020645b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotationSpeed: 2
 --- !u!114 &114873532059077778
 MonoBehaviour:
   m_ObjectHideFlags: 1

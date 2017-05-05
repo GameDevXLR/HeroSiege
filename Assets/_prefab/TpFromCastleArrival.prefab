@@ -34,7 +34,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4667594107495092}
-  - component: {fileID: 114094494659136392}
   m_Layer: 0
   m_Name: Rotator
   m_TagString: Untagged
@@ -131,18 +130,6 @@ Transform:
   m_Father: {fileID: 4579349207475918}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114094494659136392
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1417708210901716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb6ac565fb178a4bb92eaaec020645b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotationSpeed: 2
 --- !u!198 &198351125757935892
 ParticleSystem:
   m_ObjectHideFlags: 1

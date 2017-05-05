@@ -175,24 +175,23 @@ public class GenericLifeScript : NetworkBehaviour
                 float y = Random.Range(0, 100);
                 if (y > dodge)
                 {
-                    if (armorScore > 0)
-                    {
-                        float multiplicatorArmor = (float)100f / (100f + armorScore);
-                        currentHp -= (int)Mathf.Abs(dmg * multiplicatorArmor);
-                        if (gameObject.layer == Layers.Ennemies && currentHp <= 0)
-                        {
-                            attacker.GetComponent<PlayerManager>().killCount++;
-                        }
-                        return;
-                    }
-                    else
-                    {
-                        currentHp -= dmg;
-                        if (gameObject.layer == Layers.Ennemies && currentHp <= 0)
-                        {
-                            attacker.GetComponent<PlayerManager>().killCount++;
-                        }
-                    }
+					if (armorScore > 0) {
+						float multiplicatorArmor = (float)100f / (100f + armorScore);
+						currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
+						if (gameObject.layer == Layers.Ennemies && currentHp <= 0) {
+							if (attacker.tag == "Player") {
+								attacker.GetComponent<PlayerManager> ().killCount++;
+							}
+						}
+						return;
+					} else {
+						currentHp -= dmg;
+						if (gameObject.layer == Layers.Ennemies && currentHp <= 0) {
+							if (attacker.tag == "Player") {
+								attacker.GetComponent<PlayerManager> ().killCount++;
+							}
+						}
+					}
                     
                     
 
@@ -251,7 +250,7 @@ public class GenericLifeScript : NetworkBehaviour
         }
         else
         {
-            if (gameObject.layer == Layers.Player)
+			if (gameObject.layer == Layers.Player && gameObject.tag == "Player")
             {
                 GetComponent<PlayerManager>().playerLifeBar.localScale = new Vector3(x, 1f, 1f);
                 GetComponent<PlayerManager>().playerLifeTxt.text = currentHp.ToString() + " / " + maxHp.ToString();

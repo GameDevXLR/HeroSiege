@@ -150,11 +150,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		yield return new WaitForSeconds(0.1f);
 		if (target != null) {
 //			if (agent.isOnNavMesh) {
+			if(agent.isActiveAndEnabled){
 			agent.SetDestination (target.transform.localPosition); 
 			agent.stoppingDistance = attackRange;
 			targetTempPos = target.transform.localPosition;
 			yield return null;
-//			}
+			}
 		} else 
 		{
 			GetTargetFromID (targetID);
