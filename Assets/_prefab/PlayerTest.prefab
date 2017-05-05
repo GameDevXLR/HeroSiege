@@ -721,6 +721,7 @@ GameObject:
   - component: {fileID: 114797765490164106}
   - component: {fileID: 114870691904547754}
   - component: {fileID: 114590318982864066}
+  - component: {fileID: 114679018957871796}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -1921,6 +1922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4324d645e7bbf7b4a98dc3f3fa2131cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellImg: {fileID: 21300000, guid: 3d43c20d159112042b40969fb2b0f637, type: 3}
   SpellCC: {fileID: 8300000, guid: 0f34dd62e512e8d4e83e85f7638a91ed, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   spellCost: 80
@@ -2222,11 +2224,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09b720573fea4154a9207068bf147317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellImg: {fileID: 21300000, guid: 3aa89c47079fa4849b0d48420ba211ef, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   Spell1: {fileID: 8300000, guid: 25b05f5212f823d49a1abd46bcf4e5a5, type: 3}
   spellCost: 30
@@ -2337,10 +2340,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUsingCata: 0
-  cataChargePrice: 50
+  cataChargePrice: 300
   cataCharges: 1
-  SpellCata: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
+  SpellCata: {fileID: 8300000, guid: 0f34dd62e512e8d4e83e85f7638a91ed, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
+  boughtACharge: {fileID: 8300000, guid: 14e423af532e2ed409465ec735b11cdb, type: 3}
   spellCost: 1
   spellDmg: 200
   spellCD: 10
@@ -2837,6 +2841,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+--- !u!114 &114679018957871796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d151e7879765d34e959b5821691bd9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellImg: {fileID: 21300000, guid: 1fbe977f5bfcd284e810f2ab79438923, type: 3}
+  SpellCC: {fileID: 8300000, guid: 232efd82e671d5b4885c16f6823f5b44, type: 3}
+  OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
+  spellCost: 40
+  spellDmg: 50
+  spellCD: 6
+  spellDuration: 1.5
+  spellRange: 15
+  spellObj: {fileID: 1579321500630814, guid: 1972c86779939164aa6c287916571809, type: 2}
+  spellLvl: 1
+  cdCountdown: {fileID: 0}
+  spellTargeter: {fileID: 0}
+  spellRangeArea: {fileID: 1310458255290858}
+  isTargeting: 0
+  layer_mask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &114695388684336140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2914,7 +2946,7 @@ MonoBehaviour:
   xpDisplay: {fileID: 0}
   xpText: {fileID: 0}
   actualXP: 0
-  requiredXPToUp: 150
+  requiredXPToUp: 320
   actualLevel: 1
 --- !u!114 &114797765490164106
 MonoBehaviour:

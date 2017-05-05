@@ -12,6 +12,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
     //le sort fait spawn un prefab qui est configuré ici (dégats etc/ durée du CC)
     //le prefab doit etre enregistrer par le networkmanagerObj
     //le sort peut up.
+	public Sprite spellImg;
     public AudioClip SpellCC;
     public AudioClip OOM;
     string spellDescription;
@@ -53,6 +54,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
+			spell2Btn.GetComponent<Image> ().sprite = spellImg;
 
         }
         spellTargeter = GameObject.Find("AreaTargeter");
@@ -150,6 +152,9 @@ public class PlayerCastCCSpell : NetworkBehaviour
         if (GetComponent<GenericManaScript>().currentMp >= spellCost && !onCD)
         {
             isTargeting = true;
+//			spellRangeArea.transform.GetChild(0).transform.localScale = new Vector3 (0.5f, 1f, 0.5f);
+//			spellRangeArea.transform.GetChild(0).transform.GetChild(0).transform.localScale = new Vector3 (0.5f, 1f,0.5f);
+//
             spellRangeArea.SetActive(true);
             
 

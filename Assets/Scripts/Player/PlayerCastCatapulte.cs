@@ -16,6 +16,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 	[SyncVar]public int cataCharges = 1;
 		public AudioClip SpellCata;
 		public AudioClip OOM;
+	public AudioClip boughtACharge;
 		string spellDescription;
 	[SyncVar]public int spellCost = 1;
 		public int spellDmg = 200;
@@ -50,7 +51,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 				cdCountdown.gameObject.SetActive (false);
 				spellCataBtn.onClick.AddListener(CastThatSpell);
 				spellCataLoadBtn.onClick.AddListener(LoadTheCata);
-				spellDescription = "Deal " + spellDmg.ToString() + "to everyone on impact.";   
+			spellDescription = "Deal " + spellDmg.ToString() + " to everyone on impact. Spend "+ cataChargePrice.ToString() +" to buy a charge (Require a catapulte nearby).";   
 				spellCataBtn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 				spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
 				spellCataBtn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -236,8 +237,9 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		{
 			return;
 		}
+		GetComponent<AudioSource> ().PlayOneShot (boughtACharge);
 			CmdLoadTheCata();
-		spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = (cataCharges-1).ToString();
+		spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
 
 		StartCoroutine ( CataLoadProcess());
 		}
@@ -258,7 +260,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			spellCataBtn.interactable = true;
 			spellCataLoadBtn.interactable = true;
 		
-			spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
+			spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = newCharges.ToString();
 
 		}
 		if (isServer) 

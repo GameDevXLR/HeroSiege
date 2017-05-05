@@ -12,6 +12,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
     //le sort fait spawn un prefab qui est configuré ici (dégats etc)
     //le prefab doit etre enregistrer par le networkmanagerObj
     //le sort peut up.
+	public Sprite spellImg;
     public AudioClip OOM;
     public AudioClip Spell1;
     string spellDescription;
@@ -46,6 +47,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
             spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
+			spell1Btn.GetComponent<Image> ().sprite = spellImg;
 
         }
     }

@@ -16,13 +16,11 @@ public class SpellCatapulteArea : NetworkBehaviour {
 	public int spellDamage = 200;
 	private int damageFactor = 1;
 	private float timer;
-	private float dotTimer;
-	private float destroyTimer = 5f; //combien de temps l'objet reste au total? temps de l'anim complete en gros.
+	private float destroyTimer = 8f; //combien de temps l'objet reste au total? temps de l'anim complete en gros.
 
 	void Start()
 	{
 		timer = Time.time;
-		dotTimer = Time.time;
 	}
 	[ServerCallback]
 	void Update()

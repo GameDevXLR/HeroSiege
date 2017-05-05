@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: 114786909995224808}
   - component: {fileID: 114409740874310540}
   - component: {fileID: 54211314490965476}
-  - component: {fileID: 148915229155493536}
   - component: {fileID: 114558030626843204}
   m_Layer: 18
   m_Name: SpellOne
@@ -304,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c40e9f9585d124aa4b2c9a3889f015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 100
   target: {fileID: 0}
 --- !u!114 &114694858915326012
 MonoBehaviour:
@@ -358,18 +357,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!148 &148915229155493536
-NetworkView:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1134211014724214}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 4895539567936952}
-  m_ViewID:
-    m_ID: 0
-    m_Type: 0
 --- !u!198 &198127235464624898
 ParticleSystem:
   m_ObjectHideFlags: 1
