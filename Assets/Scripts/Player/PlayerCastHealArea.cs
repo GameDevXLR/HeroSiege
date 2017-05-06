@@ -151,8 +151,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 		if (GetComponent<GenericManaScript>().currentMp >= spellCost && !onCD)
 		{
 			isTargeting = true;
-//			spellRangeArea.transform.GetChild(0).transform.localScale = new Vector3 (25f, 1f, 25f);
-
+			ReziseTheTargeters ();
 			spellRangeArea.SetActive(true);
 
 
@@ -217,7 +216,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 		spellDuration += 0.5f;
 		if (isLocalPlayer)
 		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(true);
+			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
 			int x = (int)spellDmg / 5;
 			spellDescription = "Heal everyone for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
@@ -231,5 +230,16 @@ public class PlayerCastHealArea : NetworkBehaviour
 	public void levelUp()
 	{
 		CmdLevelUpTheSpell();
+	}
+	public void ReziseTheTargeters()
+	{
+		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (0.5f, 0.5f, 1f);
+		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (0.5f, 0.5f, 1f);
+
+		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (0.5f, 0.5f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (0.5f, 0.5f, 1f);
+		spellTargeter.transform.GetChild (0).localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+
+
 	}
 }

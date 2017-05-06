@@ -2032,10 +2032,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1635284797380856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb6ac565fb178a4bb92eaaec020645b, type: 3}
+  m_Script: {fileID: 11500000, guid: d51989c50bf2435409961daa9bf75910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 45
+  RotationSpeed: 0.93
 --- !u!114 &114348377555897910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2104,7 +2104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   underCC: 0
+  underSlow: 0
   CCTwistImg: {fileID: 212075347313932812}
+  SlowImg: {fileID: 212075347313932812}
 --- !u!114 &114507056319487786
 MonoBehaviour:
   m_ObjectHideFlags: 1

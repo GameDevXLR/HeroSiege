@@ -153,7 +153,7 @@ public class PlayerCastSpellOne : NetworkBehaviour
         spellDuration += 0.5f;
         if (isLocalPlayer)
         {
-            GetComponent<PlayerLevelUpManager>().LooseASpecPt(false);
+            GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
             int x = (int)spellDmg / 5;
 
 			spellDescription = "Deal " + spellDmg.ToString() + " damage on impact, then " + x.ToString() + " damage every 0.5sec for " + spellDuration.ToString() + " seconds.";

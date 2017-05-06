@@ -11,7 +11,9 @@ public class StatusHandlerScript : NetworkBehaviour
 	//ce script gere les différents statuts d'un personnage : CC  / root / saignement / slow etc...
 
 	public bool underCC;
+	public bool underSlow;
 	public SpriteRenderer CCTwistImg;
+	public SpriteRenderer SlowImg;
 //	public SkinnedMeshRenderer objRenderer;
 //	public Material stunMat;
 //	public Material normalMat;
@@ -55,6 +57,36 @@ public class StatusHandlerScript : NetworkBehaviour
 		//réactiver l'autoA;
 //		GetComponent<NavMeshAgent> ().Resume ();
 	}
+
+	public void MakeHimSlow(float dur)
+	{
+		RpcSlowTheObject (dur);
+	}
+	[ClientRpc]
+	public void RpcSlowTheObject(float duration)
+	{
+		StartCoroutine (SlowProcedure (duration));
+	}
+	IEnumerator SlowProcedure ( float SlowTime)
+	{
+		SlowImg.enabled = true;
+		GetComponent<NavMeshAgent> ().speed -= 2f;
+		underSlow = true;
+		//		objRenderer.materials[1] = stunMat;
+		//		GetComponent<NavMeshAgent> ().Stop ();
+		//		GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		//ajouter la désactivation de l'autoA;
+		yield return new WaitForSeconds (SlowTime);
+		GetComponent<NavMeshAgent> ().speed += 2f;
+
+		SlowImg.enabled = false;
+
+		underSlow = false;
+		//		objRenderer.materials[1] = normalMat;
+		//réactiver l'autoA;
+		//		GetComponent<NavMeshAgent> ().Resume ();
+	}
+
 
 	public void MakeHimRoot(float rootDuration)
 	{

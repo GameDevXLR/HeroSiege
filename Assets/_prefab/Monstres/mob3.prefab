@@ -3646,7 +3646,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   underCC: 0
+  underSlow: 0
   CCTwistImg: {fileID: 212304890698265106}
+  SlowImg: {fileID: 212304890698265106}
 --- !u!114 &114746713224226544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3730,10 +3732,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1173263951746140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb6ac565fb178a4bb92eaaec020645b, type: 3}
+  m_Script: {fileID: 11500000, guid: d51989c50bf2435409961daa9bf75910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 55
+  RotationSpeed: 0.93
 --- !u!114 &114955841914868296
 MonoBehaviour:
   m_ObjectHideFlags: 1

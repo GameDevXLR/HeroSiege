@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 
 public class CaptureThePoint : NetworkBehaviour 
 
+
+
 {
 	public enum PointOwner
 	{
@@ -19,11 +21,11 @@ public class CaptureThePoint : NetworkBehaviour
 	public PointOwner canBeOwnedBy = PointOwner.team1;
 	public List<GameObject> playersIn;
 	public List<GameObject> enemiesIn;
-	[SyncVar]public float timeToCapture;
+	public float timeToCapture;
 	private float timeCaptureStart;
 	private float initialTimeToCapt;
 	public AudioClip Capture;
-	int tmpTime;
+	[SyncVar(hook = "SyncOutpostTimer")]int tmpTime;
 	// Use this for initialization
 	void Start () 
 	{		
@@ -68,6 +70,7 @@ public class CaptureThePoint : NetworkBehaviour
 	{
 		if (timeToCapture < 10f && timeToCapture > 0f) 
 		{
+			//a opti : ca run 2 fois sur le serveur et le changement de variable / recalcul est trop fréquent mais bon...ya pas 1000 fois le script.
 			tmpTime = (int)timeToCapture;
 			GetComponent<Location> ().Display_2_Text = tmpTime.ToString ();
 		} else 
@@ -159,19 +162,19 @@ public class CaptureThePoint : NetworkBehaviour
 			{
 				if (belongsTo == PointOwner.team1) 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our camp has been captured.", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been captured.", Color.green);
 				} else 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy camp has been captured", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been captured.", Color.red);
 				}
 			} else 
 			{
 				if (belongsTo == PointOwner.team1) 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy camp has been captured", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been captured.", Color.red);
 				} else 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our camp has been captured.", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been captured.", Color.green);
 				}
 			}
 		}else 
@@ -184,20 +187,32 @@ public class CaptureThePoint : NetworkBehaviour
 			{
 				if (belongsTo == PointOwner.team1) 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our camp has been lost.", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost.", Color.red);
 				} else 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy camp has been lost!", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been lost!", Color.green);
 				}
 			} else 
 			{
 				if (belongsTo == PointOwner.team1) 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy camp has been lost", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been lost", Color.green);
 				} else 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our camp has been lost!.", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost!", Color.red);
 				}
+			}
+		}
+	}
+
+	public void SyncOutpostTimer(int t)
+	{
+		if (!isServer) {
+			tmpTime = t;
+			if (t < 10f && t > 0f) {
+				GetComponent<Location> ().Display_2_Text = tmpTime.ToString ();
+			} else {
+				GetComponent<Location> ().Display_2_Text = "";
 			}
 		}
 	}

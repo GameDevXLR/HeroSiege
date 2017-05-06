@@ -16,6 +16,8 @@ public class PlayerLevelUpManager : MonoBehaviour
 	public int spell1Lvl = 1;
 	public GameObject spell2LvlUpBtn;
 	public int spell2Lvl = 1;
+	public GameObject spellUltLvlUpBtn;
+	public int spellUltLvl = 1;
 	public GameObject spectPtIcon;
 
 	// Use this for initialization
@@ -24,6 +26,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 		
 		spell1LvlUpBtn = GameObject.Find ("Spell1LvlUpBtn");
 		spell2LvlUpBtn = GameObject.Find ("Spell2LvlUpBtn");
+		spellUltLvlUpBtn = GameObject.Find ("Spell3LvlUpBtn");
 		//rajouter ici les futurs sorts a faire up.
 		spectPtIcon = GameObject.Find ("CompPtsIcon");
 		Invoke ("AvoidEarlyUltiUp", 0.3f);
@@ -32,7 +35,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 	void AvoidEarlyUltiUp()
 	{
 
-			spell2LvlUpBtn.SetActive (false);
+			spellUltLvlUpBtn.SetActive (false);
 
 	}
 	public void GetAlevel()
@@ -47,10 +50,11 @@ public class PlayerLevelUpManager : MonoBehaviour
 		spell1LvlUpBtn.GetComponent<Animator> ().Play ("BtnCompPts");
 		spectPtIcon.SetActive (true);
 		spell1LvlUpBtn.SetActive (true);
+		spell2LvlUpBtn.SetActive (true);
 //		StartCoroutine (LevelUpProcess ());
 		if (ultiSpecPts > 0) 
 		{
-			spell2LvlUpBtn.SetActive (true);
+			spellUltLvlUpBtn.SetActive (true);
 		}
 	}
 
@@ -59,26 +63,30 @@ public class PlayerLevelUpManager : MonoBehaviour
 //		yield return new WaitForSeconds (0.66f);
 //	}
 
-	public void LooseASpecPt(bool isUlt)
+	public void LooseASpecPt(int spell)
 	{
-		if (isUlt) 
+		if (spell == 3) 
 		{
 			ultiSpecPts--;
-			spell2Lvl++;
-			if (ultiSpecPts == 0) {
-				spell2LvlUpBtn.SetActive (false);
+			spellUltLvl++;
+			if (ultiSpecPts == 0) 
+			{
+				spellUltLvlUpBtn.SetActive (false);
 			}
-		} else 
-		{
+		}
+		if(spell == 1){
 			spell1Lvl++;
 		}
-		
+		if(spell == 2){
+			spell2Lvl++;
+		}
 		specPts--;
 		if (specPts <= 0) 
 		{
 			spectPtIcon.SetActive (false);
 			spell1LvlUpBtn.SetActive (false);
 			spell2LvlUpBtn.SetActive (false);
+			spellUltLvlUpBtn.SetActive (false);
 
 		}
 	}

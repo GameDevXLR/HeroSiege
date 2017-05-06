@@ -86,7 +86,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			StartCoroutine(ShowTargeter()); // on a besoin d'attendre la fin de frame pour pas que mouseUp soit détecter direct et que le sort se lance cash en cliquant sur l'icone de sort.
 		}
 
-		//si t'es un joueur; tu peux cast ce sort avec la touche Z : voir pour opti ca en fonction du clavier des gars.
+		//si t'es un joueur; tu peux cast ce sort avec la touche R : voir pour opti ca en fonction du clavier des gars.
 
 		public void Update()
 		{
@@ -95,7 +95,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 				return;
 			}
 
-		if (Input.GetKeyUp(KeyCode.E) && !onCD)
+		if (Input.GetKeyUp(KeyCode.R) && !onCD)
 			{
 				CastThatSpell();
 			}
@@ -153,7 +153,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		if (cataCharges >= spellCost && !onCD)
 			{
 				isTargeting = true;
-//				spellRangeArea.SetActive(true);
+			ReziseTheTargeters ();
 
 
 			}
@@ -280,6 +280,14 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
 
 		}
+
+	}
+	public void ReziseTheTargeters()
+	{
+		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f,1f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (1f,1f, 1f);
+		spellTargeter.transform.GetChild (0).localScale = new Vector3 (1f,1f, 1f);
+
 
 	}
 }
