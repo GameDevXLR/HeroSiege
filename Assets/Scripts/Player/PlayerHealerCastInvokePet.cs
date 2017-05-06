@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerHealerCastUlti : NetworkBehaviour 
-{
+[NetworkSettings(channel = 2, sendInterval = 0.1f)]
+public class PlayerHealerCastInvokePet : NetworkBehaviour {
+
+
 	//deuxieme sort: a mettre sur l'objet joueur.
 	// sort de zone avec possibilité de target la ou on veut CC.
 	//le sort fait spawn un prefab qui est configuré ici (dégats etc/ durée du CC)
 	//le prefab doit etre enregistrer par le networkmanagerObj
 	//le sort peut up.
+	public GameObject actualPet;
 	public Sprite spellImg;
 	public AudioClip SpellCC;
 	public AudioClip OOM;
@@ -41,15 +44,15 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 		spellRangeArea.SetActive(false);
 		if (isLocalPlayer)
 		{
-			spell2Btn = GameObject.Find("Spell3Btn").GetComponent<Button>();
-			spell2LvlUpBtn = GameObject.Find("Spell3LvlUpBtn").GetComponent<Button>();
+			spell2Btn = GameObject.Find("Spell2Btn").GetComponent<Button>();
+			spell2LvlUpBtn = GameObject.Find("Spell2LvlUpBtn").GetComponent<Button>();
 			cdCountdown = spell2Btn.transform.Find ("CDCountdown");
 			cdCountdown.gameObject.SetActive (false);
 
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Slow and deal " + x.ToString () + " damage every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*4+" health";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -65,11 +68,20 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 	[Command]
 	public void CmdCastSpell(Vector3 pos)
 	{
+		if (actualPet != null) 
+		{
+			NetworkServer.Destroy (actualPet);
+		}
 		GetComponent<AudioSource>().PlayOneShot(SpellCC);
 		GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
-		go.GetComponent<SpellHealerUlti>().caster = gameObject;
-		go.GetComponent<SpellHealerUlti>().spellDamage = spellDmg;
-		go.GetComponent<SpellHealerUlti>().duration = spellDuration;
+		go.GetComponent<MinionsPathFindingScript> ().target = this.transform;
+		go.GetComponent<EnemyAutoAttackScript> ().target = gameObject;
+		go.GetComponent<EnemyAutoAttackScript> ().damage = spellDmg;
+		go.GetComponent<GenericLifeScript> ().maxHp = spellDmg * 4;
+		go.GetComponent<GenericLifeScript> ().currentHp = spellDmg * 4;
+		go.GetComponent<GenericLifeScript> ().regenHp = spellDmg / 5;
+		go.GetComponent<EnemyAutoAttackScript> ().targetID = GetComponent<NetworkIdentity> ().netId;
+		actualPet = go;
 		NetworkServer.Spawn(go);
 
 	}
@@ -93,7 +105,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 			return;
 		}
 
-		if (Input.GetKeyUp(KeyCode.E) && !onCD)
+		if (Input.GetKeyUp(KeyCode.Z) && !onCD)
 		{
 			CastThatSpell();
 		}
@@ -211,14 +223,14 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 	{
 		spellLvl++;
 		spellCost += 8;
-		spellCD -= 5f;
-		spellDmg += 15;
-		spellDuration += 1f;
+		spellCD -= 2f;
+		spellDmg += 25;
+//		spellDuration += 1f;
 		if (isLocalPlayer)
 		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(3);
+			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Slow and deal " + x.ToString() + " damage every 0,5 seconds for " + spellDuration.ToString() + " seconds.";
+			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*4+" health";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -236,9 +248,9 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
 		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
 
-		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
-		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (1f, 1f, 1f);
-		spellTargeter.transform.GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (.5f, .5f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (.5f, .5f, 1f);
+		spellTargeter.transform.GetChild (0).localScale = new Vector3 (.5f, .5f, 1f);
 
 
 	}

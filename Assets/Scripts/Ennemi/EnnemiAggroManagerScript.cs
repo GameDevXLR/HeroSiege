@@ -29,6 +29,11 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 		{
 			if (other.gameObject.layer == 8 || other.gameObject.layer == 9) 
 			{
+				if (transform.parent.gameObject.layer == 8 && other.gameObject.layer == 8) 
+				{
+					//en gros si t'es un pet et que tu target un joueur ben oubli...
+					return;
+				}
 				GetComponentInParent<EnemyAutoAttackScript> ().SetTheTarget(other.gameObject);
 			}
 		}

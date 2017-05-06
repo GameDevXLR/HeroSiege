@@ -52,28 +52,59 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	void Update ()
 	{
-		if (isUnderCC) {
+		if (isUnderCC) 
+		{
 			return;
 		}
-		if (isServer) {
-			if (target) {
-				if (!isAttacking) {
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) {
+		if (isServer) 
+		{
+			if (target) 
+			{
+				if (gameObject.layer == 8 && target.layer == 8) 
+				{
+					if (target.GetComponent<PlayerAutoAttack> ().target != null) 
+					{
+						targetID = target.GetComponent<PlayerAutoAttack> ().target.GetComponent<NetworkIdentity> ().netId;
+					}
+				}
+				if (!isAttacking) 
+				{
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) 
+					{
 						RpcAttackTarget (transform.position);
 					}
 				} else {
 					if (Time.time > previousAttackTime) {
 						previousAttackTime = Time.time + attackRate;
-						target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
+						if (gameObject.layer == 8 ) 
+						{
+							if (target.layer == 8) {
+								anim.SetBool ("walk", walkAnim = false);
+							} else 
+							{
+								target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, GetComponent<MinionsPathFindingScript>().target.gameObject);
+
+							}
+						} else {
+							target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
+						}
 					}
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<GenericLifeScript> ().isDead) {
-						RpcStopAttacking ();
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<GenericLifeScript> ().isDead) 
+					{
+						if (gameObject.layer == 8 && target.layer == 8) 
+						{
+						} else 
+						{
+							RpcStopAttacking ();
+						}
 					}
 				}
 			}
-			if (target == null && isAttacking) {
+			if (target == null && isAttacking) 
+			{
 				RpcStopAttacking ();
 			}
+
 		}
 			if (target) {
 			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
@@ -107,16 +138,21 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			agent.isStopped = true;
 
 		isAttacking = true;
+		if (gameObject.layer == 8 && target.layer == 8) 
+		{
+			return;
+		}
 			attackAnim = true;
 			agent.enabled = false;
 			GetComponent<NavMeshObstacle> ().enabled = true;
-		if (anim != null) {
-			anim.SetBool ("attackEnnemi", attackAnim);
-		}
-			audioSource.PlayOneShot(ennemiAtt);
-		if (particule != null) {
-			particule.Play ();
-		}
+			if (anim != null) {
+				anim.SetBool ("attackEnnemi", attackAnim);
+			}
+			audioSource.PlayOneShot (ennemiAtt);
+			if (particule != null) {
+				particule.Play ();
+			}
+		
 
 			
 
@@ -144,22 +180,25 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	}
 	IEnumerator AcquireTargetProcess()
 	{
-		
-		anim.SetBool("walk", walkAnim= true);
-
+		if (anim) {
+			anim.SetBool ("walk", walkAnim = true);
+		}
 		yield return new WaitForSeconds(0.1f);
 		if (target != null) {
 //			if (agent.isOnNavMesh) {
-			if(agent.isActiveAndEnabled){
-			agent.SetDestination (target.transform.localPosition); 
-			agent.stoppingDistance = attackRange;
-			targetTempPos = target.transform.localPosition;
-			yield return null;
+			if (agent.isActiveAndEnabled) {
+				agent.SetDestination (target.transform.localPosition); 
+				agent.stoppingDistance = attackRange;
+				targetTempPos = target.transform.localPosition;
 			}
-		} else 
-		{
-			GetTargetFromID (targetID);
-			anim.SetBool("walk", walkAnim = false);
+		} else {
+			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+			if (gameObject.layer != 8) 
+			{
+			StopAllCoroutines ();
+				GetTargetFromID (targetID);
+			}
+				anim.SetBool ("walk", walkAnim = false);
 		}
 	}
 	public void LooseTarget()
@@ -177,11 +216,16 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			agent.isStopped = false;
 			anim.SetBool ("attackEnnemi", attackAnim = false);
 			anim.SetBool ("walk", walkAnim = false);
-			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 			if (particule != null) 
 			{
 				particule.Stop ();
 			}
+		if (gameObject.layer == 8) 
+		{
+			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+			return;
+		}
+		GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 
 		
 	}
@@ -191,6 +235,16 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		isActualizingPos = true;
 		if (target.GetComponent<GenericLifeScript> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
+			if (gameObject.layer == 8) 
+			{
+				target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+				SetTheTarget (target);
+				agent.SetDestination (target.transform.position);
+				yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));
+				isActualizingPos = false;
+				yield break;
+			}
+
 			target = null;
 			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 		} else 
@@ -208,7 +262,9 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	{
 		targetID = id;
 		target = ClientScene.FindLocalObject (id);
-		targetTempPos = target.transform.position;
+		if (target != null) {
+			targetTempPos = target.transform.position;
+		}
 		StartCoroutine (AcquireTargetProcess ());
 
 	}

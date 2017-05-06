@@ -1384,6 +1384,7 @@ GameObject:
   - component: {fileID: 114590318982864066}
   - component: {fileID: 114679018957871796}
   - component: {fileID: 114153687336401474}
+  - component: {fileID: 114492759976091704}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -3772,7 +3773,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4324d645e7bbf7b4a98dc3f3fa2131cf, type: 3}
   m_Name: 
@@ -4138,6 +4139,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9550f1a51a7d3d4ebb0a398df7ecefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114492759976091704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89337734727e54d4bb2adc7e9b8263f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellImg: {fileID: 21300000, guid: a0ee1d4074bd6f54e863566e3835ba7f, type: 3}
+  SpellCC: {fileID: 8300000, guid: c1728082dad0c7844adbadbbcc8fd8b6, type: 3}
+  OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
+  spellCost: 20
+  spellDmg: 50
+  spellCD: 30
+  spellDuration: 60
+  spellRange: 25
+  spellObj: {fileID: 1380983508602426, guid: 4ed20bf8eb7fa9d4d82562cdb507b30f, type: 2}
+  spellLvl: 1
+  cdCountdown: {fileID: 0}
+  spellTargeter: {fileID: 0}
+  spellRangeArea: {fileID: 1310458255290858}
+  isTargeting: 0
+  layer_mask:
+    serializedVersion: 2
+    m_Bits: 1024
+  durationShake: 1
+  amountShake: 2
 --- !u!114 &114496493479518042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4902,6 +4933,8 @@ MonoBehaviour:
   spell1Lvl: 1
   spell2LvlUpBtn: {fileID: 0}
   spell2Lvl: 1
+  spellUltLvlUpBtn: {fileID: 0}
+  spellUltLvl: 1
   spectPtIcon: {fileID: 0}
 --- !u!114 &114845116257301452
 MonoBehaviour:

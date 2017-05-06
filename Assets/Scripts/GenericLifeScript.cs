@@ -69,9 +69,15 @@ public class GenericLifeScript : NetworkBehaviour
         }
         if (gameObject.layer == Layers.Player)
         {
-			deadAnimChildMesh = transform.GetChild(5).GetChild(0).gameObject;
-            deadAnimChildEffect = transform.GetChild(4).gameObject;
-        }
+			if (gameObject.tag == "Player") {
+				deadAnimChildMesh = transform.GetChild (5).GetChild (0).gameObject;
+				deadAnimChildEffect = transform.GetChild (4).gameObject;
+			} else 
+			{
+				mobDeadAnimChildMesh = transform.GetChild(3).GetChild(0).gameObject;
+
+			}
+		}
         if (gameObject.layer == Layers.Ennemies)
         {
 			mobDeadAnimChildMesh = transform.GetChild(3).GetChild(0).gameObject;
@@ -142,11 +148,11 @@ public class GenericLifeScript : NetworkBehaviour
         {
 
 
-            if (attacker != guyAttackingMe || guyAttackingMe == null)
+			if (attacker != guyAttackingMe || guyAttackingMe == null)
             {
                 guyAttackingMe = attacker;
             }
-            if (gameObject.layer == 9)
+			if (gameObject.layer == 9 || gameObject.layer == 8 && gameObject.tag != "Player")
             { //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
                 if (!attacker.GetComponent<GenericLifeScript>().isDead)
                 {
@@ -468,9 +474,10 @@ public class GenericLifeScript : NetworkBehaviour
     public void ActualizeDeadIcon(bool isHeDead)
     {
         isDead = isHeDead;
-        if (!isLocalPlayer && (gameObject.layer == Layers.Player || gameObject.layer == Layers.IgnoreLayer))
-        {
-            GetComponent<PlayerManager>().deadAvatarImg.enabled = isHeDead;
-        }
+		if (!isLocalPlayer && (gameObject.layer == Layers.Player || gameObject.layer == Layers.IgnoreLayer)) {
+			if (gameObject.tag == "Player") {
+				GetComponent<PlayerManager> ().deadAvatarImg.enabled = isHeDead;
+			}
+		}
     }
 }
