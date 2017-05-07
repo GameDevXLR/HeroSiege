@@ -4,15 +4,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerTankCastTauntArea : NetworkBehaviour 
-{
+public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 
-
-	//premier sort: a mettre sur l'objet joueur.
-	// sort de zone avec dégat over time aprés.
-	//le sort fait spawn un prefab qui est configuré ici (dégats etc)
-	//le prefab doit etre enregistrer par le networkmanagerObj
-	//le sort peut up.
 	public Sprite spellImg;
 	public AudioClip OOM;
 	public AudioClip Spell1;
@@ -22,14 +15,14 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	public float spellCD;
 	public float timeSpent;
 	public Transform cdCountdown;
-	public float spellDuration = 3f;
+	public float spellDuration = 1f;
 	public GameObject spellObj;
 	public int spellLvl = 1;
 	private bool onCD;
 	private Button spell1Btn;
 	private Button spell1LvlUpBtn;
 	public float durationShake = 5;
-	public float amountShake = 0;
+	public float amountShake = 5;
 
 	//	private GameObject spell1DescriptionObj;
 
@@ -37,14 +30,14 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	{
 		if (isLocalPlayer)
 		{
-			spell1Btn = GameObject.Find("Spell1Btn").GetComponent<Button>();
-			spell1LvlUpBtn = GameObject.Find("Spell1LvlUpBtn").GetComponent<Button>();
+			spell1Btn = GameObject.Find("Spell2Btn").GetComponent<Button>();
+			spell1LvlUpBtn = GameObject.Find("Spell2LvlUpBtn").GetComponent<Button>();
 			cdCountdown = spell1Btn.transform.Find ("CDCountdown");
 			cdCountdown.gameObject.SetActive (false);
 			spell1Btn.onClick.AddListener(CastThatSpell);
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Force all enemies around to target you for " + spellDuration.ToString() + " seconds.";
+			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+spellDmg/10+" health by enemy touched.";
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -61,10 +54,10 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	{
 		GetComponent<AudioSource>().PlayOneShot(Spell1);
 		GameObject go = Instantiate(spellObj, transform.position, transform.localRotation);
-		go.GetComponent<SpellTankTauntArea>().caster = gameObject;
-//		go.GetComponent<AlwaysMove>().target = gameObject;
-		go.GetComponent<SpellTankTauntArea>().spellDamage = spellDmg;
-		go.GetComponent<SpellTankTauntArea>().duration = spellDuration;
+		go.GetComponent<SpellTankDpsHealAoe>().caster = gameObject;
+		//		go.GetComponent<AlwaysMove>().target = gameObject;
+		go.GetComponent<SpellTankDpsHealAoe>().spellDamage = spellDmg;
+		go.GetComponent<SpellTankDpsHealAoe>().duration = spellDuration;
 		NetworkServer.Spawn(go);
 		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
 
@@ -99,7 +92,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 			return;
 		}
 
-		if (Input.GetKeyUp(KeyCode.A) && !onCD)
+		if (Input.GetKeyUp(KeyCode.Z) && !onCD)
 		{
 			CastThatSpell();
 		}
@@ -148,16 +141,15 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 2;
+		spellCost += 10;
 		spellCD -= 0.5f;
-		spellDmg += 10;
-		spellDuration += 0.5f;
+		spellDmg += 20;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
 			int x = (int)spellDmg / 5;
 
-			spellDescription = "Force all enemies around to target you for " + spellDuration.ToString() + " seconds.";
+			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+spellDmg/10+" health by enemy touched.";
 
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();

@@ -42,8 +42,8 @@ public class PlayerCastCCSpell : NetworkBehaviour
         spellRangeArea.SetActive(false);
         if (isLocalPlayer)
         {
-            spell2Btn = GameObject.Find("Spell2Btn").GetComponent<Button>();
-            spell2LvlUpBtn = GameObject.Find("Spell2LvlUpBtn").GetComponent<Button>();
+            spell2Btn = GameObject.Find("Spell3Btn").GetComponent<Button>();
+            spell2LvlUpBtn = GameObject.Find("Spell3LvlUpBtn").GetComponent<Button>();
 			cdCountdown = spell2Btn.transform.Find ("CDCountdown");
 			cdCountdown.gameObject.SetActive (false);
 
@@ -94,7 +94,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.Z) && !onCD)
+		if (Input.GetKeyUp(KeyCode.E) && !onCD)
         {
             CastThatSpell();
         }

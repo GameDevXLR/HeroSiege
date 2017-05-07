@@ -1385,6 +1385,7 @@ GameObject:
   - component: {fileID: 114679018957871796}
   - component: {fileID: 114153687336401474}
   - component: {fileID: 114492759976091704}
+  - component: {fileID: 114503528474445336}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -4042,6 +4043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9e78a5fd7cf964587edc800e4ff605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   walkSound: {fileID: 0}
   agentPlayer: {fileID: 0}
   attackScript: {fileID: 0}
@@ -4218,6 +4220,30 @@ MonoBehaviour:
     i15: 130
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114503528474445336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436cc8c6e37eadf4087c9a44c623ef25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellImg: {fileID: 21300000, guid: 6a59653d6fb12e443ab00cfa9573bc4d, type: 3}
+  OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
+  Spell1: {fileID: 8300000, guid: c1728082dad0c7844adbadbbcc8fd8b6, type: 3}
+  spellCost: 20
+  spellDmg: 10
+  spellCD: 0
+  timeSpent: 0
+  cdCountdown: {fileID: 0}
+  spellDuration: 3
+  spellObj: {fileID: 1271539282615352, guid: eedbb81b5216c6a4fad98d49568adb15, type: 2}
+  spellLvl: 1
+  durationShake: 5
+  amountShake: 0
 --- !u!114 &114549363349876078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4292,6 +4318,7 @@ MonoBehaviour:
   Att1: {fileID: 8300000, guid: 6df093105ed3eeb458ebe5d125dfb736, type: 3}
   Att2: {fileID: 8300000, guid: 5b445a1e5d09cbd4a8bdbb876db345fe, type: 3}
   Charge: {fileID: 0}
+  anim: {fileID: 0}
   stopWalk: 0
   agent: {fileID: 0}
   attackRange: 8
@@ -5076,6 +5103,7 @@ MonoBehaviour:
   amountShake: 4
   threshold: 25
   underThreshold: 0
+  isTaunt: 0
 --- !u!135 &135227125065477978
 SphereCollider:
   m_ObjectHideFlags: 1

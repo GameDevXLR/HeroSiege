@@ -111,7 +111,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	[ClientRpc]
 	public void RpcHeroTank1Selected()
 	{
-		GetComponent<PlayerCastSpellOne> ().enabled = true;
+		GetComponent<PlayerTankCastTauntArea> ().enabled = true;
+		GetComponent<PlayerTankCastDpsHealAoe> ().enabled = true;
 		GetComponent<PlayerCastCCSpell> ().enabled = true;
 		childTankSkin.SetActive (true);
 		myAutoAScript.anim = childTankSkin.GetComponentInChildren<Animator> ();
