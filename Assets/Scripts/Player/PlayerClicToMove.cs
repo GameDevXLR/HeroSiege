@@ -10,7 +10,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 	//ce script est gaté. Ca c'est dit.
 	// il gere le déplacement du joueur.
-	Animator anim;
+	public Animator anim;
 	//private AudioSource audioS;
 //	public AudioClip clicSound;
 	public AudioClip walkSound;

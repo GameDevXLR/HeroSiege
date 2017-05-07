@@ -29,10 +29,10 @@ public class PlayerLevelUpManager : MonoBehaviour
 		spellUltLvlUpBtn = GameObject.Find ("Spell3LvlUpBtn");
 		//rajouter ici les futurs sorts a faire up.
 		spectPtIcon = GameObject.Find ("CompPtsIcon");
-		Invoke ("AvoidEarlyUltiUp", 0.3f);
+//		Invoke ("AvoidEarlyUltiUp", 0.3f);
 
 	}
-	void AvoidEarlyUltiUp()
+	public void AvoidEarlyUltiUp()
 	{
 
 			spellUltLvlUpBtn.SetActive (false);

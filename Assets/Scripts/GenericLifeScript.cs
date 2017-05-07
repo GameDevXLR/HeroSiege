@@ -24,7 +24,7 @@ public class GenericLifeScript : NetworkBehaviour
     public Text playerHPTxt;
     [SyncVar] public int maxHp = 1000;
     [SyncVar(hook = "RescaleTheLifeBarIG")] public int currentHp = 800;
-    public int regenHp;
+	[SyncVar]public int regenHp;
     public int levelUpBonusHP = 10;
 
     public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn le joueur.

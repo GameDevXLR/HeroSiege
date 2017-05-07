@@ -17,13 +17,13 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public AudioClip Att2;
 	public AudioClip Charge;
 
-	Animator anim; // l'animator qui gere les anim lié a ce script
+	public Animator anim; // l'animator qui gere les anim lié a ce script
 	public bool stopWalk; //pour l animation : arrete de marcher
 	bool charge; // animation et code : charge vers un ennemi / mob
 	bool attackAnim; // dois je jouer l'animation d'attaque ? 
 	public NavMeshAgent agent; // l'agent qui permet de déplacer l'objet attacher
-	public float attackRange; // la portée des auto attaques
-	public float attackRate; // le temps entre 2 attack
+	[SyncVar]public float attackRange; // la portée des auto attaques
+	[SyncVar]public float attackRate; // le temps entre 2 attack
 	[SyncVar(hook = "ActualizeAttSpeed")]public float attackSpeedStat; //le multiplicateur par sec.
 	private float previousAttackTime; // privé : le temps global de la derniere attaque
 	[SyncVar(hook = "ActualizeDamage")]public int damage; // combien de dégats brut (hors armure) on fait.

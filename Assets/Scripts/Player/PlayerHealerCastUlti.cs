@@ -43,6 +43,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 		{
 			spell2Btn = GameObject.Find("Spell3Btn").GetComponent<Button>();
 			spell2LvlUpBtn = GameObject.Find("Spell3LvlUpBtn").GetComponent<Button>();
+			GetComponent<PlayerLevelUpManager> ().AvoidEarlyUltiUp ();
 			cdCountdown = spell2Btn.transform.Find ("CDCountdown");
 			cdCountdown.gameObject.SetActive (false);
 

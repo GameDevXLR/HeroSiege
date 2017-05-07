@@ -524,6 +524,7 @@ MonoBehaviour:
   looseSprite: {fileID: 21300000, guid: 0fa0a19366185d048a1141f01f19b035, type: 3}
   team1LivesDisplay: {fileID: 0}
   team2LivesDisplay: {fileID: 0}
+  nbrWavesText: {fileID: 0}
   messageManager: {fileID: 114187068329497642}
   playerObj: {fileID: 0}
   soloGame: 0
@@ -541,6 +542,20 @@ MonoBehaviour:
   dayIcon: {fileID: 21300000, guid: 9820ce47de53dd245add704204f8f16b, type: 3}
   nightIcon: {fileID: 21300000, guid: d2b8408c566125e499ef117fabddb3ea, type: 3}
   locManager: {fileID: 0}
+  lightM: {fileID: 0}
+  jungCamps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   gameDifficulty: 0
 --- !u!114 &114187068329497642
 MonoBehaviour:
@@ -598,6 +613,8 @@ MonoBehaviour:
   - {fileID: 0}
   bossLvlT1: 1
   bossLvlT2: 1
+  T1LvlDisplay: {fileID: 0}
+  T2LvlDisplay: {fileID: 0}
   targetTeam1Destination: {fileID: 0}
   targetTeam2Destination: {fileID: 0}
 --- !u!114 &114718437280590848

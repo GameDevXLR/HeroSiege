@@ -16,7 +16,7 @@ public class GenericManaScript : NetworkBehaviour
 	//variables clés
 	[SyncVar]public int maxMp = 100;
 	[SyncVar]public int currentMp = 80;
-	public int regenMp;
+	[SyncVar]public int regenMp;
 	public int levelUpBonusMP;
 
 	// variables pour le serveur

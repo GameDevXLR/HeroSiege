@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ClicToSelectManager : MonoBehaviour 
 {
+
+	//gere le clic to select. pour l'instant ya que des shops faudra ajuster ca un jour.
 	public LayerMask layer_mask;
 
 	// Use this for initialization

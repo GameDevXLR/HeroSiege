@@ -421,7 +421,9 @@ public class GameManager : NetworkBehaviour
 	public void RpcMessageToAll()
 	{
 		GameObject.Find ("GameClock").GetComponent<GameClockMinSec> ().enabled = true;
-		messageManager.SendAnAlertMess ("The game is starting!", Color.green);
+		messageManager.SendAnAlertMess ("The game is starting!Choose your hero", Color.green);
+		GameObject.Find ("PlayerSelectionScreen").GetComponent<Canvas> ().enabled = true;
+		GameObject.Find ("DifficultySelectCanvas").GetComponent<Canvas> ().enabled = false;
 		ActualizeLocSystem ();
 	}
 

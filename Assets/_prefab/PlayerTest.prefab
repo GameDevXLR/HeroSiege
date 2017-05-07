@@ -1273,7 +1273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1622948488157884
 GameObject:
   m_ObjectHideFlags: 1
@@ -3904,7 +3904,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 209b957ac310b5043a1abf69937baa94, type: 3}
   m_Name: 
@@ -4145,7 +4145,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89337734727e54d4bb2adc7e9b8263f7, type: 3}
   m_Name: 
@@ -4764,7 +4764,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d151e7879765d34e959b5821691bd9c, type: 3}
   m_Name: 
@@ -4968,6 +4968,15 @@ MonoBehaviour:
   mainPlayerColor: {r: 0.019139292, g: 0.44631925, b: 0.86764705, a: 1}
   enemyPlayerColor: {r: 0.5588235, g: 0.12718053, b: 0, a: 1}
   difficultyPanel: {fileID: 0}
+  heroSelectPanel: {fileID: 0}
+  childTankSkin: {fileID: 1017182390241064}
+  childHealSkin: {fileID: 1619416483097498}
+  selectHeroTank1: {fileID: 0}
+  selectHeroHealer1: {fileID: 0}
+  selectHeroDps1: {fileID: 0}
+  myGeneLifeScript: {fileID: 114949428282701634}
+  myGeneManaScript: {fileID: 114695388684336140}
+  myAutoAScript: {fileID: 114604599503415050}
   playerNickName: NewPlayer
 --- !u!114 &114870691904547754
 MonoBehaviour:
@@ -11321,7 +11330,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 205167212
+  randomSeed: 72886692
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -20194,7 +20203,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -33720646
+  randomSeed: -440033545
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -35176,7 +35185,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 442791415
+  randomSeed: -844939778
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -38162,7 +38171,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 294691807
+  randomSeed: 1661919865
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -47076,7 +47085,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1072455624
+  randomSeed: 245792866
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -50037,7 +50046,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1567103987
+  randomSeed: 2047059530
   InitialModule:
     serializedVersion: 3
     enabled: 1
