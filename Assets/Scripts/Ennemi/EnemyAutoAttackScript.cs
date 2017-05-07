@@ -104,11 +104,22 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			{
 				RpcStopAttacking ();
 			}
+			if (target == null && !isAttacking && !agent.hasPath) 
+			{
+				if(gameObject.layer == 9) //pas necessaire ?
+				{
+					if(agent.isPathStale)//si t'as pas de route ?
+					{
+						GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+					}
+				}
+			}
 
 		}
 			if (target) {
 			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
+			//rajouter ici une condition du genre "si la distance est basse" alors tu face le mec; sinon tu face ton chemin...
 			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
 
 				if (!isAttacking) {
