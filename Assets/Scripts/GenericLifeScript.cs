@@ -51,6 +51,8 @@ public class GenericLifeScript : NetworkBehaviour
     public int threshold = 25;
     public bool underThreshold = false;
 
+	[SyncVar]public bool isTaunt;
+
     void Start()
     {
 //        Anim = GetComponentInChildren<Animator>();
@@ -154,17 +156,19 @@ public class GenericLifeScript : NetworkBehaviour
             }
 			if (gameObject.layer == 9 || gameObject.layer == 8 && gameObject.tag != "Player")
             { //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
-                if (!attacker.GetComponent<GenericLifeScript>().isDead)
-                {
+				if (!attacker.GetComponent<GenericLifeScript> ().isDead) 
+				{
+					if (!isTaunt) 
+					{
+					
 
-                    if (attacker != GetComponent<EnemyAutoAttackScript>().target)
-                    {
-                        if (Random.Range(0, 2) != 0)
-                        { //2 est exclusif car c'est un int.
-                            GetComponent<EnemyAutoAttackScript>().SetTheTarget(attacker);
-                        }
-                    }
-                }
+						if (attacker != GetComponent<EnemyAutoAttackScript> ().target) {
+							if (Random.Range (0, 2) != 0) { //2 est exclusif car c'est un int.
+								GetComponent<EnemyAutoAttackScript> ().SetTheTarget (attacker);
+							}
+						}
+					}
+				}
             }
 
             if (currentHp > 0)
@@ -480,4 +484,17 @@ public class GenericLifeScript : NetworkBehaviour
 			}
 		}
     }
+
+	public void GotTauntByFor(GameObject taunter, float timeTaunt)
+	{
+		GetComponent<EnemyAutoAttackScript> ().SetTheTarget (taunter);
+		StartCoroutine (GetTaunt (timeTaunt));
+	}
+
+	public IEnumerator GetTaunt(float tauntT)
+	{
+		isTaunt = true;
+		yield return new WaitForSeconds (tauntT);
+		isTaunt = false;
+	}
 }
