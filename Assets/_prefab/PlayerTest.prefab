@@ -1386,6 +1386,8 @@ GameObject:
   - component: {fileID: 114153687336401474}
   - component: {fileID: 114492759976091704}
   - component: {fileID: 114503528474445336}
+  - component: {fileID: 114111408780293834}
+  - component: {fileID: 114930190188803938}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -3887,6 +3889,30 @@ MonoBehaviour:
   Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
     type: 3}
   LastTimerUpdate: 0
+--- !u!114 &114111408780293834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f374657976565bd458d419a8cde937c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellImg: {fileID: 21300000, guid: 3aa89c47079fa4849b0d48420ba211ef, type: 3}
+  OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
+  Spell1: {fileID: 8300000, guid: 088718d93be7f64448a41a139393b94a, type: 3}
+  spellCost: 20
+  spellDmg: 50
+  spellCD: 5
+  timeSpent: 0
+  cdCountdown: {fileID: 0}
+  spellDuration: 3
+  spellObj: {fileID: 1513018649726288, guid: 4fbb6e27e434e48478a5d7b7bb6562de, type: 2}
+  spellLvl: 1
+  durationShake: 5
+  amountShake: 5
 --- !u!114 &114116274293579696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4236,7 +4262,7 @@ MonoBehaviour:
   Spell1: {fileID: 8300000, guid: c1728082dad0c7844adbadbbcc8fd8b6, type: 3}
   spellCost: 20
   spellDmg: 10
-  spellCD: 0
+  spellCD: 8
   timeSpent: 0
   cdCountdown: {fileID: 0}
   spellDuration: 3
@@ -5032,6 +5058,36 @@ MonoBehaviour:
   autoTargetting: 0
   autoAScript: {fileID: 0}
   playerAgent: {fileID: 0}
+--- !u!114 &114930190188803938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d225a7bb4b3dc49a800dc789c04f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellImg: {fileID: 21300000, guid: 1fbe977f5bfcd284e810f2ab79438923, type: 3}
+  SpellCC: {fileID: 0}
+  OOM: {fileID: 0}
+  spellCost: 50
+  spellDmg: 20
+  spellCD: 60
+  spellDuration: 20
+  spellRange: 25
+  spellObj: {fileID: 0}
+  spellLvl: 1
+  cdCountdown: {fileID: 0}
+  spellTargeter: {fileID: 0}
+  spellRangeArea: {fileID: 0}
+  isTargeting: 0
+  layer_mask:
+    serializedVersion: 2
+    m_Bits: 1024
+  durationShake: 2
+  amountShake: 20
 --- !u!114 &114935269645884590
 MonoBehaviour:
   m_ObjectHideFlags: 1

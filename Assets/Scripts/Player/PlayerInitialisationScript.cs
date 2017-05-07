@@ -113,7 +113,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		GetComponent<PlayerTankCastTauntArea> ().enabled = true;
 		GetComponent<PlayerTankCastDpsHealAoe> ().enabled = true;
-		GetComponent<PlayerCastCCSpell> ().enabled = true;
+		GetComponent<PlayerTankCastAvatar> ().enabled = true;
 		childTankSkin.SetActive (true);
 		myAutoAScript.anim = childTankSkin.GetComponentInChildren<Animator> ();
 		myGeneLifeScript.deadAnimChildMesh = childTankSkin.transform.GetChild(0).gameObject;
