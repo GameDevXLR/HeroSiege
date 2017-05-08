@@ -45,7 +45,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg*10;
-			spellDescription = "Strenghten your hero, he deals "+spellDmg+ " more per attack and " + x.ToString () + " health for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			spellDescription = "Strenghten your hero, he deals "+spellDmg+ " more per attack and get " + x.ToString () + " health for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -170,8 +170,8 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(3);
-			int x = (int)spellDmg / 5;
-			spellDescription = "Strenghten your hero, he deals "+spellDmg+ " more per attack and " + x.ToString () + " health for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			int x = (int)spellDmg *10;
+			spellDescription = "Strenghten your hero, he deals "+spellDmg+ " more per attack and get " + x.ToString () + " health for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

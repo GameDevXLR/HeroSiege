@@ -104,16 +104,16 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			{
 				RpcStopAttacking ();
 			}
-			if (target == null && !isAttacking && !agent.hasPath) 
-			{
-				if(gameObject.layer == 9) //pas necessaire ?
-				{
-					if(agent.isPathStale)//si t'as pas de route ?
-					{
-						GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-					}
-				}
-			}
+//			if (target == null && !isAttacking && !agent.pathPending && !agent.hasPath) 
+//			{
+////				if(gameObject.layer == 9) //pas necessaire ?
+////				{
+////					if(agent.isPathStale)//si t'as pas de route ?
+////					{
+//						GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+////					}
+////				}
+//			}
 
 		}
 			if (target) {
@@ -262,6 +262,9 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		{
 //			GetComponent<NavMeshObstacle> ().enabled = false;
 //			agent.Resume();
+			GetComponent<NavMeshObstacle> ().enabled = false;
+			agent.enabled = true;
+			agent.isStopped = false;
 			agent.SetDestination (target.transform.position);
 			targetTempPos = target.transform.position;
 		}

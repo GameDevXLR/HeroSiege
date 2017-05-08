@@ -351,6 +351,11 @@ public class GenericLifeScript : NetworkBehaviour
         if (isServer)
         {
             GetComponentInChildren<PlayerEnnemyDetectionScript>().autoTargetting = false;
+			if (GetComponent<PlayerHealerCastInvokePet> ()) { //si t'as un pet 
+				if (GetComponent<PlayerHealerCastInvokePet> ().actualPet != null) {
+					NetworkServer.Destroy (GetComponent<PlayerHealerCastInvokePet> ().actualPet); // détruit le quand tu meurs.
+				}
+			}
 
         }
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
