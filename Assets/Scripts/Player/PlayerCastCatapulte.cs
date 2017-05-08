@@ -37,6 +37,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		public LayerMask layer_mask;
 		public float durationShake = 10;
 		public float amountShake = 10;
+		public int startDmg;
+
 	public GameObject cataObj;
 		//	private GameObject spell1DescriptionObj;
 
@@ -45,13 +47,14 @@ public class PlayerCastCatapulte : NetworkBehaviour
 //			spellRangeArea.SetActive(false);
 			if (isLocalPlayer)
 			{
+			startDmg = spellDmg;
 				spellCataBtn = GameObject.Find("SpellCataBtn").GetComponent<Button>();
 				spellCataLoadBtn = GameObject.Find("SpellCataLoadBtn").GetComponent<Button>();
 				cdCountdown = spellCataBtn.transform.Find ("CDCountdown");
 				cdCountdown.gameObject.SetActive (false);
 				spellCataBtn.onClick.AddListener(CastThatSpell);
 				spellCataLoadBtn.onClick.AddListener(LoadTheCata);
-			spellDescription = "Deal " + spellDmg.ToString() + " to everyone on impact. Spend "+ cataChargePrice.ToString() +" to buy a charge (Require a catapulte nearby).";   
+				spellDescription = "Deal " + spellDmg.ToString() + " to everyone on impact. Spend "+ cataChargePrice.ToString() +" to buy a charge (Require a catapulte nearby).";   
 				spellCataBtn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 				spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
 				spellCataBtn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -60,6 +63,14 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			spellTargeter = GameObject.Find("AreaTargeter");
 
 		}
+	public void ActualizeCataDmg()
+	{
+		spellDescription = "Deal " + spellDmg.ToString() + " to everyone on impact. Spend "+ cataChargePrice.ToString() +" to buy a charge (Require a catapulte nearby).";
+		spellCataBtn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+
+	}
+
+
 		//lance le sort sur le serveur.
 		//le spawn du préfab est un networkspawn : du coup il apparaitra sur tous les pc..il fera ses trucs sur le serveur
 		//bien sur.
@@ -75,6 +86,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		NetworkServer.Spawn(go);
 
 		}
+
 		//cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
 		//demander le lancement du sort sur le serveur...normal.
 		public void CastThatSpell()

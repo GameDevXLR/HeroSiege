@@ -38,9 +38,9 @@ public class SpellArcherArrowRain : NetworkBehaviour {
 	[ServerCallback]
 	public void LateUpdate()
 	{
-		if (Time.time > dotTimer + 0.5f)
+		if (Time.time > dotTimer + 0.3f)
 		{
-			dotTimer = dotTimer + 0.5f;
+			dotTimer = dotTimer + 0.3f;
 			spellTargets.Clear();
 		}
 	}
@@ -63,7 +63,7 @@ public class SpellArcherArrowRain : NetworkBehaviour {
 			{
 
 				spellTargets.Add(other.gameObject);
-				other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage / 5, true, caster);
+				other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage / 10, true, caster);
 			}
 
 		}

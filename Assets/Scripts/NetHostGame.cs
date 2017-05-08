@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
-
+using UnityEngine.UI;
 public class NetHostGame :  MonoBehaviour{
 
 		[SerializeField]
 		private uint roomSize = 10;
 
 	private bool isCreating;
-
+	public Toggle isItOneLane;
 	public string roomName;
 
 		private NetworkManager networkManager;
@@ -48,6 +48,12 @@ public class NetHostGame :  MonoBehaviour{
 		isCreating = true;
 		yield return new WaitForSeconds (1f);
 		isCreating = false;
+	}
+	public void ToggleOneLaneTwoLanes()
+	{
+
+			networkManager.GetComponent<PlayerMenuSettings> ().isItOneLane = isItOneLane.isOn;
+
 	}
 
 	}

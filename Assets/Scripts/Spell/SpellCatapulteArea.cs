@@ -56,11 +56,11 @@ public class SpellCatapulteArea : NetworkBehaviour {
 				{
 
 					int tmpDmg;
-					damageFactor = GameManager.instanceGM.Days;
+					damageFactor = GameManager.instanceGM.Days*2;
 					tmpDmg = damageFactor * spellDamage;
 					
 					spellTargets.Add(other.gameObject);
-					other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage, true, caster);
+					other.gameObject.GetComponent<GenericLifeScript>().LooseHealth(tmpDmg, true, caster);
 				}
 				
 			}

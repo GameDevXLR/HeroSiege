@@ -48,8 +48,8 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
-			int x = (int)spellDmg / 5;
-			spellDescription = "Slow and deal " + x.ToString () + " damage every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			int x = (int)spellDmg / 10;
+			spellDescription = "Slow and deal " + x.ToString () + " damage every 0,3 seconds for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -212,13 +212,13 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 		spellLvl++;
 		spellCost += 5;
 		spellCD -= 2f;
-		spellDmg += 75;
-		spellDuration += 0.5f;
+		spellDmg += 100;
+		spellDuration += 0.6f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Slow and deal " + x.ToString() + " damage every 0,5 seconds for " + spellDuration.ToString() + " seconds.";
+			spellDescription = "Slow and deal " + x.ToString() + " damage every 0,3 seconds for " + spellDuration.ToString() + " seconds.";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

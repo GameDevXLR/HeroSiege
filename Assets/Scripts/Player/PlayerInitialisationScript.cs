@@ -86,6 +86,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			if(isLocalPlayer)
 			{
 			GameObject.Find ("DifficultyPanel").GetComponent<ChooseDifficultyScript> ().enabled = true;
+				if (NetworkManager.singleton.GetComponent<PlayerMenuSettings> ().isItOneLane) 
+				{
+					GameManager.instanceGM.soloGame = true;
+					Destroy( GameObject.Find ("SpawnPointT2"));
+				}
 			}
 		}
 	}
@@ -127,10 +132,10 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			myGeneLifeScript.maxHp = 300;
 			myGeneLifeScript.currentHp = 300;
-			myGeneLifeScript.regenHp = 12;
-			myGeneManaScript.maxMp = 120;
-			myGeneManaScript.currentMp = 120;
-			myGeneManaScript.regenMp = 6;
+			myGeneLifeScript.regenHp = 10;
+			myGeneManaScript.maxMp = 100;
+			myGeneManaScript.currentMp = 100;
+			myGeneManaScript.regenMp = 4;
 			myAutoAScript.damage = 20;
 			myAutoAScript.attackRate = 1;
 			myAutoAScript.attackRange = 4;
@@ -172,7 +177,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneLifeScript.regenHp = 6;
 			myGeneManaScript.maxMp = 230;
 			myGeneManaScript.currentMp = 230;
-			myGeneManaScript.regenMp = 12;
+			myGeneManaScript.regenMp = 10;
 			myAutoAScript.damage = 8;
 			myAutoAScript.attackRate = .5f;
 			myAutoAScript.attackRange = 11;
@@ -217,7 +222,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneManaScript.currentMp = 130;
 			myGeneManaScript.regenMp = 5;
 			myAutoAScript.damage = 25;
-			myAutoAScript.attackRate = 1f;
+			myAutoAScript.attackRate = .8f;
 			myAutoAScript.attackRange = 15;
 
 		}

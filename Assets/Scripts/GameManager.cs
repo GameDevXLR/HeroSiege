@@ -222,6 +222,8 @@ public class GameManager : NetworkBehaviour
 		} else 
 		{
 			Days++;
+			playerObj.GetComponent<PlayerCastCatapulte> ().spellDmg = playerObj.GetComponent<PlayerCastCatapulte> ().startDmg* Days;
+			playerObj.GetComponent<PlayerCastCatapulte> ().ActualizeCataDmg ();
 			GetComponent<BossSpawnManager> ().bossLvlT1++;
 			GetComponent<BossSpawnManager> ().bossLvlT2++;
 			dayNightDisplay.sprite = dayIcon;

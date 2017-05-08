@@ -115,7 +115,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 			return;
 		}
 
-		if (Input.GetKeyUp(KeyCode.R) && !onCD)
+		if (Input.GetKeyUp(KeyCode.E) && !onCD)
 		{
 			CastThatSpell();
 		}
