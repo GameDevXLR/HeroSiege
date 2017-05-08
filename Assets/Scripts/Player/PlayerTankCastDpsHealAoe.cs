@@ -146,7 +146,7 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 		spellDmg += 20;
 		if (isLocalPlayer)
 		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
+			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg / 5;
 
 			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+spellDmg/10+" health by enemy touched.";

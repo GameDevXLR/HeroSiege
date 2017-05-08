@@ -4,21 +4,22 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerArcherCastArrowRain : NetworkBehaviour {
+public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 	//deuxieme sort: a mettre sur l'objet joueur.
 	// sort de zone avec possibilité de target la ou on veut CC.
 	//le sort fait spawn un prefab qui est configuré ici (dégats etc/ durée du CC)
 	//le prefab doit etre enregistrer par le networkmanagerObj
 	//le sort peut up.
 	public Sprite spellImg;
-	public AudioClip SpellCC;
+	public AudioClip SpellSound;
 	public AudioClip OOM;
 	string spellDescription;
-	public int spellCost = 80;
-	public int spellDmg = 120;
-	public float spellCD = 35f;
-	public float spellDuration = 1.5f;
-	public float spellRange = 25f;
+	public int spellCost = 30;
+	public int spellDmg = 50;
+	public float explosionRadius = 1.4f;
+	public float spellCD = 20f;
+	public float spellDuration = 10f;
+	public float spellRange = 12.5f;
 	public GameObject spellObj;
 	public int spellLvl = 1;
 	private bool onCD;
@@ -31,8 +32,8 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	public GameObject spellRangeArea;
 	public bool isTargeting; // savoir si le joueur cible pour lancer le sort. 
 	public LayerMask layer_mask;
-	public float durationShake = 1.5f;
-	public float amountShake = 2;
+	public float durationShake = 0f;
+	public float amountShake = 0;
 	//	private GameObject spell1DescriptionObj;
 
 	void Start()
@@ -40,16 +41,17 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 		spellRangeArea.SetActive(false);
 		if (isLocalPlayer)
 		{
-			spell2Btn = GameObject.Find("Spell3Btn").GetComponent<Button>();
-			spell2LvlUpBtn = GameObject.Find("Spell3LvlUpBtn").GetComponent<Button>();
+			spell2Btn = GameObject.Find("Spell2Btn").GetComponent<Button>();
+			spell2LvlUpBtn = GameObject.Find("Spell2LvlUpBtn").GetComponent<Button>();
 			cdCountdown = spell2Btn.transform.Find ("CDCountdown");
 			cdCountdown.gameObject.SetActive (false);
 			GetComponent<PlayerLevelUpManager> ().AvoidEarlyUltiUp ();
 
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
-			int x = (int)spellDmg / 10;
-			spellDescription = "Slow and deal " + x.ToString () + " damage every 0,3 seconds for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			int x = (int)spellDmg / 5;
+			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
+			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -66,9 +68,10 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	public void CmdCastSpell(Vector3 pos)
 	{
 		GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
-		go.GetComponent<SpellArcherArrowRain>().caster = gameObject;
-		go.GetComponent<SpellArcherArrowRain>().spellDamage = spellDmg;
-		go.GetComponent<SpellArcherArrowRain>().duration = spellDuration;
+		go.GetComponent<SpellArcherPoisonTrap>().caster = gameObject;
+		go.GetComponent<SpellArcherPoisonTrap>().spellDamage = spellDmg;
+		go.GetComponent<SpellArcherPoisonTrap> ().exploRadius = explosionRadius;
+		go.GetComponent<SpellArcherPoisonTrap>().duration = spellDuration;
 		NetworkServer.Spawn(go);
 
 	}
@@ -92,7 +95,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 			return;
 		}
 
-		if (Input.GetKeyUp(KeyCode.E) && !onCD)
+		if (Input.GetKeyUp(KeyCode.Z) && !onCD)
 		{
 			CastThatSpell();
 		}
@@ -122,7 +125,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-				GetComponent<AudioSource>().PlayOneShot(SpellCC);
+				GetComponent<AudioSource>().PlayOneShot(SpellSound);
 				castPosDesired = hit.point;
 				spellTargeter.transform.position = Vector3.zero;
 				CmdCastSpell(castPosDesired);
@@ -210,15 +213,16 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 5;
-		spellCD -= 2f;
-		spellDmg += 100;
-		spellDuration += 0.6f;
+		spellCost += 3;
+		spellCD -= 1f;
+		explosionRadius += 0.2f;
+		spellDmg += 15;
+		spellDuration += 1f;
 		if (isLocalPlayer)
 		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(3);
+			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Slow and deal " + x.ToString() + " damage every 0,3 seconds for " + spellDuration.ToString() + " seconds.";
+			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -233,12 +237,12 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	}
 	public void ReziseTheTargeters()
 	{
-		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
-		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
+		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (0.5f, 0.5f, 1f);
+		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (0.5f, 0.5f, 1f);
 
-		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
-		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (1f, 1f, 1f);
-		spellTargeter.transform.GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (0.5f, .5f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (.5f, .5f, 1f);
+		spellTargeter.transform.GetChild (0).localScale = new Vector3 (.5f, .5f, 1f);
 
 
 	}

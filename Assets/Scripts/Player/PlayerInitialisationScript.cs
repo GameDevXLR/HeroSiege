@@ -172,6 +172,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childHealSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.5f;
+
 			myGeneLifeScript.maxHp = 150;
 			myGeneLifeScript.currentHp = 150;
 			myGeneLifeScript.regenHp = 6;
@@ -207,7 +209,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		childDpsSkin.SetActive (true);
 		GetComponent<PlayerCastHealArea> ().enabled = true;
 		GetComponent<PlayerArcherCastArrowRain> ().enabled = true;
-		GetComponent<PlayerHealerCastInvokePet> ().enabled = true;
+		GetComponent<PlayerArcherCastPoisonTrap> ().enabled = true;
 		myAutoAScript.anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		myGeneLifeScript.deadAnimChildMesh = childDpsSkin.transform.GetChild(0).gameObject;
 		myGeneLifeScript.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
@@ -215,6 +217,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.5f;
 			myGeneLifeScript.maxHp = 180;
 			myGeneLifeScript.currentHp = 180;
 			myGeneLifeScript.regenHp = 5;
