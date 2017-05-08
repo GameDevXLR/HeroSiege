@@ -172,7 +172,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childHealSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
-			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.5f;
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1f;
 
 			myGeneLifeScript.maxHp = 150;
 			myGeneLifeScript.currentHp = 150;
@@ -217,7 +217,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
-			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.5f;
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.2f;
 			myGeneLifeScript.maxHp = 180;
 			myGeneLifeScript.currentHp = 180;
 			myGeneLifeScript.regenHp = 5;

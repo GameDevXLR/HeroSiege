@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class SpellArcherPoisonTrap : NetworkBehaviour {
+public class SpellArcherPoisonTrap : NetworkBehaviour 
+{
+	
 	public GameObject caster;
 	public float duration = 10f;
 	public float notTrigeredTimer = 30f;
 	public int spellDamage = 50;
 	public float exploRadius = 2;
-	public bool IsTriggered; // le piege a t il déja exploser ? 
+	[SyncVar (hook = "ActivateTheTrap")]public bool IsTriggered; // le piege a t il déja exploser ? 
 	private float timer;
 	private float dotTimer;
 	public List<GameObject> spellTargets;
@@ -54,7 +56,8 @@ public class SpellArcherPoisonTrap : NetworkBehaviour {
 			{
 				if (other.gameObject.layer == 9) 
 				{
-					ActivateTheTrap ();
+					IsTriggered = true;
+					notTrigeredTimer = duration; //faire que le temps avant destruction devienne la durée du zone.
 				} else 
 				{
 					return;
@@ -73,12 +76,11 @@ public class SpellArcherPoisonTrap : NetworkBehaviour {
 		}
 	}
 
-	public void ActivateTheTrap()
+	public void ActivateTheTrap(bool trig)
 	{
-		IsTriggered = true;//se mettre a faire des dégats
+		IsTriggered = trig;//se mettre a faire des dégats
 		thisCollider.radius = exploRadius;//augmenter la zone du poison
 		childObj.SetActive (true); // activer l'effet de particule
-		notTrigeredTimer = duration; //faire que le temps avant destruction devienne la durée du zone.
 		childObj.transform.localScale = new Vector3 (exploRadius,exploRadius,exploRadius);
 		areaBeforeExplo.SetActive (false);
 	}
