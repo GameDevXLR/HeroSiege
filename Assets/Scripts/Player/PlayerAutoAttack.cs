@@ -36,7 +36,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	private Vector3 targetTempPos; //calcul de position (privé)
 	private GameObject targetObj; // l'objet qui t'attaque ! 
 	public bool isActualizingPos;
-
+	[SyncVar] public int bonusDamage;
 	void Start()
 	{
 

@@ -17,6 +17,7 @@ public class GenericManaScript : NetworkBehaviour
 	[SyncVar]public int maxMp = 100;
 	[SyncVar]public int currentMp = 80;
 	[SyncVar]public int regenMp;
+	[SyncVar]public int bonusMp;
 	public int levelUpBonusMP;
 
 	// variables pour le serveur
@@ -100,9 +101,10 @@ public class GenericManaScript : NetworkBehaviour
 	//fait up le joueur; dit a tous les clients que le joueur a up.
 	public void LevelUp()
 	{
-		maxMp += levelUpBonusMP;
-		currentMp = levelUpBonusMP;
-		if (isServer) {
+		maxMp += levelUpBonusMP+ ((maxMp-bonusMp)*5/100);
+		currentMp += levelUpBonusMP+ ((maxMp-bonusMp)*5/100);
+		if (isServer) 
+		{
 			RpcActualizeThatMana (currentMp);
 		}
 	}

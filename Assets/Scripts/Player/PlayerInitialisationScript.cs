@@ -135,10 +135,15 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneLifeScript.regenHp = 10;
 			myGeneManaScript.maxMp = 100;
 			myGeneManaScript.currentMp = 100;
-			myGeneManaScript.regenMp = 4;
-			myAutoAScript.damage = 20;
+			myGeneManaScript.regenMp = 3;
+			myGeneLifeScript.armorScore = 30;
+			myAutoAScript.damage = 15;
 			myAutoAScript.attackRate = 1;
 			myAutoAScript.attackRange = 4;
+			myGeneLifeScript.levelUpBonusHP = 50;
+			myGeneManaScript.levelUpBonusMP = 10;
+			myAutoAScript.levelUpBonusDamage = 2;
+			myGeneLifeScript.levelUpBonusArmor = 3;
 
 		}
 		//faire ici la config du hero tank1 pour tous
@@ -177,12 +182,17 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneLifeScript.maxHp = 150;
 			myGeneLifeScript.currentHp = 150;
 			myGeneLifeScript.regenHp = 6;
-			myGeneManaScript.maxMp = 230;
-			myGeneManaScript.currentMp = 230;
-			myGeneManaScript.regenMp = 10;
+			myGeneManaScript.maxMp = 200;
+			myGeneManaScript.currentMp = 200;
+			myGeneManaScript.regenMp = 9;
 			myAutoAScript.damage = 8;
-			myAutoAScript.attackRate = .5f;
+			myAutoAScript.attackRate = .7f;
 			myAutoAScript.attackRange = 11;
+			myGeneLifeScript.levelUpBonusHP = 10;
+			myGeneManaScript.levelUpBonusMP = 20;
+			myGeneLifeScript.armorScore = 10;
+			myAutoAScript.levelUpBonusDamage = 2;
+			myGeneLifeScript.levelUpBonusArmor = 0;
 
 		}
 		//faire ici la config du hero tank1 pour tous
@@ -223,10 +233,14 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneLifeScript.regenHp = 5;
 			myGeneManaScript.maxMp = 130;
 			myGeneManaScript.currentMp = 130;
-			myGeneManaScript.regenMp = 5;
+			myGeneManaScript.regenMp = 4;
 			myAutoAScript.damage = 25;
 			myAutoAScript.attackRate = .8f;
-			myAutoAScript.attackRange = 15;
+			myAutoAScript.attackRange = 20;
+			myGeneLifeScript.levelUpBonusHP = 15;
+			myGeneLifeScript.armorScore = 10;
+			myGeneLifeScript.levelUpBonusArmor = 1;
+			myAutoAScript.levelUpBonusDamage = 6;
 
 		}
 		//faire ici la config du hero tank1 pour tous

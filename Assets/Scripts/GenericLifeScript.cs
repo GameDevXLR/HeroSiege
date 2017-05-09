@@ -24,7 +24,9 @@ public class GenericLifeScript : NetworkBehaviour
     public Text playerHPTxt;
     [SyncVar] public int maxHp = 1000;
     [SyncVar(hook = "RescaleTheLifeBarIG")] public int currentHp = 800;
+	[SyncVar]public int	bonusHp;
 	[SyncVar]public int regenHp;
+	[SyncVar]public int bonusArmorScore;
     public int levelUpBonusHP = 10;
 
     public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn le joueur.
@@ -50,6 +52,7 @@ public class GenericLifeScript : NetworkBehaviour
     [Range(0,100)]
     public int threshold = 25;
     public bool underThreshold = false;
+	[SyncVar] public int levelUpBonusArmor;
 
 	[SyncVar]public bool isTaunt;
 
@@ -447,8 +450,9 @@ public class GenericLifeScript : NetworkBehaviour
 
     public void LevelUp()
     {
-        maxHp += levelUpBonusHP;
-		currentHp += levelUpBonusHP;
+		maxHp += levelUpBonusHP + ((maxHp-bonusHp)*5/100);
+		armorScore += levelUpBonusArmor;
+		currentHp += levelUpBonusHP+ ((maxHp-bonusHp)*5/100);
         respawnTime += 1f;
         lifeBar.localScale = new Vector3(1, 1f, 1f);
 

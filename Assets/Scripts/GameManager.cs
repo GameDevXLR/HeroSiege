@@ -53,7 +53,6 @@ public class GameManager : NetworkBehaviour
 	public Sprite nightIcon;
 	public LocationManager locManager;
 	public LightManagerScript lightM;
-
 	public GameObject[] jungCamps;
 
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
