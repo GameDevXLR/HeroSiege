@@ -2892,7 +2892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerDeath: {fileID: 0}
   PlayerSpawn: {fileID: 0}
-  xpGiven: 0
+  xpGiven: 100
   goldGiven: 100
   goldDisplay: {fileID: 114438898843106408}
   goldCanvas: {fileID: 1678407210894732}
@@ -2923,6 +2923,7 @@ MonoBehaviour:
   amountShake: 10
   threshold: 25
   underThreshold: 0
+  isTaunt: 0
 --- !u!114 &114438898843106408
 MonoBehaviour:
   m_ObjectHideFlags: 1

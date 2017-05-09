@@ -448,7 +448,7 @@ public class GenericLifeScript : NetworkBehaviour
     public void LevelUp()
     {
         maxHp += levelUpBonusHP;
-        currentHp = maxHp;
+		currentHp += levelUpBonusHP;
         respawnTime += 1f;
         lifeBar.localScale = new Vector3(1, 1f, 1f);
 

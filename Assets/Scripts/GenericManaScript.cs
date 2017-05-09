@@ -101,7 +101,7 @@ public class GenericManaScript : NetworkBehaviour
 	public void LevelUp()
 	{
 		maxMp += levelUpBonusMP;
-		currentMp = maxMp;
+		currentMp = levelUpBonusMP;
 		if (isServer) {
 			RpcActualizeThatMana (currentMp);
 		}

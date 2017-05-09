@@ -18,11 +18,13 @@ public class PlayerXPScript : NetworkBehaviour
 	private ParticleSystem LvlUpParticle;
 	float requiredXpTmp;
 	int previousXpRec;
+	int originalXP;
 
 	// Use this for initialization
 	void Start () 
 	{
 		LvlUpParticle = GetComponentInChildren <ParticleSystem> ();
+		originalXP = requiredXPToUp;
 		if (!isLocalPlayer) 
 		{
 			return;
@@ -66,8 +68,8 @@ public class PlayerXPScript : NetworkBehaviour
 		{
 			actualLevel++;
 			LvlUpParticle.Play ();
+			requiredXpTmp = (float)originalXP * (1f + ((float)actualLevel / 2f));
 			previousXpRec = requiredXPToUp;
-			requiredXpTmp = (float)requiredXPToUp * (1f + ((float)actualLevel / 10f));
 			requiredXPToUp = (int)requiredXpTmp + requiredXPToUp;
 
 			if (isServer) 

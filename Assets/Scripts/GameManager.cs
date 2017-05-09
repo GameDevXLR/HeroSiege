@@ -224,8 +224,8 @@ public class GameManager : NetworkBehaviour
 			Days++;
 			playerObj.GetComponent<PlayerCastCatapulte> ().spellDmg = playerObj.GetComponent<PlayerCastCatapulte> ().startDmg* Days;
 			playerObj.GetComponent<PlayerCastCatapulte> ().ActualizeCataDmg ();
-			GetComponent<BossSpawnManager> ().bossLvlT1++;
-			GetComponent<BossSpawnManager> ().bossLvlT2++;
+			GetComponent<BossSpawnManager> ().bossLvlT1 +=2;
+			GetComponent<BossSpawnManager> ().bossLvlT2 +=2;
 			dayNightDisplay.sprite = dayIcon;
 			messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
 			lightM.isSwitchingOFF = true;
@@ -317,6 +317,7 @@ public class GameManager : NetworkBehaviour
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = true;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().StartSpawning (Days);
 			if (soloGame) 
 			{
 				return;
@@ -363,6 +364,7 @@ public class GameManager : NetworkBehaviour
 
 		if (gameDifficulty == 1 || gameDifficulty == 2) 
 		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = false;
 			if (soloGame) 
 			{

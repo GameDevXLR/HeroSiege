@@ -3352,16 +3352,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerDeath: {fileID: 0}
   PlayerSpawn: {fileID: 0}
-  xpGiven: 2
-  goldGiven: 10
+  xpGiven: 1500
+  goldGiven: 25
   goldDisplay: {fileID: 114779982035895716}
   goldCanvas: {fileID: 1997835931091466}
   killCount: 0
   lifeBar: {fileID: 224766238517520706}
   lifeBarMain: {fileID: 0}
   playerHPTxt: {fileID: 0}
-  maxHp: 100
-  currentHp: 100
+  maxHp: 500
+  currentHp: 500
   regenHp: 25
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
@@ -3383,6 +3383,7 @@ MonoBehaviour:
   amountShake: 10
   threshold: 25
   underThreshold: 0
+  isTaunt: 0
 --- !u!114 &114252200921075486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3522,7 +3523,7 @@ MonoBehaviour:
   agent: {fileID: 195843032128776594}
   attackRange: 4
   attackRate: 1
-  damage: 15
+  damage: 50
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 20

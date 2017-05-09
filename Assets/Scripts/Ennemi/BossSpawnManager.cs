@@ -20,6 +20,7 @@ public class BossSpawnManager : NetworkBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		
 		T1LvlDisplay = GameObject.Find ("BossLvlT1Display").GetComponent<Text> ();
 		T2LvlDisplay = GameObject.Find ("BossLvlT2Display").GetComponent<Text> ();
 
@@ -43,9 +44,11 @@ public class BossSpawnManager : NetworkBehaviour
 	{
 		GameObject bossTmpObj;
 		bossTmpObj = Instantiate (bossPrefab, tr.position, tr.rotation) as GameObject;
-		bossTmpObj.GetComponent<GenericLifeScript> ().maxHp += (bonusFactor * bonusFactor * 10) - bonusFactor;
-		bossTmpObj.GetComponent<GenericLifeScript> ().currentHp += (bonusFactor * bonusFactor * 10) - bonusFactor;
-		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor;
+		bossTmpObj.GetComponent<GenericLifeScript> ().maxHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
+		bossTmpObj.GetComponent<GenericLifeScript> ().currentHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
+		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor*GameManager.instanceGM.gameDifficulty*3;
+		bossTmpObj.GetComponent<GenericLifeScript> ().goldGiven += bonusFactor * bonusFactor;
+		bossTmpObj.GetComponent<GenericLifeScript> ().xpGiven += bonusFactor * bonusFactor;
 		if (bonusFactor >= 10) 
 		{
 			bossTmpObj.GetComponent<EnemyAutoAttackScript> ().agent.speed += 5;

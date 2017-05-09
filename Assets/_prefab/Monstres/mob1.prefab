@@ -1877,16 +1877,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerDeath: {fileID: 0}
   PlayerSpawn: {fileID: 0}
-  xpGiven: 5
-  goldGiven: 3
+  xpGiven: 225
+  goldGiven: 10
   goldDisplay: {fileID: 114269004648064538}
   goldCanvas: {fileID: 1166236954666868}
   killCount: 0
   lifeBar: {fileID: 224410816351006932}
   lifeBarMain: {fileID: 0}
   playerHPTxt: {fileID: 0}
-  maxHp: 50
-  currentHp: 50
+  maxHp: 100
+  currentHp: 100
   regenHp: 0
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
@@ -1908,6 +1908,7 @@ MonoBehaviour:
   amountShake: 10
   threshold: 25
   underThreshold: 0
+  isTaunt: 0
 --- !u!114 &114665928832872106
 MonoBehaviour:
   m_ObjectHideFlags: 1
