@@ -43,16 +43,21 @@ public class PlayerLevelUpManager : MonoBehaviour
 		specPts++;
 		playerLvl++;
 //		GetComponent<PlayerManager> ().GetALevel ();
-		if (playerLvl == 3 || playerLvl == 6 || playerLvl == 9 || playerLvl == 12) 
+		if (playerLvl == 3 || playerLvl == 6 || playerLvl == 9 || playerLvl == 12|| playerLvl == 15|| playerLvl == 18|| playerLvl == 21|| playerLvl == 24|| playerLvl == 27|| playerLvl == 30) 
 		{
 			ultiSpecPts++;
 		}
 		spell1LvlUpBtn.GetComponent<Animator> ().Play ("BtnCompPts");
 		spectPtIcon.SetActive (true);
-		spell1LvlUpBtn.SetActive (true);
-		spell2LvlUpBtn.SetActive (true);
-//		StartCoroutine (LevelUpProcess ());
-		if (ultiSpecPts > 0) 
+		if (spell1Lvl < 10) {
+			spell1LvlUpBtn.SetActive (true);
+		}
+		if (spell2Lvl < 10) {
+
+			spell2LvlUpBtn.SetActive (true);
+		}
+			//		StartCoroutine (LevelUpProcess ());
+		if (ultiSpecPts > 0 && spellUltLvl<10) 
 		{
 			spellUltLvlUpBtn.SetActive (true);
 		}

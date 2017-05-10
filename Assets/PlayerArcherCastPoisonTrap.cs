@@ -213,7 +213,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 2;
+		spellCost += 20;
 		spellCD -= 4f;
 		explosionRadius += 0.1f;
 		spellDmg += 4;

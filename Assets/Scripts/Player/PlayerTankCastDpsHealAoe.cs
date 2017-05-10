@@ -141,7 +141,7 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 10;
+		spellCost += 25;
 		spellCD -= 0.5f;
 		spellDmg += 15;
 		if (isLocalPlayer)

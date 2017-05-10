@@ -46,7 +46,7 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 			cdCountdown.gameObject.SetActive (false);
 //			spell1Btn.onClick.AddListener(CastThatSpell);
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
-			spellDescription = "Give you " + stunChances + "% chances to stun and deal "+ spellLvl+" times more damages and "+ dodgeChances+"% dodge chances.";
+			spellDescription = "Give you " + stunChances + "% chances to stun and deal "+ spellLvl/2+" times more damages and "+ dodgeChances+"% dodge chances.";
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = "0";
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = "0";
@@ -162,7 +162,7 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
-			spellDescription = "Give you " + stunChances + "% chances to stun and deal "+ spellLvl+" times more damages and "+ dodgeChances+"% dodge chances.";
+			spellDescription = "Give you " + stunChances + "% chances to stun and deal "+ spellLvl/2+" times more damages and "+ dodgeChances+"% dodge chances.";
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
 			//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
@@ -179,7 +179,10 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 	public void UpTheStats()
 	{
 		GetComponent<PlayerAutoAttack> ().critChance += levelupStunChanceBonus;
-		GetComponent<PlayerAutoAttack> ().critFactor++;
+		if (spellLvl == 2 || spellLvl == 4 || spellLvl == 6 || spellLvl == 8 || spellLvl == 10) 
+		{ 
+			GetComponent<PlayerAutoAttack> ().critFactor++;
+		}
 		GetComponent<GenericLifeScript> ().dodge += levelupDodgeChanceBonus;
 	}
 }

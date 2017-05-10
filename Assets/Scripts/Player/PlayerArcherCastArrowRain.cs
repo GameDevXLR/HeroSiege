@@ -210,7 +210,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 5;
+		spellCost += 50;
 		spellCD -= 2f;
 		spellDmg += 12;
 		spellDuration += 0.3f;

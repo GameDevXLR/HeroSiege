@@ -211,7 +211,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 8;
+		spellCost += 50;
 		spellCD -= 3f;
 		spellDmg += 15;
 		spellDuration += 1f;
