@@ -322,18 +322,23 @@ public class GameManager : NetworkBehaviour
 				return;
 			}
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().enabled = true;
-
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().StartSpawning (Days);
 		}
 		if (gameDifficulty == 4) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = true;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().StartSpawning (Days);
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().StartSpawning (Days);
+
 			if (soloGame) 
 			{
 				return;
 			}
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().enabled = true;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ().StartSpawning (Days);
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().StartSpawning (Days);
 
 		}
 		if (gameDifficulty == 10) 
@@ -341,6 +346,10 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = true;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().StartSpawning (Days);
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().StartSpawning (Days);
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().StartSpawning (Days);
+
 			if (soloGame) 
 			{
 				return;
@@ -348,6 +357,10 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().enabled = true;
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().StartSpawning (Days);
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ().StartSpawning (Days);
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().StartSpawning (Days);
+
 		}
 	}
 
@@ -369,30 +382,43 @@ public class GameManager : NetworkBehaviour
 			{
 				return;
 			}
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().enabled = false;
 
 		}
 		if (gameDifficulty == 3) 
 		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().StopAllCoroutines ();
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = false;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = false;
+
 			if (soloGame) 
 			{
 				return;
 			}
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ().StopAllCoroutines ();
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ().enabled = false;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().enabled = false;
 
 		}
 		if (gameDifficulty == 4) 
 		{
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().StopAllCoroutines ();
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().StopAllCoroutines ();
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = false;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = false;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = false;
+
 			if (soloGame) 
 			{
 				return;
 			}
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().StopAllCoroutines ();
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ().StopAllCoroutines ();
+			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().enabled = false;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ().enabled = false;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().enabled = false;
@@ -424,7 +450,14 @@ public class GameManager : NetworkBehaviour
 	public void RpcMessageToAll()
 	{
 		GameObject.Find ("GameClock").GetComponent<GameClockMinSec> ().enabled = true;
-		messageManager.SendAnAlertMess ("The game is starting!Choose your hero", Color.green);
+		if (isTeam1) 
+		{
+			messageManager.SendAnAlertMess ("The game is starting!You have join the blue team.", Color.green);			
+		}
+		if (isTeam2) 
+		{
+			messageManager.SendAnAlertMess ("The game is starting!You have join the red team.", Color.green);			
+		}
 		GameObject.Find ("PlayerSelectionScreen").GetComponent<Canvas> ().enabled = true;
 		GameObject.Find ("DifficultySelectCanvas").GetComponent<Canvas> ().enabled = false;
 		ActualizeLocSystem ();
