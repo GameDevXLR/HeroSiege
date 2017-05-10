@@ -36,8 +36,8 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 			cdCountdown.gameObject.SetActive (false);
 			spell1Btn.onClick.AddListener(CastThatSpell);
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
-			int x = (int)spellDmg / 5;
-			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+spellDmg/10+" health by enemy touched.";
+			int x = (int)spellDmg / 3;
+			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+x+" health by enemy touched.";
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

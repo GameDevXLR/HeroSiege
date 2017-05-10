@@ -217,7 +217,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void RpcHeroDps1Selected()
 	{
 		childDpsSkin.SetActive (true);
-		GetComponent<PlayerCastHealArea> ().enabled = true;
+		GetComponent<PlayerArcherCastPassiveBoost> ().enabled = true;
 		GetComponent<PlayerArcherCastArrowRain> ().enabled = true;
 		GetComponent<PlayerArcherCastPoisonTrap> ().enabled = true;
 		myAutoAScript.anim = childDpsSkin.GetComponentInChildren<Animator> ();

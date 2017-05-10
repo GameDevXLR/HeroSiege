@@ -36,6 +36,8 @@ public class PlayerAutoAttack: NetworkBehaviour
 	private Vector3 targetTempPos; //calcul de position (privé)
 	private GameObject targetObj; // l'objet qui t'attaque ! 
 	public bool isActualizingPos;
+	public int critChance;
+	public int critFactor;
 	[SyncVar] public int bonusDamage;
 	void Start()
 	{
@@ -72,6 +74,14 @@ public class PlayerAutoAttack: NetworkBehaviour
 					{
 						previousAttackTime = Time.time + attackRate;
 						target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
+						if (critChance > 0) 
+						{
+							if ((Random.Range (0, 100)) < critChance) 
+							{
+								target.GetComponent<GenericLifeScript> ().LooseHealth (damage * critFactor, false, gameObject);
+								target.GetComponent<StatusHandlerScript> ().MakeHimCC (0.5f);
+							}
+						}
 					}
 					if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
 					{

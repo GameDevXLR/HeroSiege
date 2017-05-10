@@ -44,7 +44,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 			spell1Btn.onClick.AddListener(CastThatSpell);
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Force all enemies around to target you for " + spellDuration.ToString() + " seconds.";
+			spellDescription = "Force all enemies around to target you for " + spellDuration.ToString() + " seconds,they loose "+x+"";
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

@@ -49,7 +49,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
-			int x = (int)spellDmg / 5;
+			int x = (int)spellDmg ;
 			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;

@@ -38,21 +38,18 @@ public class SpellHealArea : NetworkBehaviour {
 			spellTargets.Clear();
 		}
 	}
-		
+	[ServerCallback]	
 	void OnTriggerStay(Collider other)
 	{
-		if (isServer)
-		{
-			
 			if (!spellTargets.Contains(other.gameObject))
 			{
 				if (other.gameObject.layer == 9 || other.gameObject.layer == 8)
 				{
 
 					spellTargets.Add(other.gameObject);
-					other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)-healAmount / 5, true, caster);
+					other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)-healAmount, true, caster);
 				}
 			}
-		}
+
 	}
 }

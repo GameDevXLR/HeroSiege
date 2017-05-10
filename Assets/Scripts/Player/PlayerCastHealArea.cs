@@ -48,7 +48,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
-			int x = (int)spellDmg / 5;
+			int x = (int)spellDmg;
 			spellDescription = "Heal everyone for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;

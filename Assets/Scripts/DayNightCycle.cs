@@ -16,9 +16,9 @@ public class DayNightCycle : NetworkBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
-		transform.Rotate (1f * speed * Time.deltaTime, 0f, 0f);
+		transform.Rotate (1f * speed * Time.fixedDeltaTime, 0f, 0f);
 
 		if (transform.rotation.eulerAngles.x > 180f && isNight == false) 
 		{
