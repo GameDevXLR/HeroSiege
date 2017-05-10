@@ -143,13 +143,13 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 		spellLvl++;
 		spellCost += 10;
 		spellCD -= 0.5f;
-		spellDmg += 20;
+		spellDmg += 15;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
-			int x = (int)spellDmg / 5;
+			int x = (int)spellDmg / 3;
 
-			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+spellDmg/10+" health by enemy touched.";
+			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+x+" health by enemy touched.";
 
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();

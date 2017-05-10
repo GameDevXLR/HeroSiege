@@ -2331,10 +2331,12 @@ MonoBehaviour:
   playerHPTxt: {fileID: 0}
   maxHp: 616
   currentHp: 588
+  bonusHp: 0
   regenHp: 174
+  bonusArmorScore: 0
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
-  armorScore: 5
+  armorScore: 25
   armorDisplay: {fileID: 0}
   dodge: 0
   dodgeDisplay: {fileID: 0}
@@ -2352,6 +2354,8 @@ MonoBehaviour:
   amountShake: 10
   threshold: 25
   underThreshold: 0
+  levelUpBonusArmor: 0
+  isTaunt: 0
 --- !u!114 &114239855418295200
 MonoBehaviour:
   m_ObjectHideFlags: 1

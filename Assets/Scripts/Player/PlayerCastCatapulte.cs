@@ -19,7 +19,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 	public AudioClip boughtACharge;
 		string spellDescription;
 	[SyncVar]public int spellCost = 1;
-		public int spellDmg = 200;
+		public int spellDmg = 100;
 		public float spellCD = 10f;
 //		public float spellDuration = 1.5f;
 //		public float spellRange = 25f;

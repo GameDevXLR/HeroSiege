@@ -212,12 +212,12 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 		spellLvl++;
 		spellCost += 5;
 		spellCD -= 2f;
-		spellDmg += 100;
-		spellDuration += 0.6f;
+		spellDmg += 12;
+		spellDuration += 0.3f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(3);
-			int x = (int)spellDmg / 5;
+			int x = (int)spellDmg;
 			spellDescription = "Slow and deal " + x.ToString() + " damage every 0,3 seconds for " + spellDuration.ToString() + " seconds.";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();

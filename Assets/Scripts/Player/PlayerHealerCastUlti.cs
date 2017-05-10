@@ -212,7 +212,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 	{
 		spellLvl++;
 		spellCost += 8;
-		spellCD -= 5f;
+		spellCD -= 3f;
 		spellDmg += 15;
 		spellDuration += 1f;
 		if (isLocalPlayer)

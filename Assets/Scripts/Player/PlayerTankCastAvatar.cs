@@ -79,7 +79,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 		{
 			GetComponent<GenericLifeScript> ().maxHp += spellDmg * 10;
 			GetComponent<GenericLifeScript> ().currentHp += spellDmg * 10;
-			GetComponent<PlayerAutoAttack> ().damage += spellDmg * 2;
+			GetComponent<PlayerAutoAttack> ().damage += spellDmg ;
 		}
 		yield return new WaitForSeconds (dur);
 		GetComponent<GenericLifeScript>().deadAnimChildMesh.transform.localScale = Vector3.one;
@@ -87,7 +87,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 		{
 			GetComponent<GenericLifeScript> ().maxHp -= spellDmg * 10;
 //			GetComponent<GenericLifeScript> ().currentHp -= spellDmg * 10;
-			GetComponent<PlayerAutoAttack> ().damage -= spellDmg * 2;
+			GetComponent<PlayerAutoAttack> ().damage -= spellDmg ;
 		}
 	}
 
@@ -163,10 +163,10 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 0;
-		spellCD -= 5f;
-		spellDmg += 10;
-		spellDuration += 2f;
+		spellCost += 7;
+		spellCD -= 3f;
+		spellDmg += 11;
+		spellDuration += 1f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(3);

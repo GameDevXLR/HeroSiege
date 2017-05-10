@@ -29,7 +29,13 @@ public class SpellTankTauntArea : NetworkBehaviour {
 	{
 		if (Time.time > timer + duration)
 		{
-			timer = Time.time; //juste pour m'assurer que ce soit jouer qu'une fois. inutile je crois.
+            foreach (GameObject item in spellTargets)
+            {
+                item.GetComponent<EnemyAutoAttackScript>().damage += spellDamage;
+            }
+            
+
+            timer = Time.time; //juste pour m'assurer que ce soit jouer qu'une fois. inutile je crois.
 			NetworkServer.Destroy(gameObject);
 		}
 
@@ -47,9 +53,11 @@ public class SpellTankTauntArea : NetworkBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (Time.time < timer + 1) {
-			if (other.gameObject.layer == 9) {
+			if (other.gameObject.layer == 9 && !spellTargets.Contains(other.gameObject)) {
 				other.gameObject.GetComponent<GenericLifeScript> ().GotTauntByFor (caster, duration);
-			}
+                other.gameObject.GetComponent<EnemyAutoAttackScript>().damage -= (spellDamage* other.gameObject.GetComponent<EnemyAutoAttackScript>().damage) / 100;
+                spellTargets.Add(other.gameObject);
+                    }
 
 		}
 	}

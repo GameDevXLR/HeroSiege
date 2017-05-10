@@ -77,8 +77,8 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 		go.GetComponent<MinionsPathFindingScript> ().target = this.transform;
 		go.GetComponent<EnemyAutoAttackScript> ().target = gameObject;
 		go.GetComponent<EnemyAutoAttackScript> ().damage = spellDmg;
-		go.GetComponent<GenericLifeScript> ().maxHp = spellDmg * 4;
-		go.GetComponent<GenericLifeScript> ().currentHp = spellDmg * 4;
+		go.GetComponent<GenericLifeScript> ().maxHp = spellDmg * 10;
+		go.GetComponent<GenericLifeScript> ().currentHp = spellDmg * 10;
 		go.GetComponent<GenericLifeScript> ().regenHp = spellDmg / 5;
 		go.GetComponent<EnemyAutoAttackScript> ().targetID = GetComponent<NetworkIdentity> ().netId;
 		actualPet = go;
@@ -224,13 +224,13 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 		spellLvl++;
 		spellCost += 8;
 		spellCD -= 2f;
-		spellDmg += 25;
+		spellDmg += 18;
 //		spellDuration += 1f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*4+" health";
+			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*10+" health";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

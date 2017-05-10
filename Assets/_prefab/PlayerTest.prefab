@@ -3906,8 +3906,8 @@ MonoBehaviour:
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   Spell1: {fileID: 8300000, guid: 088718d93be7f64448a41a139393b94a, type: 3}
   spellCost: 20
-  spellDmg: 50
-  spellCD: 5
+  spellDmg: 30
+  spellCD: 8
   timeSpent: 0
   cdCountdown: {fileID: 0}
   spellDuration: 3
@@ -3942,7 +3942,7 @@ MonoBehaviour:
   SpellCC: {fileID: 8300000, guid: 0f34dd62e512e8d4e83e85f7638a91ed, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   spellCost: 40
-  spellDmg: 120
+  spellDmg: 16
   spellCD: 45
   spellDuration: 2.5
   spellRange: 25
@@ -3972,9 +3972,9 @@ MonoBehaviour:
   SpellSound: {fileID: 8300000, guid: d3e0ea855af743140aba8dd9d3dca1c6, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   spellCost: 30
-  spellDmg: 50
-  explosionRadius: 1.4
-  spellCD: 20
+  spellDmg: 6
+  explosionRadius: 1
+  spellCD: 60
   spellDuration: 10
   spellRange: 12.5
   spellObj: {fileID: 1903038432033380, guid: c7ec25faec021ba479ebe370b72e02cc, type: 2}
@@ -4002,9 +4002,9 @@ MonoBehaviour:
   spellImg: {fileID: 21300000, guid: 8469e4ebf54f41c48ad96b33c31e6105, type: 3}
   SpellCC: {fileID: 8300000, guid: 0f34dd62e512e8d4e83e85f7638a91ed, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
-  spellCost: 50
-  spellDmg: 20
-  spellCD: 60
+  spellCost: 70
+  spellDmg: 30
+  spellCD: 50
   spellDuration: 10
   spellRange: 25
   spellObj: {fileID: 1826775113327894, guid: 29a43fe1f70731949ba43507b30ee784, type: 2}
@@ -4246,7 +4246,7 @@ MonoBehaviour:
   SpellCC: {fileID: 8300000, guid: c1728082dad0c7844adbadbbcc8fd8b6, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   spellCost: 20
-  spellDmg: 50
+  spellDmg: 25
   spellCD: 45
   spellDuration: 60
   spellRange: 25
@@ -4325,7 +4325,7 @@ MonoBehaviour:
   Spell1: {fileID: 8300000, guid: c1728082dad0c7844adbadbbcc8fd8b6, type: 3}
   spellCost: 20
   spellDmg: 10
-  spellCD: 8
+  spellCD: 20
   timeSpent: 0
   cdCountdown: {fileID: 0}
   spellDuration: 3
@@ -4378,7 +4378,7 @@ MonoBehaviour:
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   boughtACharge: {fileID: 8300000, guid: 14e423af532e2ed409465ec735b11cdb, type: 3}
   spellCost: 1
-  spellDmg: 200
+  spellDmg: 100
   spellCD: 10
   spellObj: {fileID: 1379944559243352, guid: 052f2c5b4e2c12943a44355a4c3936e1, type: 2}
   spellLvl: 1
@@ -4422,6 +4422,7 @@ MonoBehaviour:
   target: {fileID: 0}
   rotSpeed: 5
   isActualizingPos: 0
+  bonusDamage: 0
 --- !u!114 &114613663393574606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4890,9 +4891,9 @@ MonoBehaviour:
   SpellCC: {fileID: 8300000, guid: 232efd82e671d5b4885c16f6823f5b44, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   spellCost: 30
-  spellDmg: 50
-  spellCD: 6
-  spellDuration: 2
+  spellDmg: 30
+  spellCD: 8
+  spellDuration: 1
   spellRange: 11
   spellObj: {fileID: 1579321500630814, guid: 1972c86779939164aa6c287916571809, type: 2}
   spellLvl: 1
@@ -4917,6 +4918,7 @@ MonoBehaviour:
   maxMp: 100
   currentMp: 80
   regenMp: 5
+  bonusMp: 0
   levelUpBonusMP: 10
   timeBetweenTic: 2
   manaBar: {fileID: 224744315606201176}
@@ -5203,7 +5205,9 @@ MonoBehaviour:
   playerHPTxt: {fileID: 0}
   maxHp: 250
   currentHp: 250
+  bonusHp: 0
   regenHp: 5
+  bonusArmorScore: 0
   levelUpBonusHP: 30
   respawnPoint: {fileID: 0}
   armorScore: 10
@@ -5224,6 +5228,7 @@ MonoBehaviour:
   amountShake: 4
   threshold: 25
   underThreshold: 0
+  levelUpBonusArmor: 0
   isTaunt: 0
 --- !u!135 &135227125065477978
 SphereCollider:

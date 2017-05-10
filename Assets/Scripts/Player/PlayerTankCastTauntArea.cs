@@ -148,10 +148,10 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 2;
-		spellCD -= 0.5f;
-		spellDmg += 10;
-		spellDuration += 0.5f;
+		spellCost += 5;
+		spellCD -= 1f;
+		spellDmg += 2;
+		spellDuration += 0.2f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);

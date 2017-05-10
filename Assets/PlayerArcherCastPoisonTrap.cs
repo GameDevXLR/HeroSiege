@@ -213,15 +213,15 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 3;
-		spellCD -= 1f;
-		explosionRadius += 0.2f;
-		spellDmg += 15;
+		spellCost += 2;
+		spellCD -= 4f;
+		explosionRadius += 0.1f;
+		spellDmg += 4;
 		spellDuration += 1f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
-			int x = (int)spellDmg / 5;
+			int x = (int)spellDmg;
 			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();

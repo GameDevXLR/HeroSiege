@@ -211,13 +211,13 @@ public class PlayerCastHealArea : NetworkBehaviour
 	{
 		spellLvl++;
 		spellCost += 10;
-		spellCD -= 0.5f;
-		spellDmg += 30;
+		spellCD -= 1f;
+		spellDmg += 35;
 		spellDuration += 0.5f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
-			int x = (int)spellDmg / 5;
+			int x = (int)spellDmg ;
 			spellDescription = "Heal everyone for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
