@@ -1551,7 +1551,9 @@ MonoBehaviour:
   playerHPTxt: {fileID: 0}
   maxHp: 150
   currentHp: 150
+  bonusHp: 0
   regenHp: 0
+  bonusArmorScore: 0
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
   armorScore: 10
@@ -1572,6 +1574,8 @@ MonoBehaviour:
   amountShake: 10
   threshold: 25
   underThreshold: 0
+  levelUpBonusArmor: 0
+  isTaunt: 0
 --- !u!114 &114636151465075738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1825,7 +1829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemiAtt: {fileID: 8300000, guid: 2447c1fa332fea04299969084e8bdab8, type: 3}
   agent: {fileID: 195422198213826926}
-  attackRange: 5
+  attackRange: 10
   attackRate: 1
   damage: 15
   isAttacking: 0

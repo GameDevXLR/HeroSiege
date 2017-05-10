@@ -236,7 +236,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneManaScript.regenMp = 4;
 			myAutoAScript.damage = 25;
 			myAutoAScript.attackRate = .8f;
-			myAutoAScript.attackRange = 20;
+			myAutoAScript.attackRange = 15;
 			myGeneLifeScript.levelUpBonusHP = 15;
 			myGeneLifeScript.armorScore = 10;
 			myGeneLifeScript.levelUpBonusArmor = 1;
