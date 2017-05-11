@@ -159,15 +159,25 @@ public class GenericLifeScript : NetworkBehaviour
                 guyAttackingMe = attacker;
             }
 			if (gameObject.layer == 9 || gameObject.layer == 8 && gameObject.tag != "Player")
-            { //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques.
+            { //une chance sur 2 de chancer de cible si la personne qui t'attaque n'est pas celle que tu attaques si t'es pas un joueur.
 				if (!attacker.GetComponent<GenericLifeScript> ().isDead) 
 				{
 					if (!isTaunt) 
 					{
-					
-
-						if (attacker != GetComponent<EnemyAutoAttackScript> ().target) {
-							if (Random.Range (0, 2) != 0) { //2 est exclusif car c'est un int.
+						if(gameObject.layer == 8 && gameObject.tag != "Player") // si t'es un pet
+						{
+							if (attacker != GetComponent<AllyPetAutoAttack> ().target) 
+							{
+								if (Random.Range (0, 10) == 0)  //2 est exclusif car c'est un int.
+								{
+									GetComponent<AllyPetAutoAttack> ().SetTheTarget (attacker);
+								}
+							}
+						}else
+						if (attacker != GetComponent<EnemyAutoAttackScript> ().target) 
+						{
+							if (Random.Range (0, 2) != 0)  //2 est exclusif car c'est un int.
+							{
 								GetComponent<EnemyAutoAttackScript> ().SetTheTarget (attacker);
 							}
 						}
@@ -321,6 +331,7 @@ public class GenericLifeScript : NetworkBehaviour
             }
             else
             {
+				isDead = true;
                 RpcKillTheMob();
                 yield return new WaitForSeconds(0.1f);
                 NetworkServer.Destroy(gameObject);
@@ -341,6 +352,7 @@ public class GenericLifeScript : NetworkBehaviour
         mobDeadAnimChildMesh.GetComponent<Animator>().enabled = true;
         mobDeadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         mobDeadAnimChildMesh.GetComponent<DeathByTime>().enabled = true;
+
         mobDeadAnimChildMesh.transform.parent = null;
     }
 
@@ -380,8 +392,12 @@ public class GenericLifeScript : NetworkBehaviour
         {
             GetComponentInChildren<PlayerEnnemyDetectionScript>().autoTargetting = false;
 			if (GetComponent<PlayerHealerCastInvokePet> ()) { //si t'as un pet 
-				if (GetComponent<PlayerHealerCastInvokePet> ().actualPet != null) {
-					NetworkServer.Destroy (GetComponent<PlayerHealerCastInvokePet> ().actualPet); // détruit le quand tu meurs.
+				if (GetComponent<PlayerHealerCastInvokePet> ().actualPet != null) 
+				{
+					GetComponent<PlayerHealerCastInvokePet> ().actualPet.transform.position = Vector3.zero;
+					GetComponent<PlayerHealerCastInvokePet> ().actualPet.GetComponent<GenericLifeScript> ().isDead = true;
+					yield return new WaitForSeconds (0.2f);
+					GetComponent<PlayerHealerCastInvokePet> ().DestroyThePrevPet(); // détruit le quand tu meurs.
 				}
 			}
 

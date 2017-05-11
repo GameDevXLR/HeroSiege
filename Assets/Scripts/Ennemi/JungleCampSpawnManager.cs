@@ -132,7 +132,8 @@ public class JungleCampSpawnManager : NetworkBehaviour
     public void reActivateMob(GameObject mob, Transform transformMob, GameObject prefab)
     {
         mob.SetActive(true);
-        
+		mob.transform.position = transformMob.position;
+		mob.transform.rotation = transformMob.rotation;
         if (mob.GetComponent<GenericLifeScript>().mobDeadAnimChildMesh)
         {
             mob.GetComponent<GenericLifeScript>().mobDeadAnimChildMesh.SetActive(true);

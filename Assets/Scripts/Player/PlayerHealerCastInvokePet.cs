@@ -14,6 +14,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 	//le prefab doit etre enregistrer par le networkmanagerObj
 	//le sort peut up.
 	public GameObject actualPet;
+	private GameObject previousPet;
 	public Sprite spellImg;
 	public AudioClip SpellCC;
 	public AudioClip OOM;
@@ -70,20 +71,30 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 	{
 		if (actualPet != null) 
 		{
-			NetworkServer.Destroy (actualPet);
+			actualPet.GetComponent<GenericLifeScript> ().isDead = true;
+			actualPet.transform.position = Vector3.zero;
+			previousPet = actualPet;
+			Invoke("DestroyThePrevPet", .3f);
 		}
+
 		GetComponent<AudioSource>().PlayOneShot(SpellCC);
 		GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
 		go.GetComponent<MinionsPathFindingScript> ().target = this.transform;
-		go.GetComponent<EnemyAutoAttackScript> ().target = gameObject;
-		go.GetComponent<EnemyAutoAttackScript> ().damage = spellDmg;
-		go.GetComponent<GenericLifeScript> ().maxHp = spellDmg * 10;
-		go.GetComponent<GenericLifeScript> ().currentHp = spellDmg * 10;
+		go.GetComponent<AllyPetAutoAttack> ().target = gameObject;
+		go.GetComponent<AllyPetAutoAttack> ().damage = spellDmg;
+		go.GetComponent<GenericLifeScript> ().maxHp = spellDmg * 4;
+		go.GetComponent<GenericLifeScript> ().currentHp = spellDmg * 4;
 		go.GetComponent<GenericLifeScript> ().regenHp = spellDmg / 5;
-		go.GetComponent<EnemyAutoAttackScript> ().targetID = GetComponent<NetworkIdentity> ().netId;
+		go.GetComponent<AllyPetAutoAttack> ().targetID = GetComponent<NetworkIdentity> ().netId;
 		actualPet = go;
 		NetworkServer.Spawn(go);
 
+
+	}
+
+	public void DestroyThePrevPet()
+	{
+		NetworkServer.Destroy (previousPet);
 	}
 	//cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
 	//demander le lancement du sort sur le serveur...normal.
@@ -230,7 +241,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*10+" health";
+			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*4+" health";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

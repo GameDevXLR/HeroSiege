@@ -341,9 +341,9 @@ GameObject:
   - component: {fileID: 208072624548657366}
   - component: {fileID: 114939773273001488}
   - component: {fileID: 82663034772907828}
-  - component: {fileID: 114650186947671358}
   - component: {fileID: 54418423754842802}
   - component: {fileID: 114919855003554388}
+  - component: {fileID: 114684093164353834}
   m_Layer: 8
   m_Name: PetHealer
   m_TagString: Untagged
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 33697476397708970}
   - component: {fileID: 135317813078226480}
   - component: {fileID: 23664595469439902}
-  - component: {fileID: 114297981718639472}
+  - component: {fileID: 114895191927934948}
   m_Layer: 18
   m_Name: AggroArea
   m_TagString: Untagged
@@ -2104,8 +2104,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 2}
-  m_Center: {x: 0.05591178, y: 1.0309448, z: 0.039943933}
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0.05591178, y: 0.79386806, z: 0.039943933}
 --- !u!82 &82663034772907828
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2356,6 +2356,7 @@ MonoBehaviour:
   underThreshold: 0
   levelUpBonusArmor: 0
   isTaunt: 0
+  isJungleMob: 0
 --- !u!114 &114239855418295200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2441,17 +2442,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114297981718639472
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1668038197279862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9d3d7061b155cc4da2a67c3a188bf8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114395903596133340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2556,7 +2546,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114650186947671358
+--- !u!114 &114684093164353834
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2564,7 +2554,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1380983508602426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfa91d09dc81e9f4dbe7bbcdf9a0ae38, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cde8c96857bb48438f4eb7bbd46f852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ennemiAtt: {fileID: 8300000, guid: 2447c1fa332fea04299969084e8bdab8, type: 3}
@@ -2578,6 +2568,19 @@ MonoBehaviour:
   detectionRange: 30
   desiredPos: {x: 0, y: 0, z: 0}
   isUnderCC: 0
+  isActuAttacking: 0
+  isActuStopAttacking: 0
+--- !u!114 &114895191927934948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1668038197279862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc85e909b655e64fa8aa9c0dee4b548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114908170016967608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2854,7 +2857,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1380983508602426}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 1.28
   m_Speed: 4
   m_Acceleration: 5000
   avoidancePriority: 45
@@ -8990,11 +8993,11 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.5, y: 1.5, z: 2.5}
+  m_Extents: {x: 1.5, y: 1.5, z: 1.5}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 1.22, z: 0}
   m_TimeToStationary: 0.5
 --- !u!212 &212058624816662448
 SpriteRenderer:

@@ -20,6 +20,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 	{
 //		agentParent =GetComponentInParent<NavMeshAgent> ();
 		autoAScript = GetComponentInParent<EnemyAutoAttackScript> ();
+
 	}
 
 	void OnTriggerStay(Collider other)
@@ -42,7 +43,8 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 	{
 		if (autoAScript.target != null) 
 		{
-			if (other.gameObject == autoAScript.target) {
+			if (other.gameObject == autoAScript.target) 
+			{
 				if (!GetComponentInParent<EnemyAutoAttackScript> ().isUnderCC && !GetComponentInParent<GenericLifeScript> ().isTaunt) 
 				{
 					GetComponentInParent<EnemyAutoAttackScript> ().LooseTarget ();
