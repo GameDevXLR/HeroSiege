@@ -36,6 +36,9 @@ public class PlayerAutoAttack: NetworkBehaviour
 	private Vector3 targetTempPos; //calcul de position (privé)
 	private GameObject targetObj; // l'objet qui t'attaque ! 
 	public bool isActualizingPos;
+	public bool isActuAttacking;
+	public bool isActuStopAttacking;
+
 	public int critChance;
 	public int critFactor;
 	[SyncVar] public int bonusDamage;
@@ -64,8 +67,8 @@ public class PlayerAutoAttack: NetworkBehaviour
 			{
 				if (!isAttacking) 
 				{
-					if (Vector3.Distance (transform.position, target.transform.position) <= attackRange) {
-
+					if (Vector3.Distance (transform.position, target.transform.position) <= attackRange && !isActuAttacking) {
+						isActuAttacking = true;
 						RpcAttackTarget ();
 					}
 				} else 
@@ -83,14 +86,16 @@ public class PlayerAutoAttack: NetworkBehaviour
 							}
 						}
 					}
-					if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
+					if (!isActuStopAttacking && Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
 					{
+						isActuStopAttacking = true;
 						RpcStopAttacking ();
 					}
 				}
 			}
-			if (target == null && isAttacking) 
+			if (target == null && isAttacking && !isActuStopAttacking) 
 			{
+				isActuStopAttacking = true;
 				RpcStopAttacking ();
 			}
 		}
@@ -156,7 +161,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 			else
 			//audioSource.clip = playerSounds [0];
 			GetComponent<AudioSource> ().PlayOneShot (Att2);
-
+		if (isServer) 
+		{
+			isActuAttacking = false;
+		}
 
 	}
 	[Command]
@@ -187,6 +195,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 			//faire ici l'arret de la charge.
 			charge = false;
 			anim.SetBool ("charge", charge);
+		}
+		if (isServer) 
+		{
+			isActuStopAttacking = false;
 		}
 	}
 
