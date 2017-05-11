@@ -36,6 +36,11 @@ public class PlayerAutoAttack: NetworkBehaviour
 	private Vector3 targetTempPos; //calcul de position (privé)
 	private GameObject targetObj; // l'objet qui t'attaque ! 
 	public bool isActualizingPos;
+	public bool isActuAttacking;
+	public bool isActuStopAttacking;
+
+	public int critChance;
+	public int critFactor;
 	[SyncVar] public int bonusDamage;
 	void Start()
 	{
@@ -62,8 +67,8 @@ public class PlayerAutoAttack: NetworkBehaviour
 			{
 				if (!isAttacking) 
 				{
-					if (Vector3.Distance (transform.position, target.transform.position) <= attackRange) {
-
+					if (Vector3.Distance (transform.position, target.transform.position) <= attackRange && !isActuAttacking) {
+						isActuAttacking = true;
 						RpcAttackTarget ();
 					}
 				} else 
@@ -72,20 +77,29 @@ public class PlayerAutoAttack: NetworkBehaviour
 					{
 						previousAttackTime = Time.time + attackRate;
 						target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
+						if (critChance > 0) 
+						{
+							if ((Random.Range (0, 100)) < critChance) 
+							{
+								target.GetComponent<GenericLifeScript> ().LooseHealth (damage * critFactor, false, gameObject);
+								target.GetComponent<StatusHandlerScript> ().MakeHimCC (0.5f);
+							}
+						}
 					}
-					if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
+					if (!isActuStopAttacking && Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
 					{
+						isActuStopAttacking = true;
 						RpcStopAttacking ();
-                        
 					}
 				}
 			}
 			if ((target == null || target.GetComponent<GenericLifeScript>().isDead) && isAttacking) 
 			{
+				isActuStopAttacking = true;
 				RpcStopAttacking ();
 			}
 		}
-		if (target && !target.GetComponent<GenericLifeScript>().isDead) 
+		if (target) 
 		{
 			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
@@ -147,7 +161,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 			else
 			//audioSource.clip = playerSounds [0];
 			GetComponent<AudioSource> ().PlayOneShot (Att2);
-
+		if (isServer) 
+		{
+			isActuAttacking = false;
+		}
 
 	}
 	[Command]
@@ -159,7 +176,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[ClientRpc]
 	public void RpcStopAttacking()
 	{
-		if (target == null ||target.GetComponent<GenericLifeScript>().isDead) {
+		if (target == null) {
 			if (agent.isActiveAndEnabled) 
 			{
 				agent.SetDestination (transform.position);
@@ -178,6 +195,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 			//faire ici l'arret de la charge.
 			charge = false;
 			anim.SetBool ("charge", charge);
+		}
+		if (isServer) 
+		{
+			isActuStopAttacking = false;
 		}
 	}
 

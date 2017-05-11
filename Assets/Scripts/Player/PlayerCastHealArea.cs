@@ -19,7 +19,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 	public int spellDmg = 50;
 	public float spellCD = 6f;
 	public float spellDuration = 1.5f;
-	public float spellRange = 15f;
+	public float spellRange = 12.5f;
 	public GameObject spellObj;
 	public int spellLvl = 1;
 	private bool onCD;
@@ -48,7 +48,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
-			int x = (int)spellDmg / 5;
+			int x = (int)spellDmg;
 			spellDescription = "Heal everyone for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
@@ -210,7 +210,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 10;
+		spellCost += 12;
 		spellCD -= 1f;
 		spellDmg += 35;
 		spellDuration += 0.5f;

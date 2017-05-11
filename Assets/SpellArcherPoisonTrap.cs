@@ -10,8 +10,8 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 	public float duration = 10f;
 	public float notTrigeredTimer = 30f;
 	public int spellDamage = 50;
-	public float exploRadius = 2;
-	[SyncVar (hook = "ActivateTheTrap")]public bool IsTriggered; // le piege a t il déja exploser ? 
+	[SyncVar]public float exploRadius = 2;
+	public bool IsTriggered; // le piege a t il déja exploser ? 
 	private float timer;
 	private float dotTimer;
 	public List<GameObject> spellTargets;
@@ -47,6 +47,7 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 		}
 	}
 
+	[ServerCallback]
 	void OnTriggerStay(Collider other)
 	{
 
@@ -57,6 +58,7 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 				if (other.gameObject.layer == 9) 
 				{
 					IsTriggered = true;
+					ActivateTheTrap ();
 					notTrigeredTimer = duration; //faire que le temps avant destruction devienne la durée du zone.
 				} else 
 				{
@@ -69,19 +71,25 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 				if (other.gameObject.layer == 9 || other.gameObject.layer == 8)
 				{
 
-					other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage / 5, true, caster);
+					other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage, true, caster);
 					spellTargets.Add(other.gameObject);
 				}
 			}
 		}
 	}
 
-	public void ActivateTheTrap(bool trig)
+	public void ActivateTheTrap()
 	{
-		IsTriggered = trig;//se mettre a faire des dégats
+		
+		RpcActivateTheTrap();
+	}
+	[ClientRpc]
+	public void RpcActivateTheTrap()
+	{
 		thisCollider.radius = exploRadius;//augmenter la zone du poison
 		childObj.SetActive (true); // activer l'effet de particule
 		childObj.transform.localScale = new Vector3 (exploRadius,exploRadius,exploRadius);
 		areaBeforeExplo.SetActive (false);
+		
 	}
 }

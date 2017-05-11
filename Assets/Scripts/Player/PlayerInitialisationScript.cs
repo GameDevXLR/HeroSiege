@@ -26,6 +26,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Button selectHeroTank1;
 	public Button selectHeroHealer1;
 	public Button selectHeroDps1;
+	public Sprite tankAvatarImg;
+	public Sprite healAvatarImg;
+	public Sprite DpsAvatarImg;
 	public GenericLifeScript myGeneLifeScript;
 	public GenericManaScript myGeneManaScript;
 	public PlayerAutoAttack myAutoAScript;
@@ -119,6 +122,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	[ClientRpc]
 	public void RpcHeroTank1Selected()
 	{
+		GetComponent<PlayerClicToMove> ().enabled = true;
 		GetComponent<PlayerTankCastTauntArea> ().enabled = true;
 		GetComponent<PlayerTankCastDpsHealAoe> ().enabled = true;
 		GetComponent<PlayerTankCastAvatar> ().enabled = true;
@@ -144,6 +148,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneManaScript.levelUpBonusMP = 10;
 			myAutoAScript.levelUpBonusDamage = 2;
 			myGeneLifeScript.levelUpBonusArmor = 3;
+			myAutoAScript.attackSpeedStat = 0.8f;
 
 		}
 		//faire ici la config du hero tank1 pour tous
@@ -168,6 +173,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void RpcHeroHeal1Selected()
 	{
 		childHealSkin.SetActive (true);
+		GetComponent<PlayerClicToMove> ().enabled = true;
+
 		GetComponent<PlayerCastHealArea> ().enabled = true;
 		GetComponent<PlayerHealerCastUlti> ().enabled = true;
 		GetComponent<PlayerHealerCastInvokePet> ().enabled = true;
@@ -193,6 +200,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneLifeScript.armorScore = 10;
 			myAutoAScript.levelUpBonusDamage = 2;
 			myGeneLifeScript.levelUpBonusArmor = 0;
+			myAutoAScript.attackSpeedStat = 1.1f;
 
 		}
 		//faire ici la config du hero tank1 pour tous
@@ -217,7 +225,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void RpcHeroDps1Selected()
 	{
 		childDpsSkin.SetActive (true);
-		GetComponent<PlayerCastHealArea> ().enabled = true;
+		GetComponent<PlayerClicToMove> ().enabled = true;
+
+		GetComponent<PlayerArcherCastPassiveBoost> ().enabled = true;
 		GetComponent<PlayerArcherCastArrowRain> ().enabled = true;
 		GetComponent<PlayerArcherCastPoisonTrap> ().enabled = true;
 		myAutoAScript.anim = childDpsSkin.GetComponentInChildren<Animator> ();
@@ -241,6 +251,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneLifeScript.armorScore = 10;
 			myGeneLifeScript.levelUpBonusArmor = 1;
 			myAutoAScript.levelUpBonusDamage = 6;
+			myAutoAScript.attackSpeedStat = 1.25f;
 
 		}
 		//faire ici la config du hero tank1 pour tous

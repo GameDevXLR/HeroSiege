@@ -63,7 +63,7 @@ public class SpellArcherArrowRain : NetworkBehaviour {
 			{
 
 				spellTargets.Add(other.gameObject);
-				other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage / 10, true, caster);
+				other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage, true, caster);
 			}
 
 		}

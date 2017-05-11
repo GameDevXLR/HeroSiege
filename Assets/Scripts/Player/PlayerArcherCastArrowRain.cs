@@ -48,7 +48,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
-			int x = (int)spellDmg / 10;
+			int x = (int)spellDmg;
 			spellDescription = "Slow and deal " + x.ToString () + " damage every 0,3 seconds for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
@@ -210,7 +210,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 5;
+		spellCost += 50;
 		spellCD -= 2f;
 		spellDmg += 12;
 		spellDuration += 0.3f;

@@ -163,7 +163,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 7;
+		spellCost += 45;
 		spellCD -= 3f;
 		spellDmg += 11;
 		spellDuration += 1f;

@@ -1390,6 +1390,7 @@ GameObject:
   - component: {fileID: 114930190188803938}
   - component: {fileID: 114144252582192040}
   - component: {fileID: 114147312335374500}
+  - component: {fileID: 114652832635747004}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -3905,7 +3906,7 @@ MonoBehaviour:
   spellImg: {fileID: 21300000, guid: 3aa89c47079fa4849b0d48420ba211ef, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   Spell1: {fileID: 8300000, guid: 088718d93be7f64448a41a139393b94a, type: 3}
-  spellCost: 20
+  spellCost: 25
   spellDmg: 30
   spellCD: 8
   timeSpent: 0
@@ -3941,8 +3942,8 @@ MonoBehaviour:
   spellImg: {fileID: 21300000, guid: 6156575fab61e3849981b82f32b11cba, type: 3}
   SpellCC: {fileID: 8300000, guid: 0f34dd62e512e8d4e83e85f7638a91ed, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
-  spellCost: 40
-  spellDmg: 16
+  spellCost: 45
+  spellDmg: 12
   spellCD: 45
   spellDuration: 2.5
   spellRange: 25
@@ -3972,7 +3973,7 @@ MonoBehaviour:
   SpellSound: {fileID: 8300000, guid: d3e0ea855af743140aba8dd9d3dca1c6, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   spellCost: 30
-  spellDmg: 6
+  spellDmg: 10
   explosionRadius: 1
   spellCD: 60
   spellDuration: 10
@@ -4127,7 +4128,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b9e78a5fd7cf964587edc800e4ff605, type: 3}
   m_Name: 
@@ -4246,7 +4247,7 @@ MonoBehaviour:
   SpellCC: {fileID: 8300000, guid: c1728082dad0c7844adbadbbcc8fd8b6, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   spellCost: 20
-  spellDmg: 25
+  spellDmg: 35
   spellCD: 45
   spellDuration: 60
   spellRange: 25
@@ -4323,7 +4324,7 @@ MonoBehaviour:
   spellImg: {fileID: 21300000, guid: 6a59653d6fb12e443ab00cfa9573bc4d, type: 3}
   OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
   Spell1: {fileID: 8300000, guid: c1728082dad0c7844adbadbbcc8fd8b6, type: 3}
-  spellCost: 20
+  spellCost: 30
   spellDmg: 10
   spellCD: 20
   timeSpent: 0
@@ -4422,6 +4423,8 @@ MonoBehaviour:
   target: {fileID: 0}
   rotSpeed: 5
   isActualizingPos: 0
+  critChance: 0
+  critFactor: 0
   bonusDamage: 0
 --- !u!114 &114613663393574606
 MonoBehaviour:
@@ -4876,6 +4879,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+--- !u!114 &114652832635747004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1126d1ef26a24094ebde5605636818cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellImg: {fileID: 21300000, guid: 52bd2e07cd4cbaf4f956bbfd39b2f6c4, type: 3}
+  OOM: {fileID: 8300000, guid: 86add1eda67193c4184105a55358cdd4, type: 3}
+  Spell1: {fileID: 8300000, guid: 6df093105ed3eeb458ebe5d125dfb736, type: 3}
+  spellCost: 0
+  stunChances: 2
+  dodgeChances: 3
+  levelupStunChanceBonus: 1
+  levelupDodgeChanceBonus: 1
+  timeSpent: 0
+  cdCountdown: {fileID: 0}
+  spellLvl: 1
+  durationShake: 0
+  amountShake: 0
 --- !u!114 &114679018957871796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5094,6 +5121,9 @@ MonoBehaviour:
   selectHeroTank1: {fileID: 0}
   selectHeroHealer1: {fileID: 0}
   selectHeroDps1: {fileID: 0}
+  tankAvatarImg: {fileID: 0}
+  healAvatarImg: {fileID: 0}
+  DpsAvatarImg: {fileID: 0}
   myGeneLifeScript: {fileID: 114949428282701634}
   myGeneManaScript: {fileID: 114695388684336140}
   myAutoAScript: {fileID: 114604599503415050}
@@ -5139,8 +5169,8 @@ MonoBehaviour:
   spellImg: {fileID: 21300000, guid: 1fbe977f5bfcd284e810f2ab79438923, type: 3}
   SpellCC: {fileID: 0}
   OOM: {fileID: 0}
-  spellCost: 50
-  spellDmg: 20
+  spellCost: 65
+  spellDmg: 22
   spellCD: 60
   spellDuration: 20
   spellRange: 25
