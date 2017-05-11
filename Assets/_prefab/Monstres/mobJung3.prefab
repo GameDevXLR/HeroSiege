@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 114714666483470886}
   - component: {fileID: 95568583536341268}
   - component: {fileID: 114739354810560038}
+  - component: {fileID: 114405097070350184}
   m_Layer: 8
   m_Name: GoldCanvas (2)
   m_TagString: Untagged
@@ -479,6 +480,7 @@ GameObject:
   - component: {fileID: 4294475019106522}
   - component: {fileID: 95973842391257398}
   - component: {fileID: 114552707128762740}
+  - component: {fileID: 114905658133400214}
   m_Layer: 0
   m_Name: SPIDER
   m_TagString: Untagged
@@ -2308,7 +2310,9 @@ MonoBehaviour:
   playerHPTxt: {fileID: 0}
   maxHp: 200
   currentHp: 200
+  bonusHp: 0
   regenHp: 50
+  bonusArmorScore: 0
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
   armorScore: 60
@@ -2329,6 +2333,9 @@ MonoBehaviour:
   amountShake: 10
   threshold: 25
   underThreshold: 0
+  levelUpBonusArmor: 0
+  isTaunt: 0
+  isJungleMob: 0
 --- !u!114 &114197149455702724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2433,6 +2440,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+--- !u!114 &114405097070350184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1058724933178000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 0.65
 --- !u!114 &114480701758467312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2707,6 +2726,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+--- !u!114 &114905658133400214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1370144457175786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2
 --- !u!114 &114921238978033592
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -55,6 +55,7 @@ public class GenericLifeScript : NetworkBehaviour
 	[SyncVar] public int levelUpBonusArmor;
 
 	[SyncVar]public bool isTaunt;
+    public bool isJungleMob;
 
     void Start()
     {
@@ -312,10 +313,19 @@ public class GenericLifeScript : NetworkBehaviour
         //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
         if (isServer)
         {
-            RpcKillTheMob();
-            yield return new WaitForSeconds(0.2f);
-            NetworkServer.Destroy(gameObject);
-            //faire ici la remise dans le pool.
+            if (isJungleMob)
+            {
+                isDead = true;
+                RpcKillTheJungleMob();
+
+            }
+            else
+            {
+                RpcKillTheMob();
+                yield return new WaitForSeconds(0.1f);
+                NetworkServer.Destroy(gameObject);
+                //faire ici la remise dans le pool.
+            }
 
         }
 
@@ -336,6 +346,21 @@ public class GenericLifeScript : NetworkBehaviour
 
 
 
+    [ClientRpc]
+    public void RpcKillTheJungleMob()
+    {
+        goldDisplay.text = goldGiven.ToString();
+        goldCanvas.GetComponent<Animator>().enabled = true;
+        goldCanvas.GetComponent<Canvas>().enabled = true;
+        goldCanvas.GetComponent<InactivateByTime>().InactivateWithlifeTime();
+        //  goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);
+        mobDeadAnimChildMesh.GetComponent<Animator>().enabled = true;
+        mobDeadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
+        mobDeadAnimChildMesh.GetComponent<InactivateByTime>().InactivateWithlifeTime();
+        GetComponent<EnemyAutoAttackScript>().target = null;
+        GetComponent<NavMeshAgent>().enabled = false;
+        guyAttackingMe = null;
+    }
 
     //ce qu'il se passe si un JOUEUR meurt...
     [ClientRpc]

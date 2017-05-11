@@ -58,7 +58,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			if (target) 
+			if (target && !target.GetComponent<GenericLifeScript>().isDead) 
 			{
 				if (!isAttacking) 
 				{
@@ -76,15 +76,16 @@ public class PlayerAutoAttack: NetworkBehaviour
 					if (Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
 					{
 						RpcStopAttacking ();
+                        
 					}
 				}
 			}
-			if (target == null && isAttacking) 
+			if ((target == null || target.GetComponent<GenericLifeScript>().isDead) && isAttacking) 
 			{
 				RpcStopAttacking ();
 			}
 		}
-		if (target) 
+		if (target && !target.GetComponent<GenericLifeScript>().isDead) 
 		{
 			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
@@ -158,7 +159,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[ClientRpc]
 	public void RpcStopAttacking()
 	{
-		if (target == null) {
+		if (target == null ||target.GetComponent<GenericLifeScript>().isDead) {
 			if (agent.isActiveAndEnabled) 
 			{
 				agent.SetDestination (transform.position);

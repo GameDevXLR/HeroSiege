@@ -448,6 +448,7 @@ GameObject:
   - component: {fileID: 114814937866265788}
   - component: {fileID: 95293064639200950}
   - component: {fileID: 114767254412467504}
+  - component: {fileID: 114586578471927396}
   m_Layer: 8
   m_Name: GoldCanvas (2)
   m_TagString: Untagged
@@ -529,6 +530,7 @@ GameObject:
   - component: {fileID: 4211497941656454}
   - component: {fileID: 95182132404585664}
   - component: {fileID: 114015459479402638}
+  - component: {fileID: 114154088520310364}
   m_Layer: 0
   m_Name: Goblin_Ranger_R1
   m_TagString: Untagged
@@ -1392,6 +1394,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+--- !u!114 &114154088520310364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836998045025764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2
 --- !u!114 &114196182043369784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1576,6 +1590,19 @@ MonoBehaviour:
   underThreshold: 0
   levelUpBonusArmor: 0
   isTaunt: 0
+  isJungleMob: 0
+--- !u!114 &114586578471927396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1736315127910624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 0.65
 --- !u!114 &114636151465075738
 MonoBehaviour:
   m_ObjectHideFlags: 1

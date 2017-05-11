@@ -3357,6 +3357,7 @@ GameObject:
   - component: {fileID: 114654630094429272}
   - component: {fileID: 95075686986799626}
   - component: {fileID: 114411770093052276}
+  - component: {fileID: 114105654346717594}
   m_Layer: 8
   m_Name: GoldCanvas (2)
   m_TagString: Untagged
@@ -5205,6 +5206,7 @@ GameObject:
   - component: {fileID: 4251469081363578}
   - component: {fileID: 95088997059043980}
   - component: {fileID: 114151345778143374}
+  - component: {fileID: 114101538846549048}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -5749,7 +5751,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1469047396771948}
-  m_LocalRotation: {x: 0.6613818, y: -0.32186097, z: 0.36608946, w: 0.570051}
+  m_LocalRotation: {x: 0.66138184, y: -0.321861, z: 0.3660895, w: 0.5700511}
   m_LocalPosition: {x: -0.26663175, y: -0.008684978, z: -0.044942692}
   m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 1.0000001}
   m_Children: []
@@ -7811,7 +7813,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499112743403724}
-  m_LocalRotation: {x: 0.6613819, y: -0.32186106, z: 0.36608964, w: 0.57005084}
+  m_LocalRotation: {x: 0.66138184, y: -0.32186103, z: 0.3660896, w: 0.5700508}
   m_LocalPosition: {x: -0.1434544, y: -0.008684998, z: -0.04494271}
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.9999999}
   m_Children:
@@ -11015,6 +11017,30 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114101538846549048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1915981808655180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2.5
+--- !u!114 &114105654346717594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590789217147196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 0.65
 --- !u!114 &114120960278484736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11470,6 +11496,7 @@ MonoBehaviour:
   underThreshold: 0
   levelUpBonusArmor: 0
   isTaunt: 0
+  isJungleMob: 0
 --- !u!135 &135661501899205928
 SphereCollider:
   m_ObjectHideFlags: 1
