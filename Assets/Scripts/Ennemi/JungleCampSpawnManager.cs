@@ -49,7 +49,6 @@ public class JungleCampSpawnManager : NetworkBehaviour
     public void spawnJungCamp()
     {
         
-        jungCampMinion.Clear();
         foreach (Transform tr in spawnPos)
         {
             GameObject minion;
@@ -88,12 +87,18 @@ public class JungleCampSpawnManager : NetworkBehaviour
 	{
         GameObject minion = ClientScene.FindLocalObject(id);
         Transform tr = spawnPos[index];
-        reActivateMob(minion, tr);
-        minion = Instantiate (minionPrefab, tr.position, tr.rotation) as GameObject;
-		minion.GetComponent<GenericLifeScript> ().maxHp += CampLvl * scaleFactor* GameManager.instanceGM.gameDifficulty;
+        reActivateMob(minion, tr, minionPrefab);
+        minion.GetComponent<GenericLifeScript>().maxHp = minionPrefab.GetComponent<GenericLifeScript>().maxHp;
+
+        minion.GetComponent<GenericLifeScript>().maxHp = CampLvl * scaleFactor * GameManager.instanceGM.gameDifficulty;
 		minion.GetComponent<GenericLifeScript> ().currentHp = minion.GetComponent<GenericLifeScript>().maxHp;
-		minion.GetComponent<GenericLifeScript> ().goldGiven += scaleFactor* CampLvl * 20 / 100;
+
+        minion.GetComponent<GenericLifeScript>().goldGiven = minionPrefab.GetComponent<GenericLifeScript>().goldGiven;
+        minion.GetComponent<GenericLifeScript> ().goldGiven += scaleFactor* CampLvl * 20 / 100;
+
+        minion.GetComponent<EnemyAutoAttackScript>().damage = minionPrefab.GetComponent<EnemyAutoAttackScript>().damage;
         minion.GetComponent<EnemyAutoAttackScript>().damage += scaleFactor * CampLvl * 30 / 100;
+
 		minion.GetComponent<GenericLifeScript> ().xpGiven = (CampLvl * scaleFactor*5)-scaleFactor;
           
 		minion.GetComponent<MinionsPathFindingScript> ().target = tr;
@@ -107,18 +112,24 @@ public class JungleCampSpawnManager : NetworkBehaviour
         GameObject minionboss = ClientScene.FindLocalObject(id);
 
         Transform tr = bossPos[index];
-        reActivateMob(minionboss, tr);
+        reActivateMob(minionboss, tr, minionBossPrefab);
+
+        minionboss.GetComponent<GenericLifeScript>().maxHp = minionBossPrefab.GetComponent<GenericLifeScript>().maxHp;
         minionboss.GetComponent<GenericLifeScript>().maxHp += CampLvl * scaleFactor * GameManager.instanceGM.gameDifficulty;
         minionboss.GetComponent<GenericLifeScript>().currentHp = minionboss.GetComponent<GenericLifeScript>().maxHp;
+
+        minionboss.GetComponent<GenericLifeScript>().goldGiven = minionBossPrefab.GetComponent<GenericLifeScript>().goldGiven;
         minionboss.GetComponent<GenericLifeScript>().goldGiven += scaleFactor * CampLvl * 50 / 100;
         minionboss.transform.GetChild(3).transform.localScale = new Vector3(2f, 2f, 2f);
         minionboss.GetComponent<MinionsPathFindingScript>().target = tr;
+
+        minionboss.GetComponent<EnemyAutoAttackScript>().damage = minionBossPrefab.GetComponent<EnemyAutoAttackScript>().damage;
         minionboss.GetComponent<EnemyAutoAttackScript>().damage += scaleFactor * CampLvl * 60 / 100;
         minionboss.GetComponent<GenericLifeScript>().xpGiven = (CampLvl * scaleFactor * 10) - scaleFactor;
 
     }
 
-    public void reActivateMob(GameObject mob, Transform transformMob)
+    public void reActivateMob(GameObject mob, Transform transformMob, GameObject prefab)
     {
         mob.SetActive(true);
         
@@ -132,7 +143,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
             }
         }
 
-        mob.GetComponent<NavMeshAgent>().enabled = true;
+        mob.GetComponent<NavMeshAgent>().acceleration = prefab.GetComponent<NavMeshAgent>().acceleration;
         if (mob.GetComponent<NavMeshAgent>().isActiveAndEnabled)
         {
             mob.GetComponent<NavMeshAgent>().SetDestination(transformMob.position);

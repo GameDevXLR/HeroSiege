@@ -358,7 +358,7 @@ public class GenericLifeScript : NetworkBehaviour
         mobDeadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         mobDeadAnimChildMesh.GetComponent<InactivateByTime>().InactivateWithlifeTime();
         GetComponent<EnemyAutoAttackScript>().target = null;
-        GetComponent<NavMeshAgent>().enabled = false;
+        GetComponent<NavMeshAgent>().acceleration = 0;
         guyAttackingMe = null;
     }
 
