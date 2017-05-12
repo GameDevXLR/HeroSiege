@@ -19,7 +19,7 @@ public class GenericLifeScript : NetworkBehaviour
 	public GameObject goldCanvas;
     public int killCount;
     public RectTransform lifeBar; // barre de vie IG
-
+	private Transform animParent;
     public RectTransform lifeBarMain; // lifebar de l'interface player.
     public Text playerHPTxt;
     [SyncVar] public int maxHp = 1000;
@@ -359,7 +359,6 @@ public class GenericLifeScript : NetworkBehaviour
         mobDeadAnimChildMesh.GetComponent<Animator>().enabled = true;
         mobDeadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         mobDeadAnimChildMesh.GetComponent<DeathByTime>().enabled = true;
-
         mobDeadAnimChildMesh.transform.parent = null;
     }
 
@@ -419,6 +418,8 @@ public class GenericLifeScript : NetworkBehaviour
         GetComponent<PlayerAutoAttack>().target = null;
         GetComponent<PlayerAutoAttack>().enabled = false;
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+		animParent = deadAnimChildMesh.transform.parent;
+
         deadAnimChildMesh.transform.parent = null;
         GetComponent<PlayerClicToMove>().target = null;
         GetComponent<PlayerClicToMove>().enabled = false;
@@ -436,11 +437,12 @@ public class GenericLifeScript : NetworkBehaviour
         //		yield return new WaitForSeconds (0.8f);
         //		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
         yield return new WaitForSeconds(respawnTime);
-        deadAnimChildMesh.transform.parent = this.transform;
-        deadAnimChildMesh.transform.localPosition = new Vector3(0f, -0.7f, 0f); // le mesh est légerement en dessous...allez pigé...a revoir ca !
+		deadAnimChildMesh.transform.parent = animParent;
+        deadAnimChildMesh.transform.localPosition = Vector3.zero; 
+		deadAnimChildMesh.transform.localScale = Vector3.one;
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", false);
 
-        deadAnimChildEffect.transform.parent = this.transform;
+		deadAnimChildEffect.transform.parent = this.transform;
         deadAnimChildEffect.transform.localPosition = Vector3.zero;
         GetComponent<NavMeshAgent>().enabled = true;
         gameObject.layer = 8;

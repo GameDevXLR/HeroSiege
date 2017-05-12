@@ -127,6 +127,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerTankCastDpsHealAoe> ().enabled = true;
 		GetComponent<PlayerTankCastAvatar> ().enabled = true;
 		childTankSkin.SetActive (true);
+		myAutoAScript.enabled = true;
 		myAutoAScript.anim = childTankSkin.GetComponentInChildren<Animator> ();
 		myGeneLifeScript.deadAnimChildMesh = childTankSkin.transform.GetChild(0).gameObject;
 		myGeneLifeScript.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
@@ -178,6 +179,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerCastHealArea> ().enabled = true;
 		GetComponent<PlayerHealerCastUlti> ().enabled = true;
 		GetComponent<PlayerHealerCastInvokePet> ().enabled = true;
+		myAutoAScript.enabled = true;
+
 		myAutoAScript.anim = childHealSkin.GetComponentInChildren<Animator> ();
 		myGeneLifeScript.deadAnimChildMesh = childHealSkin.transform.GetChild(0).gameObject;
 		myGeneLifeScript.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
@@ -225,11 +228,13 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void RpcHeroDps1Selected()
 	{
 		childDpsSkin.SetActive (true);
+		myAutoAScript.enabled = true;
 		GetComponent<PlayerClicToMove> ().enabled = true;
 
 		GetComponent<PlayerArcherCastPassiveBoost> ().enabled = true;
 		GetComponent<PlayerArcherCastArrowRain> ().enabled = true;
 		GetComponent<PlayerArcherCastPoisonTrap> ().enabled = true;
+
 		myAutoAScript.anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		myGeneLifeScript.deadAnimChildMesh = childDpsSkin.transform.GetChild(0).gameObject;
 		myGeneLifeScript.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);

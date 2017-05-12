@@ -148,7 +148,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 10;
+		spellCost += 5;
 		spellCD -= 1f;
 		spellDmg += 2;
 		spellDuration += 0.2f;

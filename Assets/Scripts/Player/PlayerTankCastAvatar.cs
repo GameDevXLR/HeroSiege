@@ -62,6 +62,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 	public void CmdCastSpell()
 	{
 		RpcCastSpell ();
+		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
 
 	}
 
@@ -163,7 +164,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 45;
+		spellCost += 15;
 		spellCD -= 3f;
 		spellDmg += 11;
 		spellDuration += 1f;

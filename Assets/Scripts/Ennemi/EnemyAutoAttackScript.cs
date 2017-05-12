@@ -220,8 +220,11 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	}
 	IEnumerator AcquireTargetProcess()
 	{
-		if (anim) {
-			anim.SetBool ("walk", walkAnim = true);
+		if (gameObject.name != "mobJung2(clone)") {
+			
+			if (anim) {
+				anim.SetBool ("walk", walkAnim = true);
+			}
 		}
 		yield return new WaitForSeconds(0.1f);
 		if (target != null) {
@@ -254,8 +257,11 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
 			agent.isStopped = false;
+		if (gameObject.name != "mobJung2(clone)") {
+			
 			anim.SetBool ("attackEnnemi", attackAnim = false);
 			anim.SetBool ("walk", walkAnim = false);
+		}
 			if (particule != null) 
 			{
 				particule.Stop ();

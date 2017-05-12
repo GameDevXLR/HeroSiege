@@ -243,6 +243,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 		damage = dmg;
 		if (isLocalPlayer) 
 		{
+			if (damageDisplay == null) 
+			{
+				damageDisplay = GameObject.Find ("DamageLog").GetComponent<Text> ();
+			}
 			damageDisplay.text = damage.ToString ();
 
 		}

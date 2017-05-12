@@ -3732,9 +3732,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 20c10aef8986f6747b53f2b6f9bd9fdd, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -4401,7 +4401,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d363b3323b3afb948a1d10318542783b, type: 3}
   m_Name: 
@@ -4423,6 +4423,8 @@ MonoBehaviour:
   target: {fileID: 0}
   rotSpeed: 5
   isActualizingPos: 0
+  isActuAttacking: 0
+  isActuStopAttacking: 0
   critChance: 0
   critFactor: 0
   bonusDamage: 0
@@ -5011,6 +5013,7 @@ MonoBehaviour:
   actualXP: 0
   requiredXPToUp: 1000
   actualLevel: 1
+  isTeam1: 0
 --- !u!114 &114797765490164106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5140,7 +5143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncRot: 0
-  timeBtwTic: 0.11
+  timeBtwTic: 0.1
 --- !u!114 &114924662801619198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5260,6 +5263,7 @@ MonoBehaviour:
   underThreshold: 0
   levelUpBonusArmor: 0
   isTaunt: 0
+  isJungleMob: 0
 --- !u!135 &135227125065477978
 SphereCollider:
   m_ObjectHideFlags: 1

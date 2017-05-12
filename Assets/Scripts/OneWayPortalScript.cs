@@ -103,7 +103,7 @@ public class OneWayPortalScript : NetworkBehaviour {
 		GameObject playerToTP;
 		playerToTP = ClientScene.FindLocalObject (id) ;
 		yield return new WaitForEndOfFrame ();
-		playerToTP.GetComponent<NavMeshAgent> ().ResetPath ();
+		playerToTP.GetComponent<NavMeshAgent> ().velocity = Vector3.zero;
 		playerToTP.GetComponent<NavMeshAgent> ().enabled = false;
 		playerToTP.transform.localPosition = GameObject.Find(tpdestination).transform.position;
 		playerToTP.transform.GetChild (3).GetComponent<ParticleSystem> ().Play (true);	
