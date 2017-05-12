@@ -56,7 +56,8 @@ public class GenericLifeScript : NetworkBehaviour
 
 	[SyncVar]public bool isTaunt;
     public bool isJungleMob;
-
+	private int nbrOfPlayersT1;
+	private int nbrOfPlayersT2;
     void Start()
     {
 //        Anim = GetComponentInChildren<Animator>();
@@ -87,6 +88,11 @@ public class GenericLifeScript : NetworkBehaviour
         if (gameObject.layer == Layers.Ennemies)
         {
 			mobDeadAnimChildMesh = transform.GetChild(3).GetChild(0).gameObject;
+			if (isServer) 
+			{
+				nbrOfPlayersT1 = GameManager.instanceGM.team1ID.Count;
+				nbrOfPlayersT2 = GameManager.instanceGM.team2ID.Count;
+			}
         }
 
     }
@@ -311,7 +317,8 @@ public class GenericLifeScript : NetworkBehaviour
         {
             if (guyAttackingMe.tag == "Player")
             {
-                guyAttackingMe.GetComponent<PlayerXPScript>().GetXP(xpGiven);
+				ShareXPWithTheTeam (guyAttackingMe.GetComponent<PlayerXPScript> ().isTeam1, xpGiven);
+                guyAttackingMe.GetComponent<PlayerXPScript>().GetXP(xpGiven/10);
                 guyAttackingMe.GetComponent<PlayerGoldScript>().GetGold(goldGiven);
                 //				if (isServer) 
                 //				{
@@ -546,5 +553,25 @@ public class GenericLifeScript : NetworkBehaviour
 		isTaunt = true;
 		yield return new WaitForSeconds (tauntT);
 		isTaunt = false;
+	}
+
+	public void ShareXPWithTheTeam(bool isT1, int xpToShare)
+	{
+		if (isT1) 
+		{
+			foreach (NetworkInstanceId id in GameManager.instanceGM.team1ID) 
+			{
+				GameObject go =  ClientScene.FindLocalObject (id);
+				go.GetComponent<PlayerXPScript> ().GetXP (xpToShare / nbrOfPlayersT1);
+			}
+		} 
+		else 
+		{
+			foreach (NetworkInstanceId id in GameManager.instanceGM.team2ID) 
+			{
+				GameObject go =  ClientScene.FindLocalObject (id);
+				go.GetComponent<PlayerXPScript> ().GetXP (xpToShare / nbrOfPlayersT2);
+			}
+		}
 	}
 }

@@ -36,6 +36,7 @@ public class TeamSelectorScript : NetworkBehaviour
 			if (teamNbr == 1) 
 			{
 				other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
+				other.gameObject.GetComponent<PlayerXPScript> ().isTeam1 = true;
 				other.gameObject.GetComponent<PlayerManager> ().myTeamSprite = team1Icon;
 				return;
 

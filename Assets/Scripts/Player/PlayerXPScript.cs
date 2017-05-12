@@ -19,6 +19,7 @@ public class PlayerXPScript : NetworkBehaviour
 	float requiredXpTmp;
 	int previousXpRec;
 	int originalXP;
+	public bool isTeam1;
 
 	// Use this for initialization
 	void Start () 
@@ -39,7 +40,7 @@ public class PlayerXPScript : NetworkBehaviour
 
 	public void GetXP(int xp)
 	{
-		if (!isServer) 
+		if (!isServer || GetComponent<GenericLifeScript>().isDead) 
 		{
 			return;
 		}
