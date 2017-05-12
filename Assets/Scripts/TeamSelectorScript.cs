@@ -23,6 +23,8 @@ public class TeamSelectorScript : NetworkBehaviour
 				if (teamNbr == 1) 
 				{
 					GameManager.instanceGM.isTeam1 = true;
+					other.gameObject.GetComponent<PlayerXPScript> ().isTeam1 = true;
+
 					other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
 					return;
 

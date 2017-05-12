@@ -170,7 +170,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		{
 //		desiredPos = pos;
 		agent.velocity = Vector3.zero;
-			agent.isStopped = true;
+		agent.isStopped = true;
 
 		isAttacking = true;
 //		if (gameObject.layer == 8 && target.layer == 8) 

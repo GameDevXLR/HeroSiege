@@ -86,6 +86,8 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 	[ClientRpc]
 	public void RpcActivateTheTrap()
 	{
+		thisCollider = GetComponent<SphereCollider> ();
+
 		thisCollider.radius = exploRadius;//augmenter la zone du poison
 		childObj.SetActive (true); // activer l'effet de particule
 		childObj.transform.localScale = new Vector3 (exploRadius,exploRadius,exploRadius);
