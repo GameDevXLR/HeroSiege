@@ -99,20 +99,22 @@ public class PlayerAutoAttack: NetworkBehaviour
 				RpcStopAttacking ();
 			}
 		}
-		if (target) 
-		{
+		if (target) {
 			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
-			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
-			if (!isAttacking) 
-			{
-				if (Vector3.Distance (targetTempPos, target.transform.position) > 0 && !isActualizingPos) 
-				{
-					if (Vector3.Distance (transform.position, target.transform.position) > attackRange) 
-					{
+			if (!isAttacking) {
+				if (Vector3.Distance (targetTempPos, target.transform.position) > 0 && !isActualizingPos) {
+					if (Vector3.Distance (transform.position, target.transform.position) > attackRange) {
+						Debug.Log (Vector3.Distance (transform.position, target.transform.position).ToString ());
 						StartCoroutine (ActualizeTargetPos ());
-					}
+
+					} 
+
 				}
+			}
+			if (Vector3.Distance (transform.position, target.transform.position) < attackRange) 
+			{
+				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
 			}
 		}
 

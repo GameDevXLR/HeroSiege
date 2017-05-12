@@ -220,7 +220,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	}
 	IEnumerator AcquireTargetProcess()
 	{
-		if (gameObject.name != "mobJung2(clone)") {
+		if (gameObject.name != "Goblin_Ranger_R1") {
 			
 			if (anim) {
 				anim.SetBool ("walk", walkAnim = true);
@@ -257,7 +257,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
 			agent.isStopped = false;
-		if (gameObject.name != "mobJung2(clone)") {
+		if (gameObject.name != "Goblin_Ranger_R1") {
 			
 			anim.SetBool ("attackEnnemi", attackAnim = false);
 			anim.SetBool ("walk", walkAnim = false);

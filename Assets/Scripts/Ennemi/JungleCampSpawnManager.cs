@@ -90,14 +90,14 @@ public class JungleCampSpawnManager : NetworkBehaviour
         reActivateMob(minion, tr, minionPrefab);
         minion.GetComponent<GenericLifeScript>().maxHp = minionPrefab.GetComponent<GenericLifeScript>().maxHp;
 
-        minion.GetComponent<GenericLifeScript>().maxHp = CampLvl * scaleFactor * GameManager.instanceGM.gameDifficulty;
+        minion.GetComponent<GenericLifeScript>().maxHp = CampLvl * scaleFactor*2 * GameManager.instanceGM.gameDifficulty;
 		minion.GetComponent<GenericLifeScript> ().currentHp = minion.GetComponent<GenericLifeScript>().maxHp;
 
         minion.GetComponent<GenericLifeScript>().goldGiven = minionPrefab.GetComponent<GenericLifeScript>().goldGiven;
         minion.GetComponent<GenericLifeScript> ().goldGiven += scaleFactor* CampLvl * 20 / 100;
 
         minion.GetComponent<EnemyAutoAttackScript>().damage = minionPrefab.GetComponent<EnemyAutoAttackScript>().damage;
-        minion.GetComponent<EnemyAutoAttackScript>().damage += scaleFactor * CampLvl * 30 / 100;
+        minion.GetComponent<EnemyAutoAttackScript>().damage += scaleFactor * CampLvl * 10 / 100;
 
 		minion.GetComponent<GenericLifeScript> ().xpGiven = (CampLvl * scaleFactor*5)-scaleFactor;
           
@@ -115,7 +115,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
         reActivateMob(minionboss, tr, minionBossPrefab);
 
         minionboss.GetComponent<GenericLifeScript>().maxHp = minionBossPrefab.GetComponent<GenericLifeScript>().maxHp;
-        minionboss.GetComponent<GenericLifeScript>().maxHp += CampLvl * scaleFactor * GameManager.instanceGM.gameDifficulty;
+        minionboss.GetComponent<GenericLifeScript>().maxHp += CampLvl * scaleFactor *4* GameManager.instanceGM.gameDifficulty;
         minionboss.GetComponent<GenericLifeScript>().currentHp = minionboss.GetComponent<GenericLifeScript>().maxHp;
 
         minionboss.GetComponent<GenericLifeScript>().goldGiven = minionBossPrefab.GetComponent<GenericLifeScript>().goldGiven;
@@ -124,7 +124,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
         minionboss.GetComponent<MinionsPathFindingScript>().target = tr;
 
         minionboss.GetComponent<EnemyAutoAttackScript>().damage = minionBossPrefab.GetComponent<EnemyAutoAttackScript>().damage;
-        minionboss.GetComponent<EnemyAutoAttackScript>().damage += scaleFactor * CampLvl * 60 / 100;
+        minionboss.GetComponent<EnemyAutoAttackScript>().damage += scaleFactor * CampLvl * 20 / 100;
         minionboss.GetComponent<GenericLifeScript>().xpGiven = (CampLvl * scaleFactor * 10) - scaleFactor;
 
     }
