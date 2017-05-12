@@ -35,7 +35,6 @@ public class SpawnManager : NetworkBehaviour
 	{
 		difficultyFactor = GameManager.instanceGM.gameDifficulty;
 		coPlayers = NetworkServer.connections.Count;
-		Debug.Log (coPlayers);
 		if (coPlayers > 1) 
 		{
 			difficultyFactor *= (coPlayers / 2);

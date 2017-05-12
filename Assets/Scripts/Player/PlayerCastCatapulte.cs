@@ -123,6 +123,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 				{
 					isTargeting = false;
 //					spellRangeArea.SetActive(false);
+				Camera.main.GetComponent<CameraController> ().selectedPlayer = true;
+				GetComponent<PlayerClicToMove> ().enabled = true;
 
 					spellTargeter.transform.position = Vector3.zero;
 					return;
@@ -132,6 +134,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 				if ( cataCharges < spellCost || GetComponent<GenericLifeScript>().isDead)
 					{
 						isTargeting = false;
+					Camera.main.GetComponent<CameraController> ().selectedPlayer = true;
+					GetComponent<PlayerClicToMove> ().enabled = true;
 //						spellRangeArea.SetActive(false);
 
 						spellTargeter.transform.position = Vector3.zero;
@@ -146,7 +150,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 
 					spellTargeter.transform.position = Vector3.zero;
 					StartCoroutine(SpellOnCD());
-
+				Camera.main.GetComponent<CameraController> ().selectedPlayer = true;
+				GetComponent<PlayerClicToMove> ().enabled = true;
 					Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
 					return;
 				}
@@ -165,6 +170,9 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		if (cataCharges >= spellCost && !onCD)
 			{
 				isTargeting = true;
+			GetComponent<PlayerClicToMove> ().enabled = false;
+			Camera.main.GetComponent<CameraController> ().selectedPlayer = false;
+			Camera.main.transform.position = new Vector3 (Camera.main.transform.position.x, 50f, Camera.main.transform.position.z);
 			ReziseTheTargeters ();
 
 
@@ -175,6 +183,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 				{
 					isTargeting = false;
 //					spellRangeArea.SetActive(false);
+				Camera.main.GetComponent<CameraController> ().selectedPlayer = true;
+				GetComponent<PlayerClicToMove> ().enabled = true;
 
 					spellTargeter.transform.position = Vector3.zero;
 				}
