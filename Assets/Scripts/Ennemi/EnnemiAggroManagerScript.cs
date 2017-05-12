@@ -26,7 +26,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 	void OnTriggerStay(Collider other)
 	{
 
-		if (autoAScript.target == null || autoAScript.target.layer != 8) 
+		if (!GetComponent<GenericLifeScript>().isDead && (autoAScript.target == null || autoAScript.target.layer != 8)) 
 		{
 			if (other.gameObject.layer == 8 || other.gameObject.layer == 9) 
 			{
