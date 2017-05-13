@@ -16,7 +16,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public AudioClip Att1;
 	public AudioClip Att2;
 	public AudioClip Charge;
-
+	public bool holdPosition;
 	public Animator anim; // l'animator qui gere les anim lié a ce script
 	public bool stopWalk; //pour l animation : arrete de marcher
 	bool charge; // animation et code : charge vers un ennemi / mob
@@ -69,6 +69,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 				{
 					if (Vector3.Distance (transform.position, target.transform.position) <= attackRange && !isActuAttacking) {
 						isActuAttacking = true;
+						holdPosition = true;
 						RpcAttackTarget ();
 					}
 				} else 
@@ -100,20 +101,28 @@ public class PlayerAutoAttack: NetworkBehaviour
 			}
 		}
 		if (target) {
-			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
-			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
-			if (!isAttacking) {
+			if (!isAttacking) 
+			{
 				if (Vector3.Distance (targetTempPos, target.transform.position) > 0 && !isActualizingPos) {
-					if (Vector3.Distance (transform.position, target.transform.position) > attackRange) {
-						Debug.Log (Vector3.Distance (transform.position, target.transform.position).ToString ());
-						StartCoroutine (ActualizeTargetPos ());
-
+					if (Vector3.Distance (transform.position, target.transform.position) > attackRange) 
+					{
+						if (holdPosition) 
+						{
+							LooseTarget ();
+							agent.destination = transform.position;
+						} else 
+						{
+							StartCoroutine (ActualizeTargetPos ());
+							
+						}
 					} 
 
 				}
 			}
-			if (Vector3.Distance (transform.position, target.transform.position) < attackRange) 
+			if (target && Vector3.Distance (transform.position, target.transform.position) < attackRange) 
 			{
+				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
+				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
 			}
 		}
@@ -130,6 +139,9 @@ public class PlayerAutoAttack: NetworkBehaviour
 						{
 								stopWalk = true;
 								anim.SetBool ("stopwalk", stopWalk);
+							if (isServer) {
+								GetComponentInChildren<PlayerEnnemyDetectionScript> ().autoTargetting = true;
+							}
 								//audioSource.Stop ();
 							}
 						}

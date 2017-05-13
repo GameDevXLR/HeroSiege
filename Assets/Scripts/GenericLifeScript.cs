@@ -27,6 +27,7 @@ public class GenericLifeScript : NetworkBehaviour
 	[SyncVar]public int	bonusHp;
 	[SyncVar]public int regenHp;
 	[SyncVar]public int bonusArmorScore;
+	[SyncVar]public int damageReduction;
     public int levelUpBonusHP = 10;
 
     public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn le joueur.
@@ -207,6 +208,12 @@ public class GenericLifeScript : NetworkBehaviour
                 {
 					if (armorScore > 0) {
 						float multiplicatorArmor = (float)100f / (100f + armorScore);
+						int dmgAfterReduct = (dmg/2) - damageReduction; //on ne peut réduire les damages que jusqu'a 50%
+						if (dmgAfterReduct < 0) 
+						{
+							dmgAfterReduct = 0;
+						}
+						dmg = (dmg / 2) + dmgAfterReduct;
 						currentHp -= (int)Mathf.Abs (dmg * multiplicatorArmor);
 						if (gameObject.layer == Layers.Ennemies && currentHp <= 0) {
 							if (attacker.tag == "Player") {

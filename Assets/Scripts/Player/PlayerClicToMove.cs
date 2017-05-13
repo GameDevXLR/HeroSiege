@@ -93,7 +93,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 		}
 		if (target)  
 		{
-			if(Vector3.Distance(targetTmpPos, target.transform.localPosition)>1f)
+			if(Vector3.Distance(targetTmpPos, target.transform.localPosition)>1f && !GetComponent<PlayerAutoAttack>().holdPosition)
 			{
 				targetTmpPos = target.transform.localPosition;
 				agentPlayer.SetDestination (targetTmpPos);
@@ -191,20 +191,16 @@ public class PlayerClicToMove : NetworkBehaviour {
 		target = ClientScene.FindLocalObject (targetID);
 //		agentPlayer.stoppingDistance = 1;
 		attackScript.AcquireTarget (target);
+		attackScript.holdPosition = false;
 		anim.SetBool ("stopwalk", false);
 		attackScript.stopWalk = false;
 	}
 
 	public void SetThatTargetFromAggro(NetworkInstanceId targetid)
 	{
-		if (isServer) 
-		{
 
 			SetTargetOnServer (targetid);
-		} else 
-		{
-			Debug.Log ("impossible de set une new target depuis un client!"); // ca apparait jamais je pense on peut delete soon ce délire.
-		}
+
 	}
 
 

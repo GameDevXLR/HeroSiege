@@ -26,11 +26,12 @@ public class ShopScript : MonoBehaviour
 
 	public void OpenYourMenu()
 	{
-		if (isAccessible) 
-		{
-			ShopIconObj.GetComponent<Image> ().sprite = openedShopImg;
-		shopPanel.gameObject.SetActive (true);
-		isOpen = true;
+		if (isAccessible) {
+			if (Vector3.Distance (gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) < 15f) {
+				ShopIconObj.GetComponent<Image> ().sprite = openedShopImg;
+				shopPanel.gameObject.SetActive (true);
+				isOpen = true;
+			}
 		}
 	}
 	public void CloseYourMenu()

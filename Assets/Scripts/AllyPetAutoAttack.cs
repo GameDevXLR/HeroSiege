@@ -123,10 +123,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		}
 		if (target) 
 		{
-			Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
-			float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
 			//rajouter ici une condition du genre "si la distance est basse" alors tu face le mec; sinon tu face ton chemin...
-			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
 
 			if (!isAttacking) 
 			{
@@ -140,6 +137,12 @@ public class AllyPetAutoAttack : NetworkBehaviour
 						//							}
 					}
 				}
+			}
+			if (Vector3.Distance (transform.position, target.transform.position) < attackRange) 
+			{
+				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
+				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
+				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
 			}
 
 		}
