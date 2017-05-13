@@ -30,6 +30,8 @@ public class ItemManager : NetworkBehaviour
 	public GameObject IgdraBraceletPrefab;
 	public GameObject OrbOfPowerPrefab;
 	public AudioClip Gold;
+	public bool tip1Given;
+
 	public void Start()
 	{
 		if (isLocalPlayer) 
@@ -60,6 +62,11 @@ public class ItemManager : NetworkBehaviour
 		} else 
 		{
 			CmdBuyThatForHim (itemID, itemPrice, GameManager.instanceGM.ID);
+			if (!tip1Given) 
+			{
+				GameManager.instanceGM.ShowAGameTip ("You can use the keys 1 to 9 of your keyboard to consume items of your inventory.");
+				tip1Given = true;
+			}
 		}
 	}
 

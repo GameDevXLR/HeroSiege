@@ -16,6 +16,8 @@ public class ShopScript : MonoBehaviour
 	public GameObject ShopIconObj;
 	public Sprite openedShopImg;
 	public Sprite closedShopImg;
+	public string tipToShow = "TOOLTIP MISSING";
+	public bool tip1;
 
 	public void Start()
 	{
@@ -30,6 +32,11 @@ public class ShopScript : MonoBehaviour
 			if (Vector3.Distance (gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) < 15f) {
 				ShopIconObj.GetComponent<Image> ().sprite = openedShopImg;
 				shopPanel.gameObject.SetActive (true);
+				if (!tip1) 
+				{
+					GameManager.instanceGM.ShowAGameTip (tipToShow);
+					tip1 = true;
+				}
 				isOpen = true;
 			}
 		}

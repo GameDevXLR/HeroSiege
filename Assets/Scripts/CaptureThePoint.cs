@@ -26,6 +26,9 @@ public class CaptureThePoint : NetworkBehaviour
 	private float initialTimeToCapt;
 	public AudioClip Capture;
 	[SyncVar(hook = "SyncOutpostTimer")]int tmpTime;
+	public bool haveGivenTip0;
+
+	public bool haveGivenTip;
 	// Use this for initialization
 	void Start () 
 	{		
@@ -39,14 +42,23 @@ public class CaptureThePoint : NetworkBehaviour
 	{
 		
 	}
-	[ServerCallback]
 	public void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.layer == Layers.Player) 
 		{
-			playersIn.Add (other.gameObject);
+			if (isServer) {
+				playersIn.Add (other.gameObject);
+			}
+			if (other.GetComponent<NetworkIdentity> ().isLocalPlayer) 
+			{
+				if (!haveGivenTip0) 
+				{
+					GameManager.instanceGM.ShowAGameTip ("kill all enemies in the outpost area to be able to capture it.");
+					haveGivenTip0 = true;
+				}
+			}
 		}
-		if (other.gameObject.layer == Layers.Ennemies) 
+		if (other.gameObject.layer == Layers.Ennemies && isServer) 
 		{
 			enemiesIn.Add (other.gameObject);
 		}
@@ -65,6 +77,9 @@ public class CaptureThePoint : NetworkBehaviour
 		}
 		
 	}
+
+
+
 	[ServerCallback]
 	public void OnTriggerStay(Collider other)
 	{
@@ -207,6 +222,11 @@ public class CaptureThePoint : NetworkBehaviour
 
 	public void SyncOutpostTimer(int t)
 	{
+		if (!haveGivenTip) 
+		{
+			GameManager.instanceGM.ShowAGameTip ("Capture the outpost to get acess to his shop and be able to increase the strenght of your daily boss");
+			haveGivenTip = true;
+		}
 		if (!isServer) {
 			tmpTime = t;
 			if (t < 10f && t > 0f) {

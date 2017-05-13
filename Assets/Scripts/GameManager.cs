@@ -227,6 +227,10 @@ public class GameManager : NetworkBehaviour
 			{
 				ShowAGameTip ("During the day, the jungle camp will respawn and the bosses will show up. The enemy waves won't spawn before the night is back.");
 			}
+			if (Days == 3) 
+			{
+				ShowAGameTip ("If you feel strong enough, you could try to capture the outpost in the middle of the map. This will give you access to a shop and will give you more time to come back to the fight if you die.");
+			}
 			playerObj.GetComponent<PlayerCastCatapulte> ().spellDmg = playerObj.GetComponent<PlayerCastCatapulte> ().startDmg* Days;
 			playerObj.GetComponent<PlayerCastCatapulte> ().ActualizeCataDmg ();
 			GetComponent<BossSpawnManager> ().bossLvlT1 +=2;

@@ -38,7 +38,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		public float durationShake = 10;
 		public float amountShake = 10;
 		public int startDmg;
-
+	public bool tip1;
+	public bool tip2;
 	public GameObject cataObj;
 		//	private GameObject spell1DescriptionObj;
 
@@ -95,6 +96,11 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			{
 				return;
 			}
+		if (!tip1) 
+		{
+			GameManager.instanceGM.ShowAGameTip ("You can target the enemy team lane with it. The damage will increase with every passing day.Carefull! it can kill you or your allies as well.");
+			tip1 = true;
+		}
 			StartCoroutine(ShowTargeter()); // on a besoin d'attendre la fin de frame pour pas que mouseUp soit détecter direct et que le sort se lance cash en cliquant sur l'icone de sort.
 		}
 
@@ -262,7 +268,11 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		GetComponent<AudioSource> ().PlayOneShot (boughtACharge);
 			CmdLoadTheCata();
 		spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
-
+		if (!tip2) 
+		{
+			GameManager.instanceGM.ShowAGameTip ("The number of charges if share between players. You can buy charges and let an ally fire them.");
+			tip2 = true;
+		}
 		StartCoroutine ( CataLoadProcess());
 		}
 
