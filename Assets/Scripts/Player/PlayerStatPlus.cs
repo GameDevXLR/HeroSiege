@@ -16,9 +16,9 @@ public class PlayerStatPlus : NetworkBehaviour {
 	public AudioClip OOM;
 	public AudioClip Spell1;
 	string spellDescription;
-	public int dmgBonus = 5;
-	public int hpBonus = 30;
-	public int mpBonus = 20;
+	[SyncVar]public int dmgBonus = 5;
+	[SyncVar]public int hpBonus = 30;
+	[SyncVar]public int mpBonus = 20;
 	[SyncVar]public bool doubleHPBonus;
 	[SyncVar]public bool doubleMPBonus;
 	[SyncVar]public bool doubleDpsBonus;
@@ -48,6 +48,10 @@ public class PlayerStatPlus : NetworkBehaviour {
 			spellDescription = "Boost your hero by adding "+hpBonus+" max hit point, "+mpBonus+"max mana and "+dmgBonus+" damage.";
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 //			spell1Btn.GetComponent<Image> ().sprite = spellImg;
+			if (!isServer) 
+			{
+				Invoke("ActuDescription",3f);
+			}
 		}
 	}
 
@@ -165,5 +169,10 @@ public class PlayerStatPlus : NetworkBehaviour {
 		GetComponent<PlayerAutoAttack> ().damage += dmgBonus;
 		GetComponent<GenericManaScript> ().maxMp += mpBonus;
 		GetComponent<GenericLifeScript> ().maxHp += hpBonus;
+	}
+	public void ActuDescription()
+	{
+		spellDescription = "Boost your hero by adding "+hpBonus+" max hit point, "+mpBonus+"max mana and "+dmgBonus+" damage.";
+		spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 	}
 }
