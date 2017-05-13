@@ -137,20 +137,20 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childTankSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
-			myGeneLifeScript.maxHp = 300;
-			myGeneLifeScript.currentHp = 300;
-			myGeneLifeScript.regenHp = 10;
-			myGeneManaScript.maxMp = 100;
-			myGeneManaScript.currentMp = 100;
+			myGeneLifeScript.maxHp = 320;
+			myGeneLifeScript.currentHp = 320;
+			myGeneLifeScript.regenHp = 12;
+			myGeneManaScript.maxMp = 110;
+			myGeneManaScript.currentMp = 110;
 			myGeneManaScript.regenMp = 3;
-			myGeneLifeScript.armorScore = 30;
+			myGeneLifeScript.armorScore = 35;
 			myAutoAScript.damage = 15;
 			myAutoAScript.attackRate = 1;
-			myAutoAScript.attackRange = 4;
-			myGeneLifeScript.levelUpBonusHP = 50;
-			myGeneManaScript.levelUpBonusMP = 10;
+			myAutoAScript.attackRange = 3;
+			myGeneLifeScript.levelUpBonusHP = 55;
+			myGeneManaScript.levelUpBonusMP = 12;
 			myAutoAScript.levelUpBonusDamage = 2;
-			myGeneLifeScript.levelUpBonusArmor = 3;
+			myGeneLifeScript.levelUpBonusArmor = 4;
 			myAutoAScript.attackSpeedStat = 0.8f;
 			myStatPlusScript.doubleHPBonus = true;
 
@@ -196,17 +196,17 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneLifeScript.maxHp = 150;
 			myGeneLifeScript.currentHp = 150;
 			myGeneLifeScript.regenHp = 6;
-			myGeneManaScript.maxMp = 200;
-			myGeneManaScript.currentMp = 200;
-			myGeneManaScript.regenMp = 9;
+			myGeneManaScript.maxMp = 220;
+			myGeneManaScript.currentMp = 220;
+			myGeneManaScript.regenMp = 8;
 			myAutoAScript.damage = 8;
 			myAutoAScript.attackRate = .7f;
-			myAutoAScript.attackRange = 11;
-			myGeneLifeScript.levelUpBonusHP = 10;
-			myGeneManaScript.levelUpBonusMP = 20;
+			myAutoAScript.attackRange = 10;
+			myGeneLifeScript.levelUpBonusHP = 11;
+			myGeneManaScript.levelUpBonusMP = 22;
 			myGeneLifeScript.armorScore = 10;
 			myAutoAScript.levelUpBonusDamage = 2;
-			myGeneLifeScript.levelUpBonusArmor = 0;
+			myGeneLifeScript.levelUpBonusArmor = 1;
 			myAutoAScript.attackSpeedStat = 1.1f;
 			myStatPlusScript.doubleMPBonus = true;
 
@@ -252,17 +252,17 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.2f;
 			myGeneLifeScript.maxHp = 180;
 			myGeneLifeScript.currentHp = 180;
-			myGeneLifeScript.regenHp = 5;
+			myGeneLifeScript.regenHp = 8;
 			myGeneManaScript.maxMp = 130;
 			myGeneManaScript.currentMp = 130;
-			myGeneManaScript.regenMp = 4;
+			myGeneManaScript.regenMp = 5;
 			myAutoAScript.damage = 25;
 			myAutoAScript.attackRate = .8f;
 			myAutoAScript.attackRange = 15;
 			myGeneLifeScript.levelUpBonusHP = 15;
 			myGeneLifeScript.armorScore = 10;
-			myGeneLifeScript.levelUpBonusArmor = 1;
-			myAutoAScript.levelUpBonusDamage = 6;
+			myGeneLifeScript.levelUpBonusArmor = 2;
+			myAutoAScript.levelUpBonusDamage = 4;
 			myAutoAScript.attackSpeedStat = 1.25f;
 			myStatPlusScript.doubleDpsBonus = true;
 

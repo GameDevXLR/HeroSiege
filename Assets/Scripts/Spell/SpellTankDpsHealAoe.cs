@@ -31,8 +31,7 @@ public class SpellTankDpsHealAoe : NetworkBehaviour {
 		{
 			int nbrOfObj;
 			nbrOfObj = spellTargets.Count;
-			int x = (int)(nbrOfObj * spellDamage / 3);
-			caster.GetComponent<GenericLifeScript> ().currentHp +=(spellDamage / 3)* nbrOfObj ;
+			caster.GetComponent<GenericLifeScript> ().currentHp +=(spellDamage / 2)* nbrOfObj ;
 			hasHealed = true;
 
 		}

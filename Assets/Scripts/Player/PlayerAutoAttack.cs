@@ -135,7 +135,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 				{
 						if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) 
 				{
-							if (!stopWalk) 
+						if (!stopWalk || !anim.GetBool("stopwalk")) 
 						{
 								stopWalk = true;
 								anim.SetBool ("stopwalk", stopWalk);
