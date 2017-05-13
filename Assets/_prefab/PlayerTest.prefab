@@ -1391,6 +1391,7 @@ GameObject:
   - component: {fileID: 114144252582192040}
   - component: {fileID: 114147312335374500}
   - component: {fileID: 114652832635747004}
+  - component: {fileID: 114244598284905834}
   m_Layer: 8
   m_Name: PlayerTest
   m_TagString: Player
@@ -4068,6 +4069,27 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: +25
+--- !u!114 &114244598284905834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8cc84a33578eed48b3379c720dcda69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellImg: {fileID: 0}
+  OOM: {fileID: 0}
+  Spell1: {fileID: 0}
+  dmgBonus: 5
+  hpBonus: 30
+  mpBonus: 20
+  doubleHPBonus: 0
+  doubleMPBonus: 0
+  doubleDpsBonus: 0
+  spellLvl: 1
 --- !u!114 &114251096692580146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4409,6 +4431,7 @@ MonoBehaviour:
   Att1: {fileID: 8300000, guid: 6df093105ed3eeb458ebe5d125dfb736, type: 3}
   Att2: {fileID: 8300000, guid: 5b445a1e5d09cbd4a8bdbb876db345fe, type: 3}
   Charge: {fileID: 0}
+  holdPosition: 0
   anim: {fileID: 0}
   stopWalk: 0
   agent: {fileID: 0}
@@ -5085,7 +5108,8 @@ MonoBehaviour:
   spell2Lvl: 1
   spellUltLvlUpBtn: {fileID: 0}
   spellUltLvl: 1
-  spectPtIcon: {fileID: 0}
+  specPlusBtn: {fileID: 0}
+  specPlusLvl: 0
 --- !u!114 &114845116257301452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5130,6 +5154,7 @@ MonoBehaviour:
   myGeneLifeScript: {fileID: 114949428282701634}
   myGeneManaScript: {fileID: 114695388684336140}
   myAutoAScript: {fileID: 114604599503415050}
+  myStatPlusScript: {fileID: 114244598284905834}
   playerNickName: NewPlayer
 --- !u!114 &114870691904547754
 MonoBehaviour:
@@ -5241,6 +5266,7 @@ MonoBehaviour:
   bonusHp: 0
   regenHp: 5
   bonusArmorScore: 0
+  damageReduction: 0
   levelUpBonusHP: 30
   respawnPoint: {fileID: 0}
   armorScore: 10

@@ -18,7 +18,8 @@ public class PlayerLevelUpManager : MonoBehaviour
 	public int spell2Lvl = 1;
 	public GameObject spellUltLvlUpBtn;
 	public int spellUltLvl = 1;
-	public GameObject spectPtIcon;
+	public GameObject specPlusBtn;
+	public int specPlusLvl = 0;
 
 	// Use this for initialization
 	void Start () 
@@ -28,7 +29,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 		spell2LvlUpBtn = GameObject.Find ("Spell2LvlUpBtn");
 		spellUltLvlUpBtn = GameObject.Find ("Spell3LvlUpBtn");
 		//rajouter ici les futurs sorts a faire up.
-		spectPtIcon = GameObject.Find ("CompPtsIcon");
+		specPlusBtn = GameObject.Find ("StatPlusBtn");
 //		Invoke ("AvoidEarlyUltiUp", 0.3f);
 
 	}
@@ -47,10 +48,10 @@ public class PlayerLevelUpManager : MonoBehaviour
 		{
 			ultiSpecPts++;
 		}
-		spell1LvlUpBtn.GetComponent<Animator> ().Play ("BtnCompPts");
-		spectPtIcon.SetActive (true);
+		specPlusBtn.SetActive (true);
 		if (spell1Lvl < 10) {
 			spell1LvlUpBtn.SetActive (true);
+//			spell1LvlUpBtn.GetComponent<Animator> ().Play ("BtnCompPts");
 		}
 		if (spell2Lvl < 10) {
 
@@ -70,6 +71,10 @@ public class PlayerLevelUpManager : MonoBehaviour
 
 	public void LooseASpecPt(int spell)
 	{
+		if (spell == 4) 
+		{
+			specPlusLvl++;
+		}
 		if (spell == 3) 
 		{
 			ultiSpecPts--;
@@ -88,7 +93,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 		specPts--;
 		if (specPts <= 0) 
 		{
-			spectPtIcon.SetActive (false);
+			specPlusBtn.SetActive (false);
 			spell1LvlUpBtn.SetActive (false);
 			spell2LvlUpBtn.SetActive (false);
 			spellUltLvlUpBtn.SetActive (false);
