@@ -54,6 +54,8 @@ public class GameManager : NetworkBehaviour
 	public LocationManager locManager;
 	public LightManagerScript lightM;
 	public GameObject[] jungCamps;
+	public Canvas tutorialPanel;
+	public Text tutoTip;
 
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
 
@@ -81,10 +83,10 @@ public class GameManager : NetworkBehaviour
 		lightM = GameObject.Find ("[Lights]").GetComponent<LightManagerScript> ();
 		nbrWavesText = GameObject.Find ("WavesCounter").GetComponent<Text> ();
 		nbrWavesText.text = "0";
-//		if (isServer) 
-//		{
-//			jungCamps = GameObject.FindObjectsOfType(typeof( JungleCampSpawnManager)) as GameObject[];
-//		}
+		if (isServer) 
+		{
+			ShowAGameTip ("The number of spawn point and the strengh of the enemies depends on the number of players of the team and the game difficulty.On Nightmare and above, the number of enemy spawn point will increase.");
+		}
 	}
 	public bool IsItSolo()
 	{
@@ -221,6 +223,10 @@ public class GameManager : NetworkBehaviour
 		} else 
 		{
 			Days++;
+			if (Days == 2) 
+			{
+				ShowAGameTip ("During the day, the jungle camp will respawn and the bosses will show up. The enemy waves won't spawn before the night is back.");
+			}
 			playerObj.GetComponent<PlayerCastCatapulte> ().spellDmg = playerObj.GetComponent<PlayerCastCatapulte> ().startDmg* Days;
 			playerObj.GetComponent<PlayerCastCatapulte> ().ActualizeCataDmg ();
 			GetComponent<BossSpawnManager> ().bossLvlT1 +=2;
@@ -461,6 +467,11 @@ public class GameManager : NetworkBehaviour
 		GameObject.Find ("PlayerSelectionScreen").GetComponent<Canvas> ().enabled = true;
 		GameObject.Find ("DifficultySelectCanvas").GetComponent<Canvas> ().enabled = false;
 		ActualizeLocSystem ();
+		if (PlayerPrefsX.GetBool ("BEGINNER_GUIDE", true)) 
+		{
+			tutorialPanel.enabled = true;
+			tutoTip.text = "Select your hero. This will greatly influence the gameplay. The ovate is a difficult choice if you are playing solo. The champion is easy to play and can make a good choice if it's your first game.";
+		}
 	}
 
 	public void ActualizeLocSystem()
@@ -473,5 +484,14 @@ public class GameManager : NetworkBehaviour
 		locManager.Realtime_Updates = true;
 		yield return new WaitForSeconds (0.3f);
 		locManager.Realtime_Updates = false;
+	}
+
+	public void ShowAGameTip(string tip)
+	{
+		if (PlayerPrefsX.GetBool ("BEGINNER_GUIDE", true)) 
+		{
+			tutorialPanel.enabled = true;
+			tutoTip.text = tip;
+		}
 	}
 }

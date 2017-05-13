@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 114101508417045676}
   - component: {fileID: 114395821510757714}
   - component: {fileID: 114009289559484576}
-  - component: {fileID: 114638914342928952}
   m_Layer: 0
   m_Name: NetworkManagerObj
   m_TagString: Untagged
@@ -55,6 +54,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isItOneLane: 0
+  beginnerGuide: 1
+  isGuideActive: {fileID: 0}
 --- !u!114 &114101508417045676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,6 +115,8 @@ MonoBehaviour:
   - {fileID: 1380983508602426, guid: 4ed20bf8eb7fa9d4d82562cdb507b30f, type: 2}
   - {fileID: 1271539282615352, guid: eedbb81b5216c6a4fad98d49568adb15, type: 2}
   - {fileID: 1764175826294820, guid: e47ec8b092cf5fa4a9932b157f37017a, type: 2}
+  - {fileID: 1903038432033380, guid: c7ec25faec021ba479ebe370b72e02cc, type: 2}
+  - {fileID: 1513018649726288, guid: 4fbb6e27e434e48478a5d7b7bb6562de, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 10
   m_ConnectionConfig:
@@ -168,15 +171,4 @@ MonoBehaviour:
   matchName: default
   matchSize: 10
   isNetworkActive: 0
-  matchMaker: {fileID: 114638914342928952}
---- !u!114 &114638914342928952
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1065471443572348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  matchMaker: {fileID: 0}

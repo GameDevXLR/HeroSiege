@@ -534,8 +534,8 @@ MonoBehaviour:
   isTeam2: 0
   coPlayers: 0
   teamWhoWon: 0
-  lifeOfTheTeam1: 20
-  lifeOfTheTeam2: 20
+  lifeOfTheTeam1: 50
+  lifeOfTheTeam2: 50
   nightTime: 0
   Days: 1
   dayNightDisplay: {fileID: 0}
@@ -556,6 +556,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  tutorialPanel: {fileID: 0}
+  tutoTip: {fileID: 0}
   gameDifficulty: 0
 --- !u!114 &114187068329497642
 MonoBehaviour:

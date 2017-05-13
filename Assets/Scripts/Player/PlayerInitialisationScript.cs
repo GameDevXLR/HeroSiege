@@ -146,7 +146,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneLifeScript.armorScore = 35;
 			myAutoAScript.damage = 15;
 			myAutoAScript.attackRate = 1;
-			myAutoAScript.attackRange = 3;
+			myAutoAScript.attackRange = 5;
 			myGeneLifeScript.levelUpBonusHP = 55;
 			myGeneManaScript.levelUpBonusMP = 12;
 			myAutoAScript.levelUpBonusDamage = 2;
@@ -159,6 +159,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
 			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
+			ShowYourTip ();
 		} else //si c'est le perso d'un autre joueur pour toi : 
 		{
 			//rien pour le moment ? 
@@ -215,6 +216,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
 			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
+			ShowYourTip ();
 		} else //si c'est le perso d'un autre joueur pour toi : 
 		{
 			//rien pour le moment ? 
@@ -271,6 +273,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
 			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
+			ShowYourTip ();
 		} else //si c'est le perso d'un autre joueur pour toi : 
 		{
 			//rien pour le moment ? 
@@ -345,6 +348,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		yield return new WaitForSeconds (1.5f);
 		RpcCallMessage (playerNickName + " has joined the game.");
 
+	}
+
+	void ShowYourTip()
+	{
+		GameManager.instanceGM.ShowAGameTip ("To move your hero, right clic on the ground. You can attack an enemy by right clicking on it as well.");
 	}
 
 }

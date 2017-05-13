@@ -539,11 +539,20 @@ public class GenericLifeScript : NetworkBehaviour
     public void ActualizePlayerDeaths(int dea)
     {
         playerDeathCount = dea;
+		if (isLocalPlayer && playerDeathCount == 1) 
+		{
+			GameManager.instanceGM.ShowAGameTip ("When you die, you can still cast spells on the enemy team. It's also a good time to spy on the other team.");
+		}
         GetComponent<PlayerManager>().playerDeathsTxt.text = dea.ToString();
     }
     public void ActualizeDeadIcon(bool isHeDead)
     {
         isDead = isHeDead;
+		if (isLocalPlayer && playerDeathCount == 1 && !isDead) 
+		{
+			GameManager.instanceGM.ShowAGameTip ("The time you spent dead depends on the number of time you died and your hero's level.");
+		}
+
 		if (!isLocalPlayer && (gameObject.layer == Layers.Player || gameObject.layer == Layers.IgnoreLayer)) {
 			if (gameObject.tag == "Player") {
 				GetComponent<PlayerManager> ().deadAvatarImg.enabled = isHeDead;
