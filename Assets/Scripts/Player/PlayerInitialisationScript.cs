@@ -137,19 +137,19 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childTankSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
-			myGeneLifeScript.maxHp = 320;
-			myGeneLifeScript.currentHp = 320;
-			myGeneLifeScript.regenHp = 12;
-			myGeneManaScript.maxMp = 110;
-			myGeneManaScript.currentMp = 110;
-			myGeneManaScript.regenMp = 3;
-			myGeneLifeScript.armorScore = 35;
-			myAutoAScript.damage = 15;
+			myGeneLifeScript.maxHp = 520;
+			myGeneLifeScript.currentHp = 520;
+			myGeneLifeScript.regenHp = 15;
+			myGeneManaScript.maxMp = 150;
+			myGeneManaScript.currentMp = 150;
+			myGeneManaScript.regenMp = 4;
+			myGeneLifeScript.armorScore = 45;
+			myAutoAScript.damage = 20;
 			myAutoAScript.attackRate = 1;
 			myAutoAScript.attackRange = 5;
-			myGeneLifeScript.levelUpBonusHP = 55;
+			myGeneLifeScript.levelUpBonusHP = 75;
 			myGeneManaScript.levelUpBonusMP = 12;
-			myAutoAScript.levelUpBonusDamage = 2;
+			myAutoAScript.levelUpBonusDamage = 3;
 			myGeneLifeScript.levelUpBonusArmor = 4;
 			myAutoAScript.attackSpeedStat = 0.8f;
 			myStatPlusScript.doubleHPBonus = true;
@@ -194,8 +194,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1f;
 
-			myGeneLifeScript.maxHp = 150;
-			myGeneLifeScript.currentHp = 150;
+			myGeneLifeScript.maxHp = 300;
+			myGeneLifeScript.currentHp = 300;
 			myGeneLifeScript.regenHp = 6;
 			myGeneManaScript.maxMp = 220;
 			myGeneManaScript.currentMp = 220;
@@ -203,7 +203,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myAutoAScript.damage = 8;
 			myAutoAScript.attackRate = .7f;
 			myAutoAScript.attackRange = 10;
-			myGeneLifeScript.levelUpBonusHP = 11;
+			myGeneLifeScript.levelUpBonusHP = 25;
 			myGeneManaScript.levelUpBonusMP = 22;
 			myGeneLifeScript.armorScore = 10;
 			myAutoAScript.levelUpBonusDamage = 2;
@@ -252,19 +252,21 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.2f;
-			myGeneLifeScript.maxHp = 180;
-			myGeneLifeScript.currentHp = 180;
+			myGeneLifeScript.maxHp = 440;
+			myGeneLifeScript.currentHp = 440;
 			myGeneLifeScript.regenHp = 8;
 			myGeneManaScript.maxMp = 130;
 			myGeneManaScript.currentMp = 130;
 			myGeneManaScript.regenMp = 5;
-			myAutoAScript.damage = 25;
+			myAutoAScript.damage = 22;
 			myAutoAScript.attackRate = .8f;
 			myAutoAScript.attackRange = 15;
-			myGeneLifeScript.levelUpBonusHP = 15;
-			myGeneLifeScript.armorScore = 10;
+			myGeneLifeScript.levelUpBonusHP = 35;
+			myGeneManaScript.levelUpBonusMP = 12;
+
+			myGeneLifeScript.armorScore = 15;
 			myGeneLifeScript.levelUpBonusArmor = 2;
-			myAutoAScript.levelUpBonusDamage = 4;
+			myAutoAScript.levelUpBonusDamage = 5;
 			myAutoAScript.attackSpeedStat = 1.25f;
 			myStatPlusScript.doubleDpsBonus = true;
 
@@ -352,7 +354,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 
 	void ShowYourTip()
 	{
-		GameManager.instanceGM.ShowAGameTip ("To move your hero, right clic on the ground. You can attack an enemy by right clicking on it as well.");
+		GameManager.instanceGM.ShowAGameTip ("To move your hero, right clic on the ground. You can attack an enemy by right clicking on it as well. Use 'L' to lock/unlock the camera and 'Spacebar' to center the view on your hero.");
 	}
 
 }

@@ -43,7 +43,7 @@ public class SpellHealArea : NetworkBehaviour {
 	{
 			if (!spellTargets.Contains(other.gameObject))
 			{
-				if (other.gameObject.layer == 9 || other.gameObject.layer == 8)
+				if (other.gameObject.layer == 8)
 				{
 
 					spellTargets.Add(other.gameObject);

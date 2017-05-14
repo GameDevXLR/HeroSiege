@@ -157,7 +157,8 @@ public class PlayerAutoAttack: NetworkBehaviour
 		if (isLocalPlayer && !isServer) {
 			CmdTellThemMyLocalPos (transform.position);
 		}
-
+		stopWalk = true;
+		anim.SetBool ("stopwalk", stopWalk);
 		charge = false;
 		anim.SetBool ("charge", false);
 		if (agent.isOnNavMesh) {
@@ -168,7 +169,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		attackAnim = true;
 		anim.SetBool ("attack", attackAnim);
 		int AttSound = Random.Range (0, 10);
-		if (AttSound > 5) {
+		if (AttSound > 4) {
 			//audioSource.clip = playerSounds [1];
 			GetComponent<AudioSource> ().PlayOneShot (Att1);
 		}

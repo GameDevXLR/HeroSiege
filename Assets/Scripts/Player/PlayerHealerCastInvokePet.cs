@@ -53,7 +53,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*4+" health";
+			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*6+" health";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -82,8 +82,8 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 		go.GetComponent<MinionsPathFindingScript> ().target = this.transform;
 		go.GetComponent<AllyPetAutoAttack> ().target = gameObject;
 		go.GetComponent<AllyPetAutoAttack> ().damage = spellDmg;
-		go.GetComponent<GenericLifeScript> ().maxHp = spellDmg * 4;
-		go.GetComponent<GenericLifeScript> ().currentHp = spellDmg * 4;
+		go.GetComponent<GenericLifeScript> ().maxHp = spellDmg * 6;
+		go.GetComponent<GenericLifeScript> ().currentHp = spellDmg * 6;
 		go.GetComponent<GenericLifeScript> ().regenHp = spellDmg / 5;
 		go.GetComponent<AllyPetAutoAttack> ().targetID = GetComponent<NetworkIdentity> ().netId;
 		actualPet = go;
@@ -233,15 +233,15 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 	public void RpcLvlUpSpell()
 	{
 		spellLvl++;
-		spellCost += 8;
-		spellCD -= 2f;
-		spellDmg += 18;
+		spellCost += 16;
+		spellCD -= 3f;
+		spellDmg += 27;
 //		spellDuration += 1f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*4+" health";
+			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*6+" health";
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

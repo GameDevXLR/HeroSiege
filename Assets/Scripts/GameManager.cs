@@ -85,7 +85,7 @@ public class GameManager : NetworkBehaviour
 		nbrWavesText.text = "0";
 		if (isServer) 
 		{
-			ShowAGameTip ("The number of spawn point and the strengh of the enemies depends on the number of players of the team and the game difficulty.On Nightmare and above, the number of enemy spawn point will increase.");
+			ShowAGameTip ("The number of waves spawn points and the strenght of the enemies depends on the number of players by team and the game difficulty.On Nightmare and above, the number of enemy spawn points will increase.");
 		}
 	}
 	public bool IsItSolo()
@@ -225,7 +225,7 @@ public class GameManager : NetworkBehaviour
 			Days++;
 			if (Days == 2) 
 			{
-				ShowAGameTip ("During the day, the jungle camp will respawn and the bosses will show up. The enemy waves won't spawn before the night is back.");
+				ShowAGameTip ("During the day, the jungle camps will respawn and the daily bosses will show up. The waves won't spawn before night time.");
 			}
 			if (Days == 3) 
 			{
@@ -474,7 +474,7 @@ public class GameManager : NetworkBehaviour
 		if (PlayerPrefsX.GetBool ("BEGINNER_GUIDE", true)) 
 		{
 			tutorialPanel.enabled = true;
-			tutoTip.text = "Select your hero. This will greatly influence the gameplay. The ovate is a difficult choice if you are playing solo. The champion is easy to play and can make a good choice if it's your first game.";
+			tutoTip.text = "Select your hero. This will greatly influence the gameplay. The Ovate is a difficult choice if you are playing solo. The Champion is easy to play and can make a good choice if it's your first game.";
 		}
 	}
 

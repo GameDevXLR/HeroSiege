@@ -16,7 +16,7 @@ public class PlayerStatPlus : NetworkBehaviour {
 	public AudioClip OOM;
 	public AudioClip Spell1;
 	string spellDescription;
-	[SyncVar]public int dmgBonus = 5;
+	[SyncVar]public int dmgBonus = 4;
 	[SyncVar]public int hpBonus = 30;
 	[SyncVar]public int mpBonus = 20;
 	[SyncVar]public bool doubleHPBonus;

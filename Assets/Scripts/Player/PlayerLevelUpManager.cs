@@ -45,7 +45,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 		playerLvl++;
 		if (playerLvl == 2) 
 		{
-			GameManager.instanceGM.ShowAGameTip ("When you level up, you get a specialization point that you can spend to increase the power of one of your spell, or up your basic statistics.");
+			GameManager.instanceGM.ShowAGameTip ("When you level up, you get a specialization point that you can spend to increase the power of one of your ability, or up your overall basic statistics.");
 		}
 //		GetComponent<PlayerManager> ().GetALevel ();
 		if (playerLvl == 3 || playerLvl == 6 || playerLvl == 9 || playerLvl == 12|| playerLvl == 15|| playerLvl == 18|| playerLvl == 21|| playerLvl == 24|| playerLvl == 27|| playerLvl == 30) 
@@ -80,7 +80,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 			specPlusLvl++;
 			if (specPlusLvl == 1) 
 			{
-				GameManager.instanceGM.ShowAGameTip ("Did you know that one of 3 stat bonus given by this passive is doubled based on your hero type : CaC/Tank/Mage.");
+				GameManager.instanceGM.ShowAGameTip ("Did you know that one of the 3 stat bonus given by this passive is doubled based on your hero type : Adc/Tank/Mage.");
 			}
 		}
 		if (spell == 3) 
@@ -89,7 +89,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 			spellUltLvl++;
 			if (spellUltLvl == 2) 
 			{
-				GameManager.instanceGM.ShowAGameTip ("Did you know that you can up your ultimate only once every 3 level. And that all of your spells can only be upgraded 10times, except for the Statistic bonus.");
+				GameManager.instanceGM.ShowAGameTip ("Did you know that you can up your ultimate only once every 3 levels. And that all of your abilities can only be upgraded 10 times, except for the Statistic bonus.");
 			}
 			if (ultiSpecPts == 0) 
 			{

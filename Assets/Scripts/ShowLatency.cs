@@ -32,6 +32,6 @@ public class ShowLatency : NetworkBehaviour {
 	void ShowLat()
 	{
 		latency = nClient.GetRTT ();
-		latencyDisplay.text = latency.ToString ();
+		latencyDisplay.text = "Ping: " +latency.ToString ();
 	}
 }

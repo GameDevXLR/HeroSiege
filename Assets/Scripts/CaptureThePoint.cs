@@ -53,7 +53,7 @@ public class CaptureThePoint : NetworkBehaviour
 			{
 				if (!haveGivenTip0) 
 				{
-					GameManager.instanceGM.ShowAGameTip ("kill all enemies in the outpost area to be able to capture it.");
+					GameManager.instanceGM.ShowAGameTip ("Kill all enemies on the outpost area to be able to capture it.");
 					haveGivenTip0 = true;
 				}
 			}
@@ -202,19 +202,19 @@ public class CaptureThePoint : NetworkBehaviour
 			{
 				if (belongsTo == PointOwner.team1) 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost.", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been lost!", Color.green);
 				} else 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been lost!", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost.", Color.red);
 				}
 			} else 
 			{
 				if (belongsTo == PointOwner.team1) 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been lost", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost!", Color.red);
 				} else 
 				{
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost!", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been lost", Color.green);
 				}
 			}
 		}
@@ -224,7 +224,7 @@ public class CaptureThePoint : NetworkBehaviour
 	{
 		if (!haveGivenTip) 
 		{
-			GameManager.instanceGM.ShowAGameTip ("Capture the outpost to get acess to his shop and be able to increase the strenght of your daily boss");
+			GameManager.instanceGM.ShowAGameTip ("Capture the outpost to get acess to his shop and be able to increase the strenght of your daily boss.");
 			haveGivenTip = true;
 		}
 		if (!isServer) {

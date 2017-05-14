@@ -49,7 +49,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg;
-			spellDescription = "Heal everyone for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
+			spellDescription = "Heal all allies inside for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
@@ -211,14 +211,14 @@ public class PlayerCastHealArea : NetworkBehaviour
 	{
 		spellLvl++;
 		spellCost += 12;
-		spellCD -= 1f;
-		spellDmg += 35;
+		spellCD -= 0.5f;
+		spellDmg += 7*spellLvl;
 		spellDuration += 0.5f;
 		if (isLocalPlayer)
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
 			int x = (int)spellDmg ;
-			spellDescription = "Heal everyone for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
+			spellDescription = "Heal all allies inside for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
