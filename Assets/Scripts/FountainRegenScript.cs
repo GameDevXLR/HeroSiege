@@ -6,8 +6,8 @@ public class FountainRegenScript : MonoBehaviour {
 
 	// pour que cette fontaine fonctionne : il faut que le script soit mis sur un objet possédant un collider en mode Trigger. Dés qu'un joueur entre dedans il regen.
 
-	public int regenHp = 2;
-	public int regenMp = 1;
+	[Range (0,100)]public int regenHp = 2;
+	[Range (0,100)]public int regenMp = 1;
 	bool isReady = true;
 
 	void OnTriggerStay(Collider other)
@@ -18,8 +18,18 @@ public class FountainRegenScript : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "Player") //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
 		{
-			other.GetComponent<GenericLifeScript> ().currentHp += regenHp;
-			other.GetComponent<GenericManaScript> ().currentMp += regenMp;
+			int tmpHP = (regenHp * other.GetComponent<GenericLifeScript> ().maxHp) / 100;
+			if (tmpHP < 3) 
+			{
+				tmpHP = 2;
+			}
+			int tmpMP = (regenHp * other.GetComponent<GenericManaScript> ().maxMp) / 100;
+			if (tmpMP < 3) 
+			{
+				tmpMP = 2;
+			}
+			other.GetComponent<GenericLifeScript> ().currentHp += tmpHP;
+			other.GetComponent<GenericManaScript> ().currentMp += tmpMP;
 			StartCoroutine (GetReadyProcedure ());
 		}
 	}
@@ -45,7 +55,7 @@ public class FountainRegenScript : MonoBehaviour {
 	IEnumerator GetReadyProcedure()
 	{
 		isReady = false;
-		yield return new WaitForSeconds (0.5f);
+		yield return new WaitForSeconds (5f);
 		isReady = true;
 	}
 }

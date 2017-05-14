@@ -150,7 +150,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 		spellLvl++;
 		spellCost += 5;
 		spellCD -= 1f;
-		spellDmg += 2;
+		spellDmg += 5;
 		spellDuration += 0.2f;
 		if (isLocalPlayer)
 		{
