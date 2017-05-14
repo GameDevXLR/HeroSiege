@@ -134,6 +134,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
         mob.SetActive(true);
 		mob.transform.position = transformMob.position;
 		mob.transform.rotation = transformMob.rotation;
+		mob.GetComponent<NavMeshAgent> ().enabled = true;
         if (mob.GetComponent<GenericLifeScript>().mobDeadAnimChildMesh)
         {
             mob.GetComponent<GenericLifeScript>().mobDeadAnimChildMesh.SetActive(true);

@@ -298,8 +298,10 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 //			agent.Resume();
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
-			agent.isStopped = false;
-			agent.SetDestination (target.transform.position);
+			if (agent.isOnNavMesh) {
+				agent.isStopped = false;
+				agent.SetDestination (target.transform.position);
+			}
 			targetTempPos = target.transform.position;
 		}
 		yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));

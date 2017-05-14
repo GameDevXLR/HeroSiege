@@ -341,6 +341,10 @@ public class GenericLifeScript : NetworkBehaviour
             {
                 isDead = true;
                 RpcKillTheJungleMob();
+				if (GetComponent<EnemyAutoAttackScript> ().isAttacking) 
+				{
+					GetComponent<EnemyAutoAttackScript> ().RpcStopAttacking ();
+				}
 
             }
             else
@@ -381,9 +385,10 @@ public class GenericLifeScript : NetworkBehaviour
         //  goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);
         mobDeadAnimChildMesh.GetComponent<Animator>().enabled = true;
         mobDeadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
-        mobDeadAnimChildMesh.GetComponent<InactivateByTime>().InactivateWithlifeTime();
+//        mobDeadAnimChildMesh.GetComponent<InactivateByTime>().InactivateWithlifeTime();
         GetComponent<EnemyAutoAttackScript>().target = null;
         GetComponent<NavMeshAgent>().acceleration = 0;
+		GetComponent<NavMeshAgent> ().velocity = Vector3.zero;
         guyAttackingMe = null;
     }
 

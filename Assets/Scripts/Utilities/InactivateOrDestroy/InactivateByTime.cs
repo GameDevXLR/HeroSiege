@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class InactivateByTime : MonoBehaviour
 {
 
     public float lifetime;
+	public GameObject daddyTr;
     // Use this for initialization
     public void InactivateWithlifeTime()
     {
@@ -14,7 +17,10 @@ public class InactivateByTime : MonoBehaviour
 
     public void inactivate()
     {
-        gameObject.SetActive(false);
+		daddyTr.GetComponent<NavMeshAgent> ().enabled = false;
+		daddyTr.transform.position = Vector3.zero;
+		GetComponent<Canvas> ().enabled = false;
+		GetComponent<Animator> ().enabled = false;
     }
 
 
