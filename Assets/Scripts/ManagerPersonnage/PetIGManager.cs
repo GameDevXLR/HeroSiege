@@ -37,7 +37,7 @@ public class PetIGManager : CharacterIGManager {
         }
     }
 
-    public new void MakeHimDie()
+    public override void MakeHimDie()
     {
 
         StartCoroutine(KillTheMob());

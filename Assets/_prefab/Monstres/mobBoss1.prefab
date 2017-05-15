@@ -607,7 +607,6 @@ GameObject:
   - component: {fileID: 33945325771131698}
   - component: {fileID: 65907465037549982}
   - component: {fileID: 23240156953409352}
-  - component: {fileID: 114413173443814458}
   - component: {fileID: 114135898089301858}
   - component: {fileID: 195782094007203306}
   - component: {fileID: 114545285561273128}
@@ -617,6 +616,7 @@ GameObject:
   - component: {fileID: 114621018668208152}
   - component: {fileID: 54358660851229740}
   - component: {fileID: 114689901315079102}
+  - component: {fileID: 114486781802833534}
   m_Layer: 9
   m_Name: mobBoss1
   m_TagString: Boss
@@ -2879,51 +2879,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114413173443814458
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1420677973341816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerDeath: {fileID: 0}
-  PlayerSpawn: {fileID: 0}
-  xpGiven: 2000
-  goldGiven: 100
-  goldDisplay: {fileID: 114438898843106408}
-  goldCanvas: {fileID: 1678407210894732}
-  killCount: 0
-  lifeBar: {fileID: 224799649439388832}
-  lifeBarMain: {fileID: 0}
-  playerHPTxt: {fileID: 0}
-  maxHp: 1000
-  currentHp: 1000
-  regenHp: 25
-  levelUpBonusHP: 10
-  respawnPoint: {fileID: 0}
-  armorScore: 25
-  armorDisplay: {fileID: 0}
-  dodge: 0
-  dodgeDisplay: {fileID: 0}
-  respawnTxt: {fileID: 0}
-  isDead: 0
-  playerDeathCount: 0
-  respawnTime: 5
-  timeBetweenTic: 5
-  guyAttackingMe: {fileID: 0}
-  rezParticule: {fileID: 0}
-  deadAnimChildEffect: {fileID: 0}
-  deadAnimChildMesh: {fileID: 0}
-  mobDeadAnimChildMesh: {fileID: 0}
-  durationShake: 5
-  amountShake: 10
-  threshold: 25
-  underThreshold: 0
-  isTaunt: 0
 --- !u!114 &114438898843106408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2983,6 +2938,36 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &114486781802833534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420677973341816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9486faf332116134aaf4427ebb3d0667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeBar: {fileID: 224799649439388832}
+  maxHp: 1000
+  currentHp: 1000
+  bonusHp: 0
+  regenHp: 25
+  damageReduction: 0
+  armorScore: 25
+  bonusArmorScore: 0
+  dodge: 0
+  isDead: 0
+  deadAnimChildMesh: {fileID: 0}
+  timeBetweenTic: 5
+  guyAttackingMe: {fileID: 0}
+  isTaunt: 0
+  xpGiven: 50
+  goldGiven: 5
+  goldDisplay: {fileID: 114438898843106408}
+  goldCanvas: {fileID: 1678407210894732}
+  isJungleMob: 0
 --- !u!114 &114488150067218850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3146,6 +3131,9 @@ MonoBehaviour:
   detectionRange: 50
   desiredPos: {x: 0, y: 0, z: 0}
   isUnderCC: 0
+  isActuAttacking: 0
+  isActuStopAttacking: 0
+  isLoosingTarget: 0
 --- !u!114 &114623077183640722
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,7 +8,6 @@ public class InactivateByTime : MonoBehaviour
 {
 
     public float lifetime;
-	public GameObject daddyTr;
     // Use this for initialization
     public void InactivateWithlifeTime()
     {
@@ -17,10 +16,7 @@ public class InactivateByTime : MonoBehaviour
 
     public void inactivate()
     {
-		daddyTr.GetComponent<NavMeshAgent> ().enabled = false;
-		daddyTr.transform.position = Vector3.zero;
-		GetComponent<Canvas> ().enabled = false;
-		GetComponent<Animator> ().enabled = false;
+        gameObject.SetActive(false);
     }
 
 

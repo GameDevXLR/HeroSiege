@@ -14,7 +14,7 @@ public class InactivateAnimatorCanvas : MonoBehaviour {
 
     public void inactivate()
     {
-        gameObject.GetComponent<Animator>().enabled = false;
-        gameObject.GetComponent<Canvas>().enabled = false;
+        GetComponent<Animator>().enabled = false;
+        GetComponent<Canvas>().enabled = false;
     }
 }

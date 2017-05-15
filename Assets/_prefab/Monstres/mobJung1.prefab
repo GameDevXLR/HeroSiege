@@ -3357,7 +3357,7 @@ GameObject:
   - component: {fileID: 114654630094429272}
   - component: {fileID: 95075686986799626}
   - component: {fileID: 114411770093052276}
-  - component: {fileID: 114105654346717594}
+  - component: {fileID: 114761350299336964}
   m_Layer: 8
   m_Name: GoldCanvas (2)
   m_TagString: Untagged
@@ -5145,7 +5145,6 @@ GameObject:
   - component: {fileID: 33444691643040558}
   - component: {fileID: 65170318798591102}
   - component: {fileID: 23912891360371802}
-  - component: {fileID: 114983183829304428}
   - component: {fileID: 114594234653664644}
   - component: {fileID: 195188654927422968}
   - component: {fileID: 114472653894647428}
@@ -5156,6 +5155,7 @@ GameObject:
   - component: {fileID: 54632252057324418}
   - component: {fileID: 114017646617901400}
   - component: {fileID: 114069608858984512}
+  - component: {fileID: 114022402550038634}
   m_Layer: 9
   m_Name: mobJung1
   m_TagString: Untagged
@@ -5207,6 +5207,7 @@ GameObject:
   - component: {fileID: 4251469081363578}
   - component: {fileID: 95088997059043980}
   - component: {fileID: 114151345778143374}
+  - component: {fileID: 114154170934081716}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -10968,6 +10969,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncRot: 0
   timeBtwTic: 0.22
+--- !u!114 &114022402550038634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911839666593776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 3
 --- !u!114 &114045336858103988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11047,19 +11060,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114105654346717594
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1590789217147196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 0.65
-  daddyTr: {fileID: 1911839666593776}
 --- !u!114 &114120960278484736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11090,6 +11090,18 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73ca80cb628febb46b40b10a3017d40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2.5
+--- !u!114 &114154170934081716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1915981808655180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 2.5
@@ -11414,6 +11426,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114761350299336964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590789217147196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679fde14235979146accbbd425caf65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0.65
 --- !u!114 &114798379786431436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11470,56 +11494,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationSpeed: 0.93
---- !u!114 &114983183829304428
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1911839666593776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerDeath: {fileID: 0}
-  PlayerSpawn: {fileID: 0}
-  xpGiven: 15
-  goldGiven: 10
-  goldDisplay: {fileID: 114045336858103988}
-  goldCanvas: {fileID: 1590789217147196}
-  killCount: 0
-  lifeBar: {fileID: 224359716515990726}
-  lifeBarMain: {fileID: 0}
-  playerHPTxt: {fileID: 0}
-  maxHp: 100
-  currentHp: 100
-  bonusHp: 0
-  regenHp: 0
-  bonusArmorScore: 0
-  damageReduction: 0
-  levelUpBonusHP: 10
-  respawnPoint: {fileID: 0}
-  armorScore: 5
-  armorDisplay: {fileID: 0}
-  dodge: 0
-  dodgeDisplay: {fileID: 0}
-  respawnTxt: {fileID: 0}
-  isDead: 0
-  playerDeathCount: 0
-  respawnTime: 5
-  timeBetweenTic: 1
-  guyAttackingMe: {fileID: 0}
-  rezParticule: {fileID: 0}
-  deadAnimChildEffect: {fileID: 0}
-  deadAnimChildMesh: {fileID: 0}
-  mobDeadAnimChildMesh: {fileID: 0}
-  durationShake: 5
-  amountShake: 10
-  threshold: 25
-  underThreshold: 0
-  levelUpBonusArmor: 0
-  isTaunt: 0
-  isJungleMob: 1
 --- !u!135 &135661501899205928
 SphereCollider:
   m_ObjectHideFlags: 1

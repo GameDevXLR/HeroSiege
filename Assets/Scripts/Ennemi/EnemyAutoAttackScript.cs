@@ -107,8 +107,11 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
                             target.GetComponent<PetIGManager>().LooseHealth(damage, false, gameObject);
                         //						}
                     }
-					if (!isActuStopAttacking && Vector3.Distance ( transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<GenericLifeScript> ().isDead ) 
-					{
+					if (!isActuStopAttacking && Vector3.Distance ( transform.localPosition, target.transform.localPosition) > attackRange 
+                        || target == null 
+                        || (target.tag == "Player" && target.GetComponent<PlayerIGManager> ().isDead ) 
+                        || (target.tag != "Player" && target.GetComponent<PetIGManager>().isDead))
+                    {
 //						if (gameObject.layer == 8 && target.layer == 8) 
 //						{
 //						} else 
