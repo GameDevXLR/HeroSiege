@@ -25,26 +25,26 @@ public class TeamSelectorScript : NetworkBehaviour
 					GameManager.instanceGM.isTeam1 = true;
 					other.gameObject.GetComponent<PlayerXPScript> ().isTeam1 = true;
 
-					other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
+					other.gameObject.GetComponent<PlayerIGManager>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
 					return;
 
 				} else 
 				{
 					GameManager.instanceGM.isTeam2 = true;
-					other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT2");
+					other.gameObject.GetComponent<PlayerIGManager>().respawnPoint = GameObject.Find ("PlayerRespawnPointT2");
 					return;
 				}
 			}
 			if (teamNbr == 1) 
 			{
-				other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
+				other.gameObject.GetComponent<PlayerIGManager>().respawnPoint = GameObject.Find ("PlayerRespawnPointT1");
 				other.gameObject.GetComponent<PlayerXPScript> ().isTeam1 = true;
 				other.gameObject.GetComponent<PlayerManager> ().myTeamSprite = team1Icon;
 				return;
 
 			} else 
 			{
-				other.gameObject.GetComponent<GenericLifeScript>().respawnPoint = GameObject.Find ("PlayerRespawnPointT2");
+				other.gameObject.GetComponent<PlayerIGManager>().respawnPoint = GameObject.Find ("PlayerRespawnPointT2");
 				other.gameObject.GetComponent<PlayerManager> ().myTeamSprite = team2Icon;
 
 			}

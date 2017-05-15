@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33514949011225384}
   - component: {fileID: 65306285786481806}
   - component: {fileID: 23300161619421398}
-  - component: {fileID: 114553126409150174}
   - component: {fileID: 114196182043369784}
   - component: {fileID: 195422198213826926}
   - component: {fileID: 114862510930733180}
@@ -32,6 +31,8 @@ GameObject:
   - component: {fileID: 114908982825255802}
   - component: {fileID: 54275056788145724}
   - component: {fileID: 114506459767818940}
+  - component: {fileID: 114571150185662158}
+  - component: {fileID: 114706519917618674}
   m_Layer: 9
   m_Name: mobJung2
   m_TagString: Untagged
@@ -448,7 +449,7 @@ GameObject:
   - component: {fileID: 114814937866265788}
   - component: {fileID: 95293064639200950}
   - component: {fileID: 114767254412467504}
-  - component: {fileID: 114586578471927396}
+  - component: {fileID: 114721281519640702}
   m_Layer: 8
   m_Name: GoldCanvas (2)
   m_TagString: Untagged
@@ -530,6 +531,7 @@ GameObject:
   - component: {fileID: 4211497941656454}
   - component: {fileID: 95182132404585664}
   - component: {fileID: 114015459479402638}
+  - component: {fileID: 114858461168234592}
   m_Layer: 0
   m_Name: Goblin_Ranger_R1
   m_TagString: Untagged
@@ -1529,7 +1531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncRot: 0
   timeBtwTic: 0.31
---- !u!114 &114553126409150174
+--- !u!114 &114571150185662158
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1537,61 +1539,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1005958469064112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
+  m_Script: {fileID: 11500000, guid: 9486faf332116134aaf4427ebb3d0667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDeath: {fileID: 0}
-  PlayerSpawn: {fileID: 0}
-  xpGiven: 20
-  goldGiven: 25
-  goldDisplay: {fileID: 114367478807938214}
-  goldCanvas: {fileID: 1736315127910624}
-  killCount: 0
   lifeBar: {fileID: 224284315727738590}
-  lifeBarMain: {fileID: 0}
-  playerHPTxt: {fileID: 0}
   maxHp: 150
   currentHp: 150
   bonusHp: 0
   regenHp: 0
-  bonusArmorScore: 0
   damageReduction: 0
-  levelUpBonusHP: 10
-  respawnPoint: {fileID: 0}
   armorScore: 10
-  armorDisplay: {fileID: 0}
+  bonusArmorScore: 0
   dodge: 5
-  dodgeDisplay: {fileID: 0}
-  respawnTxt: {fileID: 0}
   isDead: 0
-  playerDeathCount: 0
-  respawnTime: 5
+  deadAnimChildMesh: {fileID: 0}
   timeBetweenTic: 1
   guyAttackingMe: {fileID: 0}
-  rezParticule: {fileID: 0}
-  deadAnimChildEffect: {fileID: 0}
-  deadAnimChildMesh: {fileID: 0}
-  mobDeadAnimChildMesh: {fileID: 0}
-  durationShake: 5
-  amountShake: 10
-  threshold: 25
-  underThreshold: 0
-  levelUpBonusArmor: 0
   isTaunt: 0
+  xpGiven: 50
+  goldGiven: 5
+  goldDisplay: {fileID: 114367478807938214}
+  goldCanvas: {fileID: 1736315127910624}
   isJungleMob: 1
---- !u!114 &114586578471927396
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1736315127910624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 0.65
-  daddyTr: {fileID: 1005958469064112}
 --- !u!114 &114636151465075738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1647,6 +1616,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d3d7061b155cc4da2a67c3a188bf8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114706519917618674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005958469064112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 3
 --- !u!114 &114708382870262654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1668,6 +1649,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114721281519640702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1736315127910624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679fde14235979146accbbd425caf65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0.65
 --- !u!114 &114764422553865272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1806,6 +1799,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+--- !u!114 &114858461168234592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836998045025764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2
 --- !u!114 &114862510930733180
 MonoBehaviour:
   m_ObjectHideFlags: 1

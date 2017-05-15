@@ -77,11 +77,11 @@ public class PlayerCastHealArea : NetworkBehaviour
 	//demander le lancement du sort sur le serveur...normal.
 	public void CastThatSpell()
 	{
-		if (GetComponent<GenericLifeScript>().isDead)
+		if (!GetComponent<PlayerIGManager>().isDead)
 		{
-			return;
-		}
-		StartCoroutine(ShowTargeter()); // on a besoin d'attendre la fin de frame pour pas que mouseUp soit détecter direct et que le sort se lance cash en cliquant sur l'icone de sort.
+            StartCoroutine(ShowTargeter()); // on a besoin d'attendre la fin de frame pour pas que mouseUp soit détecter direct et que le sort se lance cash en cliquant sur l'icone de sort.	
+        }
+		
 	}
 
 	//si t'es un joueur; tu peux cast ce sort avec la touche Z : voir pour opti ca en fonction du clavier des gars.
@@ -115,7 +115,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 			}
 			if (Input.GetMouseButtonUp(0))
 			{
-				if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<GenericLifeScript>().isDead)
+				if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<PlayerIGManager>().isDead)
 				{
 					isTargeting = false;
 					spellRangeArea.SetActive(false);
@@ -144,7 +144,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 	IEnumerator ShowTargeter()
 	{
 		yield return new WaitForEndOfFrame();
-		if (GetComponent<GenericLifeScript>().isDead)
+		if (GetComponent<PlayerIGManager>().isDead)
 		{
 			yield return null;
 		}

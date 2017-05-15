@@ -63,7 +63,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			if (target && !target.GetComponent<GenericLifeScript>().isDead) 
+			if (target && !target.GetComponent<EnnemyIGManager>().isDead) 
 			{
 				if (!isAttacking) 
 				{
@@ -77,24 +77,24 @@ public class PlayerAutoAttack: NetworkBehaviour
 					if (Time.time > previousAttackTime) 
 					{
 						previousAttackTime = Time.time + attackRate;
-						target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
+						target.GetComponent<EnnemyIGManager> ().LooseHealth (damage, false, gameObject);
 						if (critChance > 0) 
 						{
 							if ((Random.Range (0, 100)) < critChance) 
 							{
-								target.GetComponent<GenericLifeScript> ().LooseHealth (damage * critFactor, false, gameObject);
+								target.GetComponent<EnnemyIGManager> ().LooseHealth (damage * critFactor, false, gameObject);
 								target.GetComponent<StatusHandlerScript> ().MakeHimCC (0.5f);
 							}
 						}
 					}
-					if (!isActuStopAttacking && Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<GenericLifeScript> ().isDead) 
+					if (!isActuStopAttacking && Vector3.Distance (transform.position, target.transform.position) > attackRange || target.GetComponent<EnnemyIGManager> ().isDead) 
 					{
 						isActuStopAttacking = true;
 						RpcStopAttacking ();
 					}
 				}
 			}
-			if ((target == null || target.GetComponent<GenericLifeScript>().isDead) && isAttacking) 
+			if ((target == null || target.GetComponent<EnnemyIGManager>().isDead) && isAttacking) 
 			{
 				isActuStopAttacking = true;
 				RpcStopAttacking ();

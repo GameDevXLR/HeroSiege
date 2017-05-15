@@ -29,7 +29,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Sprite tankAvatarImg;
 	public Sprite healAvatarImg;
 	public Sprite DpsAvatarImg;
-	public GenericLifeScript myGeneLifeScript;
+	public PlayerIGManager myPlayerIGManager;
 	public GenericManaScript myGeneManaScript;
 	public PlayerAutoAttack myAutoAScript;
 	public PlayerStatPlus myStatPlusScript;
@@ -131,26 +131,26 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		myAutoAScript.enabled = true;
 		myStatPlusScript.enabled = true;
 		myAutoAScript.anim = childTankSkin.GetComponentInChildren<Animator> ();
-		myGeneLifeScript.deadAnimChildMesh = childTankSkin.transform.GetChild(0).gameObject;
-		myGeneLifeScript.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
+		myPlayerIGManager.deadAnimChildMesh = childTankSkin.transform.GetChild(0).gameObject;
+		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
 
 		GetComponent<PlayerClicToMove> ().anim = childTankSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
-			myGeneLifeScript.maxHp = 520;
-			myGeneLifeScript.currentHp = 520;
-			myGeneLifeScript.regenHp = 15;
+			myPlayerIGManager.maxHp = 520;
+			myPlayerIGManager.currentHp = 520;
+			myPlayerIGManager.regenHp = 15;
 			myGeneManaScript.maxMp = 150;
 			myGeneManaScript.currentMp = 150;
 			myGeneManaScript.regenMp = 4;
-			myGeneLifeScript.armorScore = 45;
+			myPlayerIGManager.armorScore = 45;
 			myAutoAScript.damage = 20;
 			myAutoAScript.attackRate = 1;
 			myAutoAScript.attackRange = 5;
-			myGeneLifeScript.levelUpBonusHP = 75;
+			myPlayerIGManager.levelUpBonusHP = 75;
 			myGeneManaScript.levelUpBonusMP = 12;
 			myAutoAScript.levelUpBonusDamage = 3;
-			myGeneLifeScript.levelUpBonusArmor = 4;
+			myPlayerIGManager.levelUpBonusArmor = 4;
 			myAutoAScript.attackSpeedStat = 0.8f;
 			myStatPlusScript.doubleHPBonus = true;
 
@@ -187,27 +187,27 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		myStatPlusScript.enabled = true;
 
 		myAutoAScript.anim = childHealSkin.GetComponentInChildren<Animator> ();
-		myGeneLifeScript.deadAnimChildMesh = childHealSkin.transform.GetChild(0).gameObject;
-		myGeneLifeScript.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
+		myPlayerIGManager.deadAnimChildMesh = childHealSkin.transform.GetChild(0).gameObject;
+		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
 		GetComponent<PlayerClicToMove> ().anim = childHealSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1f;
 
-			myGeneLifeScript.maxHp = 300;
-			myGeneLifeScript.currentHp = 300;
-			myGeneLifeScript.regenHp = 6;
+			myPlayerIGManager.maxHp = 300;
+			myPlayerIGManager.currentHp = 300;
+			myPlayerIGManager.regenHp = 6;
 			myGeneManaScript.maxMp = 220;
 			myGeneManaScript.currentMp = 220;
 			myGeneManaScript.regenMp = 8;
 			myAutoAScript.damage = 8;
 			myAutoAScript.attackRate = .7f;
 			myAutoAScript.attackRange = 10;
-			myGeneLifeScript.levelUpBonusHP = 25;
+			myPlayerIGManager.levelUpBonusHP = 25;
 			myGeneManaScript.levelUpBonusMP = 22;
-			myGeneLifeScript.armorScore = 10;
+			myPlayerIGManager.armorScore = 10;
 			myAutoAScript.levelUpBonusDamage = 2;
-			myGeneLifeScript.levelUpBonusArmor = 1;
+			myPlayerIGManager.levelUpBonusArmor = 1;
 			myAutoAScript.attackSpeedStat = 1.1f;
 			myStatPlusScript.doubleMPBonus = true;
 
@@ -245,27 +245,27 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerArcherCastPoisonTrap> ().enabled = true;
 
 		myAutoAScript.anim = childDpsSkin.GetComponentInChildren<Animator> ();
-		myGeneLifeScript.deadAnimChildMesh = childDpsSkin.transform.GetChild(0).gameObject;
-		myGeneLifeScript.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
+		myPlayerIGManager.deadAnimChildMesh = childDpsSkin.transform.GetChild(0).gameObject;
+		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
 
 		GetComponent<PlayerClicToMove> ().anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.2f;
-			myGeneLifeScript.maxHp = 440;
-			myGeneLifeScript.currentHp = 440;
-			myGeneLifeScript.regenHp = 8;
+			myPlayerIGManager.maxHp = 440;
+			myPlayerIGManager.currentHp = 440;
+			myPlayerIGManager.regenHp = 8;
 			myGeneManaScript.maxMp = 130;
 			myGeneManaScript.currentMp = 130;
 			myGeneManaScript.regenMp = 5;
 			myAutoAScript.damage = 22;
 			myAutoAScript.attackRate = .8f;
 			myAutoAScript.attackRange = 15;
-			myGeneLifeScript.levelUpBonusHP = 35;
+			myPlayerIGManager.levelUpBonusHP = 35;
 			myGeneManaScript.levelUpBonusMP = 12;
 
-			myGeneLifeScript.armorScore = 15;
-			myGeneLifeScript.levelUpBonusArmor = 2;
+			myPlayerIGManager.armorScore = 15;
+			myPlayerIGManager.levelUpBonusArmor = 2;
 			myAutoAScript.levelUpBonusDamage = 5;
 			myAutoAScript.attackSpeedStat = 1.25f;
 			myStatPlusScript.doubleDpsBonus = true;

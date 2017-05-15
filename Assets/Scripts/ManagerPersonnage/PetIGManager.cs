@@ -17,7 +17,7 @@ public class PetIGManager : CharacterIGManager {
     {
        
        base.LooseHeathServer(dmg, trueDmg, attacker);
-        if (!attacker.GetComponent<GenericLifeScript>().isDead)
+        if (!attacker.GetComponent<EnnemyIGManager>().isDead)
         {
             if (!isTaunt)
             {
@@ -37,7 +37,7 @@ public class PetIGManager : CharacterIGManager {
         }
     }
 
-    public new void MakeHimDie()
+    public override void MakeHimDie()
     {
 
         StartCoroutine(KillTheMob());

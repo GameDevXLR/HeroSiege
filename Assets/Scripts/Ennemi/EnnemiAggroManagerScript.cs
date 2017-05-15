@@ -26,7 +26,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 	void OnTriggerStay(Collider other)
 	{
 
-		if (!GetComponentInParent<GenericLifeScript>().isDead && (autoAScript.target == null || autoAScript.target.layer != 8)) 
+		if (!GetComponentInParent<EnnemyIGManager>().isDead && (autoAScript.target == null || autoAScript.target.layer != 8)) 
 		{
 			if (other.gameObject.layer == 8 || other.gameObject.layer == 9) 
 			{
@@ -45,7 +45,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 		{
 			if (other.gameObject == autoAScript.target) 
 			{
-				if (!GetComponentInParent<EnemyAutoAttackScript> ().isUnderCC && !GetComponentInParent<GenericLifeScript> ().isTaunt) 
+				if (!GetComponentInParent<EnemyAutoAttackScript> ().isUnderCC && !GetComponentInParent<EnnemyIGManager> ().isTaunt) 
 				{
 					GetComponentInParent<EnemyAutoAttackScript> ().LooseTarget ();
 				}

@@ -344,9 +344,10 @@ GameObject:
   - component: {fileID: 54418423754842802}
   - component: {fileID: 114919855003554388}
   - component: {fileID: 114684093164353834}
+  - component: {fileID: 114731488448299962}
   m_Layer: 8
   m_Name: PetHealer
-  m_TagString: Untagged
+  m_TagString: Pet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2314,7 +2315,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1380983508602426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f783a4db0e34dd4eaed3f2c662008af, type: 3}
   m_Name: 
@@ -2571,6 +2572,31 @@ MonoBehaviour:
   isUnderCC: 0
   isActuAttacking: 0
   isActuStopAttacking: 0
+--- !u!114 &114731488448299962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1380983508602426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86652f5e1252bd4192cf07386b796b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeBar: {fileID: 0}
+  maxHp: 616
+  currentHp: 616
+  bonusHp: 0
+  regenHp: 174
+  damageReduction: 0
+  armorScore: 25
+  bonusArmorScore: 0
+  dodge: 0
+  isDead: 0
+  deadAnimChildMesh: {fileID: 0}
+  timeBetweenTic: 5
+  guyAttackingMe: {fileID: 0}
+  isTaunt: 0
 --- !u!114 &114895191927934948
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,7 +23,7 @@ public class PotionsScript : InventoryItem
 
 	public void LooseOneCharge()
 	{
-		if (GameManager.instanceGM.playerObj.GetComponent<GenericLifeScript> ().isDead) 
+		if (GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager> ().isDead) 
 		{
 			return;
 		}

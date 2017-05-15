@@ -39,7 +39,8 @@ public class EnnemyIGManager : CharacterIGManager
     {
 
         base.LooseHeathServer(dmg, trueDmg, attacker);
-        if (!attacker.GetComponent<GenericLifeScript>().isDead)
+        if ((attacker.tag == "Player" && !attacker.GetComponent<PlayerIGManager>().isDead)
+            ||(attacker.tag != "Player" && !attacker.GetComponent<EnnemyIGManager>().isDead))
         {
             if (!isTaunt)
             {
@@ -58,7 +59,7 @@ public class EnnemyIGManager : CharacterIGManager
         }
     }
 
-    public new void MakeHimDie()
+    public override void MakeHimDie()
     {
        
         StartCoroutine(KillTheMob());
@@ -118,13 +119,15 @@ public class EnnemyIGManager : CharacterIGManager
         goldDisplay.text = goldGiven.ToString();
         goldCanvas.GetComponent<Animator>().enabled = true;
         goldCanvas.GetComponent<Canvas>().enabled = true;
-        goldCanvas.GetComponent<InactivateByTime>().InactivateWithlifeTime();
+        goldCanvas.GetComponent<InactivateAnimatorCanvas>().inactiveWithTime();
         //  goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);
         deadAnimChildMesh.GetComponent<Animator>().enabled = true;
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         deadAnimChildMesh.GetComponent<InactivateByTime>().InactivateWithlifeTime();
         GetComponent<EnemyAutoAttackScript>().target = null;
         GetComponent<NavMeshAgent>().acceleration = 0;
+        GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+        GetComponent<InactivateByTime>().InactivateWithlifeTime();
         guyAttackingMe = null;
     }
 

@@ -60,7 +60,7 @@ public class SpellCCAreaScript : NetworkBehaviour
             {
 
                 spellTargets.Add(other.gameObject);
-                other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage / 5, true, caster);
+                other.gameObject.GetComponent<EnnemyIGManager>().LooseHealth((int)spellDamage / 5, true, caster);
             }
 
         }

@@ -113,7 +113,7 @@ public class CharacterIGManager : NetworkBehaviour
         lifeBar.localScale = new Vector3(x, 1f, 1f);
     }
 
-    public void MakeHimDie()
+    public virtual void MakeHimDie()
     {
         Debug.Log("Personnage mort");
     }
@@ -147,7 +147,7 @@ public class CharacterIGManager : NetworkBehaviour
         }
     }
 
-    public void takeDommage(int dmg, bool trueDmg)
+    public virtual void takeDommage(int dmg, bool trueDmg)
     {
         if (trueDmg)
         {
@@ -179,17 +179,17 @@ public class CharacterIGManager : NetworkBehaviour
 
 
 
-    public void ActualizeArmor(int armor)
+    public virtual void ActualizeArmor(int armor)
     {
         armorScore = armor;
     }
-    public void ActualizeDodge(float dod)
+    public virtual void ActualizeDodge(float dod)
     {
         dodge = dod;
     }
 
 
-    public void ActualizeDeadIcon(bool isHeDead)
+    public virtual void ActualizeDeadIcon(bool isHeDead)
     {
         isDead = isHeDead;
 

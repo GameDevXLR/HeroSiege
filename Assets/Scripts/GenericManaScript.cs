@@ -75,12 +75,11 @@ public class GenericManaScript : NetworkBehaviour
 	//auto regen des mp tous les timeTic;
 	public void RegenerateMp ()
 	{
-		if (GetComponent<GenericLifeScript> ().isDead) 
+		if (GetComponent<PlayerIGManager> ().isDead) 
 		{
 			manaBar.GetComponentInParent<Canvas> ().enabled = false;
-			return;
 		}
-		if (currentMp <= maxMp) 
+		else if (currentMp <= maxMp) 
 		{
 			currentMp += regenMp;
 			RpcActualizeThatMana (currentMp);
@@ -90,7 +89,7 @@ public class GenericManaScript : NetworkBehaviour
 	[Command]
 	public void CmdLooseManaPoints(int mana)
 	{
-		if (GetComponent<GenericLifeScript> ().isDead) 
+		if (GetComponent<PlayerIGManager> ().isDead) 
 		{
 			return;
 		}
@@ -141,7 +140,7 @@ public class GenericManaScript : NetworkBehaviour
 		{
 			manaBar.GetComponentInParent<Canvas> ().enabled = false;
 		}
-		if(GetComponent<GenericLifeScript>().isDead)
+		if(GetComponent<PlayerIGManager>().isDead)
 		{
 			manaBar.GetComponentInParent<Canvas> ().enabled = false;
 		}

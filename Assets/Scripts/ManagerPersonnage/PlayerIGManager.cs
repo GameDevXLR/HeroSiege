@@ -123,7 +123,7 @@ public class PlayerIGManager : CharacterIGManager {
     }
 
 
-    public new void MakeHimDie()
+    public override void MakeHimDie()
     {
         RpcPlayerRespawnProcess();
     }
@@ -151,7 +151,7 @@ public class PlayerIGManager : CharacterIGManager {
                 if (GetComponent<PlayerHealerCastInvokePet>().actualPet != null)
                 {
                     GetComponent<PlayerHealerCastInvokePet>().actualPet.transform.position = Vector3.zero;
-                    GetComponent<PlayerHealerCastInvokePet>().actualPet.GetComponent<GenericLifeScript>().isDead = true;
+                    GetComponent<PlayerHealerCastInvokePet>().actualPet.GetComponent<PetIGManager>().isDead = true;
                     yield return new WaitForSeconds(0.2f);
                     GetComponent<PlayerHealerCastInvokePet>().DestroyThePrevPet(); // détruit le quand tu meurs.
                 }
@@ -249,7 +249,7 @@ public class PlayerIGManager : CharacterIGManager {
 
         }
     }
-    public new  void ActualizeArmor(int armor)
+    public override  void ActualizeArmor(int armor)
     {
         base.ActualizeArmor(armor);
         if (isLocalPlayer)
@@ -257,7 +257,7 @@ public class PlayerIGManager : CharacterIGManager {
             armorDisplay.text = armorScore.ToString();
         }
     }
-    public new void ActualizeDodge(float dod)
+    public override void ActualizeDodge(float dod)
     {
         base.ActualizeDodge(dod);
         if (isLocalPlayer)
@@ -274,7 +274,7 @@ public class PlayerIGManager : CharacterIGManager {
         }
         GetComponent<PlayerManager>().playerDeathsTxt.text = dea.ToString();
     }
-    public new void ActualizeDeadIcon(bool isHeDead)
+    public override void ActualizeDeadIcon(bool isHeDead)
     {
         isDead = isHeDead;
         if (isLocalPlayer && playerDeathCount == 1 && !isDead)

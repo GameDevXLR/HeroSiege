@@ -40,7 +40,7 @@ public class PlayerXPScript : NetworkBehaviour
 
 	public void GetXP(int xp)
 	{
-		if (!isServer || GetComponent<GenericLifeScript>().isDead) 
+		if (!isServer || GetComponent<PlayerIGManager>().isDead) 
 		{
 			return;
 		}
@@ -83,7 +83,7 @@ public class PlayerXPScript : NetworkBehaviour
 				playerLvl.text = actualLevel.ToString ();
 
 			}
-			GetComponent<GenericLifeScript> ().LevelUp ();
+			GetComponent<PlayerIGManager> ().LevelUp ();
 			GetComponent<GenericManaScript> ().LevelUp ();
 			GetComponent<PlayerAutoAttack> ().LevelUp ();
 
