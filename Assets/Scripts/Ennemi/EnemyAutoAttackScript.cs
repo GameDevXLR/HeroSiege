@@ -60,7 +60,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 		if (target != null && isServer) 
 		{
-			if (((target.tag == "Player" && target.GetComponent<PlayerIGManager> ().isDead) || target.GetComponent<PetIGManager>().isDead) && !isLoosingTarget) 
+			if (((target.tag == "Player" && target.GetComponent<PlayerIGManager> ().isDead) || target.tag == "Pet" && target.GetComponent<PetIGManager>().isDead) && !isLoosingTarget) 
 			{
 				isLoosingTarget = true;
 				LooseTarget ();
@@ -281,8 +281,8 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	{
 
 		isActualizingPos = true;
-		if ((gameObject.tag == "Player" && target.GetComponent<PlayerIGManager>().isDead) 
-            || (gameObject.tag != "Player" && target.GetComponent<PetIGManager> ().isDead) 
+		if ((target.gameObject.tag == "Player" && target.GetComponent<PlayerIGManager>().isDead) 
+            || (target.gameObject.tag == "Pet" && target.GetComponent<PetIGManager> ().isDead) 
             || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
 			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;

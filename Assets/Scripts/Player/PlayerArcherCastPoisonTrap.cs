@@ -117,7 +117,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 			}
 			if (Input.GetMouseButtonUp(0))
 			{
-				if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<PetIGManager>().isDead)
+				if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<PlayerIGManager>().isDead)
 				{
 					isTargeting = false;
 					spellRangeArea.SetActive(false);
