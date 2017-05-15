@@ -83,12 +83,12 @@ public class AllyPetAutoAttack : NetworkBehaviour
 								anim.SetBool ("walk", walkAnim = false);
 							} else 
 							{
-								target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, GetComponent<MinionsPathFindingScript>().target.gameObject);
+								target.GetComponent<EnnemyIGManager> ().LooseHealth (damage, false, GetComponent<MinionsPathFindingScript>().target.gameObject);
 
 							}
 						 
 					}
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<PlayerIGManager> ().isDead) 
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.layer == Layers.Player && target.GetComponent<PlayerIGManager> ().isDead) 
 					{
 						if (target.layer != 8) 
 						{
@@ -258,7 +258,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 	{
 
 		isActualizingPos = true;
-		if (target.GetComponent<EnnemyIGManager> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
+		if ( target.layer == Layers.Ennemies && target.GetComponent<EnnemyIGManager> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
 				target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
 				SetTheTarget (target);
