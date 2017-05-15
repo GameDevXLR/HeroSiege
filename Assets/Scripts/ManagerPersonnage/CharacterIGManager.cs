@@ -11,12 +11,13 @@ public class CharacterIGManager : NetworkBehaviour
     [SyncVar(hook = "RescaleTheLifeBarIG")] public int currentHp = 800;
     [SyncVar] public int bonusHp;
     [SyncVar] public int regenHp;
+    [SyncVar] public int damageReduction;
 
     // Armure
     [SyncVar(hook = "ActualizeArmor")] public int armorScore = 1;
+    [SyncVar] public int bonusArmorScore;
 
     // Esquive
-    [SyncVar] public int bonusArmorScore;
     [SyncVar(hook = "ActualizeDodge")] [Range(0, 100)] public float dodge;
 
     // Mort
@@ -32,12 +33,13 @@ public class CharacterIGManager : NetworkBehaviour
 
     [SyncVar] public bool isTaunt;
 
-    protected void Start()
+    protected virtual void Start()
     {
         lastTic = 0f;
+
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (isDead || currentHp == maxHp)
         {
@@ -74,7 +76,7 @@ public class CharacterIGManager : NetworkBehaviour
         }
     }
 
-    public void WhenUpdateCurrentSupAtMaxHp()
+    public virtual void WhenUpdateCurrentSupAtMaxHp()
     {
         currentHp = maxHp;
         lifeBar.GetComponentInParent<Canvas>().enabled = false;
@@ -86,7 +88,7 @@ public class CharacterIGManager : NetworkBehaviour
         RescaleTheLifeBarIG(currentHp);
     }
 
-    public void RescaleTheLifeBarIG(int life)
+    public virtual void RescaleTheLifeBarIG(int life)
     {
         currentHp = life;
         float x = (float)currentHp / maxHp;
@@ -116,7 +118,7 @@ public class CharacterIGManager : NetworkBehaviour
         Debug.Log("Personnage mort");
     }
 
-    public void LooseHealth(int dmg, bool trueDmg, GameObject attacker)
+    public virtual void LooseHealth(int dmg, bool trueDmg, GameObject attacker)
     {
         if (isDead)
         {
@@ -124,42 +126,58 @@ public class CharacterIGManager : NetworkBehaviour
         }
         if (isServer)
         {
-            if (attacker != guyAttackingMe || guyAttackingMe == null)
-            {
-                guyAttackingMe = attacker;
-            }
-            
-            if (currentHp > 0)
-            {
-                if (trueDmg)
-                {
-                    currentHp -= dmg;
-                    return;
-                }
-                float y = Random.Range(0, 100);
-                if (y > dodge)
-                {
-                    if (armorScore > 0)
-                    {
-                        float multiplicatorArmor = (float)100f / (100f + armorScore);
-                        currentHp -= (int)Mathf.Abs(dmg * multiplicatorArmor);
-                       
-                        return;
-                    }
-                    else
-                    {
-                        currentHp -= dmg;
-                    }
-                }
-            }
+            LooseHeathServer(dmg, trueDmg, attacker);
         }
         RescaleTheLifeBarIG(currentHp);
         lifeBar.GetComponentInParent<Canvas>().enabled = true;
+
+    }
+    
+    protected virtual void LooseHeathServer(int dmg, bool trueDmg, GameObject attacker)
+    {
+        if (attacker != guyAttackingMe || guyAttackingMe == null)
+        {
+            guyAttackingMe = attacker;
+        }
+
+
+        if (currentHp > 0)
+        {
+            takeDommage(dmg, trueDmg);
+        }
+    }
+
+    public void takeDommage(int dmg, bool trueDmg)
+    {
+        if (trueDmg)
+        {
+            currentHp -= dmg;
+        }
+        else
+        {
+            float y = Random.Range(0, 100);
+            if (y > dodge)
+            {
+                if (armorScore <= -100)
+                {
+                    currentHp -= dmg * 2;
+                }
+                else
+                {
+                    float multiplicatorArmor = (float)100f / (100f + armorScore);
+                    int dmgAfterReduct = (dmg / 2) - damageReduction; //on ne peut réduire les damages que jusqu'a 50%
+                    if (dmgAfterReduct < 0)
+                    {
+                        dmgAfterReduct = 0;
+                    }
+                    dmg = (dmg / 2) + dmgAfterReduct;
+                    currentHp -= (int)Mathf.Abs(dmg * multiplicatorArmor);
+                }
+            }
+        }
     }
 
 
-
- 
 
     public void ActualizeArmor(int armor)
     {
@@ -189,4 +207,5 @@ public class CharacterIGManager : NetworkBehaviour
         yield return new WaitForSeconds(tauntT);
         isTaunt = false;
     }
+
 }

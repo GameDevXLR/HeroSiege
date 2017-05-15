@@ -11,14 +11,18 @@ public class PlayerIGManager : CharacterIGManager {
     // Audio
     public AudioClip PlayerDeath;
     public AudioClip PlayerSpawn;
+
     // kill
     public int killCount;
+
     // life
     public RectTransform lifeBarMain; // lifebar de l'interface player.
     public Text playerHPTxt;
+
     //level up
     public int levelUpBonusHP = 10;
     [SyncVar] public int levelUpBonusArmor;
+
     // mort
     public GameObject respawnPoint; // placer ici un transform qui correspond a l'endroit ou doit respawn le joueur.
     public Text respawnTxt;
@@ -26,12 +30,14 @@ public class PlayerIGManager : CharacterIGManager {
     public float respawnTime = 5f;
     public ParticleSystem rezParticule;
     private Image playerDeathDisplay;
+
     // stat armor/dodge
     public Text armorDisplay;
     public Text dodgeDisplay;
-    
+
     // animation
     public GameObject deadAnimChildEffect;
+    private Transform animParent;
 
 
     // shake de la camera
@@ -40,10 +46,12 @@ public class PlayerIGManager : CharacterIGManager {
     [Range(0, 100)]
     public int threshold = 25;
     public bool underThreshold = false;
+
     
-    new void Start()
+
+    protected override void Start()
     {
-        lastTic = 0f;
+        base.Start();
         if (isLocalPlayer)
         {
             respawnTxt = GameObject.Find("RespawnText").GetComponent<Text>();
@@ -56,98 +64,51 @@ public class PlayerIGManager : CharacterIGManager {
             playerDeathDisplay = GameObject.Find("PlayerDeadAvatarImg").GetComponent<Image>();
             playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
         }
+       
         deadAnimChildMesh = transform.GetChild(5).GetChild(0).gameObject;
         deadAnimChildEffect = transform.GetChild(4).gameObject;
+        
     }
 
-    public new void WhenUpdateCurrentSupAtMaxHp()
+    protected override void Update()
     {
-        currentHp = maxHp;
-        lifeBar.GetComponentInParent<Canvas>().enabled = false;
+        base.Update();
+
+        if (underThreshold && ((float)currentHp / maxHp) * 100 > threshold)
+        {
+            underThreshold = false;
+        }
+    }
+
+
+    
+
+
+    public override void WhenUpdateCurrentSupAtMaxHp()
+    {
+        base.WhenUpdateCurrentSupAtMaxHp();
         if (isLocalPlayer)
         {
             playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
         }
     }
 
-
-    public new void LooseHealth(int dmg, bool trueDmg, GameObject attacker)
+    public override void RescaleTheLifeBarIG(int life)
     {
-        if (isDead)
-        {
-            return;
-        }
-        if (isServer)
-        {
-            if (attacker != guyAttackingMe || guyAttackingMe == null)
-            {
-                guyAttackingMe = attacker;
-            }
-            
 
-            if (currentHp > 0)
-            {
-                if (trueDmg)
-                {
-                    currentHp -= dmg;
-                }
-                else
-                {
-                    float y = Random.Range(0, 100);
-                    if (y > dodge)
-                    {
-                        if (armorScore <= -100)
-                        {
-                            currentHp -= dmg * 2 ;
-                        }
-                        else
-                        {
-                            float multiplicatorArmor = (float)100f / (100f + armorScore);
-                            currentHp -= (int)Mathf.Abs(dmg * multiplicatorArmor);
-                        }
-                    }
-                }
-                
-            }
+        base.RescaleTheLifeBarIG(life);
 
-        }
-        RescaleTheLifeBarIG(currentHp);
-        lifeBar.GetComponentInParent<Canvas>().enabled = true;
-        
-    }
-
-
-    public new void RescaleTheLifeBarIG(int life)
-    {
-        currentHp = life;
         float x = (float)currentHp / maxHp;
         if (x > 1f)
         {
             x = 1f;
         }
-
-
         if (((float)currentHp / maxHp) * 100 <= threshold && !underThreshold && isLocalPlayer)
         {
             underThreshold = true;
             Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
         }
-
-        if (currentHp == maxHp)
-        {
-            lifeBar.GetComponentInParent<Canvas>().enabled = false;
-        }
-        else if (currentHp != maxHp && currentHp != 0)
-        {
-            lifeBar.GetComponentInParent<Canvas>().enabled = true;
-
-            if (currentHp > maxHp)
-            {
-                currentHp = maxHp;
-                lifeBar.GetComponentInParent<Canvas>().enabled = false;
-            }
-        }
-        lifeBar.localScale = new Vector3(x, 1f, 1f);
+        
         if (isLocalPlayer)
         {
             lifeBarMain.localScale = new Vector3(x, 1f, 1f);
@@ -164,15 +125,8 @@ public class PlayerIGManager : CharacterIGManager {
 
     public new void MakeHimDie()
     {
-        if (isLocalPlayer)
-        {
-            //faire ici ce qui se passe pour un joueur qui meurt
-        }
         RpcPlayerRespawnProcess();
-        
     }
-
-
 
     //ce qu'il se passe si un JOUEUR meurt...
     [ClientRpc]
@@ -192,6 +146,16 @@ public class PlayerIGManager : CharacterIGManager {
         if (isServer)
         {
             GetComponentInChildren<PlayerEnnemyDetectionScript>().autoTargetting = false;
+            if (GetComponent<PlayerHealerCastInvokePet>())
+            { //si t'as un pet 
+                if (GetComponent<PlayerHealerCastInvokePet>().actualPet != null)
+                {
+                    GetComponent<PlayerHealerCastInvokePet>().actualPet.transform.position = Vector3.zero;
+                    GetComponent<PlayerHealerCastInvokePet>().actualPet.GetComponent<GenericLifeScript>().isDead = true;
+                    yield return new WaitForSeconds(0.2f);
+                    GetComponent<PlayerHealerCastInvokePet>().DestroyThePrevPet(); // détruit le quand tu meurs.
+                }
+            }
 
         }
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
@@ -204,6 +168,8 @@ public class PlayerIGManager : CharacterIGManager {
         GetComponent<PlayerAutoAttack>().target = null;
         GetComponent<PlayerAutoAttack>().enabled = false;
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+        animParent = deadAnimChildMesh.transform.parent;
+
         deadAnimChildMesh.transform.parent = null;
         GetComponent<PlayerClicToMove>().target = null;
         GetComponent<PlayerClicToMove>().enabled = false;
@@ -221,8 +187,9 @@ public class PlayerIGManager : CharacterIGManager {
         //		yield return new WaitForSeconds (0.8f);
         //		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
         yield return new WaitForSeconds(respawnTime);
-        deadAnimChildMesh.transform.parent = this.transform;
-        deadAnimChildMesh.transform.localPosition = new Vector3(0f, -0.7f, 0f); // le mesh est légerement en dessous...allez pigé...a revoir ca !
+        deadAnimChildMesh.transform.parent = animParent;
+        deadAnimChildMesh.transform.localPosition = Vector3.zero;
+        deadAnimChildMesh.transform.localScale = Vector3.one;
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", false);
 
         deadAnimChildEffect.transform.parent = this.transform;
@@ -263,8 +230,9 @@ public class PlayerIGManager : CharacterIGManager {
                 respawnTxt.enabled = false;
             }
         }
-    }
 
+
+    }
 
     public void LevelUp()
     {
@@ -281,9 +249,9 @@ public class PlayerIGManager : CharacterIGManager {
 
         }
     }
-    public new void ActualizeArmor(int armor)
+    public new  void ActualizeArmor(int armor)
     {
-        armorScore = armor;
+        base.ActualizeArmor(armor);
         if (isLocalPlayer)
         {
             armorDisplay.text = armorScore.ToString();
@@ -291,7 +259,7 @@ public class PlayerIGManager : CharacterIGManager {
     }
     public new void ActualizeDodge(float dod)
     {
-        dodge = dod;
+        base.ActualizeDodge(dod);
         if (isLocalPlayer)
         {
             dodgeDisplay.text = dod.ToString();
@@ -300,16 +268,24 @@ public class PlayerIGManager : CharacterIGManager {
     public void ActualizePlayerDeaths(int dea)
     {
         playerDeathCount = dea;
+        if (isLocalPlayer && playerDeathCount == 1)
+        {
+            GameManager.instanceGM.ShowAGameTip("When you die, you can cast your invoker spells on the enemy team or to help your allies. You can change them in the menu. It's also a good time to spy on the other team.");
+        }
         GetComponent<PlayerManager>().playerDeathsTxt.text = dea.ToString();
     }
     public new void ActualizeDeadIcon(bool isHeDead)
     {
         isDead = isHeDead;
-        if (!isLocalPlayer)
+        if (isLocalPlayer && playerDeathCount == 1 && !isDead)
         {
-            GetComponent<PlayerManager>().deadAvatarImg.enabled = isHeDead;
+            GameManager.instanceGM.ShowAGameTip("The time you spent dead depends on the number of time you died before and your hero's level.");
         }
-        
+
+        if (!isLocalPlayer )
+        {
+                GetComponent<PlayerManager>().deadAvatarImg.enabled = isHeDead;
+        }
     }
 
 }

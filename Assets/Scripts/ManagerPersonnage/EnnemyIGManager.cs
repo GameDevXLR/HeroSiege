@@ -18,91 +18,44 @@ public class EnnemyIGManager : CharacterIGManager
 
     public bool isJungleMob;
 
+    //Team
+
+    private int nbrOfPlayersT1;
+    private int nbrOfPlayersT2;
+
 
     new void Start()
     {
-        lastTic = 0f;
+        base.Start();
         deadAnimChildMesh = transform.GetChild(3).GetChild(0).gameObject;
+        if (isServer) 
+		{
+			nbrOfPlayersT1 = GameManager.instanceGM.team1ID.Count;
+			nbrOfPlayersT2 = GameManager.instanceGM.team2ID.Count;
+		}
     }
 
-
-    public new void LooseHealth(int dmg, bool trueDmg, GameObject attacker)
+    protected override void LooseHeathServer(int dmg, bool trueDmg, GameObject attacker)
     {
-        if (isDead)
-        {
-            return;
-        }
-        if (isServer)
-        {
 
-
-            if (attacker != guyAttackingMe || guyAttackingMe == null)
+        base.LooseHeathServer(dmg, trueDmg, attacker);
+        if (!attacker.GetComponent<GenericLifeScript>().isDead)
+        {
+            if (!isTaunt)
             {
-                guyAttackingMe = attacker;
-            }
-            if (!attacker.GetComponent<PlayerIGManager>().isDead)
-            {
-                if (!isTaunt)
+                if (attacker != GetComponent<EnemyAutoAttackScript>().target)
                 {
-                    if (attacker != GetComponent<EnemyAutoAttackScript>().target)
+                    if (Random.Range(0, 2) != 0)  //2 est exclusif car c'est un int.
                     {
-                        if (Random.Range(0, 4) != 0)
-                        { //2 est exclusif car c'est un int.
-                            GetComponent<EnemyAutoAttackScript>().SetTheTarget(attacker);
-                        }
+                        GetComponent<EnemyAutoAttackScript>().SetTheTarget(attacker);
                     }
                 }
             }
-            
-
-            if (currentHp > 0)
-            {
-                if (trueDmg)
-                {
-                    currentHp -= dmg;
-                    if (gameObject.layer == Layers.Ennemies && currentHp <= 0)
-                    {
-                        if (attacker.tag == "Player")
-                        {
-                            attacker.GetComponent<PlayerManager>().killCount++;
-                        }
-                    }
-                }
-                else
-                {
-                    float y = Random.Range(0, 100);
-                    if (y > dodge)
-                    {
-                        if (armorScore <= -100)
-                        {
-                            currentHp -= dmg * 2;
-                            if (currentHp <= 0)
-                            {
-                                if (attacker.tag == "Player")
-                                {
-                                    attacker.GetComponent<PlayerManager>().killCount++;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            float multiplicatorArmor = (float)100f / (100f + armorScore);
-                            currentHp -= (int)Mathf.Abs(dmg * multiplicatorArmor);
-                            if (currentHp <= 0)
-                            {
-                                if (attacker.tag == "Player")
-                                {
-                                    attacker.GetComponent<PlayerManager>().killCount++;
-                                }
-                            }
-                            
-                        }
-                    }
-                }               
-            }
         }
-        RescaleTheLifeBarIG(currentHp);
-        lifeBar.GetComponentInParent<Canvas>().enabled = true;
+        if (currentHp <= 0)
+        {
+            attacker.GetComponent<PlayerManager>().killCount++;
+        }
     }
 
     public new void MakeHimDie()
@@ -173,6 +126,26 @@ public class EnnemyIGManager : CharacterIGManager
         GetComponent<EnemyAutoAttackScript>().target = null;
         GetComponent<NavMeshAgent>().acceleration = 0;
         guyAttackingMe = null;
+    }
+
+    public void ShareXPWithTheTeam(bool isT1, int xpToShare)
+    {
+        if (isT1)
+        {
+            foreach (NetworkInstanceId id in GameManager.instanceGM.team1ID)
+            {
+                GameObject go = ClientScene.FindLocalObject(id);
+                go.GetComponent<PlayerXPScript>().GetXP(xpToShare / nbrOfPlayersT1);
+            }
+        }
+        else
+        {
+            foreach (NetworkInstanceId id in GameManager.instanceGM.team2ID)
+            {
+                GameObject go = ClientScene.FindLocalObject(id);
+                go.GetComponent<PlayerXPScript>().GetXP(xpToShare / nbrOfPlayersT2);
+            }
+        }
     }
 
 }
