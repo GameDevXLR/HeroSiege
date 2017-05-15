@@ -5155,6 +5155,7 @@ GameObject:
   - component: {fileID: 114325965607624806}
   - component: {fileID: 54632252057324418}
   - component: {fileID: 114017646617901400}
+  - component: {fileID: 114069608858984512}
   m_Layer: 9
   m_Name: mobJung1
   m_TagString: Untagged
@@ -11000,6 +11001,36 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: +25
+--- !u!114 &114069608858984512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911839666593776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9486faf332116134aaf4427ebb3d0667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeBar: {fileID: 224359716515990726}
+  maxHp: 100
+  currentHp: 100
+  bonusHp: 0
+  regenHp: 0
+  damageReduction: 0
+  armorScore: 5
+  bonusArmorScore: 0
+  dodge: 0
+  isDead: 0
+  deadAnimChildMesh: {fileID: 0}
+  timeBetweenTic: 1
+  guyAttackingMe: {fileID: 0}
+  isTaunt: 0
+  xpGiven: 15
+  goldGiven: 10
+  goldDisplay: {fileID: 114045336858103988}
+  goldCanvas: {fileID: 1590789217147196}
+  isJungleMob: 1
 --- !u!114 &114101529891299568
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -88,12 +88,9 @@ public class AllyPetAutoAttack : NetworkBehaviour
 							}
 						 
 					}
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<GenericLifeScript> ().isDead) 
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<PlayerIGManager> ().isDead) 
 					{
-						if (target.layer == 8) 
-						{
-						} 
-						else 
+						if (target.layer != 8) 
 						{
 							if (!isActuStopAttacking) 
 							{
@@ -261,20 +258,13 @@ public class AllyPetAutoAttack : NetworkBehaviour
 	{
 
 		isActualizingPos = true;
-		if (target.GetComponent<GenericLifeScript> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
+		if (target.GetComponent<EnnemyIGManager> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
-//			if (gameObject.layer == 8) 
-//			{
 				target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
 				SetTheTarget (target);
 				agent.SetDestination (target.transform.position);
 				yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));
 				isActualizingPos = false;
-//				yield break;
-//			}
-
-//			target = null;
-//			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
 		} else 
 		{
 			//			GetComponent<NavMeshObstacle> ().enabled = false;

@@ -168,7 +168,7 @@ public class PlayerStatPlus : NetworkBehaviour {
 	{
 		GetComponent<PlayerAutoAttack> ().damage += dmgBonus;
 		GetComponent<GenericManaScript> ().maxMp += mpBonus;
-		GetComponent<GenericLifeScript> ().maxHp += hpBonus;
+		GetComponent<PlayerIGManager> ().maxHp += hpBonus;
 	}
 	public void ActuDescription()
 	{

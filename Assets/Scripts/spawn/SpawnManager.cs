@@ -170,9 +170,9 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi = Instantiate (squelettePrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
 
-					newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor / (5 * difficultyFactor);
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor;
+					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (5 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 10;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
@@ -185,9 +185,9 @@ public class SpawnManager : NetworkBehaviour
 				for (int i = 0; i < zomb; i++) {
 					newEnnemi = Instantiate (zombiePrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor / (5 * difficultyFactor);
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor;
+					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (5 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 10;
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
@@ -202,9 +202,9 @@ public class SpawnManager : NetworkBehaviour
 				for (int i = 0; i < miniB; i++) {
 					newEnnemi = Instantiate (minibossPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor*2;
-					newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor*2;
-					newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor / (2 * difficultyFactor);
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*2;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*2;
+					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (2 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 2;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
@@ -217,13 +217,13 @@ public class SpawnManager : NetworkBehaviour
 				for (int i = 0; i < squelEli; i++) {
 					newEnnemi = Instantiate (squeletteElitePrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor*4;
-					newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor*4;
-					newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor / (2 * difficultyFactor);
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*4;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*4;
+					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (2 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 5;
-					newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += 275;
+					newEnnemi.GetComponent<EnnemyIGManager> ().xpGiven += 275;
 					newEnnemi.transform.Find ("Mob1Prefab").transform.localScale = new Vector3 (2, 2, 2);
-					newEnnemi.GetComponent<GenericLifeScript> ().armorScore += 20;
+					newEnnemi.GetComponent<EnnemyIGManager> ().armorScore += 20;
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
@@ -236,13 +236,13 @@ public class SpawnManager : NetworkBehaviour
 				for (int i = 0; i < zombEli; i++) {
 					newEnnemi = Instantiate (zombieElitePrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor*4;
-					newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor*4;
-					newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor / (2 * difficultyFactor);
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*4;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*4;
+					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (2 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 5;
-					newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += 250;
+					newEnnemi.GetComponent<EnnemyIGManager> ().xpGiven += 250;
 					newEnnemi.transform.Find ("Mob2Prefab").transform.localScale = new Vector3 (2, 2, 2);
-					newEnnemi.GetComponent<GenericLifeScript> ().dodge += 7;
+					newEnnemi.GetComponent<EnnemyIGManager> ().dodge += 7;
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
@@ -256,13 +256,13 @@ public class SpawnManager : NetworkBehaviour
 				for (int i = 0; i < miniBEli; i++) {
 					newEnnemi = Instantiate (minibossElitePrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
-					newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor*5;
-					newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor*5;
-					newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += 750;
-					newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor / (1 * difficultyFactor);
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*5;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*5;
+					newEnnemi.GetComponent<EnnemyIGManager> ().xpGiven += 750;
+					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (1 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor;
 					newEnnemi.transform.Find ("Mob3Prefab").transform.localScale = new Vector3 (2, 2, 2);
-					newEnnemi.GetComponent<GenericLifeScript> ().armorScore += 20;
+					newEnnemi.GetComponent<EnnemyIGManager> ().armorScore += 20;
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;

@@ -92,7 +92,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		//demander le lancement du sort sur le serveur...normal.
 		public void CastThatSpell()
 		{
-			if (GetComponent<GenericLifeScript>().isDead)
+			if (GetComponent<PlayerIGManager>().isDead)
 			{
 				return;
 			}
@@ -137,7 +137,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 				}
 				if (Input.GetMouseButtonUp(0))
 				{
-				if ( cataCharges < spellCost || GetComponent<GenericLifeScript>().isDead)
+				if ( cataCharges < spellCost || GetComponent<PlayerIGManager>().isDead)
 					{
 						isTargeting = false;
 					Camera.main.GetComponent<CameraController> ().selectedPlayer = true;
@@ -169,7 +169,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		IEnumerator ShowTargeter()
 		{
 			yield return new WaitForEndOfFrame();
-			if (GetComponent<GenericLifeScript>().isDead)
+			if (GetComponent<PlayerIGManager>().isDead)
 			{
 				yield return null;
 			}

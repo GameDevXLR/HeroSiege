@@ -39,7 +39,8 @@ public class EnnemyIGManager : CharacterIGManager
     {
 
         base.LooseHeathServer(dmg, trueDmg, attacker);
-        if (!attacker.GetComponent<GenericLifeScript>().isDead)
+        if ((attacker.tag == "Player" && !attacker.GetComponent<PlayerIGManager>().isDead)
+            ||(attacker.tag != "Player" && !attacker.GetComponent<EnnemyIGManager>().isDead))
         {
             if (!isTaunt)
             {

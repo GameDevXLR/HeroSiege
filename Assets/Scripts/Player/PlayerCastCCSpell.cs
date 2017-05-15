@@ -78,7 +78,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
     //demander le lancement du sort sur le serveur...normal.
     public void CastThatSpell()
     {
-        if (GetComponent<GenericLifeScript>().isDead)
+        if (GetComponent<PlayerIGManager>().isDead)
         {
             return;
         }
@@ -116,7 +116,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
             }
             if (Input.GetMouseButtonUp(0))
             {
-                if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<GenericLifeScript>().isDead)
+                if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<PlayerIGManager>().isDead)
                 {
                     isTargeting = false;
                     spellRangeArea.SetActive(false);
@@ -145,7 +145,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
     IEnumerator ShowTargeter()
     {
         yield return new WaitForEndOfFrame();
-        if (GetComponent<GenericLifeScript>().isDead)
+        if (GetComponent<PlayerIGManager>().isDead)
         {
             yield return null;
         }

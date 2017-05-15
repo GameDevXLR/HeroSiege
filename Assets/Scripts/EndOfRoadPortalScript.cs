@@ -20,8 +20,8 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 	{
 		
 		if (other.gameObject.layer == 9) { // layer9 is Ennemies.
-			other.gameObject.GetComponent<GenericLifeScript> ().guyAttackingMe = null;
-			other.gameObject.GetComponent<GenericLifeScript> ().MakeHimDie ();
+			other.gameObject.GetComponent<EnnemyIGManager> ().guyAttackingMe = null;
+			other.gameObject.GetComponent<EnnemyIGManager> ().MakeHimDie ();
 
 			if (teamNbr == 1) 
 			{

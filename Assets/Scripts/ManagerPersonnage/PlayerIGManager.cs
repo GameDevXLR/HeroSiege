@@ -151,7 +151,7 @@ public class PlayerIGManager : CharacterIGManager {
                 if (GetComponent<PlayerHealerCastInvokePet>().actualPet != null)
                 {
                     GetComponent<PlayerHealerCastInvokePet>().actualPet.transform.position = Vector3.zero;
-                    GetComponent<PlayerHealerCastInvokePet>().actualPet.GetComponent<GenericLifeScript>().isDead = true;
+                    GetComponent<PlayerHealerCastInvokePet>().actualPet.GetComponent<PetIGManager>().isDead = true;
                     yield return new WaitForSeconds(0.2f);
                     GetComponent<PlayerHealerCastInvokePet>().DestroyThePrevPet(); // détruit le quand tu meurs.
                 }

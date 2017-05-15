@@ -103,8 +103,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) {
 			targetplayer = NetworkServer.FindLocalObject (targetID);
-			targetplayer.GetComponent<GenericLifeScript> ().maxHp += 20;
-			targetplayer.GetComponent<GenericLifeScript> ().bonusHp += 20;
+			targetplayer.GetComponent<PlayerIGManager> ().maxHp += 20;
+			targetplayer.GetComponent<PlayerIGManager> ().bonusHp += 20;
 
 		}
 	}
@@ -149,7 +149,7 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			targetplayer = NetworkServer.FindLocalObject (targetID);
-			targetplayer.GetComponent<GenericLifeScript> ().regenHp += 2;
+			targetplayer.GetComponent<PlayerIGManager> ().regenHp += 2;
 			targetplayer.GetComponent<GenericManaScript> ().regenMp += 2;
 		}
 
@@ -226,7 +226,7 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().currentHp += 250;
+			GetComponent<PlayerIGManager> ().currentHp += 250;
 		}
 	}
 	[ClientRpc]
@@ -245,7 +245,7 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().currentHp += 1000;
+			GetComponent<PlayerIGManager> ().currentHp += 1000;
 		}
 	}
 
@@ -361,7 +361,7 @@ public class ItemManager : NetworkBehaviour
 		{
 			
 			GetComponent<PlayerClicToMove> ().playerSpeed += 0.5f;
-			GetComponent<GenericLifeScript> ().dodge += 5f;
+			GetComponent<PlayerIGManager> ().dodge += 5f;
 		}
 	}
 	[ClientRpc]
@@ -371,7 +371,7 @@ public class ItemManager : NetworkBehaviour
 		if (isServer) 
 		{
 			GetComponent<PlayerClicToMove> ().playerSpeed -= 0.5f;
-			GetComponent<GenericLifeScript> ().dodge -= 5f;
+			GetComponent<PlayerIGManager> ().dodge -= 5f;
 
 		}
 	}
@@ -381,12 +381,12 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().maxHp += 250;
-			GetComponent<GenericLifeScript> ().bonusHp += 250;
+			GetComponent<PlayerIGManager> ().maxHp += 250;
+			GetComponent<PlayerIGManager> ().bonusHp += 250;
 
-			GetComponent<GenericLifeScript> ().regenHp += 10;
-			GetComponent<GenericLifeScript> ().armorScore += 50;
-			GetComponent<GenericLifeScript> ().bonusArmorScore += 50;
+			GetComponent<PlayerIGManager> ().regenHp += 10;
+			GetComponent<PlayerIGManager> ().armorScore += 50;
+			GetComponent<PlayerIGManager> ().bonusArmorScore += 50;
 
 		}
 		if (isLocalPlayer) 
@@ -401,11 +401,11 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().maxHp -= 250;
-			GetComponent<GenericLifeScript> ().bonusHp -= 250;
+			GetComponent<PlayerIGManager> ().maxHp -= 250;
+			GetComponent<PlayerIGManager> ().bonusHp -= 250;
 
-			GetComponent<GenericLifeScript> ().regenHp -= 10;
-			GetComponent<GenericLifeScript> ().armorScore -= 50;
+			GetComponent<PlayerIGManager> ().regenHp -= 10;
+			GetComponent<PlayerIGManager> ().armorScore -= 50;
 
 		}
 	}

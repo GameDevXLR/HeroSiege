@@ -71,7 +71,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 	{
 		if (actualPet != null) 
 		{
-			actualPet.GetComponent<GenericLifeScript> ().isDead = true;
+			actualPet.GetComponent<PetIGManager> ().isDead = true;
 			actualPet.transform.position = Vector3.zero;
 			previousPet = actualPet;
 			Invoke("DestroyThePrevPet", .3f);
@@ -82,9 +82,9 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 		go.GetComponent<MinionsPathFindingScript> ().target = this.transform;
 		go.GetComponent<AllyPetAutoAttack> ().target = gameObject;
 		go.GetComponent<AllyPetAutoAttack> ().damage = spellDmg;
-		go.GetComponent<GenericLifeScript> ().maxHp = spellDmg * 6;
-		go.GetComponent<GenericLifeScript> ().currentHp = spellDmg * 6;
-		go.GetComponent<GenericLifeScript> ().regenHp = spellDmg / 5;
+		go.GetComponent<PetIGManager> ().maxHp = spellDmg * 6;
+		go.GetComponent<PetIGManager> ().currentHp = spellDmg * 6;
+		go.GetComponent<PetIGManager> ().regenHp = spellDmg / 5;
 		go.GetComponent<AllyPetAutoAttack> ().targetID = GetComponent<NetworkIdentity> ().netId;
 		actualPet = go;
 		NetworkServer.Spawn(go);
@@ -100,7 +100,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 	//demander le lancement du sort sur le serveur...normal.
 	public void CastThatSpell()
 	{
-		if (GetComponent<GenericLifeScript>().isDead)
+		if (GetComponent<PlayerIGManager>().isDead)
 		{
 			return;
 		}
@@ -138,7 +138,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 			}
 			if (Input.GetMouseButtonUp(0))
 			{
-				if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<GenericLifeScript>().isDead)
+				if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<PlayerIGManager>().isDead)
 				{
 					isTargeting = false;
 					spellRangeArea.SetActive(false);
@@ -167,7 +167,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 	IEnumerator ShowTargeter()
 	{
 		yield return new WaitForEndOfFrame();
-		if (GetComponent<GenericLifeScript>().isDead)
+		if (GetComponent<PlayerIGManager>().isDead)
 		{
 			yield return null;
 		}

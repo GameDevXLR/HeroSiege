@@ -60,8 +60,15 @@ public class SpellCatapulteArea : NetworkBehaviour {
 					tmpDmg = damageFactor * spellDamage;
 					
 					spellTargets.Add(other.gameObject);
-					other.gameObject.GetComponent<GenericLifeScript>().LooseHealth(tmpDmg, true, caster);
-				}
+                    if (other.gameObject.layer == 8) {
+                        if (other.gameObject.tag == "player")
+                            other.gameObject.GetComponent<PlayerIGManager>().LooseHealth(tmpDmg, true, caster);
+                        else
+                            other.gameObject.GetComponent<PetIGManager>().LooseHealth(tmpDmg, true, caster);
+                    }
+                    else
+                        other.gameObject.GetComponent<EnnemyIGManager>().LooseHealth(tmpDmg, true, caster);
+                }
 				
 			}
 			

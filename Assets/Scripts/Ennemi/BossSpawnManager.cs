@@ -44,11 +44,11 @@ public class BossSpawnManager : NetworkBehaviour
 	{
 		GameObject bossTmpObj;
 		bossTmpObj = Instantiate (bossPrefab, tr.position, tr.rotation) as GameObject;
-		bossTmpObj.GetComponent<GenericLifeScript> ().maxHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
-		bossTmpObj.GetComponent<GenericLifeScript> ().currentHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
+		bossTmpObj.GetComponent<EnnemyIGManager> ().maxHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
+		bossTmpObj.GetComponent<EnnemyIGManager> ().currentHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
 		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor*GameManager.instanceGM.gameDifficulty*3;
-		bossTmpObj.GetComponent<GenericLifeScript> ().goldGiven += bonusFactor * bonusFactor;
-		bossTmpObj.GetComponent<GenericLifeScript> ().xpGiven += bonusFactor * bonusFactor;
+		bossTmpObj.GetComponent<EnnemyIGManager> ().goldGiven += bonusFactor * bonusFactor;
+		bossTmpObj.GetComponent<EnnemyIGManager> ().xpGiven += bonusFactor * bonusFactor;
 		if (bonusFactor >= 10) 
 		{
 			bossTmpObj.GetComponent<EnemyAutoAttackScript> ().agent.speed += 5;

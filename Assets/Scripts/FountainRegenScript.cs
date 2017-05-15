@@ -18,7 +18,7 @@ public class FountainRegenScript : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "Player") //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
 		{
-			int tmpHP = (regenHp * other.GetComponent<GenericLifeScript> ().maxHp) / 100;
+			int tmpHP = (regenHp * other.GetComponent<PlayerIGManager> ().maxHp) / 100;
 			if (tmpHP < 3) 
 			{
 				tmpHP = 2;
@@ -28,7 +28,7 @@ public class FountainRegenScript : MonoBehaviour {
 			{
 				tmpMP = 2;
 			}
-			other.GetComponent<GenericLifeScript> ().currentHp += tmpHP;
+			other.GetComponent<PlayerIGManager> ().currentHp += tmpHP;
 			other.GetComponent<GenericManaScript> ().currentMp += tmpMP;
 			StartCoroutine (GetReadyProcedure ());
 		}

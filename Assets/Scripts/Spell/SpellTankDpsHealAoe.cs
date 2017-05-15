@@ -31,7 +31,7 @@ public class SpellTankDpsHealAoe : NetworkBehaviour {
 		{
 			int nbrOfObj;
 			nbrOfObj = spellTargets.Count;
-			caster.GetComponent<GenericLifeScript> ().currentHp +=(spellDamage / 2)* nbrOfObj ;
+			caster.GetComponent<PlayerIGManager> ().currentHp +=(spellDamage / 2)* nbrOfObj ;
 			hasHealed = true;
 
 		}
@@ -61,7 +61,7 @@ public class SpellTankDpsHealAoe : NetworkBehaviour {
 				if(!spellTargets.Contains(other.gameObject))
 					{
 						spellTargets.Add (other.gameObject);
-					other.gameObject.GetComponent<GenericLifeScript> ().LooseHealth(spellDamage, true, caster);
+					other.gameObject.GetComponent<EnnemyIGManager> ().LooseHealth(spellDamage, true, caster);
 				}
 			}
 

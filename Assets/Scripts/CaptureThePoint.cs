@@ -156,7 +156,7 @@ public class CaptureThePoint : NetworkBehaviour
 
 	public void CheckIfPlayersAreAlive(GameObject player)
 	{
-		if (player.GetComponent<GenericLifeScript> ().isDead) 
+		if (player.GetComponent<PlayerIGManager> ().isDead) 
 		{
 			playersIn.Remove (player);
 		}

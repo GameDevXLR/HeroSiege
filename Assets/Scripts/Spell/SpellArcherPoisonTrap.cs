@@ -70,9 +70,17 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 			{
 				if (other.gameObject.layer == 9 || other.gameObject.layer == 8)
 				{
+                    if (other.gameObject.layer == 8)
+                    {
+                        if(other.gameObject.tag == "Player")
+                            other.gameObject.GetComponent<PlayerIGManager>().LooseHealth((int)spellDamage, true, caster);
+                        else
+                            other.gameObject.GetComponent<PetIGManager>().LooseHealth((int)spellDamage, true, caster);
+                    }
+                    else
+                        other.gameObject.GetComponent<EnnemyIGManager>().LooseHealth((int)spellDamage, true, caster);
 
-					other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage, true, caster);
-					spellTargets.Add(other.gameObject);
+                    spellTargets.Add(other.gameObject);
 				}
 			}
 		}

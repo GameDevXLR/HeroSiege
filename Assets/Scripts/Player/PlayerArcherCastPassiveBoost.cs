@@ -57,7 +57,7 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 		{
 			GetComponent<PlayerAutoAttack> ().critChance += stunChances;
 			GetComponent<PlayerAutoAttack> ().critFactor++;
-			GetComponent<GenericLifeScript> ().dodge += dodgeChances;
+			GetComponent<PlayerIGManager> ().dodge += dodgeChances;
 		}
 	}
 
@@ -183,6 +183,6 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 		{ 
 			GetComponent<PlayerAutoAttack> ().critFactor++;
 		}
-		GetComponent<GenericLifeScript> ().dodge += levelupDodgeChanceBonus;
+		GetComponent<PlayerIGManager> ().dodge += levelupDodgeChanceBonus;
 	}
 }

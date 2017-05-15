@@ -54,7 +54,7 @@ public class SpellTankTauntArea : NetworkBehaviour {
 	{
 		if (Time.time < timer + 1) {
 			if (other.gameObject.layer == 9 && !spellTargets.Contains(other.gameObject)) {
-				other.gameObject.GetComponent<GenericLifeScript> ().GotTauntByFor (caster, duration);
+				other.gameObject.GetComponent<EnnemyIGManager> ().GotTauntByFor (caster, duration);
                 other.gameObject.GetComponent<EnemyAutoAttackScript>().damage -= (spellDamage* other.gameObject.GetComponent<EnemyAutoAttackScript>().damage) / 100;
                 spellTargets.Add(other.gameObject);
                     }

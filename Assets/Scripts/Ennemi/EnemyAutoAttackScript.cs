@@ -60,7 +60,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 		if (target != null && isServer) 
 		{
-			if (target.GetComponent<GenericLifeScript> ().isDead && !isLoosingTarget) 
+			if (((target.tag == "Player" && target.GetComponent<PlayerIGManager> ().isDead) || target.GetComponent<PetIGManager>().isDead) && !isLoosingTarget) 
 			{
 				isLoosingTarget = true;
 				LooseTarget ();
@@ -101,9 +101,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 //
 //							}
 //						} else {
-							target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, gameObject);
-//						}
-					}
+                        if(target.tag == "Player")
+							target.GetComponent<PlayerIGManager> ().LooseHealth (damage, false, gameObject);
+                        else
+                            target.GetComponent<PetIGManager>().LooseHealth(damage, false, gameObject);
+                        //						}
+                    }
 					if (!isActuStopAttacking && Vector3.Distance ( transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<GenericLifeScript> ().isDead ) 
 					{
 //						if (gameObject.layer == 8 && target.layer == 8) 
@@ -278,20 +281,16 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	{
 
 		isActualizingPos = true;
-		if (target.GetComponent<GenericLifeScript> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
+		if ((gameObject.tag == "Player" && target.GetComponent<PlayerIGManager>().isDead) 
+            || (gameObject.tag != "Player" && target.GetComponent<PetIGManager> ().isDead) 
+            || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
-			if (gameObject.layer == 8) 
-			{
-				target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
-				SetTheTarget (target);
-				agent.SetDestination (target.transform.position);
-				yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));
-				isActualizingPos = false;
-				yield break;
-			}
-
-			target = null;
-			GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+			SetTheTarget (target);
+			agent.SetDestination (target.transform.position);
+			yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));
+			isActualizingPos = false;
+			
 		} else 
 		{
 //			GetComponent<NavMeshObstacle> ().enabled = false;

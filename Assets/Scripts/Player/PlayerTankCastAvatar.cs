@@ -75,18 +75,18 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 
 	IEnumerator AvatarProcedure(float dur)
 	{
-		GetComponent<GenericLifeScript>().deadAnimChildMesh.transform.localScale = new Vector3 (2f, 2f, 2f);
+		GetComponent<PlayerIGManager>().deadAnimChildMesh.transform.localScale = new Vector3 (2f, 2f, 2f);
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().maxHp += spellDmg * 10;
-			GetComponent<GenericLifeScript> ().currentHp += spellDmg * 10;
+			GetComponent<PlayerIGManager> ().maxHp += spellDmg * 10;
+			GetComponent<PlayerIGManager> ().currentHp += spellDmg * 10;
 			GetComponent<PlayerAutoAttack> ().damage += spellDmg ;
 		}
 		yield return new WaitForSeconds (dur);
-		GetComponent<GenericLifeScript>().deadAnimChildMesh.transform.localScale = Vector3.one;
+		GetComponent<PlayerIGManager>().deadAnimChildMesh.transform.localScale = Vector3.one;
 		if (isServer) 
 		{
-			GetComponent<GenericLifeScript> ().maxHp -= spellDmg * 10;
+			GetComponent<PlayerIGManager> ().maxHp -= spellDmg * 10;
 //			GetComponent<GenericLifeScript> ().currentHp -= spellDmg * 10;
 			GetComponent<PlayerAutoAttack> ().damage -= spellDmg ;
 		}
@@ -96,7 +96,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 	//demander le lancement du sort sur le serveur...normal.
 	public void CastThatSpell()
 	{
-		if (GetComponent<GenericLifeScript>().isDead)
+		if (GetComponent<PlayerIGManager>().isDead)
 		{
 			return;
 		}

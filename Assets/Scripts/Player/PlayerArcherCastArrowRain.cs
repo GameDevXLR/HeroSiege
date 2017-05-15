@@ -76,7 +76,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	//demander le lancement du sort sur le serveur...normal.
 	public void CastThatSpell()
 	{
-		if (GetComponent<GenericLifeScript>().isDead)
+		if (GetComponent<PlayerIGManager>().isDead)
 		{
 			return;
 		}
@@ -114,7 +114,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 			}
 			if (Input.GetMouseButtonUp(0))
 			{
-				if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<GenericLifeScript>().isDead)
+				if (Vector3.Distance(hit.point, transform.position) > spellRange || GetComponent<GenericManaScript>().currentMp < spellCost || GetComponent<PlayerIGManager>().isDead)
 				{
 					isTargeting = false;
 					spellRangeArea.SetActive(false);
@@ -144,7 +144,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	IEnumerator ShowTargeter()
 	{
 		yield return new WaitForEndOfFrame();
-		if (GetComponent<GenericLifeScript>().isDead)
+		if (GetComponent<PlayerIGManager>().isDead)
 		{
 			yield return null;
 		}

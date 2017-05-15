@@ -58,7 +58,7 @@ public class SpellAreaDamage : NetworkBehaviour
 
             if (other.gameObject.layer == 9)
             {
-                other.gameObject.GetComponent<GenericLifeScript>().LooseHealth(spellDamage, true, caster);
+                other.gameObject.GetComponent<EnnemyIGManager>().LooseHealth(spellDamage, true, caster);
             }
         }
     }
@@ -74,7 +74,7 @@ public class SpellAreaDamage : NetworkBehaviour
                 {
 
                     spellTargets.Add(other.gameObject);
-                    other.gameObject.GetComponent<GenericLifeScript>().LooseHealth((int)spellDamage / 5, true, caster);
+                    other.gameObject.GetComponent<EnnemyIGManager>().LooseHealth((int)spellDamage / 5, true, caster);
                 }
 
             }

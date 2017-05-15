@@ -73,7 +73,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	//demander le lancement du sort sur le serveur...normal.
 	public void CastThatSpell()
 	{
-		if (GetComponent<GenericLifeScript>().isDead)
+		if (GetComponent<PlayerIGManager>().isDead)
 		{
 			return;
 		}

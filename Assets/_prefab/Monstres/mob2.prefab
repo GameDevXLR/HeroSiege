@@ -882,6 +882,7 @@ GameObject:
   - component: {fileID: 114887921810659502}
   - component: {fileID: 54470705887771074}
   - component: {fileID: 114621568014076468}
+  - component: {fileID: 114617621828181772}
   m_Layer: 9
   m_Name: mob2
   m_TagString: Untagged
@@ -2176,6 +2177,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 0.65
+--- !u!114 &114617621828181772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853418556211758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9486faf332116134aaf4427ebb3d0667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeBar: {fileID: 224013841328478006}
+  maxHp: 200
+  currentHp: 200
+  bonusHp: 0
+  regenHp: 0
+  damageReduction: 0
+  armorScore: 1
+  bonusArmorScore: 0
+  dodge: 8
+  isDead: 0
+  deadAnimChildMesh: {fileID: 0}
+  timeBetweenTic: 1
+  guyAttackingMe: {fileID: 0}
+  isTaunt: 0
+  xpGiven: 450
+  goldGiven: 15
+  goldDisplay: {fileID: 114430112710119982}
+  goldCanvas: {fileID: 1802038026311656}
+  isJungleMob: 0
 --- !u!114 &114621568014076468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2378,6 +2409,9 @@ MonoBehaviour:
   detectionRange: 20
   desiredPos: {x: 0, y: 0, z: 0}
   isUnderCC: 0
+  isActuAttacking: 0
+  isActuStopAttacking: 0
+  isLoosingTarget: 0
 --- !u!114 &114889827600163824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2401,7 +2435,10 @@ MonoBehaviour:
   playerHPTxt: {fileID: 0}
   maxHp: 200
   currentHp: 200
+  bonusHp: 0
   regenHp: 0
+  bonusArmorScore: 0
+  damageReduction: 0
   levelUpBonusHP: 10
   respawnPoint: {fileID: 0}
   armorScore: 0
@@ -2422,7 +2459,9 @@ MonoBehaviour:
   amountShake: 10
   threshold: 25
   underThreshold: 0
+  levelUpBonusArmor: 0
   isTaunt: 0
+  isJungleMob: 0
 --- !u!114 &114911413729773554
 MonoBehaviour:
   m_ObjectHideFlags: 1
