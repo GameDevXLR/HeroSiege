@@ -38,6 +38,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public bool isActualizingPos;
 	public bool isActuAttacking;
 	public bool isActuStopAttacking;
+	public ParticleSystem particule;
 
 	public int critChance;
 	public int critFactor;
@@ -47,6 +48,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponentInChildren<Animator> ();
+
 		if (isLocalPlayer) 
 		{
 			agent.avoidancePriority = 75;
@@ -180,6 +182,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 			isActuAttacking = false;
 		}
+		if (particule) 
+		{
+			particule.Play ();
+		}
 
 	}
 	[Command]
@@ -223,6 +229,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 			isActuStopAttacking = false;
 		}
+		if (particule) 
+		{
+			particule.Stop ();
+		}
 	}
 
 	public void AcquireTarget(GameObject newTarget)
@@ -245,6 +255,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 		}
 		//audioSource.Stop ();
 		anim.SetBool ("attack", attackAnim);
+		if (particule) 
+		{
+			particule.Stop ();
+		}
 		if (charge) 
 		{
 			//faire ici l'arret de la charge.

@@ -17,7 +17,7 @@ public class PetIGManager : CharacterIGManager {
     {
        
        base.LooseHeathServer(dmg, trueDmg, attacker);
-        if (!attacker.GetComponent<EnnemyIGManager>().isDead)
+		if (attacker.layer == Layers.Ennemies && !attacker.GetComponent<EnnemyIGManager>().isDead)
         {
             if (!isTaunt)
             {

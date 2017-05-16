@@ -205,7 +205,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		myAutoAScript.Att2 = autoAHeal2;
 		myPlayerIGManager.PlayerDeath = deadHeal;
 		myPlayerIGManager.heroChosen = "Ovate";
-
+		myAutoAScript.particule = childHealSkin.GetComponentInChildren<ParticleSystem> ();
 		myAutoAScript.anim = childHealSkin.GetComponentInChildren<Animator> ();
 		myPlayerIGManager.deadAnimChildMesh = childHealSkin.transform.GetChild(0).gameObject;
 		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);

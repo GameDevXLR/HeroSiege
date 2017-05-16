@@ -19,8 +19,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 	public AudioClip boughtACharge;
 		string spellDescription;
 	[SyncVar]public int spellCost = 1;
-		public int spellDmg = 100;
-		public float spellCD = 10f;
+		[SyncVar]public int spellDmg = 100;
+		public float spellCD = 30f;
 //		public float spellDuration = 1.5f;
 //		public float spellRange = 25f;
 		public GameObject spellObj;
@@ -270,7 +270,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
 		if (!tip2) 
 		{
-			GameManager.instanceGM.ShowAGameTip ("The number of charges if share between players. You can buy charges and let an ally fire them.");
+			GameManager.instanceGM.ShowAGameTip ("The number of charges is shared between players of your team. You can buy charges and let an ally fire them.");
 			tip2 = true;
 		}
 		StartCoroutine ( CataLoadProcess());
