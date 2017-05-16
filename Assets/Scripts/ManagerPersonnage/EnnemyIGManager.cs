@@ -92,7 +92,11 @@ public class EnnemyIGManager : CharacterIGManager
         //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
         if (isServer)
         {
-			int y = goldGiven / myEnemies.Count;
+			int y = goldGiven;
+			if (myEnemies.Count > 0) 
+			{
+				 y = goldGiven / myEnemies.Count;
+			}
 			for (int i = 0; i < myEnemies.Count; i++) 
 			{
 				myEnemies [i].GetComponent<PlayerGoldScript> ().GetGold (y);

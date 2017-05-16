@@ -106,6 +106,11 @@ public class AllyPetAutoAttack : NetworkBehaviour
 				isActuStopAttacking = true;
 				RpcStopAttacking ();
 			}
+			if ((target == null ||target.layer == Layers.Ennemies && target.GetComponent<EnnemyIGManager>().isDead) && isAttacking) 
+			{
+				isActuStopAttacking = true;
+				RpcStopAttacking ();
+			}
 			//			if (target == null && !isAttacking && !agent.pathPending && !agent.hasPath) 
 			//			{
 			////				if(gameObject.layer == 9) //pas necessaire ?
@@ -223,7 +228,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 //				StopAllCoroutines ();
 //				GetTargetFromID (targetID);
 //			}
-			anim.SetBool ("walk", walkAnim = false);
+			anim.SetBool ("walk", walkAnim = true);
 		}
 	}
 	public void LooseTarget()
@@ -240,7 +245,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		agent.enabled = true;
 		agent.isStopped = false;
 		anim.SetBool ("attackEnnemi", attackAnim = false);
-		anim.SetBool ("walk", walkAnim = false);
+		anim.SetBool ("walk", walkAnim = true);
 		if (particule != null) 
 		{
 			particule.Stop ();

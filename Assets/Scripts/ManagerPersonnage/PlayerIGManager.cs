@@ -167,6 +167,9 @@ public class PlayerIGManager : CharacterIGManager {
         gameObject.layer = 16; //passe en layer Ignore
         GetComponent<PlayerAutoAttack>().StopAllCoroutines();
         GetComponent<PlayerAutoAttack>().target = null;
+		if (GetComponent<PlayerAutoAttack> ().particule) {
+			GetComponent<PlayerAutoAttack> ().particule.Stop ();
+		}
         GetComponent<PlayerAutoAttack>().enabled = false;
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
         animParent = deadAnimChildMesh.transform.parent;
