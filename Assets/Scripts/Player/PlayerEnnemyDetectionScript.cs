@@ -43,7 +43,6 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 						if (autoAScript.target == null) {
 							if (!other.GetComponent<EnnemyIGManager> ().isDead) 
 							{
-								Debug.Log ("doing");
 								TellHeroHisDest (other.gameObject.GetComponent<NetworkIdentity> ().netId);
 							}
 						}

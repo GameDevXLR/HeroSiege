@@ -30,7 +30,7 @@ public class EnnemyIGManager : CharacterIGManager
     new void Start()
     {
         base.Start();
-        deadAnimChildMesh = transform.GetChild(3).GetChild(0).gameObject;
+        deadAnimChildMesh = transform.GetChild(2).GetChild(0).gameObject;
         if (isServer) 
 		{
 			nbrOfPlayersT1 = GameManager.instanceGM.team1ID.Count;
