@@ -28,14 +28,10 @@ public class AllyAggroManager : MonoBehaviour {
 
 		if (autoAScript.target == null) 
 		{
-			if (other.gameObject.layer == 9) 
-			{
-//				if (transform.parent.gameObject.layer == 8 && other.gameObject.layer == 8) 
-//				{
-//					//en gros si t'es un pet et que tu target un joueur ben oubli...
-//					return;
-//				}
-				GetComponentInParent<AllyPetAutoAttack> ().SetTheTarget(other.gameObject);
+			if (other.gameObject.layer == 9) {
+				if (!other.GetComponent<EnnemyIGManager> ().isDead) {
+					GetComponentInParent<AllyPetAutoAttack> ().SetTheTarget (other.gameObject);
+				}
 			}
 		}
 	}

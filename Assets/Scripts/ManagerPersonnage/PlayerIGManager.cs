@@ -263,11 +263,11 @@ public class PlayerIGManager : CharacterIGManager {
     }
     public override void ActualizeDodge(float dod)
     {
-        base.ActualizeDodge(dod);
         if (isLocalPlayer)
         {
             dodgeDisplay.text = dod.ToString();
         }
+		base.ActualizeDodge(dod);
     }
     public void ActualizePlayerDeaths(int dea)
     {
