@@ -4083,8 +4083,8 @@ MonoBehaviour:
   spellImg: {fileID: 0}
   OOM: {fileID: 0}
   Spell1: {fileID: 0}
-  dmgBonus: 5
-  hpBonus: 30
+  dmgBonus: 4
+  hpBonus: 40
   mpBonus: 20
   doubleHPBonus: 0
   doubleMPBonus: 0
@@ -4241,6 +4241,7 @@ MonoBehaviour:
   amountShake: 4
   threshold: 25
   underThreshold: 0
+  heroChosen: 
 --- !u!114 &114478854671164318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5106,6 +5107,7 @@ MonoBehaviour:
   playerManaTxt: {fileID: 0}
   playerLifeBar: {fileID: 0}
   playerManaBar: {fileID: 0}
+  avatarImg: {fileID: 0}
   deadAvatarImg: {fileID: 0}
   pingPrefab: {fileID: 1149734847917142, guid: 2991c5c190ea0eb4b9ca83f63bcb558b, type: 2}
   UIPrefab: {fileID: 1587382832268106, guid: 9206b6cbf3a057d488a960a59d43cd23, type: 2}
@@ -5195,9 +5197,18 @@ MonoBehaviour:
   selectHeroTank1: {fileID: 0}
   selectHeroHealer1: {fileID: 0}
   selectHeroDps1: {fileID: 0}
-  tankAvatarImg: {fileID: 0}
-  healAvatarImg: {fileID: 0}
-  DpsAvatarImg: {fileID: 0}
+  tankAvatarImg: {fileID: 21300000, guid: 01a1641d5f9a51f4790fe7136d18bc3a, type: 3}
+  healAvatarImg: {fileID: 21300000, guid: 376de96f3bd3ea64c8c21b17a9079a8e, type: 3}
+  DpsAvatarImg: {fileID: 21300000, guid: dacb1acc17c4d6b4285ccfd3b00e374c, type: 3}
+  tankAvatarImgMini: {fileID: 21300000, guid: 1e0483575227e734f9fccf38ab2bf424, type: 3}
+  healAvatarImgMini: {fileID: 21300000, guid: 7a88b09dc37cd224193ce2ff530c683d, type: 3}
+  DpsAvatarImgMini: {fileID: 21300000, guid: 6b2c8838bc5e8b849a0315912058ec3e, type: 3}
+  autoAHeal1: {fileID: 8300000, guid: 4b3e3ff631497b44b8def6f6ca0a6e5c, type: 3}
+  autoAHeal2: {fileID: 8300000, guid: 53c1d36406769c24b83e44ca0ad82675, type: 3}
+  deadHeal: {fileID: 8300000, guid: 1a92695559d1fd842a0bb80d0486b56a, type: 3}
+  autoAArcher1: {fileID: 8300000, guid: 4b3e3ff631497b44b8def6f6ca0a6e5c, type: 3}
+  autoAArcher2: {fileID: 8300000, guid: 53c1d36406769c24b83e44ca0ad82675, type: 3}
+  deadArcher: {fileID: 8300000, guid: 1a92695559d1fd842a0bb80d0486b56a, type: 3}
   myPlayerIGManager: {fileID: 114417787900004490}
   myGeneManaScript: {fileID: 114695388684336140}
   myAutoAScript: {fileID: 114604599503415050}

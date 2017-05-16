@@ -191,7 +191,15 @@ public class PlayerAutoAttack: NetworkBehaviour
 	[ClientRpc]
 	public void RpcStopAttacking()
 	{
-		if (target == null) {
+		if (target != null && target.GetComponent<EnnemyIGManager> ().isDead) 
+		{
+
+			agent.SetDestination (transform.position);
+			targetTempPos = transform.position;
+			target = null;
+		}
+		if (target == null )
+		{
 			if (agent.isActiveAndEnabled) 
 			{
 				agent.SetDestination (transform.position);
@@ -227,6 +235,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 	public void LooseTarget()
 	{
+
 		target = null;
 		isAttacking = false;
 		attackAnim = false;
@@ -269,8 +278,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 	IEnumerator ActualizeTargetPos()
 	{
 		isActualizingPos = true;
-		agent.SetDestination (target.transform.position);
-		targetTempPos = target.transform.position;
+
+			agent.SetDestination (target.transform.position);
+			targetTempPos = target.transform.position;			
+
 		yield return new WaitForSeconds (Random.Range( 0.10f, 0.20f));
 		isActualizingPos = false;
 	}

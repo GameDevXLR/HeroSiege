@@ -23,6 +23,9 @@ public class EnnemyIGManager : CharacterIGManager
     private int nbrOfPlayersT1;
     private int nbrOfPlayersT2;
 
+	//my enemies
+	public List<GameObject> myEnemies;
+
 
     new void Start()
     {
@@ -34,6 +37,15 @@ public class EnnemyIGManager : CharacterIGManager
 			nbrOfPlayersT2 = GameManager.instanceGM.team2ID.Count;
 		}
     }
+
+	public override void LooseHealth (int dmg, bool trueDmg, GameObject attacker)
+	{
+		base.LooseHealth (dmg, trueDmg, attacker);
+		if (!myEnemies.Contains (attacker)) 
+		{
+			myEnemies.Add (attacker);
+		}
+	}
 
     protected override void LooseHeathServer(int dmg, bool trueDmg, GameObject attacker)
     {
@@ -74,12 +86,21 @@ public class EnnemyIGManager : CharacterIGManager
             if (guyAttackingMe.tag == "Player")
             {
                 guyAttackingMe.GetComponent<PlayerXPScript>().GetXP(xpGiven);
-                guyAttackingMe.GetComponent<PlayerGoldScript>().GetGold(goldGiven);
+                guyAttackingMe.GetComponent<PlayerGoldScript>().GetGold(goldGiven/10);
             }
         }
         //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
         if (isServer)
         {
+			int y = goldGiven / myEnemies.Count;
+			for (int i = 0; i < myEnemies.Count; i++) 
+			{
+				myEnemies [i].GetComponent<PlayerGoldScript> ().GetGold (y);
+				if (i == myEnemies.Count - 1) 
+				{
+					myEnemies.Clear ();
+				}
+			}
             if (isJungleMob)
             {
                 isDead = true;

@@ -36,6 +36,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		public bool isActuAttacking;
 		public bool isActuStopAttacking;
 	public bool isLoosingTarget;
+
 	void Start()
 		{
 

@@ -7,16 +7,20 @@ public class MainMenuManager : MonoBehaviour
 {
 	private bool actifTabFG;
 	private bool actifTabProfile;
+	public bool actifTabOptions;
 	public InputField nameField;
 	public Text PlayerNameDisplay;
 	public GameObject FindGamesCanvasObj;
 	public GameObject ProfileCanvasObj;
+	public GameObject OptionsCanvasObj;
 	public string PlayerNickname;
 
 	void Awake()
 	{
 		FindGamesCanvasObj.GetComponent<Canvas>().enabled = false;	
-		ProfileCanvasObj.GetComponent<Canvas>().enabled = false;	
+		ProfileCanvasObj.GetComponent<Canvas>().enabled = false;
+		OptionsCanvasObj.GetComponent<Canvas> ().enabled = false;
+
 	}
 	public void Start()
 	{
@@ -44,6 +48,10 @@ public class MainMenuManager : MonoBehaviour
 			{
 				ToggleProfileCanvas ();
 			}
+			if (actifTabOptions) 
+			{
+				ToggleOptionsCanvas ();
+			}
 
 			return;
 		}
@@ -67,7 +75,10 @@ public class MainMenuManager : MonoBehaviour
 			{
 				ToggleFindGCanvas ();
 			}
-
+			if (actifTabOptions) 
+			{
+				ToggleOptionsCanvas ();
+			}
 			return;
 		}
 		if (actifTabProfile == true)
@@ -75,6 +86,32 @@ public class MainMenuManager : MonoBehaviour
 
 			ProfileCanvasObj.GetComponent<Canvas>().enabled = false;
 			actifTabProfile = false;			
+		}
+
+	}
+	public void ToggleOptionsCanvas()
+	{
+
+		if (actifTabOptions == false)
+		{
+
+			OptionsCanvasObj.GetComponent<Canvas>().enabled = true;
+			actifTabOptions = true;
+			if (actifTabFG) 
+			{
+				ToggleFindGCanvas ();
+			}
+			if (actifTabProfile) 
+			{
+				ToggleProfileCanvas ();
+			}
+			return;
+		}
+		if (actifTabOptions == true)
+		{
+
+			OptionsCanvasObj.GetComponent<Canvas>().enabled = false;
+			actifTabOptions = false;			
 		}
 
 	}
@@ -95,9 +132,9 @@ public class MainMenuManager : MonoBehaviour
 			return;
 		}
 		
-		if (nameField.text.Length > 24) 
+		if (nameField.text.Length > 18) 
 		{
-			nameField.text = nameField.text.Substring (0, 24);
+			nameField.text = nameField.text.Substring (0, 18);
 		}
 		PlayerNickname = nameField.text;
 		PlayerPrefs.SetString("PlayerNN", PlayerNickname);

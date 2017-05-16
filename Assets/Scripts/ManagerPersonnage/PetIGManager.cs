@@ -23,17 +23,13 @@ public class PetIGManager : CharacterIGManager {
             {
                 if (attacker != GetComponent<AllyPetAutoAttack>().target)
                 {
-                    if (Random.Range(0, 10) == 0)  //2 est exclusif car c'est un int.
+                    if (Random.Range(0, 10) == 0) 
                     {
                         GetComponent<AllyPetAutoAttack>().SetTheTarget(attacker);
                     }
                 }
                 
             }
-        }
-        if (currentHp <= 0)
-        {
-            attacker.GetComponent<PlayerManager>().killCount++;
         }
     }
 

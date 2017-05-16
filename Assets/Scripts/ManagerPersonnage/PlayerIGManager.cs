@@ -47,6 +47,7 @@ public class PlayerIGManager : CharacterIGManager {
     public int threshold = 25;
     public bool underThreshold = false;
 
+	public string heroChosen;
     
 
     protected override void Start()
