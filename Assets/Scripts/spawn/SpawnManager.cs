@@ -24,7 +24,6 @@ public class SpawnManager : NetworkBehaviour
 	public Transform spawnpoint; //point de spawn du mob.
 	public Transform targetDestination;
 	public int numberOfMobs; // nombre de mobs dans la vague.
-	private int actualNbr; //C est le mob numero combien de la vague ? 
 	public float TimeBetweenMobs; //temps entre 2 mobs.
 
 	[SyncVar (hook = "ActuNbrOfWaves")]public int totalWaves; // le numéro de la vague d'ennemis. nombre total de vagues depuis le début.
@@ -39,60 +38,11 @@ public class SpawnManager : NetworkBehaviour
 		{
 			difficultyFactor *= (coPlayers / 2);
 		}
-//        Debug.Log("start : SpawManager");
 	}
-	
 
-//	void Update () 
-//	{
-//		if (!isServer) 
-//		{
-//			return;			
-//		}
-//
-//		if (Time.time > lastTic) 
-//		{
-//			lastTic = Time.time + timeBetweenTic;
-//			actualNbr++;
-//			SpawnAMob ();
-//			if (level == 2) 
-//			{
-//				SpawnAMob ();
-//			}
-//			if (actualNbr == numberOfMobs) 
-//			{
-//				LevelUpTheWaves ();
-//				lastTic += 5f; //ajouter ici le temps entre 2 vagues de 2 niveaux différents.
-//			}
-//		}
-//	}
-//	public void SpawnAMob()
-//	{
-//		newEnnemi = Instantiate (ennemi [level], spawnpoint.position, spawnpoint.rotation) as GameObject;
-//		int tmpFactor = totalWaves * 10 * difficultyFactor;
-//		newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
-//		newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
-//		newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor/difficultyFactor;
-//		newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/(5*difficultyFactor);
-//		newEnnemi.GetComponent<MinionsPathFindingScript>().isTeam1 = isTeam1;
-//		newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
-//		if (level == 2) //si c'est la vague Boss (mob3) bennn faire péter hein...
-//		{
-//			newEnnemi.GetComponent<GenericLifeScript> ().maxHp += tmpFactor;
-//			newEnnemi.GetComponent<GenericLifeScript> ().currentHp += tmpFactor;
-//			newEnnemi.GetComponent<GenericLifeScript> ().xpGiven += tmpFactor/difficultyFactor;
-//			newEnnemi.GetComponent<GenericLifeScript> ().goldGiven += tmpFactor/(5*difficultyFactor);
-//		}
-//		NetworkServer.Spawn (newEnnemi);
-//
-//	}
-
-	//que se passe t-il quand on change de vague d'ennemi ? 
-	//le nombre total de mob dans la vague augmente de 1 pour le moment quand on a fait défilé tous les types d'ennemis.
 	public void LevelUpTheWaves()
 	{
 		totalWaves++;
-		actualNbr = 0;
 		level++;
 		if (level == ennemi.Length) 
 		{
@@ -173,9 +123,10 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor;
 					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor;
 					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (5 * difficultyFactor);
-					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 10;
+					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 20;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
 				}
@@ -189,9 +140,8 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor;
 					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (5 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 10;
-
+					newEnnemi.GetComponent<EnnemyIGManager> ().isSlowingOnAutoA = true;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
-					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 10;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
@@ -202,12 +152,14 @@ public class SpawnManager : NetworkBehaviour
 				for (int i = 0; i < miniB; i++) {
 					newEnnemi = Instantiate (minibossPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
-					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*2;
-					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*2;
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*4;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*4;
 					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (2 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 2;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					newEnnemi.GetComponent<EnnemyIGManager> ().isAnInvisible = true;
+
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
 				}
@@ -217,13 +169,14 @@ public class SpawnManager : NetworkBehaviour
 				for (int i = 0; i < squelEli; i++) {
 					newEnnemi = Instantiate (squeletteElitePrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
-					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*4;
-					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*4;
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*3;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*3;
 					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (2 * difficultyFactor);
-					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 5;
+					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 10;
 					newEnnemi.GetComponent<EnnemyIGManager> ().xpGiven += 275;
 					newEnnemi.transform.Find ("Mob1Prefab").transform.localScale = new Vector3 (2, 2, 2);
 					newEnnemi.GetComponent<EnnemyIGManager> ().armorScore += 20;
+					newEnnemi.GetComponent<EnnemyIGManager> ().isAbleToResurect = true;
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
@@ -236,15 +189,17 @@ public class SpawnManager : NetworkBehaviour
 				for (int i = 0; i < zombEli; i++) {
 					newEnnemi = Instantiate (zombieElitePrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 					int tmpFactor = totalWaves * 10 * difficultyFactor;
-					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*4;
-					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*4;
+					newEnnemi.GetComponent<EnnemyIGManager> ().maxHp += tmpFactor*3;
+					newEnnemi.GetComponent<EnnemyIGManager> ().currentHp += tmpFactor*3;
 					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (2 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 5;
 					newEnnemi.GetComponent<EnnemyIGManager> ().xpGiven += 250;
 					newEnnemi.transform.Find ("Mob2Prefab").transform.localScale = new Vector3 (2, 2, 2);
 					newEnnemi.GetComponent<EnnemyIGManager> ().dodge += 7;
-
+					newEnnemi.GetComponent<EnnemyIGManager> ().isSlowingOnAutoA = true;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
+					newEnnemi.GetComponent<EnnemyIGManager> ().isAnInvisible = true;
+
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
@@ -263,6 +218,9 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor;
 					newEnnemi.transform.Find ("Mob3Prefab").transform.localScale = new Vector3 (2, 2, 2);
 					newEnnemi.GetComponent<EnnemyIGManager> ().armorScore += 20;
+					newEnnemi.GetComponent<EnnemyIGManager> ().isSlowingOnAutoA = true;
+					newEnnemi.GetComponent<EnnemyIGManager> ().isAbleToResurect = true;
+					newEnnemi.GetComponent<EnnemyIGManager> ().isCastingAoeCC = true;
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;

@@ -617,6 +617,7 @@ GameObject:
   - component: {fileID: 54358660851229740}
   - component: {fileID: 114689901315079102}
   - component: {fileID: 114486781802833534}
+  - component: {fileID: 114704258555246680}
   m_Layer: 9
   m_Name: mobBoss1
   m_TagString: Boss
@@ -823,7 +824,7 @@ GameObject:
   - component: {fileID: 198085469792532482}
   - component: {fileID: 199994882534833080}
   m_Layer: 9
-  m_Name: Mob3AttParticle
+  m_Name: MobAttParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2969,6 +2970,10 @@ MonoBehaviour:
   goldCanvas: {fileID: 1678407210894732}
   isJungleMob: 0
   myEnemies: []
+  isSlowingOnAutoA: 0
+  isCastingAoeCC: 0
+  isAbleToResurect: 0
+  IsAbleToIgnoreAggro: 0
 --- !u!114 &114488150067218850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3135,6 +3140,7 @@ MonoBehaviour:
   isActuAttacking: 0
   isActuStopAttacking: 0
   isLoosingTarget: 0
+  hasAttEffect: 1
 --- !u!114 &114623077183640722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3185,6 +3191,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncRot: 0
   timeBtwTic: 0.25
+--- !u!114 &114704258555246680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420677973341816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae8145fa4d8ff44c89183b6930e27e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AoeCCPrefab: {fileID: 1719465231846340, guid: 9dcc10228525f6b48a03712c601b301b,
+    type: 2}
+  spellCCDuration: 2
+  charges: 0
+  recquiredCharges: 5
 --- !u!114 &114739463826667562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3554,7 +3576,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1865036652
+  randomSeed: 940355583
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6557,7 +6579,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -612499042
+  randomSeed: -1810715756
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -36,6 +36,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		public bool isActuAttacking;
 		public bool isActuStopAttacking;
 	public bool isLoosingTarget;
+	public bool hasAttEffect; // il a un effet de particule quand il attaque ? 
 
 	void Start()
 		{
@@ -43,8 +44,10 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			agent = GetComponent<NavMeshAgent> ();
 			anim = GetComponentInChildren<Animator> ();
 			audioSource = GetComponent<AudioSource> ();
-			particule = GetComponentInChildren<ParticleSystem> ();
-
+		if (hasAttEffect) 
+		{
+			particule = transform.Find ("MobAttParticle").GetComponent<ParticleSystem> ();
+		}
 			if (isServer) 
 			{
 				GetComponentInChildren<EnnemiAggroManagerScript> ().enabled = true;
@@ -70,16 +73,8 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 		if (isServer) 
 		{
-//			try{
 			if (target) 
 			{
-//				if (gameObject.layer == 8 && target.layer == 8) 
-//				{
-//					if (target.GetComponent<PlayerAutoAttack> ().target != null) 
-//					{
-//						targetID = target.GetComponent<PlayerAutoAttack> ().target.GetComponent<NetworkIdentity> ().netId;
-//					}
-//				}
 				if (!isAttacking) 
 				{
 					if (!isActuAttacking && Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) 
@@ -92,57 +87,39 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 					if (Time.time > previousAttackTime) 
 					{
 						previousAttackTime = Time.time + attackRate;
-//						if (gameObject.layer == 8 ) 
-//						{
-//							if (target.layer == 8) {
-//								anim.SetBool ("walk", walkAnim = false);
-//							} else 
-//							{
-//								target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, GetComponent<MinionsPathFindingScript>().target.gameObject);
-//
-//							}
-//						} else {
-                        if(target.tag == "Player")
+						if (target.tag == "Player") 
+						{
 							target.GetComponent<PlayerIGManager> ().LooseHealth (damage, false, gameObject);
+							if (GetComponent<EnnemyIGManager> ().isSlowingOnAutoA) 
+							{
+								GetComponent<EnemySlowPlayer> ().SlowTheTarget (target, attackRate);
+							}
+							if (GetComponent<EnnemyIGManager> ().isCastingAoeCC) 
+							{
+								GetComponent<EnemyCastAoeCC> ().AddACharge ();
+							}
+							if (GetComponent<EnnemyIGManager> ().isCCOnAutoA) 
+							{
+								//10% de chance de stun (1s par défaut)
+								if (Random.Range (0, 10) > 8) 
+								{
+									GetComponent<EnemyCCPlayer> ().CCTheTarget (target);
+								}
+							}
+						}
                         else
                             target.GetComponent<PetIGManager>().LooseHealth(damage, false, gameObject);
-                        //						}
                     }
 					if (!isActuStopAttacking && Vector3.Distance ( transform.localPosition, target.transform.localPosition) > attackRange 
                         || target == null 
                         || (target.tag == "Player" && target.GetComponent<PlayerIGManager> ().isDead ) 
                         || (target.tag != "Player" && target.GetComponent<PetIGManager>().isDead))
                     {
-//						if (gameObject.layer == 8 && target.layer == 8) 
-//						{
-//						} else 
-//						{
 						isActuStopAttacking = true;
 						RpcStopAttacking ();
-//						}
 					}
 				}
-				}
-//			}catch(MissingReferenceException)
-//			{
-//				Debug.Log ("pute");
-//			}
-//			if (target == null && !isAttacking &&!isActuStopAttacking) 
-//			{
-//				isActuStopAttacking = true;
-//				RpcStopAttacking ();
-//			}
-//			if (target == null && !isAttacking && !agent.pathPending && !agent.hasPath) 
-//			{
-////				if(gameObject.layer == 9) //pas necessaire ?
-////				{
-////					if(agent.isPathStale)//si t'as pas de route ?
-////					{
-//						GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
-////					}
-////				}
-//			}
-
+			}
 		}
 		if (target) 
 		{
@@ -155,12 +132,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 						if (Vector3.Distance (transform.position, target.transform.position) > attackRange + 0.5f) 
 					{
 							StartCoroutine (ActualizeTargetPos ());
-//						} else 
-////					{
-//							if (Vector3.Distance (desiredPos, transform.position) > 0.5f && desiredPos != Vector3.zero) {
-//								transform.position = Vector3.Lerp (transform.position, desiredPos, 5 * Time.deltaTime);
 					}
-//						}
 				}
 			}
 			if (target && Vector3.Distance (transform.position, target.transform.position) < attackRange) 
@@ -178,15 +150,14 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		[ClientRpc]
 	public void RpcAttackTarget(Vector3 pos)
 		{
-//		desiredPos = pos;
+		if (GetComponent<EnnemyIGManager> ().isAnInvisible) 
+		{
+			GetComponent<EnnemyIGManager>().deadAnimChildMesh.GetComponentInChildren<SkinnedMeshRenderer> ().enabled = true;
+			transform.Find ("MiniMapIcon").GetComponent<SpriteRenderer> ().enabled = true;
+		}
 		agent.velocity = Vector3.zero;
 		agent.isStopped = true;
-
 		isAttacking = true;
-//		if (gameObject.layer == 8 && target.layer == 8) 
-//		{
-//			return;
-//		}
 			attackAnim = true;
 			agent.enabled = false;
 			GetComponent<NavMeshObstacle> ().enabled = true;
@@ -207,7 +178,11 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		[ClientRpc]
 	public void RpcStopAttacking()
 	{
-		
+		if (GetComponent<EnnemyIGManager> ().isAnInvisible) 
+		{
+			GetComponent<EnnemyIGManager>().deadAnimChildMesh.GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+			transform.Find ("MiniMapIcon").GetComponent<SpriteRenderer> ().enabled = false;
+		}
 		GetComponent<NavMeshObstacle> ().enabled = false;
 		agent.enabled = true;
 		isAttacking = false;
@@ -238,7 +213,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		}
 		yield return new WaitForSeconds(0.1f);
 		if (target != null) {
-//			if (agent.isOnNavMesh) {
 			if (agent.isActiveAndEnabled) {
 				agent.SetDestination (target.transform.localPosition); 
 				agent.stoppingDistance = attackRange;
@@ -263,6 +237,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcLooseTarget()
 	{
+		if (GetComponent<EnnemyIGManager> ().isAnInvisible) 
+		{
+			GetComponent<EnnemyIGManager>().deadAnimChildMesh.GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+			transform.Find ("MiniMapIcon").GetComponent<SpriteRenderer> ().enabled = false;
+
+		}
 			target = null;
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
@@ -297,8 +277,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			
 		} else 
 		{
-//			GetComponent<NavMeshObstacle> ().enabled = false;
-//			agent.Resume();
 			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
 			if (agent.isOnNavMesh) {
@@ -325,16 +303,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	public void SetTheTarget(GameObject targ)
 	{
 			targetID = targ.GetComponent<NetworkIdentity> ().netId;
-//		RpcActualizeAttackerPosition (transform.position);
-
 	}
-//	[ClientRpc]
-//	public void RpcActualizeAttackerPosition(Vector3 pos)
-//	{
-//		if (!isServer) {
-//			desiredPos = pos;
-//		}
-//	}
 	public void GetCC(float dur)
 	{
 		RpcGetCCForTimer (dur);

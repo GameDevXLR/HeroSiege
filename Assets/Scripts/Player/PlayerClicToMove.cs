@@ -70,7 +70,11 @@ public class PlayerClicToMove : NetworkBehaviour {
                 }
 				if (hit.collider.gameObject.layer == Layers.Ennemies) 
 				{
-//					aggroArea.autoTargetting = true;
+					if (hit.collider.gameObject.GetComponent<EnnemyIGManager> ().isAnInvisible && !hit.collider.gameObject.GetComponent<EnemyAutoAttackScript> ().isAttacking) 
+					{
+						//rien faire si tu clic sur un invisible qui est pas en train d'attaquer.
+						return; 
+					}
 					cursorTargetter.transform.position = Vector3.zero;
 					target = hit.collider.gameObject;
 					CmdSendNewTarget(target.GetComponent<NetworkIdentity> ().netId);

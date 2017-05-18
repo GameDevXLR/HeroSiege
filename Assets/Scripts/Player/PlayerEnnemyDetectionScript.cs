@@ -41,8 +41,11 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 							other.gameObject.GetComponent<EnnemyIGManager> ().myEnemies.Add (autoAScript.gameObject);
 						}
 						if (autoAScript.target == null) {
-							if (!other.GetComponent<EnnemyIGManager> ().isDead) 
-							{
+							if (!other.GetComponent<EnnemyIGManager> ().isDead) {
+								if (other.GetComponent<EnnemyIGManager> ().isAnInvisible && !other.GetComponent<EnemyAutoAttackScript>().isAttacking) 
+								{
+									return;
+								}
 								TellHeroHisDest (other.gameObject.GetComponent<NetworkIdentity> ().netId);
 							}
 						}

@@ -26,11 +26,26 @@ public class EnnemyIGManager : CharacterIGManager
 	//my enemies
 	public List<GameObject> myEnemies;
 
+	[Header("Enemies abilities")]
+	public bool isSlowingOnAutoA;
+	public bool isCCOnAutoA;
+	public bool isDrainingManaOnAutoA;
+	public bool isCastingAoeCC;
+	public bool isAbleToResurect;
+	public bool IsAbleToIgnoreAggro;
+	[SyncVar]public bool isAnInvisible;
+
 
     new void Start()
     {
         base.Start();
         deadAnimChildMesh = transform.GetChild(2).GetChild(0).gameObject;
+		if (isAnInvisible) 
+		{
+			transform.Find ("MiniMapIcon").GetComponent<SpriteRenderer> ().enabled = false;
+
+			deadAnimChildMesh.GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
+		}
         if (isServer) 
 		{
 			nbrOfPlayersT1 = GameManager.instanceGM.team1ID.Count;
@@ -73,7 +88,14 @@ public class EnnemyIGManager : CharacterIGManager
 
     public override void MakeHimDie()
     {
-       
+		if (isAbleToResurect) 
+		{
+			currentHp = maxHp;
+			RpcMakeHimRez ();
+			isDead = false;
+			isAbleToResurect = false;
+			return;
+		}
         StartCoroutine(KillTheMob());
     }
 
@@ -81,6 +103,7 @@ public class EnnemyIGManager : CharacterIGManager
     //ce qu'il se passe si un mob meurt...
     IEnumerator KillTheMob()
     {
+
         if (guyAttackingMe)
         {
             if (guyAttackingMe.tag == "Player")
@@ -105,6 +128,7 @@ public class EnnemyIGManager : CharacterIGManager
 					myEnemies.Clear ();
 				}
 			}
+
             if (isJungleMob)
             {
                 isDead = true;
@@ -176,4 +200,17 @@ public class EnnemyIGManager : CharacterIGManager
         }
     }
 
+	[ClientRpc]
+	public void RpcMakeHimRez()
+	{
+		StartCoroutine(rezProcedure());
+	}
+
+	IEnumerator rezProcedure()
+	{
+		transform.Find ("RezParticle").GetComponent<ParticleSystem> ().Play ();
+		yield return new WaitForSeconds (2f);
+		transform.Find ("RezParticle").GetComponent<ParticleSystem> ().Stop();
+
+	}
 }

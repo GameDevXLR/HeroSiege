@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 198170146606187860}
   - component: {fileID: 199694037577133008}
   m_Layer: 9
-  m_Name: Mob2AttParticle
+  m_Name: MobAttParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 4974157814256906}
   - component: {fileID: 212650112206558684}
   m_Layer: 11
-  m_Name: MiniMapIcon (2)
+  m_Name: MiniMapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -829,6 +829,7 @@ GameObject:
   - component: {fileID: 54470705887771074}
   - component: {fileID: 114621568014076468}
   - component: {fileID: 114617621828181772}
+  - component: {fileID: 114468235282368770}
   m_Layer: 9
   m_Name: mob2
   m_TagString: Untagged
@@ -2014,6 +2015,17 @@ MonoBehaviour:
   underSlow: 0
   CCTwistImg: {fileID: 212075347313932812}
   SlowImg: {fileID: 212075347313932812}
+--- !u!114 &114468235282368770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853418556211758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3507d085ac4f745b5a43605130d8cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114507056319487786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2114,6 +2126,13 @@ MonoBehaviour:
   goldCanvas: {fileID: 1802038026311656}
   isJungleMob: 0
   myEnemies: []
+  isSlowingOnAutoA: 0
+  isCCOnAutoA: 0
+  isDrainingManaOnAutoA: 0
+  isCastingAoeCC: 0
+  isAbleToResurect: 0
+  IsAbleToIgnoreAggro: 0
+  isAnInvisible: 0
 --- !u!114 &114621568014076468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2282,6 +2301,7 @@ MonoBehaviour:
   isActuAttacking: 0
   isActuStopAttacking: 0
   isLoosingTarget: 0
+  hasAttEffect: 1
 --- !u!114 &114976476096530448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3241,7 +3261,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 221436992
+  randomSeed: -547509265
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6214,7 +6234,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1029792713
+  randomSeed: -569182821
   InitialModule:
     serializedVersion: 3
     enabled: 1

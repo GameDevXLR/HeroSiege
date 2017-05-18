@@ -39,7 +39,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public bool isActuAttacking;
 	public bool isActuStopAttacking;
 	public ParticleSystem particule;
-
+	public bool isUnderCC;
 	public int critChance;
 	public int critFactor;
 	[SyncVar] public int bonusDamage;
@@ -305,5 +305,52 @@ public class PlayerAutoAttack: NetworkBehaviour
 		attackRate = attackAnimTime / attackSpeedStat;
 
 		anim.SetFloat ("attackSpeed", aS);
+	}
+	public void GetCC(float dur)
+	{
+		RpcGetCCForTimer (dur);
+	}
+	[ClientRpc]
+	public void RpcGetCCForTimer(float dura)
+	{
+		StartCoroutine(UnderCCProcedure(dura));
+	}
+
+	IEnumerator UnderCCProcedure(float durat)
+	{
+		isUnderCC = true;
+		if (isAttacking) 
+		{
+			if (particule != null) 
+			{
+				particule.Stop ();
+			}
+			anim.SetBool ("attack", false);
+		}
+		if (agent.isActiveAndEnabled) 
+		{
+			agent.velocity = Vector3.zero;
+			agent.isStopped = true;
+		}
+		GetComponent<PlayerClicToMove> ().enabled = false;
+		anim.enabled = false;
+		yield return new WaitForSeconds (durat);
+		if (agent.isActiveAndEnabled) 
+		{
+			agent.isStopped = false;
+		}
+		GetComponent<PlayerClicToMove> ().enabled = true;
+
+		if (isAttacking) 
+		{
+			if (particule != null) 
+			{
+				particule.Play ();
+			}
+			anim.SetBool ("attack", true);
+		}
+		anim.enabled = true;
+
+		isUnderCC = false;
 	}
 }

@@ -5103,6 +5103,7 @@ GameObject:
   - component: {fileID: 114017646617901400}
   - component: {fileID: 114069608858984512}
   - component: {fileID: 114022402550038634}
+  - component: {fileID: 114823897711352548}
   m_Layer: 9
   m_Name: mobJung1
   m_TagString: Untagged
@@ -10991,6 +10992,11 @@ MonoBehaviour:
   goldCanvas: {fileID: 1590789217147196}
   isJungleMob: 1
   myEnemies: []
+  isSlowingOnAutoA: 0
+  isCCOnAutoA: 1
+  isCastingAoeCC: 0
+  isAbleToResurect: 0
+  IsAbleToIgnoreAggro: 0
 --- !u!114 &114101529891299568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11143,8 +11149,8 @@ MonoBehaviour:
   ennemiAtt: {fileID: 8300000, guid: 819de7c6607003f47831a49f984395b8, type: 3}
   agent: {fileID: 195188654927422968}
   attackRange: 3.5
-  attackRate: 0.5
-  damage: 10
+  attackRate: 1
+  damage: 2
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 15
@@ -11154,6 +11160,7 @@ MonoBehaviour:
   isActuAttacking: 0
   isActuStopAttacking: 0
   isLoosingTarget: 0
+  hasAttEffect: 0
 --- !u!114 &114379189777831496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11294,6 +11301,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0.65
+--- !u!114 &114823897711352548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911839666593776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e71836ec7174e14080b614c50e5bdc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cCDuration: 1
 --- !u!114 &114859908152555944
 MonoBehaviour:
   m_ObjectHideFlags: 1
