@@ -36,7 +36,10 @@ public class PlayerStatusHandler : NetworkBehaviour {
 
 	public void MakeHimSlow(float dur)
 	{
-		RpcSlowTheObject (dur);
+		if (!underSlow) 
+		{
+			RpcSlowTheObject (dur);
+		}
 	}
 
 
