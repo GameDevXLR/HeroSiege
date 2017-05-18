@@ -47,11 +47,14 @@ public class CameraController : MonoBehaviour
 
 	Camera cameraCible;
 
-	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
-	void Awake(){
+    public CameraBoundaries boundaries;
+
+    //on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
+    void Awake(){
 		if (instanceCamera == null) {
 			instanceCamera = this;
-		} else if (instanceCamera != this) 
+            
+        } else if (instanceCamera != this) 
 		{
 			Destroy (gameObject);
 		}
@@ -63,6 +66,7 @@ public class CameraController : MonoBehaviour
         yRef = gameObject.transform.position.y;
 		isReady = true;
 		layer_mask = LayerMask.GetMask ("Ground"); // ground layer 10
+        
     }
 
     void Update()
@@ -74,8 +78,9 @@ public class CameraController : MonoBehaviour
 		if (Input.GetKeyUp (lockKey))
 			selectedPlayer = !selectedPlayer;
 		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
-			UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, layer_mask);
-		}
+			//UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, layer_mask);
+            UtilsScreenMovement.moveScreenWithMouse(cameraCible, boundaries, zoneDetectionMouse, speed, layer_mask);
+        }
     }
 
     void LateUpdate()

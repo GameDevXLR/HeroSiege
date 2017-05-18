@@ -5,6 +5,10 @@ using UnityEngine.Networking;
 
 public class CharacterIGManager : NetworkBehaviour
 {
+    //[SyncVar(hook = "RescaleTheLifeBarIG")] public int currentHp = 800;
+    //[SyncVar(hook = "ActualizeArmor")] public int armorScore = 1;
+    //[SyncVar(hook = "ActualizeDeadIcon")] public bool isDead;
+    //[SyncVar(hook = "ActualizeDodge")] [Range(0, 100)] public float dodge;
     // Vie
     public RectTransform lifeBar; // barre de vie IG
     [SyncVar] public int maxHp = 1000;
