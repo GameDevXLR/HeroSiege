@@ -14,7 +14,10 @@ public class MainMenuManager : MonoBehaviour
 	public GameObject ProfileCanvasObj;
 	public GameObject OptionsCanvasObj;
 	public string PlayerNickname;
+	public Slider menuMusicVolume;
+	public AudioSource menuMusic;
 
+	public Slider generalVolume;
 	void Awake()
 	{
 		FindGamesCanvasObj.GetComponent<Canvas>().enabled = false;	
@@ -30,6 +33,10 @@ public class MainMenuManager : MonoBehaviour
 //		}		
 		PlayerNameDisplay.text = PlayerPrefs.GetString("PlayerNN");
 		PlayerNickname = PlayerPrefs.GetString ("PlayerNN");
+		menuMusic.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME", 0.5f);
+		menuMusicVolume.value = menuMusic.volume;
+		AudioListener.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME", 0.5f);
+		generalVolume.value = AudioListener.volume;
 		if (PlayerNameDisplay.text == "") 
 		{
 			PlayerNameDisplay.text = "NewPlayer";
@@ -123,6 +130,18 @@ public class MainMenuManager : MonoBehaviour
 //			{
 //				UnityEditor.EditorApplication.isPlaying = false;
 //			}
+	}
+
+	public void ChangeMusicMenuVolume()
+	{
+		menuMusic.volume = menuMusicVolume.value;
+		PlayerPrefs.SetFloat ("MUSIC_VOLUME", menuMusicVolume.value);
+	}
+
+	public void ChangeGeneralVolume()
+	{
+		AudioListener.volume = generalVolume.value;
+		PlayerPrefs.SetFloat ("GENERAL_VOLUME", generalVolume.value);
 	}
 
 	public void ChangeName()
