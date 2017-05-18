@@ -16,18 +16,16 @@ public class SpellTankDpsHealAoe : NetworkBehaviour {
 	public float duration;
 	public int spellDamage = 50;
 	private float timer;
-	private float dotTimer;
 	private bool hasHealed;
 
 	void Start()
 	{
 		timer = Time.time;
-		dotTimer = Time.time;
 	}
 	[ServerCallback]
 	void Update()
 	{
-		if (Time.time > timer + 0.7f && !hasHealed) 
+		if (Time.time > timer + 0.4f && !hasHealed) 
 		{
 			int nbrOfObj;
 			nbrOfObj = spellTargets.Count;
@@ -42,19 +40,11 @@ public class SpellTankDpsHealAoe : NetworkBehaviour {
 		}
 
 	}
-//	[ServerCallback]
-//	public void LateUpdate()
-//	{
-////		if (Time.time > dotTimer + 0.5f)
-////		{
-////			dotTimer = dotTimer + 0.5f;
-////			spellTargets.Clear();
-////		}
-//	}
+
 	[ServerCallback]
 	void OnTriggerEnter(Collider other)
 	{
-		if (Time.time < timer + 0.5f) 
+		if (Time.time < timer + 0.3f) 
 		{
 			if (other.gameObject.layer == 9) 
 			{

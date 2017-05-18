@@ -35,6 +35,7 @@ public class CharacterIGManager : NetworkBehaviour
     // est attaquer par
     public GameObject guyAttackingMe;
 
+
     [SyncVar] public bool isTaunt;
 
     protected virtual void Start()
@@ -130,6 +131,7 @@ public class CharacterIGManager : NetworkBehaviour
         }
         if (isServer)
         {
+
             LooseHeathServer(dmg, trueDmg, attacker);
         }
         RescaleTheLifeBarIG(currentHp);

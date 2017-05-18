@@ -498,4 +498,14 @@ public class GameManager : NetworkBehaviour
 			tutoTip.text = tip;
 		}
 	}
+	public void DisconnectThePlayer()
+	{
+		if (isServer) 
+		{
+			StopPlayerFromJoining ();
+			NetworkManager.singleton.StopHost ();
+			return;
+		}
+		NetworkManager.singleton.StopClient ();
+	}
 }

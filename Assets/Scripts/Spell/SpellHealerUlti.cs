@@ -54,7 +54,7 @@ public class SpellHealerUlti : NetworkBehaviour {
 			if (other.gameObject.layer == 9)
 			{
 				spellTargets.Add(other.gameObject);
-				other.gameObject.GetComponent<PlayerIGManager>().LooseHealth((int)spellDamage / 5, true, caster);
+				other.gameObject.GetComponent<EnnemyIGManager>().LooseHealth((int)spellDamage / 5, true, caster);
 			}
 
 		}

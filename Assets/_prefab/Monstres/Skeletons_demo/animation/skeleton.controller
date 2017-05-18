@@ -13,25 +13,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attackEnnemi
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: walk
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AttackSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -85,10 +85,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.13210356
-  m_TransitionOffset: 0.0010467196
-  m_ExitTime: 0.0025764436
-  m_HasExitTime: 1
+  m_TransitionDuration: 0.04106003
+  m_TransitionOffset: 0.0010467212
+  m_ExitTime: 0.0025764452
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -109,9 +109,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1455564
+  m_TransitionDuration: 0.14555642
   m_TransitionOffset: 0
-  m_ExitTime: 0.039259236
+  m_ExitTime: 0.00889104
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -133,9 +133,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.09000019
-  m_TransitionOffset: 0.0128927175
-  m_ExitTime: 0.019715901
+  m_TransitionDuration: 0.06516977
+  m_TransitionOffset: 0.006685113
+  m_ExitTime: 0.009074293
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

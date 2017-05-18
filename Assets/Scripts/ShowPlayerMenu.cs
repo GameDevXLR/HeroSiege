@@ -15,6 +15,13 @@ public class ShowPlayerMenu: MonoBehaviour {
 		ChildMenu = gameObject;
 		ChildMenu.GetComponent<Canvas>().enabled = false;	
 	}
+	void Start()
+	{
+		musicSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME");
+		AudioListener.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME");
+				myVol.value = AudioListener.volume;
+				musicVol.value = musicSource.volume;
+	}
 	public void ToggleMenu()
 	{
 
@@ -38,10 +45,13 @@ public class ShowPlayerMenu: MonoBehaviour {
 	public void ChangeGeneralVolume()
 	{
 		AudioListener.volume = myVol.value;
+		PlayerPrefs.SetFloat ("GENERAL_VOLUME", myVol.value);
 	}
 	public void ChangeMusicVolume()
 	{
 		musicSource.volume = musicVol.value;
+		PlayerPrefs.SetFloat ("MUSIC_VOLUME", musicVol.value);
+
 	}
 	void Update()
 	{
@@ -53,6 +63,12 @@ public class ShowPlayerMenu: MonoBehaviour {
 	public void QuitTheGame()
 	{
 		Application.Quit();
+
+	}
+
+	public void DisconnectThePlayer()
+	{
+		GameManager.instanceGM.DisconnectThePlayer ();
 	}
 
 }

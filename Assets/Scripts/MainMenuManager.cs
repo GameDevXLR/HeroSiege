@@ -7,16 +7,23 @@ public class MainMenuManager : MonoBehaviour
 {
 	private bool actifTabFG;
 	private bool actifTabProfile;
+	public bool actifTabOptions;
 	public InputField nameField;
 	public Text PlayerNameDisplay;
 	public GameObject FindGamesCanvasObj;
 	public GameObject ProfileCanvasObj;
+	public GameObject OptionsCanvasObj;
 	public string PlayerNickname;
+	public Slider menuMusicVolume;
+	public AudioSource menuMusic;
 
+	public Slider generalVolume;
 	void Awake()
 	{
 		FindGamesCanvasObj.GetComponent<Canvas>().enabled = false;	
-		ProfileCanvasObj.GetComponent<Canvas>().enabled = false;	
+		ProfileCanvasObj.GetComponent<Canvas>().enabled = false;
+		OptionsCanvasObj.GetComponent<Canvas> ().enabled = false;
+
 	}
 	public void Start()
 	{
@@ -26,6 +33,10 @@ public class MainMenuManager : MonoBehaviour
 //		}		
 		PlayerNameDisplay.text = PlayerPrefs.GetString("PlayerNN");
 		PlayerNickname = PlayerPrefs.GetString ("PlayerNN");
+		menuMusic.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME", 0.5f);
+		menuMusicVolume.value = menuMusic.volume;
+		AudioListener.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME", 0.5f);
+		generalVolume.value = AudioListener.volume;
 		if (PlayerNameDisplay.text == "") 
 		{
 			PlayerNameDisplay.text = "NewPlayer";
@@ -43,6 +54,10 @@ public class MainMenuManager : MonoBehaviour
 			if (actifTabProfile) 
 			{
 				ToggleProfileCanvas ();
+			}
+			if (actifTabOptions) 
+			{
+				ToggleOptionsCanvas ();
 			}
 
 			return;
@@ -67,7 +82,10 @@ public class MainMenuManager : MonoBehaviour
 			{
 				ToggleFindGCanvas ();
 			}
-
+			if (actifTabOptions) 
+			{
+				ToggleOptionsCanvas ();
+			}
 			return;
 		}
 		if (actifTabProfile == true)
@@ -75,6 +93,32 @@ public class MainMenuManager : MonoBehaviour
 
 			ProfileCanvasObj.GetComponent<Canvas>().enabled = false;
 			actifTabProfile = false;			
+		}
+
+	}
+	public void ToggleOptionsCanvas()
+	{
+
+		if (actifTabOptions == false)
+		{
+
+			OptionsCanvasObj.GetComponent<Canvas>().enabled = true;
+			actifTabOptions = true;
+			if (actifTabFG) 
+			{
+				ToggleFindGCanvas ();
+			}
+			if (actifTabProfile) 
+			{
+				ToggleProfileCanvas ();
+			}
+			return;
+		}
+		if (actifTabOptions == true)
+		{
+
+			OptionsCanvasObj.GetComponent<Canvas>().enabled = false;
+			actifTabOptions = false;			
 		}
 
 	}
@@ -88,6 +132,18 @@ public class MainMenuManager : MonoBehaviour
 //			}
 	}
 
+	public void ChangeMusicMenuVolume()
+	{
+		menuMusic.volume = menuMusicVolume.value;
+		PlayerPrefs.SetFloat ("MUSIC_VOLUME", menuMusicVolume.value);
+	}
+
+	public void ChangeGeneralVolume()
+	{
+		AudioListener.volume = generalVolume.value;
+		PlayerPrefs.SetFloat ("GENERAL_VOLUME", generalVolume.value);
+	}
+
 	public void ChangeName()
 	{
 		if (nameField.text == "") 
@@ -95,9 +151,9 @@ public class MainMenuManager : MonoBehaviour
 			return;
 		}
 		
-		if (nameField.text.Length > 24) 
+		if (nameField.text.Length > 18) 
 		{
-			nameField.text = nameField.text.Substring (0, 24);
+			nameField.text = nameField.text.Substring (0, 18);
 		}
 		PlayerNickname = nameField.text;
 		PlayerPrefs.SetString("PlayerNN", PlayerNickname);

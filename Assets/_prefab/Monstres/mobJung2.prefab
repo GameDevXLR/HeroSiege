@@ -1207,8 +1207,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 2}
-  m_Center: {x: -0.20298189, y: 1.032563, z: 0.18246758}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!82 &82334878603509866
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1561,6 +1561,7 @@ MonoBehaviour:
   goldDisplay: {fileID: 114367478807938214}
   goldCanvas: {fileID: 1736315127910624}
   isJungleMob: 1
+  myEnemies: []
 --- !u!114 &114636151465075738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1947,7 +1948,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1005958469064112}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.67
+  m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 5000
   avoidancePriority: 55
@@ -1956,8 +1957,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.5
-  m_BaseOffset: 0.5
+  m_Height: 2
+  m_BaseOffset: 0
   m_WalkableMask: 9
   m_ObstacleAvoidanceType: 1
 --- !u!198 &198261834667000412
@@ -8107,11 +8108,11 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.75, y: 1.5, z: 0.75}
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Center: {x: 0, y: 0.96, z: 0}
   m_TimeToStationary: 0.5
 --- !u!212 &212260985301604736
 SpriteRenderer:
@@ -8145,7 +8146,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 1cf9c20dbb1e3224384822dd9ff41e6d, type: 3}
   m_Color: {r: 0.61764705, g: 0.067966245, b: 0.0045415265, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8427,8 +8428,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1736315127910624}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -61.266}
-  m_LocalScale: {x: 2.6666808, y: 5.3333397, z: 2.6666808}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 6, z: 3}
   m_Children:
   - {fileID: 224867863978524610}
   m_Father: {fileID: 4663604429934908}
@@ -8436,7 +8437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -59.141216, y: -29.040855}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.5, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224976692822117492

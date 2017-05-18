@@ -83,12 +83,12 @@ public class AllyPetAutoAttack : NetworkBehaviour
 								anim.SetBool ("walk", walkAnim = false);
 							} else 
 							{
-								target.GetComponent<GenericLifeScript> ().LooseHealth (damage, false, GetComponent<MinionsPathFindingScript>().target.gameObject);
+								target.GetComponent<EnnemyIGManager> ().LooseHealth (damage, false, GetComponent<MinionsPathFindingScript>().target.gameObject);
 
 							}
 						 
 					}
-					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.GetComponent<PlayerIGManager> ().isDead) 
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null || target.layer == Layers.Player && target.GetComponent<PlayerIGManager> ().isDead) 
 					{
 						if (target.layer != 8) 
 						{
@@ -102,6 +102,11 @@ public class AllyPetAutoAttack : NetworkBehaviour
 				}
 			}
 			if (target == null && isAttacking && !isActuStopAttacking) 
+			{
+				isActuStopAttacking = true;
+				RpcStopAttacking ();
+			}
+			if ((target == null ||target.layer == Layers.Ennemies && target.GetComponent<EnnemyIGManager>().isDead) && isAttacking) 
 			{
 				isActuStopAttacking = true;
 				RpcStopAttacking ();
@@ -223,7 +228,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 //				StopAllCoroutines ();
 //				GetTargetFromID (targetID);
 //			}
-			anim.SetBool ("walk", walkAnim = false);
+			anim.SetBool ("walk", walkAnim = true);
 		}
 	}
 	public void LooseTarget()
@@ -240,7 +245,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		agent.enabled = true;
 		agent.isStopped = false;
 		anim.SetBool ("attackEnnemi", attackAnim = false);
-		anim.SetBool ("walk", walkAnim = false);
+		anim.SetBool ("walk", walkAnim = true);
 		if (particule != null) 
 		{
 			particule.Stop ();
@@ -258,7 +263,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 	{
 
 		isActualizingPos = true;
-		if (target.GetComponent<EnnemyIGManager> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
+		if ( target.layer == Layers.Ennemies && target.GetComponent<EnnemyIGManager> ().isDead || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
 				target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
 				SetTheTarget (target);

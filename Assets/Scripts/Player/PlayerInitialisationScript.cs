@@ -29,6 +29,18 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Sprite tankAvatarImg;
 	public Sprite healAvatarImg;
 	public Sprite DpsAvatarImg;
+	public Sprite tankAvatarImgMini;
+	public Sprite healAvatarImgMini;
+	public Sprite DpsAvatarImgMini;
+	[Header("All ovate sounds:")]
+	public AudioClip autoAHeal1;
+	public AudioClip autoAHeal2;
+	public AudioClip deadHeal;
+	[Header("All hunter sounds:")]
+	public AudioClip autoAArcher1;
+	public AudioClip autoAArcher2;
+	public AudioClip deadArcher;
+
 	public PlayerIGManager myPlayerIGManager;
 	public GenericManaScript myGeneManaScript;
 	public PlayerAutoAttack myAutoAScript;
@@ -130,10 +142,12 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		childTankSkin.SetActive (true);
 		myAutoAScript.enabled = true;
 		myStatPlusScript.enabled = true;
+		GameManager.instanceGM.messageManager.SendAnAlertMess (playerNickName + " will play the Champion.[Tank]", Color.green);
+
 		myAutoAScript.anim = childTankSkin.GetComponentInChildren<Animator> ();
 		myPlayerIGManager.deadAnimChildMesh = childTankSkin.transform.GetChild(0).gameObject;
 		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
-
+		myPlayerIGManager.heroChosen = "Champion";
 		GetComponent<PlayerClicToMove> ().anim = childTankSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
@@ -158,11 +172,13 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//faire ici la config du hero tank1 pour tous
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
+			GetComponent<PlayerManager> ().avatarImg.sprite = tankAvatarImg;
+
 			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
 			ShowYourTip ();
 		} else //si c'est le perso d'un autre joueur pour toi : 
 		{
-			//rien pour le moment ? 
+			GetComponent<PlayerManager> ().avatarImg.sprite = tankAvatarImgMini;
 		}
 	}
 	public void ListenerSelectHeroHeal1()
@@ -179,13 +195,17 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		childHealSkin.SetActive (true);
 		GetComponent<PlayerClicToMove> ().enabled = true;
-
+		GameManager.instanceGM.messageManager.SendAnAlertMess (playerNickName + " will play the Ovate.[support]", Color.green);
 		GetComponent<PlayerCastHealArea> ().enabled = true;
 		GetComponent<PlayerHealerCastUlti> ().enabled = true;
 		GetComponent<PlayerHealerCastInvokePet> ().enabled = true;
 		myAutoAScript.enabled = true;
 		myStatPlusScript.enabled = true;
-
+		myAutoAScript.Att1 = autoAHeal1;
+		myAutoAScript.Att2 = autoAHeal2;
+		myPlayerIGManager.PlayerDeath = deadHeal;
+		myPlayerIGManager.heroChosen = "Ovate";
+		myAutoAScript.particule = childHealSkin.GetComponentInChildren<ParticleSystem> ();
 		myAutoAScript.anim = childHealSkin.GetComponentInChildren<Animator> ();
 		myPlayerIGManager.deadAnimChildMesh = childHealSkin.transform.GetChild(0).gameObject;
 		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
@@ -217,9 +237,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
 			ShowYourTip ();
+			GetComponent<PlayerManager> ().avatarImg.sprite = healAvatarImg;
+
 		} else //si c'est le perso d'un autre joueur pour toi : 
 		{
-			//rien pour le moment ? 
+			GetComponent<PlayerManager> ().avatarImg.sprite = healAvatarImgMini;
 		}
 	}
 	public void ListenerSelectHeroDps1()
@@ -243,10 +265,14 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerArcherCastPassiveBoost> ().enabled = true;
 		GetComponent<PlayerArcherCastArrowRain> ().enabled = true;
 		GetComponent<PlayerArcherCastPoisonTrap> ().enabled = true;
-
+		myAutoAScript.Att1 = autoAArcher1;
+		myAutoAScript.Att2 = autoAArcher2;
+		myPlayerIGManager.PlayerDeath = deadArcher;
 		myAutoAScript.anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		myPlayerIGManager.deadAnimChildMesh = childDpsSkin.transform.GetChild(0).gameObject;
 		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
+		myPlayerIGManager.heroChosen = "Hunter";
+		GameManager.instanceGM.messageManager.SendAnAlertMess (playerNickName + " will play the Hunter.[ADC]", Color.green);
 
 		GetComponent<PlayerClicToMove> ().anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
@@ -275,10 +301,12 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
 			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
+			GetComponent<PlayerManager> ().avatarImg.sprite = DpsAvatarImg;
+
 			ShowYourTip ();
 		} else //si c'est le perso d'un autre joueur pour toi : 
 		{
-			//rien pour le moment ? 
+			GetComponent<PlayerManager> ().avatarImg.sprite = DpsAvatarImgMini;
 		}
 	}
 	public void ChangeMyName (string str)

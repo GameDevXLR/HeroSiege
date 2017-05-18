@@ -47,6 +47,7 @@ public class PlayerIGManager : CharacterIGManager {
     public int threshold = 25;
     public bool underThreshold = false;
 
+	public string heroChosen;
     
 
     protected override void Start()
@@ -166,6 +167,9 @@ public class PlayerIGManager : CharacterIGManager {
         gameObject.layer = 16; //passe en layer Ignore
         GetComponent<PlayerAutoAttack>().StopAllCoroutines();
         GetComponent<PlayerAutoAttack>().target = null;
+		if (GetComponent<PlayerAutoAttack> ().particule) {
+			GetComponent<PlayerAutoAttack> ().particule.Stop ();
+		}
         GetComponent<PlayerAutoAttack>().enabled = false;
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
         animParent = deadAnimChildMesh.transform.parent;
@@ -259,11 +263,11 @@ public class PlayerIGManager : CharacterIGManager {
     }
     public override void ActualizeDodge(float dod)
     {
-        base.ActualizeDodge(dod);
         if (isLocalPlayer)
         {
             dodgeDisplay.text = dod.ToString();
         }
+		base.ActualizeDodge(dod);
     }
     public void ActualizePlayerDeaths(int dea)
     {

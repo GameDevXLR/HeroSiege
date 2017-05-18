@@ -103,8 +103,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) {
 			targetplayer = NetworkServer.FindLocalObject (targetID);
-			targetplayer.GetComponent<PlayerIGManager> ().maxHp += 20;
-			targetplayer.GetComponent<PlayerIGManager> ().bonusHp += 20;
+			targetplayer.GetComponent<PlayerIGManager> ().maxHp += 50;
+			targetplayer.GetComponent<PlayerIGManager> ().bonusHp += 50;
 
 		}
 	}
@@ -113,8 +113,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) {
 			targetplayer = NetworkServer.FindLocalObject (targetID);
-			targetplayer.GetComponent<GenericManaScript> ().maxMp += 20;
-			targetplayer.GetComponent<GenericManaScript> ().bonusMp += 20;
+			targetplayer.GetComponent<GenericManaScript> ().maxMp += 30;
+			targetplayer.GetComponent<GenericManaScript> ().bonusMp += 30;
 
 		}
 	}
@@ -226,7 +226,7 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<PlayerIGManager> ().currentHp += 250;
+			GetComponent<PlayerIGManager> ().currentHp += 500;
 		}
 	}
 	[ClientRpc]
@@ -245,7 +245,7 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<PlayerIGManager> ().currentHp += 1000;
+			GetComponent<PlayerIGManager> ().currentHp += 2000;
 		}
 	}
 
@@ -381,8 +381,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<PlayerIGManager> ().maxHp += 250;
-			GetComponent<PlayerIGManager> ().bonusHp += 250;
+			GetComponent<PlayerIGManager> ().maxHp += 550;
+			GetComponent<PlayerIGManager> ().bonusHp += 550;
 
 			GetComponent<PlayerIGManager> ().regenHp += 10;
 			GetComponent<PlayerIGManager> ().armorScore += 50;
@@ -401,8 +401,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<PlayerIGManager> ().maxHp -= 250;
-			GetComponent<PlayerIGManager> ().bonusHp -= 250;
+			GetComponent<PlayerIGManager> ().maxHp -= 550;
+			GetComponent<PlayerIGManager> ().bonusHp -= 550;
 
 			GetComponent<PlayerIGManager> ().regenHp -= 10;
 			GetComponent<PlayerIGManager> ().armorScore -= 50;
@@ -415,8 +415,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<PlayerAutoAttack> ().damage += 100;
-			GetComponent<PlayerAutoAttack> ().bonusDamage += 100;
+			GetComponent<PlayerAutoAttack> ().damage += 200;
+			GetComponent<PlayerAutoAttack> ().bonusDamage += 200;
 
 		}
 		if (isLocalPlayer) 
@@ -431,8 +431,8 @@ public class ItemManager : NetworkBehaviour
 	{
 		if (isServer) 
 		{
-			GetComponent<PlayerAutoAttack> ().damage -= 100;
-			GetComponent<PlayerAutoAttack> ().bonusDamage -= 100;
+			GetComponent<PlayerAutoAttack> ().damage -= 200;
+			GetComponent<PlayerAutoAttack> ().bonusDamage -= 200;
 
 		}
 	}

@@ -617,6 +617,7 @@ GameObject:
   - component: {fileID: 54358660851229740}
   - component: {fileID: 114689901315079102}
   - component: {fileID: 114486781802833534}
+  - component: {fileID: 114704258555246680}
   m_Layer: 9
   m_Name: mobBoss1
   m_TagString: Boss
@@ -823,7 +824,7 @@ GameObject:
   - component: {fileID: 198085469792532482}
   - component: {fileID: 199994882534833080}
   m_Layer: 9
-  m_Name: Mob3AttParticle
+  m_Name: MobAttParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2089,7 +2090,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1271040809616072}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 3.098, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 4905928041325656}
@@ -2968,6 +2969,11 @@ MonoBehaviour:
   goldDisplay: {fileID: 114438898843106408}
   goldCanvas: {fileID: 1678407210894732}
   isJungleMob: 0
+  myEnemies: []
+  isSlowingOnAutoA: 0
+  isCastingAoeCC: 0
+  isAbleToResurect: 0
+  IsAbleToIgnoreAggro: 0
 --- !u!114 &114488150067218850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3122,9 +3128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemiAtt: {fileID: 8300000, guid: 2447c1fa332fea04299969084e8bdab8, type: 3}
   agent: {fileID: 195782094007203306}
-  attackRange: 6
+  attackRange: 4
   attackRate: 1
-  damage: 50
+  damage: 55
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 20
@@ -3134,6 +3140,7 @@ MonoBehaviour:
   isActuAttacking: 0
   isActuStopAttacking: 0
   isLoosingTarget: 0
+  hasAttEffect: 1
 --- !u!114 &114623077183640722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3184,6 +3191,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncRot: 0
   timeBtwTic: 0.25
+--- !u!114 &114704258555246680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420677973341816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae8145fa4d8ff44c89183b6930e27e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AoeCCPrefab: {fileID: 1719465231846340, guid: 9dcc10228525f6b48a03712c601b301b,
+    type: 2}
+  spellCCDuration: 2
+  charges: 0
+  recquiredCharges: 5
 --- !u!114 &114739463826667562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3485,8 +3508,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1420677973341816}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
-  m_Speed: 5
+  m_Radius: 0.69
+  m_Speed: 2.5
   m_Acceleration: 5000
   avoidancePriority: 45
   m_AngularSpeed: 9999
@@ -3553,7 +3576,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1865036652
+  randomSeed: 940355583
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6556,7 +6579,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -612499042
+  randomSeed: -1810715756
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -9618,14 +9641,14 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1420677973341816}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1, y: 1.5, z: 1}
+  m_Extents: {x: 0.7, y: 1.23, z: 0.7}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1.3, z: 0}
+  m_Center: {x: 0, y: 1.15, z: 0}
   m_TimeToStationary: 0.5
 --- !u!212 &212160170802095138
 SpriteRenderer:
@@ -9811,7 +9834,7 @@ RectTransform:
   m_GameObject: {fileID: 1342966928211486}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 4, y: 8, z: 2}
+  m_LocalScale: {x: 2, y: 4, z: 0}
   m_Children:
   - {fileID: 224681430673456658}
   - {fileID: 224799649439388832}
@@ -9820,7 +9843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3.386}
+  m_AnchoredPosition: {x: 0, y: 2.479}
   m_SizeDelta: {x: 0.5, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224372749571432004

@@ -49,6 +49,7 @@ public class BossSpawnManager : NetworkBehaviour
 		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor*GameManager.instanceGM.gameDifficulty*3;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().goldGiven += bonusFactor * bonusFactor;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().xpGiven += bonusFactor * bonusFactor;
+		bossTmpObj.GetComponent<EnnemyIGManager> ().isCastingAoeCC = true;
 		if (bonusFactor >= 10) 
 		{
 			bossTmpObj.GetComponent<EnemyAutoAttackScript> ().agent.speed += 5;
