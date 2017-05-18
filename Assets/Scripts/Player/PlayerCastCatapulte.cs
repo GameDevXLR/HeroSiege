@@ -291,7 +291,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			isUsingCata = true;
 			spellCataBtn.interactable = true;
 			spellCataLoadBtn.interactable = true;
-		
+			spellCataLoadBtn.GetComponentInChildren<RawImage> ().enabled = true;
 			spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = newCharges.ToString();
 
 		}
@@ -309,6 +309,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			isUsingCata = false;
 			spellCataBtn.interactable = false;
 			spellCataLoadBtn.interactable = false;
+			spellCataLoadBtn.GetComponentInChildren<RawImage> ().enabled = false;
+
 			spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
 
 		}

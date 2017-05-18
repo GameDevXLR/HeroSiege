@@ -157,6 +157,7 @@ public class EnnemyIGManager : CharacterIGManager
         deadAnimChildMesh.GetComponent<Animator>().enabled = true;
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         deadAnimChildMesh.GetComponent<DeathByTime>().enabled = true;
+
         deadAnimChildMesh.transform.parent = null;
     }
 
@@ -176,9 +177,17 @@ public class EnnemyIGManager : CharacterIGManager
         GetComponent<EnemyAutoAttackScript>().target = null;
         GetComponent<NavMeshAgent>().acceleration = 0;
         GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+		StartCoroutine (MoveOutOfTheWay ());
         GetComponent<InactivateByTime>().InactivateWithlifeTime();
         guyAttackingMe = null;
     }
+
+	IEnumerator MoveOutOfTheWay()
+	{
+		yield return new WaitForSeconds (2f);
+		transform.position = Vector3.zero;
+
+	}
 
     public void ShareXPWithTheTeam(bool isT1, int xpToShare)
     {
