@@ -9,6 +9,7 @@ public class SpellCatapulteArea : NetworkBehaviour {
 
 	public GameObject caster; // doit etre completer lors du lancement du sort/de la config du sort sur playerCastXXX
 	public List<GameObject> spellTargets;
+	public AudioClip impactSound;
 	bool isDealing;
 	public float timeBeforeImpact = 2f; // doit etre plus petit que duration. Cb de temps avant impact ? 
 	public float duration; // doit etre plus court que destroyTimer. Combien de temps les 
@@ -28,6 +29,8 @@ public class SpellCatapulteArea : NetworkBehaviour {
 		if (Time.time > timer + timeBeforeImpact && !isDealing) 
 		{
 			isDealing = true;
+			GetComponent<AudioSource> ().PlayOneShot (impactSound);
+//			GetComponentInChildren<Animator> ().Play ("TirCatapulte");
 			transform.GetChild (0).gameObject.SetActive (false);
 			transform.GetChild (1).gameObject.SetActive (true);
 

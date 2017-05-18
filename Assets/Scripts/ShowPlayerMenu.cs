@@ -63,6 +63,12 @@ public class ShowPlayerMenu: MonoBehaviour {
 	public void QuitTheGame()
 	{
 		Application.Quit();
+
+	}
+
+	public void DisconnectThePlayer()
+	{
+		GameManager.instanceGM.DisconnectThePlayer ();
 	}
 
 }
