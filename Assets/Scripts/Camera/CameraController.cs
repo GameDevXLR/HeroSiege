@@ -34,6 +34,12 @@ public class CameraController : MonoBehaviour
 	// initial distance player / camera
 	[SerializeField] Vector3 offset = new Vector3(3.7f,4.8f,0.2f);
 
+    // zoom
+    private float zoomfact = 1;
+    public float vitesseZoom = 0.2f;
+    public float limiteBasse = 0.5f;
+    public float limiteHausse = 2;
+
 
 	// initial y, allow to block the y axis
 	private float yRef;
@@ -122,6 +128,7 @@ public class CameraController : MonoBehaviour
                 z = gameObject.transform.position.z
             };
         }
+        
     }
 
     public void LockUnlockCamera()
@@ -129,6 +136,11 @@ public class CameraController : MonoBehaviour
 		selectedPlayer = !selectedPlayer;
 
 	}
+
+    public void zoom()
+    {
+
+    }
 
 }
 

@@ -185,21 +185,37 @@ public class CharacterIGManager : NetworkBehaviour
 
 
 
-    public virtual void ActualizeArmor(int armor)
+    public void ActualizeArmor(int armor)
+    {
+        ActualizeArmorHook(armor);
+    }
+
+    public virtual void ActualizeArmorHook(int armor)
     {
         armorScore = armor;
     }
-    public virtual void ActualizeDodge(float dod)
+
+
+    public void ActualizeDodge(float dod)
+    {
+        ActualizeDodgeHook(dod);
+    }
+    public virtual void ActualizeDodgeHook(float dod)
     {
         dodge = dod;
     }
 
-
-    public virtual void ActualizeDeadIcon(bool isHeDead)
+    public void ActualizeDeadIcon(bool isHeDead)
+    {
+        ActualizeDeadIconHook(isHeDead);
+    }
+    public virtual void ActualizeDeadIconHook(bool isHeDead)
     {
         isDead = isHeDead;
-
     }
+
+
+
 
     public void GotTauntByFor(GameObject taunter, float timeTaunt)
     {

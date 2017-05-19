@@ -253,21 +253,22 @@ public class PlayerIGManager : CharacterIGManager {
 
         }
     }
-    public override  void ActualizeArmor(int armor)
+    public override  void ActualizeArmorHook(int armor)
     {
-        base.ActualizeArmor(armor);
+        base.ActualizeArmorHook(armor);
         if (isLocalPlayer)
         {
             armorDisplay.text = armorScore.ToString();
         }
     }
-    public override void ActualizeDodge(float dod)
+    public override void ActualizeDodgeHook(float dod)
     {
+    
+		base.ActualizeDodgeHook(dod);
         if (isLocalPlayer)
         {
             dodgeDisplay.text = dod.ToString();
-        }
-		base.ActualizeDodge(dod);
+        }    
     }
     public void ActualizePlayerDeaths(int dea)
     {
@@ -278,7 +279,7 @@ public class PlayerIGManager : CharacterIGManager {
         }
         GetComponent<PlayerManager>().playerDeathsTxt.text = dea.ToString();
     }
-    public override void ActualizeDeadIcon(bool isHeDead)
+    public override void ActualizeDeadIconHook(bool isHeDead)
     {
         isDead = isHeDead;
         if (isLocalPlayer && playerDeathCount == 1 && !isDead)
