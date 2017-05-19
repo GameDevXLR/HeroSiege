@@ -65,36 +65,35 @@ public static class UtilsScreenMovement
     public static void moveScreenWithMouse(Camera cameraCible, CameraBoundaries boundaries, int zoneDetectionMouse, int speed, int layer_mask)
     {
 
+        float yValue = (Input.mousePosition.y - (Screen.height / 2)) / (Screen.height / 2);
+        float xValue = (Input.mousePosition.x - (Screen.width / 2)) / (Screen.width / 2);
+        float zoneDectectWidth = (float)zoneDetectionMouse / Screen.width;
+        float zoneDectectHeight = (float)zoneDetectionMouse / Screen.height;
+
         float xValueDeplacement = 0;
         float zValueDeplacement = 0;
 
-        // move to the left
-        if (Input.mousePosition.x >= 0 && Input.mousePosition.x <= zoneDetectionMouse && cameraCible.transform.position.x >= boundaries.getOuest())
+        if((xValue <= 1 && xValue >= 1 - zoneDectectWidth) 
+            || (xValue >= -1 && xValue <= -1 + zoneDectectWidth)
+            || (yValue <= 1 && yValue >= 1 - zoneDectectHeight)
+            || (yValue >= -1 && yValue <= -1 + zoneDectectHeight))
         {
-            xValueDeplacement = -speed * Time.deltaTime;
-        }
-        //move to the right
-        else if (Input.mousePosition.x <= Screen.width && Input.mousePosition.x >= Screen.width - zoneDetectionMouse && cameraCible.transform.position.x <= boundaries.getEst())
-        { 
-            xValueDeplacement = speed * Time.deltaTime;
-        }
+            if ((xValue > 0 && cameraCible.transform.position.z <= boundaries.getEst())
+                || (xValue < 0 && cameraCible.transform.position.z >= boundaries.getOuest()))
+            {
+                xValueDeplacement = speed * Time.deltaTime * xValue;
+            }
 
-        //move backward
-        if (Input.mousePosition.y >= 0 && Input.mousePosition.y <= zoneDetectionMouse && cameraCible.transform.position.y > boundaries.getSud())
-        {
-            Debug.Log("back");
-            zValueDeplacement = -speed * Time.deltaTime;
-
-        }
-        //move forward
-        else if (Input.mousePosition.y <= Screen.height && Input.mousePosition.y >= Screen.height - zoneDetectionMouse && cameraCible.transform.position.y <= boundaries.getNord())
-        {
-
-            zValueDeplacement = speed * Time.deltaTime;
+            if ((yValue > 0 && cameraCible.transform.position.x >= boundaries.getNord())
+                || (yValue < 0 && cameraCible.transform.position.x <= boundaries.getSud()))
+            {
+                zValueDeplacement = speed * Time.deltaTime * yValue;
+            }
         }
 
         if (xValueDeplacement != 0 || zValueDeplacement != 0)
         {
+            Debug.Log("CameraCible position : " + cameraCible.transform.position);
             Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection(new Vector3(xValueDeplacement, 0, zValueDeplacement));           
             
             destination.y = cameraCible.transform.position.y;

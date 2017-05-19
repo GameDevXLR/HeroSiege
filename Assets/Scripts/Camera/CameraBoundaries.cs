@@ -10,25 +10,21 @@ public class CameraBoundaries
 
     public float getSud()
     {
-        Debug.Log( "Sud : " + WardSudEst.transform.position.y);
-        return WardSudEst.transform.position.y;
+        return WardSudEst.transform.position.x;
     }
 
     public float getEst()
     {
-        Debug.Log("Est : " + WardSudEst.transform.position.x);
-        return WardSudEst.transform.position.x;
+        return WardSudEst.transform.position.z;
     }
 
     public float getOuest()
     {
-        Debug.Log("Ouest : " + WardNordOuest.transform.position.x);
-        return WardNordOuest.transform.position.x;
+        return WardNordOuest.transform.position.z;
     }
 
     public float getNord()
     {
-        Debug.Log("Nord : " + WardNordOuest.transform.position.y);
-        return WardNordOuest.transform.position.y;
+        return WardNordOuest.transform.position.x;
     }
 }
