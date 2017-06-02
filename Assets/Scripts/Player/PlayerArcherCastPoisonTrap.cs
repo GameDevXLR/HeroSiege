@@ -125,7 +125,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-				GetComponent<AudioSource>().PlayOneShot(SpellSound);
+                RpcSoundSpell();
 				castPosDesired = hit.point;
 				spellTargeter.transform.position = Vector3.zero;
 				CmdCastSpell(castPosDesired);
@@ -144,7 +144,13 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 		}
 	}
 
-	IEnumerator ShowTargeter()
+    [ClientRpc]
+    public void RpcSoundSpell()
+    {
+        GetComponent<AudioSource>().PlayOneShot(SpellSound);
+    }
+
+    IEnumerator ShowTargeter()
 	{
 		yield return new WaitForEndOfFrame();
 		if (GetComponent<PlayerIGManager>().isDead)

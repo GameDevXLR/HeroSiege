@@ -66,13 +66,19 @@ public class PlayerCastCCSpell : NetworkBehaviour
     [Command]
     public void CmdCastSpell(Vector3 pos)
     {
-        GetComponent<AudioSource>().PlayOneShot(SpellCC);
+        RpcSoundSpell();
         GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
         go.GetComponent<SpellCCAreaScript>().caster = gameObject;
         go.GetComponent<SpellCCAreaScript>().spellDamage = spellDmg;
         go.GetComponent<SpellCCAreaScript>().duration = spellDuration;
         NetworkServer.Spawn(go);
 
+    }
+
+    [ClientRpc]
+    public void RpcSoundSpell()
+    {
+        GetComponent<AudioSource>().PlayOneShot(SpellCC);
     }
     //cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
     //demander le lancement du sort sur le serveur...normal.

@@ -59,7 +59,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	[Command]
 	public void CmdCastSpell()
 	{
-		GetComponent<AudioSource>().PlayOneShot(Spell1);
+        RpcSoundSpell();
 		GameObject go = Instantiate(spellObj, transform.position, transform.localRotation);
 		go.GetComponent<SpellTankTauntArea>().caster = gameObject;
 //		go.GetComponent<AlwaysMove>().target = gameObject;
@@ -69,9 +69,16 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
 
 	}
-	//cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
-	//demander le lancement du sort sur le serveur...normal.
-	public void CastThatSpell()
+
+    [ClientRpc]
+    public void RpcSoundSpell()
+    {
+        GetComponent<AudioSource>().PlayOneShot(Spell1);
+    }
+
+    //cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
+    //demander le lancement du sort sur le serveur...normal.
+    public void CastThatSpell()
 	{
 		if (GetComponent<PlayerIGManager>().isDead)
 		{

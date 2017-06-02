@@ -122,7 +122,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-				GetComponent<AudioSource>().PlayOneShot(SpellCC);
+                RpcSoundSpell();
 				castPosDesired = hit.point;
 				spellTargeter.transform.position = Vector3.zero;
 				CmdCastSpell(castPosDesired);
@@ -141,7 +141,13 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 		}
 	}
 
-	IEnumerator ShowTargeter()
+    [ClientRpc]
+    public void RpcSoundSpell()
+    {
+        GetComponent<AudioSource>().PlayOneShot(SpellCC);
+    }
+
+    IEnumerator ShowTargeter()
 	{
 		yield return new WaitForEndOfFrame();
 		if (GetComponent<PlayerIGManager>().isDead)

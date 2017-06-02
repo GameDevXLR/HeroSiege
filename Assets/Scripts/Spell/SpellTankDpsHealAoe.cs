@@ -49,8 +49,8 @@ public class SpellTankDpsHealAoe : NetworkBehaviour {
 			if (other.gameObject.layer == 9) 
 			{
 				if(!spellTargets.Contains(other.gameObject))
-					{
-						spellTargets.Add (other.gameObject);
+				{
+					spellTargets.Add (other.gameObject);
 					other.gameObject.GetComponent<EnnemyIGManager> ().LooseHealth(spellDamage, true, caster);
 				}
 			}

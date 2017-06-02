@@ -66,7 +66,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 	[Command]
 	public void CmdCastSpell(Vector3 pos)
 	{
-		GetComponent<AudioSource>().PlayOneShot(SpellCC);
+        RpcSoundSpell();
 		GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
 		go.GetComponent<SpellHealerUlti>().caster = gameObject;
 		go.GetComponent<SpellHealerUlti>().spellDamage = spellDmg;
@@ -74,9 +74,15 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 		NetworkServer.Spawn(go);
 
 	}
-	//cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
-	//demander le lancement du sort sur le serveur...normal.
-	public void CastThatSpell()
+
+    [ClientRpc]
+    public void RpcSoundSpell()
+    {
+        GetComponent<AudioSource>().PlayOneShot(SpellCC);
+    }
+    //cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
+    //demander le lancement du sort sur le serveur...normal.
+    public void CastThatSpell()
 	{
 		if (GetComponent<PlayerIGManager>().isDead)
 		{

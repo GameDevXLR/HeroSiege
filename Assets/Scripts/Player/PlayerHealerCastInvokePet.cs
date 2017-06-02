@@ -77,7 +77,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 			Invoke("DestroyThePrevPet", .3f);
 		}
 
-		GetComponent<AudioSource>().PlayOneShot(SpellCC);
+        RpcSoundSpell();
 		GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
 		go.GetComponent<MinionsPathFindingScript> ().target = this.transform;
 		go.GetComponent<AllyPetAutoAttack> ().target = gameObject;
@@ -92,7 +92,13 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 
 	}
 
-	public void DestroyThePrevPet()
+    [ClientRpc]
+    public void RpcSoundSpell()
+    {
+        GetComponent<AudioSource>().PlayOneShot(SpellCC);
+    }
+
+    public void DestroyThePrevPet()
 	{
 		NetworkServer.Destroy (previousPet);
 	}
