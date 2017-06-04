@@ -65,6 +65,11 @@ public class ItemManager : NetworkBehaviour
 			if (!tip1Given) 
 			{
 				GameManager.instanceGM.ShowAGameTip ("You can use the keys 1 to 9 of your keyboard to consume items of your inventory.");
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					GameManager.instanceGM.ShowAGameTip ("Vous pouvez utiliser les touches 1 a 9 de votre clavier pour utiliser un consommable de votre inventaire.");
+
+				}
 				tip1Given = true;
 			}
 		}
@@ -176,10 +181,24 @@ public class ItemManager : NetworkBehaviour
 		GM = GameManager.instanceGM;
 		if (GM.isTeam1) 
 		{
-			GM.messageManager.SendAnAlertMess ("Our boss is growing stronger", Color.green);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GM.messageManager.SendAnAlertMess ("Notre boss devient plus fort.", Color.green);
+
+			} else 
+			{
+				GM.messageManager.SendAnAlertMess ("Our boss is growing stronger", Color.green);
+			}
 		} else 
 		{
-			GM.messageManager.SendAnAlertMess ("The enemy boss is getting stronger.", Color.red);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GM.messageManager.SendAnAlertMess ("Le boss ennemi devient plus fort!", Color.red);
+
+			} else 
+			{
+				GM.messageManager.SendAnAlertMess ("The enemy boss is getting stronger.", Color.red);
+			}
 		}
 		if (isServer) 
 		{
@@ -194,10 +213,24 @@ public class ItemManager : NetworkBehaviour
 		GM = GameManager.instanceGM;
 		if (GM.isTeam2) 
 		{
-			GM.messageManager.SendAnAlertMess ("Our boss is growing stronger", Color.green);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GM.messageManager.SendAnAlertMess ("Notre boss devient plus fort.", Color.green);
+
+			} else 
+			{
+				GM.messageManager.SendAnAlertMess ("Our boss is growing stronger.", Color.green);
+			}
 		} else 
 		{
-			GM.messageManager.SendAnAlertMess ("The enemy boss is getting stronger.", Color.red);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GM.messageManager.SendAnAlertMess ("Le boss ennemi devient plus fort!", Color.red);
+
+			} else 
+			{
+				GM.messageManager.SendAnAlertMess ("The enemy boss is getting stronger!", Color.red);
+			}
 		}
 		if (isServer) 
 		{

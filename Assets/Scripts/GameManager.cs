@@ -83,9 +83,13 @@ public class GameManager : NetworkBehaviour
 		lightM = GameObject.Find ("[Lights]").GetComponent<LightManagerScript> ();
 		nbrWavesText = GameObject.Find ("WavesCounter").GetComponent<Text> ();
 		nbrWavesText.text = "0";
-		if (isServer) 
-		{
+		if (isServer) {
 			ShowAGameTip ("The number of waves spawn points and the strenght of the enemies depends on the number of players by team and the game difficulty.On Nightmare and above, the number of enemy spawn points will increase.");
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				ShowAGameTip ("Le nombre de points de départ des vagues et la force des ennemis dépend du nombre de joueur de l'équipe et de la difficulté de la partie. En 'Cauchemar' et plus, le nombre de points de départ est augmenté.");
+
+			}
 		}
 	}
 	public bool IsItSolo()
@@ -100,13 +104,33 @@ public class GameManager : NetworkBehaviour
 	public void T1SyncLooseLife(int life)
 	{
 		team1LivesDisplay.text = "Blue Team : " + life.ToString ();
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			team2LivesDisplay.text = "Equipe bleu: " + life.ToString ();
+
+		}
 		lifeOfTheTeam1 = life;
-		if (isTeam1) {
-			messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam1.ToString () + " lives remaining.", Color.red);
+		if (isTeam1) 
+		{
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("Nous avons perdu une vie. " + lifeOfTheTeam1.ToString () + " vie(s) restante..", Color.red);
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam1.ToString () + " lives remaining.", Color.red);
+			}
 			return;
 		} else 
 		{
-			messageManager.SendAnAlertMess ("The other team have " + lifeOfTheTeam1.ToString () + " lives remaining.", Color.green);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("L'équipe adverse a perdu une vie. " + lifeOfTheTeam1.ToString () + " vie(s) restante.", Color.green);
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("The other team have " + lifeOfTheTeam1.ToString () + " lives remaining.", Color.green);
+			}
 
 		}
 
@@ -114,14 +138,34 @@ public class GameManager : NetworkBehaviour
 
 	public void T2SyncLooseLife(int life)
 	{
-		team2LivesDisplay.text = "Red Team : " + life.ToString ();
+		team2LivesDisplay.text = "Red Team: " + life.ToString ();
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			team2LivesDisplay.text = "Equipe rouge: " + life.ToString ();
+
+		}
 		lifeOfTheTeam2 = life;
-		if (isTeam2) {
-			messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam2.ToString () + "  lives remaining.", Color.red);
+		if (isTeam2) 
+		{
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("Nous avons perdu une vie. " + lifeOfTheTeam1.ToString () + " vie(s) restante..", Color.red);
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("We've lost a life. " + lifeOfTheTeam2.ToString () + "  lives remaining.", Color.red);
+			}
 			return;
 		} else 
 		{
-			messageManager.SendAnAlertMess ("The other team have " + lifeOfTheTeam2.ToString () + " lives remaining.", Color.green);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("L'équipe adverse a perdu une vie. " + lifeOfTheTeam1.ToString () + " vie(s) restante.", Color.green);
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("The other team have " + lifeOfTheTeam2.ToString () + " lives remaining.", Color.green);
+			}
 
 		}
 
@@ -208,7 +252,14 @@ public class GameManager : NetworkBehaviour
 		dayNightDisplay.sprite = nightIcon;
 		if (night) 
 		{
-			messageManager.SendAnAlertMess ("It's night time. Better be ready.", Color.red);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("La nuit tombe. Préparez-vous!", Color.red);
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("It's night time. Better be ready.", Color.red);
+			}
 			lightM.isSwitchingON = true;
 
 			if (isServer) 
@@ -226,17 +277,34 @@ public class GameManager : NetworkBehaviour
 			if (Days == 2) 
 			{
 				ShowAGameTip ("During the day, the jungle camps will respawn and the daily bosses will show up. The waves won't spawn before night time.");
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					ShowAGameTip ("Durant la journée, les camps de la jungle réapparraissent tous les jours, en même temps que les boss. Les vagues redémarrent à la nuit tombée.");
+
+				}
 			}
 			if (Days == 3) 
 			{
 				ShowAGameTip ("If you feel strong enough, you could try to capture the outpost in the middle of the map. This will give you access to a shop and will give you more time to come back to the fight if you die.");
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					ShowAGameTip ("Si vous pensez être assez fort, essayez le capturer l'avant-poste au milieu de la carte. Vous aurez ainsi accés a un magasin et aurez plus de temps pour revenir combattre en cas de mort.");
+
+				}
 			}
 			playerObj.GetComponent<PlayerCastCatapulte> ().spellDmg = playerObj.GetComponent<PlayerCastCatapulte> ().startDmg* Days;
 			playerObj.GetComponent<PlayerCastCatapulte> ().ActualizeCataDmg ();
 			GetComponent<BossSpawnManager> ().bossLvlT1 +=2;
 			GetComponent<BossSpawnManager> ().bossLvlT2 +=2;
 			dayNightDisplay.sprite = dayIcon;
-			messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("Le jour se lève...C'est le jour " + Days + ".", Color.green);
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
+			}
 			lightM.isSwitchingOFF = true;
 
 			if (isServer) 
@@ -278,7 +346,14 @@ public class GameManager : NetworkBehaviour
 		}
 		if (!isServer) 
 		{
-			messageManager.SendAnAlertMess ("The host has chosen a game difficulty of " + gameDifficulty + ". Good Luck !", Color.green);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("Le serveur a choisi une difficulté de " + gameDifficulty + ". Bonne chance!", Color.green);
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("The host has chosen a game difficulty of " + gameDifficulty + ". Good Luck!", Color.green);
+			}
 		} else 
 		{
 			StartTheGameForAll ();
@@ -462,11 +537,25 @@ public class GameManager : NetworkBehaviour
 		GameObject.Find ("GameClock").GetComponent<GameClockMinSec> ().enabled = true;
 		if (isTeam1) 
 		{
-			messageManager.SendAnAlertMess ("The game is starting!You have join the blue team.", Color.green);			
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("la partie commence, vous avez rejoind l'équipe bleue.", Color.green);			
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("The game is starting!You have join the blue team.", Color.green);			
+			}
 		}
 		if (isTeam2) 
 		{
-			messageManager.SendAnAlertMess ("The game is starting!You have join the red team.", Color.green);			
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				messageManager.SendAnAlertMess ("La partie commence, vous avez rejoind l'équipe rouge.", Color.green);			
+
+			} else 
+			{
+				messageManager.SendAnAlertMess ("The game is starting!You have join the red team.", Color.green);			
+			}
 		}
 		GameObject.Find ("PlayerSelectionScreen").GetComponent<Canvas> ().enabled = true;
 		GameObject.Find ("DifficultySelectCanvas").GetComponent<Canvas> ().enabled = false;
@@ -475,6 +564,11 @@ public class GameManager : NetworkBehaviour
 		{
 			tutorialPanel.enabled = true;
 			tutoTip.text = "Select your hero. This will greatly influence the gameplay. The Ovate is a difficult choice if you are playing solo. The Champion is easy to play and can make a good choice if it's your first game.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				tutoTip.text = "Selectionnez votre héros. Ceci influencera grandement le jeu. L'Ovate est un choix difficile si vous jouez seul. Le Champion est plus accessible si c'est votre première partie.";
+
+			}
 		}
 	}
 

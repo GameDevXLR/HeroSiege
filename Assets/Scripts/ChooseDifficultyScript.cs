@@ -43,7 +43,14 @@ public class ChooseDifficultyScript : MonoBehaviour
 	{
 		GameManager.instanceGM.gameDifficulty = 1;
 		gameMode = difficultySettings.normal;
-		GameManager.instanceGM.messageManager.SendAnAlertMess ("Normal mode activated...pussy!", Color.green);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			GameManager.instanceGM.messageManager.SendAnAlertMess ("Mode Normal activé.", Color.green);
+
+		} else 
+		{
+			GameManager.instanceGM.messageManager.SendAnAlertMess ("Normal mode activated.", Color.green);
+		}
 		inib1.GetComponent<SpawnManager>().enabled = true;
 		if (isSolo) 
 		{
@@ -100,7 +107,12 @@ public class ChooseDifficultyScript : MonoBehaviour
 	public void MadnessModeExe()
 	{
 		GameManager.instanceGM.gameDifficulty = 10;
-		GameManager.instanceGM.messageManager.SendAnAlertMess ("Madness?! Run! You fool...", Color.red);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+			GameManager.instanceGM.messageManager.SendAnAlertMess ("Mode Madness activé. Prenez garde!", Color.green);
+
+		} else {
+			GameManager.instanceGM.messageManager.SendAnAlertMess ("Madness?! Run! You fool...", Color.red);
+		}
 		gameMode = difficultySettings.madness;
 
 		inib1.GetComponent<SpawnManager>().enabled = true;
