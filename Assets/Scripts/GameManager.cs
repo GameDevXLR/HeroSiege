@@ -106,8 +106,7 @@ public class GameManager : NetworkBehaviour
 		team1LivesDisplay.text = "Blue Team : " + life.ToString ();
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			team2LivesDisplay.text = "Equipe bleu: " + life.ToString ();
-
+			team1LivesDisplay.text = "Equipe bleu: " + life.ToString ();
 		}
 		lifeOfTheTeam1 = life;
 		if (isTeam1) 
@@ -149,7 +148,7 @@ public class GameManager : NetworkBehaviour
 		{
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
-				messageManager.SendAnAlertMess ("Nous avons perdu une vie. " + lifeOfTheTeam1.ToString () + " vie(s) restante..", Color.red);
+				messageManager.SendAnAlertMess ("Nous avons perdu une vie. " + lifeOfTheTeam2.ToString () + " vie(s) restante..", Color.red);
 
 			} else 
 			{
@@ -160,7 +159,7 @@ public class GameManager : NetworkBehaviour
 		{
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
-				messageManager.SendAnAlertMess ("L'équipe adverse a perdu une vie. " + lifeOfTheTeam1.ToString () + " vie(s) restante.", Color.green);
+				messageManager.SendAnAlertMess ("L'équipe adverse a perdu une vie. " + lifeOfTheTeam2.ToString () + " vie(s) restante.", Color.green);
 
 			} else 
 			{
