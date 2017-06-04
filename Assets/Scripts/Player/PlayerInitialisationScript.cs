@@ -61,9 +61,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		CmdChangeName (PlayerPrefs.GetString ("PlayerNN"));
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
 		heroSelectPanel = GameObject.Find ("HeroSelectionPanel");
-		selectHeroTank1 = heroSelectPanel.transform.Find ("SelectTank1Btn").GetComponent<Button>();
-		selectHeroHealer1 = heroSelectPanel.transform.Find ("SelectHeal1Btn").GetComponent<Button> ();
-		selectHeroDps1 = heroSelectPanel.transform.Find ("SelectArcher1Btn").GetComponent<Button> ();
+		selectHeroTank1 = heroSelectPanel.transform.Find("ChampionPan").Find ("SelectTank1Btn").GetComponent<Button>();
+		selectHeroHealer1 = heroSelectPanel.transform.Find("OvatePan").transform.Find ("SelectHeal1Btn").GetComponent<Button> ();
+		selectHeroDps1 = heroSelectPanel.transform.Find("HunterPan").transform.Find ("SelectArcher1Btn").GetComponent<Button> ();
 		selectHeroTank1.onClick.AddListener (ListenerSelectHeroTank1);
 		selectHeroHealer1.onClick.AddListener (ListenerSelectHeroHeal1);
 		selectHeroDps1.onClick.AddListener (ListenerSelectHeroDps1);
