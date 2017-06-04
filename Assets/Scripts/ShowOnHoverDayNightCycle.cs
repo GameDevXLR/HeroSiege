@@ -17,6 +17,11 @@ public class ShowOnHoverDayNightCycle :  MonoBehaviour
 	{
 		panelToShow.gameObject.SetActive (true);
 		panelToShow.GetComponent<Text> ().text = "Day " + GameManager.instanceGM.Days.ToString ();
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			panelToShow.GetComponent<Text> ().text = "Jour " + GameManager.instanceGM.Days.ToString ();
+
+		}
 	}
 
 	public  void HideOnEndHover()

@@ -50,7 +50,12 @@ public class PlayerCastCCSpell : NetworkBehaviour
             spell2Btn.onClick.AddListener(CastThatSpell);
             spell2LvlUpBtn.onClick.AddListener(levelUp);
             int x = (int)spellDmg / 5;
-			spellDescription = "Stun and deal " + x.ToString () + " damage every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			spellDescription = "Stun and deal " + x.ToString () + " damage every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Etourdi et inflige " + x.ToString () + " dégâts toutes les 0,5s pendant " + spellDuration.ToString () + " secondes.";
+
+			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -155,26 +160,27 @@ public class PlayerCastCCSpell : NetworkBehaviour
         {
             yield return null;
         }
-        if (GetComponent<GenericManaScript>().currentMp >= spellCost && !onCD)
-        {
-            isTargeting = true;
+		if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) {
+			isTargeting = true;
 			ReziseTheTargeters ();
-            spellRangeArea.SetActive(true);
+			spellRangeArea.SetActive (true);
             
 
-        }
-        else
-        {
-            if (isTargeting == true)
-            {
-                isTargeting = false;
-                spellRangeArea.SetActive(false);
+		} else {
+			if (isTargeting == true) {
+				isTargeting = false;
+				spellRangeArea.SetActive (false);
 
-                spellTargeter.transform.position = Vector3.zero;
-            }
-            GetComponent<AudioSource>().PlayOneShot(OOM);
-            GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
-        }
+				spellTargeter.transform.position = Vector3.zero;
+			}
+			GetComponent<AudioSource> ().PlayOneShot (OOM);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Pas assez de mana!", Color.red);
+
+			} else {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
+			}
+		}
     }
 
     IEnumerator SpellOnCD()
@@ -226,7 +232,12 @@ public class PlayerCastCCSpell : NetworkBehaviour
             GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
             int x = (int)spellDmg / 5;
             spellDescription = "Stun and deal " + x.ToString() + " damage every 0,5 seconds for " + spellDuration.ToString() + " seconds.";
-            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Etourdi et inflige " + x.ToString () + " dégâts toutes les 0,5s pendant " + spellDuration.ToString () + " secondes.";
+
+			}
+			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
             //changer ici l'interface du joueur.

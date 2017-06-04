@@ -46,6 +46,11 @@ public class PlayerStatPlus : NetworkBehaviour {
 			spell1LvlUpBtn = GameObject.Find("StatPlusBtn").GetComponent<Button>();
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
 			spellDescription = "Boost your hero by adding "+hpBonus+" max hit point, "+mpBonus+"max mana and "+dmgBonus+" damage.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Boost votre héro en ajoutant "+hpBonus+" pv max, "+mpBonus+" mana max et "+dmgBonus+" dégâts d'attaque.";
+
+			}
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 //			spell1Btn.GetComponent<Image> ().sprite = spellImg;
 			if (!isServer) 
@@ -173,6 +178,11 @@ public class PlayerStatPlus : NetworkBehaviour {
 	public void ActuDescription()
 	{
 		spellDescription = "Boost your hero by adding "+hpBonus+" max hit point, "+mpBonus+"max mana and "+dmgBonus+" damage.";
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			spellDescription = "Boost votre héro en ajoutant "+hpBonus+" pv max, "+mpBonus+" mana max et "+dmgBonus+" dégâts d'attaque.";
+
+		}
 		spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 	}
 }

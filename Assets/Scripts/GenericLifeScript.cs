@@ -547,6 +547,11 @@ public class GenericLifeScript : NetworkBehaviour
 		if (isLocalPlayer && playerDeathCount == 1) 
 		{
 			GameManager.instanceGM.ShowAGameTip ("When you die, you can cast your invoker spells on the enemy team or to help your allies. You can change them in the menu. It's also a good time to spy on the other team.");
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GameManager.instanceGM.ShowAGameTip ("Quand vous tombez au combat, vous pouvez utiliser vos sorts d'invoqueur sur la team adverse, ou pour aider vos alliés. Vous pouvez les changés dans votre profil. C'est aussi le moment d'espionner l'équipe adverse.");
+
+			}
 		}
         GetComponent<PlayerManager>().playerDeathsTxt.text = dea.ToString();
     }
@@ -556,6 +561,11 @@ public class GenericLifeScript : NetworkBehaviour
 		if (isLocalPlayer && playerDeathCount == 1 && !isDead) 
 		{
 			GameManager.instanceGM.ShowAGameTip ("The time you spent dead depends on the number of time you died before and your hero's level.");
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GameManager.instanceGM.ShowAGameTip ("Le temps que vous passez mort dépend du nombre de fois ou vous êtes mort précédemment et du niveau de votre héros.");
+
+			}
 		}
 
 		if (!isLocalPlayer && (gameObject.layer == Layers.Player || gameObject.layer == Layers.IgnoreLayer)) {

@@ -154,11 +154,14 @@ public class EnnemyIGManager : CharacterIGManager
         goldCanvas.GetComponent<Canvas>().enabled = true;
         goldCanvas.GetComponent<DeathByTime>().enabled = true;
         //		goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);
-        deadAnimChildMesh.GetComponent<Animator>().enabled = true;
-        deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
-        deadAnimChildMesh.GetComponent<DeathByTime>().enabled = true;
+		if (deadAnimChildMesh) {
+			
+			deadAnimChildMesh.GetComponent<Animator> ().enabled = true;
+			deadAnimChildMesh.GetComponent<Animator> ().SetBool ("isDead", true);
+			deadAnimChildMesh.GetComponent<DeathByTime> ().enabled = true;
 
-        deadAnimChildMesh.transform.parent = null;
+			deadAnimChildMesh.transform.parent = null;
+		}
     }
 
 
@@ -171,10 +174,12 @@ public class EnnemyIGManager : CharacterIGManager
         goldCanvas.GetComponent<Canvas>().enabled = true;
         goldCanvas.GetComponent<InactivateAnimatorCanvas>().inactiveWithTime();
         //  goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);
-        deadAnimChildMesh.GetComponent<Animator>().enabled = true;
-        deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
-        deadAnimChildMesh.GetComponent<InactivateByTime>().InactivateWithlifeTime();
-        GetComponent<EnemyAutoAttackScript>().target = null;
+		if (deadAnimChildMesh) {
+			deadAnimChildMesh.GetComponent<Animator> ().enabled = true;
+			deadAnimChildMesh.GetComponent<Animator> ().SetBool ("isDead", true);
+			deadAnimChildMesh.GetComponent<InactivateByTime> ().InactivateWithlifeTime ();
+		}
+		GetComponent<EnemyAutoAttackScript>().target = null;
         GetComponent<NavMeshAgent>().acceleration = 0;
         GetComponent<NavMeshAgent>().velocity = Vector3.zero;
 		StartCoroutine (MoveOutOfTheWay ());

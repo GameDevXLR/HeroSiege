@@ -51,6 +51,11 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg ;
 			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Place un piège. Quand activer, inflige " + x.ToString () + " dégâts par seconde pendant " + spellDuration.ToString () + " secondes. Dure 60 secondes. Rayon: "+explosionRadius*10+" unités.";
+
+			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
@@ -157,25 +162,26 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 		{
 			yield return null;
 		}
-		if (GetComponent<GenericManaScript>().currentMp >= spellCost && !onCD)
-		{
+		if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) {
 			isTargeting = true;
 			ReziseTheTargeters ();
-			spellRangeArea.SetActive(true);
+			spellRangeArea.SetActive (true);
 
 
-		}
-		else
-		{
-			if (isTargeting == true)
-			{
+		} else {
+			if (isTargeting == true) {
 				isTargeting = false;
-				spellRangeArea.SetActive(false);
+				spellRangeArea.SetActive (false);
 
 				spellTargeter.transform.position = Vector3.zero;
 			}
-			GetComponent<AudioSource>().PlayOneShot(OOM);
-			GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
+			GetComponent<AudioSource> ().PlayOneShot (OOM);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Pas assez de mana!", Color.red);
+
+			} else {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
+			}
 		}
 	}
 
@@ -229,6 +235,11 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg;
 			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Place un piège. Quand activer, inflige " + x.ToString () + " dégâts par seconde pendant " + spellDuration.ToString () + " secondes. Dure 60 secondes. Rayon: "+explosionRadius*10+" unités.";
+
+			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
