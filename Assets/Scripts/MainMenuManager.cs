@@ -16,6 +16,7 @@ public class MainMenuManager : MonoBehaviour
 	public string PlayerNickname;
 	public Slider menuMusicVolume;
 	public AudioSource menuMusic;
+	public string langage;
 
 	public Slider generalVolume;
 	void Awake()
@@ -35,6 +36,7 @@ public class MainMenuManager : MonoBehaviour
 		PlayerNickname = PlayerPrefs.GetString ("PlayerNN");
 		menuMusic.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME", 0.5f);
 		menuMusicVolume.value = menuMusic.volume;
+		langage = PlayerPrefs.GetString ("LANGAGE", "Eng");
 		AudioListener.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME", 0.5f);
 		generalVolume.value = AudioListener.volume;
 		if (PlayerNameDisplay.text == "") 

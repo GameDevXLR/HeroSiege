@@ -49,7 +49,12 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg;
-			spellDescription = "Slow and deal " + x.ToString () + " damage every 0,3 seconds for " + spellDuration.ToString () + " seconds.";            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			spellDescription = "Slow and deal " + x.ToString () + " damage every 0,3 seconds for " + spellDuration.ToString () + " seconds.";            
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Ralenti et inflige " + x.ToString () + " dégats toutes les 0,3s pendant " + spellDuration.ToString () + " secondes."; 
+			}
+			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -166,6 +171,11 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 				spellTargeter.transform.position = Vector3.zero;
 			}
 			GetComponent<AudioSource>().PlayOneShot(OOM);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GameManager.instanceGM.messageManager.SendAnAlertMess("Pas assez de mana!", Color.red);
+				yield return null;
+			}
 			GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
 		}
 	}
@@ -219,6 +229,10 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(3);
 			int x = (int)spellDmg;
 			spellDescription = "Slow and deal " + x.ToString() + " damage every 0,3 seconds for " + spellDuration.ToString() + " seconds.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Ralenti et inflige " + x.ToString () + " dégats toutes les 0,3s pendant " + spellDuration.ToString () + " secondes."; 
+			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

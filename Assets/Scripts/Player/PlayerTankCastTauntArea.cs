@@ -45,6 +45,11 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg;
 			spellDescription = "Force all enemies around to target you for " + spellDuration.ToString() + " seconds,they loose "+x+" damage.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Force tous les ennemis autour de vous a vous attaquer pendant " + spellDuration.ToString() + " secondes. Ils perdent "+x+" dégâts d'attaque.";
+
+			}
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -85,9 +90,13 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 		}
 		else
 		{
-			GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
 			GetComponent<AudioSource>().PlayOneShot(OOM);
-		}
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Pas assez de Mana!", Color.red);
+
+			} else {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
+			}		}
 	}
 
 	//si t'es un joueur; tu peux cast ce sort avec la touche A : voir pour opti ca en fonction du clavier des gars.
@@ -158,6 +167,11 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 
 			int x = (int)spellDmg;
 			spellDescription = "Force all enemies around to target you for " + spellDuration.ToString() + " seconds,they loose "+x+" damage.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Force tous les ennemis autour de vous a vous attaquer pendant " + spellDuration.ToString() + " secondes. Ils perdent "+x+" dégâts d'attaque.";
+
+			}
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

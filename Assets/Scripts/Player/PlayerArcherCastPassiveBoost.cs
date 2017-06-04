@@ -47,6 +47,11 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 //			spell1Btn.onClick.AddListener(CastThatSpell);
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
 			spellDescription = "Give you " + stunChances + "% chances to stun and deal "+ spellLvl/2+" times more damages and "+ dodgeChances+"% dodge chances.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Vous donne " + stunChances + "% de chances de stun et d'infliger "+ spellLvl/2+" fois plus de dégats et ajoute "+ dodgeChances+"% chances d'esquiver.";
+
+			}
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = "0";
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = "0";
@@ -163,6 +168,11 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
 			spellDescription = "Give you " + stunChances + "% chances to stun and deal "+ spellLvl/2+" times more damages and "+ dodgeChances+"% dodge chances.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Vous donne " + stunChances + "% de chances de stun et d'infliger "+ spellLvl/2+" fois plus de dégats et ajoute "+ dodgeChances+"% chances d'esquiver.";
+
+			}
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
 			//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");

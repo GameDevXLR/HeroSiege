@@ -42,6 +42,10 @@ public class NetJoinGame : MonoBehaviour {
 
 		networkManager.matchMaker.ListMatches(0, 20, "", true, 0, 0, OnMatchList);
 		status.text = "Loading...";
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			status.text = "Chargement...";
+		}
 	}
 
 	public void OnMatchList (bool success, string extendedInfo, List<MatchInfoSnapshot> matchList)
@@ -52,6 +56,10 @@ public class NetJoinGame : MonoBehaviour {
 		if (!success || matchList == null)
 		{
 			status.text = "Couldn't get room list.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				status.text = "Impossible de récupérer la liste des salons.";
+			}
 			return;
 		}
 
@@ -76,6 +84,10 @@ public class NetJoinGame : MonoBehaviour {
 		if (roomList.Count == 0)
 		{
 			status.text = "No rooms at the moment.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				status.text = "Aucun salon pour le moment...";
+			}
 		}
 	}
 
@@ -106,14 +118,26 @@ public class NetJoinGame : MonoBehaviour {
 			if (countdown == 10) 
 			{
 				status.text = "Establishing connection...";
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					status.text = "Etablissement de la connection...";
+				}
 			} 
 			if(countdown == 8)
 			{
 				status.text = "Packing armor and weapon...";
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					status.text = "Polissage de l'armure...";
+				}
 			}
 			if (countdown <= 5) 
 			{
 				status.text = "JOINING... (" + countdown + ")";
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					status.text = "Connection.. (" + countdown + ")";
+				}
 			}
 //			if (countdown == 3) 
 //			{
@@ -127,6 +151,10 @@ public class NetJoinGame : MonoBehaviour {
 
 		// Failed to connect
 		status.text = "Failed to connect.";
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			status.text = "Echec de la connection.";
+		}
 		yield return new WaitForSeconds(1);
 
 		MatchInfo matchInfo = networkManager.matchInfo;

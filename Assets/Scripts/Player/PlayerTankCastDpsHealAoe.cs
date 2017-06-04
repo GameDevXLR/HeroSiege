@@ -38,6 +38,11 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg /2;
 			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+x+" health by enemy touched.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Inflige "+ spellDmg+" dégâts a tous les ennemis autour de vous et vous soigne de "+x+" pv par ennemi touché.";
+
+			}
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -78,8 +83,13 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 		}
 		else
 		{
-			GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
 			GetComponent<AudioSource>().PlayOneShot(OOM);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Pas assez de Mana!", Color.red);
+
+			} else {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
+			}	
 		}
 	}
 
@@ -150,7 +160,11 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 			int x = (int)spellDmg / 2;
 
 			spellDescription = "Deal "+ spellDmg+" damage to every enemy around you and heal for "+x+" health by enemy touched.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Inflige "+ spellDmg+" dégâts a tous les ennemis autour de vous et vous soigne de "+x+" pv par ennemi touché.";
 
+			}
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

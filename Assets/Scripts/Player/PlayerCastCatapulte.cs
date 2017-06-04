@@ -56,7 +56,12 @@ public class PlayerCastCatapulte : NetworkBehaviour
 				spellCataBtn.onClick.AddListener(CastThatSpell);
 				spellCataLoadBtn.onClick.AddListener(LoadTheCata);
 				spellDescription = "Deal " + spellDmg.ToString() + " to everyone on impact. Spend "+ cataChargePrice.ToString() +" to buy a charge (Require a catapulte nearby).";   
-				spellCataBtn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Inflige " + spellDmg.ToString() + "a tout le monde a l'impact. Dépensez "+ cataChargePrice.ToString() +" pour acheter une charge(recquière une catapulte).";   
+
+			}
+			spellCataBtn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 				spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
 				spellCataBtn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
 
@@ -67,6 +72,11 @@ public class PlayerCastCatapulte : NetworkBehaviour
 	public void ActualizeCataDmg()
 	{
 		spellDescription = "Deal " + spellDmg.ToString() + " to everyone on impact. Spend "+ cataChargePrice.ToString() +" to buy a charge (Require a catapulte nearby).";
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			spellDescription = "Inflige " + spellDmg.ToString() + "a tout le monde a l'impact. Dépensez "+ cataChargePrice.ToString() +" pour acheter une charge(recquière une catapulte).";   
+
+		}
 		spellCataBtn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 
 	}
@@ -99,6 +109,11 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		if (!tip1) 
 		{
 			GameManager.instanceGM.ShowAGameTip ("You can target the enemy team lane with it. The damage will increase with every passing day.Carefull! it can kill you or your allies as well.");
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GameManager.instanceGM.ShowAGameTip ("Vous pouvez cibler l'équipe adverse. Les dégâts augmentent chaque jour.Attention! Peut toucher vos alliés ou vous-même.");
+
+			}
 			tip1 = true;
 		}
 			StartCoroutine(ShowTargeter()); // on a besoin d'attendre la fin de frame pour pas que mouseUp soit détecter direct et que le sort se lance cash en cliquant sur l'icone de sort.
@@ -173,30 +188,33 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			{
 				yield return null;
 			}
-		if (cataCharges >= spellCost && !onCD)
-			{
-				isTargeting = true;
+		if (cataCharges >= spellCost && !onCD) {
+			isTargeting = true;
 			GetComponent<PlayerClicToMove> ().enabled = false;
 			Camera.main.GetComponent<CameraController> ().selectedPlayer = false;
 			Camera.main.transform.position = new Vector3 (Camera.main.transform.position.x, 50f, Camera.main.transform.position.z);
 			ReziseTheTargeters ();
 
 
-			}
-			else
-			{
-				if (isTargeting == true)
-				{
-					isTargeting = false;
+		} else {
+			if (isTargeting == true) {
+				isTargeting = false;
 //					spellRangeArea.SetActive(false);
 				Camera.main.GetComponent<CameraController> ().selectedPlayer = true;
 				GetComponent<PlayerClicToMove> ().enabled = true;
 
-					spellTargeter.transform.position = Vector3.zero;
-				}
-				GetComponent<AudioSource>().PlayOneShot(OOM);
-				GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Charges!", Color.red);
+				spellTargeter.transform.position = Vector3.zero;
 			}
+			GetComponent<AudioSource> ().PlayOneShot (OOM);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Pas assez de munitions!", Color.red);
+
+			} else 
+			{
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Charges!", Color.red);
+			}
+		}
 		}
 
 		IEnumerator SpellOnCD()
@@ -271,6 +289,11 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		if (!tip2) 
 		{
 			GameManager.instanceGM.ShowAGameTip ("The number of charges is shared between players of your team. You can buy charges and let an ally fire them.");
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GameManager.instanceGM.ShowAGameTip ("Le nombre de munitions est partager entre tous les membres de l'équipe. Vous pouvez acheter des munitions et laisser un allié les utilisés.");
+
+			}
 			tip2 = true;
 		}
 		StartCoroutine ( CataLoadProcess());

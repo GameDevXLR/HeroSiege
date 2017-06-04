@@ -57,6 +57,11 @@ public class PlayerXPScript : NetworkBehaviour
 	{
 		generalTxt.enabled = true;
 		generalTxt.text = "You have reach level " + actualLevel + " .";
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			generalTxt.text = "Vous avez atteind le niveau " + actualLevel + " .";
+
+		}
 		yield return new WaitForSeconds (2f);
 		generalTxt.enabled = false;
 		GetComponent<PlayerLevelUpManager> ().GetAlevel ();

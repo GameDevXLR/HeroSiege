@@ -53,7 +53,12 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg / 5;
-			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*6+" health";
+			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*6+" health.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Invoque votre compagnon pour vous aider dans la bataille. Inflige "+ spellDmg.ToString()+" dégâts. Possède "+spellDmg*6+" pv.";
+
+			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
@@ -189,8 +194,12 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 				spellTargeter.transform.position = Vector3.zero;
 			}
 			GetComponent<AudioSource>().PlayOneShot(OOM);
-			GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
-		}
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Pas assez de Mana!", Color.red);
+
+			} else {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
+			}		}
 	}
 
 	IEnumerator SpellOnCD()
@@ -242,6 +251,11 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
 			int x = (int)spellDmg / 5;
 			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*6+" health";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Invoque votre compagnon pour vous aider dans la bataille. Inflige "+ spellDmg.ToString()+" dégâts. Possède "+spellDmg*6+" pv.";
+
+			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

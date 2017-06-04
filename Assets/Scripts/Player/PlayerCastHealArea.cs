@@ -50,6 +50,11 @@ public class PlayerCastHealArea : NetworkBehaviour
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg;
 			spellDescription = "Heal all allies inside for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Soigne tous les alliés a l'intérieur de " + x.ToString () + " pv toutes les 0,5s pendant " + spellDuration.ToString () + " secondes.";            
+
+			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
@@ -148,25 +153,26 @@ public class PlayerCastHealArea : NetworkBehaviour
 		{
 			yield return null;
 		}
-		if (GetComponent<GenericManaScript>().currentMp >= spellCost && !onCD)
-		{
+		if (GetComponent<GenericManaScript> ().currentMp >= spellCost && !onCD) {
 			isTargeting = true;
 			ReziseTheTargeters ();
-			spellRangeArea.SetActive(true);
+			spellRangeArea.SetActive (true);
 
 
-		}
-		else
-		{
-			if (isTargeting == true)
-			{
+		} else {
+			if (isTargeting == true) {
 				isTargeting = false;
-				spellRangeArea.SetActive(false);
+				spellRangeArea.SetActive (false);
 
 				spellTargeter.transform.position = Vector3.zero;
 			}
-			GetComponent<AudioSource>().PlayOneShot(OOM);
-			GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
+			GetComponent<AudioSource> ().PlayOneShot (OOM);
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Pas assez de Mana!", Color.red);
+
+			} else {
+				GameManager.instanceGM.messageManager.SendAnAlertMess ("Not enough Mana!", Color.red);
+			}
 		}
 	}
 
@@ -219,6 +225,11 @@ public class PlayerCastHealArea : NetworkBehaviour
 			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
 			int x = (int)spellDmg ;
 			spellDescription = "Heal all allies inside for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Soigne tous les alliés a l'intérieur de " + x.ToString () + " pv toutes les 0,5s pendant " + spellDuration.ToString () + " secondes.";            
+
+			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();

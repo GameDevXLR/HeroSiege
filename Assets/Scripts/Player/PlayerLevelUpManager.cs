@@ -46,6 +46,11 @@ public class PlayerLevelUpManager : MonoBehaviour
 		if (playerLvl == 2) 
 		{
 			GameManager.instanceGM.ShowAGameTip ("When you level up, you get a specialization point that you can spend to increase the power of one of your ability, or up your overall basic statistics.");
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				GameManager.instanceGM.ShowAGameTip ("Quand vous gagnez un niveau, Vous obtenez un point de spécialisation que vous pouvez dépenser pour augmenter la puissance de l'une de vos compétences, ou pour augmenter vos statistiques de base.");
+
+			}
 		}
 //		GetComponent<PlayerManager> ().GetALevel ();
 		if (playerLvl == 3 || playerLvl == 6 || playerLvl == 9 || playerLvl == 12|| playerLvl == 15|| playerLvl == 18|| playerLvl == 21|| playerLvl == 24|| playerLvl == 27|| playerLvl == 30) 
@@ -81,6 +86,11 @@ public class PlayerLevelUpManager : MonoBehaviour
 			if (specPlusLvl == 1) 
 			{
 				GameManager.instanceGM.ShowAGameTip ("Did you know that one of the 3 stat bonus given by this passive is doubled based on your hero type : Adc/Tank/Mage.");
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					GameManager.instanceGM.ShowAGameTip ("Saviez vous que l'un des trois bonus donné par ce passif est doublé en fonction du type de votre héro: Adc/Tank/Mage.");
+
+				}
 			}
 		}
 		if (spell == 3) 
@@ -90,6 +100,15 @@ public class PlayerLevelUpManager : MonoBehaviour
 			if (spellUltLvl == 2) 
 			{
 				GameManager.instanceGM.ShowAGameTip ("Did you know that you can up your ultimate only once every 3 levels. And that all of your abilities can only be upgraded 10 times, except for the Statistic bonus.");
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					GameManager.instanceGM.ShowAGameTip ("Saviez vous que vous pouvez augmenter votre Ultime une fois tous les trois niveaux? Et que vos compétences ne peuvent être augmenter que 10 fois, sauf la compétence de bonus de stats.");
+
+				}
+			}
+			if (ultiSpecPts < 0) 
+			{
+				ultiSpecPts = 0;
 			}
 			if (ultiSpecPts == 0) 
 			{
@@ -105,6 +124,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 		specPts--;
 		if (specPts <= 0) 
 		{
+			specPts = 0;
 			specPlusBtn.SetActive (false);
 			spell1LvlUpBtn.SetActive (false);
 			spell2LvlUpBtn.SetActive (false);

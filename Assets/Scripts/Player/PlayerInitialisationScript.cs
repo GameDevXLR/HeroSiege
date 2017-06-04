@@ -377,12 +377,21 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		yield return new WaitForSeconds (1.5f);
 		RpcCallMessage (playerNickName + " has joined the game.");
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			RpcCallMessage (playerNickName + " a rejoind la partie.");
 
+		}
 	}
 
 	void ShowYourTip()
 	{
 		GameManager.instanceGM.ShowAGameTip ("To move your hero, right clic on the ground. You can attack an enemy by right clicking on it as well. Use 'L' to lock/unlock the camera and 'Spacebar' to center the view on your hero.");
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			GameManager.instanceGM.ShowAGameTip ("Pour déplacer votre héro, faites un clic droit sur le sol. Vous pouvez attaquer avec le bouton droit de la souris. Utilisez 'L' pour verrouiller/déverrouiller le suivi camera et 'Espace' pour recentrer la vue sur votre héro.");
+
+		}
 	}
 
 }
