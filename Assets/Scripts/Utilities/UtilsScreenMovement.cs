@@ -93,7 +93,7 @@ public static class UtilsScreenMovement
 
         if (xValueDeplacement != 0 || zValueDeplacement != 0)
         {
-            Debug.Log("CameraCible position : " + cameraCible.transform.position);
+           // Debug.Log("CameraCible position : " + cameraCible.transform.position);
             Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection(new Vector3(xValueDeplacement, 0, zValueDeplacement));           
             
             destination.y = cameraCible.transform.position.y;
