@@ -544,6 +544,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4847367628666212}
   - component: {fileID: 137114575840348020}
+  - component: {fileID: 64265273711267918}
+  - component: {fileID: 114263514584307420}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -2682,6 +2684,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64265273711267918
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1391872320710764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300008, guid: ffaf641b210f5ea41952cf36f1379d66, type: 3}
 --- !u!65 &65907465037549982
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2879,6 +2895,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114263514584307420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1391872320710764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObj: {fileID: 0}
+  color: 2
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114438898843106408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2969,6 +3001,7 @@ MonoBehaviour:
   goldCanvas: {fileID: 1678407210894732}
   isJungleMob: 0
   myEnemies: []
+  outlinemob: {fileID: 114263514584307420}
   isSlowingOnAutoA: 0
   isCCOnAutoA: 0
   isDrainingManaOnAutoA: 0

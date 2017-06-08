@@ -68,6 +68,11 @@ public class PlayerClicToMove : NetworkBehaviour {
                 {
                     return;
                 }
+				if (GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj) 
+				{
+					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj.eraseRenderer = true;
+					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = null;
+				}
 				if (hit.collider.gameObject.layer == Layers.Ennemies) 
 				{
 					if (hit.collider.gameObject.GetComponent<EnnemyIGManager> ().isAnInvisible && !hit.collider.gameObject.GetComponent<EnemyAutoAttackScript> ().isAttacking) 
@@ -77,6 +82,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 					}
 					cursorTargetter.transform.position = Vector3.zero;
 					target = hit.collider.gameObject;
+					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = target.GetComponent<EnnemyIGManager> ().outlinemob;
+					target.GetComponent<EnnemyIGManager> ().outlinemob.eraseRenderer = false;
 					CmdSendNewTarget(target.GetComponent<NetworkIdentity> ().netId);
 
 				} else 

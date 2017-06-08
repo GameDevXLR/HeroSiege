@@ -1025,6 +1025,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4345527927929468}
   - component: {fileID: 137927663728407628}
+  - component: {fileID: 64570694767571974}
+  - component: {fileID: 114298664791382746}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -2042,6 +2044,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64570694767571974
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927114102599722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 130cac6b96af6214296215324b5da188, type: 3}
 --- !u!65 &65136498101414050
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2256,6 +2272,22 @@ MonoBehaviour:
   isTeam1: 0
   agent: {fileID: 0}
   target: {fileID: 0}
+--- !u!114 &114298664791382746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927114102599722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObj: {fileID: 0}
+  color: 2
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114365788867032628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2324,6 +2356,7 @@ MonoBehaviour:
   goldCanvas: {fileID: 1058724933178000}
   isJungleMob: 0
   myEnemies: []
+  outlinemob: {fileID: 114298664791382746}
   isSlowingOnAutoA: 0
   isCCOnAutoA: 0
   isDrainingManaOnAutoA: 0
