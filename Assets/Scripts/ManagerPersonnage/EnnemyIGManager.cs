@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using cakeslice;
 
 [NetworkSettings(channel = 0, sendInterval = 0.3f)]
 public class EnnemyIGManager : CharacterIGManager
@@ -25,7 +26,7 @@ public class EnnemyIGManager : CharacterIGManager
 
 	//my enemies
 	public List<GameObject> myEnemies;
-
+	public cakeslice.Outline outlinemob;
 	[Header("Enemies abilities")]
 	public bool isSlowingOnAutoA;
 	public bool isCCOnAutoA;

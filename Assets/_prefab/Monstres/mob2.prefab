@@ -861,6 +861,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4255971571992144}
   - component: {fileID: 137072095947688842}
+  - component: {fileID: 114391508710706508}
+  - component: {fileID: 64027546043811270}
   m_Layer: 0
   m_Name: mesh_L_Spine
   m_TagString: Untagged
@@ -1768,6 +1770,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64027546043811270
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1888328954061770}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300010, guid: 8141a1e3f5562ba4d910d6c02d5d213c, type: 3}
 --- !u!65 &65582747420792480
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1955,6 +1971,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d3d7061b155cc4da2a67c3a188bf8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114391508710706508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1888328954061770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObj: {fileID: 0}
+  color: 2
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114404794523604172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2126,6 +2158,7 @@ MonoBehaviour:
   goldCanvas: {fileID: 1802038026311656}
   isJungleMob: 0
   myEnemies: []
+  outlinemob: {fileID: 114391508710706508}
   isSlowingOnAutoA: 0
   isCCOnAutoA: 0
   isDrainingManaOnAutoA: 0

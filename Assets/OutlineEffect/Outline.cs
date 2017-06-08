@@ -33,6 +33,7 @@ namespace cakeslice
     {
         public Renderer Renderer { get; private set; }
 
+		public GameObject parentObj;
         public int color;
         public bool eraseRenderer;
 
