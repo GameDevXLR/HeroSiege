@@ -14,8 +14,9 @@ public class ShowOnHover : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		panelToShow = transform.GetChild(0);	
-	}
+        if(panelToShow == null)
+            panelToShow = transform.GetChild(0);
+    }
 	
 	public  void ShowHover(){
 		panelToShow.gameObject.SetActive (true);
