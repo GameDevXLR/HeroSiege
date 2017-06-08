@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: OutlinedMat
-  m_Shader: {fileID: 4800000, guid: 78f005649b3ee6e4a814bb693f1243dc, type: 3}
+  m_Shader: {fileID: 4800000, guid: 42ee3d5bf793b7f429bfdf0a0499e889, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,7 +39,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -65,13 +65,18 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Outline: 0.03
+    - _OutlineVal: 0.03
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpeedX: 0
+    - _SpeedY: 0
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - _Zoom: 20
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineCol: {r: 0.8235294, g: 0.27058825, b: 0.039215688, a: 1}
     - _OutlineColor: {r: 0.9485294, g: 0, b: 0, a: 1}

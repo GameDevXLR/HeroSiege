@@ -2194,6 +2194,7 @@ MonoBehaviour:
   isActuAttacking: 0
   isActuStopAttacking: 0
   isLoosingTarget: 0
+  hasAttEffect: 0
 --- !u!114 &114169262380653472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2309,7 +2310,7 @@ MonoBehaviour:
   bonusHp: 0
   regenHp: 50
   damageReduction: 0
-  armorScore: 60
+  armorScore: 40
   bonusArmorScore: 0
   dodge: 0
   isDead: 0
@@ -2323,6 +2324,13 @@ MonoBehaviour:
   goldCanvas: {fileID: 1058724933178000}
   isJungleMob: 0
   myEnemies: []
+  isSlowingOnAutoA: 0
+  isCCOnAutoA: 0
+  isDrainingManaOnAutoA: 0
+  isCastingAoeCC: 0
+  isAbleToResurect: 0
+  IsAbleToIgnoreAggro: 0
+  isAnInvisible: 0
 --- !u!114 &114504576505167798
 MonoBehaviour:
   m_ObjectHideFlags: 1
