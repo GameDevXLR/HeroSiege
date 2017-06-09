@@ -10,6 +10,9 @@ public class NetHostGame :  MonoBehaviour{
 	private bool isCreating;
 	public Toggle isItOneLane;
 	public string roomName;
+	public AudioClip startPlaying;
+	public AudioClip classicClic;
+
 
 		private NetworkManager networkManager;
 
@@ -46,6 +49,7 @@ public class NetHostGame :  MonoBehaviour{
 	IEnumerator PreventDoubleGame()
 	{
 		isCreating = true;
+		GetComponent<AudioSource> ().PlayOneShot (startPlaying);
 		yield return new WaitForSeconds (1f);
 		isCreating = false;
 	}

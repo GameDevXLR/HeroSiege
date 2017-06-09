@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.AI;
 
 public class SpawnManager : NetworkBehaviour 
 {
@@ -13,6 +14,7 @@ public class SpawnManager : NetworkBehaviour
 	public float timeBetweenTic; //temps entre 2 mobs d'une meme vague.
 	public int level = 0; // niveau de la vague. (détermine le type de mob)
 	public bool isTeam1; // cocher si c'est un ennemi de la team1. sinon ce sera team 2 auto.
+	public bool isRightPath;
 	public GameObject[] ennemi; //array des mobs spawnable.
 	public GameObject squelettePrefab;
 	public GameObject squeletteElitePrefab;
@@ -126,7 +128,10 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 20;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
-
+					if (isRightPath) 
+					{
+						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
+					}
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
 				}
@@ -143,6 +148,10 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnnemyIGManager> ().isSlowingOnAutoA = true;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					if (isRightPath) 
+					{
+						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
+					}
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
 				}
@@ -159,7 +168,10 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
 					newEnnemi.GetComponent<EnnemyIGManager> ().isAnInvisible = true;
-
+					if (isRightPath) 
+					{
+						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
+					}
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
 				}
@@ -180,6 +192,10 @@ public class SpawnManager : NetworkBehaviour
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					if (isRightPath) 
+					{
+						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
+					}
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
 				}
@@ -201,6 +217,10 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnnemyIGManager> ().isAnInvisible = true;
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					if (isRightPath) 
+					{
+						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
+					}
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
 				}
@@ -224,6 +244,10 @@ public class SpawnManager : NetworkBehaviour
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					if (isRightPath) 
+					{
+						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
+					}
 					NetworkServer.Spawn (newEnnemi);
 					yield return new WaitForSeconds (0.2f);
 				}

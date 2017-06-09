@@ -17,6 +17,8 @@ public class MainMenuManager : MonoBehaviour
 	public Slider menuMusicVolume;
 	public AudioSource menuMusic;
 	public string langage;
+	public AudioClip clicSound1;
+	public AudioClip clicSound2;
 
 	public Slider generalVolume;
 	void Awake()
@@ -47,6 +49,7 @@ public class MainMenuManager : MonoBehaviour
 	}
 	public void ToggleFindGCanvas()
 	{
+		GetComponent<AudioSource> ().PlayOneShot (clicSound1);
 
 		if (actifTabFG == false)
 		{
@@ -74,6 +77,7 @@ public class MainMenuManager : MonoBehaviour
 	}
 	public void ToggleProfileCanvas()
 	{
+		GetComponent<AudioSource> ().PlayOneShot (clicSound1);
 
 		if (actifTabProfile == false)
 		{
@@ -100,6 +104,7 @@ public class MainMenuManager : MonoBehaviour
 	}
 	public void ToggleOptionsCanvas()
 	{
+		GetComponent<AudioSource> ().PlayOneShot (clicSound1);
 
 		if (actifTabOptions == false)
 		{
@@ -152,7 +157,8 @@ public class MainMenuManager : MonoBehaviour
 		{
 			return;
 		}
-		
+		GetComponent<AudioSource> ().PlayOneShot (clicSound2);
+
 		if (nameField.text.Length > 18) 
 		{
 			nameField.text = nameField.text.Substring (0, 18);
