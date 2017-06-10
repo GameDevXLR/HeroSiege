@@ -268,6 +268,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		myAutoAScript.Att1 = autoAArcher1;
 		myAutoAScript.Att2 = autoAArcher2;
 		myPlayerIGManager.PlayerDeath = deadArcher;
+		myAutoAScript.particule = childDpsSkin.GetComponentInChildren<ParticleSystem> ();
 		myAutoAScript.anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		myPlayerIGManager.deadAnimChildMesh = childDpsSkin.transform.GetChild(0).gameObject;
 		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
