@@ -39,6 +39,10 @@ public class SpawnManager : NetworkBehaviour
 		if (coPlayers > 1) 
 		{
 			difficultyFactor *= (coPlayers / 2);
+			if (difficultyFactor > 10) 
+			{
+				difficultyFactor = 10;
+			}
 		}
 	}
 
