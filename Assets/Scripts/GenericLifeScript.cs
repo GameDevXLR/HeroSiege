@@ -485,7 +485,7 @@ public class GenericLifeScript : NetworkBehaviour
             yield return new WaitForEndOfFrame();
             int k = z - j;
             respawnTxt.text = k.ToString();
-            yield return new WaitForSeconds(1f);
+			yield return new WaitForSecondsRealtime(1f);
             if (k == 1)
             {
                 playerDeathDisplay.enabled = false;

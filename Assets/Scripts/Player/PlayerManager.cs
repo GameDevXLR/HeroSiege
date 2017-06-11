@@ -73,7 +73,7 @@ public class PlayerManager : NetworkBehaviour
 
 	IEnumerator DelayTheUIActu()
 	{
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (.8f);
 		myTeamIcon.sprite = myTeamSprite;
 	}
 

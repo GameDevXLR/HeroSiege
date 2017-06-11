@@ -62,7 +62,7 @@ public class PlayerXPScript : NetworkBehaviour
 			generalTxt.text = "Vous avez atteind le niveau " + actualLevel + " .";
 
 		}
-		yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (0.5f);
 		generalTxt.enabled = false;
 		GetComponent<PlayerLevelUpManager> ().GetAlevel ();
 

@@ -115,7 +115,7 @@ public class SpawnManager : NetworkBehaviour
 	{
 		while (true) 
 		{
-			yield return new WaitForSeconds (11.5f); // changer ca si la durée d'une nuit varie.
+			yield return new WaitForSeconds (15f); // changer ca si la durée d'une nuit varie.
 			totalWaves++;
 			if (squel != 0) {
 				for (int i = 0; i < squel; i++) {

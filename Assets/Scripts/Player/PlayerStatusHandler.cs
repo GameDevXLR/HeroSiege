@@ -29,7 +29,7 @@ public class PlayerStatusHandler : NetworkBehaviour {
 	{
 		CCTwistImg.enabled = true;
 		underCC = true;
-		yield return new WaitForSeconds (CCTime);
+		yield return new WaitForSecondsRealtime (CCTime);
 		CCTwistImg.enabled = false;
 		underCC = false;
 	}
@@ -53,7 +53,7 @@ public class PlayerStatusHandler : NetworkBehaviour {
 		SlowImg.enabled = true;
 		agent.speed -= 2f;
 		underSlow = true;
-		yield return new WaitForSeconds (SlowTime);
+		yield return new WaitForSecondsRealtime (SlowTime);
 		agent.speed += 2f;
 		SlowImg.enabled = false;
 		underSlow = false;
