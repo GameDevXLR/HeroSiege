@@ -1,6 +1,7 @@
 ﻿using System;
 
-public class Layers {
+public class Layers
+{
     public static int Default = 0,
         transparentFX = 1,
         IgnoreRaycast = 2,
@@ -10,8 +11,12 @@ public class Layers {
         Ennemies = 9,
         Ground = 10,
         Minimap = 11,
-        IgnoreLayer = 16, 
+        IgnoreLayer = 16,
         UIBlock = 17;
 }
+
+
+
+
 
 

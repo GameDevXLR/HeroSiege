@@ -22,7 +22,7 @@ public class MenuLangageManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+        if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			Invoke ("MakeMenuFr", 0.1f);
 		}
