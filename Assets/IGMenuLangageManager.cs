@@ -23,6 +23,7 @@ public class IGMenuLangageManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+        
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			MakeTheGameFr ();
