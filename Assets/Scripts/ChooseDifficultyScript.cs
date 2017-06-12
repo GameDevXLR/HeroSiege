@@ -135,7 +135,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 		{
 			isSolo = true;
 		}
-		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = -1f;
+		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = -1.2f;
 		gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
 	}
 
