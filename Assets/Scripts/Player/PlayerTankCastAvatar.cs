@@ -153,7 +153,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
 				timeSpent += 0.2f;
 			}
-			yield return new WaitForSeconds (0.2f);
+			yield return new WaitForSecondsRealtime (0.2f);
 		}
 	}
 	//si on clic sur level up; ca le dit au serveur.

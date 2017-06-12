@@ -106,7 +106,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 	}
 	public void MadnessModeExe()
 	{
-		GameManager.instanceGM.gameDifficulty = 10;
+		GameManager.instanceGM.gameDifficulty = 6;
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
 			GameManager.instanceGM.messageManager.SendAnAlertMess ("Mode Madness activé. Prenez garde!", Color.green);
 

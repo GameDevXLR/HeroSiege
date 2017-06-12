@@ -44,8 +44,8 @@ public class GameManager : NetworkBehaviour
 	[SyncVar(hook = "GameRestarting")]private bool isRestarting;
 
 	public NetworkInstanceId ID;
-	[SyncVar(hook = "T1SyncLooseLife")]public int lifeOfTheTeam1 = 15;
-	[SyncVar(hook = "T2SyncLooseLife")]public int lifeOfTheTeam2 = 15;
+	[SyncVar(hook = "T1SyncLooseLife")]public int lifeOfTheTeam1 = 50;
+	[SyncVar(hook = "T2SyncLooseLife")]public int lifeOfTheTeam2 = 50;
 	[SyncVar(hook = "DayNightEvents")]public bool nightTime;
 	public int Days = 1;
 	public Image dayNightDisplay;
@@ -335,7 +335,7 @@ public class GameManager : NetworkBehaviour
 		case 4:
 
 			break;
-		case 10:
+		case 6:
 
 			break;
 		default :
@@ -425,7 +425,7 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().StartSpawning (Days);
 
 		}
-		if (gameDifficulty == 10) 
+		if (gameDifficulty == 6) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = true;
@@ -470,7 +470,7 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().enabled = false;
 
 		}
-		if (gameDifficulty == 3) 
+		if (gameDifficulty == 4) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().StopAllCoroutines ();
@@ -487,7 +487,7 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().enabled = false;
 
 		}
-		if (gameDifficulty == 4) 
+		if (gameDifficulty == 6) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().StopAllCoroutines ();

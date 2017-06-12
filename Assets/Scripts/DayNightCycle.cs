@@ -8,32 +8,53 @@ public class DayNightCycle : NetworkBehaviour {
 	[SyncVar]public float speed = 0f;
 	public float nightSpeedFactor = 0.4f;
 	public bool isNight;
+	public float timeOfDay = 1;
 	public AudioClip Night;
 	public AudioClip Day;
+
+	bool firstdayTrigger;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		transform.Rotate (1f * speed * Time.fixedDeltaTime, 0f, 0f);
-
-		if (transform.rotation.eulerAngles.x > 180f && isNight == false) 
+		float x = 1f * speed * Time.fixedDeltaTime;
+		transform.Rotate (x, 0f, 0f);
+		timeOfDay -= x;
+		if (!firstdayTrigger && timeOfDay>2f) 
 		{
 			isNight = true;
 			GetComponent<AudioSource> ().PlayOneShot (Night);
 			GameManager.instanceGM.nightTime = true;
 			speed -= nightSpeedFactor;
+			firstdayTrigger = true;
 		}
-		if (transform.rotation.eulerAngles.x > 0f && transform.rotation.eulerAngles.x <180f&& isNight) 
+
+		if (timeOfDay > 180f) 
 		{
-			isNight = false;
-			GetComponent<AudioSource> ().PlayOneShot (Day);
-			GameManager.instanceGM.nightTime = false;
-			speed += nightSpeedFactor;
+			timeOfDay = 0f;
+			if (isNight) 
+			{
+				isNight = false;
+				GetComponent<AudioSource> ().PlayOneShot (Day);
+				GameManager.instanceGM.nightTime = false;
+				speed += nightSpeedFactor;
+			}
+			else 
+			{
+				isNight = true;
+
+				GetComponent<AudioSource> ().PlayOneShot (Night);
+				GameManager.instanceGM.nightTime = true;
+				speed -= nightSpeedFactor;
+			}
+
 		}
+			
 	
 	}
 }
