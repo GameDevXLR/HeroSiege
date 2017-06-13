@@ -610,7 +610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4982956518937742}
   - component: {fileID: 137684226010909588}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: yi_liao_yuan_ren_001_ty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,7 +1573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4934115942846024}
   - component: {fileID: 137736827206666242}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: yi_liao_yuan_ren_wq_001_ty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1988,7 +1988,7 @@ GameObject:
   - component: {fileID: 4165393126600490}
   - component: {fileID: 198243779410816424}
   - component: {fileID: 199221373683579570}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: RogueAttackParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2355,7 +2355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4254746637938382}
   - component: {fileID: 137167594208467500}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: WK_HeavyIntantry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2735,6 +2735,22 @@ GameObject:
   - component: {fileID: 4880207873208584}
   m_Layer: 0
   m_Name: Bip001 L Forearm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1851950251448104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4459809618302958}
+  - component: {fileID: 108860273673754574}
+  m_Layer: 8
+  m_Name: PlayerLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4271,6 +4287,19 @@ Transform:
   m_Father: {fileID: 4938054947786032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4459809618302958
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851950251448104}
+  m_LocalRotation: {x: 0.5856652, y: 0, z: 0, w: 0.8105531}
+  m_LocalPosition: {x: -1.9, y: 0.62, z: 0.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4761200443502976}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 71.7, y: 0, z: 0}
 --- !u!4 &4473540415251092
 Transform:
   m_ObjectHideFlags: 1
@@ -4992,8 +5021,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 4.5, z: 0}
+  m_LocalRotation: {x: -0, y: 0.3198901, z: -0, w: 0.9474547}
+  m_LocalPosition: {x: 20.233746, y: 19.529903, z: 213.84586}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4385223683264028}
@@ -5012,9 +5041,10 @@ Transform:
   - {fileID: 4919829426220400}
   - {fileID: 224010582569539338}
   - {fileID: 4867983331166032}
+  - {fileID: 4459809618302958}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 37.313004, z: 0}
 --- !u!4 &4767223235413842
 Transform:
   m_ObjectHideFlags: 1
@@ -6132,6 +6162,42 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!108 &108860273673754574
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851950251448104}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 1
+  m_Color: {r: 0.86856616, g: 0.9259001, b: 0.99264705, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 1
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 524288
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!114 &114005177080923438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -22969,7 +23035,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -81937072
+  randomSeed: -985747811
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -68888,7 +68954,7 @@ SpriteRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920286070158048}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_MotionVectors: 1
