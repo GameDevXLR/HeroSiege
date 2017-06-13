@@ -43,6 +43,7 @@ public class DayNightCycle : NetworkBehaviour {
 				GetComponent<AudioSource> ().PlayOneShot (Day);
 				GameManager.instanceGM.nightTime = false;
 				speed += nightSpeedFactor;
+				return;
 			}
 			else 
 			{
