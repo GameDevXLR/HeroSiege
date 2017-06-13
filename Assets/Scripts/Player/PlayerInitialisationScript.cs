@@ -278,7 +278,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
-			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.2f;
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.8f;
 			myPlayerIGManager.maxHp = 440;
 			myPlayerIGManager.currentHp = 440;
 			myPlayerIGManager.regenHp = 8;

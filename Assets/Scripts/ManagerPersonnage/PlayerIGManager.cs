@@ -193,7 +193,9 @@ public class PlayerIGManager : CharacterIGManager {
         yield return new WaitForSeconds(respawnTime);
         deadAnimChildMesh.transform.parent = animParent;
         deadAnimChildMesh.transform.localPosition = Vector3.zero;
-        deadAnimChildMesh.transform.localScale = Vector3.one;
+		if (heroChosen == "Champion") {
+			deadAnimChildMesh.transform.localScale = Vector3.one;
+		}
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", false);
 
         deadAnimChildEffect.transform.parent = this.transform;
