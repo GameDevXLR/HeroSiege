@@ -159,6 +159,8 @@ public class PlayerIGManager : CharacterIGManager {
             }
 
         }
+		GetComponent<PlayerStatusHandler> ().CCTwistImg.enabled = false;
+		GetComponent<PlayerStatusHandler> ().SlowImg.enabled = false;
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         GetComponent<AudioSource>().PlayOneShot(PlayerDeath);
         playerDeathCount++;

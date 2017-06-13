@@ -104,7 +104,8 @@ public class EnnemyIGManager : CharacterIGManager
     //ce qu'il se passe si un mob meurt...
     IEnumerator KillTheMob()
     {
-
+		GetComponent<StatusHandlerScript> ().CCTwistImg.enabled = false;
+		GetComponent<StatusHandlerScript> ().SlowImg.enabled = false;
         if (guyAttackingMe)
         {
             if (guyAttackingMe.tag == "Player")

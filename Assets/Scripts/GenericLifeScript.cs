@@ -420,6 +420,7 @@ public class GenericLifeScript : NetworkBehaviour
 			}
 
         }
+
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         GetComponent<AudioSource>().PlayOneShot(PlayerDeath);
         playerDeathCount++;
@@ -431,6 +432,8 @@ public class GenericLifeScript : NetworkBehaviour
         GetComponent<PlayerAutoAttack>().enabled = false;
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 		animParent = deadAnimChildMesh.transform.parent;
+		GetComponent<PlayerStatusHandler> ().CCTwistImg.enabled = false;
+		GetComponent<PlayerStatusHandler> ().SlowImg.enabled = false;
 
         deadAnimChildMesh.transform.parent = null;
         GetComponent<PlayerClicToMove>().target = null;

@@ -34,24 +34,28 @@ public class DayNightCycle : NetworkBehaviour {
 			firstdayTrigger = true;
 		}
 
-		if (timeOfDay > 180f) 
+		if (timeOfDay > 180f ) 
 		{
 			timeOfDay = 0f;
 			if (isNight) 
 			{
 				isNight = false;
 				GetComponent<AudioSource> ().PlayOneShot (Day);
-				GameManager.instanceGM.nightTime = false;
 				speed += nightSpeedFactor;
+				if (isServer) {
+					GameManager.instanceGM.nightTime = false;
+				}
 				return;
 			}
 			else 
 			{
-				isNight = true;
 
 				GetComponent<AudioSource> ().PlayOneShot (Night);
-				GameManager.instanceGM.nightTime = true;
+				if (isServer) {
+					GameManager.instanceGM.nightTime = true;
+				}				
 				speed -= nightSpeedFactor;
+				isNight = true;
 			}
 
 		}
