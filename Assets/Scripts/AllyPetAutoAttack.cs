@@ -267,7 +267,9 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		{
 				target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
 				SetTheTarget (target);
+			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
+
 			agent.isStopped = false;
 				agent.SetDestination (target.transform.position);
 				yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));

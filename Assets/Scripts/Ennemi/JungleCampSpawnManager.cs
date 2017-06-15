@@ -141,10 +141,12 @@ public class JungleCampSpawnManager : NetworkBehaviour
             if (mob.GetComponent<EnnemyIGManager>().isDead)
             {
                 mob.GetComponent<EnnemyIGManager>().deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", false);
+				mob.GetComponent<EnnemyIGManager>().deadAnimChildMesh.GetComponent<Animator>().SetBool("attackEnnemi", false);
+
                 mob.GetComponent<EnnemyIGManager>().isDead = false;
             }
         }
-
+		mob.GetComponent<NavMeshObstacle> ().enabled = false;
         mob.GetComponent<NavMeshAgent>().enabled = true;
 
         mob.GetComponent<NavMeshAgent>().acceleration = prefab.GetComponent<NavMeshAgent>().acceleration;

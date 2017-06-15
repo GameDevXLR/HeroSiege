@@ -94,10 +94,10 @@ public class PlayerIGManager : CharacterIGManager {
         }
     }
 
-    public override void RescaleTheLifeBarIG(int life)
+    public override void TempoRescaleTheLifeBarIG(int life)
     {
 
-        base.RescaleTheLifeBarIG(life);
+        base.TempoRescaleTheLifeBarIG(life);
 
         float x = (float)currentHp / maxHp;
         if (x > 1f)

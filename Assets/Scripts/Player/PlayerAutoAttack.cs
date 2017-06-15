@@ -63,6 +63,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 	void Update ()
 	{
+		if (anim.GetBool ("attack") == false) 
+		{
+			anim.SetFloat("realSpeed", Mathf.Clamp( agent.velocity.sqrMagnitude, 0.1f,1f));
+		}
 		if (isServer) 
 		{
 			if (target && !target.GetComponent<EnnemyIGManager>().isDead) 

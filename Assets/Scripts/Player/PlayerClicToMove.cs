@@ -62,7 +62,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit, 1000f, layer_mask)) 
+			if (Physics.Raycast (ray, out hit, 2000f, layer_mask)) 
 			{
                 if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
@@ -209,7 +209,14 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 	public void SetThatTargetFromAggro(NetworkInstanceId targetid)
 	{
-
+		if (GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj) 
+		{
+			GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj.eraseRenderer = true;
+			GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = null;
+		}
+		GameObject goTarg = ClientScene.FindLocalObject (targetid);
+		GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = goTarg.GetComponent<EnnemyIGManager> ().outlinemob;
+		goTarg.GetComponent<EnnemyIGManager> ().outlinemob.eraseRenderer = false;
 			SetTargetOnServer (targetid);
 
 	}

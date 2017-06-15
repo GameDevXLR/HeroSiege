@@ -93,7 +93,12 @@ public class CharacterIGManager : NetworkBehaviour
         RescaleTheLifeBarIG(currentHp);
     }
 
-    public virtual void RescaleTheLifeBarIG(int life)
+    public void RescaleTheLifeBarIG(int life)
+    {
+        TempoRescaleTheLifeBarIG(life);
+    }
+
+    public virtual void TempoRescaleTheLifeBarIG(int life)
     {
         currentHp = life;
         float x = (float)currentHp / maxHp;

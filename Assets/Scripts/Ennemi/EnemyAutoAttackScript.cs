@@ -58,6 +58,10 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	void Update ()
 	{
+		if (anim.GetBool ("attackEnnemi") == false) 
+		{
+			anim.SetFloat ("realSpeed", Mathf.Clamp(agent.velocity.sqrMagnitude,0.1f,1f));
+		}
 		if (isUnderCC) 
 		{
 			return;
