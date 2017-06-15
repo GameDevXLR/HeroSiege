@@ -6,7 +6,9 @@ public class NetHostGame :  MonoBehaviour{
 
 		[SerializeField]
 		private uint roomSize = 10;
-
+	public GameObject loadingCanvas;
+	public Text loadingMessage;
+	public Slider loadingBar;
 	private bool isCreating;
 	public Toggle isItOneLane;
 	public string roomName;
@@ -50,7 +52,92 @@ public class NetHostGame :  MonoBehaviour{
 	{
 		isCreating = true;
 		GetComponent<AudioSource> ().PlayOneShot (startPlaying);
-		yield return new WaitForSeconds (1f);
+		loadingCanvas.SetActive (true);
+		yield return new WaitForSecondsRealtime (.5f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "Construction des constructions.";
+
+		} else 
+		{
+			loadingMessage.text = "Building the buildings.";
+		}
+		loadingBar.value += 0.1f;
+		yield return new WaitForSecondsRealtime (.5f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "Construction des constructions..";
+
+		} else 
+		{
+			loadingMessage.text = "Building the buildings..";
+		}
+		loadingBar.value += 0.2f;		yield return new WaitForSecondsRealtime (.5f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "Construction des constructions...";
+
+		} else 
+		{
+			loadingMessage.text = "Building the buildings...";
+		}
+		loadingBar.value += 0.3f;		yield return new WaitForSecondsRealtime (.5f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "Dragons enlevés.";
+
+		} else 
+		{
+			loadingMessage.text = "Removing dragons.";
+		}
+		loadingBar.value += 0.2f;		yield return new WaitForSecondsRealtime (.5f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "Dragons enlevés..";
+
+		} else 
+		{
+			loadingMessage.text = "Removing dragons..";
+		}
+		loadingBar.value += 0.1f;		yield return new WaitForSecondsRealtime (1f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "Dragons enlevés...";
+
+		} else 
+		{
+			loadingMessage.text = "Removing dragons...";
+		}
+		loadingBar.value += 0.05f;		yield return new WaitForSecondsRealtime (1f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "Sac a dos prêt!";
+
+		} else 
+		{
+			loadingMessage.text = "Packing stuffs.";
+		}
+		loadingBar.value += 0.03f;		yield return new WaitForSecondsRealtime (1f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "En attente de la fin de l'hiver.";
+
+		} else 
+		{
+			loadingMessage.text = "Waiting for winter to end.";
+		}
+		loadingBar.value += 0.02f;		yield return new WaitForSecondsRealtime (1f);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			loadingMessage.text = "Echec critique!";
+
+		} else 
+		{
+			loadingMessage.text = "FAILURE!";
+		}
+		loadingBar.value -= 0.9f;
+		loadingCanvas.SetActive (false);
+
 		isCreating = false;
 	}
 	public void ToggleOneLaneTwoLanes()

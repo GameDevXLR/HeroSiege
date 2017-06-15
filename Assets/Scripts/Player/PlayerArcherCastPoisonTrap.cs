@@ -193,7 +193,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 		cdCountdown.gameObject.SetActive (true);
 		int tmp = (int)(spellCD);
 		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
-		yield return new WaitForSeconds(spellCD);
+		yield return new WaitForSecondsRealtime(spellCD);
 		spell2Btn.interactable = true;
 		cdCountdown.gameObject.SetActive (false);
 		timeSpent = 0f;
@@ -209,7 +209,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
 				timeSpent += 0.2f;
 			}
-			yield return new WaitForSeconds (0.2f);
+			yield return new WaitForSecondsRealtime (0.2f);
 		}
 	}
 	//si on clic sur level up; ca le dit au serveur.

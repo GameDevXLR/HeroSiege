@@ -191,7 +191,7 @@ public class PlayerCastCCSpell : NetworkBehaviour
 		cdCountdown.gameObject.SetActive (true);
 		int tmp = (int)(spellCD);
 		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
-        yield return new WaitForSeconds(spellCD);
+		yield return new WaitForSecondsRealtime(spellCD);
         spell2Btn.interactable = true;
 		cdCountdown.gameObject.SetActive (false);
 		timeSpent = 0f;
