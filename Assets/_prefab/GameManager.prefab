@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114390961700196786}
   - component: {fileID: 114187068329497642}
   - component: {fileID: 114574788973545376}
+  - component: {fileID: 114018175363057824}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -503,6 +504,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114018175363057824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1058267811540780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5d72036cdfe134fb9b7c04454aaaf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curTargets: []
+  selectedObj: {fileID: 0}
+  attackCursor: {fileID: 2800000, guid: 8095d44bbc382294d843d549c531bc6e, type: 3}
+  normalCursor: {fileID: 2800000, guid: b864bec75550ec14198eecce9ab02c91, type: 3}
 --- !u!114 &114127148823258428
 MonoBehaviour:
   m_ObjectHideFlags: 1
