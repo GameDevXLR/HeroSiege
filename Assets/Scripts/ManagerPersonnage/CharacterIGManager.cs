@@ -186,6 +186,8 @@ public class CharacterIGManager : NetworkBehaviour
                 }
             }
         }
+        if (currentHp < 0)
+            currentHp = 0;
     }
 
 
