@@ -13,12 +13,16 @@ public class PlayerStatusHandler : NetworkBehaviour {
 	public SpriteRenderer CCTwistImg;
 	public SpriteRenderer SlowImg;
 	public NavMeshAgent agent;
+
 	[Server]
 	public void MakeHimCC(float CCDuration)
 	{
-		agent = GetComponent<NavMeshAgent> ();
-		RpcCCTheObject (CCDuration);
-		GetComponent<PlayerAutoAttack> ().GetCC (CCDuration);
+        if (!GetComponent<PlayerIGManager>().isDead)
+        {
+            agent = GetComponent<NavMeshAgent>();
+            RpcCCTheObject(CCDuration);
+            GetComponent<PlayerAutoAttack>().GetCC(CCDuration);
+        }
 	}
 	[ClientRpc]
 	public void RpcCCTheObject(float duration)
@@ -34,12 +38,16 @@ public class PlayerStatusHandler : NetworkBehaviour {
 		underCC = false;
 	}
 
-	public void MakeHimSlow(float dur)
+    [Server]
+    public void MakeHimSlow(float dur)
 	{
-		if (!underSlow) 
-		{
-			RpcSlowTheObject (dur);
-		}
+        if (!GetComponent<PlayerIGManager>().isDead)
+        {
+            if (!underSlow)
+            {
+                RpcSlowTheObject(dur);
+            }
+        }
 	}
 
 
@@ -59,10 +67,13 @@ public class PlayerStatusHandler : NetworkBehaviour {
 		underSlow = false;
 	}
 
-
-	public void MakeHimRoot(float rootDuration)
+    [Server]
+    public void MakeHimRoot(float rootDuration)
 	{
-		StartCoroutine (RootProcedure(rootDuration));
+        if (!GetComponent<PlayerIGManager>().isDead)
+        {
+            StartCoroutine(RootProcedure(rootDuration));
+        }
 	}
 	IEnumerator RootProcedure (float rootTime)
 	{
