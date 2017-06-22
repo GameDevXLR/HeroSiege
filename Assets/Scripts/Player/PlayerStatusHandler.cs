@@ -79,7 +79,7 @@ public class PlayerStatusHandler : NetworkBehaviour {
 	{
 		agent.isStopped = true;
 		GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		yield return new WaitForSeconds (rootTime);
+		yield return new WaitForSecondsRealtime (rootTime);
 		agent.isStopped = false;
 	}
 

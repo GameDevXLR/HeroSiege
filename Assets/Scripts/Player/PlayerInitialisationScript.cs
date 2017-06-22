@@ -74,6 +74,10 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
+			if (!isServer) 
+			{
+				difficultyPanel.SetActive (false);
+			}
 			string playerNN;
 			playerNN = PlayerPrefs.GetString ("PlayerNN");
 //			ChangeMyName (playerNN);
@@ -83,10 +87,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			CameraController.instanceCamera.Initialize ();
 			GameObject.Find ("PlayerInterface2.0").GetComponent<Canvas> ().enabled = true;
 			GameObject.Find ("PlayerNickNameTxt").GetComponent<Text> ().text = playerNN;
-			if (!isServer) 
-			{
-				difficultyPanel.SetActive (false);
-			}
 		} else 
 		{
 			GetComponent<PlayerLevelUpManager> ().enabled = false; //juste pour etre sur
@@ -377,11 +377,13 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	IEnumerator TellNewPlayerHasJoin()
 	{
 		yield return new WaitForSeconds (1.5f);
-		RpcCallMessage (playerNickName + " has joined the game.");
-		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-		{
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
 			RpcCallMessage (playerNickName + " a rejoind la partie.");
 
+		} else 
+		{
+			RpcCallMessage (playerNickName + " has joined the game.");
+			
 		}
 	}
 

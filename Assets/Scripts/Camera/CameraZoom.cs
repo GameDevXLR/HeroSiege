@@ -23,8 +23,9 @@ public class CameraZoom : MonoBehaviour {
 			zoom = Mathf.Clamp (zoom + 10, zoomInLimite, zoomOutLimite);
 
 		}
-
 		GetComponent<Camera> ().fieldOfView = Mathf.Lerp (GetComponent<Camera> ().fieldOfView, zoom, Time.deltaTime * smooth);
+		float x = GetComponent<Camera> ().fieldOfView;
+		transform.GetChild (0).localScale = new Vector3 (x, x, x);
 
 	}
 

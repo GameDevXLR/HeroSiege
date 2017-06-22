@@ -15,12 +15,13 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 			this.enabled = false;
 		}
 	}
-
+	[ServerCallback]
 	public void OnTriggerEnter(Collider other)
 	{
 		
 		if (other.gameObject.layer == 9) { // layer9 is Ennemies.
 			other.gameObject.GetComponent<EnnemyIGManager> ().guyAttackingMe = null;
+			other.gameObject.GetComponent<EnnemyIGManager> ().isAbleToResurect = false;
 			other.gameObject.GetComponent<EnnemyIGManager> ().MakeHimDie ();
 
 			if (teamNbr == 1) 
