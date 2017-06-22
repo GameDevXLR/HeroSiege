@@ -104,14 +104,13 @@ public class EnnemyIGManager : CharacterIGManager
     //ce qu'il se passe si un mob meurt...
     IEnumerator KillTheMob()
     {
-		GetComponent<StatusHandlerScript> ().CCTwistImg.enabled = false;
-		GetComponent<StatusHandlerScript> ().SlowImg.enabled = false;
         if (guyAttackingMe)
         {
             if (guyAttackingMe.tag == "Player")
             {
-                guyAttackingMe.GetComponent<PlayerXPScript>().GetXP(xpGiven);
+                guyAttackingMe.GetComponent<PlayerXPScript>().GetXP(xpGiven/10);
                 guyAttackingMe.GetComponent<PlayerGoldScript>().GetGold(goldGiven/10);
+				ShareXPWithTheTeam (guyAttackingMe.GetComponent<PlayerXPScript> ().isTeam1, xpGiven);
             }
         }
         //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
@@ -151,6 +150,8 @@ public class EnnemyIGManager : CharacterIGManager
     [ClientRpc]
     public void RpcKillTheMob()
     {
+		GetComponent<StatusHandlerScript> ().CCTwistImg.enabled = false;
+		GetComponent<StatusHandlerScript> ().SlowImg.enabled = false;
         goldDisplay.text = goldGiven.ToString();
         goldCanvas.GetComponent<Animator>().enabled = true;
         goldCanvas.GetComponent<Canvas>().enabled = true;
@@ -171,6 +172,8 @@ public class EnnemyIGManager : CharacterIGManager
     [ClientRpc]
     public void RpcKillTheJungleMob()
     {
+		GetComponent<StatusHandlerScript> ().CCTwistImg.enabled = false;
+		GetComponent<StatusHandlerScript> ().SlowImg.enabled = false;
         goldDisplay.text = goldGiven.ToString();
         goldCanvas.GetComponent<Animator>().enabled = true;
         goldCanvas.GetComponent<Canvas>().enabled = true;

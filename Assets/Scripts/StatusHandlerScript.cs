@@ -49,7 +49,7 @@ public class StatusHandlerScript : NetworkBehaviour
 //		GetComponent<NavMeshAgent> ().Stop ();
 //		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		//ajouter la désactivation de l'autoA;
-		yield return new WaitForSeconds (CCTime);
+		yield return new WaitForSecondsRealtime (CCTime);
 		CCTwistImg.enabled = false;
 
 		underCC = false;
@@ -76,7 +76,7 @@ public class StatusHandlerScript : NetworkBehaviour
 		//		GetComponent<NavMeshAgent> ().Stop ();
 		//		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		//ajouter la désactivation de l'autoA;
-		yield return new WaitForSeconds (SlowTime);
+		yield return new WaitForSecondsRealtime (SlowTime);
 		GetComponent<NavMeshAgent> ().speed += 2f;
 
 		SlowImg.enabled = false;
@@ -96,7 +96,7 @@ public class StatusHandlerScript : NetworkBehaviour
 	{
 		GetComponent<NavMeshAgent> ().isStopped = true;
 		GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		yield return new WaitForSeconds (rootTime);
+		yield return new WaitForSecondsRealtime (rootTime);
 		GetComponent<NavMeshAgent> ().isStopped = false;
 	}
 

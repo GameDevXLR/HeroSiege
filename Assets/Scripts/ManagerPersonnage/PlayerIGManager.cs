@@ -48,7 +48,7 @@ public class PlayerIGManager : CharacterIGManager {
     public bool underThreshold = false;
 
 	public string heroChosen;
-    
+
 
     protected override void Start()
     {
@@ -192,7 +192,7 @@ public class PlayerIGManager : CharacterIGManager {
 
         //		yield return new WaitForSeconds (0.8f);
         //		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
-        yield return new WaitForSeconds(respawnTime);
+		yield return new WaitForSecondsRealtime(respawnTime);
         deadAnimChildMesh.transform.parent = animParent;
         deadAnimChildMesh.transform.localPosition = Vector3.zero;
 		if (heroChosen == "Champion") {
@@ -231,7 +231,7 @@ public class PlayerIGManager : CharacterIGManager {
             yield return new WaitForEndOfFrame();
             int k = z - j;
             respawnTxt.text = k.ToString();
-            yield return new WaitForSeconds(1f);
+			yield return new WaitForSecondsRealtime(1f);
             if (k == 1)
             {
                 playerDeathDisplay.enabled = false;
