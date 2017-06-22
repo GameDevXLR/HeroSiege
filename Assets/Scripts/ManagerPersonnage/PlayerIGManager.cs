@@ -248,14 +248,14 @@ public class PlayerIGManager : CharacterIGManager {
         armorScore += levelUpBonusArmor;
         currentHp += levelUpBonusHP + ((maxHp - bonusHp) * 5 / 100);
         respawnTime += 1f;
-        lifeBar.localScale = new Vector3(1, 1f, 1f);
-
-        if (isLocalPlayer)
-        {
-            lifeBarMain.localScale = new Vector3(1, 1f, 1f);
-            playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
-
-        }
+//        lifeBar.localScale = new Vector3(1, 1f, 1f);
+//
+//        if (isLocalPlayer)
+//        {
+////            lifeBarMain.localScale = new Vector3(1, 1f, 1f);
+////            playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
+//
+//        }
     }
     public override  void ActualizeArmorHook(int armor)
     {

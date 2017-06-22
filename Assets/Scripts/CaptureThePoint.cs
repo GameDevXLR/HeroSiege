@@ -75,10 +75,18 @@ public class CaptureThePoint : NetworkBehaviour
 		if (other.gameObject.layer == Layers.Player) 
 		{
 			playersIn.Remove (other.gameObject);
+			if (playersIn.Count == 0 && belongsTo == PointOwner.neutral) 
+			{
+				timeToCapture = initialTimeToCapt;
+			}
 		}
 		if (other.gameObject.layer == Layers.Ennemies) 
 		{
 			enemiesIn.Remove (other.gameObject);
+			if (enemiesIn.Count == 0 && belongsTo != PointOwner.neutral) 
+			{
+				timeToCapture = initialTimeToCapt;
+			}
 		}
 		
 	}
@@ -106,7 +114,7 @@ public class CaptureThePoint : NetworkBehaviour
 			}
 			if (other.gameObject.layer == Layers.Player && enemiesIn.Count == 0) 
 			{
-				timeToCapture -= Time.smoothDeltaTime;
+				timeToCapture -= Time.fixedDeltaTime;
 				if (timeToCapture <= 0f) 
 				{
 					timeToCapture = initialTimeToCapt;
@@ -124,7 +132,7 @@ public class CaptureThePoint : NetworkBehaviour
 				}
 				if(playersIn.Count == 0)
 				{
-					timeToCapture -= Time.smoothDeltaTime;
+					timeToCapture -= Time.fixedDeltaTime;
 					if (timeToCapture <= 0f) 
 					{
 						timeToCapture = initialTimeToCapt;
@@ -143,7 +151,7 @@ public class CaptureThePoint : NetworkBehaviour
 				}
 				if(playersIn.Count == 0)
 				{
-					timeToCapture -= Time.smoothDeltaTime;
+					timeToCapture -= Time.fixedDeltaTime;
 					if (timeToCapture <= 0f) 
 					{
 						timeToCapture = initialTimeToCapt;
@@ -192,7 +200,7 @@ public class CaptureThePoint : NetworkBehaviour
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("L'avant-poste ennemi a été capturé.", Color.green);
+						GameManager.instanceGM.messageManager.SendAnAlertMess ("L'avant-poste ennemi a été capturé.", Color.red);
 						return;
 					}
 					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been captured.", Color.red);
@@ -203,7 +211,7 @@ public class CaptureThePoint : NetworkBehaviour
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("L'avant-poste ennemi a été capturé.", Color.green);
+						GameManager.instanceGM.messageManager.SendAnAlertMess ("L'avant-poste ennemi a été capturé.", Color.red);
 						return;
 					}
 					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been captured.", Color.red);
@@ -237,7 +245,7 @@ public class CaptureThePoint : NetworkBehaviour
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("Notre avant-poste est perdu.", Color.green);
+						GameManager.instanceGM.messageManager.SendAnAlertMess ("Notre avant-poste est perdu.", Color.red);
 						return;
 					}
 					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost.", Color.red);
@@ -248,7 +256,7 @@ public class CaptureThePoint : NetworkBehaviour
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("Notre avant-poste est perdu.", Color.green);
+						GameManager.instanceGM.messageManager.SendAnAlertMess ("Notre avant-poste est perdu.", Color.red);
 						return;
 					}
 					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost!", Color.red);
