@@ -132,7 +132,10 @@ public class JungleCampSpawnManager : NetworkBehaviour
     public void reActivateMob(GameObject mob, Transform transformMob, GameObject prefab)
     {
         mob.SetActive(true);
-		mob.transform.position = transformMob.position;
+        
+
+
+        mob.transform.position = transformMob.position;
 		mob.transform.rotation = transformMob.rotation;
 		
         if (mob.GetComponent<EnnemyIGManager>().deadAnimChildMesh)
@@ -146,10 +149,12 @@ public class JungleCampSpawnManager : NetworkBehaviour
                 mob.GetComponent<EnnemyIGManager>().isDead = false;
             }
         }
-		mob.GetComponent<NavMeshObstacle> ().enabled = false;
+
+        
         mob.GetComponent<NavMeshAgent>().enabled = true;
 
         mob.GetComponent<NavMeshAgent>().acceleration = prefab.GetComponent<NavMeshAgent>().acceleration;
+
         if (mob.GetComponent<NavMeshAgent>().isActiveAndEnabled)
         {
             mob.GetComponent<NavMeshAgent>().SetDestination(transformMob.position);

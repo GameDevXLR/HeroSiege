@@ -174,10 +174,17 @@ public class EnnemyIGManager : CharacterIGManager
     {
 		GetComponent<StatusHandlerScript> ().CCTwistImg.enabled = false;
 		GetComponent<StatusHandlerScript> ().SlowImg.enabled = false;
+
+        GetComponent<NavMeshObstacle>().enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false;
+        
+
         goldDisplay.text = goldGiven.ToString();
         goldCanvas.GetComponent<Animator>().enabled = true;
         goldCanvas.GetComponent<Canvas>().enabled = true;
         goldCanvas.GetComponent<InactivateAnimatorCanvas>().inactiveWithTime();
+
+
         //  goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);
 		if (deadAnimChildMesh) {
 			deadAnimChildMesh.GetComponent<Animator> ().enabled = true;
