@@ -16,7 +16,7 @@ public class TextSeveralLanguage : MonoBehaviour {
             Invoke("TradFr", 0.1f);
         }
 
-        else if(PlayerPrefs.GetString("LANGAGE", "Eng") == Languages.English)
+        else
         {
             Invoke("TradEng", 0.1f);
         }
@@ -54,7 +54,7 @@ public class TextSeveralLanguage : MonoBehaviour {
             PlayerPrefs.SetString("LANGAGE", Languages.French);
             TradFr();
         }
-        else if (Language == Languages.English)
+        else
         {
             PlayerPrefs.SetString("LANGAGE", Languages.English);
             TradEng();

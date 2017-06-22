@@ -80,56 +80,61 @@ public class PlayerLevelUpManager : MonoBehaviour
 
 	public void LooseASpecPt(int spell)
 	{
-		if (spell == 4) 
-		{
-			specPlusLvl++;
-			if (specPlusLvl == 1) 
-			{
-				GameManager.instanceGM.ShowAGameTip ("Did you know that one of the 3 stat bonus given by this passive is doubled based on your hero type : Adc/Tank/Mage.");
-				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-				{
-					GameManager.instanceGM.ShowAGameTip ("Saviez vous que l'un des trois bonus donné par ce passif est doublé en fonction du type de votre héro: Adc/Tank/Mage.");
+        if (specPts > 0)
+        {
+            if (spell == 4)
+            {
+                specPlusLvl++;
+                if (specPlusLvl == 1)
+                {
+                    GameManager.instanceGM.ShowAGameTip("Did you know that one of the 3 stat bonus given by this passive is doubled based on your hero type : Adc/Tank/Mage.");
+                    if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+                    {
+                        GameManager.instanceGM.ShowAGameTip("Saviez vous que l'un des trois bonus donné par ce passif est doublé en fonction du type de votre héro: Adc/Tank/Mage.");
 
-				}
-			}
-		}
-		if (spell == 3) 
-		{
-			ultiSpecPts--;
-			spellUltLvl++;
-			if (spellUltLvl == 2) 
-			{
-				GameManager.instanceGM.ShowAGameTip ("Did you know that you can up your ultimate only once every 3 levels. And that all of your abilities can only be upgraded 10 times, except for the Statistic bonus.");
-				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-				{
-					GameManager.instanceGM.ShowAGameTip ("Saviez vous que vous pouvez augmenter votre Ultime une fois tous les trois niveaux? Et que vos compétences ne peuvent être augmenter que 10 fois, sauf la compétence de bonus de stats.");
+                    }
+                }
+            }
+            if (spell == 3)
+            {
+                ultiSpecPts--;
+                spellUltLvl++;
+                if (spellUltLvl == 2)
+                {
+                    GameManager.instanceGM.ShowAGameTip("Did you know that you can up your ultimate only once every 3 levels. And that all of your abilities can only be upgraded 10 times, except for the Statistic bonus.");
+                    if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+                    {
+                        GameManager.instanceGM.ShowAGameTip("Saviez vous que vous pouvez augmenter votre Ultime une fois tous les trois niveaux? Et que vos compétences ne peuvent être augmenter que 10 fois, sauf la compétence de bonus de stats.");
 
-				}
-			}
-			if (ultiSpecPts < 0) 
-			{
-				ultiSpecPts = 0;
-			}
-			if (ultiSpecPts == 0) 
-			{
-				spellUltLvlUpBtn.SetActive (false);
-			}
-		}
-		if(spell == 1){
-			spell1Lvl++;
-		}
-		if(spell == 2){
-			spell2Lvl++;
-		}
-		specPts--;
-		if (specPts <= 0) 
-		{
-			specPts = 0;
-			specPlusBtn.SetActive (false);
-			spell1LvlUpBtn.SetActive (false);
-			spell2LvlUpBtn.SetActive (false);
-			spellUltLvlUpBtn.SetActive (false);
+                    }
+                }
+                if (ultiSpecPts < 0)
+                {
+                    ultiSpecPts = 0;
+                }
+                if (ultiSpecPts == 0)
+                {
+                    spellUltLvlUpBtn.SetActive(false);
+                }
+            }
+            if (spell == 1)
+            {
+                spell1Lvl++;
+            }
+            if (spell == 2)
+            {
+                spell2Lvl++;
+            }
+        }
+        specPts--;
+        if (specPts <= 0)
+        {
+            specPts = 0;
+            specPlusBtn.SetActive(false);
+            spell1LvlUpBtn.SetActive(false);
+            spell2LvlUpBtn.SetActive(false);
+            spellUltLvlUpBtn.SetActive(false);
 
-		}
-	}
+        }
+    }
 }
