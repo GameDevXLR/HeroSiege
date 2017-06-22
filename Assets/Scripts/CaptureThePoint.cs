@@ -44,7 +44,7 @@ public class CaptureThePoint : NetworkBehaviour
 	}
 	public void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.layer == Layers.Player) 
+		if (other.gameObject.layer == Layers.Player && other.gameObject.tag == "Player") 
 		{
 			if (isServer) {
 				playersIn.Add (other.gameObject);
