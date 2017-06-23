@@ -311,7 +311,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	[Server]
 	public void SetTheTarget(GameObject targ)
 	{
+		if (targ.GetComponent<NetworkIdentity> ()) {
 			targetID = targ.GetComponent<NetworkIdentity> ().netId;
+		} else 
+		{
+			Debug.Log ("manque un netid");
+		}
 	}
 	public void GetCC(float dur)
 	{

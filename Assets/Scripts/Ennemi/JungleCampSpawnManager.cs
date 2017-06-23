@@ -19,7 +19,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
     public Transform[] bossPos;
 	public GameObject minionPrefab;
 	public GameObject minionBossPrefab;
-    [SyncVar] public int CampLvl = 0; // number of days...
+    public int CampLvl = 0; // number of days...
 	public int scaleFactor = 50;
     public bool alreadySpawn;
 
