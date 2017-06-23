@@ -247,30 +247,40 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcLvlUpSpell()
 	{
-		spellLvl++;
-		spellCost += 16;
-		spellCD -= 3f;
-		spellDmg += 27;
-//		spellDuration += 1f;
-		if (isLocalPlayer)
-		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
-			int x = (int)spellDmg / 5;
-			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*6+" health";
-			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-			{
-				spellDescription = "Invoque votre compagnon pour vous aider dans la bataille. Inflige "+ spellDmg.ToString()+" dégâts. Possède "+spellDmg*6+" pv.";
+		
+        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(2))
+        {
 
-			}
-			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
-			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
-			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
-			//changer ici l'interface du joueur.
-		}
-	}
+            upgradeSpell();
+            int x = (int)spellDmg / 5;
+            spellDescription = "Invoke your companion to help you in battle. Deals " + spellDmg.ToString() + " damage. Got " + spellDmg * 6 + " health";
+            if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+            {
+                spellDescription = "Invoque votre compagnon pour vous aider dans la bataille. Inflige " + spellDmg.ToString() + " dégâts. Possède " + spellDmg * 6 + " pv.";
 
-	//suffit de linké ca a un bouton d'interface et boom
-	public void levelUp()
+            }
+            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+            spell2Btn.transform.GetChild(0).transform.Find("MpCost").GetComponentInChildren<Text>().text = spellCost.ToString();
+            spell2Btn.transform.GetChild(0).transform.Find("CDTime").GetComponentInChildren<Text>().text = spellCD.ToString();
+            //changer ici l'interface du joueur.
+        }
+        else if (GetComponent<PlayerLevelUpManager>().LooseASpecPt(2))
+        {
+            upgradeSpell();
+        }
+    }
+
+    public void upgradeSpell()
+    {
+        spellLvl++;
+        spellCost += 16;
+        spellCD -= 3f;
+        spellDmg += 27;
+        //		spellDuration += 1f;
+    }
+
+    //suffit de linké ca a un bouton d'interface et boom
+    public void levelUp()
 	{
 		CmdLevelUpTheSpell();
 	}

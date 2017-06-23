@@ -161,27 +161,38 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcLvlUpSpell()
 	{
-		spellLvl++;
-		stunChances += 1;
-		dodgeChances += 1;
-		if (isLocalPlayer)
-		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
-			spellDescription = "Give you " + stunChances + "% chances to stun and deal "+ spellLvl/2+" times more damages and "+ dodgeChances+"% dodge chances.";
-			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-			{
-				spellDescription = "Vous donne " + stunChances + "% de chances de stun et d'infliger "+ spellLvl/2+" fois plus de dégats et ajoute "+ dodgeChances+"% chances d'esquiver.";
+		
+		
+        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(1))
+        {
+            upgradeSpell();
+            spellDescription = "Give you " + stunChances + "% chances to stun and deal " + spellLvl / 2 + " times more damages and " + dodgeChances + "% dodge chances.";
+            if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+            {
+                spellDescription = "Vous donne " + stunChances + "% de chances de stun et d'infliger " + spellLvl / 2 + " fois plus de dégats et ajoute " + dodgeChances + "% chances d'esquiver.";
 
-			}
-			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
-			//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
-			//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
-			//changer ici l'interface du joueur.
-		}
-	}
+            }
+            spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+            //			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
+            //			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
+            //changer ici l'interface du joueur.
+        }
+        else if (GetComponent<PlayerLevelUpManager>().LooseASpecPt(3))
+        {
+            upgradeSpell();
+        }
+    }
 
-	//suffit de linké ca a un bouton d'interface et boom
-	public void levelUp()
+    public void upgradeSpell()
+    {
+        spellLvl++;
+        stunChances += 1;
+        dodgeChances += 1;
+    }
+
+
+    //suffit de linké ca a un bouton d'interface et boom
+    public void levelUp()
 	{
 		CmdLevelUpTheSpell();
 	}

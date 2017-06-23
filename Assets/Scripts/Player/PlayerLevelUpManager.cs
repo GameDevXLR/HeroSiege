@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class PlayerLevelUpManager : MonoBehaviour 
 {
@@ -73,13 +74,13 @@ public class PlayerLevelUpManager : MonoBehaviour
 		}
 	}
 
-//	IEnumerator LevelUpProcess()
-//	{
-//		yield return new WaitForSeconds (0.66f);
-//	}
+    //	IEnumerator LevelUpProcess()
+    //	{
+    //		yield return new WaitForSeconds (0.66f);
+    //	}
 
-	public void LooseASpecPt(int spell)
-	{
+    public bool LooseASpecPtAsLocalPlayer(int spell)
+    {
         if (specPts > 0)
         {
             if (spell == 4)
@@ -91,10 +92,10 @@ public class PlayerLevelUpManager : MonoBehaviour
                     if (PlayerPrefs.GetString("LANGAGE") == "Fr")
                     {
                         GameManager.instanceGM.ShowAGameTip("Saviez vous que l'un des trois bonus donné par ce passif est doublé en fonction du type de votre héro: Adc/Tank/Mage.");
-
                     }
                 }
             }
+
             if (spell == 3)
             {
                 ultiSpecPts--;
@@ -117,6 +118,52 @@ public class PlayerLevelUpManager : MonoBehaviour
                     spellUltLvlUpBtn.SetActive(false);
                 }
             }
+
+            if (spell == 1)
+            {
+                spell1Lvl++;
+            }
+
+            if (spell == 2)
+            {
+                spell2Lvl++;
+            }
+
+            specPts--;
+            if (specPts <= 0)
+            {
+                specPts = 0;
+                lvlUpBtnSetActive(false);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public bool LooseASpecPt(int spell)
+    {
+        
+        if (specPts > 0)
+        {
+            if (spell == 4)
+            {
+                specPlusLvl++;
+                
+            }
+            if (spell == 3)
+            {
+                ultiSpecPts--;
+                spellUltLvl++;
+                
+                if (ultiSpecPts < 0)
+                {
+                    ultiSpecPts = 0;
+                }
+                
+            }
             if (spell == 1)
             {
                 spell1Lvl++;
@@ -125,16 +172,23 @@ public class PlayerLevelUpManager : MonoBehaviour
             {
                 spell2Lvl++;
             }
-        }
-        specPts--;
-        if (specPts <= 0)
-        {
-            specPts = 0;
-            specPlusBtn.SetActive(false);
-            spell1LvlUpBtn.SetActive(false);
-            spell2LvlUpBtn.SetActive(false);
-            spellUltLvlUpBtn.SetActive(false);
+            specPts--;
+            if (specPts <= 0)
+            {
+                specPts = 0;
+            }
 
+            return true;
         }
+
+        return false;
+    }
+
+    public void lvlUpBtnSetActive(bool active)
+    {
+        specPlusBtn.SetActive(active);
+        spell1LvlUpBtn.SetActive(active);
+        spell2LvlUpBtn.SetActive(active);
+        spellUltLvlUpBtn.SetActive(active);
     }
 }

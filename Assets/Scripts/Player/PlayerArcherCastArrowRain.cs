@@ -225,29 +225,39 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcLvlUpSpell()
 	{
-		spellLvl++;
-		spellCost += 40;
-		spellCD -= 2f;
-		spellDmg += 12;
-		spellDuration += 0.3f;
-		if (isLocalPlayer)
-		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(3);
-			int x = (int)spellDmg;
-			spellDescription = "Slow and deal " + x.ToString() + " damage every 0,3 seconds for " + spellDuration.ToString() + " seconds.";
-			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-			{
-				spellDescription = "Ralenti et inflige " + x.ToString () + " dégats toutes les 0,3s pendant " + spellDuration.ToString () + " secondes."; 
-			}
-			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
-			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
-			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
-			//changer ici l'interface du joueur.
-		}
-	}
+		
+		
+        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(2))
+        {
+            upgradeSpell();
+            int x = (int)spellDmg;
+            spellDescription = "Slow and deal " + x.ToString() + " damage every 0,3 seconds for " + spellDuration.ToString() + " seconds.";
+            if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+            {
+                spellDescription = "Ralenti et inflige " + x.ToString() + " dégats toutes les 0,3s pendant " + spellDuration.ToString() + " secondes.";
+            }
+            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+            spell2Btn.transform.GetChild(0).transform.Find("MpCost").GetComponentInChildren<Text>().text = spellCost.ToString();
+            spell2Btn.transform.GetChild(0).transform.Find("CDTime").GetComponentInChildren<Text>().text = spellCD.ToString();
+            //changer ici l'interface du joueur.
+        }
+        else if (GetComponent<PlayerLevelUpManager>().LooseASpecPt(3))
+        {
+            upgradeSpell();
+        }
+    }
 
-	//suffit de linké ca a un bouton d'interface et boom
-	public void levelUp()
+    public void upgradeSpell()
+    {
+        spellLvl++;
+        spellCost += 40;
+        spellCD -= 2f;
+        spellDmg += 12;
+        spellDuration += 0.3f;
+    }
+
+    //suffit de linké ca a un bouton d'interface et boom
+    public void levelUp()
 	{
 		CmdLevelUpTheSpell();
 	}
