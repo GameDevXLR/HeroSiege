@@ -39,7 +39,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4464392258998256}
-  - component: {fileID: 114935429798800530}
   m_Layer: 0
   m_Name: MinionSP2
   m_TagString: Untagged
@@ -55,7 +54,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4056833126557496}
-  - component: {fileID: 114213518218242408}
   m_Layer: 0
   m_Name: MinionBossSP1
   m_TagString: Untagged
@@ -71,7 +69,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4179760965020116}
-  - component: {fileID: 114007121303743024}
   m_Layer: 0
   m_Name: MinionSP1
   m_TagString: Untagged
@@ -173,108 +170,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1038539409738506}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114007121303743024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864493871602606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 12
-    i1: 25
-    i2: 29
-    i3: 52
-    i4: 217
-    i5: 236
-    i6: 148
-    i7: 116
-    i8: 235
-    i9: 222
-    i10: 251
-    i11: 99
-    i12: 194
-    i13: 114
-    i14: 146
-    i15: 86
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &114213518218242408
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1714012326258492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 12
-    i1: 25
-    i2: 29
-    i3: 52
-    i4: 217
-    i5: 236
-    i6: 148
-    i7: 116
-    i8: 235
-    i9: 222
-    i10: 251
-    i11: 99
-    i12: 194
-    i13: 114
-    i14: 146
-    i15: 86
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114372992877719700
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1038539409738506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 12
-    i1: 25
-    i2: 29
-    i3: 52
-    i4: 217
-    i5: 236
-    i6: 148
-    i7: 116
-    i8: 235
-    i9: 222
-    i10: 251
-    i11: 99
-    i12: 194
-    i13: 114
-    i14: 146
-    i15: 86
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &114935429798800530
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437061417272008}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
