@@ -161,7 +161,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		agent.isStopped = true;
 
 		isAttacking = true;
-		if (target.layer == 8) 
+		if (target !=null && target.layer == 8) 
 		{
 			isActuAttacking = false;
 			return;
@@ -193,7 +193,9 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		agent.enabled = true;
 		isAttacking = false;
 		attackAnim = false;
-		anim.SetBool ("attackEnnemi", attackAnim);
+		if (anim) {
+			anim.SetBool ("attackEnnemi", attackAnim);
+		}
 		if (particule != null) {
 			particule.Stop ();
 		}

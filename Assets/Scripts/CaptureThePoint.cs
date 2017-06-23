@@ -114,7 +114,7 @@ public class CaptureThePoint : NetworkBehaviour
 			}
 			if (other.gameObject.layer == Layers.Player && enemiesIn.Count == 0) 
 			{
-				timeToCapture -= Time.fixedDeltaTime;
+				timeToCapture -= Time.fixedUnscaledDeltaTime;
 				if (timeToCapture <= 0f) 
 				{
 					timeToCapture = initialTimeToCapt;
@@ -132,7 +132,7 @@ public class CaptureThePoint : NetworkBehaviour
 				}
 				if(playersIn.Count == 0)
 				{
-					timeToCapture -= Time.fixedDeltaTime;
+					timeToCapture -= Time.fixedUnscaledDeltaTime;
 					if (timeToCapture <= 0f) 
 					{
 						timeToCapture = initialTimeToCapt;
@@ -151,7 +151,7 @@ public class CaptureThePoint : NetworkBehaviour
 				}
 				if(playersIn.Count == 0)
 				{
-					timeToCapture -= Time.fixedDeltaTime;
+					timeToCapture -= Time.fixedUnscaledDeltaTime;
 					if (timeToCapture <= 0f) 
 					{
 						timeToCapture = initialTimeToCapt;

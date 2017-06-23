@@ -58,9 +58,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	void Update ()
 	{
-		if (anim.GetBool ("attackEnnemi") == false) 
+		if (anim) 
 		{
-			anim.SetFloat ("realSpeed", Mathf.Clamp(agent.velocity.sqrMagnitude,0.1f,1f));
+			if (anim.GetBool ("attackEnnemi") == false) 
+			{
+				anim.SetFloat ("realSpeed", Mathf.Clamp(agent.velocity.sqrMagnitude,0.1f,1f));
+			}
 		}
 		if (isUnderCC) 
 		{
@@ -274,7 +277,9 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
             || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
 			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
-			SetTheTarget (target);
+			if (isServer) {
+				SetTheTarget (target);
+			}
 			agent.SetDestination (target.transform.position);
 			yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));
 			isActualizingPos = false;
