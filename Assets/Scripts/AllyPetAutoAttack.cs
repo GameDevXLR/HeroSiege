@@ -341,7 +341,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 			agent.isStopped = true;
 		}
 		anim.enabled = false;
-		yield return new WaitForSeconds (durat);
+		yield return new WaitForSecondsRealtime (durat);
 		if (agent.isActiveAndEnabled) 
 		{
 			agent.isStopped = false;

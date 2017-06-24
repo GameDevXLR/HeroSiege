@@ -87,7 +87,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
 	{
         GameObject minion = ClientScene.FindLocalObject(id);
         Transform tr = spawnPos[index];
-        reActivateMob(minion, tr, minionPrefab);
+		reActivateMob(ClientScene.FindLocalObject(id), tr, minionPrefab);
         minion.GetComponent<EnnemyIGManager>().maxHp = minionPrefab.GetComponent<EnnemyIGManager>().maxHp;
 
         minion.GetComponent<EnnemyIGManager>().maxHp = CampLvl * scaleFactor*2 * GameManager.instanceGM.gameDifficulty;
@@ -112,7 +112,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
         GameObject minionboss = ClientScene.FindLocalObject(id);
 
         Transform tr = bossPos[index];
-        reActivateMob(minionboss, tr, minionBossPrefab);
+		reActivateMob(ClientScene.FindLocalObject(id), tr, minionBossPrefab);
 
         minionboss.GetComponent<EnnemyIGManager>().maxHp = minionBossPrefab.GetComponent<EnnemyIGManager>().maxHp;
         minionboss.GetComponent<EnnemyIGManager>().maxHp += CampLvl * scaleFactor *4* GameManager.instanceGM.gameDifficulty;

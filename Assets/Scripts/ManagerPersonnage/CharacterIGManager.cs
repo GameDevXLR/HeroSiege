@@ -144,10 +144,11 @@ public class CharacterIGManager : NetworkBehaviour
 
     }
     
-    protected virtual void LooseHeathServer(int dmg, bool trueDmg, GameObject attacker)
+	protected virtual void LooseHeathServer(int dmg, bool trueDmg, GameObject attacker)
     {
         if (attacker != guyAttackingMe || guyAttackingMe == null)
         {
+
             guyAttackingMe = attacker;
         }
 

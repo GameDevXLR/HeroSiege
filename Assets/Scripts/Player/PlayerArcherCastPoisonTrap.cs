@@ -130,7 +130,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-                RpcSoundSpell();
+				CmdSoundSpell();
 				castPosDesired = hit.point;
 				spellTargeter.transform.position = Vector3.zero;
 				CmdCastSpell(castPosDesired);
@@ -148,7 +148,11 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 
 		}
 	}
-
+	[Command]
+	public void CmdSoundSpell()
+	{
+		RpcSoundSpell ();
+	}
     [ClientRpc]
     public void RpcSoundSpell()
     {

@@ -52,7 +52,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
-			int x = (int)spellDmg / 5;
+//			int x = (int)spellDmg / 5;
 			spellDescription = "Invoke your companion to help you in battle. Deals "+ spellDmg.ToString()+" damage. Got "+spellDmg*6+" health.";
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
@@ -252,7 +252,7 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
         {
 
             upgradeSpell();
-            int x = (int)spellDmg / 5;
+//            int x = (int)spellDmg / 5;
             spellDescription = "Invoke your companion to help you in battle. Deals " + spellDmg.ToString() + " damage. Got " + spellDmg * 6 + " health";
             if (PlayerPrefs.GetString("LANGAGE") == "Fr")
             {

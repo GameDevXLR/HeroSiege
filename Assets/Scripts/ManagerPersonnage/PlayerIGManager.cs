@@ -202,10 +202,9 @@ public class PlayerIGManager : CharacterIGManager {
 
         deadAnimChildEffect.transform.parent = this.transform;
         deadAnimChildEffect.transform.localPosition = Vector3.zero;
+		GetComponent<PlayerClicToMove>().enabled = true;
         GetComponent<NavMeshAgent>().enabled = true;
         gameObject.layer = 8;
-        GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-        GetComponent<PlayerClicToMove>().enabled = true;
         GetComponent<CapsuleCollider>().enabled = true;
         GetComponent<AudioSource>().PlayOneShot(PlayerSpawn);
         if (isServer)
@@ -219,6 +218,7 @@ public class PlayerIGManager : CharacterIGManager {
         GetComponent<PlayerAutoAttack>().enabled = true;
         currentHp = maxHp;
         GetComponent<GenericManaScript>().currentMp = GetComponent<GenericManaScript>().maxMp;
+		GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
     }
 
     IEnumerator RespawnTimer()
@@ -277,10 +277,10 @@ public class PlayerIGManager : CharacterIGManager {
     public void ActualizePlayerDeaths(int dea)
     {
         playerDeathCount = dea;
-        if (isLocalPlayer && playerDeathCount == 1)
-        {
-            GameManager.instanceGM.ShowAGameTip("When you die, you can cast your invoker spells on the enemy team or to help your allies. You can change them in the menu. It's also a good time to spy on the other team.");
-        }
+//        if (isLocalPlayer && playerDeathCount == 1)
+//        {
+//            GameManager.instanceGM.ShowAGameTip("When you die, you can cast your invoker spells on the enemy team or to help your allies. You can change them in the menu. It's also a good time to spy on the other team.");
+//        }
         GetComponent<PlayerManager>().playerDeathsTxt.text = dea.ToString();
     }
     public override void ActualizeDeadIconHook(bool isHeDead)

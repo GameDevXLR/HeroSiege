@@ -66,15 +66,25 @@ public class EnnemyIGManager : CharacterIGManager
     protected override void LooseHeathServer(int dmg, bool trueDmg, GameObject attacker)
     {
 
-        base.LooseHeathServer(dmg, trueDmg, attacker);
-        if ((attacker.tag == "Player" && !attacker.GetComponent<PlayerIGManager>().isDead)
+		if (attacker != guyAttackingMe || guyAttackingMe == null)
+		{
+			if (Vector3.Distance (transform.position, attacker.transform.position) < GetComponent<EnemyAutoAttackScript> ().attackRange*3) {
+				guyAttackingMe = attacker;
+			}
+		}
+
+
+		if (currentHp > 0)
+		{
+			takeDommage(dmg, trueDmg);
+		}        if ((attacker.tag == "Player" && !attacker.GetComponent<PlayerIGManager>().isDead)
             ||(attacker.tag != "Player" && !attacker.GetComponent<EnnemyIGManager>().isDead))
         {
             if (!isTaunt)
             {
                 if (attacker != GetComponent<EnemyAutoAttackScript>().target)
                 {
-                    if (Random.Range(0, 2) != 0)  //2 est exclusif car c'est un int.
+                    if (Random.Range(0, 3) != 0)  //3 est exclusif car c'est un int.
                     {
                         GetComponent<EnemyAutoAttackScript>().SetTheTarget(attacker);
                     }

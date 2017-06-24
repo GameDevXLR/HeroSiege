@@ -127,7 +127,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-                RpcSoundSpell();
+				CmdSoundSpell ();
 				castPosDesired = hit.point;
 				spellTargeter.transform.position = Vector3.zero;
 				CmdCastSpell(castPosDesired);
@@ -144,6 +144,11 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 			spellTargeter.transform.position = hit.point;
 
 		}
+	}
+	[Command]
+	public void CmdSoundSpell()
+	{
+		RpcSoundSpell ();
 	}
 
     [ClientRpc]
@@ -227,7 +232,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	{
 		
 		
-        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(2))
+        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(3))
         {
             upgradeSpell();
             int x = (int)spellDmg;
