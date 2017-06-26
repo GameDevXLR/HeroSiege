@@ -8,6 +8,7 @@ public class BossSpawnManager : NetworkBehaviour
 {
 
 	public GameObject bossPrefab;
+    public GameObject effetPrefab;
 	public Transform[] bossSpawns;
 	[SyncVar(hook = "ActuBossLvlT1")]public int bossLvlT1;
 	[SyncVar(hook = "ActuBossLvlT2")]public int bossLvlT2;
@@ -42,6 +43,7 @@ public class BossSpawnManager : NetworkBehaviour
 
 	public void SpawnOneBoss(Transform tr, Transform targetDest, int bonusFactor)
 	{
+        SpawnEffetForOneBoss(tr, targetDest);
 		GameObject bossTmpObj;
 		bossTmpObj = Instantiate (bossPrefab, tr.position, tr.rotation) as GameObject;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().maxHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
@@ -59,6 +61,13 @@ public class BossSpawnManager : NetworkBehaviour
 		NetworkServer.Spawn (bossTmpObj);
 		
 	}
+
+    public void SpawnEffetForOneBoss(Transform tr, Transform targetDest)
+    {
+        GameObject effetObj;
+        effetObj = Instantiate(effetPrefab, tr.position, tr.rotation) as GameObject;
+        NetworkServer.Spawn(effetObj);
+    }
 	public void ActuBossLvlT1(int lvl)
 	{
 		bossLvlT1 = lvl;
