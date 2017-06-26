@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 198769182135692196}
   - component: {fileID: 199709410099040456}
   - component: {fileID: 82732923264240860}
+  - component: {fileID: 114530496143459042}
   m_Layer: 0
   m_Name: SpawnEnnemiBoss
   m_TagString: Untagged
@@ -122,10 +123,10 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 20
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -185,6 +186,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114530496143459042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1310231480103674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188c434809452e94e95c520efcaa8bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 8300000, guid: e47d74f68703b634fabcbc77fdc86c43, type: 3}
 --- !u!198 &198239530037520970
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -242,7 +255,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1254786288
+  randomSeed: -97908449
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3368,7 +3381,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -889755305
+  randomSeed: 1818064673
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6494,7 +6507,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1007864479
+  randomSeed: 1162502000
   InitialModule:
     serializedVersion: 3
     enabled: 1
