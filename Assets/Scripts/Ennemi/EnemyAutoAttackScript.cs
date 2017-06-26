@@ -58,13 +58,6 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	void Update ()
 	{
-		if (anim) 
-		{
-			if (anim.GetBool ("attackEnnemi") == false) 
-			{
-				anim.SetFloat ("realSpeed", Mathf.Clamp(agent.velocity.sqrMagnitude,0.1f,1f));
-			}
-		}
 		if (isUnderCC) 
 		{
 			return;
@@ -91,31 +84,36 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 					}
 				} else 
 				{
-					if (Time.time > previousAttackTime) {
+					if (Time.time > previousAttackTime) 
+					{
 						previousAttackTime = Time.time + attackRate;
-						if (target.tag == "Player") {
+						if (target.tag == "Player") 
+						{
 							target.GetComponent<PlayerIGManager> ().LooseHealth (damage, false, gameObject);
-							if (GetComponent<EnnemyIGManager> ().isSlowingOnAutoA) {
+							if (GetComponent<EnnemyIGManager> ().isSlowingOnAutoA) 
+							{
 								GetComponent<EnemySlowPlayer> ().SlowTheTarget (target, attackRate);
 							}
-							if (GetComponent<EnnemyIGManager> ().isCastingAoeCC) {
+							if (GetComponent<EnnemyIGManager> ().isCastingAoeCC) 
+							{
 								GetComponent<EnemyCastAoeCC> ().AddACharge ();
 							}
-							if (GetComponent<EnnemyIGManager> ().isCCOnAutoA) {
+							if (GetComponent<EnnemyIGManager> ().isCCOnAutoA) 
+							{
 								//10% de chance de stun (1s par défaut)
-								if (Random.Range (0, 10) > 8) {
+								if (Random.Range (0, 10) > 8) 
+								{
 									GetComponent<EnemyCCPlayer> ().CCTheTarget (target);
 								}
 							}
 						}
-						if (target.tag == "Pet") {
-							target.GetComponent<PetIGManager> ().LooseHealth (damage, false, gameObject);
-						}
-					}
+                        else
+                            target.GetComponent<PetIGManager>().LooseHealth(damage, false, gameObject);
+                    }
 					if (!isActuStopAttacking && Vector3.Distance ( transform.localPosition, target.transform.localPosition) > attackRange 
                         || target == null 
                         || (target.tag == "Player" && target.GetComponent<PlayerIGManager> ().isDead ) 
-						|| (target.tag != "Player" && target.layer != Layers.UI && target.GetComponent<PetIGManager>().isDead))
+                        || (target.tag != "Player" && target.GetComponent<PetIGManager>().isDead))
                     {
 						isActuStopAttacking = true;
 						RpcStopAttacking ();
@@ -158,9 +156,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			transform.Find ("MiniMapIcon").GetComponent<SpriteRenderer> ().enabled = true;
 		}
 		agent.velocity = Vector3.zero;
-		if (agent.isActiveAndEnabled) {
-			agent.isStopped = true;
-		}
+		agent.isStopped = true;
 		isAttacking = true;
 			attackAnim = true;
 			agent.enabled = false;
@@ -227,10 +223,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			if (gameObject.layer != 8) 
 			{
 			StopAllCoroutines ();
-				if (target.layer != Layers.UI) 
-				{
-					GetTargetFromID (targetID);
-				}
+				GetTargetFromID (targetID);
 			}
 				anim.SetBool ("walk", walkAnim = false);
 		}
@@ -277,11 +270,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
             || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
 			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
-			if (isServer) {
-				if (target.layer != Layers.UI) {
-					SetTheTarget (target);
-				}
-			}
+			SetTheTarget (target);
 			agent.SetDestination (target.transform.position);
 			yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));
 			isActualizingPos = false;
@@ -313,16 +302,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	[Server]
 	public void SetTheTarget(GameObject targ)
 	{
-		if (targ.layer == Layers.UI) 
-		{
-			Debug.Log ("mon debug a pas marcher ^^ca devrait pu arriver ce message!");
-		}
-		if (targ.GetComponent<NetworkIdentity> ()) {
 			targetID = targ.GetComponent<NetworkIdentity> ().netId;
-		} else 
-		{
-			Debug.Log ("manque un netid : ca devrait pu arriver ce message!");
-		}
 	}
 	public void GetCC(float dur)
 	{

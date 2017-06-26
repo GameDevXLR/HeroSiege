@@ -190,7 +190,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 		cdCountdown.gameObject.SetActive (true);
 		int tmp = (int)(spellCD);
 		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
-		yield return new WaitForSecondsRealtime(spellCD);
+		yield return new WaitForSeconds(spellCD);
 		spell2Btn.interactable = true;
 		cdCountdown.gameObject.SetActive (false);
 		timeSpent = 0f;
@@ -221,41 +221,30 @@ public class PlayerCastHealArea : NetworkBehaviour
 	[ClientRpc]
 	public void RpcLvlUpSpell()
 	{
-		
-        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(1))
-        {
+		spellLvl++;
+		spellCost += 12;
+		spellCD -= 0.5f;
+		spellDmg += 7*spellLvl;
+		spellDuration += 0.5f;
+		if (isLocalPlayer)
+		{
+			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
+			int x = (int)spellDmg ;
+			spellDescription = "Heal all allies inside for " + x.ToString () + " health every 0,5 seconds for " + spellDuration.ToString () + " seconds.";            
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Soigne tous les alliés a l'intérieur de " + x.ToString () + " pv toutes les 0,5s pendant " + spellDuration.ToString () + " secondes.";            
 
-            upgradeSpell();
-            GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
-            int x = (int)spellDmg;
-            spellDescription = "Heal all allies inside for " + x.ToString() + " health every 0,5 seconds for " + spellDuration.ToString() + " seconds.";
-            if (PlayerPrefs.GetString("LANGAGE") == "Fr")
-            {
-                spellDescription = "Soigne tous les alliés a l'intérieur de " + x.ToString() + " pv toutes les 0,5s pendant " + spellDuration.ToString() + " secondes.";
+			}
+			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
+			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
+			//changer ici l'interface du joueur.
+		}
+	}
 
-            }
-            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
-            spell2Btn.transform.GetChild(0).transform.Find("MpCost").GetComponentInChildren<Text>().text = spellCost.ToString();
-            spell2Btn.transform.GetChild(0).transform.Find("CDTime").GetComponentInChildren<Text>().text = spellCD.ToString();
-            //changer ici l'interface du joueur.
-        }
-        else if (GetComponent<PlayerLevelUpManager>().LooseASpecPt(1))
-        {
-            upgradeSpell();
-        }
-    }
-
-    public void upgradeSpell()
-    {
-        spellLvl++;
-        spellCost += 12;
-        spellCD -= 0.5f;
-        spellDmg += 7 * spellLvl;
-        spellDuration += 0.5f;
-    }
-
-    //suffit de linké ca a un bouton d'interface et boom
-    public void levelUp()
+	//suffit de linké ca a un bouton d'interface et boom
+	public void levelUp()
 	{
 		CmdLevelUpTheSpell();
 	}

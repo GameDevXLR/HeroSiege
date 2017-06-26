@@ -154,35 +154,25 @@ public class PlayerCastSpellOne : NetworkBehaviour
     [ClientRpc]
     public void RpcLvlUpSpell()
     {
-       
-        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(1))
-        {
-
-            upgradeSpell();
-            int x = (int)spellDmg / 5;
-
-            spellDescription = "Deal " + spellDmg.ToString() + " damage on impact, then " + x.ToString() + " damage every 0.5sec for " + spellDuration.ToString() + " seconds.";
-
-            spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
-            spell1Btn.transform.GetChild(0).transform.Find("MpCost").GetComponentInChildren<Text>().text = spellCost.ToString();
-            spell1Btn.transform.GetChild(0).transform.Find("CDTime").GetComponentInChildren<Text>().text = spellCD.ToString();
-            //			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
-            //			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
-            //changer ici l'interface du joueur.
-        }
-        else if (GetComponent<PlayerLevelUpManager>().LooseASpecPt(1))
-        {
-            upgradeSpell();
-        }
-    }
-
-    public void upgradeSpell()
-    {
         spellLvl++;
         spellCost += 5;
         spellCD -= 0.5f;
         spellDmg += 10;
         spellDuration += 0.5f;
+        if (isLocalPlayer)
+        {
+            GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
+            int x = (int)spellDmg / 5;
+
+			spellDescription = "Deal " + spellDmg.ToString() + " damage on impact, then " + x.ToString() + " damage every 0.5sec for " + spellDuration.ToString() + " seconds.";
+
+            spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
+			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
+//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
+//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
+            //changer ici l'interface du joueur.
+        }
     }
 
     //suffit de linké ca a un bouton d'interface et boom

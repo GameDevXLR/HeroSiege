@@ -48,7 +48,7 @@ public class PlayerIGManager : CharacterIGManager {
     public bool underThreshold = false;
 
 	public string heroChosen;
-
+    
 
     protected override void Start()
     {
@@ -94,10 +94,10 @@ public class PlayerIGManager : CharacterIGManager {
         }
     }
 
-    public override void TempoRescaleTheLifeBarIG(int life)
+    public override void RescaleTheLifeBarIG(int life)
     {
 
-        base.TempoRescaleTheLifeBarIG(life);
+        base.RescaleTheLifeBarIG(life);
 
         float x = (float)currentHp / maxHp;
         if (x > 1f)
@@ -192,7 +192,7 @@ public class PlayerIGManager : CharacterIGManager {
 
         //		yield return new WaitForSeconds (0.8f);
         //		GetComponentInChildren<SkinnedMeshRenderer> ().enabled = false;
-		yield return new WaitForSecondsRealtime(respawnTime);
+        yield return new WaitForSeconds(respawnTime);
         deadAnimChildMesh.transform.parent = animParent;
         deadAnimChildMesh.transform.localPosition = Vector3.zero;
 		if (heroChosen == "Champion") {
@@ -202,9 +202,10 @@ public class PlayerIGManager : CharacterIGManager {
 
         deadAnimChildEffect.transform.parent = this.transform;
         deadAnimChildEffect.transform.localPosition = Vector3.zero;
-		GetComponent<PlayerClicToMove>().enabled = true;
         GetComponent<NavMeshAgent>().enabled = true;
         gameObject.layer = 8;
+        GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+        GetComponent<PlayerClicToMove>().enabled = true;
         GetComponent<CapsuleCollider>().enabled = true;
         GetComponent<AudioSource>().PlayOneShot(PlayerSpawn);
         if (isServer)
@@ -218,7 +219,6 @@ public class PlayerIGManager : CharacterIGManager {
         GetComponent<PlayerAutoAttack>().enabled = true;
         currentHp = maxHp;
         GetComponent<GenericManaScript>().currentMp = GetComponent<GenericManaScript>().maxMp;
-		GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
     }
 
     IEnumerator RespawnTimer()
@@ -231,7 +231,7 @@ public class PlayerIGManager : CharacterIGManager {
             yield return new WaitForEndOfFrame();
             int k = z - j;
             respawnTxt.text = k.ToString();
-			yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSeconds(1f);
             if (k == 1)
             {
                 playerDeathDisplay.enabled = false;
@@ -248,14 +248,14 @@ public class PlayerIGManager : CharacterIGManager {
         armorScore += levelUpBonusArmor;
         currentHp += levelUpBonusHP + ((maxHp - bonusHp) * 5 / 100);
         respawnTime += 1f;
-//        lifeBar.localScale = new Vector3(1, 1f, 1f);
-//
-//        if (isLocalPlayer)
-//        {
-////            lifeBarMain.localScale = new Vector3(1, 1f, 1f);
-////            playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
-//
-//        }
+        lifeBar.localScale = new Vector3(1, 1f, 1f);
+
+        if (isLocalPlayer)
+        {
+            lifeBarMain.localScale = new Vector3(1, 1f, 1f);
+            playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
+
+        }
     }
     public override  void ActualizeArmorHook(int armor)
     {
@@ -277,10 +277,10 @@ public class PlayerIGManager : CharacterIGManager {
     public void ActualizePlayerDeaths(int dea)
     {
         playerDeathCount = dea;
-//        if (isLocalPlayer && playerDeathCount == 1)
-//        {
-//            GameManager.instanceGM.ShowAGameTip("When you die, you can cast your invoker spells on the enemy team or to help your allies. You can change them in the menu. It's also a good time to spy on the other team.");
-//        }
+        if (isLocalPlayer && playerDeathCount == 1)
+        {
+            GameManager.instanceGM.ShowAGameTip("When you die, you can cast your invoker spells on the enemy team or to help your allies. You can change them in the menu. It's also a good time to spy on the other team.");
+        }
         GetComponent<PlayerManager>().playerDeathsTxt.text = dea.ToString();
     }
     public override void ActualizeDeadIconHook(bool isHeDead)

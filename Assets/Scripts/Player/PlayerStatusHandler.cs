@@ -13,16 +13,12 @@ public class PlayerStatusHandler : NetworkBehaviour {
 	public SpriteRenderer CCTwistImg;
 	public SpriteRenderer SlowImg;
 	public NavMeshAgent agent;
-
 	[Server]
 	public void MakeHimCC(float CCDuration)
 	{
-        if (!GetComponent<PlayerIGManager>().isDead)
-        {
-            agent = GetComponent<NavMeshAgent>();
-            RpcCCTheObject(CCDuration);
-            GetComponent<PlayerAutoAttack>().GetCC(CCDuration);
-        }
+		agent = GetComponent<NavMeshAgent> ();
+		RpcCCTheObject (CCDuration);
+		GetComponent<PlayerAutoAttack> ().GetCC (CCDuration);
 	}
 	[ClientRpc]
 	public void RpcCCTheObject(float duration)
@@ -38,16 +34,12 @@ public class PlayerStatusHandler : NetworkBehaviour {
 		underCC = false;
 	}
 
-    [Server]
-    public void MakeHimSlow(float dur)
+	public void MakeHimSlow(float dur)
 	{
-        if (!GetComponent<PlayerIGManager>().isDead)
-        {
-            if (!underSlow)
-            {
-                RpcSlowTheObject(dur);
-            }
-        }
+		if (!underSlow) 
+		{
+			RpcSlowTheObject (dur);
+		}
 	}
 
 
@@ -67,19 +59,16 @@ public class PlayerStatusHandler : NetworkBehaviour {
 		underSlow = false;
 	}
 
-    [Server]
-    public void MakeHimRoot(float rootDuration)
+
+	public void MakeHimRoot(float rootDuration)
 	{
-        if (!GetComponent<PlayerIGManager>().isDead)
-        {
-            StartCoroutine(RootProcedure(rootDuration));
-        }
+		StartCoroutine (RootProcedure(rootDuration));
 	}
 	IEnumerator RootProcedure (float rootTime)
 	{
 		agent.isStopped = true;
 		GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		yield return new WaitForSecondsRealtime (rootTime);
+		yield return new WaitForSeconds (rootTime);
 		agent.isStopped = false;
 	}
 

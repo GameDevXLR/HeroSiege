@@ -16,14 +16,13 @@ public class SpawnManager : NetworkBehaviour
 	public bool isTeam1; // cocher si c'est un ennemi de la team1. sinon ce sera team 2 auto.
 	public bool isRightPath;
 	public GameObject[] ennemi; //array des mobs spawnable.
-	[Header("Minions prefabs")]
 	public GameObject squelettePrefab;
 	public GameObject squeletteElitePrefab;
 	public GameObject zombiePrefab;
 	public GameObject zombieElitePrefab;
 	public GameObject minibossPrefab;
 	public GameObject minibossElitePrefab;
-	public GameObject spawnPartEffects;
+
 	public Transform spawnpoint; //point de spawn du mob.
 	public Transform targetDestination;
 	public int numberOfMobs; // nombre de mobs dans la vague.
@@ -122,7 +121,6 @@ public class SpawnManager : NetworkBehaviour
 		{
 			yield return new WaitForSeconds (15f); // changer ca si la durée d'une nuit varie.
 			totalWaves++;
-			RpcSpawnPartEffect ();
 			if (squel != 0) {
 				for (int i = 0; i < squel; i++) {
 					newEnnemi = Instantiate (squelettePrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
@@ -259,18 +257,6 @@ public class SpawnManager : NetworkBehaviour
 				}
 			}
 		}
-	}
-	[ClientRpc]
-	public void RpcSpawnPartEffect()
-	{
-		spawnPartEffects.SetActive (true);
-		Invoke("unactivateEffect", 3);
-	}
-
-	public void unactivateEffect()
-	{
-		spawnPartEffects.SetActive (false);
-
 	}
 
 }

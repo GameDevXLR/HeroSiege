@@ -60,10 +60,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
 		CmdChangeName (PlayerPrefs.GetString ("PlayerNN"));
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
-		if (!isServer) 
-		{
-			difficultyPanel.SetActive (false);
-		}
 		heroSelectPanel = GameObject.Find ("HeroSelectionPanel");
 		selectHeroTank1 = heroSelectPanel.transform.Find("ChampionPan").Find ("SelectTank1Btn").GetComponent<Button>();
 		selectHeroHealer1 = heroSelectPanel.transform.Find("OvatePan").transform.Find ("SelectHeal1Btn").GetComponent<Button> ();
@@ -78,7 +74,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
-
 			string playerNN;
 			playerNN = PlayerPrefs.GetString ("PlayerNN");
 //			ChangeMyName (playerNN);
@@ -88,6 +83,10 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			CameraController.instanceCamera.Initialize ();
 			GameObject.Find ("PlayerInterface2.0").GetComponent<Canvas> ().enabled = true;
 			GameObject.Find ("PlayerNickNameTxt").GetComponent<Text> ().text = playerNN;
+			if (!isServer) 
+			{
+				difficultyPanel.SetActive (false);
+			}
 		} else 
 		{
 			GetComponent<PlayerLevelUpManager> ().enabled = false; //juste pour etre sur
@@ -378,13 +377,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	IEnumerator TellNewPlayerHasJoin()
 	{
 		yield return new WaitForSeconds (1.5f);
-		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+		RpcCallMessage (playerNickName + " has joined the game.");
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
 			RpcCallMessage (playerNickName + " a rejoind la partie.");
 
-		} else 
-		{
-			RpcCallMessage (playerNickName + " has joined the game.");
-			
 		}
 	}
 

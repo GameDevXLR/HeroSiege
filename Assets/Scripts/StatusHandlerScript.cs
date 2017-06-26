@@ -14,16 +14,26 @@ public class StatusHandlerScript : NetworkBehaviour
 	public bool underSlow;
 	public SpriteRenderer CCTwistImg;
 	public SpriteRenderer SlowImg;
+//	public SkinnedMeshRenderer objRenderer;
+//	public Material stunMat;
+//	public Material normalMat;
+//	private GenericLifeScript lifeScript;
+	// ajouter le script d'autoAttack.
 
-
-    [Server]
+	// Use this for initialization
+//	void Start () 
+//	{
+//		lifeScript = GetComponent<GenericLifeScript> ();
+//	}
+	[Server]
 	public void MakeHimCC(float CCDuration)
 	{
-        if (!GetComponent<EnnemyIGManager>().isDead)
-        {
-            RpcCCTheObject(CCDuration);
-            GetComponent<EnemyAutoAttackScript>().GetCC(CCDuration);
-        }
+//		if (underCC) 
+//		{
+//			return;
+//		}
+		RpcCCTheObject (CCDuration);
+		GetComponent<EnemyAutoAttackScript> ().GetCC (CCDuration);
 	}
 	[ClientRpc]
 	public void RpcCCTheObject(float duration)
@@ -35,21 +45,22 @@ public class StatusHandlerScript : NetworkBehaviour
 		CCTwistImg.enabled = true;
 
 		underCC = true;
-
+//		objRenderer.materials[1] = stunMat;
+//		GetComponent<NavMeshAgent> ().Stop ();
+//		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		//ajouter la désactivation de l'autoA;
-		yield return new WaitForSecondsRealtime (CCTime);
+		yield return new WaitForSeconds (CCTime);
 		CCTwistImg.enabled = false;
 
 		underCC = false;
+//		objRenderer.materials[1] = normalMat;
+		//réactiver l'autoA;
+//		GetComponent<NavMeshAgent> ().Resume ();
 	}
 
-    [Server]
-    public void MakeHimSlow(float dur)
+	public void MakeHimSlow(float dur)
 	{
-        if (!GetComponent<EnnemyIGManager>().isDead)
-        {
-            RpcSlowTheObject(dur);
-        }
+		RpcSlowTheObject (dur);
 	}
 	[ClientRpc]
 	public void RpcSlowTheObject(float duration)
@@ -61,29 +72,31 @@ public class StatusHandlerScript : NetworkBehaviour
 		SlowImg.enabled = true;
 		GetComponent<NavMeshAgent> ().speed -= 2f;
 		underSlow = true;
-
+		//		objRenderer.materials[1] = stunMat;
+		//		GetComponent<NavMeshAgent> ().Stop ();
+		//		GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		//ajouter la désactivation de l'autoA;
-		yield return new WaitForSecondsRealtime (SlowTime);
+		yield return new WaitForSeconds (SlowTime);
 		GetComponent<NavMeshAgent> ().speed += 2f;
 
 		SlowImg.enabled = false;
 
 		underSlow = false;
+		//		objRenderer.materials[1] = normalMat;
+		//réactiver l'autoA;
+		//		GetComponent<NavMeshAgent> ().Resume ();
 	}
 
-    [Server]
-    public void MakeHimRoot(float rootDuration)
+
+	public void MakeHimRoot(float rootDuration)
 	{
-        if (!GetComponent<EnnemyIGManager>().isDead)
-        {
-            StartCoroutine(RootProcedure(rootDuration));
-        }
+		StartCoroutine (RootProcedure(rootDuration));
 	}
 	IEnumerator RootProcedure (float rootTime)
 	{
 		GetComponent<NavMeshAgent> ().isStopped = true;
 		GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		yield return new WaitForSecondsRealtime (rootTime);
+		yield return new WaitForSeconds (rootTime);
 		GetComponent<NavMeshAgent> ().isStopped = false;
 	}
 

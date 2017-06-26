@@ -161,7 +161,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		agent.isStopped = true;
 
 		isAttacking = true;
-		if (target !=null && target.layer == 8) 
+		if (target.layer == 8) 
 		{
 			isActuAttacking = false;
 			return;
@@ -193,9 +193,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		agent.enabled = true;
 		isAttacking = false;
 		attackAnim = false;
-		if (anim) {
-			anim.SetBool ("attackEnnemi", attackAnim);
-		}
+		anim.SetBool ("attackEnnemi", attackAnim);
 		if (particule != null) {
 			particule.Stop ();
 		}
@@ -269,9 +267,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 		{
 				target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
 				SetTheTarget (target);
-			GetComponent<NavMeshObstacle> ().enabled = false;
 			agent.enabled = true;
-
 			agent.isStopped = false;
 				agent.SetDestination (target.transform.position);
 				yield return new WaitForSeconds (Random.Range( 0.20f, 0.30f));
@@ -341,7 +337,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 			agent.isStopped = true;
 		}
 		anim.enabled = false;
-		yield return new WaitForSecondsRealtime (durat);
+		yield return new WaitForSeconds (durat);
 		if (agent.isActiveAndEnabled) 
 		{
 			agent.isStopped = false;

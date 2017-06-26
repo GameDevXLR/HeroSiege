@@ -9,22 +9,22 @@ public class MouseManager : MonoBehaviour
 //	public LayerMask layer_mask;
 	public List<Outline> curTargets;
 	public Outline selectedObj;
-	public Texture2D attackCursor;
-	public Texture2D normalCursor;
+
 	private Outline hoverTarget;
 	private bool isclicking;
 	// Use this for initialization
+	void Start () 
+	{
+
+	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		Cursor.SetCursor (normalCursor, Vector2.zero, CursorMode.Auto);
-
 		if (hoverTarget) 
 		{
 			hoverTarget.eraseRenderer = true;
 			hoverTarget = null;
-
 			curTargets.Clear ();
 		}
 		if (selectedObj) 
@@ -47,26 +47,10 @@ public class MouseManager : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit[] hit=Physics.RaycastAll (ray);
 
-//		if (hit.Length > 0) {
-//			Cursor.SetCursor (attackCursor, Vector2.zero, CursorMode.Auto);
-//
-//		} else {
-//			Cursor.SetCursor (normalCursor, Vector2.zero, CursorMode.Auto);
-//
-//		}
 		foreach (RaycastHit  r in hit) 
 		{
-//			if (r.collider.gameObject.layer == Layers.Ennemies) {
-//				Cursor.SetCursor (attackCursor, Vector2.zero, CursorMode.Auto);
-//				Outline[] rOutlines =  r.transform.GetComponentsInChildren<Outline> ();
-//				foreach (Outline o in rOutlines) 
-//				{
-//					curTargets.Add (o);
-//				}
-//			}
 			if (r.collider.GetComponent<Outline>()) 
 			{
-
 				if(!curTargets.Contains(r.collider.GetComponent<Outline>()))
 				{
 					curTargets.Add (r.collider.GetComponent<Outline> ());
@@ -88,15 +72,6 @@ public class MouseManager : MonoBehaviour
 						selectedObj.eraseRenderer = false;
 					}
 				}
-			}
-			if (r.collider.gameObject.layer == Layers.Ennemies) {
-				Cursor.SetCursor (attackCursor, Vector2.zero, CursorMode.Auto);
-//				Outline[] rOutlines =  r.transform.GetComponentsInChildren<Outline> ();
-//				foreach (Outline o in rOutlines) 
-//				{
-//					curTargets.Add (o);
-//					o.eraseRenderer = false;
-//				}
 			}
 
 		}

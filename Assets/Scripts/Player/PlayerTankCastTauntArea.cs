@@ -130,7 +130,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 		int tmp = (int)(spellCD);
 		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
 		spell1Btn.interactable = false;
-		yield return new WaitForSecondsRealtime(spellCD);
+		yield return new WaitForSeconds(spellCD);
 		spell1Btn.interactable = true;
 		cdCountdown.gameObject.SetActive (false);
 		timeSpent = 0f;
@@ -163,42 +163,33 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 	[ClientRpc]
 	public void RpcLvlUpSpell()
 	{
-	
-        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(1))
-        {
+		spellLvl++;
+		spellCost += 5;
+		spellCD -= 1f;
+		spellDmg += 5;
+		spellDuration += 0.2f;
+		if (isLocalPlayer)
+		{
+			GetComponent<PlayerLevelUpManager>().LooseASpecPt(1);
 
-            upgradeSpell();
-            int x = (int)spellDmg;
-            spellDescription = "Force all enemies around to target you for " + spellDuration.ToString() + " seconds,they loose " + x + " damage.";
-            if (PlayerPrefs.GetString("LANGAGE") == "Fr")
-            {
-                spellDescription = "Force tous les ennemis autour de vous a vous attaquer pendant " + spellDuration.ToString() + " secondes. Ils perdent " + x + " dégâts d'attaque.";
+			int x = (int)spellDmg;
+			spellDescription = "Force all enemies around to target you for " + spellDuration.ToString() + " seconds,they loose "+x+" damage.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				spellDescription = "Force tous les ennemis autour de vous a vous attaquer pendant " + spellDuration.ToString() + " secondes. Ils perdent "+x+" dégâts d'attaque.";
 
-            }
-            spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
-            spell1Btn.transform.GetChild(0).transform.Find("MpCost").GetComponentInChildren<Text>().text = spellCost.ToString();
-            spell1Btn.transform.GetChild(0).transform.Find("CDTime").GetComponentInChildren<Text>().text = spellCD.ToString();
-            //			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
-            //			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
-            //changer ici l'interface du joueur.
-        }
-        else if (GetComponent<PlayerLevelUpManager>().LooseASpecPt(1))
-        {
-            upgradeSpell();
-        }
-    }
+			}
+			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
+			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
+			//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().SetBool ("Enable", true);
+			//			spell1Btn.transform.GetChild (1).transform.GetComponent<Animator> ().Play("BtnCompPts");
+			//changer ici l'interface du joueur.
+		}
+	}
 
-    public void upgradeSpell()
-    {
-        spellLvl++;
-        spellCost += 5;
-        spellCD -= 1f;
-        spellDmg += 5;
-        spellDuration += 0.2f;
-    }
-
-    //suffit de linké ca a un bouton d'interface et boom
-    public void levelUp()
+	//suffit de linké ca a un bouton d'interface et boom
+	public void levelUp()
 	{
 		CmdLevelUpTheSpell();
 	}
