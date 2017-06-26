@@ -158,7 +158,7 @@ public class PlayerStatPlus : NetworkBehaviour {
 		spellLvl++;
 		if (isLocalPlayer)
 		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(4);
+			GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(4);
 			//changer ici l'interface du joueur.
 		}
 	}
