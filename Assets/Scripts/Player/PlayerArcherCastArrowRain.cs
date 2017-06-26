@@ -127,7 +127,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-                RpcSoundSpell();
+				CmdSoundSpell ();
 				castPosDesired = hit.point;
 				spellTargeter.transform.position = Vector3.zero;
 				CmdCastSpell(castPosDesired);
@@ -144,6 +144,11 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 			spellTargeter.transform.position = hit.point;
 
 		}
+	}
+	[Command]
+	public void CmdSoundSpell()
+	{
+		RpcSoundSpell ();
 	}
 
     [ClientRpc]
@@ -194,7 +199,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 		cdCountdown.gameObject.SetActive (true);
 		int tmp = (int)(spellCD);
 		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
-		yield return new WaitForSeconds(spellCD);
+		yield return new WaitForSecondsRealtime(spellCD);
 		spell2Btn.interactable = true;
 		cdCountdown.gameObject.SetActive (false);
 		timeSpent = 0f;
@@ -225,29 +230,39 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcLvlUpSpell()
 	{
-		spellLvl++;
-		spellCost += 40;
-		spellCD -= 2f;
-		spellDmg += 12;
-		spellDuration += 0.3f;
-		if (isLocalPlayer)
-		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(3);
-			int x = (int)spellDmg;
-			spellDescription = "Slow and deal " + x.ToString() + " damage every 0,3 seconds for " + spellDuration.ToString() + " seconds.";
-			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-			{
-				spellDescription = "Ralenti et inflige " + x.ToString () + " dégats toutes les 0,3s pendant " + spellDuration.ToString () + " secondes."; 
-			}
-			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
-			spell2Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = spellCost.ToString();
-			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
-			//changer ici l'interface du joueur.
-		}
-	}
+		
+		
+        if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(3))
+        {
+            upgradeSpell();
+            int x = (int)spellDmg;
+            spellDescription = "Slow and deal " + x.ToString() + " damage every 0,3 seconds for " + spellDuration.ToString() + " seconds.";
+            if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+            {
+                spellDescription = "Ralenti et inflige " + x.ToString() + " dégats toutes les 0,3s pendant " + spellDuration.ToString() + " secondes.";
+            }
+            spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
+            spell2Btn.transform.GetChild(0).transform.Find("MpCost").GetComponentInChildren<Text>().text = spellCost.ToString();
+            spell2Btn.transform.GetChild(0).transform.Find("CDTime").GetComponentInChildren<Text>().text = spellCD.ToString();
+            //changer ici l'interface du joueur.
+        }
+        else if (GetComponent<PlayerLevelUpManager>().LooseASpecPt(3))
+        {
+            upgradeSpell();
+        }
+    }
 
-	//suffit de linké ca a un bouton d'interface et boom
-	public void levelUp()
+    public void upgradeSpell()
+    {
+        spellLvl++;
+        spellCost += 40;
+        spellCD -= 2f;
+        spellDmg += 12;
+        spellDuration += 0.3f;
+    }
+
+    //suffit de linké ca a un bouton d'interface et boom
+    public void levelUp()
 	{
 		CmdLevelUpTheSpell();
 	}

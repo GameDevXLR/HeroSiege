@@ -130,7 +130,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-                RpcSoundSpell();
+				CmdSoundSpell();
 				castPosDesired = hit.point;
 				spellTargeter.transform.position = Vector3.zero;
 				CmdCastSpell(castPosDesired);
@@ -148,7 +148,11 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 
 		}
 	}
-
+	[Command]
+	public void CmdSoundSpell()
+	{
+		RpcSoundSpell ();
+	}
     [ClientRpc]
     public void RpcSoundSpell()
     {
@@ -193,7 +197,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 		cdCountdown.gameObject.SetActive (true);
 		int tmp = (int)(spellCD);
 		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
-		yield return new WaitForSeconds(spellCD);
+		yield return new WaitForSecondsRealtime(spellCD);
 		spell2Btn.interactable = true;
 		cdCountdown.gameObject.SetActive (false);
 		timeSpent = 0f;
@@ -209,7 +213,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
 				timeSpent += 0.2f;
 			}
-			yield return new WaitForSeconds (0.2f);
+			yield return new WaitForSecondsRealtime (0.2f);
 		}
 	}
 	//si on clic sur level up; ca le dit au serveur.
@@ -224,15 +228,11 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcLvlUpSpell()
 	{
-		spellLvl++;
-		spellCost += 15;
-		spellCD -= 4f;
-		explosionRadius += 0.1f;
-		spellDmg += 4;
-		spellDuration += 1f;
-		if (isLocalPlayer)
+		
+		if (isLocalPlayer && GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(2))
 		{
-			GetComponent<PlayerLevelUpManager>().LooseASpecPt(2);
+
+            upgradeSpell();
 			int x = (int)spellDmg;
 			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
@@ -245,7 +245,21 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 			spell2Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = spellCD.ToString();
 			//changer ici l'interface du joueur.
 		}
+        else if(GetComponent<PlayerLevelUpManager>().LooseASpecPt(2))
+        {
+            upgradeSpell();
+        }
 	}
+
+    public void upgradeSpell()
+    {
+        spellLvl++;
+        spellCost += 15;
+        spellCD -= 4f;
+        explosionRadius += 0.1f;
+        spellDmg += 4;
+        spellDuration += 1f;
+    }
 
 	//suffit de linké ca a un bouton d'interface et boom
 	public void levelUp()

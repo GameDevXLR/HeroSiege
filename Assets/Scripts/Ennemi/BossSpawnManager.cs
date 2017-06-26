@@ -9,12 +9,14 @@ public class BossSpawnManager : NetworkBehaviour
 
 	public GameObject bossPrefab;
 	public Transform[] bossSpawns;
+    public GameObject[] EffectSpawns;
 	[SyncVar(hook = "ActuBossLvlT1")]public int bossLvlT1;
 	[SyncVar(hook = "ActuBossLvlT2")]public int bossLvlT2;
 	public Text T1LvlDisplay;
 	public Text T2LvlDisplay;
 	public Transform targetTeam1Destination;
 	public Transform targetTeam2Destination;
+    private int effectNumber = 4; // nombre d'effect appliqué : 2 pour sologame, 4 sinon
 
 
 	// Use this for initialization
@@ -24,10 +26,16 @@ public class BossSpawnManager : NetworkBehaviour
 		T1LvlDisplay = GameObject.Find ("BossLvlT1Display").GetComponent<Text> ();
 		T2LvlDisplay = GameObject.Find ("BossLvlT2Display").GetComponent<Text> ();
 
-	}
+        if (GetComponent<GameManager>().soloGame)
+        {
+            effectNumber = 2;
+        }
+
+    }
 
 	public void SpawnBosses()
 	{
+        RpcSpawnEffect();
 		SpawnOneBoss (bossSpawns [0], targetTeam1Destination, bossLvlT1);
 		SpawnOneBoss (bossSpawns [1], targetTeam1Destination, bossLvlT2);
 
@@ -37,7 +45,6 @@ public class BossSpawnManager : NetworkBehaviour
 		}
 		SpawnOneBoss (bossSpawns [2], targetTeam2Destination, bossLvlT1);
 		SpawnOneBoss (bossSpawns [3], targetTeam2Destination, bossLvlT2);
-
 	}
 
 	public void SpawnOneBoss(Transform tr, Transform targetDest, int bonusFactor)
@@ -57,9 +64,30 @@ public class BossSpawnManager : NetworkBehaviour
 
 		bossTmpObj.GetComponent<MinionsPathFindingScript> ().target = targetDest;
 		NetworkServer.Spawn (bossTmpObj);
-		
 	}
-	public void ActuBossLvlT1(int lvl)
+
+    [ClientRpc]
+    public void RpcSpawnEffect()
+    {
+        for (int i = 0; i < effectNumber; i++)
+        {
+            EffectSpawns[i].SetActive(true);
+            
+        }
+        Invoke("unactivateEffect", 3);
+    }
+
+    public void unactivateEffect()
+    {
+        for (int i = 0; i < effectNumber; i++)
+        {
+            EffectSpawns[i].SetActive(false);
+        }
+    }
+    
+    
+
+    public void ActuBossLvlT1(int lvl)
 	{
 		bossLvlT1 = lvl;
 		T1LvlDisplay.text = lvl.ToString ();

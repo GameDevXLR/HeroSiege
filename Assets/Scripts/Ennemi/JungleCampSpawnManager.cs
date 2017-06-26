@@ -19,7 +19,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
     public Transform[] bossPos;
 	public GameObject minionPrefab;
 	public GameObject minionBossPrefab;
-    [SyncVar] public int CampLvl = 0; // number of days...
+    public int CampLvl = 0; // number of days...
 	public int scaleFactor = 50;
     public bool alreadySpawn;
 
@@ -87,7 +87,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
 	{
         GameObject minion = ClientScene.FindLocalObject(id);
         Transform tr = spawnPos[index];
-        reActivateMob(minion, tr, minionPrefab);
+		reActivateMob(ClientScene.FindLocalObject(id), tr, minionPrefab);
         minion.GetComponent<EnnemyIGManager>().maxHp = minionPrefab.GetComponent<EnnemyIGManager>().maxHp;
 
         minion.GetComponent<EnnemyIGManager>().maxHp = CampLvl * scaleFactor*2 * GameManager.instanceGM.gameDifficulty;
@@ -112,7 +112,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
         GameObject minionboss = ClientScene.FindLocalObject(id);
 
         Transform tr = bossPos[index];
-        reActivateMob(minionboss, tr, minionBossPrefab);
+		reActivateMob(ClientScene.FindLocalObject(id), tr, minionBossPrefab);
 
         minionboss.GetComponent<EnnemyIGManager>().maxHp = minionBossPrefab.GetComponent<EnnemyIGManager>().maxHp;
         minionboss.GetComponent<EnnemyIGManager>().maxHp += CampLvl * scaleFactor *4* GameManager.instanceGM.gameDifficulty;
@@ -132,7 +132,10 @@ public class JungleCampSpawnManager : NetworkBehaviour
     public void reActivateMob(GameObject mob, Transform transformMob, GameObject prefab)
     {
         mob.SetActive(true);
-		mob.transform.position = transformMob.position;
+        
+
+
+        mob.transform.position = transformMob.position;
 		mob.transform.rotation = transformMob.rotation;
 		
         if (mob.GetComponent<EnnemyIGManager>().deadAnimChildMesh)
@@ -141,13 +144,17 @@ public class JungleCampSpawnManager : NetworkBehaviour
             if (mob.GetComponent<EnnemyIGManager>().isDead)
             {
                 mob.GetComponent<EnnemyIGManager>().deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", false);
+				mob.GetComponent<EnnemyIGManager>().deadAnimChildMesh.GetComponent<Animator>().SetBool("attackEnnemi", false);
+
                 mob.GetComponent<EnnemyIGManager>().isDead = false;
             }
         }
 
+        
         mob.GetComponent<NavMeshAgent>().enabled = true;
 
         mob.GetComponent<NavMeshAgent>().acceleration = prefab.GetComponent<NavMeshAgent>().acceleration;
+
         if (mob.GetComponent<NavMeshAgent>().isActiveAndEnabled)
         {
             mob.GetComponent<NavMeshAgent>().SetDestination(transformMob.position);

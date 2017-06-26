@@ -93,7 +93,12 @@ public class CharacterIGManager : NetworkBehaviour
         RescaleTheLifeBarIG(currentHp);
     }
 
-    public virtual void RescaleTheLifeBarIG(int life)
+    public void RescaleTheLifeBarIG(int life)
+    {
+        TempoRescaleTheLifeBarIG(life);
+    }
+
+    public virtual void TempoRescaleTheLifeBarIG(int life)
     {
         currentHp = life;
         float x = (float)currentHp / maxHp;
@@ -139,10 +144,11 @@ public class CharacterIGManager : NetworkBehaviour
 
     }
     
-    protected virtual void LooseHeathServer(int dmg, bool trueDmg, GameObject attacker)
+	protected virtual void LooseHeathServer(int dmg, bool trueDmg, GameObject attacker)
     {
         if (attacker != guyAttackingMe || guyAttackingMe == null)
         {
+
             guyAttackingMe = attacker;
         }
 
@@ -181,6 +187,8 @@ public class CharacterIGManager : NetworkBehaviour
                 }
             }
         }
+        if (currentHp < 0)
+            currentHp = 0;
     }
 
 
