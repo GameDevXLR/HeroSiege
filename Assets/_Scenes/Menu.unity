@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2041,6 +2041,7 @@ Prefab:
     - {fileID: 114593021745452136, guid: 57a189d9da793d245827a03338d244dc, type: 2}
     - {fileID: 114686864716835974, guid: 57a189d9da793d245827a03338d244dc, type: 2}
     - {fileID: 114133081694328858, guid: 57a189d9da793d245827a03338d244dc, type: 2}
+    - {fileID: 114307738851125954, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &771548507
@@ -4023,7 +4024,8 @@ AudioSource:
   m_GameObject: {fileID: 1572631130}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243765118687429670, guid: f53275b0b299b98478e54f8554ae7abc,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 2911f23c8f3918b4586c01b198d978d8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.21

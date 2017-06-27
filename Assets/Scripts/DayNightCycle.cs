@@ -21,14 +21,13 @@ public class DayNightCycle : NetworkBehaviour {
 		float x = 1f * speed * Time.fixedDeltaTime;
 		transform.Rotate (x, 0f, 0f);
 		timeOfDay -= x;
-		if (!firstdayTrigger && timeOfDay>2f) 
-		{
+		if (!firstdayTrigger && timeOfDay > 2f) {
 			isNight = true;
 			GetComponent<AudioSource> ().PlayOneShot (Night);
 			GameManager.instanceGM.nightTime = true;
 			speed -= nightSpeedFactor;
 			firstdayTrigger = true;
-		}
+		} 
 
 		if (timeOfDay > 180f ) 
 		{
@@ -61,7 +60,6 @@ public class DayNightCycle : NetworkBehaviour {
 		}
 		else 
 		{
-
 			GetComponent<AudioSource> ().PlayOneShot (Night);
 			if (isServer) {
 				GameManager.instanceGM.nightTime = true;

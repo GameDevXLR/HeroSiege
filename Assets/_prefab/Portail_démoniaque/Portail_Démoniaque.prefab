@@ -462,8 +462,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1556893766126262}
   m_LocalRotation: {x: 0.5375941, y: 0.49083364, z: 0.46709913, w: 0.5018898}
-  m_LocalPosition: {x: 0.001906516, y: 0.0003, z: 0.0147}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 0.001906516, y: 0.0003, z: 0.0235}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_Children:
   - {fileID: 4880841613394834}
   - {fileID: 4935066883543926}
@@ -869,7 +869,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 46b266736aa559345b0dcb32febaf2a1, type: 2}
-  - {fileID: 2100000, guid: 173bd8f66ff3f8b418a62c07a7dad2b6, type: 2}
+  - {fileID: 0}
   - {fileID: 2100000, guid: 2b636f2382d7e3a44978ce57b6e3aa2a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1631,7 +1631,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1056524259
+  randomSeed: 2118461592
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4635,13 +4635,13 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1940071970
+  randomSeed: -1972934030
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       minMaxState: 0
-      scalar: 5
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5015,7 +5015,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 10
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -5804,7 +5804,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   ForceModule:
-    enabled: 0
+    enabled: 1
     x:
       minMaxState: 0
       scalar: 0
@@ -5885,7 +5885,7 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       minMaxState: 0
-      scalar: 0
+      scalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:

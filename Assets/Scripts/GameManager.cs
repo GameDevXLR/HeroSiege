@@ -17,6 +17,8 @@ public class GameManager : NetworkBehaviour
 	//il gere également les evenements importants genre : event de nuit / jour.
 	//il gere aussi le spawn entre guillemets (active / désactive les spawners de mobs)
 	// gere pas grand chose lié au réseau parcontre : voir NetworkManagerObj pour ca (dans la hierarchy)
+	public AudioClip[] MusicBackground;
+	public float delayTime;
 	public GameObject difficultyPanel;
 	public AudioClip LooseLifeSound;
 	public AudioClip winSound;
@@ -251,6 +253,12 @@ public class GameManager : NetworkBehaviour
 		dayNightDisplay.sprite = nightIcon;
 		if (night) 
 		{
+//			StartCoroutine (ChangeVolumeCurve ());
+			Camera.main.transform.GetComponent<AudioSource> ().clip = MusicBackground[0];
+			Camera.main.transform.GetComponent<AudioSource> ().Play();
+
+
+
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
 				messageManager.SendAnAlertMess ("La nuit tombe. Préparez-vous!", Color.red);
@@ -272,6 +280,10 @@ public class GameManager : NetworkBehaviour
 			}
 		} else 
 		{
+//			StartCoroutine (ChangeVolumeCurve ());
+
+			Camera.main.transform.GetComponent<AudioSource> ().clip = MusicBackground[1];
+			Camera.main.transform.GetComponent<AudioSource> ().Play();
 			Days++;
 			if (Days == 2) 
 			{
@@ -601,4 +613,30 @@ public class GameManager : NetworkBehaviour
 		}
 		NetworkManager.singleton.StopClient ();
 	}
+
+//	public IEnumerator ChangeVolumeCurve()
+//	{
+//		float y = Time.time;
+//		bool z = true;
+//		while (z) 
+//		{
+//			yield return new WaitForSecondsRealtime (0.1f);
+//			if (Camera.main.GetComponent<AudioSource> ().volume > 0f) {
+//				Camera.main.GetComponent<AudioSource> ().volume -= 0.05f;
+//			}
+//			if (Time.time > y + delayTime) 
+//				{
+//				
+//				Camera.main.GetComponent<AudioSource> ().volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME");
+//				z = false;
+//				if (nightTime) {
+//
+//				} else {
+//
+//				}
+//			}
+//			yield break;
+//		}
+//
+//	}
 }
