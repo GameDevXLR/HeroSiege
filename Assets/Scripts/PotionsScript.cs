@@ -9,6 +9,7 @@ public class PotionsScript : InventoryItem
 	public int potionCharges;
 	public Text chargesDisplay;
 	public string potionDesc;
+	public string potionDescFr;
 	public int DesiredSellPrice = 25;
 	public AudioClip Potion;
 	public Sprite potionFull;
@@ -19,6 +20,12 @@ public class PotionsScript : InventoryItem
 	{
 		maxCharges = potionCharges;
 		chargesDisplay.text = potionDesc + potionCharges.ToString () + " available.";
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+		{
+			potionDesc = potionDescFr;
+			chargesDisplay.text = potionDesc + potionCharges.ToString () + " disponible.";
+
+		}
 	}
 
 	public void LooseOneCharge()
@@ -33,6 +40,11 @@ public class PotionsScript : InventoryItem
 			GetComponent<AudioSource> ().PlayOneShot (Potion);
 			potionCharges--;
 			chargesDisplay.text = potionDesc + potionCharges.ToString () + " available.";
+			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+			{
+				chargesDisplay.text = potionDesc + potionCharges.ToString () + " disponible.";
+
+			}
 			if (potionCharges == 1) 
 			{
 				transform.Find("Image").GetComponent<Image> ().overrideSprite = potionAlmostEmpty;

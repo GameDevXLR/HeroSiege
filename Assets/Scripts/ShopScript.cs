@@ -17,12 +17,16 @@ public class ShopScript : MonoBehaviour
 	public Sprite openedShopImg;
 	public Sprite closedShopImg;
 	public string tipToShow = "TOOLTIP MISSING";
+	public string tipToShowFr = "AH! Travaux...";
 	public bool tip1;
 
 	public void Start()
 	{
 		shopPanel = GameObject.Find (shopName).transform;
 		shopPanel.gameObject.SetActive (false);
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
+			tipToShow = tipToShowFr;
+		}
 
 	}
 
