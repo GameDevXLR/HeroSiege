@@ -24,6 +24,7 @@ public class SpawnManager : NetworkBehaviour
 	public GameObject minibossPrefab;
 	public GameObject minibossElitePrefab;
 	public GameObject spawnPartEffects;
+	public GameObject partEffectPortal;
 	public Transform spawnpoint; //point de spawn du mob.
 	public Transform targetDestination;
 	public int numberOfMobs; // nombre de mobs dans la vague.
@@ -32,9 +33,15 @@ public class SpawnManager : NetworkBehaviour
 	[SyncVar (hook = "ActuNbrOfWaves")]public int totalWaves; // le numéro de la vague d'ennemis. nombre total de vagues depuis le début.
 	private GameObject newEnnemi;
 	public int difficultyFactor; // permet de gérer la difficulté du jeu. cette variable est rechercher sur le GameManager au lancement du script.
+	void Awake()
+	{
+		partEffectPortal= transform.GetChild (0).Find ("Portail_Démoniaque").Find ("PortailParticule").gameObject;
+		partEffectPortal.SetActive (false);
 
+	}
 	void Start () 
 	{
+//		partEffectPortal= transform.GetChild (0).Find ("Portail_Démoniaque").Find ("PortailParticule").gameObject;
 		difficultyFactor = GameManager.instanceGM.gameDifficulty;
 		coPlayers = NetworkServer.connections.Count;
 		if (coPlayers > 1) 
@@ -47,6 +54,26 @@ public class SpawnManager : NetworkBehaviour
 		}
 	}
 
+	[ServerCallback]
+	void OnEnable()
+	{
+		RpcStartPortal ();
+	}
+
+	[ServerCallback]
+	void OnDisable()
+	{
+		RpcStopPortal ();
+	}
+	[ClientRpc]
+	public void RpcStartPortal (){
+		partEffectPortal.SetActive (true);
+	}
+	[ClientRpc]
+	public void RpcStopPortal (){
+		partEffectPortal.SetActive (false);
+
+	}
 	public void LevelUpTheWaves()
 	{
 		totalWaves++;

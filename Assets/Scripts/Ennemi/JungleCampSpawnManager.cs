@@ -22,7 +22,12 @@ public class JungleCampSpawnManager : NetworkBehaviour
     public int CampLvl = 0; // number of days...
 	public int scaleFactor = 50;
     public bool alreadySpawn;
+	public GameObject spawnPartEffects;
 
+	void Start() {
+	
+		spawnPartEffects = transform.GetChild (0).gameObject;
+	}
 
     public void ResetThisJungCamp()
     {
@@ -70,6 +75,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
 
     public void updateTheJungCamp()
     {
+		RpcSpawnPartEffect ();
         CampLvl++;
         for (int indexMinion = 0; indexMinion < jungCampMinion.Count ;indexMinion++)
         {
@@ -160,5 +166,18 @@ public class JungleCampSpawnManager : NetworkBehaviour
             mob.GetComponent<NavMeshAgent>().SetDestination(transformMob.position);
         }
     }
+
+	[ClientRpc]
+	public void RpcSpawnPartEffect()
+	{
+		spawnPartEffects.SetActive (true);
+		Invoke("unactivateEffect", 3);
+	}
+
+	public void unactivateEffect()
+	{
+		spawnPartEffects.SetActive (false);
+
+	}
 
 }

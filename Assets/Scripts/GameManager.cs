@@ -613,6 +613,7 @@ public class GameManager : NetworkBehaviour
 		}
 		NetworkManager.singleton.StopClient ();
 	}
+		
 
 //	public IEnumerator ChangeVolumeCurve()
 //	{
