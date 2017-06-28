@@ -13,6 +13,6 @@ public class inibMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		transform.Rotate( new Vector3 (2, 4, 10) * speed * Time.deltaTime);
+		transform.Rotate( new Vector3 (0, 0, 2) * speed * Time.deltaTime);
 	}
 }
