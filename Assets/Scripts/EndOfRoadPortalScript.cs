@@ -7,6 +7,7 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 	//portail de fin de route pour les mobs : si ils l'atteignent  : on perd une vie. si le nombre de vie tombe a zero : on a perdu la game.
 
 	public int teamNbr; // détermine a quel équipe il fait perdre des vies. A CONFIGURER IMPERATIVEMENT.
+	public GameObject endOfRoadParticles;
 	// Use this for initialization
 	void Start () 
 	{
@@ -20,6 +21,7 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 	{
 		
 		if (other.gameObject.layer == 9) { // layer9 is Ennemies.
+			RpcCallPartNexus();
 			other.gameObject.GetComponent<EnnemyIGManager> ().guyAttackingMe = null;
 			other.gameObject.GetComponent<EnnemyIGManager> ().isAbleToResurect = false;
 			other.gameObject.GetComponent<EnnemyIGManager> ().MakeHimDie ();
@@ -30,6 +32,7 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 				if (other.tag == "Boss") 
 				{
 					GameManager.instanceGM.Team1LooseALife ();
+					RpcCallPartNexus();
 					GameManager.instanceGM.Team1LooseALife ();
 				}
 			}
@@ -39,9 +42,16 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 				if (other.tag == "Boss") 
 				{
 					GameManager.instanceGM.Team2LooseALife ();
+					RpcCallPartNexus();
 					GameManager.instanceGM.Team2LooseALife ();
 				}
 			}
 		}
+	}
+	[ClientRpc]
+	public void RpcCallPartNexus()
+	{
+		endOfRoadParticles.GetComponent<ParticleSystem> ().Emit(330);
+
 	}
 }
