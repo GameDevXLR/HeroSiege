@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 114101508417045676}
   - component: {fileID: 114395821510757714}
   - component: {fileID: 114009289559484576}
-  - component: {fileID: 114307738851125954}
   m_Layer: 0
   m_Name: NetworkManagerObj
   m_TagString: Untagged
@@ -72,17 +71,6 @@ MonoBehaviour:
   showGUI: 0
   offsetX: 0
   offsetY: 0
---- !u!114 &114307738851125954
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1065471443572348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114395821510757714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,6 +118,8 @@ MonoBehaviour:
   - {fileID: 1903038432033380, guid: c7ec25faec021ba479ebe370b72e02cc, type: 2}
   - {fileID: 1513018649726288, guid: 4fbb6e27e434e48478a5d7b7bb6562de, type: 2}
   - {fileID: 1719465231846340, guid: 9dcc10228525f6b48a03712c601b301b, type: 2}
+  - {fileID: 1801836114149008, guid: 25fb1ef0035caa44bb8925e08a7b7ece, type: 2}
+  - {fileID: 1552877025250526, guid: 63c6dbc233058ab49a5be6f1aa0e7277, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 10
   m_ConnectionConfig:
@@ -174,9 +164,9 @@ MonoBehaviour:
     m_MaxNetSimulatorTimeout: 12000
   m_Channels: 05000000000000000800000006000000
   m_UseWebSockets: 0
-  m_UseSimulator: 0
-  m_SimulatedLatency: 50
-  m_PacketLossPercentage: 0
+  m_UseSimulator: 1
+  m_SimulatedLatency: 400
+  m_PacketLossPercentage: 20
   m_MaxBufferedPackets: 124
   m_AllowFragmentation: 1
   m_MatchHost: mm.unet.unity3d.com
@@ -184,4 +174,4 @@ MonoBehaviour:
   matchName: default
   matchSize: 10
   isNetworkActive: 0
-  matchMaker: {fileID: 114307738851125954}
+  matchMaker: {fileID: 0}

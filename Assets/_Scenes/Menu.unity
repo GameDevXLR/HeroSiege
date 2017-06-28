@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38073996, b: 0.35872692, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2012,36 +2012,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
-        type: 2}
-      propertyPath: matchMaker
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 114009289559484576, guid: 57a189d9da793d245827a03338d244dc,
         type: 2}
       propertyPath: isGuideActive
       value: 
       objectReference: {fileID: 1707910553}
-    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
-        type: 2}
-      propertyPath: m_UseSimulator
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
-        type: 2}
-      propertyPath: m_PacketLossPercentage
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
-        type: 2}
-      propertyPath: m_SimulatedLatency
-      value: 400
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114593021745452136, guid: 57a189d9da793d245827a03338d244dc, type: 2}
-    - {fileID: 114686864716835974, guid: 57a189d9da793d245827a03338d244dc, type: 2}
-    - {fileID: 114133081694328858, guid: 57a189d9da793d245827a03338d244dc, type: 2}
-    - {fileID: 114307738851125954, guid: 57a189d9da793d245827a03338d244dc, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &771548507

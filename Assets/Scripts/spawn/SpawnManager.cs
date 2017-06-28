@@ -219,7 +219,7 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (2 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 10;
 					newEnnemi.GetComponent<EnnemyIGManager> ().xpGiven += 275;
-					newEnnemi.transform.Find ("Mob1Prefab").transform.localScale = new Vector3 (2, 2, 2);
+//					newEnnemi.transform.Find ("Mob1Prefab").transform.localScale = new Vector3 (2, 2, 2);
 					newEnnemi.GetComponent<EnnemyIGManager> ().armorScore += 20;
 					newEnnemi.GetComponent<EnnemyIGManager> ().isAbleToResurect = true;
 
@@ -243,7 +243,7 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnnemyIGManager> ().goldGiven += tmpFactor / (2 * difficultyFactor);
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 5;
 					newEnnemi.GetComponent<EnnemyIGManager> ().xpGiven += 250;
-					newEnnemi.transform.Find ("Mob2Prefab").transform.localScale = new Vector3 (2, 2, 2);
+//					newEnnemi.transform.Find ("Mob2Prefab").transform.localScale = new Vector3 (2, 2, 2);
 					newEnnemi.GetComponent<EnnemyIGManager> ().dodge += 7;
 					newEnnemi.GetComponent<EnnemyIGManager> ().isSlowingOnAutoA = true;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
