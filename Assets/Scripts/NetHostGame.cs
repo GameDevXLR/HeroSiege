@@ -47,6 +47,13 @@ public class NetHostGame :  MonoBehaviour{
 			networkManager.matchMaker.CreateMatch (roomName, roomSize, true, "", "", "", 0, 0, networkManager.OnMatchCreate);
 		}
 		}
+	void FixedUpdate()
+	{
+		if (isCreating) 
+		{
+			loadingBar.value += Random.Range (0.05f, 0.20f);
+		}
+	}
 
 	IEnumerator PreventDoubleGame()
 	{
@@ -62,7 +69,11 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "Building the buildings.";
 		}
-		loadingBar.value += 0.1f;
+		loadingBar.value += Random.Range(0.1f, 0.5f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}
 		yield return new WaitForSecondsRealtime (.5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
@@ -72,7 +83,12 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "Building the buildings..";
 		}
-		loadingBar.value += 0.2f;		yield return new WaitForSecondsRealtime (.5f);
+		loadingBar.value += Random.Range(0.1f, 0.5f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}
+		yield return new WaitForSecondsRealtime (.5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Construction des constructions...";
@@ -81,7 +97,12 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "Building the buildings...";
 		}
-		loadingBar.value += 0.3f;		yield return new WaitForSecondsRealtime (.5f);
+		loadingBar.value += Random.Range(0.1f, 0.5f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}
+		yield return new WaitForSecondsRealtime (.5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Dragons enlevés.";
@@ -90,7 +111,12 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "Removing dragons.";
 		}
-		loadingBar.value += 0.2f;		yield return new WaitForSecondsRealtime (.5f);
+		loadingBar.value += Random.Range(0.1f, 0.5f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}
+		yield return new WaitForSecondsRealtime (.5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Dragons enlevés..";
@@ -99,7 +125,12 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "Removing dragons..";
 		}
-		loadingBar.value += 0.1f;		yield return new WaitForSecondsRealtime (1f);
+		loadingBar.value += Random.Range(0.1f, 0.5f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}
+		yield return new WaitForSecondsRealtime (1f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Dragons enlevés...";
@@ -108,7 +139,12 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "Removing dragons...";
 		}
-		loadingBar.value += 0.05f;		yield return new WaitForSecondsRealtime (1f);
+		loadingBar.value += Random.Range(0.2f, 0.7f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}
+		yield return new WaitForSecondsRealtime (1f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Sac a dos prêt!";
@@ -117,7 +153,12 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "Packing stuffs.";
 		}
-		loadingBar.value += 0.03f;		yield return new WaitForSecondsRealtime (1f);
+		loadingBar.value += Random.Range(0.1f, 0.5f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}
+		yield return new WaitForSecondsRealtime (1f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "En attente de la fin de l'hiver.";
@@ -126,7 +167,12 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "Waiting for winter to end.";
 		}
-		loadingBar.value += 0.02f;		yield return new WaitForSecondsRealtime (1f);
+		loadingBar.value += Random.Range(0.1f, 0.5f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}
+		yield return new WaitForSecondsRealtime (1f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Echec critique!";
@@ -135,7 +181,11 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingMessage.text = "FAILURE!";
 		}
-		loadingBar.value -= 0.9f;
+		loadingBar.value += Random.Range(0.1f, 0.5f);
+		if (loadingBar.value >= loadingBar.maxValue) 
+		{
+			loadingBar.value = Random.Range(0.1f, 0.5f);
+		}		
 		loadingCanvas.SetActive (false);
 
 		isCreating = false;

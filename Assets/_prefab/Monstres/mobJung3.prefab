@@ -902,6 +902,7 @@ GameObject:
   - component: {fileID: 114379098570299712}
   - component: {fileID: 114476079112074648}
   - component: {fileID: 114504576505167798}
+  - component: {fileID: 65905697339923316}
   m_Layer: 9
   m_Name: mobJung3
   m_TagString: Untagged
@@ -2088,6 +2089,18 @@ MeshCollider:
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 130cac6b96af6214296215324b5da188, type: 3}
+--- !u!65 &65905697339923316
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1818635276551824}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!82 &82542304320388010
 AudioSource:
   m_ObjectHideFlags: 1

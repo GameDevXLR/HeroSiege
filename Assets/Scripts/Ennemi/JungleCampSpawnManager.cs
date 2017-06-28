@@ -156,7 +156,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
             }
         }
 
-        
+		mob.GetComponent<NavMeshObstacle> ().enabled = false;
         mob.GetComponent<NavMeshAgent>().enabled = true;
 
         mob.GetComponent<NavMeshAgent>().acceleration = prefab.GetComponent<NavMeshAgent>().acceleration;

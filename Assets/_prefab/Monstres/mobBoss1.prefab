@@ -641,6 +641,7 @@ GameObject:
   - component: {fileID: 114689901315079102}
   - component: {fileID: 114486781802833534}
   - component: {fileID: 114704258555246680}
+  - component: {fileID: 65168487563669364}
   m_Layer: 9
   m_Name: mobBoss1
   m_TagString: Boss
@@ -2730,6 +2731,18 @@ MeshCollider:
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: c3da664f9f0720349acb66ab8d9d0c40, type: 3}
+--- !u!65 &65168487563669364
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420677973341816}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!82 &82002968782035306
 AudioSource:
   m_ObjectHideFlags: 1
