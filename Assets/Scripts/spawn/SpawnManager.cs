@@ -26,7 +26,7 @@ public class SpawnManager : NetworkBehaviour
 	public GameObject spawnPartEffects;
 	public GameObject partEffectPortal;
 	public Transform spawnpoint; //point de spawn du mob.
-	public Transform targetDestination;
+	[SyncVar] public Transform targetDestination;
 	public int numberOfMobs; // nombre de mobs dans la vague.
 	public float TimeBetweenMobs; //temps entre 2 mobs.
 

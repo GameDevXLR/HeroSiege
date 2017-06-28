@@ -42,6 +42,10 @@ public class EnemyAoeCCSpell : NetworkBehaviour {
 		{
 			if (other.gameObject.layer == 8) 
 			{
+				if (other.tag == "Pet") 
+				{
+					return;
+				}
 				other.gameObject.GetComponent<PlayerStatusHandler> ().MakeHimCC (duration);
 			}
 		}

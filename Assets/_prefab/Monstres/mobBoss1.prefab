@@ -37,6 +37,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4187675092906228}
   - component: {fileID: 137698311359767280}
+  - component: {fileID: 114923163588442418}
+  - component: {fileID: 64270665390685790}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -627,7 +629,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4905928041325656}
   - component: {fileID: 33945325771131698}
-  - component: {fileID: 65907465037549982}
   - component: {fileID: 23240156953409352}
   - component: {fileID: 114135898089301858}
   - component: {fileID: 195782094007203306}
@@ -2715,18 +2716,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65907465037549982
-BoxCollider:
+--- !u!64 &64270665390685790
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1420677973341816}
+  m_GameObject: {fileID: 1022202233086562}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0.05591178, y: 1.0309448, z: 0.039943933}
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: c3da664f9f0720349acb66ab8d9d0c40, type: 3}
 --- !u!82 &82002968782035306
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2990,7 +2993,7 @@ MonoBehaviour:
   goldCanvas: {fileID: 1678407210894732}
   isJungleMob: 0
   myEnemies: []
-  outlinemob: {fileID: 0}
+  outlinemob: {fileID: 114923163588442418}
   isSlowingOnAutoA: 0
   isCCOnAutoA: 0
   isDrainingManaOnAutoA: 0
@@ -3085,7 +3088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTeam1: 0
-  agent: {fileID: 0}
+  agent: {fileID: 195782094007203306}
   target: {fileID: 0}
 --- !u!114 &114621018668208152
 MonoBehaviour:
@@ -3267,6 +3270,22 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114923163588442418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1022202233086562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObj: {fileID: 0}
+  color: 2
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114923639429229608
 MonoBehaviour:
   m_ObjectHideFlags: 1
