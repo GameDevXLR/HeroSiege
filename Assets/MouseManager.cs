@@ -10,6 +10,7 @@ public class MouseManager : MonoBehaviour
 	public List<Outline> curTargets;
 	public Outline selectedObj;
 	public Texture2D attackCursor;
+	public Texture2D allyCursor;
 	public Texture2D normalCursor;
 	private Outline hoverTarget;
 	private bool isclicking;
@@ -97,6 +98,15 @@ public class MouseManager : MonoBehaviour
 //					curTargets.Add (o);
 //					o.eraseRenderer = false;
 //				}
+			}
+			if (r.collider.gameObject.layer == Layers.UI) {
+				Cursor.SetCursor (allyCursor, Vector2.zero, CursorMode.Auto);
+				//				Outline[] rOutlines =  r.transform.GetComponentsInChildren<Outline> ();
+				//				foreach (Outline o in rOutlines) 
+				//				{
+				//					curTargets.Add (o);
+				//					o.eraseRenderer = false;
+				//				}
 			}
 
 		}
