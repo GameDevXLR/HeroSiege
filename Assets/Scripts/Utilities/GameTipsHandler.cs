@@ -10,15 +10,6 @@ public class GameTipsHandler : MonoBehaviour
 	public Text tipDescription;
 	public Toggle showTips;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void CloseTheTipWindow()
 	{

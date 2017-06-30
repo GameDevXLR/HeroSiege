@@ -115,7 +115,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 					if (!isActuStopAttacking && Vector3.Distance ( transform.localPosition, target.transform.localPosition) > attackRange 
                         || target == null 
                         || (target.tag == "Player" && target.GetComponent<PlayerIGManager> ().isDead ) 
-						|| (target.tag != "Player" && target.layer != Layers.UI && target.GetComponent<PetIGManager>().isDead))
+						|| (target.tag != "Player" && target.layer != Layers.UI && target.tag !="Boss" && target.GetComponent<PetIGManager>().isDead))
                     {
 						isActuStopAttacking = true;
 						RpcStopAttacking ();

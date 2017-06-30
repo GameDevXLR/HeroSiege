@@ -16,9 +16,5 @@ public class ShopObjectsDescTraductor : MonoBehaviour {
 		}
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

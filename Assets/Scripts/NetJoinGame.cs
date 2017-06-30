@@ -20,6 +20,7 @@ public class NetJoinGame : MonoBehaviour {
 
 	private NetworkManager networkManager;
 
+	public bool isLoadingRooms;
 	void Start ()
 	{
 		networkManager = NetworkManager.singleton;
@@ -33,6 +34,9 @@ public class NetJoinGame : MonoBehaviour {
 
 	public void RefreshRoomList ()
 	{
+		if (isLoadingRooms) {
+			return;
+		}
 		ClearRoomList();
 
 		if (networkManager.matchMaker == null)
@@ -93,9 +97,15 @@ public class NetJoinGame : MonoBehaviour {
 
 	void ClearRoomList()
 	{
+		if (roomList.Count > 0) {
+			isLoadingRooms = true;
+		}
 		for (int i = 0; i < roomList.Count; i++)
 		{
 			Destroy(roomList[i]);
+			if (i == roomList.Count - 2) {
+				isLoadingRooms = false;
+			}
 		}
 
 		roomList.Clear();
@@ -106,6 +116,8 @@ public class NetJoinGame : MonoBehaviour {
 		
 		networkManager.matchMaker.JoinMatch(_match.networkId, "", "", "", 0, 0, networkManager.OnMatchJoined);
 		StartCoroutine(WaitForJoin());
+
+		StartCoroutine (GetComponent<NetHostGame> ().PreventDoubleGame ());
 	}
 
 	IEnumerator WaitForJoin ()
@@ -144,7 +156,7 @@ public class NetJoinGame : MonoBehaviour {
 //				LoadingScreenManager.LoadScene (2);
 //			}
 			//décommenter ci dessus si on veut afficher l'écran de chargement pour ceux qui rejoignent.
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSecondsRealtime(1);
 
 			countdown--;
 		}
@@ -155,7 +167,7 @@ public class NetJoinGame : MonoBehaviour {
 		{
 			status.text = "Echec de la connection.";
 		}
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSecondsRealtime(1);
 
 		MatchInfo matchInfo = networkManager.matchInfo;
 		if (matchInfo != null)

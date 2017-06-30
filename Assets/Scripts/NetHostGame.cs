@@ -39,7 +39,7 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			return;
 		}
-			if (roomName != "" && roomName != null)
+		if (roomName != "" && roomName != null && !GetComponent<NetJoinGame>().isLoadingRooms)
 			{
 				Debug.Log("Creating Room: " + roomName + " with room for " + roomSize + " players.");
 //			LoadingScreenManager.LoadScene (2);
@@ -55,7 +55,7 @@ public class NetHostGame :  MonoBehaviour{
 		}
 	}
 
-	IEnumerator PreventDoubleGame()
+	public IEnumerator PreventDoubleGame()
 	{
 		isCreating = true;
 		GetComponent<AudioSource> ().PlayOneShot (startPlaying);

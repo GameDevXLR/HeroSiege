@@ -88,8 +88,8 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		[Command]
 		public void CmdCastSpell(Vector3 pos)
 		{
+		RpcFireCataOnClients ();
 		cataCharges -= spellCost;
-		GetComponent<AudioSource>().PlayOneShot(SpellCata);
 		GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
 		go.GetComponent<SpellCatapulteArea>().caster = gameObject;
 		go.GetComponent<SpellCatapulteArea>().spellDamage = spellDmg;
@@ -97,6 +97,12 @@ public class PlayerCastCatapulte : NetworkBehaviour
 		NetworkServer.Spawn(go);
 
 		}
+	[ClientRpc]
+	public void RpcFireCataOnClients()
+	{
+		GetComponent<AudioSource>().PlayOneShot(SpellCata);
+		
+	}
 
 		//cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
 		//demander le lancement du sort sur le serveur...normal.

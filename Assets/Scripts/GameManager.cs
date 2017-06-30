@@ -320,13 +320,13 @@ public class GameManager : NetworkBehaviour
 
 			if (isServer) 
 			{
+				coPlayers = NetworkServer.connections.Count; // le nombre de joueurs connectés.
+				DayStartingEvents (coPlayers);
+				Debug.Log ("spawn them here in the code...There is " + coPlayers.ToString() +" players connected.");
 				foreach (GameObject go in jungCamps) 
 				{
 					go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
 				}
-				coPlayers = NetworkServer.connections.Count; // le nombre de joueurs connectés.
-				DayStartingEvents (coPlayers);
-				Debug.Log ("spawn them here in the code...There is " + coPlayers.ToString() +" players connected.");
 			}
 		}
 	}
@@ -380,13 +380,13 @@ public class GameManager : NetworkBehaviour
 		NetworkServer.Destroy (GameObject.Find ("StartingBarricade2"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector2"));
+		StopPlayerFromJoining ();
+		RpcMessageToAll ();
+		ActivateGoldPerSec ();
 		foreach (GameObject go in jungCamps) 
 		{
 			go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
 		}
-		StopPlayerFromJoining ();
-		RpcMessageToAll ();
-		ActivateGoldPerSec ();
 	}
 
 	[Server]

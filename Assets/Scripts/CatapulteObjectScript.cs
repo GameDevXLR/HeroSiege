@@ -54,6 +54,11 @@ public class CatapulteObjectScript : NetworkBehaviour
 	public void ShowTheAnimCata(int ch)
 	{
 		chargesLoaded = ch;
+		if (isServer && isBeingUsed) 
+		{
+			userOfCata.GetComponent<PlayerCastCatapulte> ().RpcActivateCata (chargesLoaded);
+
+		}
 //		GetComponentInChildren<Animator> ().Play ("TirCatapulte"); // voir pour faire jouer ici l'anime cata.
 	}
 }

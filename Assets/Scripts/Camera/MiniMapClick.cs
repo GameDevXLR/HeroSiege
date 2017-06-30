@@ -27,7 +27,7 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         Vector3 localHit = transform.InverseTransformPoint(eventData.position);
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            Debug.Log("controll");
+//            Debug.Log("controll");
             if (Input.GetMouseButtonDown(0))
             {
                 //Debug.Log("activation + " + eventData.position);
@@ -64,7 +64,9 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
+			Camera.main.GetComponent<CameraController>().selectedPlayer = false;
             Camera.main.GetComponent<CameraController>().MoveCameraTo(hit.point);
+
 
         }
     }
@@ -90,7 +92,7 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         if (Physics.Raycast(ray, out hit))
         {
             GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().recevePingPosition(hit.point);
-            Debug.Log("moau");
+//            Debug.Log("moau");
         }
     }
 
