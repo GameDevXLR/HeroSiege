@@ -18,6 +18,8 @@ public class SpellCatapulteAuto : NetworkBehaviour {
 	private int damageFactor = 1;
 	private float timer;
 	private float destroyTimer = 8f; //combien de temps l'objet reste au total? temps de l'anim complete en gros.
+	public float nextTicTime = 0.6f;
+	private float actualTime;
 
 	void Start()
 	{
@@ -36,12 +38,24 @@ public class SpellCatapulteAuto : NetworkBehaviour {
 
 			return;
 		}
+		if (isDealing && actualTime < nextTicTime) 
+		{
+			actualTime = nextTicTime;
+			Invoke ("ResetTicTime", nextTicTime);
+		}
 		if (Time.time > timer + destroyTimer)
 		{
 			timer = Time.time; //juste pour m'assurer que ce soit jouer qu'une fois. inutile je crois.
 			NetworkServer.Destroy(gameObject);
 		}
 
+	}
+
+	[Server]
+	public void ResetTicTime()
+	{
+		actualTime = 0f;
+		spellTargets.Clear ();
 	}
 
 	[ServerCallback]

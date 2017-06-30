@@ -2035,6 +2035,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.size
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 4570286692455482, guid: 57a189d9da793d245827a03338d244dc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -60
@@ -2072,6 +2077,12 @@ Prefab:
       propertyPath: isGuideActive
       value: 
       objectReference: {fileID: 1707910553}
+    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[23]
+      value: 
+      objectReference: {fileID: 1799284724170398, guid: 1d10ecd1a4e18e945a7c7c9ba68ede4b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_IsPrefabParent: 0
