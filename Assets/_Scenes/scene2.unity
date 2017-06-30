@@ -7111,6 +7111,7 @@ GameObject:
   - component: {fileID: 412402215}
   - component: {fileID: 412402214}
   - component: {fileID: 412402221}
+  - component: {fileID: 412402224}
   - component: {fileID: 412402220}
   - component: {fileID: 412402222}
   - component: {fileID: 412402223}
@@ -7336,7 +7337,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 412402213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bffd30cfc9d6a644b958049bfc95222, type: 3}
   m_Name: 
@@ -7461,6 +7462,42 @@ MonoBehaviour:
   spellPrefab: {fileID: 1900963935911786, guid: 78ff8651d0b94f848a395dee1ca2e083,
     type: 2}
   timeBetweenFire: 10
+--- !u!114 &412402224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 412402213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40b8252525960a4293dcfa3e12167af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOutpost: 0
+  isCatapulte: 1
+  belongsTo: 2
+  canBeOwnedBy: 0
+  playersIn: []
+  enemiesIn: []
+  timeToCapture: 10
+  Capture: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
+  haveGivenTip0: 0
+  tip0Fr: Capturez la catapulte pour pouvoir l'utiliser.
+  tip0En: Capture the catapulte to be able to use it.
+  haveGivenTip: 0
+  tipFr: "Vous pouvez acheter des munitions pour vos alli\xE9s ou pour plus tard."
+  tipEn: You can buy ammo for your allies or for later on in the game.
+  alertMessSentPositiveEng: Our catapulte has been captured.
+  alertMessSentNegativeEng: The enemy catapulte has been captured.
+  alertMessSentPositiveFr: "Notre catapulte ouest a \xE9t\xE9 captur\xE9."
+  alertMessSentNegativeFr: "La catapulte ouest ennemi a \xE9t\xE9 captur\xE9."
+  alertMessSentPositiveLossEng: The enemy catapulte has been lost!
+  alertMessSentNegativeLossEng: Our catapulte has been lost.
+  alertMessSentPositiveLossFr: La catapulte ouest ennemi est perdu.
+  alertMessSentNegativeLossFr: Notre catapulte ouest est perdu.
+  ownedColor: {r: 0, g: 0, b: 0, a: 0}
+  notOwnedColor: {r: 0, g: 0, b: 0, a: 0}
+  anime: {fileID: 2030769571}
 --- !u!1001 &418229922
 Prefab:
   m_ObjectHideFlags: 0
@@ -27195,7 +27232,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 2137203910
+  randomSeed: 1450123494
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -50152,9 +50189,42 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1691691668081444, guid: 5084de80ab25daa4186ff1a51fbacc66, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198307654106908870, guid: 5084de80ab25daa4186ff1a51fbacc66,
+        type: 2}
+      propertyPath: randomSeed
+      value: 115333604
+      objectReference: {fileID: 0}
+    - target: {fileID: 95265091921599600, guid: 5084de80ab25daa4186ff1a51fbacc66,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5084de80ab25daa4186ff1a51fbacc66, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2030769570 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1691691668081444, guid: 5084de80ab25daa4186ff1a51fbacc66,
+    type: 2}
+  m_PrefabInternal: {fileID: 2030769569}
+--- !u!111 &2030769571
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2030769570}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: d307e0119fd8f304d8750ad105a97fdf, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &2036928671
 Prefab:
   m_ObjectHideFlags: 0
