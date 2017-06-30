@@ -7110,7 +7110,6 @@ GameObject:
   - component: {fileID: 412402216}
   - component: {fileID: 412402215}
   - component: {fileID: 412402214}
-  - component: {fileID: 412402221}
   - component: {fileID: 412402224}
   - component: {fileID: 412402220}
   - component: {fileID: 412402222}
@@ -7331,41 +7330,6 @@ MonoBehaviour:
   Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
     type: 3}
   LastTimerUpdate: 0
---- !u!114 &412402221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 412402213}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bffd30cfc9d6a644b958049bfc95222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOutpost: 0
-  isCatapulte: 1
-  belongsTo: 2
-  canBeOwnedBy: 0
-  playersIn: []
-  enemiesIn: []
-  timeToCapture: 10
-  Capture: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
-  haveGivenTip0: 0
-  tip0Fr: Capturez la catapulte pour pouvoir l'utiliser.
-  tip0En: Capture the catapulte to be able to use it.
-  haveGivenTip: 0
-  tipFr: "Vous pouvez acheter des munitions pour vos alli\xE9s ou pour plus tard."
-  tipEn: You can buy ammo for your allies or for later on in the game.
-  alertMessSentPositiveEng: Our catapulte has been captured.
-  alertMessSentNegativeEng: The enemy catapulte has been captured.
-  alertMessSentPositiveFr: "Notre catapulte ouest a \xE9t\xE9 captur\xE9."
-  alertMessSentNegativeFr: "La catapulte ouest ennemi a \xE9t\xE9 captur\xE9."
-  alertMessSentPositiveLossEng: The enemy catapulte has been lost!
-  alertMessSentNegativeLossEng: Our catapulte has been lost.
-  alertMessSentPositiveLossFr: La catapulte ouest ennemi est perdu.
-  alertMessSentNegativeLossFr: Notre catapulte ouest est perdu.
-  ownedColor: {r: 0, g: 0, b: 0, a: 0}
-  notOwnedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!82 &412402222
 AudioSource:
   m_ObjectHideFlags: 0

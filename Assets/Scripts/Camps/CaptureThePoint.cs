@@ -337,7 +337,7 @@ public class CaptureThePoint : NetworkBehaviour
         if (!isServer)
         {
             tmpTime = t;
-            if (t < 10f && t > 0f)
+            if (t < 30f && t > 0f)
             {
                 GetComponent<Location>().Display_2_Text = tmpTime.ToString();
             }
