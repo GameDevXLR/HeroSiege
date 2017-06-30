@@ -61,7 +61,6 @@ public class SpellCatapulteAuto : NetworkBehaviour {
 					int tmpDmg;
 					damageFactor = GameManager.instanceGM.Days*2;
 					tmpDmg = damageFactor * spellDamage;
-					Debug.Log (other.gameObject.name);
 					spellTargets.Add(other.gameObject);
 						if (other.gameObject.tag == "Player")
 						other.gameObject.GetComponent<PlayerIGManager>().takeDommage(tmpDmg, true);

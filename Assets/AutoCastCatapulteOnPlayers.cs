@@ -28,7 +28,7 @@ public class AutoCastCatapulteOnPlayers : NetworkBehaviour
 		{
 			return;
 		}
-		if (Time.time > 30 && Time.time > previousFire + timeBetweenFire) 
+		if (Time.time > 60 && Time.time > previousFire + timeBetweenFire) 
 		{
 			previousFire = Time.time + Random.Range(0f, 20f);
 			if (GetComponent<CaptureThePoint> ().belongsTo == CaptureThePoint.PointOwner.neutral) 

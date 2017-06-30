@@ -64,7 +64,7 @@ public class SpellCatapulteArea : NetworkBehaviour {
 					
 					spellTargets.Add(other.gameObject);
                     if (other.gameObject.layer == 8) {
-                        if (other.gameObject.tag == "player")
+                        if (other.gameObject.tag == "Player")
                             other.gameObject.GetComponent<PlayerIGManager>().LooseHealth(tmpDmg, true, caster);
                         else
                             other.gameObject.GetComponent<PetIGManager>().LooseHealth(tmpDmg, true, caster);

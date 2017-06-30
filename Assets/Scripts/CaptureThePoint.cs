@@ -210,7 +210,13 @@ public class CaptureThePoint : NetworkBehaviour
 				GetComponentInChildren<ShopScript> ().isAccessible = true;
 				transform.GetChild (0).GetComponent<Location> ().enabled = true;
 			}
-
+			if (isCatapulte) 
+			{
+				
+				GetComponent<CatapulteObjectScript>().userOfCata = playersIn[0];
+				
+				GetComponent<CatapulteObjectScript>().ActivatePlayerBtn ();
+			}
 			if (GameManager.instanceGM.isTeam1) 
 			{
 				if (belongsTo == PointOwner.team1) 
