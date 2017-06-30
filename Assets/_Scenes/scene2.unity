@@ -50196,14 +50196,25 @@ Prefab:
     - target: {fileID: 198307654106908870, guid: 5084de80ab25daa4186ff1a51fbacc66,
         type: 2}
       propertyPath: randomSeed
-      value: 115333604
+      value: -1594155575
       objectReference: {fileID: 0}
     - target: {fileID: 95265091921599600, guid: 5084de80ab25daa4186ff1a51fbacc66,
         type: 2}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 198792979187542366, guid: 5084de80ab25daa4186ff1a51fbacc66,
+        type: 2}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198792979187542366, guid: 5084de80ab25daa4186ff1a51fbacc66,
+        type: 2}
+      propertyPath: randomSeed
+      value: -2069597331
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 95265091921599600, guid: 5084de80ab25daa4186ff1a51fbacc66, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5084de80ab25daa4186ff1a51fbacc66, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2030769570 stripped
@@ -50220,7 +50231,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: d307e0119fd8f304d8750ad105a97fdf, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: d307e0119fd8f304d8750ad105a97fdf, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
