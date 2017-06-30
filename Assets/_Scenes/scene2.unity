@@ -7462,6 +7462,9 @@ MonoBehaviour:
   ownedColor: {r: 0, g: 0, b: 0, a: 0}
   notOwnedColor: {r: 0, g: 0, b: 0, a: 0}
   anime: {fileID: 2030769571}
+  areaParticles: {fileID: 2030769573}
+  cdParticles: {fileID: 2030769572}
+  emissionGo: 0
 --- !u!1001 &418229922
 Prefab:
   m_ObjectHideFlags: 0
@@ -50160,7 +50163,7 @@ Prefab:
     - target: {fileID: 198307654106908870, guid: 5084de80ab25daa4186ff1a51fbacc66,
         type: 2}
       propertyPath: randomSeed
-      value: -1594155575
+      value: -513636604
       objectReference: {fileID: 0}
     - target: {fileID: 95265091921599600, guid: 5084de80ab25daa4186ff1a51fbacc66,
         type: 2}
@@ -50176,6 +50179,11 @@ Prefab:
         type: 2}
       propertyPath: randomSeed
       value: -2069597331
+      objectReference: {fileID: 0}
+    - target: {fileID: 198307654106908870, guid: 5084de80ab25daa4186ff1a51fbacc66,
+        type: 2}
+      propertyPath: EmissionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95265091921599600, guid: 5084de80ab25daa4186ff1a51fbacc66, type: 2}
@@ -50201,6 +50209,16 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!198 &2030769572 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198307654106908870, guid: 5084de80ab25daa4186ff1a51fbacc66,
+    type: 2}
+  m_PrefabInternal: {fileID: 2030769569}
+--- !u!198 &2030769573 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198792979187542366, guid: 5084de80ab25daa4186ff1a51fbacc66,
+    type: 2}
+  m_PrefabInternal: {fileID: 2030769569}
 --- !u!1001 &2036928671
 Prefab:
   m_ObjectHideFlags: 0
