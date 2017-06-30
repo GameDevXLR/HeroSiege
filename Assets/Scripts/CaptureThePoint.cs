@@ -16,6 +16,9 @@ public class CaptureThePoint : NetworkBehaviour
 		neutral
 	}
 
+	[Header("TypeOfPoint")]
+	public bool isOutpost = true;
+	public bool isCatapulte;
 
 	[SyncVar(hook="ChangeOwner")]public PointOwner belongsTo;
 	public PointOwner canBeOwnedBy = PointOwner.team1;
@@ -27,12 +30,30 @@ public class CaptureThePoint : NetworkBehaviour
 	public AudioClip Capture;
 	[SyncVar(hook = "SyncOutpostTimer")]int tmpTime;
 	public bool haveGivenTip0;
+	public string tip0Fr = "Tuez tous les ennemis sur l'avant-poste pour le capturer.";
+	public string tip0En = "Kill all enemies on the outpost area to be able to capture it.";
 
 	public bool haveGivenTip;
+	public string tipFr = "Capturez l'avant-poste pour avoir accés au magasin associé et pouvoir augmenter la force de votre boss journalier.";
+	public string tipEn = "Capture the outpost to get acess to his shop and be able to increase the strenght of your daily boss.";
+
+	public string alertMessSentPositiveEng = "Our outpost has been captured.";
+	public string alertMessSentNegativeEng = "The enemy outpost has been captured.";
+	public string alertMessSentPositiveFr = "Notre avant-poste a été capturé.";
+	public string alertMessSentNegativeFr = "L'avant-poste ennemi a été capturé.";
+
+	public string alertMessSentPositiveLossEng = "The enemy outpost has been lost!";
+	public string alertMessSentNegativeLossEng = "Our outpost has been lost.";
+	public string alertMessSentPositiveLossFr = "L'avant-poste ennemi est perdu.";
+	public string alertMessSentNegativeLossFr = "Notre avant-poste est perdu.";
+
+	public Color ownedColor;
+	public Color notOwnedColor;
 	// Use this for initialization
 	void Start () 
-	{		
-		GetComponentInChildren<ShopScript> ().isAccessible = false;
+	{		if (isOutpost) {
+			GetComponentInChildren<ShopScript> ().isAccessible = false;
+		}
 		initialTimeToCapt = timeToCapture;
 
 	}
@@ -53,10 +74,10 @@ public class CaptureThePoint : NetworkBehaviour
 			{
 				if (!haveGivenTip0) 
 				{
-					GameManager.instanceGM.ShowAGameTip ("Kill all enemies on the outpost area to be able to capture it.");
+					GameManager.instanceGM.ShowAGameTip (tip0En);
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.ShowAGameTip ("Tuez tous les ennemis sur l'avant-poste pour le capturer.");
+						GameManager.instanceGM.ShowAGameTip (tip0Fr);
 
 					}
 					haveGivenTip0 = true;
@@ -184,26 +205,30 @@ public class CaptureThePoint : NetworkBehaviour
 		{
 			GetComponent<AudioSource> ().PlayOneShot (Capture);
 			GetComponent<Location> ().IconColour = Color.green;
-			GetComponentInChildren<ShopScript> ().isAccessible = true;
-			transform.GetChild (0).GetComponent<Location> ().enabled = true;
+
+			if (isOutpost) {
+				GetComponentInChildren<ShopScript> ().isAccessible = true;
+				transform.GetChild (0).GetComponent<Location> ().enabled = true;
+			}
+
 			if (GameManager.instanceGM.isTeam1) 
 			{
 				if (belongsTo == PointOwner.team1) 
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("Notre avant-poste a été capturé.", Color.green);
+						GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentPositiveFr, Color.green);
 						return;
 					}
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been captured.", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentPositiveEng, Color.green);
 				} else 
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("L'avant-poste ennemi a été capturé.", Color.red);
+						GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentNegativeFr, Color.red);
 						return;
 					}
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been captured.", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentNegativeEng, Color.red);
 				}
 			} else 
 			{
@@ -211,44 +236,52 @@ public class CaptureThePoint : NetworkBehaviour
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("L'avant-poste ennemi a été capturé.", Color.red);
+						GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentNegativeFr, Color.red);
 						return;
 					}
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been captured.", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentNegativeFr, Color.red);
 				} else 
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("Notre avant-poste a été capturé.", Color.green);
+						GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentPositiveFr, Color.green);
 						return;
 					}
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been captured.", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentPositiveEng, Color.green);
 				}
 			}
 		}else 
 		{
 			GetComponent<Location> ().IconColour = Color.yellow;
-			transform.GetChild (0).GetComponent<Location> ().enabled = false;
-			GetComponentInChildren<ShopScript> ().isAccessible = false;
-			GetComponentInChildren<ShopScript> ().CloseYourMenu ();
+			if (isCatapulte) 
+			{
+				GetComponent<CatapulteObjectScript>().DesactivatePlayerBtn ();
+			}
+			if (isOutpost) {
+				
+				transform.GetChild (0).GetComponent<Location> ().enabled = false;
+				GetComponentInChildren<ShopScript> ().isAccessible = false;
+				GetComponentInChildren<ShopScript> ().CloseYourMenu ();
+			}
+
 			if (GameManager.instanceGM.isTeam1) 
 			{
 				if (belongsTo == PointOwner.team1) 
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("L'avant-poste ennemi est perdu.", Color.green);
+						GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentPositiveLossFr, Color.green);
 						return;
 					}
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been lost!", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentPositiveLossEng, Color.green);
 				} else 
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("Notre avant-poste est perdu.", Color.red);
+						GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentNegativeLossFr, Color.red);
 						return;
 					}
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost.", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentNegativeLossEng, Color.red);
 				}
 			} else 
 			{
@@ -256,18 +289,18 @@ public class CaptureThePoint : NetworkBehaviour
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("Notre avant-poste est perdu.", Color.red);
+						GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentNegativeLossFr, Color.red);
 						return;
 					}
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("Our outpost has been lost!", Color.red);
+					GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentNegativeLossEng, Color.red);
 				} else 
 				{
 					if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 					{
-						GameManager.instanceGM.messageManager.SendAnAlertMess ("L'avant-poste ennemi est perdu.", Color.green);
+						GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentPositiveLossFr, Color.green);
 						return;
 					}
-					GameManager.instanceGM.messageManager.SendAnAlertMess ("The enemy outpost has been lost", Color.green);
+					GameManager.instanceGM.messageManager.SendAnAlertMess (alertMessSentPositiveLossEng, Color.green);
 				}
 			}
 		}
@@ -277,10 +310,10 @@ public class CaptureThePoint : NetworkBehaviour
 	{
 		if (!haveGivenTip) 
 		{
-			GameManager.instanceGM.ShowAGameTip ("Capture the outpost to get acess to his shop and be able to increase the strenght of your daily boss.");
+			GameManager.instanceGM.ShowAGameTip (tipEn);
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
-				GameManager.instanceGM.ShowAGameTip ("Capturez l'avant-poste pour avoir accés au magasin associé et pouvoir augmenter la force de votre boss journalier.");
+				GameManager.instanceGM.ShowAGameTip (tipFr);
 
 			}
 			haveGivenTip = true;

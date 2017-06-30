@@ -17,7 +17,7 @@ public class CatapulteObjectScript : NetworkBehaviour
 	[ServerCallback]
 	public void OnTriggerEnter(Collider other)
 	{
-		if (isBeingUsed) 
+		if (isBeingUsed || GetComponent<CaptureThePoint>().belongsTo == CaptureThePoint.PointOwner.neutral) 
 		{
 			return;
 		}
@@ -54,7 +54,7 @@ public class CatapulteObjectScript : NetworkBehaviour
 	public void ShowTheAnimCata(int ch)
 	{
 		chargesLoaded = ch;
-		if (isServer && isBeingUsed) 
+		if (isServer && isBeingUsed ) 
 		{
 			userOfCata.GetComponent<PlayerCastCatapulte> ().RpcActivateCata (chargesLoaded);
 

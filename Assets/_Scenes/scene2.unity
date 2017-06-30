@@ -5497,14 +5497,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bffd30cfc9d6a644b958049bfc95222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOutpost: 1
+  isCatapulte: 0
   belongsTo: 2
   canBeOwnedBy: 0
   playersIn: []
   enemiesIn: []
-  timeToCapture: 10
+  timeToCapture: 30
   Capture: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
   haveGivenTip0: 0
+  tip0Fr: Tuez tous les ennemis sur l'avant-poste pour le capturer.
+  tip0En: Kill all enemies on the outpost area to be able to capture it.
   haveGivenTip: 0
+  tipFr: "Capturez l'avant-poste pour avoir acc\xE9s au magasin associ\xE9 et pouvoir
+    augmenter la force de votre boss journalier."
+  tipEn: Capture the outpost to get acess to his shop and be able to increase the
+    strenght of your daily boss.
+  alertMessSentPositiveEng: Our outpost has been captured.
+  alertMessSentNegativeEng: The enemy outpost has been captured.
+  alertMessSentPositiveFr: "Notre avant-poste a \xE9t\xE9 captur\xE9."
+  alertMessSentNegativeFr: "L'avant-poste ennemi a \xE9t\xE9 captur\xE9."
+  alertMessSentPositiveLossEng: The enemy outpost has been lost!
+  alertMessSentNegativeLossEng: Our outpost has been lost.
+  alertMessSentPositiveLossFr: L'avant-poste ennemi est perdu.
+  alertMessSentNegativeLossFr: Notre avant-poste est perdu.
+  ownedColor: {r: 0, g: 0, b: 0, a: 0}
+  notOwnedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!82 &262913170
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6420,7 +6438,11 @@ GameObject:
   - component: {fileID: 412402216}
   - component: {fileID: 412402215}
   - component: {fileID: 412402214}
-  m_Layer: 0
+  - component: {fileID: 412402221}
+  - component: {fileID: 412402220}
+  - component: {fileID: 412402222}
+  - component: {fileID: 412402223}
+  m_Layer: 18
   m_Name: CatapulteArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6521,8 +6543,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0.53, y: -0.06, z: -0.59}
 --- !u!33 &412402218
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6546,6 +6568,226 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &412402220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 412402213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe65ef9dfc0d34d990203dc33b0d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayIcon: {fileID: 2800000, guid: 9f5ed83dcb6a7a74d86ce91ff985da1d, type: 3}
+  IconColour: {r: 0.87782264, g: 0.9485294, b: 0.21620889, a: 1}
+  Display_1_Type: 1
+  Distance_1_Units: 
+  Display_1_Timer: 5
+  Display_1_Text: Catapulte
+  Text_1_Colour: {r: 0.7607843, g: 0.78039217, b: 0.8509804, a: 1}
+  Display_2_Type: 1
+  Distance_2_Units: 
+  Display_2_Timer: 0
+  Display_2_Text: 
+  Text_2_Colour: {r: 1, g: 1, b: 1, a: 1}
+  PointerArrowIcon: {fileID: 2800000, guid: 9f20a48ab5ac60a42be45b9bea6a7111, type: 3}
+  PointerColour: {r: 0.9485294, g: 0.933907, b: 0.41846886, a: 1}
+  DisplayStyle: 0
+  PulsingAnimation: 0
+  PulsingSpeed: 0
+  FadeOverDistance: 1
+  MaxFadeDistance: 150
+  FadeDistances:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.008333334
+      value: 0.006210923
+      inSlope: 2.4059057
+      outSlope: 2.4059057
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.09648667
+      value: 0.21829955
+      inSlope: 2.496706
+      outSlope: 2.496706
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.18751414
+      value: 0.44717458
+      inSlope: 2.6085792
+      outSlope: 2.6085792
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.3437268
+      value: 0.86938727
+      inSlope: 1.6991668
+      outSlope: 1.6991668
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.5019231
+      value: 0.97941697
+      inSlope: 0.049661547
+      outSlope: 0.049661547
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.7987769
+      value: 0.8024317
+      inSlope: -1.1709036
+      outSlope: -1.1709036
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.9408663
+      value: 0.40683472
+      inSlope: -4.6546516
+      outSlope: -4.6546516
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1.0041667
+      value: -0.006210819
+      inSlope: -6.5251613
+      outSlope: -6.5251613
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  DisplayOnScreen: 1
+  DisplayOffScreen: 1
+  Minimap_Display_Icon: {fileID: 2800000, guid: e2a7b44f7b8644e4399c2aa6078ffa15,
+    type: 3}
+  LastTimerUpdate: 0
+--- !u!114 &412402221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 412402213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bffd30cfc9d6a644b958049bfc95222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOutpost: 0
+  isCatapulte: 1
+  belongsTo: 2
+  canBeOwnedBy: 0
+  playersIn: []
+  enemiesIn: []
+  timeToCapture: 10
+  Capture: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
+  haveGivenTip0: 0
+  tip0Fr: Capturez la catapulte pour pouvoir l'utiliser.
+  tip0En: Capture the catapulte to be able to use it.
+  haveGivenTip: 0
+  tipFr: "Vous pouvez acheter des munitions pour vos alli\xE9s ou pour plus tard."
+  tipEn: You can buy ammo for your allies or for later on in the game.
+  alertMessSentPositiveEng: Our catapulte has been captured.
+  alertMessSentNegativeEng: The enemy catapulte has been captured.
+  alertMessSentPositiveFr: "Notre catapulte ouest a \xE9t\xE9 captur\xE9."
+  alertMessSentNegativeFr: "La catapulte ouest ennemi a \xE9t\xE9 captur\xE9."
+  alertMessSentPositiveLossEng: The enemy catapulte has been lost!
+  alertMessSentNegativeLossEng: Our catapulte has been lost.
+  alertMessSentPositiveLossFr: La catapulte ouest ennemi est perdu.
+  alertMessSentNegativeLossFr: Notre catapulte ouest est perdu.
+  ownedColor: {r: 0, g: 0, b: 0, a: 0}
+  notOwnedColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!82 &412402222
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 412402213}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &412402223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 412402213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f812dbb58eb7b74daa721ee039f4e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamOfCataIs1: 1
+  spellDmg: 200
+  spellPrefab: {fileID: 1900963935911786, guid: 78ff8651d0b94f848a395dee1ca2e083,
+    type: 2}
+  timeBetweenFire: 5
 --- !u!1001 &418229922
 Prefab:
   m_ObjectHideFlags: 0
@@ -29411,14 +29653,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bffd30cfc9d6a644b958049bfc95222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOutpost: 1
+  isCatapulte: 0
   belongsTo: 2
   canBeOwnedBy: 1
   playersIn: []
   enemiesIn: []
-  timeToCapture: 10
+  timeToCapture: 30
   Capture: {fileID: 8300000, guid: 6bb58e0a011251e4da575e4a1c6298b3, type: 3}
   haveGivenTip0: 0
+  tip0Fr: Tuez tous les ennemis sur l'avant-poste pour le capturer.
+  tip0En: Kill all enemies on the outpost area to be able to capture it.
   haveGivenTip: 0
+  tipFr: "Capturez l'avant-poste pour avoir acc\xE9s au magasin associ\xE9 et pouvoir
+    augmenter la force de votre boss journalier."
+  tipEn: Capture the outpost to get acess to his shop and be able to increase the
+    strenght of your daily boss.
+  alertMessSentPositiveEng: Our outpost has been captured.
+  alertMessSentNegativeEng: The enemy outpost has been captured.
+  alertMessSentPositiveFr: "Notre avant-poste a \xE9t\xE9 captur\xE9."
+  alertMessSentNegativeFr: "L'avant-poste ennemi a \xE9t\xE9 captur\xE9."
+  alertMessSentPositiveLossEng: The enemy outpost has been lost!
+  alertMessSentNegativeLossEng: Our outpost has been lost.
+  alertMessSentPositiveLossFr: L'avant-poste ennemi est perdu.
+  alertMessSentNegativeLossFr: Notre avant-poste est perdu.
+  ownedColor: {r: 0, g: 0, b: 0, a: 0}
+  notOwnedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1667122942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36181,7 +36441,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 909915201
+  randomSeed: 2137203910
   InitialModule:
     serializedVersion: 3
     enabled: 1
