@@ -37,7 +37,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 	}
 	public void NormalMode()
 	{
-		Invoke ("NormalModeExe", 0.1f);
+		Invoke ("NormalModeExe", 0.2f);
 	}
 	public void NormalModeExe()
 	{
@@ -62,7 +62,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 	}
 	public void HardMode()
 	{
-		Invoke ("HardModeExe", 0.1f);
+		Invoke ("HardModeExe", 0.2f);
 
 	}
 	public void HardModeExe()
@@ -101,7 +101,7 @@ public class ChooseDifficultyScript : MonoBehaviour
 	}
 	public void MadnessMode()
 	{
-		Invoke ("MadnessModeExe", 0.1f);
+		Invoke ("MadnessModeExe", 0.2f);
 
 	}
 	public void MadnessModeExe()
