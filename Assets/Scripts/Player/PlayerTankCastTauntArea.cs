@@ -193,8 +193,8 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
         spellLvl++;
         spellCost += 5;
         spellCD -= 1f;
-        spellDmg += 5;
-        spellDuration += 0.2f;
+        spellDmg += 6;
+        spellDuration += 1f;
     }
 
     //suffit de linké ca a un bouton d'interface et boom

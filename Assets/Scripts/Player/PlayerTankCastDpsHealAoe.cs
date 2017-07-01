@@ -185,9 +185,9 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
     public void upgradeSpell()
     {
         spellLvl++;
-        spellCost += 15;
+        spellCost += 8;
         spellCD -= 0.5f;
-        spellDmg += 22;
+        spellDmg += 18;
     }
 
     //suffit de linké ca a un bouton d'interface et boom
