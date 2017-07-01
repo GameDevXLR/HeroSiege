@@ -41,6 +41,10 @@ public class AutoCastCatapulteOnPlayers : NetworkBehaviour
 
 	public void FireOnAPlayer()
 	{
+		
+		int iValue = Mathf.CeilToInt(spellDmg * 1.10f);
+		spellDmg = iValue;
+
 		if (teamOfCataIs1) 
 		{
 			int x = Random.Range (0, GameManager.instanceGM.team1ID.Count);

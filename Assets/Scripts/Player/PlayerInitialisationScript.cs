@@ -62,7 +62,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		difficultyPanel = GameObject.Find ("DifficultyPanel");
 		if (isServer) 
 		{
-			difficultyPanel.transform.localScale = new Vector3 (0.45f,0.45f,0.45f);
+			difficultyPanel.transform.localScale = new Vector3 (0.5f,0.5f,0.5f);
 		}
 		heroSelectPanel = GameObject.Find ("HeroSelectionPanel");
 		selectHeroTank1 = heroSelectPanel.transform.Find("ChampionPan").Find ("SelectTank1Btn").GetComponent<Button>();
