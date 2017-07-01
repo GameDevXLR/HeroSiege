@@ -119,8 +119,10 @@ public class AutoCastCatapulteOnPlayers : NetworkBehaviour
 //		GetComponent<AudioSource> ().PlayOneShot (rotatingCataSnd);
 
 		animController.enabled = true;
-		yield return new WaitForSecondsRealtime (3f);
+		yield return new WaitForSeconds (2f);
 		GetComponent<AudioSource> ().PlayOneShot (firingCataSnd);
+		yield return new WaitForSeconds (3f);
+
 		animController.enabled = false;
 
 	}
