@@ -137,11 +137,12 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 					}
 				}
 			}
-			if (target && Vector3.Distance (transform.position, target.transform.position) < attackRange) 
-			{
-				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
-				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
-				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
+			if (target && Vector3.Distance (transform.position, target.transform.position) < attackRange) {
+				if ((target.transform.position - transform.position) != Vector3.zero) {
+					Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
+					float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
+					transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
+				}
 			}
 
 		}
