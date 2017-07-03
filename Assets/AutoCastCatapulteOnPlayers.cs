@@ -116,7 +116,7 @@ public class AutoCastCatapulteOnPlayers : NetworkBehaviour
 	}
 	IEnumerator FireProcedure()
 	{
-//		GetComponent<AudioSource> ().PlayOneShot (rotatingCataSnd);
+		GetComponent<AudioSource> ().PlayOneShot (rotatingCataSnd);
 
 		animController.enabled = true;
 		yield return new WaitForSeconds (2f);
