@@ -17,8 +17,7 @@ public class CaptureTheCatapulte : CaptureThePoint
     public override void captureThePoint(PointOwner target)
     {
         base.captureThePoint(target);
-        ParticleSystem.EmissionModule em = cdParticles.emission;
-        em.enabled = true;
+		RpcCaptureParticle ();
         anime.Play();
     }
 
@@ -30,5 +29,21 @@ public class CaptureTheCatapulte : CaptureThePoint
         em.enabled = false;
         anime.Stop();
     }
+
+
+	[ClientRpc]
+	public void RpcCaptureParticle()
+	{
+		ParticleSystem.EmissionModule em = cdParticles.emission;
+		em.enabled = true;
+		Invoke("unactivateEffect", 10);
+	}
+
+	public void unactivateEffect()
+	{
+		ParticleSystem.EmissionModule em = cdParticles.emission;
+		em.enabled = false;
+
+	}
 
 }
