@@ -79,7 +79,7 @@ public class GameManager : NetworkBehaviour
 		team1LivesDisplay = GameObject.Find ("LivesDisplayT1").GetComponent<Text> ();
 		team2LivesDisplay = GameObject.Find ("LivesDisplayT2").GetComponent<Text> ();
 		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
-		difficultyPanel = GameObject.Find ("DifficultyPanel");
+		difficultyPanel = GameObject.Find ("NewDiffPan");
 		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
 		locManager = GameObject.Find ("LocationManager").GetComponent<LocationManager> ();
 		lightM = GameObject.Find ("[Lights]").GetComponent<LightManagerScript> ();
@@ -344,10 +344,10 @@ public class GameManager : NetworkBehaviour
 		case 2:
 
 			break;
-		case 4:
+		case 3:
 
 			break;
-		case 6:
+		case 4:
 
 			break;
 		default :
@@ -420,7 +420,7 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().StartSpawning (Days);
 		}
-		if (gameDifficulty == 4) 
+		if (gameDifficulty == 3) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().enabled = true;
@@ -437,7 +437,7 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().StartSpawning (Days);
 
 		}
-		if (gameDifficulty == 6) 
+		if (gameDifficulty == 4) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().enabled = true;
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().enabled = true;
@@ -482,7 +482,7 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ().enabled = false;
 
 		}
-		if (gameDifficulty == 4) 
+		if (gameDifficulty == 3) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ().StopAllCoroutines ();
@@ -499,7 +499,7 @@ public class GameManager : NetworkBehaviour
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ().enabled = false;
 
 		}
-		if (gameDifficulty == 6) 
+		if (gameDifficulty == 4) 
 		{
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ().StopAllCoroutines ();
 			difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ().StopAllCoroutines ();
@@ -568,18 +568,18 @@ public class GameManager : NetworkBehaviour
 				messageManager.SendAnAlertMess ("The game is starting!You have join the red team.", Color.green);			
 			}
 		}
-		GameObject.Find ("PlayerSelectionScreen").GetComponent<Canvas> ().enabled = true;
-		GameObject.Find ("DifficultySelectCanvas").GetComponent<Canvas> ().enabled = false;
+//		GameObject.Find ("PlayerSelectionScreen").GetComponent<Canvas> ().enabled = true;
+//		GameObject.Find ("DifficultySelectCanvas").GetComponent<Canvas> ().enabled = false;
 		ActualizeLocSystem ();
 		if (PlayerPrefsX.GetBool ("BEGINNER_GUIDE", true)) 
 		{
-			tutorialPanel.enabled = true;
-			tutoTip.text = "Select your hero. This will greatly influence the gameplay. The Ovate is a difficult choice if you are playing solo. The Champion is easy to play and can make a good choice if it's your first game.";
-			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-			{
-				tutoTip.text = "Selectionnez votre héros. Ceci influencera grandement le jeu. L'Ovate est un choix difficile si vous jouez seul. Le Champion est plus accessible si c'est votre première partie.";
-
-			}
+//			tutorialPanel.enabled = true;
+//			tutoTip.text = "Select your hero. This will greatly influence the gameplay. The Ovate is a difficult choice if you are playing solo. The Champion is easy to play and can make a good choice if it's your first game.";
+//			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+//			{
+//				tutoTip.text = "Selectionnez votre héros. Ceci influencera grandement le jeu. L'Ovate est un choix difficile si vous jouez seul. Le Champion est plus accessible si c'est votre première partie.";
+//
+//			}
 		}
 	}
 

@@ -1869,7 +1869,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Version 0.13.0
+  m_Text: Version 0.13.1
 --- !u!222 &645557344
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2035,6 +2035,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.size
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4570286692455482, guid: 57a189d9da793d245827a03338d244dc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -60
@@ -2072,7 +2077,19 @@ Prefab:
       propertyPath: isGuideActive
       value: 
       objectReference: {fileID: 1707910553}
-    m_RemovedComponents: []
+    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: matchMaker
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[24]
+      value: 
+      objectReference: {fileID: 1153460153048618, guid: 6b7e13e4cdf908f4899e4d4b5597f388,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: 114017098472514954, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &771548507

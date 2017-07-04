@@ -331,6 +331,11 @@ public class PlayerAutoAttack: NetworkBehaviour
 			}
 			anim.SetBool ("attack", false);
 		}
+		if (!agent) 
+		{
+			agent = GetComponent<NavMeshAgent> ();
+
+		}
 		if (agent.isActiveAndEnabled) 
 		{
 			agent.velocity = Vector3.zero;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using HyperLuminalGames;
+using UnityEngine.Events;
 
 [NetworkSettings(channel = 0, sendInterval =0.5f)]
 
@@ -40,13 +41,16 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public AudioClip autoAArcher1;
 	public AudioClip autoAArcher2;
 	public AudioClip deadArcher;
-
+	[Header("HeroSelection stuff.")]
+	public UnityEvent selectedHero;
 	public PlayerIGManager myPlayerIGManager;
 	public GenericManaScript myGeneManaScript;
 	public PlayerAutoAttack myAutoAScript;
 	public PlayerStatPlus myStatPlusScript;
 	[SyncVar(hook = "ChangeMyName")]public string playerNickName;
 
+	public Color selectedHeroColor;
+	public Color defaultHeroColor;
 //	public override void OnStartClient ()
 //	{
 //		ChangeMyName (playerNickName);
@@ -59,10 +63,10 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
 		//		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
 		CmdChangeName (PlayerPrefs.GetString ("PlayerNN"));
-		difficultyPanel = GameObject.Find ("DifficultyPanel");
+		difficultyPanel = GameObject.Find ("NewDiffPan");
 		if (isServer) 
 		{
-			difficultyPanel.transform.localScale = new Vector3 (0.5f,0.5f,0.5f);
+//			difficultyPanel.transform.localScale = new Vector3 (0.5f,0.5f,0.5f);
 		}
 		heroSelectPanel = GameObject.Find ("HeroSelectionPanel");
 		selectHeroTank1 = heroSelectPanel.transform.Find("ChampionPan").Find ("SelectTank1Btn").GetComponent<Button>();
@@ -78,7 +82,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
-
+			selectedHero.AddListener (CapsuleSelectTank);
 			string playerNN;
 			playerNN = PlayerPrefs.GetString ("PlayerNN");
 //			ChangeMyName (playerNN);
@@ -102,7 +106,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
 			if(isLocalPlayer)
 			{
-			GameObject.Find ("DifficultyPanel").GetComponent<ChooseDifficultyScript> ().enabled = true;
+			GameObject.Find ("NewDiffPan").GetComponent<ChooseDifficultyScript> ().enabled = true;
 				if (NetworkManager.singleton.GetComponent<PlayerMenuSettings> ().isItOneLane) 
 				{
 					GameManager.instanceGM.soloGame = true;
@@ -126,12 +130,36 @@ public class PlayerInitialisationScript : NetworkBehaviour
 
 	public void ListenerSelectHeroTank1()
 	{
+		selectedHero.RemoveAllListeners ();
+		selectedHero.AddListener (CapsuleSelectTank);
+		//ajouter ici le code pour montrer son choix
+		CmdSayIAmTank ();
+//		CmdSelectHeroTank1 ();
+	}
+	public void CapsuleSelectTank()
+	{
 		CmdSelectHeroTank1 ();
 	}
 	[Command]
 	public void CmdSelectHeroTank1()
 	{
 		RpcHeroTank1Selected ();
+	}	
+	[Command]
+	public void CmdSayIAmTank()
+	{
+		RpcTankSelected ();
+	}
+	[ClientRpc]
+	public void RpcTankSelected()
+	{
+		if (isLocalPlayer) 
+		{
+			selectHeroDps1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
+			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
+			selectHeroTank1.transform.parent.GetComponent<Image> ().color = selectedHeroColor;
+		}
+		//ajouter ici les changements lié aux icones des joueurs dans les panneaux de team
 	}
 	[ClientRpc]
 	public void RpcHeroTank1Selected()
@@ -175,7 +203,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			GetComponent<PlayerManager> ().avatarImg.sprite = tankAvatarImg;
 
-			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
+//			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
 			ShowYourTip ();
 		} else //si c'est le perso d'un autre joueur pour toi : 
 		{
@@ -184,12 +212,36 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	public void ListenerSelectHeroHeal1()
 	{
+		selectedHero.RemoveAllListeners ();
+		selectedHero.AddListener (CapsuleSelectHeal);
+		//ajouter ici le code pour montrer son choix
+		CmdSayIAmHeal ();
+	}
+	public void CapsuleSelectHeal()
+	{
 		CmdSelectHeroHeal1 ();
 	}
 	[Command]
 	public void CmdSelectHeroHeal1()
 	{
 		RpcHeroHeal1Selected ();
+	}
+	[Command]
+	public void CmdSayIAmHeal()
+	{
+		RpcHealSelected ();
+	}
+	[ClientRpc]
+	public void RpcHealSelected()
+	{
+		if (isLocalPlayer) 
+		{
+			selectHeroDps1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
+			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = selectedHeroColor;
+			selectHeroTank1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
+		}
+		//ajouter ici les changements lié aux icones des joueurs dans les panneaux de team
+		
 	}
 	[ClientRpc]
 	public void RpcHeroHeal1Selected()
@@ -236,7 +288,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//faire ici la config du hero tank1 pour tous
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
-			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
+//			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
 			ShowYourTip ();
 			GetComponent<PlayerManager> ().avatarImg.sprite = healAvatarImg;
 
@@ -247,12 +299,35 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	public void ListenerSelectHeroDps1()
 	{
+		selectedHero.RemoveAllListeners ();
+		selectedHero.AddListener (CapsuleSelectDps);
+		//ajouter ici le code pour montrer son choix
+		CmdSayIAmDps ();
+	}
+	public void CapsuleSelectDps()
+	{
 		CmdSelectHeroDps1 ();
 	}
 	[Command]
 	public void CmdSelectHeroDps1()
 	{
 		RpcHeroDps1Selected ();
+	}
+	[Command]
+	public void CmdSayIAmDps()
+	{
+		RpcDpsSelected ();
+	}
+	[ClientRpc]
+	public void RpcDpsSelected()
+	{
+		if (isLocalPlayer) 
+		{
+			selectHeroDps1.transform.parent.GetComponent<Image> ().color = selectedHeroColor;
+			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
+			selectHeroTank1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
+		}
+		//ajouter ici les changements lié aux icones des joueurs dans les panneaux de team
 	}
 	[ClientRpc]
 	public void RpcHeroDps1Selected()
@@ -302,7 +377,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//faire ici la config du hero tank1 pour tous
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
-			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
+//			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
 			GetComponent<PlayerManager> ().avatarImg.sprite = DpsAvatarImg;
 
 			ShowYourTip ();
