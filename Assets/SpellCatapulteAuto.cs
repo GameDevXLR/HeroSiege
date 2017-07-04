@@ -31,10 +31,7 @@ public class SpellCatapulteAuto : NetworkBehaviour {
 		if (Time.time > timer + timeBeforeImpact && !isDealing) 
 		{
 			isDealing = true;
-			GetComponent<AudioSource> ().PlayOneShot (impactSound);
-			//			GetComponentInChildren<Animator> ().Play ("TirCatapulte");
-			transform.GetChild (0).gameObject.SetActive (false);
-			transform.GetChild (1).gameObject.SetActive (true);
+			RpcActivateFire ();
 
 			return;
 		}
@@ -88,6 +85,14 @@ public class SpellCatapulteAuto : NetworkBehaviour {
 
 		}
 
+	}
+	[ClientRpc]
+	public void RpcActivateFire()
+	{
+		GetComponent<AudioSource> ().PlayOneShot (impactSound);
+		//			GetComponentInChildren<Animator> ().Play ("TirCatapulte");
+		//			transform.GetChild (0).gameObject.SetActive (false);
+		transform.GetChild (1).gameObject.SetActive (true);
 	}
 
 }

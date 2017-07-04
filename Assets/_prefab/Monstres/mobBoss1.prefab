@@ -1159,6 +1159,7 @@ GameObject:
   - component: {fileID: 4433370291509528}
   - component: {fileID: 212963476257725238}
   - component: {fileID: 114759398925377060}
+  - component: {fileID: 114754735642862784}
   m_Layer: 9
   m_Name: SlowEffect
   m_TagString: Untagged
@@ -3201,6 +3202,18 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1678407210894732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fa0296c1368ad14b82ee31a0ad92c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationActivated: 1
+--- !u!114 &114754735642862784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1761867068631862}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fa0296c1368ad14b82ee31a0ad92c7b, type: 3}

@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 4569675735293238}
   - component: {fileID: 212790967586494710}
   - component: {fileID: 114197959074956008}
+  - component: {fileID: 114909513483376538}
   m_Layer: 9
   m_Name: SlowEffect
   m_TagString: Untagged
@@ -1984,6 +1985,18 @@ MonoBehaviour:
   underSlow: 0
   CCTwistImg: {fileID: 212346173114512804}
   SlowImg: {fileID: 212790967586494710}
+--- !u!114 &114909513483376538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1887785503553278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fa0296c1368ad14b82ee31a0ad92c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationActivated: 1
 --- !u!135 &135633682344695856
 SphereCollider:
   m_ObjectHideFlags: 1

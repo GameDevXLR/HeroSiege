@@ -17,6 +17,7 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 	public List<GameObject> spellTargets;
 	SphereCollider thisCollider;
 	public GameObject childObj;
+	public Transform[] effectsToResize;
 	public GameObject areaBeforeExplo;
 
 	void Start()
@@ -59,6 +60,7 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 				{
 					IsTriggered = true;
 					ActivateTheTrap ();
+					timer = Time.time;
 					notTrigeredTimer = duration; //faire que le temps avant destruction devienne la durée du zone.
 				} else 
 				{
@@ -98,7 +100,12 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 
 		thisCollider.radius = exploRadius;//augmenter la zone du poison
 		childObj.SetActive (true); // activer l'effet de particule
-		childObj.transform.localScale = new Vector3 (exploRadius,exploRadius,exploRadius);
+		Vector3 v = new Vector3 (exploRadius,exploRadius,exploRadius);
+		childObj.transform.localScale = v;
+		foreach (Transform t in effectsToResize) 
+		{
+			t.localScale = v;
+		}
 		areaBeforeExplo.SetActive (false);
 		
 	}
