@@ -116,7 +116,7 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
 		}
-		yield return new WaitForSecondsRealtime (.5f);
+		yield return new WaitForSecondsRealtime (2.5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Dragons enlevés..";
@@ -130,7 +130,7 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
 		}
-		yield return new WaitForSecondsRealtime (1f);
+		yield return new WaitForSecondsRealtime (5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Dragons enlevés...";
@@ -144,7 +144,7 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
 		}
-		yield return new WaitForSecondsRealtime (1f);
+		yield return new WaitForSecondsRealtime (3f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Sac a dos prêt!";
@@ -158,7 +158,7 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
 		}
-		yield return new WaitForSecondsRealtime (1f);
+		yield return new WaitForSecondsRealtime (5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "En attente de la fin de l'hiver.";
@@ -172,7 +172,7 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
 		}
-		yield return new WaitForSecondsRealtime (1f);
+		yield return new WaitForSecondsRealtime (10f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Echec critique!";

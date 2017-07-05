@@ -159,6 +159,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
 			selectHeroTank1.transform.parent.GetComponent<Image> ().color = selectedHeroColor;
 		}
+		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = tankAvatarImgMini;
+
 		//ajouter ici les changements lié aux icones des joueurs dans les panneaux de team
 	}
 	[ClientRpc]
@@ -240,6 +242,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = selectedHeroColor;
 			selectHeroTank1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
 		}
+		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = healAvatarImgMini;
+
 		//ajouter ici les changements lié aux icones des joueurs dans les panneaux de team
 		
 	}
@@ -327,6 +331,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
 			selectHeroTank1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
 		}
+		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = DpsAvatarImgMini;
+
 		//ajouter ici les changements lié aux icones des joueurs dans les panneaux de team
 	}
 	[ClientRpc]

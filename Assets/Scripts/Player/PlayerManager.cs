@@ -25,13 +25,20 @@ public class PlayerManager : NetworkBehaviour
 	public GameObject playerUI;
 	public Transform playersStatsView;
     public GameObject minimap;
-
+	[Header("Selec hero screen")]
+	public GameObject playerSelecPrefab;
+	public GameObject playerSelecUI;
+	public Image playerSelecHeroChosenImg;
+	public Transform team1SelecScreenPanel;
+	public Transform team2SelecScreenPanel;
 	public Sprite myTeamSprite;
 	public Image myTeamIcon;
 
 	public void Start()
 	{
 		playersStatsView = GameObject.Find ("PlayersStatsView").transform;
+		team1SelecScreenPanel = GameObject.Find ("BlueTeamSelecPanel").transform;
+		team2SelecScreenPanel = GameObject.Find ("RedTeamSelecPanel").transform;
 		minimap = GameObject.Find("minimap");
 		if (!isLocalPlayer) 
 		{
@@ -40,6 +47,7 @@ public class PlayerManager : NetworkBehaviour
 			//systeme de nom provisoire juste pour distinguer : en attendant le menu avant jeu.
 		}else
 		{
+			StartCoroutine (DelayTheSelecHeroUI ());
 			playerKillsTxt = GameObject.Find ("KillsCountLog").GetComponent<Text> ();
 			playerDeathsTxt = GameObject.Find ("DeathsCountLog").GetComponent<Text> ();
 			playerLvlDisplay = GameObject.Find ("PlayerLevel").GetComponent<Text> ();
@@ -71,10 +79,33 @@ public class PlayerManager : NetworkBehaviour
 		StartCoroutine (DelayTheUIActu ());
 	}
 
+	IEnumerator DelayTheSelecHeroUI()
+	{
+		yield return new WaitForSecondsRealtime (0.5f);
+		SpawnPlayerSelecUI ();
+
+	}
+
+	public void SpawnPlayerSelecUI()
+	{
+		if (GetComponent<PlayerXPScript> ().isTeam1) 
+		{
+			playerSelecUI = Instantiate (playerSelecPrefab, team1SelecScreenPanel, true);
+		} else 
+		{
+			playerSelecUI = Instantiate (playerSelecPrefab, team2SelecScreenPanel, true);
+
+		}
+		playerSelecHeroChosenImg = playerSelecUI.transform.Find("Avatar").GetComponent<Image>();
+		playerSelecUI.GetComponentInChildren<Text> ().text = GetComponent<PlayerInitialisationScript>().playerNickName;
+		playerSelecUI.transform.localScale = new Vector3 (1f, 1f, 1f);
+	}
+
 	IEnumerator DelayTheUIActu()
 	{
 		yield return new WaitForSeconds (.8f);
 		myTeamIcon.sprite = myTeamSprite;
+		SpawnPlayerSelecUI ();
 	}
 
 	public void ActualizeKillCount(int kills)
