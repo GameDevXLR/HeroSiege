@@ -55,9 +55,22 @@ public class SpellCatapulteAuto : NetworkBehaviour {
 		spellTargets.Clear ();
 	}
 
+//	[ServerCallback]
+//	void OnTriggerEnter(Collider other)
+//	{
+//		Debug.Log (other.gameObject.name);
+//		if (other.gameObject.tag == "SafeZone") 
+//		{
+//			NetworkServer.Destroy (this.gameObject);
+//		}
+//	}
 	[ServerCallback]
 	void OnTriggerStay(Collider other)
 	{
+		if (other.gameObject.tag == "SafeZone") 
+		{
+			NetworkServer.Destroy (this.gameObject);
+		}
 		if (!isDealing) 
 		{
 			return;

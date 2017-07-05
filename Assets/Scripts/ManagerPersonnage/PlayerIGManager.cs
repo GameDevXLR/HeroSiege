@@ -244,9 +244,9 @@ public class PlayerIGManager : CharacterIGManager {
 
     public void LevelUp()
     {
-        maxHp += levelUpBonusHP + ((maxHp - bonusHp) * 5 / 100);
+        maxHp += levelUpBonusHP + ((maxHp - bonusHp) * 10 / 100);
         armorScore += levelUpBonusArmor;
-        currentHp += levelUpBonusHP + ((maxHp - bonusHp) * 5 / 100);
+        currentHp += levelUpBonusHP + ((maxHp - bonusHp) * 10 / 100);
         respawnTime += 1f;
 //        lifeBar.localScale = new Vector3(1, 1f, 1f);
 //

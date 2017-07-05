@@ -57,11 +57,6 @@ public class CaptureThePoint : NetworkBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == Layers.Player && other.gameObject.tag == "Player")
@@ -84,7 +79,7 @@ public class CaptureThePoint : NetworkBehaviour
                 }
             }
         }
-        if (other.gameObject.layer == Layers.Ennemies && isServer)
+		if (isServer && other.gameObject.layer == Layers.Ennemies )
         {
             enemiesIn.Add(other.gameObject);
         }
@@ -123,7 +118,7 @@ public class CaptureThePoint : NetworkBehaviour
     [ServerCallback]
     public void OnTriggerStay(Collider other)
     {
-        if (timeToCapture < 10f && timeToCapture > 0f)
+		if (timeToCapture < initialTimeToCapt && timeToCapture > 0f)
         {
             //a opti : ca run 2 fois sur le serveur et le changement de variable / recalcul est trop fréquent mais bon...ya pas 1000 fois le script.
             tmpTime = (int)timeToCapture;
@@ -324,6 +319,8 @@ public class CaptureThePoint : NetworkBehaviour
 
     public void SyncOutpostTimer(int t)
     {
+		tmpTime = t;
+
         if (!haveGivenTip)
         {
             GameManager.instanceGM.ShowAGameTip(tipEn);
@@ -336,8 +333,7 @@ public class CaptureThePoint : NetworkBehaviour
         }
         if (!isServer)
         {
-            tmpTime = t;
-			if (t < timeToCapture && t > 0f)
+			if (t < initialTimeToCapt && t > 0f)
             {
                 GetComponent<Location>().Display_2_Text = tmpTime.ToString();
             }

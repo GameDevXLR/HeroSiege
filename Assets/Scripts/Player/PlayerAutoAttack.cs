@@ -274,6 +274,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public void LevelUp()
 	{
 		damage += levelUpBonusDamage;
+		levelUpBonusDamage += (levelUpBonusDamage * 10 / 100)+1;
 		if (isLocalPlayer) 
 		{
 			damageDisplay.text = damage.ToString ();

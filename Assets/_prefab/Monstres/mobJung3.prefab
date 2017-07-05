@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 4294475019106522}
   - component: {fileID: 95973842391257398}
   - component: {fileID: 114552707128762740}
+  - component: {fileID: 114320902509887358}
   m_Layer: 0
   m_Name: SPIDER
   m_TagString: Untagged
@@ -2332,6 +2333,18 @@ MonoBehaviour:
   eraseRenderer: 1
   originalLayer: 0
   originalMaterials: []
+--- !u!114 &114320902509887358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1370144457175786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8511c4f29669f44ab8f0be885e5b357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2.5
 --- !u!114 &114365788867032628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2874,7 +2887,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1703016065
+  randomSeed: -1519755007
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5883,7 +5896,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -646723448
+  randomSeed: -2061218291
   InitialModule:
     serializedVersion: 3
     enabled: 1

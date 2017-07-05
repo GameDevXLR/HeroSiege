@@ -16,6 +16,7 @@ public class AutoCastCatapulteOnPlayers : NetworkBehaviour
 	public AudioClip rotatingCataSnd;
 	[SyncVar (hook = "SyncCataFiring" )] public bool isFiring;
 	[SyncVar] GameObject targetObj;
+	bool firstShot = true;
 
 	// Use this for initialization
 	void Start () 
@@ -38,9 +39,16 @@ public class AutoCastCatapulteOnPlayers : NetworkBehaviour
 		if (Time.time > previousFire + timeBetweenFire) 
 		{
 			previousFire = Time.time + Random.Range(0f, 20f);
+			if (firstShot) 
+			{
+				firstShot = false;
+				return;
+			}
 			if (GetComponent<CaptureThePoint> ().belongsTo == CaptureThePoint.PointOwner.neutral) 
 			{
-				FireOnAPlayer ();
+				if (GetComponent<CaptureThePoint> ().enemiesIn.Count > 0) {
+					FireOnAPlayer ();
+				}
 			}
 		}
 		
