@@ -24,12 +24,33 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public GameObject childTankSkin;
 	public GameObject childHealSkin;
 	public GameObject childDpsSkin;
+	[Header("Heros skin selection materials and avatars.")]
+	public SkinnedMeshRenderer tankSkinMesh;
+	public SkinnedMeshRenderer healSkinMesh;
+	public SkinnedMeshRenderer dpsSkinMesh;
+	private SkinnedMeshRenderer actualSkinMesh;
+	public Material tankMatSkin1;
+	public Material tankMatSkin2;
+	public Material tankMatSkin3;
+	public Material healMatSkin1;
+	public Material healMatSkin2;
+	public Material healMatSkin3;
+	public Material dpsMatSkin1;
+	public Material dpsMatSkin2;
+	public Material dpsMatSkin3;
+
 	public Button selectHeroTank1;
 	public Button selectHeroHealer1;
 	public Button selectHeroDps1;
 	public Sprite tankAvatarImg;
 	public Sprite healAvatarImg;
 	public Sprite DpsAvatarImg;
+	public Sprite tankAvatar2Img;
+	public Sprite healAvatar2Img;
+	public Sprite DpsAvatar2Img;
+	public Sprite tankAvatar3Img;
+	public Sprite healAvatar3Img;
+	public Sprite DpsAvatar3Img;
 	public Sprite tankAvatarImgMini;
 	public Sprite healAvatarImgMini;
 	public Sprite DpsAvatarImgMini;
@@ -120,12 +141,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void CmdChangeName (string nickName)
 	{
 		playerNickName = nickName;
-		//		GetComponent<PlayerManager> ().playerNickname = nickName;
-		//		if (!isLocalPlayer) 
-		//		{
-		//			GetComponent<PlayerManager> ().playerNNTxt.text = nickName;
-		//			GetComponent<PlayerManager> ().playerUI.transform.GetChild (0).GetComponent<Text> ().text = nickName;
-		//		}
 	}
 
 	public void ListenerSelectHeroTank1()
@@ -139,6 +154,104 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void CapsuleSelectTank()
 	{
 		CmdSelectHeroTank1 ();
+		CmdSendColor(PlayerPrefs.GetInt("SKIN_COLOR", 1));
+	}
+	[Command]
+	public void CmdSendColor(int i)
+	{
+		RpcReceiveSkin (i);
+
+
+	}
+	[ClientRpc]
+	public void RpcReceiveSkin(int i)
+	{
+		if (myPlayerIGManager.heroChosen == "Ovate") 
+		{
+			actualSkinMesh = healSkinMesh;
+			switch (i) {
+			case 1:
+				actualSkinMesh.material = healMatSkin1;
+				if(isLocalPlayer){
+					
+				GetComponent<PlayerManager> ().avatarImg.sprite = healAvatarImg;
+			}
+				break;		
+			case 2:
+				actualSkinMesh.material = healMatSkin2;
+				if(isLocalPlayer){
+					
+				GetComponent<PlayerManager> ().avatarImg.sprite = healAvatar2Img;
+			}
+				break;
+			case 3:
+				actualSkinMesh.material = healMatSkin3;
+				if(isLocalPlayer){
+					
+				GetComponent<PlayerManager> ().avatarImg.sprite = healAvatar3Img;
+			}
+				break;
+			default:
+				break;
+			}
+		} else if (myPlayerIGManager.heroChosen == "Hunter") 
+		{
+			actualSkinMesh = dpsSkinMesh;
+			switch (i) 
+			{
+			case 1:
+				actualSkinMesh.material = dpsMatSkin1;
+				if (isLocalPlayer) {
+					GetComponent<PlayerManager> ().avatarImg.sprite = DpsAvatarImg;
+				}
+				break;		
+			case 2:
+				actualSkinMesh.material = dpsMatSkin2;
+					if(isLocalPlayer){
+						
+				GetComponent<PlayerManager> ().avatarImg.sprite = DpsAvatar2Img;
+					}
+				break;
+			case 3:
+				actualSkinMesh.material = dpsMatSkin3;
+						if(isLocalPlayer){
+							
+				GetComponent<PlayerManager> ().avatarImg.sprite = DpsAvatar3Img;
+						}
+				break;
+			default:
+				break;
+			}
+		} else 
+		{
+			actualSkinMesh = tankSkinMesh;
+			switch (i) 
+			{
+			case 1:
+				actualSkinMesh.material = tankMatSkin1;
+							if(isLocalPlayer){
+								
+				GetComponent<PlayerManager> ().avatarImg.sprite = tankAvatarImg;
+							}
+				break;		
+			case 2:
+				actualSkinMesh.material = tankMatSkin2;
+								if(isLocalPlayer){
+									
+				GetComponent<PlayerManager> ().avatarImg.sprite = tankAvatar2Img;
+								}
+				break;
+			case 3:
+				actualSkinMesh.material = tankMatSkin3;
+									if(isLocalPlayer){
+										
+				GetComponent<PlayerManager> ().avatarImg.sprite = tankAvatar3Img;
+									}
+				break;
+			default:
+				break;
+			}
+		}
 	}
 	[Command]
 	public void CmdSelectHeroTank1()
@@ -222,6 +335,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void CapsuleSelectHeal()
 	{
 		CmdSelectHeroHeal1 ();
+		CmdSendColor(PlayerPrefs.GetInt("SKIN_COLOR", 1));
+
 	}
 	[Command]
 	public void CmdSelectHeroHeal1()
@@ -292,7 +407,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//faire ici la config du hero tank1 pour tous
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
-//			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
 			ShowYourTip ();
 			GetComponent<PlayerManager> ().avatarImg.sprite = healAvatarImg;
 
@@ -311,6 +425,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void CapsuleSelectDps()
 	{
 		CmdSelectHeroDps1 ();
+		CmdSendColor(PlayerPrefs.GetInt("SKIN_COLOR", 1));
+
 	}
 	[Command]
 	public void CmdSelectHeroDps1()
@@ -383,7 +499,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//faire ici la config du hero tank1 pour tous
 		if (isLocalPlayer) //si c'est ton perso et ton choix de perso : 
 		{
-//			heroSelectPanel.GetComponentInParent<Canvas> ().enabled = false;
 			GetComponent<PlayerManager> ().avatarImg.sprite = DpsAvatarImg;
 
 			ShowYourTip ();
@@ -412,13 +527,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		}
 	}
 
-
-//	[ClientRpc]
-//	public void RpcChangeName ()
-//	{
-//		gameObject.name = "Player" + netId.ToString ();
-//
-//	}
 	public override void OnStartServer ()
 	{
 		StartCoroutine (TellNewPlayerHasJoin ());
@@ -475,7 +583,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GameManager.instanceGM.ShowAGameTip ("To move your hero, right clic on the ground. You can attack an enemy by right clicking on it as well. Use 'L' to lock/unlock the camera and 'Spacebar' to center the view on your hero.");
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			GameManager.instanceGM.ShowAGameTip ("Pour déplacer votre héro, faites un clic droit sur le sol. Vous pouvez attaquer avec le bouton droit de la souris. Utilisez 'L' pour verrouiller/déverrouiller le suivi camera et 'Espace' pour recentrer la vue sur votre héro.");
+			GameManager.instanceGM.ShowAGameTip ("Pour déplacer votre héros, faites un clic droit sur le sol. Vous pouvez attaquer avec le bouton droit de la souris. Utilisez 'L' pour verrouiller/déverrouiller le suivi camera et 'Espace' pour recentrer la vue sur votre héro.");
 
 		}
 	}

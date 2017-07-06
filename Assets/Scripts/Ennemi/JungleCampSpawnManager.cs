@@ -53,6 +53,7 @@ public class JungleCampSpawnManager : NetworkBehaviour
 
     public void spawnJungCamp()
     {
+
         
         foreach (Transform tr in spawnPos)
         {
