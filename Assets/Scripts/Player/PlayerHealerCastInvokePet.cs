@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 [NetworkSettings(channel = 2, sendInterval = 0.1f)]
 public class PlayerHealerCastInvokePet : NetworkBehaviour {
@@ -77,6 +78,9 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 		if (actualPet != null) 
 		{
 			actualPet.GetComponent<PetIGManager> ().isDead = true;
+			actualPet.GetComponent<NavMeshAgent> ().enabled = false;
+			actualPet.GetComponent<NavMeshObstacle> ().enabled = false;
+
 			actualPet.transform.position = Vector3.zero;
 			previousPet = actualPet;
 			Invoke("DestroyThePrevPet", .3f);

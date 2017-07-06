@@ -33,6 +33,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 	public bool isUnderCC;
 	public bool isActuAttacking;
 	public bool isActuStopAttacking;
+	bool isLoosingTarget;
 	void Start()
 	{
 
@@ -70,6 +71,12 @@ public class AllyPetAutoAttack : NetworkBehaviour
 				{
 					if (!isActuAttacking && Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) 
 					{
+						if (target.layer == Layers.Ennemies && target.GetComponent<EnnemyIGManager> ().isDead && !isLoosingTarget) 
+						{
+							isLoosingTarget = true;
+							RpcLooseTarget ();
+							RpcStopAttacking ();
+						}
 						isActuAttacking = true;
 						RpcAttackTarget (transform.position);
 					}
@@ -140,11 +147,19 @@ public class AllyPetAutoAttack : NetworkBehaviour
 					}
 				}
 			}
-			if (Vector3.Distance (transform.position, target.transform.position) < attackRange) 
-			{
+			if (Vector3.Distance (transform.position, target.transform.position) < attackRange) {
 				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
 				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
+
+			} else 
+			{
+				if (target.tag == "Player") 
+				{
+					anim.SetBool ("walk", walkAnim = true);
+
+					agent.SetDestination (target.transform.position);
+				}
 			}
 
 		}
@@ -255,6 +270,7 @@ public class AllyPetAutoAttack : NetworkBehaviour
 //		if (gameObject.layer == 8) 
 //		{
 			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+		isLoosingTarget = false;
 //			return;
 //		}
 //		GetComponent<MinionsPathFindingScript> ().GoToEndGame ();

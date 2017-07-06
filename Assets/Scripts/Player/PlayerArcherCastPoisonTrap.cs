@@ -210,7 +210,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 			int tmp =(int) (spellCD - timeSpent);
 			if (tmp >= 0) 
 			{
-				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
+				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = (tmp+1).ToString ();
 				timeSpent += 0.2f;
 			}
 			yield return new WaitForSecondsRealtime (0.2f);
@@ -257,7 +257,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
         spellCost += 5;
         spellCD -= 2f;
         explosionRadius += 0.1f;
-        spellDmg += 2;
+        spellDmg += 3;
         spellDuration += 1f;
     }
 

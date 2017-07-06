@@ -1179,7 +1179,7 @@ Transform:
   m_GameObject: {fileID: 1651488273471620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 4194995271374004}
   m_Father: {fileID: 4738307275245702}
@@ -1358,7 +1358,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1667772713966254}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 3.88, z: -0.019}
+  m_LocalPosition: {x: 0, y: 2.4, z: -0.019}
   m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4738307275245702}
@@ -2561,8 +2561,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemiAtt: {fileID: 8300000, guid: 2447c1fa332fea04299969084e8bdab8, type: 3}
   agent: {fileID: 195502631679329418}
-  attackRange: 6
-  attackRate: 2
+  attackRange: 3
+  attackRate: 2.5
   damage: 50
   isAttacking: 0
   target: {fileID: 0}
@@ -2885,15 +2885,15 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2
-  m_Speed: 4
+  m_Speed: 5
   m_Acceleration: 5000
-  avoidancePriority: 45
+  avoidancePriority: 42
   m_AngularSpeed: 9999
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.5
+  m_Height: 2.4
   m_BaseOffset: 0
   m_WalkableMask: 57
   m_ObstacleAvoidanceType: 1
@@ -9017,10 +9017,10 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1380983508602426}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.5, y: 1.5, z: 1.5}
+  m_Extents: {x: 2, y: 1.5, z: 2}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
