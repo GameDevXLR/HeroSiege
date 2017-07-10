@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
 	public string langage;
 	public AudioClip clicSound1;
 	public AudioClip clicSound2;
-
+//	public Toggle oneLaneTog;
 	public Slider generalVolume;
 	void Awake()
 	{
@@ -159,9 +159,9 @@ public class MainMenuManager : MonoBehaviour
 		}
 		GetComponent<AudioSource> ().PlayOneShot (clicSound2);
 
-		if (nameField.text.Length > 18) 
+		if (nameField.text.Length > 12) 
 		{
-			nameField.text = nameField.text.Substring (0, 18);
+			nameField.text = nameField.text.Substring (0, 12);
 		}
 		PlayerNickname = nameField.text;
 		PlayerPrefs.SetString("PlayerNN", PlayerNickname);

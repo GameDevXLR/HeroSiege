@@ -109,6 +109,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			string playerNN;
 			playerNN = PlayerPrefs.GetString ("PlayerNN");
 //			ChangeMyName (playerNN);
+			CmdChangeName(playerNN);
 			GetComponent<PlayerLevelUpManager> ().enabled = true;
 			minimapIcon.color = mainPlayerColor;
 			CameraController.instanceCamera.target = gameObject;
@@ -587,11 +588,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 
 	void ShowYourTip()
 	{
-		GameManager.instanceGM.ShowAGameTip ("To move your hero, right clic on the ground. You can attack an enemy by right clicking on it as well. Use 'L' to lock/unlock the camera and 'Spacebar' to center the view on your hero.");
-		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-		{
+		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
 			GameManager.instanceGM.ShowAGameTip ("Pour déplacer votre héros, faites un clic droit sur le sol. Vous pouvez attaquer avec le bouton droit de la souris. Utilisez 'L' pour verrouiller/déverrouiller le suivi camera et 'Espace' pour recentrer la vue sur votre héro.");
 
+		} else {
+			GameManager.instanceGM.ShowAGameTip ("To move your hero, right clic on the ground. You can attack an enemy by right clicking on it as well. Use 'L' to lock/unlock the camera and 'Spacebar' to center the view on your hero.");
 		}
 	}
 

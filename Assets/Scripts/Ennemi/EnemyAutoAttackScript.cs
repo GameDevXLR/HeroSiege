@@ -189,6 +189,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 			transform.Find ("MiniMapIcon").GetComponent<SpriteRenderer> ().enabled = false;
 		}
 		GetComponent<NavMeshObstacle> ().enabled = false;
+		//bug : ptete voir pour check si le mob est vivant ou mort ? si ca strouve il essai d'arreter d'attaquer, mais il est mort, donc son agent devrait rester désactiver tout ca nan ?
 		agent.enabled = true;
 		isAttacking = false;
 		attackAnim = false;
@@ -198,8 +199,9 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		if (particule != null) {
 			particule.Stop ();
 		}
-
-		agent.isStopped = false;
+		if (agent.isActiveAndEnabled) {
+			agent.isStopped = false;
+		}
 		isActuStopAttacking = false;
 	}
 

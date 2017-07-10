@@ -160,6 +160,7 @@ public class PlayerStatPlus : NetworkBehaviour {
 		{
 			GetComponent<PlayerLevelUpManager>().LooseASpecPtAsLocalPlayer(4);
 			//changer ici l'interface du joueur.
+			ActuDescription ();
 		}
 	}
 
@@ -174,6 +175,12 @@ public class PlayerStatPlus : NetworkBehaviour {
 		GetComponent<PlayerAutoAttack> ().damage += dmgBonus;
 		GetComponent<GenericManaScript> ().maxMp += mpBonus;
 		GetComponent<PlayerIGManager> ().maxHp += hpBonus;
+		if(spellLvl <10)
+		{
+			dmgBonus += (dmgBonus*30/100);
+			mpBonus += (mpBonus *20/100);
+			hpBonus += (hpBonus *20/100);
+		}
 	}
 	public void ActuDescription()
 	{

@@ -18,12 +18,6 @@ public class PlayerMenuSettings : MonoBehaviour
 		beginnerGuide = PlayerPrefsX.GetBool ("BEGINNER_GUIDE", true);
 		isGuideActive.isOn = beginnerGuide;
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
 
 	public void SwitchBegGuide()
 	{
