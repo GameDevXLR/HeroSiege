@@ -11,6 +11,7 @@ public class CharacterIGManager : NetworkBehaviour
     //[SyncVar(hook = "ActualizeDodge")] [Range(0, 100)] public float dodge;
     // Vie
     public RectTransform lifeBar; // barre de vie IG
+	public AudioClip[] painSound;
     [SyncVar] public int maxHp = 1000;
     [SyncVar(hook = "RescaleTheLifeBarIG")] public int currentHp = 800;
     [SyncVar] public int bonusHp;
@@ -100,6 +101,7 @@ public class CharacterIGManager : NetworkBehaviour
 
     public virtual void TempoRescaleTheLifeBarIG(int life)
     {
+
         currentHp = life;
         float x = (float)currentHp / maxHp;
         if (x > 1f)
@@ -161,6 +163,10 @@ public class CharacterIGManager : NetworkBehaviour
 
     public virtual void takeDommage(int dmg, bool trueDmg)
     {
+		if (dmg > 1) 
+		{
+			RpcReactToDamage ();
+		}
         if (trueDmg)
         {
             currentHp -= dmg;
@@ -190,8 +196,16 @@ public class CharacterIGManager : NetworkBehaviour
         if (currentHp < 0)
             currentHp = 0;
     }
-
-
+	[ClientRpc]
+	public void RpcReactToDamage()
+	{
+		if(painSound.Length>0)
+		{
+			GetComponent<AudioSource> ().PlayOneShot (painSound [Random.Range (0, painSound.Length)], 0.2f);
+			//recu des dégats.
+		}
+	
+	}
 
     public void ActualizeArmor(int armor)
     {

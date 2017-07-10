@@ -38,7 +38,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Material dpsMatSkin1;
 	public Material dpsMatSkin2;
 	public Material dpsMatSkin3;
-
 	public Button selectHeroTank1;
 	public Button selectHeroHealer1;
 	public Button selectHeroDps1;
@@ -54,11 +53,14 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Sprite tankAvatarImgMini;
 	public Sprite healAvatarImgMini;
 	public Sprite DpsAvatarImgMini;
+	public AudioClip[] tankPainSounds;
 	[Header("All ovate sounds:")]
+	public AudioClip[] healPainSounds;
 	public AudioClip autoAHeal1;
 	public AudioClip autoAHeal2;
 	public AudioClip deadHeal;
 	[Header("All hunter sounds:")]
+	public AudioClip[] dpsPainSounds;
 	public AudioClip autoAArcher1;
 	public AudioClip autoAArcher2;
 	public AudioClip deadArcher;
@@ -291,6 +293,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		myAutoAScript.anim = childTankSkin.GetComponentInChildren<Animator> ();
 		myPlayerIGManager.deadAnimChildMesh = childTankSkin.transform.GetChild(0).gameObject;
 		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
+		myPlayerIGManager.painSound = tankPainSounds;
+
 		myPlayerIGManager.heroChosen = "Champion";
 		GetComponent<PlayerClicToMove> ().anim = childTankSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
@@ -381,6 +385,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		myAutoAScript.anim = childHealSkin.GetComponentInChildren<Animator> ();
 		myPlayerIGManager.deadAnimChildMesh = childHealSkin.transform.GetChild(0).gameObject;
 		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
+		myPlayerIGManager.painSound = healPainSounds;
 		GetComponent<PlayerClicToMove> ().anim = childHealSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
@@ -470,6 +475,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		myAutoAScript.anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		myPlayerIGManager.deadAnimChildMesh = childDpsSkin.transform.GetChild(0).gameObject;
 		myPlayerIGManager.deadAnimChildMesh.GetComponent<Animator>().SetBool("stopwalk", true);
+		myPlayerIGManager.painSound = dpsPainSounds;
 		myPlayerIGManager.heroChosen = "Hunter";
 		GameManager.instanceGM.messageManager.SendAnAlertMess (playerNickName + " will play the Hunter.[ADC]", Color.green);
 
@@ -493,6 +499,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myPlayerIGManager.levelUpBonusArmor = 2;
 			myAutoAScript.levelUpBonusDamage = 5;
 			myAutoAScript.attackSpeedStat = 1.25f;
+			myAutoAScript.attackAnimTime = 1.25f;
 			myStatPlusScript.doubleDpsBonus = true;
 
 		}

@@ -82,6 +82,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 				{
 					if (Time.time > previousAttackTime) 
 					{
+						RpcPlayAttSound ();
 						previousAttackTime = Time.time + attackRate;
 						target.GetComponent<EnnemyIGManager> ().LooseHealth (damage, false, gameObject);
 						if (critChance > 0) 
@@ -158,6 +159,21 @@ public class PlayerAutoAttack: NetworkBehaviour
 	}
 
 	[ClientRpc]
+	public void RpcPlayAttSound ()
+	{
+		int AttSound = Random.Range (0, 10);
+		if (AttSound > 4) 
+		{
+			//audioSource.clip = playerSounds [1];
+			GetComponent<AudioSource> ().PlayOneShot (Att1);
+		}
+		else
+			//audioSource.clip = playerSounds [0];
+			GetComponent<AudioSource> ().PlayOneShot (Att2);
+	}
+
+
+	[ClientRpc]
 	public void RpcAttackTarget()
 	{
 		if (isLocalPlayer && !isServer) {
@@ -174,14 +190,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		isAttacking = true;
 		attackAnim = true;
 		anim.SetBool ("attack", attackAnim);
-		int AttSound = Random.Range (0, 10);
-		if (AttSound > 4) {
-			//audioSource.clip = playerSounds [1];
-			GetComponent<AudioSource> ().PlayOneShot (Att1);
-		}
-			else
-			//audioSource.clip = playerSounds [0];
-			GetComponent<AudioSource> ().PlayOneShot (Att2);
+
 		if (isServer) 
 		{
 			isActuAttacking = false;

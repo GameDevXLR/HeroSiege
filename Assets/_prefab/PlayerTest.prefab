@@ -3253,7 +3253,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1518227680705464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.094, z: 0}
+  m_LocalPosition: {x: 0, y: -0.244, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4595218611910612}
@@ -3840,7 +3840,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1274719385096696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.479, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4112825189887158}
@@ -4459,7 +4459,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1230269966023948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4115084485902210}
@@ -5446,7 +5446,7 @@ MonoBehaviour:
   PulsingAnimation: 0
   PulsingSpeed: 0
   FadeOverDistance: 1
-  MaxFadeDistance: 130
+  MaxFadeDistance: 150
   FadeDistances:
     serializedVersion: 2
     m_Curve:
@@ -5822,6 +5822,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeBar: {fileID: 224552685445617892}
+  painSound:
+  - {fileID: 8300000, guid: fbbdbd1e820120841b4d3557131d394f, type: 3}
+  - {fileID: 8300000, guid: a3dc8cdd5b7af024aa6d8192aa3aa9fb, type: 3}
+  - {fileID: 8300000, guid: 7a5bbf4bca2269149badede012f10cb3, type: 3}
   maxHp: 250
   currentHp: 250
   bonusHp: 0
@@ -6104,7 +6108,7 @@ MonoBehaviour:
   levelUpBonusDamage: 5
   isAttacking: 0
   target: {fileID: 0}
-  rotSpeed: 5
+  rotSpeed: 25
   isActualizingPos: 0
   isActuAttacking: 0
   isActuStopAttacking: 0
@@ -6858,9 +6862,24 @@ MonoBehaviour:
   tankAvatarImgMini: {fileID: 21300000, guid: 1e0483575227e734f9fccf38ab2bf424, type: 3}
   healAvatarImgMini: {fileID: 21300000, guid: 7a88b09dc37cd224193ce2ff530c683d, type: 3}
   DpsAvatarImgMini: {fileID: 21300000, guid: 6b2c8838bc5e8b849a0315912058ec3e, type: 3}
+  tankPainSounds:
+  - {fileID: 8300000, guid: 088718d93be7f64448a41a139393b94a, type: 3}
+  - {fileID: 8300000, guid: fbbdbd1e820120841b4d3557131d394f, type: 3}
+  - {fileID: 8300000, guid: a3dc8cdd5b7af024aa6d8192aa3aa9fb, type: 3}
+  - {fileID: 8300000, guid: 7a5bbf4bca2269149badede012f10cb3, type: 3}
+  healPainSounds:
+  - {fileID: 8300000, guid: 088718d93be7f64448a41a139393b94a, type: 3}
+  - {fileID: 8300000, guid: 84d1c0950a45b594cbab1631fa898438, type: 3}
+  - {fileID: 8300000, guid: f5d1c51b9092072479c20d0522f909b7, type: 3}
+  - {fileID: 8300000, guid: efa232bcf72d83c49a69576c84cdf822, type: 3}
   autoAHeal1: {fileID: 8300000, guid: 4b3e3ff631497b44b8def6f6ca0a6e5c, type: 3}
   autoAHeal2: {fileID: 8300000, guid: 53c1d36406769c24b83e44ca0ad82675, type: 3}
   deadHeal: {fileID: 8300000, guid: 1a92695559d1fd842a0bb80d0486b56a, type: 3}
+  dpsPainSounds:
+  - {fileID: 8300000, guid: 8878a84821668cd4d93278944b52012f, type: 3}
+  - {fileID: 8300000, guid: da82d624555731d42b34535b3e244abe, type: 3}
+  - {fileID: 8300000, guid: 4b39485bc3c972c4bb81f2dceee655e1, type: 3}
+  - {fileID: 8300000, guid: 088718d93be7f64448a41a139393b94a, type: 3}
   autoAArcher1: {fileID: 8300000, guid: e70742fa8fea5854ca7822525ef0e6bc, type: 3}
   autoAArcher2: {fileID: 8300000, guid: ddc65fbc7f8cf5f49a273c8a20c064ab, type: 3}
   deadArcher: {fileID: 8300000, guid: 5ccc5c538e2eb7f4fbcd2e610479f44b, type: 3}
