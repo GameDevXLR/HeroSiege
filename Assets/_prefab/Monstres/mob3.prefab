@@ -1441,7 +1441,6 @@ GameObject:
   - component: {fileID: 54236292307458140}
   - component: {fileID: 114455300437138318}
   - component: {fileID: 114567780594809370}
-  - component: {fileID: 114752493579846406}
   - component: {fileID: 114451100719635136}
   m_Layer: 9
   m_Name: mob3
@@ -3657,21 +3656,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114752493579846406
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1840545334792104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7575337b1d0bbc54fb9d8b7219a77274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  caster: {fileID: 1719465231846340, guid: 9dcc10228525f6b48a03712c601b301b, type: 2}
-  spellTargets: []
-  duration: 0
-  spellDamage: 50
 --- !u!114 &114779982035895716
 MonoBehaviour:
   m_ObjectHideFlags: 1
