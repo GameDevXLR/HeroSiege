@@ -5,13 +5,19 @@ using UnityEngine.UI;
 public class CommandesGui : MonoBehaviour {
 
     public GameObject boutonPrefab;
+    public GameObject boutonCurrent;
     public GameObject parent;
+    public string playerPrefCurrent;
     public Dictionary<string, GameObject> dictCommande;
+    Event keyEvent;
+    KeyCode newKey;
+
+    bool waitingForKey = false;
 
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         dictCommande = new Dictionary<string, GameObject>();
         foreach (CommandeClass commande in CommandesController.Instance.listKeys)
         {
@@ -19,12 +25,11 @@ public class CommandesGui : MonoBehaviour {
 
             buttonCommande.transform.SetParent(parent.transform, false);
             buttonCommande.transform.GetChild(0).GetComponent<Text>().text = commande.englishName;
-            Debug.Log(commande.playerPrefKey);
             
-            dictCommande[commande.playerPrefKey] = buttonCommande;
-
             GameObject bouton = buttonCommande.transform.GetChild(1).gameObject;
-            bouton.transform.GetChild(0).GetComponent<Text>().text = commande.key.ToString();
+
+            dictCommande[commande.playerPrefKey] = bouton;
+            bouton.transform.GetChild(0).GetComponent<Text>().text = commande.getKey().ToString();
             bouton.GetComponent<Button>().onClick.AddListener(delegate { sendMessage(commande.playerPrefKey); });
         }
 	}
@@ -36,6 +41,55 @@ public class CommandesGui : MonoBehaviour {
 
     void sendMessage(string message)
     {
-        Debug.Log("message : " + message);
+        boutonCurrent = dictCommande[message];
+        playerPrefCurrent = message;
+        if (!waitingForKey)
+            StartCoroutine(AssignKey());
     }
+
+
+    private void OnGUI()
+    {
+        /*
+         * keyEvent dictates what key our user presses
+        * bt using Event.current to detect the current
+        * event
+        */
+
+        keyEvent = Event.current;
+        //Executes if a button gets pressed and
+
+        //the user presses a key
+        
+        if (keyEvent.isKey && waitingForKey)
+        {
+            newKey = keyEvent.keyCode; //Assigns newKey to the key user presses
+
+            waitingForKey = false;
+        }
+    }
+
+
+
+    public IEnumerator AssignKey()
+    {
+        waitingForKey = true;
+        yield return WaitForKey(); //Executes ensdlessly until user presses a key
+
+        CommandesController.Instance.dictCommandes[playerPrefCurrent].setKey(newKey) ; //Set forward to new keycode
+        CommandesController.Instance.dictCommandes[playerPrefCurrent].saveKey();
+        boutonCurrent.transform.GetChild(0).GetComponent<Text>().text = CommandesController.Instance.dictCommandes[playerPrefCurrent].getKey().ToString(); //Set button text to new key
+        
+        yield return null;
+    }
+
+    //Used for controlling the flow of our below Coroutine
+
+    IEnumerator WaitForKey()
+    {
+        Debug.Log("WaitForKey");
+        while (!keyEvent.isKey)
+            yield return null;
+    }
+
 }

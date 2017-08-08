@@ -10,7 +10,7 @@ public class CommandeClass {
     public string frenchName; 
     public string englishName;
 
-    public KeyCode key; // key of the keyboard
+    private KeyCode key; // key of the keyboard
     private KeyCode keyBase; // key of the keyboard (if reset, not really importante for now but cost nothing)
 
     
@@ -27,6 +27,16 @@ public class CommandeClass {
     public void setKey(string key)
     {
         setKey((KeyCode)System.Enum.Parse(typeof(KeyCode), key));
+    }
+
+    public void actuKey()
+    {
+        key = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(playerPrefKey, keyBase.ToString()));
+    }
+
+    public KeyCode getKey()
+    {
+        return key;
     }
 
     // set key of the playerPref

@@ -16,6 +16,12 @@ public class CommandesController : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
 
         }
+        dictCommandes = new Dictionary<string, CommandeClass>();
+        foreach (CommandeClass commande in listKeys)
+        {
+            commande.actuKey();
+            dictCommandes[commande.playerPrefKey] = commande;
+        }
         
     }
 }

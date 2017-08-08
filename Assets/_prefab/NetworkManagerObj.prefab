@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114101508417045676}
   - component: {fileID: 114395821510757714}
   - component: {fileID: 114009289559484576}
+  - component: {fileID: 114466538988707920}
   m_Layer: 0
   m_Name: NetworkManagerObj
   m_TagString: Untagged
@@ -122,6 +123,7 @@ MonoBehaviour:
   - {fileID: 1552877025250526, guid: 63c6dbc233058ab49a5be6f1aa0e7277, type: 2}
   - {fileID: 1900963935911786, guid: 78ff8651d0b94f848a395dee1ca2e083, type: 2}
   - {fileID: 1799284724170398, guid: 1d10ecd1a4e18e945a7c7c9ba68ede4b, type: 2}
+  - {fileID: 1153460153048618, guid: 6b7e13e4cdf908f4899e4d4b5597f388, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 10
   m_ConnectionConfig:
@@ -177,3 +179,75 @@ MonoBehaviour:
   matchSize: 10
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+--- !u!114 &114466538988707920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1065471443572348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12ebc7773a37f94b93e8e01f90ba63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listKeys:
+  - playerPrefKey: CameraLock
+    frenchName: "D\xE9verrouiller/Verrouiller la Cam\xE9ra"
+    englishName: UnLock/Lock Camera
+    key: 108
+  - playerPrefKey: CameraCenter
+    frenchName: "Centrer la cam\xE9ra"
+    englishName: Center camera
+    key: 32
+  - playerPrefKey: Sort1
+    frenchName: Sort 1
+    englishName: Spell 1
+    key: 97
+  - playerPrefKey: Sort2
+    frenchName: Sort 2
+    englishName: Spell 2
+    key: 122
+  - playerPrefKey: Sort3
+    frenchName: Sort 3
+    englishName: 'Spell 3 '
+    key: 101
+  - playerPrefKey: Caracteristique
+    frenchName: "Caract\xE9ristique"
+    englishName: "Caract\xE9ristics"
+    key: 99
+  - playerPrefKey: up
+    frenchName: "Am\xE9lioration (+ sort ou caract\xE9ristique)"
+    englishName: up (+ spell or caracteristics)
+    key: 304
+  - playerPrefKey: Item1
+    frenchName: Object 1
+    englishName: Item 1
+    key: 49
+  - playerPrefKey: Item2
+    frenchName: Object 2
+    englishName: Item2
+    key: 50
+  - playerPrefKey: Item3
+    frenchName: Object 3
+    englishName: Item 3
+    key: 51
+  - playerPrefKey: Item4
+    frenchName: Object 4
+    englishName: Item 4
+    key: 52
+  - playerPrefKey: Item5
+    frenchName: Obejct 5
+    englishName: Item 5
+    key: 53
+  - playerPrefKey: Item6
+    frenchName: Object 6
+    englishName: Item6
+    key: 54
+  - playerPrefKey: Item7
+    frenchName: Object 7
+    englishName: Item7
+    key: 55
+  - playerPrefKey: Item8
+    frenchName: Object 8
+    englishName: Item 8
+    key: 56

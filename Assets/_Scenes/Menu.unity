@@ -934,35 +934,35 @@ MonoBehaviour:
   - playerPrefKey: Item1
     frenchName: Object 1
     englishName: Item 1
-    key: 257
+    key: 49
   - playerPrefKey: Item2
     frenchName: Object 2
     englishName: Item2
-    key: 258
+    key: 50
   - playerPrefKey: Item3
     frenchName: Object 3
     englishName: Item 3
-    key: 259
+    key: 51
   - playerPrefKey: Item4
     frenchName: Object 4
     englishName: Item 4
-    key: 260
+    key: 52
   - playerPrefKey: Item5
     frenchName: Obejct 5
     englishName: Item 5
-    key: 261
+    key: 53
   - playerPrefKey: Item6
     frenchName: Object 6
     englishName: Item6
-    key: 262
+    key: 54
   - playerPrefKey: Item7
     frenchName: Object 7
     englishName: Item7
-    key: 263
+    key: 55
   - playerPrefKey: Item8
     frenchName: Object 8
     englishName: Item 8
-    key: 264
+    key: 56
 --- !u!1 &339451423
 GameObject:
   m_ObjectHideFlags: 0
@@ -5891,7 +5891,7 @@ Prefab:
     - target: {fileID: 224089158010487530, guid: bba43babbe3f0c843b8f0f9ab1aaded9,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 224089158010487530, guid: bba43babbe3f0c843b8f0f9ab1aaded9,
         type: 2}
@@ -5941,12 +5941,12 @@ Prefab:
     - target: {fileID: 224112909651668132, guid: bba43babbe3f0c843b8f0f9ab1aaded9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 224112909651668132, guid: bba43babbe3f0c843b8f0f9ab1aaded9,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 224361672574847746, guid: bba43babbe3f0c843b8f0f9ab1aaded9,
         type: 2}
@@ -5966,12 +5966,12 @@ Prefab:
     - target: {fileID: 224361672574847746, guid: bba43babbe3f0c843b8f0f9ab1aaded9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 224361672574847746, guid: bba43babbe3f0c843b8f0f9ab1aaded9,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bba43babbe3f0c843b8f0f9ab1aaded9, type: 2}
@@ -6054,8 +6054,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1712572800}
   m_HandleRect: {fileID: 1712572799}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6447,7 +6447,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boutonPrefab: {fileID: 1436457353511326, guid: bba43babbe3f0c843b8f0f9ab1aaded9,
     type: 2}
+  boutonCurrent: {fileID: 0}
   parent: {fileID: 141262794}
+  playerPrefCurrent: 
 --- !u!1 &1939214284
 GameObject:
   m_ObjectHideFlags: 0
