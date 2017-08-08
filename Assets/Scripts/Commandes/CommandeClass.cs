@@ -11,7 +11,7 @@ public class CommandeClass {
     public string englishName;
 
     private KeyCode key; // key of the keyboard
-    private KeyCode keyBase; // key of the keyboard (if reset, not really importante for now but cost nothing)
+    public KeyCode keyBase; // key of the keyboard (if reset, not really importante for now but cost nothing)
 
     
     

@@ -14,6 +14,7 @@ public class MenuLangageManager : MonoBehaviour
 	public Text genVolBtn;
 	public Text musVolBtn;
 	public Text BegGuideBtn;
+    public CommandesGui commandes;
 	[Header("profile texts")]
 	public Text changeNBtn;
 	public Text changeBtn;
@@ -46,6 +47,7 @@ public class MenuLangageManager : MonoBehaviour
 		BegGuideBtn.text = "Guide débutant";
 		changeNBtn.text = "Changer de nom";
 		changeBtn.text = "Changer";
+        commandes.switchLanguage("Fr");
 	}
 	public void MakeMenuEng()
 	{
@@ -59,6 +61,7 @@ public class MenuLangageManager : MonoBehaviour
 		BegGuideBtn.text = "Beginner's Guide";
 		changeNBtn.text = "Change name";
 		changeBtn.text = "Change";
+        commandes.switchLanguage("Eng");
 	}
 	public void SwitchLangage()
 	{

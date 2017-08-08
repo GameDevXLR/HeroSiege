@@ -9,6 +9,7 @@ public class CommandesGui : MonoBehaviour {
     public GameObject parent;
     public string playerPrefCurrent;
     public Dictionary<string, GameObject> dictCommande;
+    public Dictionary<string, Text> dictDescr;
     Event keyEvent;
     KeyCode newKey;
 
@@ -19,16 +20,26 @@ public class CommandesGui : MonoBehaviour {
     // Use this for initialization
     void Start () {
         dictCommande = new Dictionary<string, GameObject>();
+        dictDescr = new Dictionary<string, Text>();
         foreach (CommandeClass commande in CommandesController.Instance.listKeys)
         {
             GameObject buttonCommande = Instantiate(boutonPrefab);
 
             buttonCommande.transform.SetParent(parent.transform, false);
-            buttonCommande.transform.GetChild(0).GetComponent<Text>().text = commande.englishName;
-            
+            if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+            {
+                buttonCommande.transform.GetChild(0).GetComponent<Text>().text = commande.frenchName;
+            }
+            else
+            {
+                buttonCommande.transform.GetChild(0).GetComponent<Text>().text = commande.englishName;
+            }
+
             GameObject bouton = buttonCommande.transform.GetChild(1).gameObject;
 
             dictCommande[commande.playerPrefKey] = bouton;
+            dictDescr[commande.playerPrefKey] = buttonCommande.transform.GetChild(0).GetComponent<Text>();
+
             bouton.transform.GetChild(0).GetComponent<Text>().text = commande.getKey().ToString();
             bouton.GetComponent<Button>().onClick.AddListener(delegate { sendMessage(commande.playerPrefKey); });
         }
@@ -90,6 +101,17 @@ public class CommandesGui : MonoBehaviour {
         Debug.Log("WaitForKey");
         while (!keyEvent.isKey)
             yield return null;
+    }
+
+    public void switchLanguage(string lang)
+    {
+        foreach(KeyValuePair<string, Text> kvl in dictDescr)
+        {
+            if (lang == "Fr")
+                kvl.Value.text = CommandesController.Instance.dictCommandes[kvl.Key].frenchName;
+            else
+                kvl.Value.text = CommandesController.Instance.dictCommandes[kvl.Key].englishName;
+        }
     }
 
 }
