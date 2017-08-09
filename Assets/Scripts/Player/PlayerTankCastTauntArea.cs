@@ -115,7 +115,15 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 			return;
 		}
 
-		if (Input.GetKeyUp(KeyCode.A) && !onCD)
+        if (spell1LvlUpBtn.IsActive()
+           && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
+           && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)))
+        {
+            levelUp();
+            return;
+        }
+
+        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)) && !onCD)
 		{
 			CastThatSpell();
 		}

@@ -15,35 +15,35 @@ public class InventoryShortcut : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetKeyDown (KeyCode.Alpha1) && transform.GetChild(0).transform.childCount != 0) 
+		if (Input.GetKeyDown (CommandesController.Instance.getKeycode(CommandesEnum.Item1)) && transform.GetChild(0).transform.childCount != 0) 
 		{
 			transform.GetChild(0).transform.GetChild(0).GetComponent<Button> ().onClick.Invoke ();
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha2) && transform.GetChild(1).transform.childCount != 0) 
+		if (Input.GetKeyDown (CommandesController.Instance.getKeycode(CommandesEnum.Item2)) && transform.GetChild(1).transform.childCount != 0) 
 		{
 			transform.GetChild(1).transform.GetChild(0).GetComponent<Button> ().onClick.Invoke ();
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha3) && transform.GetChild(2).transform.childCount != 0) 
+		if (Input.GetKeyDown (CommandesController.Instance.getKeycode(CommandesEnum.Item3)) && transform.GetChild(2).transform.childCount != 0) 
 		{
 			transform.GetChild(2).transform.GetChild(0).GetComponent<Button> ().onClick.Invoke ();
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha4) && transform.GetChild(3).transform.childCount != 0) 
+		if (Input.GetKeyDown (CommandesController.Instance.getKeycode(CommandesEnum.Item4)) && transform.GetChild(3).transform.childCount != 0) 
 		{
 			transform.GetChild(3).transform.GetChild(0).GetComponent<Button> ().onClick.Invoke ();
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha5) && transform.GetChild(4).transform.childCount != 0) 
+		if (Input.GetKeyDown (CommandesController.Instance.getKeycode(CommandesEnum.Item5)) && transform.GetChild(4).transform.childCount != 0) 
 		{
 			transform.GetChild(4).transform.GetChild(0).GetComponent<Button> ().onClick.Invoke ();
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha6) && transform.GetChild(5).transform.childCount != 0) 
+		if (Input.GetKeyDown (CommandesController.Instance.getKeycode(CommandesEnum.Item6)) && transform.GetChild(5).transform.childCount != 0) 
 		{
 			transform.GetChild(5).transform.GetChild(0).GetComponent<Button> ().onClick.Invoke ();
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha7) && transform.GetChild(6).transform.childCount != 0) 
+		if (Input.GetKeyDown (CommandesController.Instance.getKeycode(CommandesEnum.Item7)) && transform.GetChild(6).transform.childCount != 0) 
 		{
 			transform.GetChild(6).transform.GetChild(0).GetComponent<Button> ().onClick.Invoke ();
 		}
-		if (Input.GetKeyDown (KeyCode.Alpha8) && transform.GetChild(7).transform.childCount != 0) 
+		if (Input.GetKeyDown (CommandesController.Instance.getKeycode(CommandesEnum.Item8)) && transform.GetChild(7).transform.childCount != 0) 
 		{
 			transform.GetChild(7).transform.GetChild(0).GetComponent<Button> ().onClick.Invoke ();
 		}

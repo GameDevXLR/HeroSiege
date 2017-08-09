@@ -134,7 +134,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 				return;
 			}
 
-		if (Input.GetKeyUp(KeyCode.R) && !onCD)
+		if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.Catapulte)) && !onCD)
 			{
 				CastThatSpell();
 			}

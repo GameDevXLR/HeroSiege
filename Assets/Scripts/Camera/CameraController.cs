@@ -14,12 +14,6 @@ public class CameraController : MonoBehaviour
 	// our personnage
 	public GameObject target; 
 
-	// key to lock and center the camera on the target
-	public KeyCode lockKey = KeyCode.L;
-
-	// key to center back the camera on the target
-	public KeyCode centerBackKey = KeyCode.Space;
-
 	// selectedPlayer
 	// true : camera lock in the perso
 	// false : camera free from the perso
@@ -81,9 +75,11 @@ public class CameraController : MonoBehaviour
 		{
 			return;
 		}
-		if (Input.GetKeyUp (lockKey))
+		if (Input.GetKeyUp (CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
 			selectedPlayer = !selectedPlayer;
-		if (!Input.GetKey (centerBackKey) && !selectedPlayer) {
+		if (!Input.GetKey (CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)) 
+            && !selectedPlayer)
+        {
 			//UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, layer_mask);
             UtilsScreenMovement.moveScreenWithMouse(cameraCible, boundaries, zoneDetectionMouse, speed, layer_mask);
         }
@@ -95,9 +91,10 @@ public class CameraController : MonoBehaviour
 		{
 			return;
 		}
-		if (selectedPlayer || Input.GetKey (centerBackKey)) {
+		if (selectedPlayer || 
+            Input.GetKey (CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
+        {
 			CenterBackCameraOnTarget ();
-		
 
 			// allow to block y axis
 			gameObject.transform.position = new Vector3 () {
@@ -107,7 +104,6 @@ public class CameraController : MonoBehaviour
 			};
 		} 
     }
-
 
 	public void CenterBackCameraOnTarget()
 	{
@@ -134,7 +130,6 @@ public class CameraController : MonoBehaviour
     public void LockUnlockCamera()
 	{
 		selectedPlayer = !selectedPlayer;
-
 	}
 
     public void zoom()

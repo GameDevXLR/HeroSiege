@@ -109,7 +109,15 @@ public class PlayerTankCastDpsHealAoe : NetworkBehaviour {
 			return;
 		}
 
-		if (Input.GetKeyUp(KeyCode.Z) && !onCD)
+        if (spell1LvlUpBtn.IsActive()
+           && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
+           && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)))
+        {
+            levelUp();
+            return;
+        }
+
+        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)) && !onCD)
 		{
 			CastThatSpell();
 		}

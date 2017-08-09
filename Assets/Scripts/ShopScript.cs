@@ -55,7 +55,7 @@ public class ShopScript : MonoBehaviour
 
 	public void Update()
 	{
-		if(Input.GetKeyUp(KeyCode.B))
+		if(Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.Shop)))
 			{
 			
 			if (isOpen) 

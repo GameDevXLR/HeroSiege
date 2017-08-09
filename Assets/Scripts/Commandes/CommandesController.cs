@@ -7,6 +7,7 @@ public class CommandesController : MonoBehaviour {
 
     public List<CommandeClass> listKeys;
     public Dictionary<string, CommandeClass> dictCommandes;
+    
 
     private void Awake()
     {
@@ -23,5 +24,10 @@ public class CommandesController : MonoBehaviour {
             dictCommandes[commande.playerPrefKey] = commande;
         }
         
+    }
+
+    public KeyCode getKeycode(string commande)
+    {
+        return dictCommandes[commande].getKey();
     }
 }

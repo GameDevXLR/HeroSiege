@@ -100,7 +100,15 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 			return;
 		}
 
-		if (Input.GetKeyUp(KeyCode.Z) && !onCD)
+        if (spell2LvlUpBtn.IsActive()
+            && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
+            && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)))
+        {
+            levelUp();
+            return;
+        }
+
+        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)) && !onCD)
 		{
 			CastThatSpell();
 		}
@@ -147,7 +155,10 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 			spellTargeter.transform.position = hit.point;
 
 		}
-	}
+
+
+        
+    }
 	[Command]
 	public void CmdSoundSpell()
 	{

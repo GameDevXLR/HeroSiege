@@ -130,8 +130,15 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 		{
 			return;
 		}
+        if (spell2LvlUpBtn.IsActive()
+           && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
+           && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)))
+        {
+            levelUp();
+            return;
+        }
 
-		if (Input.GetKeyUp(KeyCode.Z) && !onCD)
+        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)) && !onCD)
 		{
 			CastThatSpell();
 		}

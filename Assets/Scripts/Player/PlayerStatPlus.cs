@@ -60,90 +60,93 @@ public class PlayerStatPlus : NetworkBehaviour {
 		}
 	}
 
-	//lance le sort sur le serveur.
-	//le spawn du préfab est un networkspawn : du coup il apparaitra sur tous les pc..il fera ses trucs sur le serveur
-	//bien sur.
-	//	[Command]
-	//	public void CmdCastSpell()
-	//	{
-	//		GetComponent<AudioSource>().PlayOneShot(Spell1);
-	//		GameObject go = Instantiate(spellObj, transform.position, transform.localRotation);
-	//		go.GetComponent<SpellTankTauntArea>().caster = gameObject;
-	//		//		go.GetComponent<AlwaysMove>().target = gameObject;
-	//		go.GetComponent<SpellTankTauntArea>().spellDamage = spellDmg;
-	//		go.GetComponent<SpellTankTauntArea>().duration = spellDuration;
-	//		NetworkServer.Spawn(go);
-	//		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
-	//
-	//	}
-	//cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
-	//demander le lancement du sort sur le serveur...normal.
-	//	public void CastThatSpell()
-	//	{
-	//		if (GetComponent<GenericLifeScript>().isDead)
-	//		{
-	//			return;
-	//		}
-	//		if (GetComponent<GenericManaScript>().currentMp >= spellCost && !onCD)
-	//		{
-	//			CmdCastSpell();
-	//			Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
-	//			StartCoroutine(SpellOnCD());
-	//		}
-	//		else
-	//		{
-	//			GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
-	//			GetComponent<AudioSource>().PlayOneShot(OOM);
-	//		}
-	//	}
+    //lance le sort sur le serveur.
+    //le spawn du préfab est un networkspawn : du coup il apparaitra sur tous les pc..il fera ses trucs sur le serveur
+    //bien sur.
+    //	[Command]
+    //	public void CmdCastSpell()
+    //	{
+    //		GetComponent<AudioSource>().PlayOneShot(Spell1);
+    //		GameObject go = Instantiate(spellObj, transform.position, transform.localRotation);
+    //		go.GetComponent<SpellTankTauntArea>().caster = gameObject;
+    //		//		go.GetComponent<AlwaysMove>().target = gameObject;
+    //		go.GetComponent<SpellTankTauntArea>().spellDamage = spellDmg;
+    //		go.GetComponent<SpellTankTauntArea>().duration = spellDuration;
+    //		NetworkServer.Spawn(go);
+    //		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
+    //
+    //	}
+    //cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
+    //demander le lancement du sort sur le serveur...normal.
+    //	public void CastThatSpell()
+    //	{
+    //		if (GetComponent<GenericLifeScript>().isDead)
+    //		{
+    //			return;
+    //		}
+    //		if (GetComponent<GenericManaScript>().currentMp >= spellCost && !onCD)
+    //		{
+    //			CmdCastSpell();
+    //			Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
+    //			StartCoroutine(SpellOnCD());
+    //		}
+    //		else
+    //		{
+    //			GameManager.instanceGM.messageManager.SendAnAlertMess("Not enough Mana!", Color.red);
+    //			GetComponent<AudioSource>().PlayOneShot(OOM);
+    //		}
+    //	}
 
-	//si t'es un joueur; tu peux cast ce sort avec la touche A : voir pour opti ca en fonction du clavier des gars.
+    //si t'es un joueur; tu peux cast ce sort avec la touche A : voir pour opti ca en fonction du clavier des gars.
 
-	//	public void Update()
-	//	{
-	//		if (!isLocalPlayer)
-	//		{
-	//			return;
-	//		}
-	//
-	//		if (Input.GetKeyUp(KeyCode.A) && !onCD)
-	//		{
-	//			CastThatSpell();
-	//		}
-	//
-	//	}
+    public void Update()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
 
-	//	IEnumerator SpellOnCD()
-	//	{
-	//		onCD = true;
-	//		StartCoroutine (ShowCDTimer());
-	//		cdCountdown.gameObject.SetActive (true);
-	//		int tmp = (int)(spellCD);
-	//		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
-	//		spell1Btn.interactable = false;
-	//		yield return new WaitForSeconds(spellCD);
-	//		spell1Btn.interactable = true;
-	//		cdCountdown.gameObject.SetActive (false);
-	//		timeSpent = 0f;
-	//		onCD = false;
-	//	}
+        if (spell1LvlUpBtn.IsActive()
+           && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
+           && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.caracteristique)))
+        {
+            levelUp();
+            return;
+        }
+
+    }
+
+    //	IEnumerator SpellOnCD()
+    //	{
+    //		onCD = true;
+    //		StartCoroutine (ShowCDTimer());
+    //		cdCountdown.gameObject.SetActive (true);
+    //		int tmp = (int)(spellCD);
+    //		cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
+    //		spell1Btn.interactable = false;
+    //		yield return new WaitForSeconds(spellCD);
+    //		spell1Btn.interactable = true;
+    //		cdCountdown.gameObject.SetActive (false);
+    //		timeSpent = 0f;
+    //		onCD = false;
+    //	}
 
 
-	//	IEnumerator ShowCDTimer()
-	//	{
-	//		while (onCD) 
-	//		{
-	//			int tmp =(int) (spellCD - timeSpent);
-	//			if (tmp >= 0) 
-	//			{
-	//				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
-	//				timeSpent += 0.2f;
-	//			}
-	//			yield return new WaitForSeconds (0.2f);
-	//		}
-	//	}
-	//si on clic sur level up; ca le dit au serveur.
-	[Command]
+    //	IEnumerator ShowCDTimer()
+    //	{
+    //		while (onCD) 
+    //		{
+    //			int tmp =(int) (spellCD - timeSpent);
+    //			if (tmp >= 0) 
+    //			{
+    //				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
+    //				timeSpent += 0.2f;
+    //			}
+    //			yield return new WaitForSeconds (0.2f);
+    //		}
+    //	}
+    //si on clic sur level up; ca le dit au serveur.
+    [Command]
 	public void CmdLevelUpTheSpell()
 	{
 		UpTheStats ();

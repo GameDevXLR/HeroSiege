@@ -97,7 +97,15 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 			return;
 		}
 
-		if (Input.GetKeyUp(KeyCode.E) && !onCD)
+        if (spell2LvlUpBtn.IsActive()
+           && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
+           && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort3)))
+        {
+            levelUp();
+            return;
+        }
+
+        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort3)) && !onCD)
 		{
 			CastThatSpell();
 		}
