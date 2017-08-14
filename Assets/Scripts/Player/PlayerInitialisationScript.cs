@@ -526,7 +526,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		playerNickName = str;
 		gameObject.name = playerNickName + netId.ToString();
 		GetComponent<PlayerManager> ().playerNickname = playerNickName;
-		GetComponent<PlayerManager> ().playerSelecUI.GetComponentInChildren<Text> ().text = playerNickName;
+		//GetComponent<PlayerManager> ().playerSelecUI.GetComponentInChildren<Text> ().text = playerNickName;
 		GetComponent<Location> ().Display_1_Text = playerNickName;
 		if (!isLocalPlayer) 
 		{

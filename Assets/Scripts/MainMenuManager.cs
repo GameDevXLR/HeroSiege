@@ -30,12 +30,16 @@ public class MainMenuManager : MonoBehaviour
 	}
 	public void Start()
 	{
-//		if (PlayerPrefs.GetString ("PlayerNN") == null) 
-//		{
-//			PlayerPrefs.SetString ("PlayerNN", "NoName");
-//		}		
+        //		if (PlayerPrefs.GetString ("PlayerNN") == null) 
+        //		{
+        //			PlayerPrefs.SetString ("PlayerNN", "NoName");
+        //		}		
+        if (!PlayerPrefs.HasKey("PlayerNN"))
+        {
+            PlayerPrefs.SetString("PlayerNN", "John Doe");
+        }
 		PlayerNameDisplay.text = PlayerPrefs.GetString("PlayerNN");
-		PlayerNickname = PlayerPrefs.GetString ("PlayerNN");
+        PlayerNickname = PlayerPrefs.GetString("PlayerNN") ;
 		menuMusic.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME", 0.5f);
 		menuMusicVolume.value = menuMusic.volume;
 		langage = PlayerPrefs.GetString ("LANGAGE", "Eng");

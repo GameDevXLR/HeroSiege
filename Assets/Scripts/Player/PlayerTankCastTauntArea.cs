@@ -116,6 +116,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
 		}
 
         if (spell1LvlUpBtn.IsActive()
+            && !GameManager.instanceGM.isInTchat
            && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
            && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)))
         {
@@ -123,7 +124,7 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
             return;
         }
 
-        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)) && !onCD)
+        if (!GameManager.instanceGM.isInTchat && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)) && !onCD)
 		{
 			CastThatSpell();
 		}

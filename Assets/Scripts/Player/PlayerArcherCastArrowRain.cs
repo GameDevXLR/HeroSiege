@@ -98,6 +98,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 		}
 
         if (spell2LvlUpBtn.IsActive()
+           && !GameManager.instanceGM.isInTchat 
            && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
            && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort3)))
         {
@@ -105,7 +106,9 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
             return;
         }
 
-        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort3)) && !onCD)
+        if (!GameManager.instanceGM.isInTchat 
+            && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort3)) 
+            && !onCD)
 		{
 			CastThatSpell();
 		}

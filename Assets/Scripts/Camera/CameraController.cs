@@ -75,9 +75,11 @@ public class CameraController : MonoBehaviour
 		{
 			return;
 		}
-		if (Input.GetKeyUp (CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
+		if (!GameManager.instanceGM.isInTchat 
+            && Input.GetKeyUp (CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
 			selectedPlayer = !selectedPlayer;
-		if (!Input.GetKey (CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)) 
+		if (!GameManager.instanceGM.isInTchat 
+            && !Input.GetKey (CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)) 
             && !selectedPlayer)
         {
 			//UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, layer_mask);

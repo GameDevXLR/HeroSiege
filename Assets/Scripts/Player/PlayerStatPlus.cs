@@ -107,6 +107,7 @@ public class PlayerStatPlus : NetworkBehaviour {
         }
 
         if (spell1LvlUpBtn.IsActive()
+           && !GameManager.instanceGM.isInTchat 
            && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
            && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.caracteristique)))
         {

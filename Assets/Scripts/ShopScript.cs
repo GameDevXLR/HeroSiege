@@ -55,7 +55,8 @@ public class ShopScript : MonoBehaviour
 
 	public void Update()
 	{
-		if(Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.Shop)))
+		if(!GameManager.instanceGM.isInTchat &&
+            Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.Shop)))
 			{
 			
 			if (isOpen) 

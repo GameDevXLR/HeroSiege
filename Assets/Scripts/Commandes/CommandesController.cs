@@ -11,6 +11,7 @@ public class CommandesController : MonoBehaviour {
 
     private void Awake()
     {
+        //PlayerPrefs.DeleteAll(); // just for the test if I want to test without the name
         if (Instance == null)
         {
             Instance = this;

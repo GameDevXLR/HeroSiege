@@ -176,6 +176,7 @@ MonoBehaviour:
   isTeam1: 0
   isTeam2: 0
   coPlayers: 0
+  isInTchat: 0
   teamWhoWon: 0
   lifeOfTheTeam1: 99
   lifeOfTheTeam2: 99
@@ -214,6 +215,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messPrefab: {fileID: 1127924229170528, guid: d221beb6e9d233d49bd45b129bff546c, type: 2}
+  messagesBox: {fileID: 0}
+  inTchat: 0
+  tchatText: {fileID: 0}
+  placeholder: {fileID: 0}
+  placeHolderFr: Ecrivez votre message ...
+  placeHolderEn: Enter your message ...
+  ButtonText: {fileID: 0}
+  ButtonStrFr: Envoyer
+  ButtonStrEn: Send
 --- !u!114 &114574788973545376
 MonoBehaviour:
   m_ObjectHideFlags: 1

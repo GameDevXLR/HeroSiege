@@ -154,8 +154,9 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
         if (isLocalPlayer)
         {
             if (spell1LvlUpBtn.IsActive()
-                       && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
-                       && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)))
+                && !GameManager.instanceGM.isInTchat 
+                && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
+                && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)))
             {
                 levelUp();
                 return;

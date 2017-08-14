@@ -32,7 +32,7 @@ public class GameManager : NetworkBehaviour
 	public Text nbrWavesText;
 	public static GameManager instanceGM = null;
 	private GameObject[] ennemies;
-	public AlertMessageManager messageManager;
+	public MessagesManager messageManager;
 	public GameObject playerObj;
 	public bool soloGame;
 	public List<NetworkInstanceId> team1ID;
@@ -42,6 +42,7 @@ public class GameManager : NetworkBehaviour
 	public bool isTeam1;
 	public bool isTeam2;
 	public int coPlayers; //nombre Total! de joueurs connectés. utile que si t'es le serveur pour le moment...
+    public bool isInTchat = false;
 	[SyncVar]public int teamWhoWon;
 	[SyncVar(hook = "GameRestarting")]private bool isRestarting;
 

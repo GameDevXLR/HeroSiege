@@ -105,6 +105,7 @@ public class PlayerCastHealArea : NetworkBehaviour
 		}
 
         if (spell2LvlUpBtn.IsActive()
+           && !GameManager.instanceGM.isInTchat 
            && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
            && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)))
         {
@@ -112,7 +113,8 @@ public class PlayerCastHealArea : NetworkBehaviour
             return;
         }
 
-        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)) && !onCD)
+        if (!GameManager.instanceGM.isInTchat 
+            && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort1)) && !onCD)
 		{
 			CastThatSpell();
 		}

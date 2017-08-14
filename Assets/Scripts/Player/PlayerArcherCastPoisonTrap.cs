@@ -101,6 +101,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 		}
 
         if (spell2LvlUpBtn.IsActive()
+            && !GameManager.instanceGM.isInTchat 
             && Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.up))
             && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)))
         {
@@ -108,7 +109,8 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
             return;
         }
 
-        if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)) && !onCD)
+        if (!GameManager.instanceGM.isInTchat 
+            && Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.sort2)) && !onCD)
 		{
 			CastThatSpell();
 		}
