@@ -10,6 +10,7 @@ public class MessagesManager : MonoBehaviour
 	//ce script permet de faire pop un message en local dans le "messagePanel".
 	public GameObject messPrefab;
 	public Transform messagesBox;
+    public Scrollbar scroll;
 
     public bool inTchat = false;
     public InputField inputField;
@@ -43,24 +44,38 @@ public class MessagesManager : MonoBehaviour
 		GameObject go = Instantiate (messPrefab, messagesBox, false);
 		go.GetComponentInChildren<Text> ().text = message;
 		go.GetComponentInChildren<Text> ().color = color;
+
+        Invoke("resetScroll", 0.1f);
 		//go.transform.SetAsLastSibling ();
 	}
 
 
+    public void resetScroll()
+    {
+        scroll.value = 0;
+    }
+    
+
+
     public void sendMessage()
     {
-        GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(inputField.text);
+        string message = checkMessage(inputField.text);
+        GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(message);
         inputField.text = "";
         EventSystem.current.SetSelectedGameObject(null);
     }
 
     
-
-
-
     public void setIntchat(bool isInTchat)
     {
         inTchat = isInTchat;
         GameManager.instanceGM.isInTchat = inTchat;
+    }
+
+    public string checkMessage(string message)
+    {
+        string result;
+        result = message.Replace("\n", "");
+        return result;
     }
 }
