@@ -4,18 +4,13 @@ using UnityEngine.Networking;
 using UnityEngine;
 
 
-[System.Serializable]
-public class ObjectPoolItems {
-	public GameObject objectToPool;
-	public int amountToPool;
-	public bool shouldExtand = true;
-}
 
-public class ObjectPooling : NetworkBehaviour
+
+public class ObjectPoolingServer : NetworkBehaviour
 {
-	public static ObjectPooling sharedInstance;
-	public List<ObjectPoolItems> itemsToPool;
-	public List<GameObject> pooledObject;
+    public static ObjectPooling sharedInstance;
+    public List<ObjectPoolItems> itemsToPool;
+    public List<GameObject> pooledObject;
     public List<NetworkInstanceId> listID;
 
 
@@ -29,41 +24,50 @@ public class ObjectPooling : NetworkBehaviour
     }
 
     [Command]
-    void CmdCreatePool(){
-        
-		pooledObject = new List<GameObject> ();
-		foreach (ObjectPoolItems item in itemsToPool) {
-			for (int i = 0; i < item.amountToPool; i++) {
-                GameObject obj = addObjectInListe (item.objectToPool);
+    void CmdCreatePool()
+    {
+
+        pooledObject = new List<GameObject>();
+        foreach (ObjectPoolItems item in itemsToPool)
+        {
+            for (int i = 0; i < item.amountToPool; i++)
+            {
+                GameObject obj = addObjectInListe(item.objectToPool);
                 NetworkServer.Spawn(obj);
                 Debug.Log(obj.GetComponent<NetworkIdentity>().netId);
                 NetworkInstanceId id = obj.GetComponent<NetworkIdentity>().netId;
                 //listID.Add(id);
                 RpcAddNetworkID(id);
             }
-		}
+        }
         RpcSetActiveObject(false);
 
     }
 
-    public GameObject GetPooledObject(string tag){
-		for(int i = 0; i < pooledObject.Count; i++){
-			if (!pooledObject [i].activeInHierarchy && pooledObject[i].tag == tag) {
-				return pooledObject [i];
-			}
-		}
+    public GameObject GetPooledObject(string tag)
+    {
+        for (int i = 0; i < pooledObject.Count; i++)
+        {
+            if (!pooledObject[i].activeInHierarchy && pooledObject[i].tag == tag)
+            {
+                return pooledObject[i];
+            }
+        }
 
-		foreach(ObjectPoolItems item in itemsToPool){
-			if (item.objectToPool.tag == tag) {
-				if(item.shouldExtand){
-					addObjectInListe (item.objectToPool);
-					return pooledObject [pooledObject.Count - 1];
-				}
-			}
-		}
-			
-		return null;
-	}
+        foreach (ObjectPoolItems item in itemsToPool)
+        {
+            if (item.objectToPool.tag == tag)
+            {
+                if (item.shouldExtand)
+                {
+                    addObjectInListe(item.objectToPool);
+                    return pooledObject[pooledObject.Count - 1];
+                }
+            }
+        }
+
+        return null;
+    }
 
     [ClientRpc]
     void RpcSetActiveObject(bool activate)
@@ -79,10 +83,10 @@ public class ObjectPooling : NetworkBehaviour
     [ClientRpc]
     void RpcAddNetworkID(NetworkInstanceId id)
     {
-         listID.Add(id);
+        listID.Add(id);
     }
 
-    
+
     public void ReceiveSetActiveObjectWithId(NetworkInstanceId id, bool activate)
     {
         CmdSetActivateObjectWithID(id, activate);
@@ -103,9 +107,10 @@ public class ObjectPooling : NetworkBehaviour
     }
 
 
-    private GameObject addObjectInListe (GameObject objectToPool){
-		GameObject obj = (GameObject)Instantiate (objectToPool);
-        pooledObject.Add (obj);
+    private GameObject addObjectInListe(GameObject objectToPool)
+    {
+        GameObject obj = (GameObject)Instantiate(objectToPool);
+        pooledObject.Add(obj);
         return obj;
-	}
+    }
 }

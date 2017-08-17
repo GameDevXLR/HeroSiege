@@ -30,7 +30,6 @@ public class MessagesManager : MonoBehaviour
             if (inTchat)
             {
                 sendMessage();
-
             }
             else
             {
@@ -41,12 +40,17 @@ public class MessagesManager : MonoBehaviour
 
     public void SendAnAlertMess(string message, Color color)
 	{
-		GameObject go = Instantiate (messPrefab, messagesBox, false);
+        //GameObject go = Instantiate (messPrefab, messagesBox, false);
+        GameObject go = ObjectPooling.Instance.GetPooledObject(messPrefab.tag);
+        go.transform.parent = messagesBox;
+        go.transform.localScale = new Vector3(1, 1, 1);
 		go.GetComponentInChildren<Text> ().text = message;
 		go.GetComponentInChildren<Text> ().color = color;
 
+
+
         Invoke("resetScroll", 0.1f);
-		//go.transform.SetAsLastSibling ();
+		go.transform.SetAsLastSibling ();
 	}
 
 
