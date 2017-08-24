@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114030565715175200}
   - component: {fileID: 114866985101090860}
   - component: {fileID: 114400265950898158}
+  - component: {fileID: 95582309349806714}
   m_Layer: 0
   m_Name: Main_Camera
   m_TagString: MainCamera
@@ -210,6 +211,23 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735137487550638}
   m_Enabled: 1
+--- !u!95 &95582309349806714
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735137487550638}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b54cfa6ffc5707459692ebe245aa8b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114030565715175200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,8 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  lockKey: 108
-  centerBackKey: 32
   selectedPlayer: 1
   speed: 100
   zoneDetectionMouse: 50
@@ -358,3 +374,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
