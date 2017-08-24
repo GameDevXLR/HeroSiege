@@ -34,7 +34,7 @@ public class PlayerEnnemyDetectionScript : NetworkBehaviour {
 			{
 				if (playerAgent.velocity == Vector3.zero) 
 				{
-					if (other.gameObject.layer == 9) 
+					if (other.gameObject.layer == 9 && other.gameObject.tag == "Enemy") 
 					{
 						if (GetComponentInParent<PlayerIGManager>().heroChosen =="Ovate" && !other.gameObject.GetComponent<EnnemyIGManager> ().myEnemies.Contains (autoAScript.gameObject)) 
 						{

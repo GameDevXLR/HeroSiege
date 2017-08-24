@@ -42,7 +42,7 @@ public class MessagesManager : MonoBehaviour
 	{
         //GameObject go = Instantiate (messPrefab, messagesBox, false);
         GameObject go = ObjectPooling.Instance.GetPooledObject(messPrefab.tag);
-        go.transform.parent = messagesBox;
+		go.transform.SetParent(messagesBox);
         go.transform.localScale = new Vector3(1, 1, 1);
 		go.GetComponentInChildren<Text> ().text = message;
 		go.GetComponentInChildren<Text> ().color = color;
