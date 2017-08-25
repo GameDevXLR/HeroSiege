@@ -126,7 +126,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		}
 		if (isServer) 
 		{
-//			RpcChangeName ();
+            //			RpcChangeName ();
+            NetworkUtils.Instance.addConn(GetComponent<NetworkIdentity>().connectionToClient);
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
 			if(isLocalPlayer)
 			{

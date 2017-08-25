@@ -42,7 +42,7 @@ public class MessagesManager : MonoBehaviour
 	{
         //GameObject go = Instantiate (messPrefab, messagesBox, false);
         GameObject go = ObjectPooling.Instance.GetPooledObject(messPrefab.tag);
-        go.transform.parent = messagesBox;
+        go.transform.SetParent(messagesBox, false);
         go.transform.localScale = new Vector3(1, 1, 1);
 		go.GetComponentInChildren<Text> ().text = message;
 		go.GetComponentInChildren<Text> ().color = color;
@@ -63,7 +63,7 @@ public class MessagesManager : MonoBehaviour
 
     public void sendMessage()
     {
-        string message = checkMessage(inputField.text);
+        string message = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname + " : " + checkMessage(inputField.text);
         GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(message);
         inputField.text = "";
         EventSystem.current.SetSelectedGameObject(null);

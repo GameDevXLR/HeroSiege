@@ -10,7 +10,7 @@ public class PooledObjects : MonoBehaviour {
     private List<GameObject> pooledObjects;
     private int index = 0;
 
-    public PooledObjects(ObjectPoolItems objPooling)
+    public void Initialise(ObjectPoolItems objPooling)
     {
         pooledObjects = new List<GameObject>();
         item = objPooling;
@@ -29,22 +29,25 @@ public class PooledObjects : MonoBehaviour {
 
     public GameObject getObj()
     {
-        
-        if (index == pooledObjects.Count)
+
+        if (item.shouldExtand)
         {
-            if (item.shouldExtand)
-                pooledObjects.Add(Instantiate(item.objectToPool));
-            else
+            index = UtilsArray.getFirstInactiveObject(pooledObjects);
+            if(index == pooledObjects.Count)
             {
-                index = 0;
+                GameObject obj = Instantiate(item.objectToPool);
+                pooledObjects.Add(obj);
             }
         }
-        else if(!pooledObjects[index].activeInHierarchy)
+        else if (index == pooledObjects.Count)
+        {
+            index = 0;
+        }
+
+        if(!pooledObjects[index].activeInHierarchy)
         {
             pooledObjects[index].SetActive(true);
         }
         return pooledObjects[index++];
-    }
-
-    
+    }    
 }
