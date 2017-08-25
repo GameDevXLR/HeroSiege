@@ -116,7 +116,7 @@ public class CameraController : MonoBehaviour
 
     public void MoveCameraTo(Vector3 vect)
     {
-        if (vect != null)
+		if (vect != Vector3.zero)
         {
             transform.position = vect + offset;
             gameObject.transform.position = new Vector3()

@@ -46,7 +46,7 @@ public class SpellTankDpsHealAoe : NetworkBehaviour {
 	{
 		if (Time.time < timer + 0.3f) 
 		{
-			if (other.gameObject.layer == 9) 
+			if (other.gameObject.layer == 9 ) 
 			{
 				if(!spellTargets.Contains(other.gameObject))
 				{
