@@ -52,21 +52,7 @@ public class NetworkUtils : MonoBehaviour
                 listConnTeam1.Remove(conn);
             }
         }
-        Debug.Log("Connection : ");
-        foreach (NetworkConnection co in listConn)
-        {
-            Debug.Log(co.ToString());
-        }
-        Debug.Log("Connection team 1 : ");
-        foreach (NetworkConnection co in listConnTeam1)
-        {
-            Debug.Log(co.ToString());
-        }
-        Debug.Log("Connection team 2 : ");
-        foreach (NetworkConnection co in listConnTeam2)
-        {
-            Debug.Log(co.ToString());
-        }
+        
 
     }
 

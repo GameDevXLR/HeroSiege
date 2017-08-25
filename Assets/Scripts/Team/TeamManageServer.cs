@@ -5,15 +5,17 @@ using UnityEngine.Networking;
 
 public class TeamManageServer : NetworkBehaviour
 {
-    public void sendTeam(int team)
+    public void sendTeam(string name, int team)
     {
-        CmdTeamToServer(team );
+        CmdTeamToServer(name, team);
         //GameManager.instanceGM.messageManager.SendAnAlertMess(message, Color.red);        
     }
 
     [Command]
-    public void CmdTeamToServer(int team)
+    public void CmdTeamToServer(string name, int team)
     {
-        NetworkUtils.Instance.addConn(GetComponent<NetworkIdentity>().connectionToClient, team);
+        NetworkConnection conn = GetComponent<NetworkIdentity>().connectionToClient;
+        NetworkUtils.Instance.addConn(conn, team);
+        
     }
 }

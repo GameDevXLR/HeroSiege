@@ -58,15 +58,27 @@ public class MessagesManager : MonoBehaviour
     {
         scroll.value = 0;
     }
-    
+
 
 
     public void sendMessage()
     {
-        string message = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname + " : " + checkMessage(inputField.text);
-        GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(message);
+        
+        string premessage = UtilsString.EraseRetourChariot(inputField.text);
+        
+        if (premessage[0].Equals('\\'))
+        {
+            checkMessageSpe(premessage);
+        }
+        else if ( premessage.Trim().Length != 0)
+        {
+            string message = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname + " : " + premessage;
+            GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(message);
+            
+        }
         inputField.text = "";
         EventSystem.current.SetSelectedGameObject(null);
+
     }
 
     
@@ -76,10 +88,20 @@ public class MessagesManager : MonoBehaviour
         GameManager.instanceGM.isInTchat = inTchat;
     }
 
-    public string checkMessage(string message)
+    public void checkMessageSpe(string message)
     {
-        string result;
-        result = message.Replace("\n", "");
-        return result;
+        string[] tab = message.Split(' ');
+
+        if (tab[0].Equals("\\msg"))
+        {
+            Debug.Log("envoi d'un message");
+            string sendMessage = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname + " : " + message;
+            GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(tab[1],sendMessage);
+        }
+        else
+        {
+            Debug.Log("raté ma poule try again");
+        }
+
     }
 }

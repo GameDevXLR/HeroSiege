@@ -23,7 +23,7 @@ public class TeamSelectorScript : NetworkBehaviour
 				{
 					GameManager.instanceGM.isTeam1 = true;
                     GameManager.instanceGM.isTeam2 = false;
-                    other.gameObject.GetComponent<TeamManageServer>().sendTeam(1);
+                    other.gameObject.GetComponent<TeamManageServer>().sendTeam(other.gameObject.GetComponent<PlayerManager>().playerNickname, 1);
                     //NetworkUtils.Instance.addConn(other.GetComponent<NetworkIdentity>().connectionToClient, 1);
 					other.gameObject.GetComponent<PlayerXPScript> ().isTeam1 = true;
 
@@ -34,9 +34,9 @@ public class TeamSelectorScript : NetworkBehaviour
 				{
                     GameManager.instanceGM.isTeam2 = true;
                     GameManager.instanceGM.isTeam1 = false;
-                    other.gameObject.GetComponent<TeamManageServer>().sendTeam(2);
+                    other.gameObject.GetComponent<TeamManageServer>().sendTeam(other.gameObject.GetComponent<PlayerManager>().playerNickname,2);
                     other.gameObject.GetComponent<PlayerXPScript>().isTeam1 = false;
-                    //NetworkUtils.Instance.addConn(other.GetComponent<NetworkIdentity>().connectionToClient, 2);
+                    
                     other.gameObject.GetComponent<PlayerIGManager>().respawnPoint = GameObject.Find ("PlayerRespawnPointT2");
 					return;
 				}

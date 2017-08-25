@@ -84,12 +84,12 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		GameManager.instanceGM.playerObj = gameObject;
 		GameManager.instanceGM.ID = gameObject.GetComponent<NetworkIdentity> ().netId;
-		//		Camera.main.transform.GetChild (0).gameObject.SetActive (false);
+		//	Camera.main.transform.GetChild (0).gameObject.SetActive (false);
 		CmdChangeName (PlayerPrefs.GetString ("PlayerNN"));
 		difficultyPanel = GameObject.Find ("NewDiffPan");
 		if (isServer) 
 		{
-//			difficultyPanel.transform.localScale = new Vector3 (0.5f,0.5f,0.5f);
+            //	difficultyPanel.transform.localScale = new Vector3 (0.5f,0.5f,0.5f);
 		}
 		heroSelectPanel = GameObject.Find ("HeroSelectionPanel");
 		selectHeroTank1 = heroSelectPanel.transform.Find("ChampionPan").Find ("SelectTank1Btn").GetComponent<Button>();
@@ -126,12 +126,12 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		}
 		if (isServer) 
 		{
-            //			RpcChangeName ();
+            //	RpcChangeName ();
             NetworkUtils.Instance.addConn(GetComponent<NetworkIdentity>().connectionToClient);
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().enabled = true;
 			if(isLocalPlayer)
 			{
-			GameObject.Find ("NewDiffPan").GetComponent<ChooseDifficultyScript> ().enabled = true;
+			    GameObject.Find ("NewDiffPan").GetComponent<ChooseDifficultyScript> ().enabled = true;
 				if (NetworkManager.singleton.GetComponent<PlayerMenuSettings> ().isItOneLane) 
 				{
 					GameManager.instanceGM.soloGame = true;
@@ -145,7 +145,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void CmdChangeName (string nickName)
 	{
 		playerNickName = nickName;
-	}
+        NetworkUtils.Instance.listPlayer[nickName] = GetComponent<NetworkIdentity>().connectionToClient;
+
+    }
 
 	public void ListenerSelectHeroTank1()
 	{
