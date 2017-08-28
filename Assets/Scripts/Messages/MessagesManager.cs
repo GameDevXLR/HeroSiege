@@ -91,16 +91,35 @@ public class MessagesManager : MonoBehaviour
     public void checkMessageSpe(string message)
     {
         string[] tab = message.Split(' ');
-
+        
         if (tab[0].Equals("\\msg"))
-        {
-            Debug.Log("envoi d'un message");
-            string sendMessage = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname + " : " + message;
-            GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(tab[1],sendMessage);
+    {
+            if(tab.Length > 2)
+            {
+                string premessage = string.Join(" ", UtilsArray.getSubArray(tab, 2, tab.Length - 2));
+                if(premessage.Trim().Length != 0)
+                {
+                    string senderName = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname ;
+                    GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(tab[1],senderName , premessage);
+                }
+                
+            }
+                
+                
+            
         }
         else
         {
-            Debug.Log("raté ma poule try again");
+            string sendmessage;
+            if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+            {
+                sendmessage = "Désolé je ne connais pas ce code : " + tab[0];
+            }
+            else
+            {
+                sendmessage = "Sorry, this code is not known: " + tab[0];
+            }
+            SendAnAlertMess(sendmessage, Color.red); 
         }
 
     }

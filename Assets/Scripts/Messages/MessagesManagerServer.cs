@@ -14,9 +14,9 @@ public class MessagesManagerServer : NetworkBehaviour
         //GameManager.instanceGM.messageManager.SendAnAlertMess(message, Color.red);        
     }
 
-    public void sendMessage(string name, string message)
+    public void sendMessage(string name, string sendername,string message)
     {
-        CmdSendMessageWithName(name, message);
+        CmdSendMessageWithName(name, sendername,message);
         //GameManager.instanceGM.messageManager.SendAnAlertMess(message, Color.red);        
     }
 
@@ -27,13 +27,17 @@ public class MessagesManagerServer : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSendMessageWithName(string name,string message)
+    public void CmdSendMessageWithName(string name, string sendername, string message)
     {
-        foreach (KeyValuePair<string, NetworkConnection> entry in NetworkUtils.Instance.listPlayer)
+        if (NetworkUtils.Instance.listPlayer.ContainsKey(name))
         {
-            Debug.Log("entry : " + entry.Key + "value : " + entry.Value);
+            TargetSendMessage(NetworkUtils.Instance.listPlayer[name], sendername + " : " + message);
         }
-        TargetSendMessage(NetworkUtils.Instance.listPlayer[name],message);
+        else
+        {
+            TargetSendMessageBadReveiver(NetworkUtils.Instance.listPlayer[sendername], name );
+        }
+
     }
 
     [ClientRpc]
@@ -46,6 +50,21 @@ public class MessagesManagerServer : NetworkBehaviour
     public void TargetSendMessage(NetworkConnection target, string message)
     {
         GameManager.instanceGM.messageManager.SendAnAlertMess(message, Color.yellow);
+    }
+
+    [TargetRpc]
+    public void TargetSendMessageBadReveiver(NetworkConnection target, string name)
+    {
+        string sendMessage = "";
+        if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+        {
+            sendMessage = "Désolé ce pseudonyme est inconnu : " + name;
+        }
+        else
+        {
+            sendMessage = "Sorry, this pseudo is unknown: " + name;
+        }
+        GameManager.instanceGM.messageManager.SendAnAlertMess(sendMessage, Color.red);
     }
 
 

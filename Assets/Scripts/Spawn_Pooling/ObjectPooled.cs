@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PooledObjects : MonoBehaviour {
+public class PooledObjects {
 
     [SerializeField]
     private ObjectPoolItems item;
@@ -10,13 +10,13 @@ public class PooledObjects : MonoBehaviour {
     private List<GameObject> pooledObjects;
     private int index = 0;
 
-    public void Initialise(ObjectPoolItems objPooling)
+    public PooledObjects(ObjectPoolItems objPooling)
     {
         pooledObjects = new List<GameObject>();
         item = objPooling;
         for (int i = 0; i < item.amountToPool; i++)
         {
-            GameObject obj = Instantiate(item.objectToPool);
+            GameObject obj = GameObject.Instantiate(item.objectToPool) as GameObject;
             obj.SetActive(false);
             pooledObjects.Add(obj);
         }
@@ -35,7 +35,7 @@ public class PooledObjects : MonoBehaviour {
             index = UtilsArray.getFirstInactiveObject(pooledObjects);
             if(index == pooledObjects.Count)
             {
-                GameObject obj = Instantiate(item.objectToPool);
+                GameObject obj = GameObject.Instantiate(item.objectToPool) as GameObject;
                 pooledObjects.Add(obj);
             }
         }

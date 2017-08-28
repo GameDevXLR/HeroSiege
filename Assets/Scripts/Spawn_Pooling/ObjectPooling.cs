@@ -29,8 +29,7 @@ public class ObjectPooling : NetworkBehaviour
 		pooledObject = new List<PooledObjects> ();
         int i = 0;
 		foreach (ObjectPoolItems item in itemsToPool) {
-            PooledObjects obj = new PooledObjects();
-            obj.Initialise(item);
+            PooledObjects obj = new PooledObjects(item);
             pooledObject.Add(obj);
 		}
     }

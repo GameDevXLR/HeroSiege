@@ -13,4 +13,9 @@ public class UtilsArray {
         }
         return result;
     }
+
+    public static string[] getSubArray(string[] array,  int firstElement, int range)
+    {
+        return new List<string>(array).GetRange(firstElement, range).ToArray();
+    }
 }
