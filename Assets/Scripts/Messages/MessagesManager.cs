@@ -20,6 +20,10 @@ public class MessagesManager : MonoBehaviour
     public Text ButtonText;
     public string ButtonStrFr;
     public string ButtonStrEn;
+    private int count = 0;
+    public bool canTalk = true;
+    public int maxMessByTime = 10;
+    public float time = 30f;
 
 
     public void Update()
@@ -63,22 +67,52 @@ public class MessagesManager : MonoBehaviour
 
     public void sendMessage()
     {
-        
-        string premessage = UtilsString.EraseRetourChariot(inputField.text);
-        
-        if (premessage[0].Equals('\\'))
+        if (canTalk)
         {
-            checkMessageSpe(premessage);
-        }
-        else if ( premessage.Trim().Length != 0)
-        {
-            string message = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname + " : " + premessage;
-            GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(message);
-            
-        }
-        inputField.text = "";
-        EventSystem.current.SetSelectedGameObject(null);
+            if(count == 0)
+            {
+                StartCoroutine(setCanTalkToTrue(time));
+            }
+            count++;
+            if(count > maxMessByTime)
+            {
+                canTalk = false;
+                
+                string sendmessage = "";
+                if (PlayerPrefs.GetString("LANGAGE") == "Fr")
+                {
+                    sendmessage = "Tu ne peux envoyer que " + maxMessByTime + " / " + time;
+                }
+                else
+                {
+                    sendmessage = "You can only send " + maxMessByTime + " / " + time;
+                }
+                SendAnAlertMess(sendmessage, Color.red);
+            }
+            else
+            {
+                string premessage = UtilsString.EraseRetourChariot(inputField.text);
 
+                if (premessage.Trim().Length != 0)
+                {
+                    if (premessage[0].Equals('\\'))
+                    {
+                        checkMessageSpe(premessage);
+                    }
+                    else
+                    {
+                        string message = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname + " : " + premessage;
+                        GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(message);
+
+                    }
+                }
+
+                
+            }
+            inputField.text = "";
+            EventSystem.current.SetSelectedGameObject(null);
+
+        }
     }
 
     
@@ -104,9 +138,6 @@ public class MessagesManager : MonoBehaviour
                 }
                 
             }
-                
-                
-            
         }
         else
         {
@@ -121,6 +152,14 @@ public class MessagesManager : MonoBehaviour
             }
             SendAnAlertMess(sendmessage, Color.red); 
         }
+
+    }
+
+    IEnumerator setCanTalkToTrue(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canTalk = true;
+        count = 0;
 
     }
 }
