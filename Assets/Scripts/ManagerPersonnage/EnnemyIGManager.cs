@@ -51,7 +51,8 @@ public class EnnemyIGManager : CharacterIGManager
 		{
 			nbrOfPlayersT1 = GameManager.instanceGM.team1ID.Count;
 			nbrOfPlayersT2 = GameManager.instanceGM.team2ID.Count;
-		}
+
+        }
     }
 
 	public override void LooseHealth (int dmg, bool trueDmg, GameObject attacker)
@@ -97,6 +98,9 @@ public class EnnemyIGManager : CharacterIGManager
         }
     }
 
+    /// <summary>
+    ///  Cette fonction n'est appellé que sur le serveur
+    /// </summary>
     public override void MakeHimDie()
     {
 		if (isAbleToResurect) 
@@ -111,7 +115,10 @@ public class EnnemyIGManager : CharacterIGManager
     }
 
 
-    //ce qu'il se passe si un mob meurt...
+    /// <summary>
+    /// ce qu'il se passe si un mob meurt...
+    /// Fonction qui ne doit s'effectuer que sur le serveur
+    /// </summary>
     IEnumerator KillTheMob()
     {
         if (guyAttackingMe)
@@ -119,9 +126,14 @@ public class EnnemyIGManager : CharacterIGManager
             if (guyAttackingMe.tag == "Player")
             {
                 guyAttackingMe.GetComponent<PlayerXPScript>().GetXP(xpGiven/10);
-                guyAttackingMe.GetComponent<PlayerGoldScript>().GetGold(goldGiven/10);
+                //guyAttackingMe.GetComponent<PlayerGoldScript>().GetGold(goldGiven/10);
 				ShareXPWithTheTeam (guyAttackingMe.GetComponent<PlayerXPScript> ().isTeam1, xpGiven);
+                GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript>().receiveGoldFromEnnemy(this,guyAttackingMe);
             }
+        }
+        else
+        {
+            GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript>().receiveGoldFromEnnemy(this);
         }
         //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
         if (isServer)
@@ -144,7 +156,6 @@ public class EnnemyIGManager : CharacterIGManager
             {
                 isDead = true;
                 RpcKillTheJungleMob();
-
             }
             else
             {
@@ -162,10 +173,10 @@ public class EnnemyIGManager : CharacterIGManager
     {
 		GetComponent<StatusHandlerScript> ().CCTwistImg.enabled = false;
 		GetComponent<StatusHandlerScript> ().SlowImg.enabled = false;
-        goldDisplay.text = goldGiven.ToString();
-        goldCanvas.GetComponent<Animator>().enabled = true;
-        goldCanvas.GetComponent<Canvas>().enabled = true;
-        goldCanvas.GetComponent<DeathByTime>().enabled = true;
+        //goldDisplay.text = goldGiven.ToString();
+        //goldCanvas.GetComponent<Animator>().enabled = true;
+        //goldCanvas.GetComponent<Canvas>().enabled = true;
+        //goldCanvas.GetComponent<DeathByTime>().enabled = true;
         //		goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);
 		if (deadAnimChildMesh) {
 			
@@ -189,10 +200,10 @@ public class EnnemyIGManager : CharacterIGManager
         GetComponent<NavMeshAgent>().enabled = false;
         
 
-        goldDisplay.text = goldGiven.ToString();
-        goldCanvas.GetComponent<Animator>().enabled = true;
-        goldCanvas.GetComponent<Canvas>().enabled = true;
-        goldCanvas.GetComponent<InactivateAnimatorCanvas>().inactiveWithTime();
+        //goldDisplay.text = goldGiven.ToString();
+        //goldCanvas.GetComponent<Animator>().enabled = true;
+        //goldCanvas.GetComponent<Canvas>().enabled = true;
+        //goldCanvas.GetComponent<InactivateAnimatorCanvas>().inactiveWithTime();
 
 
         //  goldCanvas.GetComponent<RectTransform> ().SetParent (null, false);

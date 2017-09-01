@@ -14,7 +14,7 @@ public class InactivateByTime : MonoBehaviour
         Invoke("inactivate", lifetime);
     }
 
-    public void inactivate()
+    public virtual void inactivate()
     {
         gameObject.SetActive(false);
     }

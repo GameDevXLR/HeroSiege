@@ -22,6 +22,24 @@ public class PooledObjects {
         }
     }
 
+    public PooledObjects(ObjectPoolItems objPooling, GameObject parent)
+    {
+        pooledObjects = new List<GameObject>();
+        item = objPooling;
+        for (int i = 0; i < item.amountToPool; i++)
+        {
+            GameObject obj = GameObject.Instantiate(item.objectToPool) as GameObject;
+            obj.SetActive(false);
+            obj.transform.SetParent(parent.transform, false);
+            if (obj.GetComponent<InactivateAndMoveByTime>())
+            {
+                obj.GetComponent<InactivateAndMoveByTime>().parent = parent.transform;
+            }
+            
+            pooledObjects.Add(obj);
+        }
+    }
+
     public string getTagObj()
     {
         return item.objectToPool.tag;

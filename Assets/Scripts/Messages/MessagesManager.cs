@@ -50,9 +50,6 @@ public class MessagesManager : MonoBehaviour
         go.transform.localScale = new Vector3(1, 1, 1);
 		go.GetComponentInChildren<Text> ().text = message;
 		go.GetComponentInChildren<Text> ().color = color;
-
-
-
         Invoke("resetScroll", 0.1f);
 		go.transform.SetAsLastSibling ();
 	}

@@ -7,9 +7,10 @@ using UnityEngine;
 public class ObjectPooling : NetworkBehaviour
 {
 	public static ObjectPooling Instance;
-	public List<ObjectPoolItems> itemsToPool;
+    public GameObject poolingStock;
+    public List<ObjectPoolItems> itemsToPool;
 	public List<PooledObjects> pooledObject;
-
+    
 
     void Awake()
     {
@@ -28,8 +29,9 @@ public class ObjectPooling : NetworkBehaviour
         
 		pooledObject = new List<PooledObjects> ();
 		foreach (ObjectPoolItems item in itemsToPool) {
-            PooledObjects obj = new PooledObjects(item);
+            PooledObjects obj = new PooledObjects(item, poolingStock);
             pooledObject.Add(obj);
+            
 		}
     }
 

@@ -59,7 +59,8 @@ GameObject:
   - component: {fileID: 114729614122486032}
   - component: {fileID: 114810306390136902}
   - component: {fileID: 95396494629188388}
-  - component: {fileID: 114118489070149634}
+  - component: {fileID: 114828432197509312}
+  - component: {fileID: 114863594285917510}
   m_Layer: 9
   m_Name: GoldCanvas
   m_TagString: GoldPrefab
@@ -84,18 +85,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114118489070149634
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1861594917510448}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ca80cb628febb46b40b10a3017d40f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 0.65
 --- !u!114 &114124167629130144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,6 +179,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+--- !u!114 &114828432197509312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1861594917510448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60c32c3785243d48893e18688f8b3dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 1
+  parent: {fileID: 0}
+--- !u!114 &114863594285917510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1861594917510448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679fde14235979146accbbd425caf65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0.65
 --- !u!114 &114879301643937774
 MonoBehaviour:
   m_ObjectHideFlags: 1
