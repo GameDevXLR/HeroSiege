@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class PetIGManager : CharacterIGManager {
 
+    public GameObject owner;
+
     protected override void Start()
     {
         base.Start();
@@ -62,4 +64,10 @@ public class PetIGManager : CharacterIGManager {
         deadAnimChildMesh.transform.parent = null;
     }
 
+    //public override void takeDommage(int dmg, bool trueDmg)
+    //{
+    //    int hpBefore = currentHp;
+    //    base.takeDommage(dmg, trueDmg);
+    //    gameObject.GetComponent<EventMessageServer>().receiveDegat(gameObject, currentHp - hpBefore);
+    //}
 }

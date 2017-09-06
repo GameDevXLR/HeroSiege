@@ -74,11 +74,11 @@ public class EnnemyIGManager : CharacterIGManager
 			}
 		}
 
-
 		if (currentHp > 0)
 		{
 			takeDommage(dmg, trueDmg);
-		}        if ((attacker.tag == "Player" && !attacker.GetComponent<PlayerIGManager>().isDead)
+		}
+        if ((attacker.tag == "Player" && !attacker.GetComponent<PlayerIGManager>().isDead)
             ||(attacker.tag != "Player" && !attacker.GetComponent<EnnemyIGManager>().isDead))
         {
             if (!isTaunt)
@@ -96,6 +96,13 @@ public class EnnemyIGManager : CharacterIGManager
         {
             attacker.GetComponent<PlayerManager>().killCount++;
         }
+    }
+
+    public override void takeDommage(int dmg, bool trueDmg)
+    {
+        int hpBefore = currentHp;
+        base.takeDommage(dmg, trueDmg);
+        guyAttackingMe.GetComponent<EventMessageServer>().receiveDegat(gameObject, guyAttackingMe,currentHp - hpBefore);
     }
 
     /// <summary>

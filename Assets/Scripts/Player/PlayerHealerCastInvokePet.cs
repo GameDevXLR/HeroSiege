@@ -94,7 +94,8 @@ public class PlayerHealerCastInvokePet : NetworkBehaviour {
 		go.GetComponent<PetIGManager> ().maxHp = spellDmg * 6;
 		go.GetComponent<PetIGManager> ().currentHp = spellDmg * 6;
 		go.GetComponent<PetIGManager> ().regenHp = spellDmg / 5;
-		go.GetComponent<AllyPetAutoAttack> ().targetID = GetComponent<NetworkIdentity> ().netId;
+        go.GetComponent<PetIGManager>().owner = gameObject;
+        go.GetComponent<AllyPetAutoAttack> ().targetID = GetComponent<NetworkIdentity> ().netId;
 		actualPet = go;
 		NetworkServer.Spawn(go);
 

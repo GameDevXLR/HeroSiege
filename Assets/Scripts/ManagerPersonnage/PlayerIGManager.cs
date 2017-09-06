@@ -82,9 +82,6 @@ public class PlayerIGManager : CharacterIGManager {
     }
 
 
-    
-
-
     public override void WhenUpdateCurrentSupAtMaxHp()
     {
         base.WhenUpdateCurrentSupAtMaxHp();
@@ -123,6 +120,12 @@ public class PlayerIGManager : CharacterIGManager {
         }
     }
 
+    public override void takeDommage(int dmg, bool trueDmg)
+    {
+        int hpBefore = currentHp;
+        base.takeDommage(dmg, trueDmg);
+        gameObject.GetComponent<EventMessageServer>().receiveDegat(gameObject,currentHp - hpBefore);
+    }
 
     public override void MakeHimDie()
     {
