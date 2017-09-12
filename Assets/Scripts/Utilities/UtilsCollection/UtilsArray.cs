@@ -18,4 +18,20 @@ public class UtilsArray {
     {
         return new List<string>(array).GetRange(firstElement, range).ToArray();
     }
+
+    public static bool allEnnemyDie(List<EnnemyIGManager> listEnnemy)
+    {
+        int index = 0;
+
+        while (listEnnemy[index].isDead)
+        {
+            index++;
+        }
+
+        if(index == listEnnemy.Count)
+        {
+            return true;
+        }
+        return false;
+    }
 }

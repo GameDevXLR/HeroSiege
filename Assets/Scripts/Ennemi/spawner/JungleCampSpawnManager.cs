@@ -31,14 +31,6 @@ public class JungleCampSpawnManager : NetworkBehaviour
 
     public void ResetThisJungCamp()
     {
-        //foreach (GameObject go in jungCampMinion) 
-        //{
-        //	if (go != null) {
-        //		NetworkServer.Destroy (go);
-        //	}
-        //}
-        
-
         if (!alreadySpawn)
         {
             

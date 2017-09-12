@@ -37,7 +37,7 @@ public class EventMessageServer : NetworkBehaviour
         }
         eventMess.SetActive(true);
         eventMess.GetComponent<Animator>().enabled = true;
-        eventMess.GetComponent<Canvas>().enabled = true;
+        eventMess.GetComponent<Canvas>().enabled = true;https://www.ecosia.org/search?tt=vivaldi&q=unet
         eventMess.GetComponent<InactivateAnimatorCanvas>().inactiveWithTime();
         eventMess.GetComponent<InactivateAndMoveByTime>().InactivateWithlifeTime();
     }

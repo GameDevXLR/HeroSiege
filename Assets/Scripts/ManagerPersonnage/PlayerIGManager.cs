@@ -19,6 +19,9 @@ public class PlayerIGManager : CharacterIGManager {
     public RectTransform lifeBarMain; // lifebar de l'interface player.
     public Text playerHPTxt;
 
+    // energy
+    public int energy = 0;
+
     //level up
     public int levelUpBonusHP = 10;
     [SyncVar] public int levelUpBonusArmor;

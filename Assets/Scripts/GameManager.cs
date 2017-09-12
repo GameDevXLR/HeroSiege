@@ -56,8 +56,9 @@ public class GameManager : NetworkBehaviour
 	public Sprite nightIcon;
 	public LocationManager locManager;
 	public LightManagerScript lightM;
-	public GameObject[] jungCamps;
-	public Canvas tutorialPanel;
+    public GameObject[] jungCamps;
+    public CrystalManager[] crystaux;
+    public Canvas tutorialPanel;
 	public Text tutoTip;
 
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
@@ -328,7 +329,11 @@ public class GameManager : NetworkBehaviour
 				{
 					go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
 				}
-			}
+                foreach (CrystalManager crystal in crystaux)
+                {
+                    crystal.replenish();
+                }
+            }
 		}
 	}
 
@@ -388,6 +393,10 @@ public class GameManager : NetworkBehaviour
 		{
 			go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
 		}
+        foreach(CrystalManager crystal in crystaux)
+        {
+            crystal.initialize();
+        }
 	}
 
 	[Server]
