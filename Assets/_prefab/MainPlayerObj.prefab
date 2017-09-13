@@ -2059,6 +2059,7 @@ GameObject:
   - component: {fileID: 114896777897577520}
   - component: {fileID: 114666143963175602}
   - component: {fileID: 114180748815543600}
+  - component: {fileID: 114730579166156480}
   m_Layer: 8
   m_Name: MainPlayerObj
   m_TagString: Player
@@ -5874,6 +5875,7 @@ MonoBehaviour:
   killCount: 0
   lifeBarMain: {fileID: 0}
   playerHPTxt: {fileID: 0}
+  energy: 0
   levelUpBonusHP: 10
   levelUpBonusArmor: 0
   respawnPoint: {fileID: 0}
@@ -6718,6 +6720,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114730579166156480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0a4d2d67c8440468ac7618b73b519e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114737696397258622
 MonoBehaviour:
   m_ObjectHideFlags: 1

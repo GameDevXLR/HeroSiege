@@ -82,9 +82,13 @@ public class CrystalManager : NetworkBehaviour
         if (currentEnergie != 0)
         {
             if (currentEnergie - sum >= 0)
+            {
+                currentEnergie -= sum;
                 return sum;
+            }
             else
             {
+                currentEnergie = 0;
                 return currentEnergie;
             }
         }
@@ -108,5 +112,10 @@ public class CrystalManager : NetworkBehaviour
     public void increaseStorage(int increase)
     {
         storageCapacitie += increase;
+    }
+
+    public bool isEmpty()
+    {
+        return currentEnergie == 0;
     }
 }
