@@ -23,6 +23,7 @@ public class CrystalManager : NetworkBehaviour
 
     public void initialize()
     {
+        decrease = true;   
         foreach(GameObject obj in jungleCamp.jungCampMinion)
         {
             listEnnemy.Add(obj.GetComponent<EnnemyIGManager>());
@@ -79,7 +80,7 @@ public class CrystalManager : NetworkBehaviour
     /// <returns></returns>
     public int getEnergie(int sum)
     {
-        if (currentEnergie != 0)
+        if (currentEnergie != 0 && UtilsArray.allEnnemyDie(listEnnemy))
         {
             if (currentEnergie - sum >= 0)
             {
@@ -117,5 +118,10 @@ public class CrystalManager : NetworkBehaviour
     public bool isEmpty()
     {
         return currentEnergie == 0;
+    }
+
+    public bool canTake()
+    {
+        return !isEmpty() && UtilsArray.allEnnemyDie(listEnnemy);
     }
 }

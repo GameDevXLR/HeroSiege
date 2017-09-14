@@ -2058,6 +2058,9 @@ GameObject:
   - component: {fileID: 114685893789081978}
   - component: {fileID: 114896777897577520}
   - component: {fileID: 114666143963175602}
+  - component: {fileID: 114875016887237836}
+  - component: {fileID: 114524207174379058}
+  - component: {fileID: 114532923662922726}
   m_Layer: 8
   m_Name: MainPlayerObj
   m_TagString: Player
@@ -5467,53 +5470,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: -0.00088633964
-      value: -0.00066407677
-      inSlope: 0.68631065
-      outSlope: 0.68631065
-      tangentMode: 34
-    - serializedVersion: 2
-      time: 0.00020601903
-      value: 0.000085620675
-      inSlope: -0.11440682
-      outSlope: -0.11440682
+      time: 0
+      value: 0.007961273
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.18751414
-      value: 0.44717458
-      inSlope: 2.544862
-      outSlope: 2.544862
-      tangentMode: 34
-    - serializedVersion: 2
-      time: 0.3437268
-      value: 0.86938727
-      inSlope: 1.6991668
-      outSlope: 1.6991668
-      tangentMode: 34
-    - serializedVersion: 2
-      time: 0.5019231
-      value: 0.97941697
-      inSlope: 0.049661547
-      outSlope: 0.049661547
-      tangentMode: 34
-    - serializedVersion: 2
-      time: 0.7987769
-      value: 0.8024317
-      inSlope: -1.1709036
-      outSlope: -1.1709036
+      time: 1
+      value: 0.007961273
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
-    - serializedVersion: 2
-      time: 0.9408663
-      value: 0.40683472
-      inSlope: -4.6546516
-      outSlope: -4.6546516
-      tangentMode: 34
-    - serializedVersion: 2
-      time: 1.0041667
-      value: -0.006210819
-      inSlope: -6.5251613
-      outSlope: -6.5251613
-      tangentMode: 34
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -6036,6 +6003,31 @@ MonoBehaviour:
   spellLvl: 1
   durationShake: 5
   amountShake: 0
+--- !u!114 &114524207174379058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5d8e0990317264b90e809252afa3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canalisage: 3
+--- !u!114 &114532923662922726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d628c17a62618468c3982ae7352a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degatPrefab: {fileID: 1861594917510448, guid: 64e25d4916a2dd143ac0e7bb6d63a9d7,
+    type: 2}
 --- !u!114 &114549363349876078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6937,6 +6929,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncRot: 0
   timeBtwTic: 0.1
+--- !u!114 &114875016887237836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0a4d2d67c8440468ac7618b73b519e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: 0
+  distanceAccess: 15
 --- !u!114 &114896777897577520
 MonoBehaviour:
   m_ObjectHideFlags: 1

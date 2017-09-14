@@ -56,8 +56,9 @@ public class ShopScript : MonoBehaviour
 	public void Update()
 	{
 		if(!GameManager.instanceGM.isInTchat &&
-            Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.Shop)))
-			{
+            Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.Shop))
+            )
+		{
 			
 			if (isOpen) 
 			{
@@ -67,7 +68,7 @@ public class ShopScript : MonoBehaviour
 			{
 				OpenYourMenu ();
 			}
-			}
+		}
 		if (isOpen) 
 		{
 			if (Vector3.Distance (gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) > 15f) 

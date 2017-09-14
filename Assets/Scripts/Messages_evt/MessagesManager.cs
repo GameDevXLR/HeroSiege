@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MessagesManager : MonoBehaviour 
+public class MessagesManager : MonoBehaviour
 {
 
-	//ce script permet de faire pop un message en local dans le "messagePanel".
-	public GameObject messPrefab;
-	public Transform messagesBox;
+    //ce script permet de faire pop un message en local dans le "messagePanel".
+    public GameObject messPrefab;
+    public Transform messagesBox;
     public Scrollbar scroll;
 
     public bool inTchat = false;
@@ -43,16 +43,16 @@ public class MessagesManager : MonoBehaviour
     }
 
     public void SendAnAlertMess(string message, Color color)
-	{
+    {
         //GameObject go = Instantiate (messPrefab, messagesBox, false);
         GameObject go = ObjectPooling.Instance.GetPooledObject(messPrefab.tag);
         go.transform.SetParent(messagesBox, false);
         go.transform.localScale = new Vector3(1, 1, 1);
-		go.GetComponentInChildren<Text> ().text = message;
-		go.GetComponentInChildren<Text> ().color = color;
+        go.GetComponentInChildren<Text>().text = message;
+        go.GetComponentInChildren<Text>().color = color;
         Invoke("resetScroll", 0.1f);
-		go.transform.SetAsLastSibling ();
-	}
+        go.transform.SetAsLastSibling();
+    }
 
 
     public void resetScroll()
@@ -66,15 +66,15 @@ public class MessagesManager : MonoBehaviour
     {
         if (canTalk)
         {
-            if(count == 0)
+            if (count == 0)
             {
                 StartCoroutine(setCanTalkToTrue(time));
             }
             count++;
-            if(count > maxMessByTime)
+            if (count > maxMessByTime)
             {
                 canTalk = false;
-                
+
                 string sendmessage = "";
                 if (PlayerPrefs.GetString("LANGAGE") == "Fr")
                 {
@@ -104,7 +104,7 @@ public class MessagesManager : MonoBehaviour
                     }
                 }
 
-                
+
             }
             inputField.text = "";
             EventSystem.current.SetSelectedGameObject(null);
@@ -112,7 +112,7 @@ public class MessagesManager : MonoBehaviour
         }
     }
 
-    
+
     public void setIntchat(bool isInTchat)
     {
         inTchat = isInTchat;
@@ -122,19 +122,26 @@ public class MessagesManager : MonoBehaviour
     public void checkMessageSpe(string message)
     {
         string[] tab = message.Split(' ');
-        
+
         if (tab[0].Equals("\\msg"))
-    {
-            if(tab.Length > 2)
+        {
+            if (tab.Length > 2)
             {
                 string premessage = string.Join(" ", UtilsArray.getSubArray(tab, 2, tab.Length - 2));
-                if(premessage.Trim().Length != 0)
+                if (premessage.Trim().Length != 0)
                 {
-                    string senderName = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname ;
-                    GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(tab[1],senderName , premessage);
+                    string senderName = GameManager.instanceGM.playerObj.GetComponent<PlayerManager>().playerNickname;
+                    GameManager.instanceGM.playerObj.GetComponent<MessagesManagerServer>().sendMessage(tab[1], senderName, premessage);
                 }
-                
+
             }
+        }
+        else if (tab[0].Equals("\\cheat1"))
+        {
+            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().maxHp = 200000;
+            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp = 200000;
+            GameManager.instanceGM.playerObj.GetComponent<PlayerAutoAttack>().damage = 2000;
+
         }
         else
         {
@@ -147,7 +154,7 @@ public class MessagesManager : MonoBehaviour
             {
                 sendmessage = "Sorry, this code is not known: " + tab[0];
             }
-            SendAnAlertMess(sendmessage, Color.red); 
+            SendAnAlertMess(sendmessage, Color.red);
         }
 
     }

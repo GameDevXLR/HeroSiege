@@ -23,7 +23,7 @@ public class UtilsArray {
     {
         int index = 0;
 
-        while (listEnnemy[index].isDead)
+        while (index < listEnnemy.Count && listEnnemy[index].isDead)
         {
             index++;
         }

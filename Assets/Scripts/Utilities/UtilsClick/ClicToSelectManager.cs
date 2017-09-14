@@ -26,10 +26,8 @@ public class ClicToSelectManager : MonoBehaviour
 				    
                 else if (objCollide.GetComponent<CrystalManager>())
                 {
-                    //playerObj.GetComponent<PlayerIGManager>().energy += objCollide.GetComponent<CrystalManager>().getEnergie(10);
                     GameManager.instanceGM.playerObj.GetComponent<EnergyManagerServer>().Request(objCollide, 10);
                 }
-                
 			}
 		}
 	}

@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1128784846213020}
+  m_IsPrefabParent: 1
+--- !u!1 &1128784846213020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4616491249012890}
+  - component: {fileID: 114310966639256624}
+  - component: {fileID: 114642014626069510}
+  m_Layer: 0
+  m_Name: PoolingsObjs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4616491249012890
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1128784846213020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -33.800003, y: 5.5, z: 19.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114310966639256624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1128784846213020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 76
+    i1: 186
+    i2: 130
+    i3: 4
+    i4: 44
+    i5: 151
+    i6: 235
+    i7: 100
+    i8: 42
+    i9: 182
+    i10: 115
+    i11: 200
+    i12: 101
+    i13: 21
+    i14: 2
+    i15: 6
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114642014626069510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1128784846213020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0079170d9189dac4bb0152509eae6ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolingStock: {fileID: 1128784846213020}
+  itemsToPool:
+  - objectToPool: {fileID: 1127924229170528, guid: d221beb6e9d233d49bd45b129bff546c,
+      type: 2}
+    amountToPool: 10
+    shouldExtand: 0
+  - objectToPool: {fileID: 1861594917510448, guid: 608b0843221d260408d69a9762fd05be,
+      type: 2}
+    amountToPool: 10
+    shouldExtand: 1
+  - objectToPool: {fileID: 1861594917510448, guid: 64e25d4916a2dd143ac0e7bb6d63a9d7,
+      type: 2}
+    amountToPool: 10
+    shouldExtand: 1

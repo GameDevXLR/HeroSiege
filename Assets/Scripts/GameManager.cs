@@ -332,6 +332,7 @@ public class GameManager : NetworkBehaviour
                 foreach (CrystalManager crystal in crystaux)
                 {
                     crystal.replenish();
+                    crystal.decrease = true;
                 }
             }
 		}
