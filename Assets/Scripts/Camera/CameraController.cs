@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
     public int speed = 5;
 
 	// detection zone of the mouse in the border
-    public int zoneDetectionMouse = 100;
+    public int zoneDetectionMouse = 300;
 
 	// initial distance player / camera
 	[SerializeField] Vector3 offset = new Vector3(3.7f,4.8f,0.2f);
@@ -65,7 +65,7 @@ public class CameraController : MonoBehaviour
         cameraCible = GetComponent<Camera>();
         yRef = gameObject.transform.position.y;
 		isReady = true;
-		layer_mask = LayerMask.GetMask ("Ground"); // ground layer 10
+		layer_mask = LayerMask.GetMask ("RaycastMove"); // ground layer 10
         
     }
 
