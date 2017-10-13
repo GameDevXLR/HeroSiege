@@ -157,11 +157,11 @@ public class CharacterIGManager : NetworkBehaviour
 
         if (currentHp > 0)
         {
-            takeDommage(dmg, trueDmg);
+            takeDommage(dmg, trueDmg, attacker);
         }
     }
 
-    public virtual void takeDommage(int dmg, bool trueDmg)
+    public virtual void takeDommage(int dmg, bool trueDmg, GameObject attacker)
     {
 		if (dmg > 1) 
 		{

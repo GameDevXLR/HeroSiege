@@ -98,11 +98,21 @@ public class EnnemyIGManager : CharacterIGManager
         }
     }
 
-    public override void takeDommage(int dmg, bool trueDmg)
+    public override void takeDommage(int dmg, bool trueDmg, GameObject attacker)
     {
         int hpBefore = currentHp;
-        base.takeDommage(dmg, trueDmg);
-        guyAttackingMe.GetComponent<EventMessageServer>().receiveDegat(gameObject, guyAttackingMe,currentHp - hpBefore);
+        base.takeDommage(dmg, trueDmg, attacker);
+        if (guyAttackingMe)
+        {
+            guyAttackingMe.GetComponent<EventMessageServer>().receiveDegat(gameObject, guyAttackingMe, currentHp - hpBefore);
+
+            Debug.Log("EnnemyIGManager ==> guyAttackingMe définie");
+        }
+        else
+        {
+            Debug.LogWarning("EnnemyIGManager ==> guyAttackingMe non définie");
+        }
+        
     }
 
     /// <summary>

@@ -121,10 +121,10 @@ public class PlayerIGManager : CharacterIGManager {
         }
     }
 
-    public override void takeDommage(int dmg, bool trueDmg)
+    public override void takeDommage(int dmg, bool trueDmg, GameObject attacker)
     {
         int hpBefore = currentHp;
-        base.takeDommage(dmg, trueDmg);
+        base.takeDommage(dmg, trueDmg, attacker);
         gameObject.GetComponent<EventMessageServer>().receiveDegat(gameObject,currentHp - hpBefore);
     }
 

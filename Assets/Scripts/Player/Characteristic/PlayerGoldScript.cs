@@ -132,13 +132,15 @@ public class PlayerGoldScript : NetworkBehaviour
     public void TargetSendGoldMessage(NetworkConnection target, GameObject mob,int gold)
     {
         GameObject go = ObjectPooling.Instance.GetPooledObject(goldCanvasPrefab.tag);
-        go.transform.SetParent(mob.transform, false);
-        go.transform.localScale = new Vector3(1, 1, 1);
-        go.GetComponentInChildren<Text>().text = "+" + gold;
+        //go.transform.SetParent(mob.transform, false);
+        //go.transform.localScale = new Vector3(1, 1, 1);
+        go.transform.position = mob.transform.position;
+        //go.transform.SetParent(null, false);
+        go.transform.GetChild(0).GetComponentInChildren<Text>().text = "+" + gold;
         go.SetActive(true);
-        go.GetComponent<Animator>().enabled = true;
-        go.GetComponent<Canvas>().enabled = true;
-        go.GetComponent<InactivateAnimatorCanvas>().inactiveWithTime();
-        go.GetComponent<InactivateAndMoveByTime>().InactivateWithlifeTime();
+        go.GetComponentInChildren<Animator>().enabled = true;
+        go.GetComponentInChildren<Canvas>().enabled = true;
+        go.GetComponentInChildren<InactivateAnimatorCanvas>().inactiveWithTime();
+        go.GetComponentInChildren<InactivateByTime>().InactivateWithlifeTime();
     }
 }

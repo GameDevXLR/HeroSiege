@@ -1,7 +1,7 @@
 ﻿/*
 //  Copyright (c) 2015 José Guerreiro. All rights reserved.
 //
-//  MIT license, see http://www.opensource.org/licenses/mit-license.php
+//  MIT license, see http://www.opensource.org/licenses/mit-license.php0.
 //  
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal

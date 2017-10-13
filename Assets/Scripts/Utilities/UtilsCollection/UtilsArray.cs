@@ -7,15 +7,30 @@ public class UtilsArray {
 	public static int getFirstInactiveObject(List<GameObject> list)
     {
         int result = 0;
-        while (result < list.Count && list[result].activeInHierarchy)
+        bool next = true;
+        while (result < list.Count && next)
         {
-            result++;
+            if (list[result] == null)
+            {
+                Debug.Log("destroy obj");
+            }
+
+            if(list[result] == null  || list[result].activeInHierarchy)
+            {
+                result++;
+            }
+            else
+            {
+                next = false;
+            }
+            
         }
         return result;
     }
 
     public static string[] getSubArray(string[] array,  int firstElement, int range)
     {
+
         return new List<string>(array).GetRange(firstElement, range).ToArray();
     }
 

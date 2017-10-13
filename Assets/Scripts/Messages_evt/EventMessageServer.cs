@@ -24,22 +24,25 @@ public class EventMessageServer : NetworkBehaviour
     public void TargetSendDegatMessage(NetworkConnection target, GameObject victime, int degats)
     {
         GameObject eventMess = ObjectPooling.Instance.GetPooledObject(degatPrefab.tag);
-        eventMess.transform.SetParent(victime.transform, false);
-        eventMess.transform.localScale = new Vector3(1, 1, 1);
-        eventMess.GetComponentInChildren<Text>().text = "+" + degats;
+        
+        //eventMess.transform.SetParent(victime.transform, false);
+        //eventMess.transform.localScale = new Vector3(1, 1, 1);
+        eventMess.transform.position = victime.transform.position;
+        eventMess.transform.GetChild(0).GetComponentInChildren<Text>().text = "+" + degats;
         if(degats > 0)
         {
-            eventMess.GetComponentInChildren<Text>().color = Color.green;
+            eventMess.transform.GetChild(0).GetComponentInChildren<Text>().color = Color.green;
         }
         else
         {
-            eventMess.GetComponentInChildren<Text>().color = Color.red;
+            eventMess.transform.GetChild(0).GetComponentInChildren<Text>().color = Color.red;
         }
         eventMess.SetActive(true);
-        eventMess.GetComponent<Animator>().enabled = true;
-        eventMess.GetComponent<Canvas>().enabled = true;https://www.ecosia.org/search?tt=vivaldi&q=unet
-        eventMess.GetComponent<InactivateAnimatorCanvas>().inactiveWithTime();
-        eventMess.GetComponent<InactivateAndMoveByTime>().InactivateWithlifeTime();
+        
+        eventMess.GetComponentInChildren<Animator>().enabled = true;
+        eventMess.GetComponentInChildren<Canvas>().enabled = true;
+        eventMess.GetComponentInChildren<InactivateAnimatorCanvas>().inactiveWithTime();
+        eventMess.GetComponentInChildren<InactivateByTime>().InactivateWithlifeTime();
     }
 }
 
