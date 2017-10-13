@@ -51,7 +51,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 		if (isLocalPlayer) 
 		{
-			agent.avoidancePriority = 75;
+			agent.avoidancePriority = 40; //determine if the agent can push or be pushed by other monsters. Squeletton got 50 for instance. So here with 40 : the player can push skeleton and be pushed by bosses.
 			damageDisplay = GameObject.Find ("DamageLog").GetComponent<Text> ();
 			damageDisplay.text = damage.ToString ();
 			attackRate = attackAnimTime / attackSpeedStat;

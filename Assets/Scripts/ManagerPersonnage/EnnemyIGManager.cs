@@ -99,11 +99,13 @@ public class EnnemyIGManager : CharacterIGManager
     }
 
     public override void takeDommage(int dmg, bool trueDmg)
-    {
-        int hpBefore = currentHp;
-        base.takeDommage(dmg, trueDmg);
-        guyAttackingMe.GetComponent<EventMessageServer>().receiveDegat(gameObject, guyAttackingMe,currentHp - hpBefore);
-    }
+	{
+		int hpBefore = currentHp;
+		base.takeDommage (dmg, trueDmg);
+		if (guyAttackingMe) {
+			guyAttackingMe.GetComponent<EventMessageServer> ().receiveDegat (gameObject, guyAttackingMe, currentHp - hpBefore);
+		}
+	}
 
     /// <summary>
     ///  Cette fonction n'est appellé que sur le serveur
