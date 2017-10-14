@@ -76,7 +76,7 @@ public class EnnemyIGManager : CharacterIGManager
 
 		if (currentHp > 0)
 		{
-			takeDommage(dmg, trueDmg);
+			takeDommage(dmg, trueDmg, attacker);
 		}
         if ((attacker.tag == "Player" && !attacker.GetComponent<PlayerIGManager>().isDead)
             ||(attacker.tag != "Player" && !attacker.GetComponent<EnnemyIGManager>().isDead))
@@ -102,15 +102,9 @@ public class EnnemyIGManager : CharacterIGManager
     {
         int hpBefore = currentHp;
         base.takeDommage(dmg, trueDmg, attacker);
-        if (guyAttackingMe)
+        if (attacker.tag == "Player")
         {
-            guyAttackingMe.GetComponent<EventMessageServer>().receiveDegat(gameObject, guyAttackingMe, currentHp - hpBefore);
-
-            Debug.Log("EnnemyIGManager ==> guyAttackingMe définie");
-        }
-        else
-        {
-            Debug.LogWarning("EnnemyIGManager ==> guyAttackingMe non définie");
+            attacker.GetComponent<EventMessageServer>().receiveDegat(gameObject, attacker, currentHp - hpBefore);
         }
         
     }

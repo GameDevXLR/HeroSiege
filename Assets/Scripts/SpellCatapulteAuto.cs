@@ -87,7 +87,7 @@ public class SpellCatapulteAuto : NetworkBehaviour {
 					tmpDmg = damageFactor * spellDamage;
 					spellTargets.Add(other.gameObject);
 						if (other.gameObject.tag == "Player")
-						other.gameObject.GetComponent<PlayerIGManager>().takeDommage(tmpDmg, true);
+						other.gameObject.GetComponent<PlayerIGManager>().takeDommage(tmpDmg, true, gameObject);
 //						else
 //						other.gameObject.GetComponent<PetIGManager>().takeDommage(tmpDmg, true);
 				}

@@ -142,5 +142,6 @@ public class PlayerGoldScript : NetworkBehaviour
         go.GetComponentInChildren<Canvas>().enabled = true;
         go.GetComponentInChildren<InactivateAnimatorCanvas>().inactiveWithTime();
         go.GetComponentInChildren<InactivateByTime>().InactivateWithlifeTime();
+        go.GetComponent<InactivateByTime>().InactivateWithlifeTime();
     }
 }

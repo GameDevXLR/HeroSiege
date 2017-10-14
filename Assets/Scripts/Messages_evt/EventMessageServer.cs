@@ -43,6 +43,7 @@ public class EventMessageServer : NetworkBehaviour
         eventMess.GetComponentInChildren<Canvas>().enabled = true;
         eventMess.GetComponentInChildren<InactivateAnimatorCanvas>().inactiveWithTime();
         eventMess.GetComponentInChildren<InactivateByTime>().InactivateWithlifeTime();
+        eventMess.GetComponent<InactivateByTime>().InactivateWithlifeTime();
     }
 }
 
