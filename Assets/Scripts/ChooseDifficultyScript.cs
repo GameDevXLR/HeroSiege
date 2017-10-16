@@ -22,7 +22,6 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 	public GameObject inib1;
 	public GameObject inib2;
 	public GameObject inib3;
-
 	public GameObject inib1B;
 	public GameObject inib2B;
 	public GameObject inib3B;
@@ -195,6 +194,9 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 //		gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
 		GameMode.Invoke ();
 	}
+
+
+
 
 	IEnumerator StartProcedure()
 	{
