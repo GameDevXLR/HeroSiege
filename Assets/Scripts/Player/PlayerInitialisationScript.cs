@@ -119,7 +119,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			CmdChangeName(playerNN);
 			GetComponent<PlayerLevelUpManager> ().enabled = true;
 			minimapIcon.color = mainPlayerColor;
-			CameraController.instanceCamera.target = gameObject;
+			CameraController.instanceCamera.setCameraTarget(gameObject);
 			CameraController.instanceCamera.Initialize ();
 			GameObject.Find ("PlayerInterface2.0").GetComponent<Canvas> ().enabled = true;
 			GameObject.Find ("PlayerNickNameTxt").GetComponent<Text> ().text = playerNN;

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.PostProcessing;
 
 /**
  * 
@@ -24,30 +26,32 @@ public class CameraController : MonoBehaviour
 
 	// detection zone of the mouse in the border
     public int zoneDetectionMouse = 300;
-
-	// initial distance player / camera
-	[SerializeField] Vector3 offset = new Vector3(3.7f,4.8f,0.2f);
+    
+    public int distance = 15;
 
     // zoom
     private float zoomfact = 1;
     public float vitesseZoom = 0.2f;
     public float limiteBasse = 0.5f;
     public float limiteHausse = 2;
-
-
-	// initial y, allow to block the y axis
-	private float yRef;
+    
 
 	// y difference use to move the y value
 	private float yvalueDiff;
 
 	private bool isReady;
+    public bool isAnotherPlayer;
+    public bool isDead = false; //permet d'éviter de modifier trop souvent le postprocessing
 
-	int layer_mask;
+    int layer_mask;
 
 	Camera cameraCible;
 
     public CameraBoundaries boundaries;
+    public PostProcessingBehaviour postProcessing;
+
+
+    public Quaternion cameraRotation = Quaternion.Euler(40, 0, 0);
 
     //on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
     void Awake(){
@@ -63,9 +67,8 @@ public class CameraController : MonoBehaviour
 	public void Initialize()
     {
         cameraCible = GetComponent<Camera>();
-        yRef = gameObject.transform.position.y;
 		isReady = true;
-		layer_mask = LayerMask.GetMask ("RaycastMove"); // ground layer 10
+		layer_mask = Layers.Ground; // ground layer 10
         
     }
 
@@ -75,15 +78,45 @@ public class CameraController : MonoBehaviour
 		{
 			return;
 		}
-		if (!GameManager.instanceGM.isInTchat 
-            && Input.GetKeyUp (CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
-			selectedPlayer = !selectedPlayer;
-		if (!GameManager.instanceGM.isInTchat 
-            && !Input.GetKey (CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)) 
-            && !selectedPlayer)
+
+        if (!isDead && GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
         {
-			//UtilsScreenMovement.moveScreenWithMouse (cameraCible, zoneDetectionMouse, speed, layer_mask);
-            UtilsScreenMovement.moveScreenWithMouse(cameraCible, boundaries, zoneDetectionMouse, speed, layer_mask);
+            var colograding = postProcessing.profile.colorGrading.settings;
+            colograding.basic.saturation = 0;
+            postProcessing.profile.colorGrading.settings = colograding;
+            isDead = true;
+        }
+        else if(isDead && !GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead ) 
+        {
+            var colograding = postProcessing.profile.colorGrading.settings;
+            colograding.basic.saturation = 1;
+            postProcessing.profile.colorGrading.settings = colograding;
+            isDead = false;
+
+        }
+        if(!GameManager.instanceGM.isInTchat)
+        {
+            if (switchToOtherPlayer())
+            {
+                selectedPlayer = true;
+                isAnotherPlayer = true;
+            }
+            else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
+            {
+                 LockUnlockCamera();
+             }
+                
+            else if(Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)) && isAnotherPlayer)
+            {
+                revertTargetToPlayer();
+                isAnotherPlayer = false;
+            }
+            else if (!Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter))
+                && !selectedPlayer)
+            {
+                UtilsScreenMovement.moveScreenWithMouse(cameraCible, boundaries, zoneDetectionMouse, speed, layer_mask);
+            }
+
         }
     }
 
@@ -97,48 +130,107 @@ public class CameraController : MonoBehaviour
             Input.GetKey (CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
         {
 			CenterBackCameraOnTarget ();
-
-			// allow to block y axis
-			gameObject.transform.position = new Vector3 () {
-				x = gameObject.transform.position.x,
-				y = yRef,
-				z = gameObject.transform.position.z
-			};
 		} 
     }
 
 	public void CenterBackCameraOnTarget()
 	{
 		if (target != null) {
-			transform.position = target.transform.position + offset;
-		}
+            //transform.position = target.transform.position + offset;
+            // Set the position of the camera based on the desired rotation towards and distance from the Player model
+            gameObject.transform.position = target.transform.position + new Vector3(1, 1, 0) * distance;
+            // Set the camera to look towards the Player model
+            gameObject.transform.LookAt(target.transform.position);
+        }
 	}
-
+      
     public void MoveCameraTo(Vector3 vect)
     {
 		if (vect != Vector3.zero)
         {
-            transform.position = vect + offset;
-            gameObject.transform.position = new Vector3()
-            {
-                x = gameObject.transform.position.x,
-                y = yRef,
-                z = gameObject.transform.position.z
-            };
+            gameObject.transform.position = target.transform.position + new Vector3(1, 1, 0) * distance;
         }
         
     }
 
     public void LockUnlockCamera()
-	{
-		selectedPlayer = !selectedPlayer;
-	}
-
-    public void zoom()
     {
+        selectedPlayer = !selectedPlayer;
+    }
+
+    public void LockUnlockCamera(bool islock)
+    {
+        selectedPlayer = islock;
+    }
+
+    public void setCameraTarget(GameObject target)
+    {
+        this.target = target;
+        LockUnlockCamera(true);
 
     }
 
+
+    public void revertTargetToPlayer()
+    {
+        setCameraTarget(GameManager.instanceGM.playerObj);
+    }
+
+    public bool switchToOtherPlayer()
+    {
+        if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer1)))
+        {
+            if (GameManager.instanceGM.isTeam1)
+            {
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[0]);
+            }
+            else
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[0]);
+
+            return true;
+        }
+        else if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer2)) )
+        {
+            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1ID.Count > 1)
+            {
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[1]);
+            }
+            else if (GameManager.instanceGM.team2ID.Count > 1)
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[1] );
+            return true;
+        }
+        else if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer3)) )
+        {
+            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1ID.Count > 2)
+            {
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[2]);
+            }
+            else if (GameManager.instanceGM.team2ID.Count > 2)
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[2]);
+            return true;
+        }
+        else if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer4)))
+        {
+            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1ID.Count > 3)
+            {
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[3]);
+            }
+            else if ( GameManager.instanceGM.team2ID.Count > 3)
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[3]);
+            return true;
+        }
+        else if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer5)))
+        {
+            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1ID.Count > 4)
+            {
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[4]);
+            }
+            else if ( GameManager.instanceGM.team2ID.Count > 4)
+                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[4]);
+            return true;
+        }
+        return false;
+    }
 }
 
 

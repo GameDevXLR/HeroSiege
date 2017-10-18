@@ -217,7 +217,6 @@ public class CharacterIGManager : NetworkBehaviour
         armorScore = armor;
     }
 
-
     public void ActualizeDodge(float dod)
     {
         ActualizeDodgeHook(dod);

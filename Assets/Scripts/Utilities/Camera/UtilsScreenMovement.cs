@@ -94,11 +94,18 @@ public static class UtilsScreenMovement
         if (xValueDeplacement != 0 || zValueDeplacement != 0)
         {
            // Debug.Log("CameraCible position : " + cameraCible.transform.position);
-            Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection(new Vector3(xValueDeplacement, 0, zValueDeplacement));           
-            
+            Vector3 destination = cameraCible.transform.position + cameraCible.transform.TransformDirection(new Vector3(xValueDeplacement, 0, zValueDeplacement));
             destination.y = cameraCible.transform.position.y;
+
+            Vector3 hitPointDest = new Vector3();
+            Vector3 hitPointDepart = new Vector3();
+
+            if (Utils.hadDetectTheLayer(destination, layer_mask, out hitPointDest) && Utils.hadDetectTheLayer(cameraCible.transform.position, layer_mask, out hitPointDepart))
+            {
+                destination.y = cameraCible.transform.position.y - (hitPointDepart.y - hitPointDest.y);
+            }
             cameraCible.transform.localPosition = Vector3.Lerp(cameraCible.transform.position, destination, speed * Time.deltaTime);
-            
+
         }
 
     }

@@ -20,5 +20,10 @@ public class CommandesEnum : MonoBehaviour {
         Item7 = "Item7",
         Item8 = "Item8",
         Catapulte = "Catapulte",
-        Shop = "Shop";
+        Shop = "Shop",
+        SwitchPlayer1 = "SwitchPlayer1",
+        SwitchPlayer2 = "SwitchPlayer2",
+        SwitchPlayer3 = "SwitchPlayer3",
+        SwitchPlayer4 = "SwitchPlayer4",
+        SwitchPlayer5 = "SwitchPlayer5";
 }

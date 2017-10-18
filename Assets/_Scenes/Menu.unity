@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38073996, b: 0.35872692, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2153,6 +2153,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.size
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 4570286692455482, guid: 57a189d9da793d245827a03338d244dc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -60
@@ -2190,6 +2195,106 @@ Prefab:
       propertyPath: isGuideActive
       value: 
       objectReference: {fileID: 1707910553}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[17].playerPrefKey
+      value: SwitchPlayer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[17].frenchName
+      value: Focus sur le player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[17].englishName
+      value: Focus on player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[17].keyBase
+      value: 282
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[18].playerPrefKey
+      value: SwitchPlayer2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[18].frenchName
+      value: Focus sur le player 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[18].englishName
+      value: Focus on player 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[18].keyBase
+      value: 283
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[19].playerPrefKey
+      value: SwitchPlayer3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[19].frenchName
+      value: Focus sur le player 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[19].englishName
+      value: Focus on player 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[19].keyBase
+      value: 284
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[20].playerPrefKey
+      value: SwitchPlayer4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[20].frenchName
+      value: Focus sur le player 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[20].englishName
+      value: Focus on player 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[20].keyBase
+      value: 285
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[21].playerPrefKey
+      value: SwitchPlayer5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[21].frenchName
+      value: Focus sur le player 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[21].englishName
+      value: Focus on player 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466538988707920, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: listKeys.Array.data[21].keyBase
+      value: 286
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_IsPrefabParent: 0
