@@ -417,7 +417,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GameManager.instanceGM.messageManager.SendAnAlertMess (playerNickName + " will play the Ovate.[support]", Color.green);
 		GetComponent<PlayerCastHealArea> ().enabled = true;
 		GetComponent<PlayerHealerCastUlti> ().enabled = true;
-		GetComponent<PlayerHealerCastInvokePet> ().enabled = true;
+		GetComponent<PlayerCastTowerMage> ().enabled = true;
 		myAutoAScript.enabled = true;
 		myStatPlusScript.enabled = true;
 		myAutoAScript.Att1 = autoAHeal1;
@@ -529,7 +529,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
-			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.8f;
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.2f;
 			myPlayerIGManager.maxHp = 440;
 			myPlayerIGManager.currentHp = 440;
 			myPlayerIGManager.regenHp = 8;
@@ -538,7 +538,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneManaScript.regenMp = 5;
 			myAutoAScript.damage = 22;
 			myAutoAScript.attackRate = .8f;
-			myAutoAScript.attackRange = 15;
+			myAutoAScript.attackRange = 20;
 			myPlayerIGManager.levelUpBonusHP = 35;
 			myGeneManaScript.levelUpBonusMP = 12;
 

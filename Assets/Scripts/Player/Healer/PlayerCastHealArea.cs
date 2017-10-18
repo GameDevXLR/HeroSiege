@@ -260,7 +260,7 @@ public class PlayerCastHealArea : NetworkBehaviour
         spellLvl++;
         spellCost += 12;
         spellCD -= 0.5f;
-        spellDmg += 7 * spellLvl;
+        spellDmg += 15 * spellLvl;
         spellDuration += 0.5f;
     }
 

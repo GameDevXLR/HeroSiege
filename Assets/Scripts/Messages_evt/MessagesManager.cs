@@ -136,7 +136,7 @@ public class MessagesManager : MonoBehaviour
 
             }
         }
-        else if (tab[0].Equals("\\cheat1"))
+        else if (tab[0].Equals("\\whoisyourdaddy"))
         {
             GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().maxHp = 200000;
             GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp = 200000;

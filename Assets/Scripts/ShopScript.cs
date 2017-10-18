@@ -33,7 +33,7 @@ public class ShopScript : MonoBehaviour
 	public void OpenYourMenu()
 	{
 		if (isAccessible) {
-			if (Vector3.Distance (gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) < 15f) {
+			if (Vector3.Distance (gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) < 25f) {
 				ShopIconObj.GetComponent<Image> ().sprite = openedShopImg;
 				shopPanel.gameObject.SetActive (true);
 				if (!tip1) 

@@ -44,16 +44,18 @@ public class SpellArcherArrowRain : NetworkBehaviour {
 			spellTargets.Clear();
 		}
 	}
-	[ServerCallback]
-	void OnTriggerEnter(Collider other)
-	{
-		if (other.gameObject.layer == 9)
-		{
-			tmpDur = (timer + duration) - Time.time;
-			other.gameObject.GetComponent<StatusHandlerScript> ().MakeHimSlow (tmpDur);
-		}
 
-	}
+	//je désactive le slow sur ce sort!
+//	[ServerCallback]
+//	void OnTriggerEnter(Collider other)
+//	{
+//		if (other.gameObject.layer == 9)
+//		{
+//			tmpDur = (timer + duration) - Time.time;
+//			other.gameObject.GetComponent<StatusHandlerScript> ().MakeHimSlow (tmpDur);
+//		}
+//
+//	}
 	[ServerCallback]
 	void OnTriggerStay(Collider other)
 	{

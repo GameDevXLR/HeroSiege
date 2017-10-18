@@ -1,0 +1,326 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.AI;
+
+public class TowerPetAutoA : NetworkBehaviour 
+{	
+
+	//ce script gere l'auto attack de l'objet auquel il est attacher.
+	//subidivision special ennemy.
+	public GameObject towerOwner;
+	public Transform laserStartingPoint;
+	private AudioSource audioSource; // qui joue le son
+	public AudioClip ennemiAtt; //quel sons pour les mobs. 
+//	Animator anim; // l'animator qui gere les anim lié a ce script
+//	//		public bool stopWalk; //pour l animation : arrete de marcher
+//	bool attackAnim; // dois je jouer l'animation d'attaque ? 
+//	bool walkAnim;
+	public float attackRange; // la portée des auto attaques
+	public float attackRate; // le rate d'attaque par seconde
+	private float previousAttackTime; // privé : le temps global de la derniere attaque
+	public int damage; // combien de dégats brut (hors armure) on fait.
+	[SyncVar]public bool isAttacking; //suis je en train d'attaquer ? A sync !!!
+	[SyncVar(hook ="GetTargetFromID" )]public NetworkInstanceId targetID; // la target.
+	public GameObject target; // qui est ma cible ? ( sur le serveur..retransmis)
+	public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
+	private Vector3 targetTempPos; //calcul de position (privé)
+	private GameObject targetObj; // l'objet qui t'attaque ! 
+	private bool isActualizingPos; // suis je déja en train d'actualiser la position de ma cible?
+	private ParticleSystem particule;
+	public float detectionRange = 20f;
+	public Vector3 desiredPos; // ou est ce que le serveur me dit que jdevrais etre. lerp vers ca.
+	public bool isUnderCC;
+	public bool isActuAttacking;
+	public bool isActuStopAttacking;
+	bool isLoosingTarget;
+	void Start()
+	{
+		GetComponent<LineRenderer> ().SetPosition (0, laserStartingPoint.position);
+		GetComponent<LineRenderer> ().SetPosition (1, laserStartingPoint.position);
+
+//		anim = GetComponentInChildren<Animator> ();
+		audioSource = GetComponent<AudioSource> ();
+		particule = GetComponentInChildren<ParticleSystem> ();
+
+		if (isServer) 
+		{
+			GetComponentInChildren<TowerAggroManager> ().enabled = true;
+			GetComponentInChildren<SphereCollider> ().enabled = true;
+		}
+
+	}
+
+	void Update ()
+	{
+		if (isUnderCC) 
+		{
+			return;
+		}
+		if (isServer) 
+		{
+			if (target) 
+			{
+
+				if (!isAttacking) 
+				{
+					if (!isActuAttacking && Vector3.Distance (transform.localPosition, target.transform.localPosition) <= attackRange) 
+					{
+						if (target.layer == Layers.Ennemies && target.GetComponent<EnnemyIGManager> ().isDead && !isLoosingTarget) 
+						{
+							isLoosingTarget = true;
+							RpcLooseTarget ();
+							RpcStopAttacking ();
+						}
+						isActuAttacking = true;
+						RpcAttackTarget (transform.position);
+					}
+				} else {
+					if (Time.time > previousAttackTime) 
+					{
+						previousAttackTime = Time.time + attackRate;
+
+						GetComponent<LineRenderer> ().SetPosition (1, target.transform.position);
+						GetComponent<TowerIGManager> ().currentHp -= 10;
+						target.GetComponent<EnnemyIGManager> ().LooseHealth (damage, false, towerOwner);
+					
+
+
+					}
+					if (Vector3.Distance (transform.localPosition, target.transform.localPosition) > attackRange || target == null) 
+					{
+
+							if (!isActuStopAttacking) 
+							{
+								isActuStopAttacking = true;
+								RpcStopAttacking ();
+							}
+
+					}
+				}
+			}
+			if (target == null && isAttacking && !isActuStopAttacking) 
+			{
+				isActuStopAttacking = true;
+				RpcStopAttacking ();
+
+			}
+			if ((target == null ||target.layer == Layers.Ennemies && target.GetComponent<EnnemyIGManager>().isDead) && isAttacking) 
+			{
+				isActuStopAttacking = true;
+				RpcStopAttacking ();
+			}
+			//			if (target == null && !isAttacking && !agent.pathPending && !agent.hasPath) 
+			//			{
+			////				if(gameObject.layer == 9) //pas necessaire ?
+			////				{
+			////					if(agent.isPathStale)//si t'as pas de route ?
+			////					{
+			//						GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+			////					}
+			////				}
+			//			}
+
+		}
+
+		//tout ca en dessous c'est pour faire rotate la "tour"...ptete pas super intelligent... lol
+		if (target) 
+		{
+			GetComponent<LineRenderer> ().SetPosition (1, target.transform.position);
+
+			if (Vector3.Distance (transform.position, target.transform.position) < attackRange) 
+			{
+				Quaternion targetRot = Quaternion.LookRotation (target.transform.position - transform.position);
+				float str = Mathf.Min (rotSpeed * Time.deltaTime, 1);
+				transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, str);
+
+			} 
+		}
+
+	}
+	//en late update on s'assure de la propreté de la rotation de la tour...tant qu'a faire!
+	void LateUpdate()
+	{
+		Quaternion actualRot;
+		actualRot = transform.rotation;
+		actualRot = new Quaternion (0f, actualRot.y, 0f, actualRot.w);
+		transform.rotation = actualRot;
+	}
+
+
+	[ClientRpc]
+	public void RpcAttackTarget(Vector3 pos)
+	{
+		//		desiredPos = pos;
+//
+//		agent.velocity = Vector3.zero;
+//		agent.isStopped = true;
+
+		isAttacking = true;
+		if (target !=null) 
+		{
+			isActuAttacking = false;
+			return;
+		}
+
+//		attackAnim = true;
+//		agent.enabled = false;
+//		GetComponent<NavMeshObstacle> ().enabled = true;
+//		if (anim != null) 
+//		{
+//			anim.SetBool ("attackEnnemi", attackAnim);
+//		}
+		audioSource.PlayOneShot (ennemiAtt);
+		if (particule != null) 
+		{
+			particule.Play ();
+		}
+		isActuAttacking = false;
+
+
+
+
+	}
+
+	[ClientRpc]
+	public void RpcStopAttacking()
+	{
+		GetComponent<LineRenderer> ().SetPosition (1, laserStartingPoint.position);
+
+//		GetComponent<NavMeshObstacle> ().enabled = false;
+//		agent.enabled = true;
+		isAttacking = false;
+//		attackAnim = false;
+//		if (anim) {
+//			anim.SetBool ("attackEnnemi", attackAnim);
+//		}
+		if (particule != null) {
+			particule.Stop ();
+		}
+//
+//		agent.isStopped = false;
+//
+		isActuStopAttacking = false;
+	}
+
+	public void AcquireTarget(NetworkInstanceId id)
+	{
+		StartCoroutine (AcquireTargetProcess ());
+
+	}
+	IEnumerator AcquireTargetProcess()
+	{
+//		if (anim) {
+//			anim.SetBool ("walk", walkAnim = true);
+//		}
+		yield return new WaitForSeconds(0.1f);
+		if (target != null) {
+			//			if (agent.isOnNavMesh) {
+
+				targetTempPos = target.transform.localPosition;
+
+		} else {
+//			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+			//			if (gameObject.layer != 8) 
+			//			{
+			//				StopAllCoroutines ();
+			//				GetTargetFromID (targetID);
+			//			}
+//			anim.SetBool ("walk", walkAnim = true);
+		}
+	}
+	public void LooseTarget()
+	{
+		RpcLooseTarget ();	
+		isAttacking = false;
+
+	}
+	[ClientRpc]
+	public void RpcLooseTarget()
+	{
+		//		target = null;
+//		GetComponent<NavMeshObstacle> ().enabled = false;
+//		agent.enabled = true;
+//		agent.isStopped = false;
+//		anim.SetBool ("attackEnnemi", attackAnim = false);
+//		anim.SetBool ("walk", walkAnim = true);
+		if (particule != null) 
+		{
+			particule.Stop ();
+		}
+		//		if (gameObject.layer == 8) 
+		//		{
+//		target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+		isLoosingTarget = false;
+		target = null;
+		//			return;
+		//		}
+		//		GetComponent<MinionsPathFindingScript> ().GoToEndGame ();
+
+
+	}
+
+	public void GetTargetFromID(NetworkInstanceId id)
+	{
+		targetID = id;
+		target = ClientScene.FindLocalObject (id);
+		if (target != null) {
+			targetTempPos = target.transform.position;
+		}
+		StartCoroutine (AcquireTargetProcess ());
+
+	}
+	[Server]
+	public void SetTheTarget(GameObject targ)
+	{
+		targetID = targ.GetComponent<NetworkIdentity> ().netId;
+
+	}
+
+	public void GetCC(float dur)
+	{
+		RpcGetCCForTimer (dur);
+	}
+	[ClientRpc]
+	public void RpcGetCCForTimer(float dura)
+	{
+		StartCoroutine(UnderCCProcedure(dura));
+	}
+
+	IEnumerator UnderCCProcedure(float durat)
+	{
+		isUnderCC = true;
+		if (isAttacking) 
+		{
+			if (particule != null) 
+			{
+				particule.Stop ();
+			}
+//			anim.SetBool ("attackEnnemi", false);
+		}
+//		if (agent.isActiveAndEnabled) 
+//		{
+//			agent.velocity = Vector3.zero;
+//			agent.isStopped = true;
+//		}
+//		anim.enabled = false;
+		yield return new WaitForSecondsRealtime (durat);
+//		if (agent.isActiveAndEnabled) 
+//		{
+//			agent.isStopped = false;
+//		}
+		if (isAttacking) 
+		{
+			if (particule != null) 
+			{
+				particule.Play ();
+			}
+//			anim.SetBool ("attackEnnemi", true);
+		}
+//		anim.enabled = true;
+
+		isUnderCC = false;
+	}
+
+}
