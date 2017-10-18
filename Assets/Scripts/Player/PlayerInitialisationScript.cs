@@ -79,7 +79,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Sprite tankArtwork;
 	public Sprite ovateArtwork;
 	public Sprite archerArtwork;
-
+	public Button lockHeroBtn;
 //	public override void OnStartClient ()
 //	{
 //		ChangeMyName (playerNickName);
@@ -101,9 +101,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		selectHeroTank1 = heroSelectPanel.transform.Find("ChampionPan").Find ("SelectTank1Btn").GetComponent<Button>();
 		selectHeroHealer1 = heroSelectPanel.transform.Find("OvatePan").transform.Find ("SelectHeal1Btn").GetComponent<Button> ();
 		selectHeroDps1 = heroSelectPanel.transform.Find("HunterPan").transform.Find ("SelectArcher1Btn").GetComponent<Button> ();
+		lockHeroBtn = GameObject.Find ("LockHero").GetComponent<Button>();
 		selectHeroTank1.onClick.AddListener (ListenerSelectHeroTank1);
 		selectHeroHealer1.onClick.AddListener (ListenerSelectHeroHeal1);
 		selectHeroDps1.onClick.AddListener (ListenerSelectHeroDps1);
+		lockHeroBtn.onClick.AddListener (LockMyHeroSelec);
 		base.OnStartLocalPlayer ();
 	}
 	// Use this for initialization
@@ -155,6 +157,29 @@ public class PlayerInitialisationScript : NetworkBehaviour
         NetworkUtils.Instance.listPlayer[nickName] = GetComponent<NetworkIdentity>().connectionToClient;
 
     }
+	public void LockMyHeroSelec()
+	{
+		CmdSayILocked ();
+	}
+	[Command]
+	public void CmdSayILocked()
+	{
+		RpcLockPlayer ();
+		
+	}
+	[ClientRpc]
+	public void RpcLockPlayer()
+	{
+		if (isLocalPlayer) 
+		{
+			heroSelectPanel.SetActive (false);
+			lockHeroBtn.enabled = false;
+		}
+//		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.CrossFadeAlpha(255f,.5f,false) ;
+		GetComponent<PlayerManager> ().playerSelecUI.transform.Find ("LockImg").GetComponent<Image> ().enabled = true;
+
+
+	}
 
 	public void ListenerSelectHeroTank1()
 	{
@@ -162,6 +187,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		selectedHero.AddListener (CapsuleSelectTank);
 		//ajouter ici le code pour montrer son choix
 		CmdSayIAmTank ();
+		lockHeroBtn.interactable = true;
+		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
 //		CmdSelectHeroTank1 ();
 	}
 	public void CapsuleSelectTank()
@@ -347,6 +374,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		selectedHero.AddListener (CapsuleSelectHeal);
 		//ajouter ici le code pour montrer son choix
 		CmdSayIAmHeal ();
+		lockHeroBtn.interactable = true;
+		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
 	}
 	public void CapsuleSelectHeal()
 	{
@@ -388,7 +417,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GameManager.instanceGM.messageManager.SendAnAlertMess (playerNickName + " will play the Ovate.[support]", Color.green);
 		GetComponent<PlayerCastHealArea> ().enabled = true;
 		GetComponent<PlayerHealerCastUlti> ().enabled = true;
-		GetComponent<PlayerHealerCastInvokePet> ().enabled = true;
+		GetComponent<PlayerCastTowerMage> ().enabled = true;
 		myAutoAScript.enabled = true;
 		myStatPlusScript.enabled = true;
 		myAutoAScript.Att1 = autoAHeal1;
@@ -440,6 +469,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		selectedHero.AddListener (CapsuleSelectDps);
 		//ajouter ici le code pour montrer son choix
 		CmdSayIAmDps ();
+		lockHeroBtn.interactable = true;
+		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
 	}
 	public void CapsuleSelectDps()
 	{
@@ -498,7 +529,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		GetComponent<PlayerClicToMove> ().anim = childDpsSkin.GetComponentInChildren<Animator> ();
 		if (isServer) //pour toutes les sync var : ici / s'assurer que les scripts sont bien tous actifs normaleemtn c'est le cas ! 
 		{
-			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.8f;
+			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1.2f;
 			myPlayerIGManager.maxHp = 440;
 			myPlayerIGManager.currentHp = 440;
 			myPlayerIGManager.regenHp = 8;
@@ -507,7 +538,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneManaScript.regenMp = 5;
 			myAutoAScript.damage = 22;
 			myAutoAScript.attackRate = .8f;
-			myAutoAScript.attackRange = 15;
+			myAutoAScript.attackRange = 20;
 			myPlayerIGManager.levelUpBonusHP = 35;
 			myGeneManaScript.levelUpBonusMP = 12;
 
