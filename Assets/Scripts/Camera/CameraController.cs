@@ -53,6 +53,22 @@ public class CameraController : MonoBehaviour
 
     public Quaternion cameraRotation = Quaternion.Euler(40, 0, 0);
 
+
+    /// <summary>
+    ///  les différents styles de caméra possible de test
+    ///  stratégique : en hauteur
+    ///  thirdPerson : derrière le joueur
+    ///  thirdPerson : derrière le joueur mais suis la rotation
+    /// </summary>
+    enum StyleCam
+    {
+        strategique,
+        thirdPerson,
+        thirdPersonBloque
+    }
+
+    StyleCam style = StyleCam.thirdPerson;
+
     //on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
     void Awake(){
 		if (instanceCamera == null) {
@@ -69,6 +85,8 @@ public class CameraController : MonoBehaviour
         cameraCible = GetComponent<Camera>();
 		isReady = true;
 		layer_mask = Layers.Ground; // ground layer 10
+        // ajout tempo
+
         
     }
 
@@ -100,6 +118,14 @@ public class CameraController : MonoBehaviour
             {
                 selectedPlayer = true;
                 isAnotherPlayer = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.F))
+            {
+                changeToThirdFixe();
+            }
+            else if (Input.GetKeyUp(KeyCode.T))
+            {
+                changeToThird();
             }
             else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
             {
@@ -136,11 +162,24 @@ public class CameraController : MonoBehaviour
 	public void CenterBackCameraOnTarget()
 	{
 		if (target != null) {
-            //transform.position = target.transform.position + offset;
-            // Set the position of the camera based on the desired rotation towards and distance from the Player model
-            gameObject.transform.position = target.transform.position + new Vector3(1, 1, 0) * distance;
-            // Set the camera to look towards the Player model
-            gameObject.transform.LookAt(target.transform.position);
+            switch (style) {
+                case (StyleCam.thirdPerson):
+                    //transform.position = target.transform.position + offset;
+                    // Set the position of the camera based on the desired rotation towards and distance from the Player model
+                    gameObject.transform.position = target.transform.position + new Vector3(1, 1, 0) * distance;
+
+                    // Set the camera to look towards the Player model
+                    gameObject.transform.LookAt(target.transform.position);
+                    break;
+                case (StyleCam.thirdPersonBloque):
+                    //transform.position = target.transform.position + offset;
+                    // Set the position of the camera based on the desired rotation towards and distance from the Player model
+                    gameObject.transform.localPosition = cameraRotation *  new Vector3(1, 1, 0) * distance;
+
+                    // Set the camera to look towards the Player model
+                    gameObject.transform.LookAt(target.transform.position);
+                    break;
+            }
         }
 	}
       
@@ -230,6 +269,19 @@ public class CameraController : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+
+    public void changeToThirdFixe()
+    {
+        style = StyleCam.thirdPersonBloque;
+        transform.SetParent(target.transform);
+    }
+
+    public void changeToThird()
+    {
+        style = StyleCam.thirdPerson;
+        transform.SetParent(null);
     }
 }
 
