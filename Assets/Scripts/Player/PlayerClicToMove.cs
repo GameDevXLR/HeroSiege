@@ -176,7 +176,7 @@ public class PlayerClicToMove : NetworkBehaviour {
         }
 
         target = null;
-        agentPlayer.stoppingDistance = 0;
+        agentPlayer.stoppingDistance = 1;
         attackScript.LooseTarget();
         anim.SetBool("stopwalk", false);
         attackScript.stopWalk = false;
