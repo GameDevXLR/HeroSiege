@@ -158,6 +158,13 @@ public class PlayerAutoAttack: NetworkBehaviour
 	
 	}
 
+	void LateUpdate()
+	{
+		Quaternion rot = transform.rotation;
+		rot = new Quaternion (0f, rot.y, 0f, rot.w);
+		transform.rotation = rot;
+	}
+
 	[ClientRpc]
 	public void RpcPlayAttSound ()
 	{

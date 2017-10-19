@@ -115,7 +115,6 @@ public class TowerIGManager : NetworkBehaviour
 
 	public virtual void MakeHimDie()
 	{
-		Debug.Log("tour détruite.");
 		if (isServer) 
 		{
 			NetworkServer.Destroy(this.gameObject);
