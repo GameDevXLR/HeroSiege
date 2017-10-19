@@ -64,7 +64,8 @@ public class CameraController : MonoBehaviour
     {
         strategique,
         thirdPerson,
-        thirdPersonBloque
+        thirdPersonBloque,
+        thirdpersoncircle
     }
 
     StyleCam style = StyleCam.thirdPerson;
@@ -127,6 +128,10 @@ public class CameraController : MonoBehaviour
             {
                 changeToThird();
             }
+            else if (Input.GetKeyUp(KeyCode.O))
+            {
+                changeToCircle();
+            }
             else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
             {
                  LockUnlockCamera();
@@ -163,20 +168,25 @@ public class CameraController : MonoBehaviour
 	{
 		if (target != null) {
             switch (style) {
-                case (StyleCam.thirdPerson):
+                case StyleCam.thirdPerson:
                     //transform.position = target.transform.position + offset;
                     // Set the position of the camera based on the desired rotation towards and distance from the Player model
-                    gameObject.transform.position = target.transform.position + new Vector3(1, 1, 0) * distance;
+                    gameObject.transform.position = target.transform.position + new Vector3(1, 1.5f, 0) * distance;
 
                     // Set the camera to look towards the Player model
                     gameObject.transform.LookAt(target.transform.position);
                     break;
-                case (StyleCam.thirdPersonBloque):
+                case StyleCam.thirdPersonBloque:
                     //transform.position = target.transform.position + offset;
                     // Set the position of the camera based on the desired rotation towards and distance from the Player model
-                    gameObject.transform.localPosition = cameraRotation *  new Vector3(1, 1, 0) * distance;
-
+//                    gameObject.transform.localPosition = cameraRotation *  new Vector3(1, 1, 0) * distance;
+				    gameObject.transform.position = Vector3.Lerp(transform.position, target.transform.Find("ThirdPersonCamPosition").position, Time.deltaTime * 1.5f);
                     // Set the camera to look towards the Player model
+                    gameObject.transform.LookAt(target.transform.position);
+                    break;
+                case StyleCam.thirdpersoncircle:
+                    transform.RotateAround(target.transform.position, Vector3.up, 30*Time.deltaTime);
+
                     gameObject.transform.LookAt(target.transform.position);
                     break;
             }
@@ -275,13 +285,19 @@ public class CameraController : MonoBehaviour
     public void changeToThirdFixe()
     {
         style = StyleCam.thirdPersonBloque;
-        transform.SetParent(target.transform);
+//        transform.SetParent(target.transform);
     }
 
     public void changeToThird()
     {
         style = StyleCam.thirdPerson;
-        transform.SetParent(null);
+        //        transform.SetParent(null);
+    }
+
+    public void changeToCircle()
+    {
+        style = StyleCam.thirdpersoncircle;
+        //        transform.SetParent(null);
     }
 }
 
