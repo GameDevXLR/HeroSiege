@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
 	public static CameraController instanceCamera = null;
 	// our personnage
 	public GameObject target;
-    Vector3 helperCamPos;
+    public Transform helperCamPos;
 
     // selectedPlayer
     // true : camera lock in the perso
@@ -52,8 +52,7 @@ public class CameraController : MonoBehaviour
     public CameraBoundaries boundaries;
     public PostProcessingBehaviour postProcessing;
 
-
-    public Quaternion cameraRotation = Quaternion.Euler(40, 0, 0);
+    public bool isShaking = false;
 
 
     /// <summary>
@@ -88,7 +87,7 @@ public class CameraController : MonoBehaviour
         cameraCible = GetComponent<Camera>();
 		isReady = true;
 		layer_mask = Layers.Ground; // ground layer 10
-        helperCamPos = target.transform.Find("ThirdPersonCamPosition").position;
+        helperCamPos = target.transform.Find("ThirdPersonCamPosition");
 
 
     }
@@ -121,7 +120,7 @@ public class CameraController : MonoBehaviour
             {
                 selectedPlayer = true;
                 isAnotherPlayer = true;
-                helperCamPos = target.transform.Find("ThirdPersonCamPosition").position;
+                helperCamPos = target.transform.Find("ThirdPersonCamPosition");
             }
             else if (Input.GetKeyUp(KeyCode.F))
             {
@@ -177,7 +176,7 @@ public class CameraController : MonoBehaviour
                     gameObject.transform.position = target.transform.position + new Vector3(1, 1.5f, 0) * distance;
 
                     // Set the camera to look towards the Player model
-                    gameObject.transform.LookAt(target.transform.position);
+                    lookAt();
                     break;
                 case StyleCam.thirdPersonBloque:
                     //transform.position = target.transform.position + offset;
@@ -185,7 +184,7 @@ public class CameraController : MonoBehaviour
 //                    gameObject.transform.localPosition = cameraRotation *  new Vector3(1, 1, 0) * distance;
 				    gameObject.transform.position = Vector3.Lerp(transform.position, target.transform.Find("ThirdPersonCamPosition").position, Time.deltaTime * 1.5f);
                     // Set the camera to look towards the Player model
-                    gameObject.transform.LookAt(target.transform.position);
+                    lookAt();
                     break;
                 case StyleCam.thirdpersoncircle:
                     moveAround();
@@ -304,15 +303,20 @@ public class CameraController : MonoBehaviour
     public void moveAround()
     {
         // Calcule de l'angle de la caméra entre l'object helper et la caméra avec pour point de référence la target
-        Vector2 vect2Target = new Vector2(target.transform.position.x - helperCamPos.x, target.transform.position.z - helperCamPos.z);
+        Vector2 vect2Target = new Vector2(target.transform.position.x - helperCamPos.position.x, target.transform.position.z - helperCamPos.position.z);
         Vector2 vect2Came = new Vector2(target.transform.position.x -  transform.position.x, target.transform.position.z - transform.position.z);
         float angle = Vector2.Angle(vect2Came, vect2Target);
+        Debug.Log(angle);
 
         // permet de savoir de quel côté doit tourner la caméra pour le chemin le plus rapide
         float dir = Mathf.Sign(Vector3.Cross(vect2Target, vect2Came).z);
+        if (dir == 0 && angle != 0)
+        {
+            dir = 1;
+        }
 
         // fait rotate la camera autour de la target
-        transform.RotateAround(target.transform.position, Vector3.up, dir * angle * Time.deltaTime * speedRotate);
+        transform.RotateAround(target.transform.position, Vector3.up, dir *  angle * Time.deltaTime * speedRotate);
 
         // permet de replacer la caméra si la target bouge
         Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
@@ -320,8 +324,19 @@ public class CameraController : MonoBehaviour
         gameObject.transform.position = target.transform.position + vect * distance;
 
         // permet d'avoir le visuel sur la caméra
-        gameObject.transform.LookAt(target.transform.position);
+        lookAt();
     }
+
+
+    public void lookAt()
+    {
+        if (!isShaking)
+        {
+            transform.LookAt(target.transform.position);
+        }
+    }
+
+    
 }
 
 

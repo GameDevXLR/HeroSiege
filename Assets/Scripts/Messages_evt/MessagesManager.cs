@@ -24,6 +24,9 @@ public class MessagesManager : MonoBehaviour
     public bool canTalk = true;
     public int maxMessByTime = 10;
     public float time = 30f;
+    // shake de la camera
+    public float durationShake = 5;
+    public float amountShake = 10;
 
 
     public void Update()
@@ -142,6 +145,14 @@ public class MessagesManager : MonoBehaviour
             GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp = 200000;
             GameManager.instanceGM.playerObj.GetComponent<PlayerAutoAttack>().damage = 2000;
 
+        }
+        else if (tab[0].Equals("\\suicide"))
+        {
+            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp = 0;
+        }
+        else if (tab[0].Equals("\\shake"))
+        {
+            Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
         }
         else
         {

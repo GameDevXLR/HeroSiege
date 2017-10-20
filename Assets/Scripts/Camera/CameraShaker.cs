@@ -31,7 +31,7 @@ public class CameraShaker : MonoBehaviour
     private void Start()
     {
         rotationOffset = transform.localRotation;
-        shakeCoroutine = Shake();
+        shakeCoroutine = Shake(GetComponent<CameraController>().target);
     }
 
     void Update()
@@ -47,7 +47,7 @@ public class CameraShaker : MonoBehaviour
         startAmount = shakeAmount;//Set default (start) values
         startDuration = shakeDuration;//Set default (start) values
 
-        if (!isRunning && shakeDuration > 0.01f) StartCoroutine(Shake());//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
+        if (!isRunning && shakeDuration > 0.01f) StartCoroutine(Shake(GetComponent<CameraController>().target));//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
     }
 
     public void ShakeCamera(float amount, float duration)
@@ -61,17 +61,21 @@ public class CameraShaker : MonoBehaviour
             startDuration = shakeDuration;//Reset the start time.
         }
 
-        if (!isRunning )
-            StartCoroutine(Shake());//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
+        if (!isRunning)
+        { 
+            StartCoroutine(Shake(GetComponent<CameraController>().target));//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
+            GetComponent<CameraController>().isShaking = true;
+        }
     }
 
 
-    IEnumerator Shake()
+    IEnumerator Shake(GameObject target)
     {
         isRunning = true;
 
         while (shakeDuration > 0.01f)
         {
+            transform.LookAt(target.transform.position);
             Vector3 rotationAmount = Random.insideUnitSphere * shakeAmount;//A Vector3 to add to the Local Rotation
             rotationAmount.z = 0;//Don't change the Z; it looks funny.
 
@@ -80,16 +84,17 @@ public class CameraShaker : MonoBehaviour
             shakeAmount = startAmount * shakePercentage;//Set the amount of shake (% * startAmount).
             shakeDuration = Mathf.Lerp(shakeDuration, 0, Time.deltaTime);//Lerp the time, so it is less and tapers off towards the end.
 
-
             if (smooth)
-                transform.rotation = Quaternion.Lerp(transform.localRotation, rotationOffset *  Quaternion.Euler(rotationAmount), Time.deltaTime * smoothAmount);
+                transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * Quaternion.Euler(rotationAmount), Time.deltaTime * smoothAmount);
             else
-                transform.rotation = Quaternion.Lerp(transform.localRotation, rotationOffset * Quaternion.Euler(rotationAmount), Time.deltaTime); ;//Set the local rotation the be the rotation amount.
+                transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * Quaternion.Euler(rotationAmount), Time.deltaTime); ;//Set the local rotation the be the rotation amount.
 
             yield return null;
         }
         transform.rotation = rotationOffset;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
         isRunning = false;
+        GetComponent<CameraController>().isShaking = false;
+
     }
 
 }

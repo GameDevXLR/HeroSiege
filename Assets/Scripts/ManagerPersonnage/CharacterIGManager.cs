@@ -58,12 +58,6 @@ public class CharacterIGManager : NetworkBehaviour
             return;
         }
         
-        if (Time.time > lastTic)
-        {
-            lastTic = Time.time + timeBetweenTic;
-            RegenYourHP();
-        }
-
         if (currentHp > maxHp)
         {
             WhenUpdateCurrentSupAtMaxHp();
@@ -79,6 +73,12 @@ public class CharacterIGManager : NetworkBehaviour
                 isDead = true;
                 MakeHimDie();
             }
+        }
+
+        if (Time.time > lastTic)
+        {
+            lastTic = Time.time + timeBetweenTic;
+            RegenYourHP();
         }
     }
 
