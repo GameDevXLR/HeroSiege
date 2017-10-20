@@ -262,6 +262,10 @@ public class PlayerCastHealArea : NetworkBehaviour
         spellCD -= 0.5f;
         spellDmg += 15 * spellLvl;
         spellDuration += 0.5f;
+		if (onCD) 
+		{
+			timeSpent -= 0.5f;
+		}
     }
 
     //suffit de linké ca a un bouton d'interface et boom

@@ -270,6 +270,10 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
         spellCD -= 1f;
         spellDmg += 12;
         spellDuration += 0.3f;
+		if (onCD) 
+		{
+			timeSpent -= 1f;
+		}
     }
 
     //suffit de linké ca a un bouton d'interface et boom

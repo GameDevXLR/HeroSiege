@@ -198,7 +198,7 @@ public class CameraController : MonoBehaviour
     {
 		if (vect != Vector3.zero)
         {
-            gameObject.transform.position = target.transform.position + new Vector3(1, 1, 0) * distance;
+			gameObject.transform.position = vect+ new Vector3(1, 2f, 0) * distance;
         }
         
     }

@@ -194,6 +194,10 @@ public class PlayerCastSpellOne : NetworkBehaviour
         spellCD -= 0.5f;
         spellDmg += 10;
         spellDuration += 0.5f;
+		if (onCD) 
+		{
+			timeSpent -= 0.5f;
+		}
     }
 
     //suffit de linké ca a un bouton d'interface et boom
