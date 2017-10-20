@@ -122,15 +122,15 @@ public class CameraController : MonoBehaviour
                 isAnotherPlayer = true;
                 helperCamPos = target.transform.Find("ThirdPersonCamPosition");
             }
-            else if (Input.GetKeyUp(KeyCode.F))
+			else if (Input.GetKeyUp(KeyCode.O))
             {
                 changeToThirdFixe();
             }
-            else if (Input.GetKeyUp(KeyCode.T))
+			else if (Input.GetKeyUp(KeyCode.K))
             {
                 changeToThird();
             }
-            else if (Input.GetKeyUp(KeyCode.O))
+			else if (Input.GetKeyUp(KeyCode.L))
             {
                 changeToCircle();
             }
@@ -306,7 +306,6 @@ public class CameraController : MonoBehaviour
         Vector2 vect2Target = new Vector2(target.transform.position.x - helperCamPos.position.x, target.transform.position.z - helperCamPos.position.z);
         Vector2 vect2Came = new Vector2(target.transform.position.x -  transform.position.x, target.transform.position.z - transform.position.z);
         float angle = Vector2.Angle(vect2Came, vect2Target);
-        Debug.Log(angle);
 
         // permet de savoir de quel côté doit tourner la caméra pour le chemin le plus rapide
         float dir = Mathf.Sign(Vector3.Cross(vect2Target, vect2Came).z);
