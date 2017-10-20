@@ -185,9 +185,7 @@ public class CameraController : MonoBehaviour
                     gameObject.transform.LookAt(target.transform.position);
                     break;
                 case StyleCam.thirdpersoncircle:
-                    transform.RotateAround(target.transform.position, Vector3.up, 30*Time.deltaTime);
-
-                    gameObject.transform.LookAt(target.transform.position);
+                    moveAround();
                     break;
             }
         }
@@ -298,6 +296,21 @@ public class CameraController : MonoBehaviour
     {
         style = StyleCam.thirdpersoncircle;
         //        transform.SetParent(null);
+    }
+
+    public void moveAround()
+    {
+        Vector3 helperCamPos = target.transform.Find("ThirdPersonCamPosition").position;
+        Vector2 vect2Target = new Vector2(target.transform.position.x - helperCamPos.x, target.transform.position.z - helperCamPos.z);
+        Vector2 vect2Came = new Vector2(target.transform.position.x -  transform.position.x, target.transform.position.z - transform.position.z);
+        float angle = Vector2.Angle(vect2Came, vect2Target);
+        angle = (angle != 0)? angle / 2 : angle ;
+        float dir = Mathf.Sign(Vector3.Cross(vect2Target, vect2Came).z);
+        transform.RotateAround(target.transform.position, Vector3.up, dir * angle * Time.deltaTime);
+        Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
+        vect.y = 1.5f;
+        gameObject.transform.position = target.transform.position + vect * distance;
+        gameObject.transform.LookAt(target.transform.position);
     }
 }
 
