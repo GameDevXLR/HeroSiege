@@ -14,15 +14,17 @@ public class CameraController : MonoBehaviour
 {
 	public static CameraController instanceCamera = null;
 	// our personnage
-	public GameObject target; 
+	public GameObject target;
+    Vector3 helperCamPos;
 
-	// selectedPlayer
-	// true : camera lock in the perso
-	// false : camera free from the perso
+    // selectedPlayer
+    // true : camera lock in the perso
+    // false : camera free from the perso
     public bool selectedPlayer = true; 
 
 	//speed move of the camera when move with mouse
     public int speed = 5;
+    public float speedRotate = 0.5f;
 
 	// detection zone of the mouse in the border
     public int zoneDetectionMouse = 300;
@@ -86,9 +88,9 @@ public class CameraController : MonoBehaviour
         cameraCible = GetComponent<Camera>();
 		isReady = true;
 		layer_mask = Layers.Ground; // ground layer 10
-        // ajout tempo
+        helperCamPos = target.transform.Find("ThirdPersonCamPosition").position;
 
-        
+
     }
 
     void Update()
@@ -119,6 +121,7 @@ public class CameraController : MonoBehaviour
             {
                 selectedPlayer = true;
                 isAnotherPlayer = true;
+                helperCamPos = target.transform.Find("ThirdPersonCamPosition").position;
             }
             else if (Input.GetKeyUp(KeyCode.F))
             {
@@ -300,16 +303,23 @@ public class CameraController : MonoBehaviour
 
     public void moveAround()
     {
-        Vector3 helperCamPos = target.transform.Find("ThirdPersonCamPosition").position;
+        // Calcule de l'angle de la caméra entre l'object helper et la caméra avec pour point de référence la target
         Vector2 vect2Target = new Vector2(target.transform.position.x - helperCamPos.x, target.transform.position.z - helperCamPos.z);
         Vector2 vect2Came = new Vector2(target.transform.position.x -  transform.position.x, target.transform.position.z - transform.position.z);
         float angle = Vector2.Angle(vect2Came, vect2Target);
-        angle = (angle != 0)? angle / 2 : angle ;
+
+        // permet de savoir de quel côté doit tourner la caméra pour le chemin le plus rapide
         float dir = Mathf.Sign(Vector3.Cross(vect2Target, vect2Came).z);
-        transform.RotateAround(target.transform.position, Vector3.up, dir * angle * Time.deltaTime);
+
+        // fait rotate la camera autour de la target
+        transform.RotateAround(target.transform.position, Vector3.up, dir * angle * Time.deltaTime * speedRotate);
+
+        // permet de replacer la caméra si la target bouge
         Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
         vect.y = 1.5f;
         gameObject.transform.position = target.transform.position + vect * distance;
+
+        // permet d'avoir le visuel sur la caméra
         gameObject.transform.LookAt(target.transform.position);
     }
 }
