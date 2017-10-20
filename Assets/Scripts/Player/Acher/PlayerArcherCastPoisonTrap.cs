@@ -272,6 +272,10 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
         explosionRadius += 0.1f;
         spellDmg += 3;
         spellDuration += 1f;
+		if (onCD) 
+		{
+			timeSpent -= 2f;
+		}
     }
 
 	//suffit de linké ca a un bouton d'interface et boom

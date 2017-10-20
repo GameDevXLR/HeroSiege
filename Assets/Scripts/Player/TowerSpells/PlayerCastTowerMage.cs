@@ -277,6 +277,10 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 		spellCost += 16;
 		spellCD -= 3f;
 		spellDmg += 12;
+		if (onCD) 
+		{
+			timeSpent -= 3f;
+		}
 		//		spellDuration += 1f;
 	}
 

@@ -208,6 +208,10 @@ public class PlayerTankCastAvatar : NetworkBehaviour
         spellCD -= 3f;
         spellDmg += 16;
         spellDuration += 1f;
+		if (onCD) 
+		{
+			timeSpent -= 3f;
+		}
     }
 
     //suffit de linké ca a un bouton d'interface et boom

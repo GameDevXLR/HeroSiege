@@ -204,6 +204,10 @@ public class PlayerTankCastTauntArea : NetworkBehaviour
         spellCD -= 1f;
         spellDmg += 6;
         spellDuration += 1f;
+		if (onCD) 
+		{
+			timeSpent -= 1f;
+		}
     }
 
     //suffit de linké ca a un bouton d'interface et boom
