@@ -568,7 +568,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	IEnumerator StartInitName(string str)
 	{
-		yield return new WaitForSeconds (0.4f);
+		yield return new WaitForSeconds (1.8f);
 		playerNickName = str;
 		gameObject.name = playerNickName + netId.ToString();
 		GetComponent<PlayerManager> ().playerNickname = playerNickName;
