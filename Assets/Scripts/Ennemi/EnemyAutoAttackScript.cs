@@ -58,7 +58,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	void Update ()
 	{
-		if (anim.isActiveAndEnabled) 
+		if ( anim && anim.isActiveAndEnabled) 
 		{
 			if (anim.GetBool ("attackEnnemi") == false) 
 			{
