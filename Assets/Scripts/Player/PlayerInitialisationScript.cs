@@ -80,6 +80,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Sprite ovateArtwork;
 	public Sprite archerArtwork;
 	public Button lockHeroBtn;
+	public GameObject nextHeroBtn;
+	public GameObject previousHeroBtn;
 //	public override void OnStartClient ()
 //	{
 //		ChangeMyName (playerNickName);
@@ -98,9 +100,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
             //	difficultyPanel.transform.localScale = new Vector3 (0.5f,0.5f,0.5f);
 		}
 		heroSelectPanel = GameObject.Find ("HeroSelectionPanel");
-		selectHeroTank1 = heroSelectPanel.transform.Find("ChampionPan").Find ("SelectTank1Btn").GetComponent<Button>();
-		selectHeroHealer1 = heroSelectPanel.transform.Find("OvatePan").transform.Find ("SelectHeal1Btn").GetComponent<Button> ();
-		selectHeroDps1 = heroSelectPanel.transform.Find("HunterPan").transform.Find ("SelectArcher1Btn").GetComponent<Button> ();
+		nextHeroBtn= heroSelectPanel.transform.parent.Find ("NextHeroBtn").gameObject;
+		previousHeroBtn =  heroSelectPanel.transform.parent.Find ("PreviousHeroBtn").gameObject;
+		selectHeroTank1 = heroSelectPanel.transform.Find("ChampionPan").GetChild(0).Find ("SelectTank1Btn").GetComponent<Button>();
+		selectHeroHealer1 = heroSelectPanel.transform.Find("OvatePan").GetChild(0).Find ("SelectHeal1Btn").GetComponent<Button> ();
+		selectHeroDps1 = heroSelectPanel.transform.Find("HunterPan").GetChild(0).Find ("SelectArcher1Btn").GetComponent<Button> ();
 		lockHeroBtn = GameObject.Find ("LockHero").GetComponent<Button>();
 		selectHeroTank1.onClick.AddListener (ListenerSelectHeroTank1);
 		selectHeroHealer1.onClick.AddListener (ListenerSelectHeroHeal1);
@@ -174,6 +178,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			heroSelectPanel.SetActive (false);
 			lockHeroBtn.enabled = false;
+			nextHeroBtn.SetActive( false);
+			previousHeroBtn.SetActive( false);
 		}
 //		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.CrossFadeAlpha(255f,.5f,false) ;
 		GetComponent<PlayerManager> ().playerSelecUI.transform.Find ("LockImg").GetComponent<Image> ().enabled = true;
@@ -309,9 +315,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isLocalPlayer) 
 		{
 			heroArtPlaceholder.sprite = tankArtwork;
-			selectHeroDps1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
-			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
-			selectHeroTank1.transform.parent.GetComponent<Image> ().color = selectedHeroColor;
+			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
 		}
 		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = tankAvatarImgMini;
 
@@ -400,9 +406,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			heroArtPlaceholder.sprite = ovateArtwork;
 
-			selectHeroDps1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
-			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = selectedHeroColor;
-			selectHeroTank1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
+			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
+			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
 		}
 		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = healAvatarImgMini;
 
@@ -495,9 +501,9 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			heroArtPlaceholder.sprite = archerArtwork;
 
-			selectHeroDps1.transform.parent.GetComponent<Image> ().color = selectedHeroColor;
-			selectHeroHealer1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
-			selectHeroTank1.transform.parent.GetComponent<Image> ().color = defaultHeroColor;
+			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
+			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
 		}
 		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = DpsAvatarImgMini;
 

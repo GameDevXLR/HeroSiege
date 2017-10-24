@@ -96,9 +96,10 @@ namespace HyperLuminalGames
 					LayerAssignment++;
 
 					// turn off visibility for all other location markers using a layer mask
-					for(int i = 0; i < DisplayLayerNames.Count; i++)
-					{
-						LocationSystem.SystemCamera.cullingMask &=  ~(1 << LayerMask.NameToLayer(DisplayLayerNames[i]));
+					for (int i = 0; i < DisplayLayerNames.Count; i++) {
+						if (LocationSystem.SystemCamera) {
+							LocationSystem.SystemCamera.cullingMask &= ~(1 << LayerMask.NameToLayer (DisplayLayerNames [i]));
+						}
 					}
 
 					// turn on visibility for only this players layer
