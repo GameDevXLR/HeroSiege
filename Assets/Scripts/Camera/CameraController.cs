@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
 	// detection zone of the mouse in the border
     public int zoneDetectionMouse = 300;
     
-    public int distance = 15;
+    public float distance = 15;
 
     // zoom
     private float zoomfact = 1;
@@ -53,6 +53,17 @@ public class CameraController : MonoBehaviour
     public PostProcessingBehaviour postProcessing;
 
     public bool isShaking = false;
+
+
+
+    public string MouseScrollWheel = "Mouse ScrollWheel";
+    public float ThirdPersonZoomSensitivity = 3f;
+    public float ThirdPersonCameraMinDistance = 4f;
+    public float ThirdPersonCameraMaxDistance = 20f;
+    public int RotateCameraMouseButton = 1;
+    public float ThirdPersonCameraSensitivity = 2f;
+    public float ThirdPersonCameraMinPitch = 5f;
+    public float ThirdPersonCameraMaxPitch = 70f;
 
 
     /// <summary>
@@ -116,23 +127,16 @@ public class CameraController : MonoBehaviour
         }
         if(!GameManager.instanceGM.isInTchat)
         {
+            SelectNextCameraDistance();
             if (switchToOtherPlayer())
             {
                 selectedPlayer = true;
                 isAnotherPlayer = true;
                 helperCamPos = target.transform.Find("ThirdPersonCamPosition");
             }
-			else if (Input.GetKeyUp(KeyCode.O))
-            {
-                changeToThirdFixe();
-            }
 			else if (Input.GetKeyUp(KeyCode.K))
             {
                 changeToThird();
-            }
-			else if (Input.GetKeyUp(KeyCode.M))
-            {
-                changeToCircle();
             }
             else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
             {
@@ -338,7 +342,22 @@ public class CameraController : MonoBehaviour
         }
     }
 
+
+
+    // If the user scrolls up on their mousewheel then zoom in, if they scroll down then zoom out
+    private void SelectNextCameraDistance()
+    {
+        var mouseScroll = Input.GetAxis(MouseScrollWheel);
+        if (!mouseScroll.Equals(0f))
+        {
+            var distanceChange = distance - mouseScroll * ThirdPersonZoomSensitivity;
+            distance = Mathf.Clamp(distanceChange, ThirdPersonCameraMinDistance, ThirdPersonCameraMaxDistance);
+        }
+    }
+
     
+
+
 }
 
 
