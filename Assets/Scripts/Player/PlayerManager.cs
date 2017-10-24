@@ -81,7 +81,7 @@ public class PlayerManager : NetworkBehaviour
 
 	IEnumerator DelayTheSelecHeroUI()
 	{
-		yield return new WaitForSecondsRealtime (1.5f);
+		yield return new WaitForSecondsRealtime (2f);
 		SpawnPlayerSelecUI ();
 
 	}

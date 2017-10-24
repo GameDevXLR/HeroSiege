@@ -567,6 +567,7 @@ public class GameManager : NetworkBehaviour
 				return;
 			}
 			team2ID.Add (id);
+
 		}
 	}
 

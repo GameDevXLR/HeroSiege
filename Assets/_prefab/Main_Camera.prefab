@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 114866985101090860}
   - component: {fileID: 114400265950898158}
   - component: {fileID: 95582309349806714}
+  - component: {fileID: 114412910203916400}
   m_Layer: 0
   m_Name: Main_Camera
   m_TagString: MainCamera
@@ -129,8 +130,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 20
-  far clip plane: 1000
+  near clip plane: 150
+  far clip plane: 150.01
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -166,7 +167,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 150
+  far clip plane: 300
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -369,6 +370,18 @@ MonoBehaviour:
   flipY: 0
   sourceCamera: {fileID: 0}
   outlineCamera: {fileID: 0}
+--- !u!114 &114412910203916400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735137487550638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 8da94805fab6b8741a5d6c1e24f2cafd, type: 2}
 --- !u!114 &114700895480209066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,16 +394,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  helperCamPos: {fileID: 0}
   selectedPlayer: 1
+  changeCamLockImg:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: lockUnlockCam
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   speed: 100
+  speedRotate: 0.5
   zoneDetectionMouse: 50
-  offset: {x: 18.5, y: 5, z: 0}
+  distance: 15
   vitesseZoom: 0.2
   limiteBasse: 1
   limiteHausse: 3
+  isAnotherPlayer: 0
+  isDead: 0
   boundaries:
     WardSudEst: {fileID: 0}
     WardNordOuest: {fileID: 0}
+  postProcessing: {fileID: 114412910203916400}
+  isShaking: 0
 --- !u!114 &114866985101090860
 MonoBehaviour:
   m_ObjectHideFlags: 1
