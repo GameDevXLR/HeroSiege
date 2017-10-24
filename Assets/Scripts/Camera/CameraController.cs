@@ -130,7 +130,7 @@ public class CameraController : MonoBehaviour
             {
                 changeToThird();
             }
-			else if (Input.GetKeyUp(KeyCode.L))
+			else if (Input.GetKeyUp(KeyCode.M))
             {
                 changeToCircle();
             }
