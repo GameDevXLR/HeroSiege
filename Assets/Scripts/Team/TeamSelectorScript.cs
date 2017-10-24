@@ -16,7 +16,7 @@ public class TeamSelectorScript : NetworkBehaviour
 	{
 		if (other.gameObject.tag == "Player") 
 		{
-			GameManager.instanceGM.AddPlayerToTeam (teamNbr, other.GetComponent<NetworkIdentity>().netId);
+			GameManager.instanceGM.AddPlayerToTeam (teamNbr, other.gameObject);
 			if (other.gameObject == GameManager.instanceGM.playerObj) 
 			{
 				if (teamNbr == 1) 

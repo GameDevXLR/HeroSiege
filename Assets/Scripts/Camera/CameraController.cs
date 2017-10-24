@@ -227,55 +227,58 @@ public class CameraController : MonoBehaviour
 
     public bool switchToOtherPlayer()
     {
+
+        
         if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer1)))
         {
+
             if (GameManager.instanceGM.isTeam1)
             {
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[0]);
+                target = GameManager.instanceGM.team1Players[0];
             }
             else
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[0]);
+                target = GameManager.instanceGM.team2Players[0];
 
             return true;
         }
         else if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer2)) )
         {
-            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1ID.Count > 1)
+            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1Players.Count > 1)
             {
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[1]);
+                target = GameManager.instanceGM.team1Players[1];
             }
-            else if (GameManager.instanceGM.team2ID.Count > 1)
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[1] );
+            else if (GameManager.instanceGM.team2Players.Count > 1)
+                target = GameManager.instanceGM.team2Players[1] ;
             return true;
         }
         else if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer3)) )
         {
-            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1ID.Count > 2)
+            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1Players.Count > 2)
             {
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[2]);
+                target =GameManager.instanceGM.team1Players[2];
             }
-            else if (GameManager.instanceGM.team2ID.Count > 2)
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[2]);
+            else if (GameManager.instanceGM.team2Players.Count > 2)
+                target = GameManager.instanceGM.team2Players[2];
             return true;
         }
         else if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer4)))
         {
-            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1ID.Count > 3)
+            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1Players.Count > 3)
             {
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[3]);
+                target = GameManager.instanceGM.team1Players[3];
             }
-            else if ( GameManager.instanceGM.team2ID.Count > 3)
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[3]);
+            else if ( GameManager.instanceGM.team2Players.Count > 3)
+                target = GameManager.instanceGM.team2Players[3];
             return true;
         }
         else if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.SwitchPlayer5)))
         {
-            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1ID.Count > 4)
+            if (GameManager.instanceGM.isTeam1 && GameManager.instanceGM.team1Players.Count > 4)
             {
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team1ID[4]);
+                target = GameManager.instanceGM.team1Players[4];
             }
-            else if ( GameManager.instanceGM.team2ID.Count > 4)
-                target = NetworkServer.FindLocalObject(GameManager.instanceGM.team2ID[4]);
+            else if ( GameManager.instanceGM.team2Players.Count > 4)
+                target = GameManager.instanceGM.team2Players[4];
             return true;
         }
         return false;

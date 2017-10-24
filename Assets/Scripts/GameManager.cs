@@ -35,11 +35,13 @@ public class GameManager : NetworkBehaviour
 	public MessagesManager messageManager;
 	public GameObject playerObj;
 	public bool soloGame;
-	public List<NetworkInstanceId> team1ID;
-//	public int[] playersScoreT1;
-	public List<NetworkInstanceId> team2ID;
-//	public int[] playersScoreT2;
-	public bool isTeam1;
+    public List<NetworkInstanceId> team1ID;
+    public List<GameObject> team1Players;
+    //	public int[] playersScoreT1;
+    public List<NetworkInstanceId> team2ID;
+    public List<GameObject> team2Players;
+    //	public int[] playersScoreT2;
+    public bool isTeam1;
 	public bool isTeam2;
 	public int coPlayers; //nombre Total! de joueurs connectés. utile que si t'es le serveur pour le moment...
     public bool isInTchat = false;
@@ -550,27 +552,30 @@ public class GameManager : NetworkBehaviour
 		}
 	}
 
-	public void AddPlayerToTeam(int team, NetworkInstanceId id)
-	{
-		if (team == 1) 
-		{
-			if(team1ID.Contains(id))
-			{
-				return;
-			}
-			team1ID.Add (id);
-		}
-		if (team == 2) 
-		{
-			if(team2ID.Contains(id))
-			{
-				return;
-			}
-			team2ID.Add (id);
-		}
-	}
+    public void AddPlayerToTeam(int team, GameObject player)
+    {
+        if (team == 1)
+        {
+            if (team1ID.Contains(player.GetComponent<NetworkIdentity>().netId))
+            {
+                return;
+            }
+            team1ID.Add(player.GetComponent<NetworkIdentity>().netId);
+            team1Players.Add(player);
+        }
+        if (team == 2)
+        {
+            if (team2ID.Contains(player.GetComponent<NetworkIdentity>().netId))
+            {
+                return;
+            }
+            team2ID.Add(player.GetComponent<NetworkIdentity>().netId);
+            team2Players.Add(player);
+        }
+    }
+    
 
-	[ClientRpc]
+    [ClientRpc]
 	public void RpcMessageToAll()
 	{
 		GameObject.Find ("GameClock").GetComponent<GameClockMinSec> ().enabled = true;
