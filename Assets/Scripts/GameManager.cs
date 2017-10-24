@@ -224,7 +224,7 @@ public class GameManager : NetworkBehaviour
 	{
 		isRestarting = restarting;
 
-		if (teamWhoWon == 1 && isTeam1 || teamWhoWon == 2 && isTeam2) 
+		if ( soloGame ||teamWhoWon == 1 && isTeam1 || teamWhoWon == 2 && isTeam2) 
 		{
 //			gameOverTxt.text = "Victory!!!";
 //			gameOverTxt.color = Color.green;
