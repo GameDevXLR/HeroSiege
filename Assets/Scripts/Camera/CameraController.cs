@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.PostProcessing;
+using UnityEngine.Events;
 
 /**
  * 
@@ -21,6 +22,7 @@ public class CameraController : MonoBehaviour
     // true : camera lock in the perso
     // false : camera free from the perso
     public bool selectedPlayer = true; 
+	public UnityEvent changeCamLockImg;
 
 	//speed move of the camera when move with mouse
     public int speed = 5;
@@ -99,7 +101,7 @@ public class CameraController : MonoBehaviour
 			return;
 		}
 
-        if (!isDead && GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
+		if (GameManager.instanceGM.playerObj && !isDead && GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
         {
             var colograding = postProcessing.profile.colorGrading.settings;
             colograding.basic.saturation = 0;
@@ -137,6 +139,7 @@ public class CameraController : MonoBehaviour
             else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
             {
                  LockUnlockCamera();
+				changeCamLockImg.Invoke() ;
              }
                 
             else if(Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)) && isAnotherPlayer)

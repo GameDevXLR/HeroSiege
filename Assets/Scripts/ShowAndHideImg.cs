@@ -11,8 +11,11 @@ public class ShowAndHideImg : MonoBehaviour {
 	public Sprite plantBtnInactive;
 	public Sprite sceneryBtnActive;
 	public Sprite sceneryBtnInactive;
+	public Sprite camLockActive;
+	public Sprite camLockInactive;
 	public Button plantBtn;
 	public Button sceneryBtn;
+	public Button camLockBtn;
 
 
 	public void ShowHidePlants()
@@ -38,5 +41,18 @@ public class ShowAndHideImg : MonoBehaviour {
 			sceneryBtn.GetComponent<Image> ().sprite = sceneryBtnInactive;
 
 		}
+	}
+
+	public void lockUnlockCam()
+	{
+		if (Camera.main.GetComponent<CameraController> ().selectedPlayer) 
+		{
+			camLockBtn.GetComponent<Image> ().sprite = camLockActive;
+		} else 
+		{
+			camLockBtn.GetComponent<Image> ().sprite = camLockInactive;
+
+		}
+		
 	}
 }
