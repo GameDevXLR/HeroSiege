@@ -26,7 +26,8 @@ public class CameraController : MonoBehaviour
 
 	//speed move of the camera when move with mouse
     public int speed = 5;
-    public float speedRotate = 0.5f;
+    public float speedRotate = 5;
+    public float angle = 90;
 
 	// detection zone of the mouse in the border
     public int zoneDetectionMouse = 300;
@@ -67,7 +68,12 @@ public class CameraController : MonoBehaviour
     public float ThirdPersonCameraMinPitch = 5f;
     public float ThirdPersonCameraMaxPitch = 70f;
 
-
+    private Vector2 mousePos;
+    
+    public float yRef = 1.5f;
+    public float xRef = 1;
+    public float zRef = 0;
+    public Vector3 vectCam;
     /// <summary>
     ///  les différents styles de caméra possible de test
     ///  stratégique : en hauteur
@@ -88,7 +94,9 @@ public class CameraController : MonoBehaviour
     void Awake(){
 		if (instanceCamera == null) {
 			instanceCamera = this;
-            
+            vectCam = new Vector3(xRef, yRef, zRef);
+
+
         } else if (instanceCamera != this) 
 		{
 			Destroy (gameObject);
@@ -136,10 +144,6 @@ public class CameraController : MonoBehaviour
                 isAnotherPlayer = true;
                 helperCamPos = target.transform.Find("ThirdPersonCamPosition");
             }
-			else if (Input.GetKeyUp(KeyCode.K))
-            {
-                changeToThird();
-            }
             else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
             {
                  LockUnlockCamera();
@@ -180,8 +184,9 @@ public class CameraController : MonoBehaviour
                 case StyleCam.thirdPerson:
                     //transform.position = target.transform.position + offset;
                     // Set the position of the camera based on the desired rotation towards and distance from the Player model
-                    gameObject.transform.position = target.transform.position + new Vector3(1, 1.5f, 0) * distance;
-
+                    //gameObject.transform.position = Vector3.Lerp(target.transform.position, target.transform.position + new Vector3(1, 1.5f, 0) * distance, speed * Time.deltaTime);
+                    float dir = findDirection();
+                    moveRotate(dir);
                     // Set the camera to look towards the Player model
                     lookAt();
                     break;
@@ -337,6 +342,28 @@ public class CameraController : MonoBehaviour
     }
 
 
+
+    public void moveRotate(float dir)
+    {
+        // fait rotate la camera autour de la target
+        if(dir != 0)
+        {
+            transform.RotateAround(target.transform.position, Vector3.up, dir * angle * speedRotate * Time.deltaTime);
+
+            // permet de replacer la caméra si la target bouge
+            Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
+            vect.y = 1.5f;
+            vectCam = vect;
+            gameObject.transform.position = target.transform.position + vectCam * distance;
+        }
+        else
+        {
+            gameObject.transform.position = Vector3.Lerp(target.transform.position, target.transform.position + vectCam * distance, speed * Time.deltaTime);
+        }
+        
+        
+    }
+
     public void lookAt()
     {
         if (!isShaking)
@@ -356,6 +383,19 @@ public class CameraController : MonoBehaviour
             var distanceChange = distance - mouseScroll * ThirdPersonZoomSensitivity;
             distance = Mathf.Clamp(distanceChange, ThirdPersonCameraMinDistance, ThirdPersonCameraMaxDistance);
         }
+    }
+    private float findDirection()
+    {
+        
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            mousePos = Input.mousePosition;
+        }
+        else if (Input.GetKey(KeyCode.LeftControl))
+        {
+            return (mousePos.x - Input.mousePosition.x > 1) ? 1 : (mousePos.x - Input.mousePosition.x < -1) ? -1 : 0 ;
+        }
+        return 0;
     }
 
     
