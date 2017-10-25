@@ -387,11 +387,11 @@ public class CameraController : MonoBehaviour
     private float findDirection()
     {
         
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             mousePos = Input.mousePosition;
         }
-        else if (Input.GetKey(KeyCode.LeftControl))
+        else if (Input.GetKey(KeyCode.Mouse2))
         {
             return (mousePos.x - Input.mousePosition.x > 1) ? 1 : (mousePos.x - Input.mousePosition.x < -1) ? -1 : 0 ;
         }
