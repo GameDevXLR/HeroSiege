@@ -65,6 +65,11 @@ public class GameManager : NetworkBehaviour
 
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
 
+	//référencement des inibiteurs pour que les mobs puissent venir chercher l'info ici (client ou serveur) et ainsi déduire le path.
+	//Team1
+	public SpawnManager camp1,camp2,camp3;
+	//Team2
+	public SpawnManager camp1B, camp2B, camp3B;
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){
 		if (instanceGM == null) 
@@ -76,6 +81,10 @@ public class GameManager : NetworkBehaviour
 //			if(team1ID.Contains(playerObj.GetComponent<NetworkIdentity>().netId)){} //utliser ca pour voir si on est dans la list déja.
 			Destroy (gameObject);
 		}
+		difficultyPanel = GameObject.Find ("NewDiffPan");
+		camp1 = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ();
+		camp2 = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ();
+		camp3 = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ();
 		
 	}
 	void Start()
@@ -83,7 +92,6 @@ public class GameManager : NetworkBehaviour
 		team1LivesDisplay = GameObject.Find ("LivesDisplayT1").GetComponent<Text> ();
 		team2LivesDisplay = GameObject.Find ("LivesDisplayT2").GetComponent<Text> ();
 		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
-		difficultyPanel = GameObject.Find ("NewDiffPan");
 		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
 		locManager = GameObject.Find ("LocationManager").GetComponent<LocationManager> ();
 		lightM = GameObject.Find ("[Lights]").GetComponent<LightManagerScript> ();

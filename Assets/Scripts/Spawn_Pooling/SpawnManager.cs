@@ -8,6 +8,7 @@ public class SpawnManager : NetworkBehaviour
 {
 
 	//nouveau systeme de spawn plus propre.
+	public int campNbr; // A COMPLETER DANS UNITY! 
 	int coPlayers;
 
 	private float lastTic; //dernier proc en temps global.
@@ -29,6 +30,7 @@ public class SpawnManager : NetworkBehaviour
 	[SyncVar] public Transform targetDestination;
 	public int numberOfMobs; // nombre de mobs dans la vague.
 	public float TimeBetweenMobs; //temps entre 2 mobs.
+	public NavMeshPath path;
 
 	[SyncVar (hook = "ActuNbrOfWaves")]public int totalWaves; // le numéro de la vague d'ennemis. nombre total de vagues depuis le début.
 	private GameObject newEnnemi;
@@ -37,6 +39,8 @@ public class SpawnManager : NetworkBehaviour
 	{
 		partEffectPortal= transform.GetChild (0).Find ("Portail_Démoniaque").Find ("PortailParticule").gameObject;
 		partEffectPortal.SetActive (false);
+		path = new NavMeshPath ();
+		NavMesh.CalculatePath (spawnpoint.position, targetDestination.position, NavMesh.AllAreas, path);
 
 	}
 	void Start () 
@@ -52,6 +56,8 @@ public class SpawnManager : NetworkBehaviour
 				difficultyFactor = 10;
 			}
 		}
+
+
 	}
 
 	[ServerCallback]
@@ -68,6 +74,8 @@ public class SpawnManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcStartPortal (){
 		partEffectPortal.SetActive (true);
+		NavMesh.CalculatePath (spawnpoint.position, targetDestination.position, NavMesh.AllAreas, path);
+
 	}
 	[ClientRpc]
 	public void RpcStopPortal (){
@@ -161,6 +169,7 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnemyAutoAttackScript> ().damage += tmpFactor / 20;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					newEnnemi.GetComponent<MinionsPathFindingScript> ().originalCampNbr = campNbr;
 					if (isRightPath) 
 					{
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
@@ -181,6 +190,8 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnnemyIGManager> ().isSlowingOnAutoA = true;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					newEnnemi.GetComponent<MinionsPathFindingScript> ().originalCampNbr = campNbr;
+
 					if (isRightPath) 
 					{
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
@@ -201,6 +212,8 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
 					newEnnemi.GetComponent<EnnemyIGManager> ().isAnInvisible = true;
+					newEnnemi.GetComponent<MinionsPathFindingScript> ().originalCampNbr = campNbr;
+
 					if (isRightPath) 
 					{
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
@@ -225,6 +238,8 @@ public class SpawnManager : NetworkBehaviour
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					newEnnemi.GetComponent<MinionsPathFindingScript> ().originalCampNbr = campNbr;
+
 					if (isRightPath) 
 					{
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
@@ -250,6 +265,8 @@ public class SpawnManager : NetworkBehaviour
 					newEnnemi.GetComponent<EnnemyIGManager> ().isAnInvisible = true;
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					newEnnemi.GetComponent<MinionsPathFindingScript> ().originalCampNbr = campNbr;
+
 					if (isRightPath) 
 					{
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
@@ -277,6 +294,8 @@ public class SpawnManager : NetworkBehaviour
 
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().isTeam1 = isTeam1;
 					newEnnemi.GetComponent<MinionsPathFindingScript> ().target = targetDestination;
+					newEnnemi.GetComponent<MinionsPathFindingScript> ().originalCampNbr = campNbr;
+
 					if (isRightPath) 
 					{
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
