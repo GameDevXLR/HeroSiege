@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class MinionsPathFindingScript : NetworkBehaviour 
 {
 	bool walkAnim;
+	[SyncVar]public int originalCampNbr; //permet de savoir quel inib a fait spawn ce mob. Chez tous le monde (client et serveur)
 //	private Animator anim;
 	[SyncVar] public bool isTeam1;
 	public NavMeshAgent agent;
@@ -26,7 +27,39 @@ public class MinionsPathFindingScript : NetworkBehaviour
 //			target = GameObject.Find ("EndPointForMobsTeam2").transform;
 //
 //		}		
-		GoToEndGame ();
+//		GoToEndGame ();
+		switch (originalCampNbr) 
+		{
+		//jung mob: ne pas mettre de chiffre, donc zero.
+		case 0:
+			break;
+		//Team1
+		case 1:
+			agent.SetPath (GameManager.instanceGM.camp1.path);
+			break;
+		case 2:
+			agent.SetPath (GameManager.instanceGM.camp2.path);
+			break;
+		case 3:
+			agent.SetPath (GameManager.instanceGM.camp3.path);
+
+			break;
+			//team2
+		case 10:
+			agent.SetPath (GameManager.instanceGM.camp1.path);
+			break;
+		case 20:
+			agent.SetPath (GameManager.instanceGM.camp2.path);
+			break;
+		case 30:
+			agent.SetPath (GameManager.instanceGM.camp3.path);
+
+			break;
+		default:
+			Debug.Log (originalCampNbr);
+			break;
+		}
+
 	}
 	
 	public void GoToEndGame()
