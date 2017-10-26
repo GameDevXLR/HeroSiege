@@ -45,7 +45,7 @@ public class ShowAndHideImg : MonoBehaviour {
 
 	public void lockUnlockCam()
 	{
-		if (Camera.main.GetComponent<CameraController> ().selectedPlayer) 
+		if (Camera.main.GetComponent<CameraController> ().style == CameraController.StyleCam.thirdPerson) 
 		{
 			camLockBtn.GetComponent<Image> ().sprite = camLockActive;
 		} else 

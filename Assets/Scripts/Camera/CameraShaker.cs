@@ -24,14 +24,14 @@ public class CameraShaker : MonoBehaviour
     public bool smooth = true;//Smooth rotation?
     [Range(1,2)]
     public float smoothAmount = 5f;//Amount to smooth
+    //IEnumerator shakeCoroutine;
+    CameraController camController;
 
-    private Quaternion rotationOffset;
-    IEnumerator shakeCoroutine;
 
     private void Start()
     {
-        rotationOffset = transform.localRotation;
-        shakeCoroutine = Shake(GetComponent<CameraController>().target);
+        camController = GetComponent<CameraController>();
+        //shakeCoroutine = Shake(camController.target);
     }
 
     void Update()
@@ -75,7 +75,11 @@ public class CameraShaker : MonoBehaviour
 
         while (shakeDuration > 0.01f)
         {
-            transform.LookAt(target.transform.position);
+            if (camController.style != CameraController.StyleCam.free)
+            {
+                transform.LookAt(target.transform.position);
+            }
+            
             Vector3 rotationAmount = Random.insideUnitSphere * shakeAmount;//A Vector3 to add to the Local Rotation
             rotationAmount.z = 0;//Don't change the Z; it looks funny.
 
@@ -91,9 +95,9 @@ public class CameraShaker : MonoBehaviour
 
             yield return null;
         }
-        transform.rotation = rotationOffset;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
         isRunning = false;
         GetComponent<CameraController>().isShaking = false;
+        yield return null;
 
     }
 

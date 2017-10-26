@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 using UnityEngine.PostProcessing;
 using UnityEngine.Events;
 
+
+
 /**
  * 
  * class : CameraController
@@ -21,8 +23,8 @@ public class CameraController : MonoBehaviour
     // selectedPlayer
     // true : camera lock in the perso
     // false : camera free from the perso
-    public bool selectedPlayer = true; 
 	public UnityEvent changeCamLockImg;
+    public bool isLock = false;
 
 	//speed move of the camera when move with mouse
     public int speed = 5;
@@ -80,15 +82,14 @@ public class CameraController : MonoBehaviour
     ///  thirdPerson : derrière le joueur
     ///  thirdPerson : derrière le joueur mais suis la rotation
     /// </summary>
-    enum StyleCam
+    public enum StyleCam
     {
         strategique,
         thirdPerson,
-        thirdPersonBloque,
-        thirdpersoncircle
+        free
     }
 
-    StyleCam style = StyleCam.thirdPerson;
+    public StyleCam style = StyleCam.thirdPerson;
 
     //on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
     void Awake(){
@@ -140,25 +141,40 @@ public class CameraController : MonoBehaviour
             SelectNextCameraDistance();
             if (switchToOtherPlayer())
             {
-                selectedPlayer = true;
+                style = StyleCam.thirdPerson;
                 isAnotherPlayer = true;
                 helperCamPos = target.transform.Find("ThirdPersonCamPosition");
+            }                
+            else if(Input.GetKeyDown(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
+            {
+                if (isAnotherPlayer)
+                {
+                    revertTargetToPlayer();
+                    isAnotherPlayer = false;
+                }
+                style = StyleCam.thirdPerson;
+                vectCam = new Vector3(xRef, yRef, zRef);
+            }
+            else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
+            {
+                if (!isLock)
+                {
+                    style = StyleCam.free;
+
+                }
+                    
             }
             else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
             {
-                 LockUnlockCamera();
-				changeCamLockImg.Invoke() ;
-             }
-                
-            else if(Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)) && isAnotherPlayer)
-            {
-                revertTargetToPlayer();
-                isAnotherPlayer = false;
-            }
-            else if (!Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter))
-                && !selectedPlayer)
-            {
-                UtilsScreenMovement.moveScreenWithMouse(cameraCible, boundaries, zoneDetectionMouse, speed, layer_mask);
+                if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
+                {
+                    isLock = !isLock;
+                }
+                else
+                {
+                    areLocking();
+                }
+                changeCamLockImg.Invoke();
             }
 
         }
@@ -170,36 +186,30 @@ public class CameraController : MonoBehaviour
 		{
 			return;
 		}
-		if (selectedPlayer || 
-            Input.GetKey (CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
-        {
-			CenterBackCameraOnTarget ();
-		} 
+         move();
+		
     }
 
-	public void CenterBackCameraOnTarget()
+	public void move()
 	{
-		if (target != null) {
+        float dir;
+
+        if (target != null) {
             switch (style) {
                 case StyleCam.thirdPerson:
-                    //transform.position = target.transform.position + offset;
                     // Set the position of the camera based on the desired rotation towards and distance from the Player model
                     //gameObject.transform.position = Vector3.Lerp(target.transform.position, target.transform.position + new Vector3(1, 1.5f, 0) * distance, speed * Time.deltaTime);
-                    float dir = findDirection();
-                    moveRotate(dir);
+                    dir = findDirection();
+                    moveRotateAround(dir);
+                    transform.position = Vector3.Lerp(target.transform.position, target.transform.position + vectCam * distance, speed * Time.deltaTime);
                     // Set the camera to look towards the Player model
                     lookAt();
                     break;
-                case StyleCam.thirdPersonBloque:
-                    //transform.position = target.transform.position + offset;
-                    // Set the position of the camera based on the desired rotation towards and distance from the Player model
-//                    gameObject.transform.localPosition = cameraRotation *  new Vector3(1, 1, 0) * distance;
-				    gameObject.transform.position = Vector3.Lerp(transform.position, target.transform.Find("ThirdPersonCamPosition").position, Time.deltaTime * 1.5f);
+                case StyleCam.free:
+                    UtilsScreenMovement.moveScreenWithMouse(cameraCible, boundaries, zoneDetectionMouse, speed, layer_mask);
+                    //dir = findDirection();
+                    //moveRotate(dir);
                     // Set the camera to look towards the Player model
-                    lookAt();
-                    break;
-                case StyleCam.thirdpersoncircle:
-                    moveAround();
                     break;
             }
         }
@@ -214,20 +224,30 @@ public class CameraController : MonoBehaviour
         
     }
 
-    public void LockUnlockCamera()
+    public void areLocking()
     {
-        selectedPlayer = !selectedPlayer;
+        if(style != StyleCam.free)
+        {
+            style = StyleCam.free;
+            isLock = false;
+        }
+        else
+        {
+            style = StyleCam.thirdPerson;
+            isLock = true;
+        }
     }
 
-    public void LockUnlockCamera(bool islock)
+    public void areLocking(bool islock)
     {
-        selectedPlayer = islock;
+        style = (islock) ? StyleCam.thirdPerson : StyleCam.free;
+        this.isLock = islock;
     }
 
     public void setCameraTarget(GameObject target)
     {
         this.target = target;
-        LockUnlockCamera(true);
+        areLocking(true);
 
     }
 
@@ -296,22 +316,11 @@ public class CameraController : MonoBehaviour
         return false;
     }
 
-
-    public void changeToThirdFixe()
-    {
-        style = StyleCam.thirdPersonBloque;
-//        transform.SetParent(target.transform);
-    }
+    
 
     public void changeToThird()
     {
         style = StyleCam.thirdPerson;
-        //        transform.SetParent(null);
-    }
-
-    public void changeToCircle()
-    {
-        style = StyleCam.thirdpersoncircle;
         //        transform.SetParent(null);
     }
 
@@ -343,10 +352,10 @@ public class CameraController : MonoBehaviour
 
 
 
-    public void moveRotate(float dir)
+    public void moveRotateAround(float dir)
     {
         // fait rotate la camera autour de la target
-        if(dir != 0)
+        if (dir != 0)
         {
             transform.RotateAround(target.transform.position, Vector3.up, dir * angle * speedRotate * Time.deltaTime);
 
@@ -354,14 +363,22 @@ public class CameraController : MonoBehaviour
             Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
             vect.y = 1.5f;
             vectCam = vect;
-            gameObject.transform.position = target.transform.position + vectCam * distance;
         }
-        else
+    }
+
+
+    public void moveRotate(float dir)
+    {
+        // fait rotate la camera autour de la target
+        if (dir != 0)
         {
-            gameObject.transform.position = Vector3.Lerp(target.transform.position, target.transform.position + vectCam * distance, speed * Time.deltaTime);
+            transform.Rotate(vectCam, dir * angle * speedRotate * Time.deltaTime);
+
+            // permet de replacer la caméra si la target bouge
+            Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
+            vect.y = 1.5f;
+            vectCam = vect;
         }
-        
-        
     }
 
     public void lookAt()
@@ -384,6 +401,7 @@ public class CameraController : MonoBehaviour
             distance = Mathf.Clamp(distanceChange, ThirdPersonCameraMinDistance, ThirdPersonCameraMaxDistance);
         }
     }
+
     private float findDirection()
     {
         

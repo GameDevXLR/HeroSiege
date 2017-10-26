@@ -64,7 +64,7 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-			Camera.main.GetComponent<CameraController>().selectedPlayer = false;
+			Camera.main.GetComponent<CameraController>().areLocking(false);
             Camera.main.GetComponent<CameraController>().MoveCameraTo(hit.point);
 
 
