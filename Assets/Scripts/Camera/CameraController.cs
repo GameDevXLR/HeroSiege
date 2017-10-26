@@ -366,13 +366,13 @@ public class CameraController : MonoBehaviour
         }
     }
 
-
+    public Vector3 rotateANgle = new Vector3(0, 1, 0);
     public void moveRotate(float dir)
     {
         // fait rotate la camera autour de la target
         if (dir != 0)
         {
-            transform.Rotate(vectCam, dir * angle * speedRotate * Time.deltaTime);
+            transform.Rotate(rotateANgle, dir * angle * speedRotate * Time.deltaTime);
 
             // permet de replacer la caméra si la target bouge
             Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
