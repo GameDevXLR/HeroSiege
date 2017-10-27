@@ -207,8 +207,8 @@ public class CameraController : MonoBehaviour
                     break;
                 case StyleCam.free:
                     UtilsScreenMovement.moveScreenWithMouse(cameraCible, boundaries, zoneDetectionMouse, speed, layer_mask);
-                    //dir = findDirection();
-                    //moveRotate(dir);
+                    dir = findDirection();
+                    moveRotate(dir);
                     // Set the camera to look towards the Player model
                     break;
             }
@@ -366,19 +366,16 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public Vector3 rotateANgle = new Vector3(0, 1, 0);
+   
     public void moveRotate(float dir)
     {
-        // fait rotate la camera autour de la target
-        if (dir != 0)
-        {
-            transform.Rotate(rotateANgle, dir * angle * speedRotate * Time.deltaTime);
+        transform.Rotate(new Vector3(0, 1, 0), Space.World);
 
-            // permet de replacer la caméra si la target bouge
-            Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
+        // permet de replacer la caméra si la target bouge
+        Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
             vect.y = 1.5f;
             vectCam = vect;
-        }
+        //}
     }
 
     public void lookAt()
