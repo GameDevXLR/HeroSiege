@@ -27,8 +27,18 @@ public class EventMessageServer : NetworkBehaviour
         
         //eventMess.transform.SetParent(victime.transform, false);
         //eventMess.transform.localScale = new Vector3(1, 1, 1);
-        eventMess.transform.position = victime.transform.position;
-        eventMess.transform.GetChild(0).GetComponentInChildren<Text>().text = "+" + degats;
+		int tmpDegatScale =(int) Mathf.Round(Mathf.Abs(degats)/20);
+		if (tmpDegatScale < 5) 
+		{
+			tmpDegatScale = 5;
+		}
+		if (tmpDegatScale > 20) 
+		{
+			tmpDegatScale = 20;
+		}
+		eventMess.transform.position = new Vector3( victime.transform.position.x,victime.transform.position.y+2f,victime.transform.position.z) ;
+		eventMess.transform.GetChild (0).GetComponent<RectTransform>().localScale = new Vector3 ( tmpDegatScale, tmpDegatScale, 1);
+		eventMess.transform.GetChild(0).GetComponentInChildren<Text>().text =  degats.ToString();
         if(degats > 0)
         {
             eventMess.transform.GetChild(0).GetComponentInChildren<Text>().color = Color.green;

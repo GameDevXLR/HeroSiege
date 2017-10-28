@@ -74,9 +74,9 @@ public class SpawnManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcStartPortal (){
 		partEffectPortal.SetActive (true);
-//		path = new NavMeshPath ();
+		path = new NavMeshPath ();
 
-//		NavMesh.CalculatePath (spawnpoint.position, targetDestination.position, NavMesh.AllAreas, path);
+		NavMesh.CalculatePath (spawnpoint.position, targetDestination.position, NavMesh.AllAreas, path);
 
 	}
 	[ClientRpc]
