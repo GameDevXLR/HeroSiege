@@ -303,10 +303,9 @@ public class GameManager : NetworkBehaviour
 			Camera.main.transform.GetComponent<AudioSource> ().clip = MusicBackground[1];
 			Camera.main.transform.GetComponent<AudioSource> ().Play();
 			Days++;
-			if (Days == 2) 
+			if (Days == 4) 
 			{
-				NetworkServer.Destroy (obstacleT1);
-				NetworkServer.Destroy (obstacleT2);
+
 				ShowAGameTip ("During the day, the jungle camps will respawn and the daily bosses will show up. The waves won't spawn before night time.");
 				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 				{
@@ -314,12 +313,24 @@ public class GameManager : NetworkBehaviour
 
 				}
 			}
-			if (Days == 3) 
+			if (Days == 2) 
 			{
 				ShowAGameTip ("If you feel strong enough, you could try to capture the outpost in the middle of the map. This will give you access to a shop and will give you more time to come back to the fight if you die.");
 				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 				{
 					ShowAGameTip ("Si vous pensez être assez fort, essayez le capturer l'avant-poste au milieu de la carte. Vous aurez ainsi accés a un magasin et aurez plus de temps pour revenir combattre en cas de mort.");
+
+				}
+			}
+
+			if (Days == 3) 
+			{
+				NetworkServer.Destroy (obstacleT1);
+				NetworkServer.Destroy (obstacleT2);
+				ShowAGameTip ("Be carefull, the obstacle on the main road to the base have been removed! The enemy can reach our camp faster now.");
+				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
+				{
+					ShowAGameTip ("Prudence! Les obstacles qui bloquaient la route principale ont été enlevés. Les ennemis peuvent atteindre la base plus rapidement maintenant.");
 
 				}
 			}

@@ -247,10 +247,10 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 
             upgradeSpell();
 			int x = (int)spellDmg;
-			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
+			spellDescription = "Place a trap. When triggered, deal " + x.ToString () + " damage each second TO EVERYONE for " + spellDuration.ToString () + " seconds. Last 60 seconds. Radius: "+explosionRadius*10+" units.";
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
-				spellDescription = "Place un piège. Quand activer, inflige " + x.ToString () + " dégâts par seconde pendant " + spellDuration.ToString () + " secondes. Dure 60 secondes. Rayon: "+explosionRadius*10+" unités.";
+				spellDescription = "Place un piège. Quand activer, inflige " + x.ToString () + " dégâts par seconde pendant " + spellDuration.ToString () + " secondes A TOUT LE MONDE. Dure 60 secondes. Rayon: "+explosionRadius*10+" unités.";
 
 			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
@@ -270,8 +270,8 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
         spellCost += 5;
         spellCD -= 2f;
         explosionRadius += 0.1f;
-        spellDmg += 3;
-        spellDuration += 1f;
+		spellDmg += 3*spellLvl;
+        spellDuration += 2f;
 		if (onCD) 
 		{
 			timeSpent -= 2f;

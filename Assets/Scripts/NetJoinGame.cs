@@ -103,7 +103,7 @@ public class NetJoinGame : MonoBehaviour {
 		for (int i = 0; i < roomList.Count; i++)
 		{
 			Destroy(roomList[i]);
-			if (i == roomList.Count - 2) {
+			if (i == roomList.Count - 1) {
 				isLoadingRooms = false;
 			}
 		}

@@ -268,7 +268,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
         spellLvl++;
         spellCost += 15;
         spellCD -= 1f;
-        spellDmg += 12;
+		spellDmg += 6*spellLvl;
         spellDuration += 0.3f;
 		if (onCD) 
 		{
