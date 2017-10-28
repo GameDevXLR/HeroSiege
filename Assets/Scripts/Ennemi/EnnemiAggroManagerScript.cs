@@ -16,7 +16,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 //	private NavMeshAgent agentParent;
 	private EnemyAutoAttackScript autoAScript;
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 //		agentParent =GetComponentInParent<NavMeshAgent> ();
 		autoAScript = GetComponentInParent<EnemyAutoAttackScript> ();
@@ -25,6 +25,10 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 
 	void OnTriggerStay(Collider other)
 	{
+		if (!autoAScript) 
+		{
+			return;
+		}
 
 		if (!GetComponentInParent<EnnemyIGManager>().isDead && (autoAScript.target == null || autoAScript.target.layer != 8)) 
 		{

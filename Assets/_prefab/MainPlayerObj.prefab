@@ -3278,7 +3278,7 @@ Transform:
   m_GameObject: {fileID: 1920286070158048}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 2.44, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 1}
   m_Children:
   - {fileID: 4083970540011950}
   m_Father: {fileID: 4761200443502976}
@@ -4438,7 +4438,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.141228, y: 44.261, z: 24.123827}
+  m_LocalPosition: {x: -139.53242, y: -0.079437256, z: -11.255524}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
   m_Children:
   - {fileID: 4385223683264028}
@@ -6999,6 +6999,8 @@ MonoBehaviour:
   ovateArtwork: {fileID: 21300000, guid: 03bf27b6bc67e93468dd437e4e486051, type: 3}
   archerArtwork: {fileID: 21300000, guid: 0fc883c92c3676147bf5870850aa93a0, type: 3}
   lockHeroBtn: {fileID: 0}
+  nextHeroBtn: {fileID: 0}
+  previousHeroBtn: {fileID: 0}
 --- !u!114 &114870691904547754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7153,7 +7155,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1258880556427594}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -7425,7 +7427,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1303154418782082}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
