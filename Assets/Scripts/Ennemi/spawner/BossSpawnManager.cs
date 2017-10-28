@@ -36,18 +36,18 @@ public class BossSpawnManager : NetworkBehaviour
 	public void SpawnBosses()
 	{
         RpcSpawnEffect();
-		SpawnOneBoss (bossSpawns [0], targetTeam1Destination, bossLvlT1);
-		SpawnOneBoss (bossSpawns [1], targetTeam1Destination, bossLvlT2);
+		SpawnOneBoss (bossSpawns [0], targetTeam1Destination, bossLvlT1,2);
+		SpawnOneBoss (bossSpawns [1], targetTeam1Destination, bossLvlT2,3);
 
 		if (GetComponent<GameManager> ().soloGame) 
 		{
 			return;
 		}
-		SpawnOneBoss (bossSpawns [2], targetTeam2Destination, bossLvlT1);
-		SpawnOneBoss (bossSpawns [3], targetTeam2Destination, bossLvlT2);
+		SpawnOneBoss (bossSpawns [2], targetTeam2Destination, bossLvlT1,20);
+		SpawnOneBoss (bossSpawns [3], targetTeam2Destination, bossLvlT2,30);
 	}
 
-	public void SpawnOneBoss(Transform tr, Transform targetDest, int bonusFactor)
+	public void SpawnOneBoss(Transform tr, Transform targetDest, int bonusFactor, int roadNbr)
 	{
 		GameObject bossTmpObj;
 		bossTmpObj = Instantiate (bossPrefab, tr.position, tr.rotation) as GameObject;
@@ -57,12 +57,15 @@ public class BossSpawnManager : NetworkBehaviour
 		bossTmpObj.GetComponent<EnnemyIGManager> ().goldGiven += bonusFactor * bonusFactor;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().xpGiven += bonusFactor * bonusFactor;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().isCastingAoeCC = true;
+		bossTmpObj.GetComponent<MinionsPathFindingScript> ().originalCampNbr = roadNbr;
+		bossTmpObj.GetComponent<MinionsPathFindingScript> ().target = targetDest;
+
 		if (bonusFactor >= 10) 
 		{
 			bossTmpObj.GetComponent<EnemyAutoAttackScript> ().agent.speed += 5;
 		}
 
-		bossTmpObj.GetComponent<MinionsPathFindingScript> ().target = targetDest;
+//		bossTmpObj.GetComponent<MinionsPathFindingScript> ().target = targetDest;
 		NetworkServer.Spawn (bossTmpObj);
 	}
 

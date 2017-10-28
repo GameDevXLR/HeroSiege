@@ -3102,6 +3102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742c60d627e827f489b5603afb95e237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
+  originalCampNbr: 0
   isTeam1: 0
   agent: {fileID: 195782094007203306}
   target: {fileID: 0}
@@ -3504,10 +3506,10 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.5
+  m_Height: 1.2
   m_BaseOffset: 0
   m_WalkableMask: 57
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 0
 --- !u!198 &198085469792532482
 ParticleSystem:
   m_ObjectHideFlags: 1
