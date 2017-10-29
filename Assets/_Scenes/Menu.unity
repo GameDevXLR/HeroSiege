@@ -1373,12 +1373,12 @@ MonoBehaviour:
   ProfileCanvasObj: {fileID: 83477797}
   OptionsCanvasObj: {fileID: 1936432548}
   PlayerNickname: NewPlayer
-  menuMusicVolume: {fileID: 0}
+  menuMusicVolume: {fileID: 1607107665}
   menuMusic: {fileID: 1572631131}
   langage: 
   clicSound1: {fileID: 8300000, guid: ccb5b38b76e4be84d841a93328a40c41, type: 3}
   clicSound2: {fileID: 8300000, guid: 07d340c09d9a26b4b8b4d47e59df1972, type: 3}
-  generalVolume: {fileID: 0}
+  generalVolume: {fileID: 1836923166}
 --- !u!4 &553115888
 Transform:
   m_ObjectHideFlags: 0
@@ -1868,7 +1868,7 @@ Prefab:
         type: 2}
       propertyPath: isGuideActive
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1735926449}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57a189d9da793d245827a03338d244dc, type: 2}
   m_IsPrefabParent: 0
@@ -3516,6 +3516,12 @@ MonoBehaviour:
   xpdeBase: 1000
   xprecquiredByLvl: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   previousxp: 0
+--- !u!114 &1607107665 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114266213481016532, guid: 2501d60b3c61a8e40af2dd4c2061e455,
+    type: 2}
+  m_PrefabInternal: {fileID: 2129702761}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1647930229
 GameObject:
   m_ObjectHideFlags: 0
@@ -3808,6 +3814,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1713619854}
+--- !u!114 &1735926449 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114043915801082882, guid: 2501d60b3c61a8e40af2dd4c2061e455,
+    type: 2}
+  m_PrefabInternal: {fileID: 2129702761}
+  m_Script: {fileID: 2109663825, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1738127016
 GameObject:
   m_ObjectHideFlags: 0
@@ -4104,6 +4116,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1836923166 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114380795518534302, guid: 2501d60b3c61a8e40af2dd4c2061e455,
+    type: 2}
+  m_PrefabInternal: {fileID: 2129702761}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1894642673
 GameObject:
   m_ObjectHideFlags: 0
