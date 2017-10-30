@@ -63,10 +63,6 @@ public class GameManager : NetworkBehaviour
     public Canvas tutorialPanel;
 	public Text tutoTip;
 
-	[Header ("Road Obstacles")]
-	public GameObject obstacleT1;
-	public GameObject obstacleT2;
-
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
 
 	//référencement des inibiteurs pour que les mobs puissent venir chercher l'info ici (client ou serveur) et ainsi déduire le path.
@@ -305,8 +301,6 @@ public class GameManager : NetworkBehaviour
 			Days++;
 			if (Days == 2) 
 			{
-				NetworkServer.Destroy (obstacleT1);
-				NetworkServer.Destroy (obstacleT2);
 				ShowAGameTip ("During the day, the jungle camps will respawn and the daily bosses will show up. The waves won't spawn before night time.");
 				if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 				{
