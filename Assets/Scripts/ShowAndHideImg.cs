@@ -20,7 +20,7 @@ public class ShowAndHideImg : MonoBehaviour {
 	public Transform bigMapBtn;
 	public RectTransform minimapArea;
 	public bool isBig;
-	public Quaternion rotImgMinimap;
+//	public Quaternion rotImgMinimap;
 
 
 	public void ShowHidePlants()
@@ -64,14 +64,14 @@ public class ShowAndHideImg : MonoBehaviour {
 	public void ShowHideBigMap()
 	{
 		isBig = !isBig;
-		if (isBig) 
+		if (!isBig) 
 		{
 			minimapArea.localScale = new Vector3 (1, 1, 1);
-			bigMapBtn.rotation = Quaternion.Inverse (rotImgMinimap);
+//			bigMapBtn.rotation = Quaternion.Inverse (rotImgMinimap);
 		} else 
 		{
 			minimapArea.localScale = new Vector3 (2.45f,2.45f, 1f);
-			bigMapBtn.rotation = rotImgMinimap;
+//			bigMapBtn.rotation = rotImgMinimap;
 
 		}
 		

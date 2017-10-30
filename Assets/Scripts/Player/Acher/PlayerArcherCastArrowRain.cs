@@ -49,10 +49,10 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			int x = (int)spellDmg;
-			spellDescription = "Slow and deal " + x.ToString () + " damage every 0,3 seconds for " + spellDuration.ToString () + " seconds.";            
+			spellDescription = "Deal " + x.ToString () + " damage every 0,3 seconds for " + spellDuration.ToString () + " seconds.";            
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
-				spellDescription = "Ralenti et inflige " + x.ToString () + " dégats toutes les 0,3s pendant " + spellDuration.ToString () + " secondes."; 
+				spellDescription = "Inflige " + x.ToString () + " dégats toutes les 0,3s pendant " + spellDuration.ToString () + " secondes."; 
 			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
@@ -266,9 +266,9 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
     public void upgradeSpell()
     {
         spellLvl++;
-        spellCost += 15;
+		spellCost += 12*spellLvl;
         spellCD -= 1f;
-        spellDmg += 12;
+		spellDmg += 6*spellLvl;
         spellDuration += 0.3f;
 		if (onCD) 
 		{
