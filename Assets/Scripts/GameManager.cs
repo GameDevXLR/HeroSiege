@@ -65,11 +65,90 @@ public class GameManager : NetworkBehaviour
 
 	[SyncVar(hook = "SyncDifficulty")]public int gameDifficulty = 1;
 
+
+
+	[Header("Reputation system.")]
+
+	[SyncVar (hook = "SyncReputation")]public float  actualReputation;
+	private float oldReputation;
+	public Slider reputSlider;
+	public AudioClip looseRep1;
+	public AudioClip looseRep2;
+	public AudioClip gainRep1;
+	public AudioClip gainRep2;
+
 	//référencement des inibiteurs pour que les mobs puissent venir chercher l'info ici (client ou serveur) et ainsi déduire le path.
-	//Team1
+
+	[Header("Référencement des inibiteurs")]
+
 	public SpawnManager camp1,camp2,camp3;
-	//Team2
 	public SpawnManager camp1B, camp2B, camp3B;
+
+	[Header("Systeme de quetes.")]
+
+	//Premiere tentative de création de quete.
+
+	[SyncVar]public bool isQuest1Active;
+	public GameObject quest1ID;
+	public int quest1Rep = -10;
+	public string quest1Desc = "Don't be the first to loose a life!";
+
+
+	#region ReputationSystem
+
+	public void TurnOnTheRepSystem()
+	{
+		reputSlider = GameObject.Find ("ReputationSlider").GetComponent<Slider> ();
+	}
+
+
+
+	public void SyncReputation(float x)
+	{
+		
+		oldReputation = actualReputation;
+		actualReputation = x;
+		reputSlider.value = actualReputation;
+		float y = oldReputation - actualReputation;
+		if (isTeam1) 
+		{
+			if (y == 0) 
+			{
+				Debug.Log ("this should not happen!");
+			}
+			if (y > 0) 
+			{
+				if (y > .2f) 
+				{
+					GetComponent<AudioSource> ().PlayOneShot (looseRep2);
+					return;
+				}
+				GetComponent<AudioSource> ().PlayOneShot (looseRep1);
+			} else 
+			{
+				if (y < -.2f) 
+				{
+					GetComponent<AudioSource> ().PlayOneShot (gainRep2);
+					return;
+				}
+				GetComponent<AudioSource> ().PlayOneShot (gainRep1);
+
+			}
+			
+		} else 
+		{
+			if (y < 0) 
+			{
+				GetComponent<AudioSource> ().PlayOneShot (looseRep1);
+			} else 
+			{
+				GetComponent<AudioSource> ().PlayOneShot (gainRep1);
+
+			}
+		}
+	}
+
+	#endregion
 	//on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
 	void Awake(){
 		if (instanceGM == null) 
@@ -93,12 +172,7 @@ public class GameManager : NetworkBehaviour
 	{
 		team1LivesDisplay = GameObject.Find ("LivesDisplayT1").GetComponent<Text> ();
 		team2LivesDisplay = GameObject.Find ("LivesDisplayT2").GetComponent<Text> ();
-		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
-		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
-		locManager = GameObject.Find ("LocationManager").GetComponent<LocationManager> ();
-		lightM = GameObject.Find ("[Lights]").GetComponent<LightManagerScript> ();
-		nbrWavesText = GameObject.Find ("WavesCounter").GetComponent<Text> ();
-		nbrWavesText.text = "0";
+
 		if (isServer) {
 			ShowAGameTip ("The number of waves spawn points and the strenght of the enemies depends on the number of players by team and the game difficulty.On Nightmare and above, the number of enemy spawn points will increase.");
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
@@ -119,12 +193,20 @@ public class GameManager : NetworkBehaviour
 	}
 	public void T1SyncLooseLife(int life)
 	{
+		if (isServer && isQuest1Active) 
+		{
+			EndQuestOne (true);
+		}
 		team1LivesDisplay.text = "Blue Team : " + life.ToString ();
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			team1LivesDisplay.text = "Equipe bleu: " + life.ToString ();
 		}
 		lifeOfTheTeam1 = life;
+		if (life > 10) 
+		{
+			return;
+		}
 		if (isTeam1) 
 		{
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
@@ -153,6 +235,10 @@ public class GameManager : NetworkBehaviour
 
 	public void T2SyncLooseLife(int life)
 	{
+		if (isServer && isQuest1Active) 
+		{
+			EndQuestOne (false);
+		}
 		team2LivesDisplay.text = "Red Team: " + life.ToString ();
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
@@ -160,6 +246,10 @@ public class GameManager : NetworkBehaviour
 
 		}
 		lifeOfTheTeam2 = life;
+		if (life > 10) 
+		{
+			return;
+		}
 		if (isTeam2) 
 		{
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
@@ -404,7 +494,42 @@ public class GameManager : NetworkBehaviour
 		} else 
 		{
 			StartTheGameForAll ();
+			//on garde l'ID de la quete pour pouvoir la finir.
+			StartQuestOne();
 		}
+	}
+
+	public void StartQuestOne()
+	{
+		if (isQuest1Active) 
+		{
+			return;
+		}
+//		quest1ID =  GetComponent<QuestManager> ().CreateQuestPanelItem ("Be the first team to kill 20 minions.", 200);
+		quest1ID =  GetComponent<QuestManager> ().CreateQuestPanelItem (quest1Desc, quest1Rep);
+		isQuest1Active = true;
+
+
+	}
+	public void EndQuestOne(bool isFirstTeam)
+	{
+		if (!isQuest1Active) 
+		{
+			return;
+		}
+		NetworkServer.Destroy(quest1ID);
+		//gestion de la récompense de quete:
+		if (isFirstTeam) 
+		{
+			SyncReputation( actualReputation - (float)((float)quest1Rep / 100f));
+		}
+		else 
+		{
+
+			SyncReputation( actualReputation + (float)((float)quest1Rep / 100f));
+		}
+		isQuest1Active = false;
+
 	}
 
 	//détruit ce qui bloque le joueur pour qu'il puisse commencer a avancer.
@@ -414,6 +539,7 @@ public class GameManager : NetworkBehaviour
 //		GameObject.Find ("CastleToCampPortalT2").GetComponent<OneWayPortalScript> ().isBeingUsed = false;
 //		NetworkServer.Destroy (GameObject.Find ("StartingBarricade1"));
 //		NetworkServer.Destroy (GameObject.Find ("StartingBarricade2"));
+		RpcInitializeTheGame();
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector2"));
 		StopPlayerFromJoining ();
@@ -427,6 +553,19 @@ public class GameManager : NetworkBehaviour
         {
             crystal.initialize();
         }
+	}
+
+	[ClientRpc]
+	public void RpcInitializeTheGame()
+	{
+		generalTxt = GameObject.Find ("GeneralText").GetComponent<Text>();
+		dayNightDisplay = GameObject.Find ("DayNightDisplay").GetComponent<Image> ();
+		locManager = GameObject.Find ("LocationManager").GetComponent<LocationManager> ();
+		lightM = GameObject.Find ("[Lights]").GetComponent<LightManagerScript> ();
+		nbrWavesText = GameObject.Find ("WavesCounter").GetComponent<Text> ();
+		nbrWavesText.text = "0";
+		TurnOnTheRepSystem ();
+
 	}
 
 	[Server]
@@ -683,4 +822,20 @@ public class GameManager : NetworkBehaviour
 //		}
 //
 //	}
+	[ServerCallback]
+	public void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.P))
+			{
+				actualReputation +=(Random.Range(-.21f,.21f));
+			if (actualReputation < 0) 
+			{
+				actualReputation = 0;
+			}
+			if (actualReputation >1) 
+			{
+				actualReputation = 1;
+			}
+			}
+	}
 }

@@ -24,7 +24,7 @@ public class PlayerManager : NetworkBehaviour
 	public GameObject UIPrefab;
 	public GameObject playerUI;
 	public Transform playersStatsView;
-    public GameObject minimap;
+//    public GameObject minimap;
 	[Header("Selec hero screen")]
 	public GameObject playerSelecPrefab;
 	public GameObject playerSelecUI;
@@ -39,7 +39,7 @@ public class PlayerManager : NetworkBehaviour
 		playersStatsView = GameObject.Find ("PlayersStatsView").transform;
 		team1SelecScreenPanel = GameObject.Find ("BlueTeamSelecPanel").transform;
 		team2SelecScreenPanel = GameObject.Find ("RedTeamSelecPanel").transform;
-		minimap = GameObject.Find("minimap");
+//		minimap = GameObject.Find("minimap");
 		if (!isLocalPlayer) 
 		{
 			SpawnPlayerUI ();
@@ -103,7 +103,7 @@ public class PlayerManager : NetworkBehaviour
 
 	IEnumerator DelayTheUIActu()
 	{
-		yield return new WaitForSeconds (.8f);
+		yield return new WaitForSeconds (1.5f);
 		myTeamIcon.sprite = myTeamSprite;
 		SpawnPlayerSelecUI ();
 	}

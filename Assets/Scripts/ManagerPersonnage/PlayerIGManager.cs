@@ -56,12 +56,12 @@ public class PlayerIGManager : CharacterIGManager {
         base.Start();
         if (isLocalPlayer)
         {
+			lifeBarMain = GameObject.Find("PlayerLifeBarMain").GetComponent<RectTransform>();
             respawnTxt = GameObject.Find("RespawnText").GetComponent<Text>();
             armorDisplay = GameObject.Find("ArmorLog").GetComponent<Text>();
             armorDisplay.text = armorScore.ToString();
             dodgeDisplay = GameObject.Find("DodgeLog").GetComponent<Text>();
             ActualizeDodge(dodge);
-            lifeBarMain = GameObject.Find("PlayerLifeBarMain").GetComponent<RectTransform>();
             playerHPTxt = GameObject.Find("PlayerHPTxt").GetComponent<Text>();
             playerDeathDisplay = GameObject.Find("PlayerDeadAvatarImg").GetComponent<Image>();
             playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();

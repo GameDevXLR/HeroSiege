@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114574788973545376}
   - component: {fileID: 114018175363057824}
   - component: {fileID: 114897648695540174}
-  - component: {fileID: 114046316490351090}
+  - component: {fileID: 114005613766255152}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -128,6 +128,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114005613766255152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1058267811540780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef90183574018f46a10b3338bc80718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuestPanel: {fileID: 0}
+  QuestItemPrefab: {fileID: 1650365912931052, guid: 548ac29ac7bd65c4fba2ad025ae7420b,
+    type: 2}
+  questItemList: []
 --- !u!114 &114018175363057824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,17 +159,6 @@ MonoBehaviour:
   attackCursor: {fileID: 2800000, guid: 673a50f4b3c14f64797e7aff7f205350, type: 3}
   allyCursor: {fileID: 2800000, guid: 5962a893a49013147a661b830934e3e4, type: 3}
   normalCursor: {fileID: 2800000, guid: b864bec75550ec14198eecce9ab02c91, type: 3}
---- !u!114 &114046316490351090
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1058267811540780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207eb13dc1ce0e14e88d8777bddde24c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114127148823258428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,7 +175,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dcd5560491f944e4ab5abdefe71b45a7, type: 3}
   delayTime: 2
   difficultyPanel: {fileID: 0}
-  LooseLifeSound: {fileID: 8300000, guid: a1509ba1cff9db6478f5c2fcb329dedf, type: 3}
+  LooseLifeSound: {fileID: 8300000, guid: e899508d573c7524cb61ddca49d38ebf, type: 3}
   winSound: {fileID: 8300000, guid: a837019e92fc9c94cb209c2c07a40c0a, type: 3}
   looseSound: {fileID: 8300000, guid: 54376ef8fb4ab9b47b3c0230d0c39fe5, type: 3}
   generalTxt: {fileID: 0}
@@ -220,12 +224,22 @@ MonoBehaviour:
   tutorialPanel: {fileID: 0}
   tutoTip: {fileID: 0}
   gameDifficulty: 0
+  actualReputation: 0.5
+  reputSlider: {fileID: 0}
+  looseRep1: {fileID: 8300000, guid: d9587b6939e9cbc46929b170dee21872, type: 3}
+  looseRep2: {fileID: 8300000, guid: 96321344673e0ac45997c72c4ed100c2, type: 3}
+  gainRep1: {fileID: 8300000, guid: 0ced8b11a32666d47adf53d1b660cf78, type: 3}
+  gainRep2: {fileID: 8300000, guid: 741687483aef86b499def620300acfed, type: 3}
   camp1: {fileID: 0}
   camp2: {fileID: 0}
   camp3: {fileID: 0}
   camp1B: {fileID: 0}
   camp2B: {fileID: 0}
   camp3B: {fileID: 0}
+  isQuest1Active: 0
+  quest1ID: {fileID: 0}
+  quest1Rep: -10
+  quest1Desc: Don't be the first to loose a life!
 --- !u!114 &114187068329497642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -251,7 +265,7 @@ MonoBehaviour:
   canTalk: 1
   maxMessByTime: 10
   time: 30
-  durationShake: 5
+  durationShake: 1
   amountShake: 10
 --- !u!114 &114574788973545376
 MonoBehaviour:
