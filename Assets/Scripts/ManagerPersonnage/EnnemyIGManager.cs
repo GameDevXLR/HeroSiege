@@ -171,13 +171,13 @@ public class EnnemyIGManager : CharacterIGManager
             else
             {
                 RpcKillTheMob();
-				if (GetComponent<MinionsPathFindingScript> ().isTeam1) 
-				{
-					GameManager.instanceGM.SyncMobCountT1(GameManager.instanceGM.totalMobCountT1 -= 1);
-				} else 
-				{
-					GameManager.instanceGM.SyncMobCountT2(GameManager.instanceGM.totalMobCountT2 -= 1);
+				if (!GetComponent<MinionsPathFindingScript> ().isBoss) {
+					if (GetComponent<MinionsPathFindingScript> ().isTeam1) {
+						GameManager.instanceGM.SyncMobCountT1 (GameManager.instanceGM.totalMobCountT1 -= 1);
+					} else {
+						GameManager.instanceGM.SyncMobCountT2 (GameManager.instanceGM.totalMobCountT2 -= 1);
 
+					}
 				}
                 yield return new WaitForSeconds(0.1f);
                 NetworkServer.Destroy(gameObject);

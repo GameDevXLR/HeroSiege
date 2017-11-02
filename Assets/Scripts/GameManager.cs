@@ -549,7 +549,6 @@ public class GameManager : NetworkBehaviour
 			StartTheGameForAll ();
 			//on garde l'ID de la quete pour pouvoir la finir.
 			StartQuestOne();
-			StartQuest2KillAllMobs ();
 		}
 	}
 
