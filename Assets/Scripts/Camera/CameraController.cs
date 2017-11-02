@@ -123,7 +123,7 @@ public class CameraController : MonoBehaviour
 
 		if (GameManager.instanceGM.playerObj && !isDead && GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
         {
-            var colograding = postProcessing.profile.colorGrading.settings;
+			var colograding = postProcessing.profile.colorGrading.settings;
             colograding.basic.saturation = 0;
             postProcessing.profile.colorGrading.settings = colograding;
             isDead = true;

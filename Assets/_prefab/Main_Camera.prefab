@@ -60,7 +60,6 @@ GameObject:
   - component: {fileID: 81039511684344868}
   - component: {fileID: 114700895480209066}
   - component: {fileID: 82248361282742708}
-  - component: {fileID: 114099501229880830}
   - component: {fileID: 114030565715175200}
   - component: {fileID: 114866985101090860}
   - component: {fileID: 114400265950898158}
@@ -329,21 +328,6 @@ MonoBehaviour:
   isRunning: 0
   smooth: 1
   smoothAmount: 5
---- !u!114 &114099501229880830
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735137487550638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 979e632c10a6e664b96ceda65074fafa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoomInLimite: 15
-  normal: 80
-  zoomOutLimite: 80
-  smooth: 3
 --- !u!114 &114400265950898158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -395,7 +379,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   helperCamPos: {fileID: 0}
-  selectedPlayer: 1
   changeCamLockImg:
     m_PersistentCalls:
       m_Calls:
@@ -412,8 +395,10 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  isLock: 0
   speed: 100
   speedRotate: 0.5
+  angle: 90
   zoneDetectionMouse: 50
   distance: 15
   vitesseZoom: 0.2
@@ -426,6 +411,20 @@ MonoBehaviour:
     WardNordOuest: {fileID: 0}
   postProcessing: {fileID: 114412910203916400}
   isShaking: 0
+  MouseScrollWheel: Mouse ScrollWheel
+  ThirdPersonZoomSensitivity: 3
+  ThirdPersonCameraMinDistance: 4
+  ThirdPersonCameraMaxDistance: 20
+  RotateCameraMouseButton: 1
+  ThirdPersonCameraSensitivity: 2
+  ThirdPersonCameraMinPitch: 5
+  ThirdPersonCameraMaxPitch: 70
+  yRef: 1.5
+  xRef: 1
+  zRef: 0
+  vectCam: {x: 0, y: 0, z: 0}
+  style: 1
+  rotateANgle: {x: 0, y: 1, z: 0}
 --- !u!114 &114866985101090860
 MonoBehaviour:
   m_ObjectHideFlags: 1

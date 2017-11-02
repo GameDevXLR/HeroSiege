@@ -144,10 +144,10 @@ namespace HyperLuminalGames
 		public void Init(GameObject LocationManager, GameObject TrackingSystem, string layer)
 	    {
 			// some warning handling to ensure the user has the correct display type that they are expecting.
-			if(DisplayIcon == null)
-			{
-				Debug.LogWarning("Display Icon has not been assigned on Location: " + this.name + ". This is not essential but may not be desired.");
-			}
+//			if(DisplayIcon == null)
+//			{
+////				Debug.LogWarning("Display Icon has not been assigned on Location: " + this.name + ". This is not essential but may not be desired.");
+//			}
 
 			if(Display_1_Text == null)
 			{

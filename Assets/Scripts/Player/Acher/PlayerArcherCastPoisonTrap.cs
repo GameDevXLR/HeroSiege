@@ -17,7 +17,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 	public int spellCost = 30;
 	public int spellDmg = 50;
 	public float explosionRadius = 1.4f;
-	public float spellCD = 20f;
+	public float spellCD = 12f;
 	public float spellDuration = 10f;
 	public float spellRange = 12.5f;
 	public GameObject spellObj;
@@ -267,14 +267,14 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
     public void upgradeSpell()
     {
         spellLvl++;
-        spellCost += 5;
-        spellCD -= 2f;
+		spellCost += 3*spellLvl;
+        spellCD -= 1f;
         explosionRadius += 0.1f;
-        spellDmg += 3;
+		spellDmg += 5*spellLvl;
         spellDuration += 1f;
 		if (onCD) 
 		{
-			timeSpent -= 2f;
+			timeSpent -= 1f;
 		}
     }
 

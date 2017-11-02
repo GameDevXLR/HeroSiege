@@ -27,7 +27,7 @@ public class SpawnManager : NetworkBehaviour
 	public GameObject spawnPartEffects;
 	public GameObject partEffectPortal;
 	public Transform spawnpoint; //point de spawn du mob.
-	[SyncVar] public Transform targetDestination;
+	public Transform targetDestination;
 	public int numberOfMobs; // nombre de mobs dans la vague.
 	public float TimeBetweenMobs; //temps entre 2 mobs.
 	public NavMeshPath path;
@@ -74,6 +74,8 @@ public class SpawnManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcStartPortal (){
 		partEffectPortal.SetActive (true);
+		path = new NavMeshPath ();
+
 		NavMesh.CalculatePath (spawnpoint.position, targetDestination.position, NavMesh.AllAreas, path);
 
 	}

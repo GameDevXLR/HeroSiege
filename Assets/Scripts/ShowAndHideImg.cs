@@ -17,6 +17,11 @@ public class ShowAndHideImg : MonoBehaviour {
 	public Button sceneryBtn;
 	public Button camLockBtn;
 
+	public Transform bigMapBtn;
+	public RectTransform minimapArea;
+	public bool isBig;
+//	public Quaternion rotImgMinimap;
+
 
 	public void ShowHidePlants()
 	{
@@ -51,6 +56,22 @@ public class ShowAndHideImg : MonoBehaviour {
 		} else 
 		{
 			camLockBtn.GetComponent<Image> ().sprite = camLockInactive;
+
+		}
+		
+	}
+
+	public void ShowHideBigMap()
+	{
+		isBig = !isBig;
+		if (!isBig) 
+		{
+			minimapArea.localScale = new Vector3 (1, 1, 1);
+//			bigMapBtn.rotation = Quaternion.Inverse (rotImgMinimap);
+		} else 
+		{
+			minimapArea.localScale = new Vector3 (2.45f,2.45f, 1f);
+//			bigMapBtn.rotation = rotImgMinimap;
 
 		}
 		

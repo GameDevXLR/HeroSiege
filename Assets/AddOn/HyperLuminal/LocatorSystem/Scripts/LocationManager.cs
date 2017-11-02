@@ -103,7 +103,7 @@ namespace HyperLuminalGames
 					}
 
 					// turn on visibility for only this players layer
-					LocationSystem.SystemCamera.cullingMask |= 1 << LayerMask.NameToLayer( DisplayLayerNames[LayerAssignment - 1]);
+//					LocationSystem.SystemCamera.cullingMask |= 1 << LayerMask.NameToLayer( DisplayLayerNames[LayerAssignment - 1]);
 					
 					// get each of the scenes locations and check they are active.
 					Location[] Locations = GameObject.FindObjectsOfType<Location>() as Location[];
