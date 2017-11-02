@@ -369,13 +369,16 @@ public class CameraController : MonoBehaviour
    
     public void moveRotate(float dir)
     {
-        transform.Rotate(new Vector3(0, 1, 0), Space.World);
-
-        // permet de replacer la caméra si la target bouge
-        Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
-            vect.y = 1.5f;
-            vectCam = vect;
-        //}
+        //transform.Rotate(new Vector3(0, 1, 0), Space.World);
+        if(dir != 0)
+        {
+            
+            transform.rotation =  Quaternion.AngleAxis(dir * angle * speedRotate * Time.deltaTime , Vector3.up) * transform.rotation ;
+            // permet de replacer la caméra si la target bouge
+            Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
+                vect.y = 1.5f;
+                vectCam = vect;
+        }
     }
 
     public void lookAt()
