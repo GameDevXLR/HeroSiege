@@ -76,6 +76,12 @@ public class CameraController : MonoBehaviour
     public float xRef = 1;
     public float zRef = 0;
     public Vector3 vectCam;
+
+
+    /// <summary>
+    /// Limitation pour éviter de clicker sur la falaise
+    /// </summary>
+    public float yMinCamera = 15;
     /// <summary>
     ///  les différents styles de caméra possible de test
     ///  stratégique : en hauteur

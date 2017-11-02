@@ -60,15 +60,24 @@ public class PlayerClicToMove : NetworkBehaviour {
 			
 //			audioS.PlayOneShot (clicSound, .6f);
 
-			RaycastHit hit;
+			
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit, 2000f, layer_mask)) 
-			{
-                //if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-                //{
-                //    return;
-                //}
-				if (GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj) 
+            int distance = 1;
+            RaycastHit[] hits = Physics.RaycastAll(ray, 2000f, layer_mask); ;
+
+            while (hits.Length > 0 && distance < 10 && hits[0].point.y >= CameraController.instanceCamera.yMinCamera) 
+            {
+                distance++;
+                Vector3 origin = ray.origin + (ray.direction * distance);
+                ray = new Ray(origin, ray.direction);
+                hits = Physics.RaycastAll(ray, 2000f, layer_mask);
+            }
+            int i = 0;
+
+            while(i < hits.Length )
+            {
+                RaycastHit hit = hits[i++];
+                if (GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj) 
 				{
 					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj.eraseRenderer = true;
 					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = null;
