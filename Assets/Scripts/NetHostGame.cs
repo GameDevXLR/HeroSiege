@@ -14,6 +14,7 @@ public class NetHostGame :  MonoBehaviour{
 	public string roomName;
 	public AudioClip startPlaying;
 	public AudioClip classicClic;
+	public Image loadColoredBackground;
 
 
 		private NetworkManager networkManager;
@@ -55,15 +56,29 @@ public class NetHostGame :  MonoBehaviour{
 		}
 	}
 
+	IEnumerator FadeTo(float aValue, float aTime)
+	{
+		float alpha = loadColoredBackground.color.a;
+		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+		{
+			Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha,aValue,t));
+			loadColoredBackground.color = newColor;
+			yield return null;
+		}
+	}
 	public IEnumerator PreventDoubleGame()
 	{
 		isCreating = true;
+
 		GetComponent<AudioSource> ().PlayOneShot (startPlaying);
 		loadingCanvas.SetActive (true);
+		StartCoroutine(FadeTo(1f,5f));
 		yield return new WaitForSecondsRealtime (.5f);
+
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Construction des constructions.";
+
 
 		} else 
 		{
@@ -185,8 +200,10 @@ public class NetHostGame :  MonoBehaviour{
 		if (loadingBar.value >= loadingBar.maxValue) 
 		{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
-		}		
+		}	
+		loadColoredBackground.CrossFadeAlpha (0f, 0.1f, true);
 		loadingCanvas.SetActive (false);
+		StartCoroutine(FadeTo(0f,0f));
 
 		isCreating = false;
 	}
