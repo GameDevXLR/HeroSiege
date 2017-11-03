@@ -21,7 +21,7 @@ public static class UtilsScreenMovement
 	 * 
 	 * 
 	 * */
-	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  int speed, int layer_mask)
+	public static void moveScreenWithMouse(Camera cameraCible, int zoneDetectionMouse,  float speed, int layer_mask)
     {
 
 		float xValueDeplacement = 0;
@@ -62,7 +62,7 @@ public static class UtilsScreenMovement
 
     }
 
-    public static void moveScreenWithMouse(Camera cameraCible, CameraBoundaries boundaries, int zoneDetectionMouse, int speed, int layer_mask)
+    public static void moveScreenWithMouse(Camera cameraCible, CameraBoundaries boundaries, int zoneDetectionMouse, float speed, int layer_mask)
     {
 
         float yValue = (Input.mousePosition.y - (Screen.height / 2)) / (Screen.height / 2);

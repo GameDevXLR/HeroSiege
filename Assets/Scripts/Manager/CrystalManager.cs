@@ -14,8 +14,9 @@ public class CrystalManager : NetworkBehaviour
 
 
     public int secondToWait = 10;
-
-    [SyncVar(hook = "actualizeDecreaseBool")] public bool decrease = false;
+    public int valueDecrease = 1;
+    
+    public bool decrease = false;
 
     public List<EnnemyIGManager> listEnnemy;
     public JungleCampSpawnManager jungleCamp;
@@ -23,8 +24,8 @@ public class CrystalManager : NetworkBehaviour
 
     public void initialize()
     {
-        decrease = true;   
-        foreach(GameObject obj in jungleCamp.jungCampMinion)
+        
+        foreach (GameObject obj in jungleCamp.jungCampMinion)
         {
             listEnnemy.Add(obj.GetComponent<EnnemyIGManager>());
         }
@@ -32,6 +33,7 @@ public class CrystalManager : NetworkBehaviour
         {
             listEnnemy.Add(obj.GetComponent<EnnemyIGManager>());
         }
+        launchDecrease();
     }
 
     public void actualizeEnergie(int energie)
@@ -45,12 +47,6 @@ public class CrystalManager : NetworkBehaviour
             
         else if (currentEnergie > storageCapacitie)
             currentEnergie = storageCapacitie;
-    }
-
-    public void actualizeDecreaseBool(bool decrease)
-    {
-        if (decrease)
-            launchDecrease();
     }
 
     public void launchDecrease()
@@ -68,7 +64,7 @@ public class CrystalManager : NetworkBehaviour
         }
         while (decrease && currentEnergie != 0)
         {
-            currentEnergie--;
+            currentEnergie -= valueDecrease;
             yield return new WaitForSeconds(secondToWait);
         }
     }

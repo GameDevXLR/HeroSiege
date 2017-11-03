@@ -19,8 +19,8 @@ public class ShowPlayerMenu: MonoBehaviour {
 	{
 		musicSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME");
 		AudioListener.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME");
-				myVol.value = AudioListener.volume;
-				musicVol.value = musicSource.volume;
+		myVol.value = AudioListener.volume;
+		musicVol.value = musicSource.volume;
 	}
 	public void ToggleMenu()
 	{
@@ -63,7 +63,6 @@ public class ShowPlayerMenu: MonoBehaviour {
 	public void QuitTheGame()
 	{
 		Application.Quit();
-
 	}
 
 	public void DisconnectThePlayer()

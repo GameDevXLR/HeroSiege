@@ -27,8 +27,8 @@ public class CameraController : MonoBehaviour
     public bool isLock = false;
 
 	//speed move of the camera when move with mouse
-    public int speed = 5;
-    public float speedRotate = 5;
+    public float speed = 5;
+    public float speedRotate = 3;
     public float angle = 90;
 
 	// detection zone of the mouse in the border
@@ -207,7 +207,7 @@ public class CameraController : MonoBehaviour
                     //gameObject.transform.position = Vector3.Lerp(target.transform.position, target.transform.position + new Vector3(1, 1.5f, 0) * distance, speed * Time.deltaTime);
                     dir = findDirection();
                     moveRotateAround(dir);
-                    transform.position = Vector3.Lerp(target.transform.position, target.transform.position + vectCam * distance, speed * Time.deltaTime);
+                    transform.position = Vector3.Lerp(transform.position, target.transform.position + vectCam * distance, speed * Time.deltaTime);
                     // Set the camera to look towards the Player model
                     lookAt();
                     break;
@@ -420,6 +420,12 @@ public class CameraController : MonoBehaviour
             return (mousePos.x - Input.mousePosition.x > 1) ? 1 : (mousePos.x - Input.mousePosition.x < -1) ? -1 : 0 ;
         }
         return 0;
+    }
+
+    public void setAngle(float y)
+    {
+        yRef = y;
+        vectCam.y = yRef;
     }
 
     
