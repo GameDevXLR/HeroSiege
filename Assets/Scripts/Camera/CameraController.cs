@@ -37,14 +37,11 @@ public class CameraController : MonoBehaviour
     public float distance = 15;
 
     // zoom
-    private float zoomfact = 1;
     public float vitesseZoom = 0.2f;
     public float limiteBasse = 0.5f;
     public float limiteHausse = 2;
     
-
-	// y difference use to move the y value
-	private float yvalueDiff;
+    
 
 	private bool isReady;
     public bool isAnotherPlayer;
@@ -63,7 +60,7 @@ public class CameraController : MonoBehaviour
 
     public string MouseScrollWheel = "Mouse ScrollWheel";
     public float ThirdPersonZoomSensitivity = 3f;
-    public float ThirdPersonCameraMinDistance = 4f;
+    public float ThirdPersonCameraMinDistance = 5f;
     public float ThirdPersonCameraMaxDistance = 20f;
     public int RotateCameraMouseButton = 1;
     public float ThirdPersonCameraSensitivity = 2f;
