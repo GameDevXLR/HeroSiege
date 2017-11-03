@@ -17,6 +17,7 @@ public class GameManager : NetworkBehaviour
 	//il gere également les evenements importants genre : event de nuit / jour.
 	//il gere aussi le spawn entre guillemets (active / désactive les spawners de mobs)
 	// gere pas grand chose lié au réseau parcontre : voir NetworkManagerObj pour ca (dans la hierarchy)
+
 	public AudioClip[] MusicBackground;
 	public float delayTime;
 	public GameObject difficultyPanel;
@@ -92,6 +93,58 @@ public class GameManager : NetworkBehaviour
 	public GameObject quest1ID;
 	public int quest1Rep = -10;
 	public string quest1Desc = "Don't be the first to loose a life!";
+
+	//Deuxieme quete: clean les vagues de mobs de la nuit en premier!.
+
+	[SyncVar]public bool isQuest2Active;
+	public GameObject quest2ID;
+	public int quest2Rep = 25;
+	public string quest2Desc = "Kill all the minions coming out of the portal";
+
+
+	[Header("Decompte des mobs.")]
+
+	[SyncVar(hook = "SyncMobCountT1")]public int totalMobCountT1;
+	[SyncVar(hook = "SyncMobCountT2")]public int totalMobCountT2;
+
+	public Text mobCountDisplayT1;
+	public Text mobCountDisplayT2;
+
+	#region MobCountSystem
+
+	public void TurnOnTheMobCountSystem()
+	{
+		mobCountDisplayT1 = GameObject.Find ("MobCountDisplayT1").GetComponent<Text> ();
+		mobCountDisplayT2 = GameObject.Find ("MobCountDisplayT2").GetComponent<Text> ();
+	}
+
+	public void SyncMobCountT1(int mobC)
+	{
+		
+		if (isServer && isQuest2Active) 
+		{
+			if (!nightTime && totalMobCountT1<=0) 
+			{
+				EndQuestTwo (true);
+			}
+		}
+		totalMobCountT1 = mobC;
+		mobCountDisplayT1.text = mobC.ToString ();
+	}
+
+	public void SyncMobCountT2(int mobC)
+	{
+		if (isServer && isQuest2Active) 
+		{
+			if (!nightTime && totalMobCountT2<=0) 
+			{
+				EndQuestTwo (false);
+			}
+		}
+		totalMobCountT2 = mobC;
+		mobCountDisplayT1.text = mobC.ToString ();
+	}
+	#endregion
 
 
 	#region ReputationSystem
@@ -505,12 +558,44 @@ public class GameManager : NetworkBehaviour
 		{
 			return;
 		}
-//		quest1ID =  GetComponent<QuestManager> ().CreateQuestPanelItem ("Be the first team to kill 20 minions.", 200);
 		quest1ID =  GetComponent<QuestManager> ().CreateQuestPanelItem (quest1Desc, quest1Rep);
 		isQuest1Active = true;
 
 
 	}
+
+	public void StartQuest2KillAllMobs()
+	{
+		if (isQuest2Active) 
+		{
+			return;
+		}
+		quest2ID =  GetComponent<QuestManager> ().CreateQuestPanelItem (quest2Desc, quest2Rep);
+		isQuest2Active = true;
+
+
+	}
+	public void EndQuestTwo(bool isFirstTeam)
+	{
+		if (!isQuest2Active) 
+		{
+			return;
+		}
+		NetworkServer.Destroy(quest2ID);
+		//gestion de la récompense de quete:
+		if (isFirstTeam) 
+		{
+			SyncReputation( actualReputation - (float)((float)quest2Rep / 100f));
+		}
+		else 
+		{
+
+			SyncReputation( actualReputation + (float)((float)quest2Rep / 100f));
+		}
+		isQuest2Active = false;
+
+	}
+
 	public void EndQuestOne(bool isFirstTeam)
 	{
 		if (!isQuest1Active) 
@@ -565,7 +650,7 @@ public class GameManager : NetworkBehaviour
 		nbrWavesText = GameObject.Find ("WavesCounter").GetComponent<Text> ();
 		nbrWavesText.text = "0";
 		TurnOnTheRepSystem ();
-
+		TurnOnTheMobCountSystem ();
 	}
 
 	[Server]

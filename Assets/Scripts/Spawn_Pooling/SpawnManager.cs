@@ -111,6 +111,7 @@ public class SpawnManager : NetworkBehaviour
 			break;
 		case 2:
 			StartCoroutine(SpawnProcedure(0,3,0,0,0,0));
+			GameManager.instanceGM.StartQuest2KillAllMobs ();
 
 			break;
 		case 3:
@@ -177,6 +178,13 @@ public class SpawnManager : NetworkBehaviour
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
 					}
 					NetworkServer.Spawn (newEnnemi);
+
+					if (isTeam1) {
+						GameManager.instanceGM.SyncMobCountT1(GameManager.instanceGM.totalMobCountT1 += 1);
+					} else {
+						GameManager.instanceGM.SyncMobCountT2(GameManager.instanceGM.totalMobCountT2 += 1);
+
+					}
 					yield return new WaitForSeconds (0.2f);
 				}
 			}
@@ -199,6 +207,13 @@ public class SpawnManager : NetworkBehaviour
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
 					}
 					NetworkServer.Spawn (newEnnemi);
+
+					if (isTeam1) {
+						GameManager.instanceGM.SyncMobCountT1(GameManager.instanceGM.totalMobCountT1 += 1);
+					} else {
+						GameManager.instanceGM.SyncMobCountT2(GameManager.instanceGM.totalMobCountT2 += 1);
+
+					}
 					yield return new WaitForSeconds (0.2f);
 				}
 			}
@@ -221,6 +236,12 @@ public class SpawnManager : NetworkBehaviour
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
 					}
 					NetworkServer.Spawn (newEnnemi);
+					if (isTeam1) {
+						GameManager.instanceGM.SyncMobCountT1(GameManager.instanceGM.totalMobCountT1 += 1);
+					} else {
+						GameManager.instanceGM.SyncMobCountT2(GameManager.instanceGM.totalMobCountT2 += 1);
+
+					}
 					yield return new WaitForSeconds (0.2f);
 				}
 			}
@@ -247,6 +268,12 @@ public class SpawnManager : NetworkBehaviour
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
 					}
 					NetworkServer.Spawn (newEnnemi);
+					if (isTeam1) {
+						GameManager.instanceGM.SyncMobCountT1(GameManager.instanceGM.totalMobCountT1 += 1);
+					} else {
+						GameManager.instanceGM.SyncMobCountT2(GameManager.instanceGM.totalMobCountT2 += 1);
+
+					}
 					yield return new WaitForSeconds (0.2f);
 				}
 			}
@@ -274,6 +301,12 @@ public class SpawnManager : NetworkBehaviour
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
 					}
 					NetworkServer.Spawn (newEnnemi);
+					if (isTeam1) {
+						GameManager.instanceGM.SyncMobCountT1(GameManager.instanceGM.totalMobCountT1 += 1);
+					} else {
+						GameManager.instanceGM.SyncMobCountT2(GameManager.instanceGM.totalMobCountT2 += 1);
+
+					}
 					yield return new WaitForSeconds (0.2f);
 				}
 			}
@@ -303,6 +336,12 @@ public class SpawnManager : NetworkBehaviour
 						newEnnemi.GetComponent<NavMeshAgent> ().SetAreaCost (5, 1);
 					}
 					NetworkServer.Spawn (newEnnemi);
+					if (isTeam1) {
+						GameManager.instanceGM.SyncMobCountT1(GameManager.instanceGM.totalMobCountT1 += 1);
+					} else {
+						GameManager.instanceGM.SyncMobCountT2(GameManager.instanceGM.totalMobCountT2 += 1);
+
+					}
 					yield return new WaitForSeconds (0.2f);
 				}
 			}
