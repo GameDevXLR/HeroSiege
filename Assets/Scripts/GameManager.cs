@@ -250,10 +250,10 @@ public class GameManager : NetworkBehaviour
 		{
 			EndQuestOne (true);
 		}
-		team1LivesDisplay.text = "Blue Team : " + life.ToString ();
+		team1LivesDisplay.text = life.ToString ();
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			team1LivesDisplay.text = "Equipe bleu: " + life.ToString ();
+			team1LivesDisplay.text =  life.ToString ();
 		}
 		lifeOfTheTeam1 = life;
 		if (life > 10) 
@@ -292,10 +292,10 @@ public class GameManager : NetworkBehaviour
 		{
 			EndQuestOne (false);
 		}
-		team2LivesDisplay.text = "Red Team: " + life.ToString ();
+		team2LivesDisplay.text = life.ToString ();
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			team2LivesDisplay.text = "Equipe rouge: " + life.ToString ();
+			team2LivesDisplay.text = life.ToString ();
 
 		}
 		lifeOfTheTeam2 = life;

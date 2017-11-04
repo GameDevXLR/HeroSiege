@@ -415,7 +415,7 @@ public class GenericLifeScript : NetworkBehaviour
 				{
 					GetComponent<PlayerHealerCastInvokePet> ().actualPet.transform.position = Vector3.zero;
 					GetComponent<PlayerHealerCastInvokePet> ().actualPet.GetComponent<GenericLifeScript> ().isDead = true;
-					yield return new WaitForSeconds (0.2f);
+					yield return new WaitForSecondsRealtime (0.2f);
 					GetComponent<PlayerHealerCastInvokePet> ().DestroyThePrevPet(); // détruit le quand tu meurs.
 				}
 			}

@@ -117,11 +117,12 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
+			
 			heroArtPlaceholder = GameObject.Find ("bg_select").GetComponent<Image> ();
 			selectedHero.AddListener (CapsuleSelectTank);
 			string playerNN;
 			playerNN = PlayerPrefs.GetString ("PlayerNN");
-//			ChangeMyName (playerNN);
+			ChangeMyName (playerNN);
 			CmdChangeName(playerNN);
 			GetComponent<PlayerLevelUpManager> ().enabled = true;
 			minimapIcon.color = mainPlayerColor;
@@ -194,7 +195,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//ajouter ici le code pour montrer son choix
 		CmdSayIAmTank ();
 		lockHeroBtn.interactable = true;
-		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
+//		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
 //		CmdSelectHeroTank1 ();
 	}
 	public void CapsuleSelectTank()
@@ -354,7 +355,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myAutoAScript.damage = 20;
 			myAutoAScript.attackRate = 1;
 			myAutoAScript.attackRange = 5;
-			myPlayerIGManager.levelUpBonusHP = 75;
+			myPlayerIGManager.levelUpBonusHP = 65;
 			myGeneManaScript.levelUpBonusMP = 12;
 			myAutoAScript.levelUpBonusDamage = 3;
 			myPlayerIGManager.levelUpBonusArmor = 4;
@@ -381,7 +382,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//ajouter ici le code pour montrer son choix
 		CmdSayIAmHeal ();
 		lockHeroBtn.interactable = true;
-		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
+//		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
 	}
 	public void CapsuleSelectHeal()
 	{
@@ -440,7 +441,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1f;
 
-			myPlayerIGManager.maxHp = 300;
+			myPlayerIGManager.maxHp = 350;
 			myPlayerIGManager.currentHp = 300;
 			myPlayerIGManager.regenHp = 6;
 			myGeneManaScript.maxMp = 220;
@@ -450,7 +451,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myAutoAScript.attackRate = .7f;
 			myAutoAScript.attackRange = 15;
 			myPlayerIGManager.levelUpBonusHP = 25;
-			myGeneManaScript.levelUpBonusMP = 22;
+			myGeneManaScript.levelUpBonusMP = 45;
 			myPlayerIGManager.armorScore = 10;
 			myAutoAScript.levelUpBonusDamage = 2;
 			myPlayerIGManager.levelUpBonusArmor = 1;
@@ -476,7 +477,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		//ajouter ici le code pour montrer son choix
 		CmdSayIAmDps ();
 		lockHeroBtn.interactable = true;
-		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
+//		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
 	}
 	public void CapsuleSelectDps()
 	{
@@ -574,7 +575,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	IEnumerator StartInitName(string str)
 	{
-		yield return new WaitForSeconds (1.8f);
+		yield return new WaitForSeconds (2f);
 		playerNickName = str;
 		gameObject.name = playerNickName + netId.ToString();
 		GetComponent<PlayerManager> ().playerNickname = playerNickName;
