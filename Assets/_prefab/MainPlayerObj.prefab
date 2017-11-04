@@ -6848,7 +6848,6 @@ MonoBehaviour:
   UIPrefab: {fileID: 1587382832268106, guid: 9206b6cbf3a057d488a960a59d43cd23, type: 2}
   playerUI: {fileID: 0}
   playersStatsView: {fileID: 0}
-  minimap: {fileID: 0}
   playerSelecPrefab: {fileID: 1340243578110806, guid: 6c287d77d217d0141a80856a5f16e89b,
     type: 2}
   playerSelecUI: {fileID: 0}
@@ -6950,15 +6949,15 @@ MonoBehaviour:
   selectHeroTank1: {fileID: 0}
   selectHeroHealer1: {fileID: 0}
   selectHeroDps1: {fileID: 0}
-  tankAvatarImg: {fileID: 21300000, guid: 01a1641d5f9a51f4790fe7136d18bc3a, type: 3}
-  healAvatarImg: {fileID: 21300000, guid: 376de96f3bd3ea64c8c21b17a9079a8e, type: 3}
-  DpsAvatarImg: {fileID: 21300000, guid: dacb1acc17c4d6b4285ccfd3b00e374c, type: 3}
-  tankAvatar2Img: {fileID: 21300000, guid: 5fac61313f1b97541a418aa733b9d845, type: 3}
-  healAvatar2Img: {fileID: 21300000, guid: 0ec90f400939cd54f82321c2e59f44e1, type: 3}
-  DpsAvatar2Img: {fileID: 21300000, guid: acf051da4c77b324e9ee16412514d0bd, type: 3}
-  tankAvatar3Img: {fileID: 21300000, guid: 8f61694df580653419a19dabd79753f3, type: 3}
-  healAvatar3Img: {fileID: 21300000, guid: 7f81a7099361a344aaeccc55f32a68d9, type: 3}
-  DpsAvatar3Img: {fileID: 21300000, guid: c63a8629c2311a84ebcc57c12e6a6050, type: 3}
+  tankAvatarImg: {fileID: 21300000, guid: 59e2ad3c9e403904e80b5253ba95010c, type: 3}
+  healAvatarImg: {fileID: 21300000, guid: 22a520dc52d073041808ee91bda92f10, type: 3}
+  DpsAvatarImg: {fileID: 21300000, guid: f8cd578b66409404bb34e66617517086, type: 3}
+  tankAvatar2Img: {fileID: 21300000, guid: 59e2ad3c9e403904e80b5253ba95010c, type: 3}
+  healAvatar2Img: {fileID: 21300000, guid: 22a520dc52d073041808ee91bda92f10, type: 3}
+  DpsAvatar2Img: {fileID: 21300000, guid: f8cd578b66409404bb34e66617517086, type: 3}
+  tankAvatar3Img: {fileID: 21300000, guid: 59e2ad3c9e403904e80b5253ba95010c, type: 3}
+  healAvatar3Img: {fileID: 21300000, guid: 22a520dc52d073041808ee91bda92f10, type: 3}
+  DpsAvatar3Img: {fileID: 21300000, guid: f8cd578b66409404bb34e66617517086, type: 3}
   tankAvatarImgMini: {fileID: 21300000, guid: 1e0483575227e734f9fccf38ab2bf424, type: 3}
   healAvatarImgMini: {fileID: 21300000, guid: 7a88b09dc37cd224193ce2ff530c683d, type: 3}
   DpsAvatarImgMini: {fileID: 21300000, guid: 6b2c8838bc5e8b849a0315912058ec3e, type: 3}
@@ -6999,6 +6998,8 @@ MonoBehaviour:
   ovateArtwork: {fileID: 21300000, guid: 03bf27b6bc67e93468dd437e4e486051, type: 3}
   archerArtwork: {fileID: 21300000, guid: 0fc883c92c3676147bf5870850aa93a0, type: 3}
   lockHeroBtn: {fileID: 0}
+  nextHeroBtn: {fileID: 0}
+  previousHeroBtn: {fileID: 0}
 --- !u!114 &114870691904547754
 MonoBehaviour:
   m_ObjectHideFlags: 1
