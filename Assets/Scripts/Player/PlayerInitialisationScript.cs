@@ -314,10 +314,10 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
-			heroArtPlaceholder.sprite = tankArtwork;
-			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
-			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
-			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
+//			heroArtPlaceholder.sprite = tankArtwork;
+//			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+//			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+//			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
 		}
 		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = tankAvatarImgMini;
 
@@ -404,11 +404,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
-			heroArtPlaceholder.sprite = ovateArtwork;
+//			heroArtPlaceholder.sprite = ovateArtwork;
 
-			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
-			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
-			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+//			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+//			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
+//			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
 		}
 		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = healAvatarImgMini;
 
@@ -499,11 +499,11 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
-			heroArtPlaceholder.sprite = archerArtwork;
+//			heroArtPlaceholder.sprite = archerArtwork;
 
-			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
-			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
-			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+//			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
+//			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
+//			selectHeroTank1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
 		}
 		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.sprite = DpsAvatarImgMini;
 

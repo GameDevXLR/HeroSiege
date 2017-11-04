@@ -142,7 +142,7 @@ public class GameManager : NetworkBehaviour
 			}
 		}
 		totalMobCountT2 = mobC;
-		mobCountDisplayT1.text = mobC.ToString ();
+		mobCountDisplayT2.text = mobC.ToString ();
 	}
 	#endregion
 
@@ -504,30 +504,30 @@ public class GameManager : NetworkBehaviour
 			lifeOfTheTeam1 = 99;
 			lifeOfTheTeam2 = 99;
 
-			team1LivesDisplay.text = "Blue Team: " + lifeOfTheTeam1.ToString ();
-			team2LivesDisplay.text = "Red Team: " + lifeOfTheTeam2.ToString ();
+			team1LivesDisplay.text = lifeOfTheTeam1.ToString ();
+			team2LivesDisplay.text = lifeOfTheTeam2.ToString ();
 			
 			break;
 		case 2:
 			lifeOfTheTeam1 = 50;
 			lifeOfTheTeam2 = 50;
 
-			team1LivesDisplay.text = "Blue Team: " + lifeOfTheTeam1.ToString ();
-			team2LivesDisplay.text = "Red Team: " + lifeOfTheTeam2.ToString ();
+			team1LivesDisplay.text = lifeOfTheTeam1.ToString ();
+			team2LivesDisplay.text = lifeOfTheTeam2.ToString ();
 			break;
 		case 3:
 			lifeOfTheTeam1 = 25;
 			lifeOfTheTeam2 = 25;
 
-			team1LivesDisplay.text = "Blue Team: " + lifeOfTheTeam1.ToString ();
-			team2LivesDisplay.text = "Red Team: " + lifeOfTheTeam2.ToString ();
+			team1LivesDisplay.text = lifeOfTheTeam1.ToString ();
+			team2LivesDisplay.text = lifeOfTheTeam2.ToString ();
 			break;
 		case 4:
 			lifeOfTheTeam1 = 10;
 			lifeOfTheTeam2 = 10;
 
-			team1LivesDisplay.text = "Blue Team: " + lifeOfTheTeam1.ToString ();
-			team2LivesDisplay.text = "Red Team: " + lifeOfTheTeam2.ToString ();
+			team1LivesDisplay.text = lifeOfTheTeam1.ToString ();
+			team2LivesDisplay.text = lifeOfTheTeam2.ToString ();
 			break;
 		default :
 			Debug.Log ("Dafuck...contact the programer if you see that.");
@@ -907,20 +907,20 @@ public class GameManager : NetworkBehaviour
 //		}
 //
 //	}
-	[ServerCallback]
-	public void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.P))
-			{
-				actualReputation +=(Random.Range(-.21f,.21f));
-			if (actualReputation < 0) 
-			{
-				actualReputation = 0;
-			}
-			if (actualReputation >1) 
-			{
-				actualReputation = 1;
-			}
-			}
-	}
+//	[ServerCallback]
+//	public void Update()
+//	{
+//		if(Input.GetKeyDown(KeyCode.P))
+//			{
+//				actualReputation +=(Random.Range(-.21f,.21f));
+//			if (actualReputation < 0) 
+//			{
+//				actualReputation = 0;
+//			}
+//			if (actualReputation >1) 
+//			{
+//				actualReputation = 1;
+//			}
+//			}
+//	}
 }
