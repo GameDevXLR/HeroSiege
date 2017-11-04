@@ -142,7 +142,7 @@ public class GameManager : NetworkBehaviour
 			}
 		}
 		totalMobCountT2 = mobC;
-		mobCountDisplayT1.text = mobC.ToString ();
+		mobCountDisplayT2.text = mobC.ToString ();
 	}
 	#endregion
 

@@ -50,6 +50,12 @@ public class PlayerIGManager : CharacterIGManager {
 
 	public string heroChosen;
 
+	public void Awake()
+	{
+		if (isLocalPlayer) {
+			lifeBarMain = GameObject.Find ("PlayerLifeBarMain").GetComponent<RectTransform> ();
+		}
+	}
 
     protected override void Start()
     {
