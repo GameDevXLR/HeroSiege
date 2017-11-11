@@ -229,6 +229,7 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 	{
 		GameObject.Find ("SelectionScreen").SetActive (false);
 		GameManager.instanceGM.playerObj.GetComponent<PlayerInitialisationScript> ().selectedHero.Invoke ();
+        CameraControllerV2.instanceCamera.Initialize();
 //		SelectedHero.Invoke ();
 	}
 }

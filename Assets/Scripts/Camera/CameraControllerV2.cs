@@ -13,59 +13,89 @@ using UnityEngine.Events;
  * A script to controll the camera
  * 
  * */
-public class CameraController : MonoBehaviour
+public class CameraControllerV2 : MonoBehaviour
 {
-	public static CameraController instanceCamera = null;
-	// our personnage
+    /// <summary>
+    /// Instance de la camera
+    /// </summary>
+	public static CameraControllerV2 instanceCamera;
+	/// <summary>
+    /// Object ciblé par la camera
+    /// </summary>
 	public GameObject target;
-    public Transform helperCamPos;
 
-    // selectedPlayer
-    // true : camera lock in the perso
-    // false : camera free from the perso
+    public Animator behavior;
+    
+    /// <summary>
+    /// Permet d'adapter l'image de Lock de la caméra 
+    /// </summary>
 	public UnityEvent changeCamLockImg;
+    /// <summary>
+    /// Défini si la caméra est en mode Lock ou non.
+    /// </summary>
     public bool isLock = false;
 
-	//speed move of the camera when move with mouse
+	/// <summary>
+    /// Défini la vitese de la caméra en mode libre
+    /// </summary>
     public float speed = 5;
+    /// <summary>
+    /// Défini la vitesse de rotation de la caméra
+    /// </summary>
     public float speedRotate = 3;
+    /// <summary>
+    /// Défini l'angle de rotation de la caméra
+    /// </summary>
     public float angle = 90;
 
-	// detection zone of the mouse in the border
+	/// <summary>
+    /// Définie la zone de détection de la souris sur les bords en mode libre
+    /// </summary>
     public int zoneDetectionMouse = 300;
     
+    /// <summary>
+    /// Défini la distance de la caméra par rapport à la cible ou à la layer ground
+    /// </summary>
     public float distance = 15;
+    public string MouseScrollWheel = "Mouse ScrollWheel";
+    public float zoomSensitivity = 3f;
+    public float minDistance = 5f;
+    public float maxDistance = 20f;
 
-    // zoom
-    public float vitesseZoom = 0.2f;
-    public float limiteBasse = 0.5f;
-    public float limiteHausse = 2;
-    
-    
-
-	private bool isReady;
+    /// <summary>
+    /// Permet de ne pas utiliser la caméra si elle n'est pas prête
+    /// </summary>
+    private bool isReady;
+    /// <summary>
+    /// Permet de savoir si la caméra film un autre object que le player
+    /// </summary>
     public bool isAnotherPlayer;
+    /// <summary>
+    /// Permet de savoir si le perso est mort et permet d'éviter de modifier trop souvent le postprocessing
+    /// </summary>
     public bool isDead = false; //permet d'éviter de modifier trop souvent le postprocessing
 
-    int layer_mask;
+    /// <summary>
+    /// Layer utilisé pour la caméra libre
+    /// </summary>
+    public int layer_mask;
 
-	Camera cameraCible;
+    /// <summary>
+    /// Camera cible pour la camera libre
+    /// </summary>
+	public Camera cameraCible;
 
+    /// <summary>
+    /// Les limites mises pour la camera libre
+    /// </summary>
     public CameraBoundaries boundaries;
+
+    /// <summary>
+    /// Postprocessing utilisé lorsque le joueur meurt
+    /// </summary>
     public PostProcessingBehaviour postProcessing;
 
     public bool isShaking = false;
-
-
-
-    public string MouseScrollWheel = "Mouse ScrollWheel";
-    public float ThirdPersonZoomSensitivity = 3f;
-    public float ThirdPersonCameraMinDistance = 5f;
-    public float ThirdPersonCameraMaxDistance = 20f;
-    public int RotateCameraMouseButton = 1;
-    public float ThirdPersonCameraSensitivity = 2f;
-    public float ThirdPersonCameraMinPitch = 5f;
-    public float ThirdPersonCameraMaxPitch = 70f;
 
     private Vector2 mousePos;
     
@@ -79,26 +109,13 @@ public class CameraController : MonoBehaviour
     /// Limitation pour éviter de clicker sur la falaise
     /// </summary>
     public float yMinCamera = 15;
-    /// <summary>
-    ///  les différents styles de caméra possible de test
-    ///  stratégique : en hauteur
-    ///  thirdPerson : derrière le joueur
-    ///  thirdPerson : derrière le joueur mais suis la rotation
-    /// </summary>
-    public enum StyleCam
-    {
-        strategique,
-        thirdPerson,
-        free
-    }
-
-    public StyleCam style = StyleCam.thirdPerson;
 
     //on s'assure en Awake que le script est bien unique. sinon on détruit le nouvel arrivant.
     void Awake(){
 		if (instanceCamera == null) {
 			instanceCamera = this;
             vectCam = new Vector3(xRef, yRef, zRef);
+            enabled = false;
 
 
         } else if (instanceCamera != this) 
@@ -109,112 +126,85 @@ public class CameraController : MonoBehaviour
 
 	public void Initialize()
     {
+        
         cameraCible = GetComponent<Camera>();
-		isReady = true;
 		layer_mask = Layers.Ground; // ground layer 10
-        helperCamPos = target.transform.Find("ThirdPersonCamPosition");
-
-
+        enabled = true;
+        behavior.SetBool("isReady", true);
+        behavior.SetBool("Lock", isLock);
+        
     }
 
-  //  void Update()
-  //  {
-		//if (!isReady) 
-		//{
-		//	return;
-		//}
+    void Update()
+    {
 
-		//if (GameManager.instanceGM.playerObj && !isDead && GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
-  //      {
-		//	var colograding = postProcessing.profile.colorGrading.settings;
-  //          colograding.basic.saturation = 0;
-  //          postProcessing.profile.colorGrading.settings = colograding;
-  //          isDead = true;
-  //      }
-  //      else if(isDead && !GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead ) 
-  //      {
-  //          var colograding = postProcessing.profile.colorGrading.settings;
-  //          colograding.basic.saturation = 1;
-  //          postProcessing.profile.colorGrading.settings = colograding;
-  //          isDead = false;
+        if (GameManager.instanceGM.playerObj && !isDead && GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
+        {
+            var colograding = postProcessing.profile.colorGrading.settings;
+            colograding.basic.saturation = 0;
+            postProcessing.profile.colorGrading.settings = colograding;
+            isDead = true;
+        }
+        else if (isDead && !GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
+        {
+            var colograding = postProcessing.profile.colorGrading.settings;
+            colograding.basic.saturation = 1;
+            postProcessing.profile.colorGrading.settings = colograding;
+            isDead = false;
 
-  //      }
-  //      if(!GameManager.instanceGM.isInTchat)
-  //      {
-  //          SelectNextCameraDistance();
-  //          if (switchToOtherPlayer())
-  //          {
-  //              style = StyleCam.thirdPerson;
-  //              isAnotherPlayer = true;
-  //              helperCamPos = target.transform.Find("ThirdPersonCamPosition");
-  //          }                
-  //          else if(Input.GetKeyDown(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
-  //          {
-  //              if (isAnotherPlayer)
-  //              {
-  //                  revertTargetToPlayer();
-  //                  isAnotherPlayer = false;
-  //              }
-  //              style = StyleCam.thirdPerson;
-  //              vectCam = new Vector3(xRef, yRef, zRef);
-  //          }
-  //          else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
-  //          {
-  //              if (!isLock)
-  //              {
-  //                  style = StyleCam.free;
+        }
+        if (!GameManager.instanceGM.isInTchat)
+        {
+            SelectNextCameraDistance();
+            if (switchToOtherPlayer())
+            {
+                behavior.SetBool("Lock", true);
+                isAnotherPlayer = true;
+            }
+            else if (Input.GetKeyDown(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
+            {
+                if (isAnotherPlayer)
+                {
+                    revertTargetToPlayer();
+                    isAnotherPlayer = false;
+                }
+                behavior.SetBool("Lock", true);
+                vectCam = new Vector3(xRef, yRef, zRef);
+            }
+            else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
+            {
+                if (!isLock)
+                {
+                    behavior.SetBool("Lock", false);
+                }
 
-  //              }
-                    
-  //          }
-  //          else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
-  //          {
-  //              if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
-  //              {
-  //                  isLock = !isLock;
-  //              }
-  //              else
-  //              {
-  //                  areLocking();
-  //              }
-  //              changeCamLockImg.Invoke();
-  //          }
+            }
+            else if (Input.GetKeyUp(CommandesController.Instance.getKeycode(CommandesEnum.CameraLock)))
+            {
+                if (Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.CameraCenter)))
+                {
+                    isLock = !isLock;
+                }
+                else
+                {
+                    areLocking();
+                }
+                changeCamLockImg.Invoke();
+            }
 
-  //      }
-  //  }
-
-  //  void LateUpdate()
-  //  {
-		//if (!isReady) 
-		//{
-		//	return;
-		//}
-  //       move();
-		
-  //  }
+        }
+    }
+    
 
 	public void move()
 	{
         float dir;
 
         if (target != null) {
-            switch (style) {
-                case StyleCam.thirdPerson:
-                    // Set the position of the camera based on the desired rotation towards and distance from the Player model
-                    //gameObject.transform.position = Vector3.Lerp(target.transform.position, target.transform.position + new Vector3(1, 1.5f, 0) * distance, speed * Time.deltaTime);
-                    dir = findDirection();
-                    moveRotateAround(dir);
-                    transform.position = Vector3.Lerp(transform.position, target.transform.position + vectCam * distance, speed * Time.deltaTime);
-                    // Set the camera to look towards the Player model
-                    lookAt();
-                    break;
-                case StyleCam.free:
                     UtilsScreenMovement.moveScreenWithMouse(cameraCible, boundaries, zoneDetectionMouse, speed, layer_mask);
                     dir = findDirection();
                     moveRotate(dir);
                     // Set the camera to look towards the Player model
-                    break;
-            }
         }
 	}
       
@@ -229,21 +219,13 @@ public class CameraController : MonoBehaviour
 
     public void areLocking()
     {
-        if(style != StyleCam.free)
-        {
-            style = StyleCam.free;
-            isLock = false;
-        }
-        else
-        {
-            style = StyleCam.thirdPerson;
-            isLock = true;
-        }
+        isLock = !isLock;
+        behavior.SetBool("Lock", isLock);
     }
 
     public void areLocking(bool islock)
     {
-        style = (islock) ? StyleCam.thirdPerson : StyleCam.free;
+        behavior.SetBool("Lock", isLock);
         this.isLock = islock;
     }
 
@@ -323,37 +305,9 @@ public class CameraController : MonoBehaviour
 
     public void changeToThird()
     {
-        style = StyleCam.thirdPerson;
-        //        transform.SetParent(null);
+        behavior.SetBool("Lock", true);
     }
-
-    public void moveAround()
-    {
-        // Calcule de l'angle de la caméra entre l'object helper et la caméra avec pour point de référence la target
-        Vector2 vect2Target = new Vector2(target.transform.position.x - helperCamPos.position.x, target.transform.position.z - helperCamPos.position.z);
-        Vector2 vect2Came = new Vector2(target.transform.position.x -  transform.position.x, target.transform.position.z - transform.position.z);
-        float angle = Vector2.Angle(vect2Came, vect2Target);
-
-        // permet de savoir de quel côté doit tourner la caméra pour le chemin le plus rapide
-        float dir = Mathf.Sign(Vector3.Cross(vect2Target, vect2Came).z);
-        if (dir == 0 && angle != 0)
-        {
-            dir = 1;
-        }
-
-        // fait rotate la camera autour de la target
-        transform.RotateAround(target.transform.position, Vector3.up, dir *  angle * Time.deltaTime * speedRotate);
-
-        // permet de replacer la caméra si la target bouge
-        Vector3 vect = new Vector3(transform.position.x - target.transform.position.x, 1.5f, transform.position.z - target.transform.position.z).normalized;
-        vect.y = 1.5f;
-        gameObject.transform.position = target.transform.position + vect * distance;
-
-        // permet d'avoir le visuel sur la caméra
-        lookAt();
-    }
-
-
+    
 
     public void moveRotateAround(float dir)
     {
@@ -400,8 +354,8 @@ public class CameraController : MonoBehaviour
         var mouseScroll = Input.GetAxis(MouseScrollWheel);
         if (!mouseScroll.Equals(0f))
         {
-            var distanceChange = distance - mouseScroll * ThirdPersonZoomSensitivity;
-            distance = Mathf.Clamp(distanceChange, ThirdPersonCameraMinDistance, ThirdPersonCameraMaxDistance);
+            var distanceChange = distance - mouseScroll * zoomSensitivity;
+            distance = Mathf.Clamp(distanceChange, minDistance, maxDistance);
         }
     }
 
