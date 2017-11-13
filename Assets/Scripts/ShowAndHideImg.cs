@@ -50,7 +50,7 @@ public class ShowAndHideImg : MonoBehaviour {
 
 	public void lockUnlockCam()
 	{
-		if (Camera.main.GetComponent<CameraController> ().style == CameraController.StyleCam.thirdPerson) 
+		if (Camera.main.GetComponent<CameraController> ().behavior.GetBool("Lock")) 
 		{
 			camLockBtn.GetComponent<Image> ().sprite = camLockActive;
 		} else 

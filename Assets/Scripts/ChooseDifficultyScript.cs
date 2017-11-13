@@ -227,9 +227,12 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 	[ClientRpc]
 	public void RpcStartTheGame()
 	{
-		GameObject.Find ("SelectionScreen").SetActive (false);
+        CameraController.instanceCamera.target = GameManager.instanceGM.playerObj;
+        CameraController.instanceCamera.Initialize();
+        GameObject.Find ("SelectionScreen").SetActive (false);
 		GameManager.instanceGM.playerObj.GetComponent<PlayerInitialisationScript> ().selectedHero.Invoke ();
-        CameraControllerV2.instanceCamera.Initialize();
+        CameraController.instanceCamera.target = GameManager.instanceGM.playerObj;
+        CameraController.instanceCamera.Initialize();
 //		SelectedHero.Invoke ();
 	}
 }

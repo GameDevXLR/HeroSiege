@@ -75,7 +75,7 @@ public class CameraShaker : MonoBehaviour
 
         while (shakeDuration > 0.01f)
         {
-            if (camController.style != CameraController.StyleCam.free)
+            if (camController.behavior.GetBool("Lock"))
             {
                 transform.LookAt(target.transform.position);
             }

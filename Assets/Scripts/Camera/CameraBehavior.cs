@@ -5,15 +5,14 @@ using UnityEngine;
 public class CameraBehavior : StateMachineBehaviour
 {
 
-    public CameraControllerV2 cameraController;
+    public CameraController cameraController;
     public Vector3 mousePos;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        cameraController = CameraControllerV2.instanceCamera;
-
+        cameraController = CameraController.instanceCamera;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

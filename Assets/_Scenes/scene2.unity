@@ -83184,67 +83184,19 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114700895480209066, guid: 247314a2e20cd72489e9ddc22974df56,
+        type: 2}
+      propertyPath: behavior
+      value: 
+      objectReference: {fileID: 1366387527}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 247314a2e20cd72489e9ddc22974df56, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1366387525 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1735137487550638, guid: 247314a2e20cd72489e9ddc22974df56,
-    type: 2}
-  m_PrefabInternal: {fileID: 1366387524}
---- !u!114 &1366387526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1366387525}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c448c34d498e4aa4393c653df6dec65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  behavior: {fileID: 1366387527}
-  changeCamLockImg:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  isLock: 0
-  speed: 100
-  speedRotate: 0.5
-  angle: 90
-  zoneDetectionMouse: 50
-  distance: 15
-  MouseScrollWheel: Mouse ScrollWheel
-  zoomSensitivity: 0.2
-  minDistance: 1
-  maxDistance: 3
-  isAnotherPlayer: 0
-  isDead: 0
-  layer_mask: 0
-  cameraCible: {fileID: 0}
-  boundaries:
-    WardSudEst: {fileID: 1253633194}
-    WardNordOuest: {fileID: 1027657545}
-  postProcessing: {fileID: 1366387528}
-  isShaking: 0
-  yRef: 1.5
-  xRef: 1
-  zRef: 0
-  vectCam: {x: 0, y: 0, z: 0}
-  yMinCamera: 15
 --- !u!95 &1366387527 stripped
 Animator:
   m_PrefabParentObject: {fileID: 95582309349806714, guid: 247314a2e20cd72489e9ddc22974df56,
     type: 2}
   m_PrefabInternal: {fileID: 1366387524}
---- !u!114 &1366387528 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114412910203916400, guid: 247314a2e20cd72489e9ddc22974df56,
-    type: 2}
-  m_PrefabInternal: {fileID: 1366387524}
-  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
 --- !u!1 &1368202585
 GameObject:
   m_ObjectHideFlags: 0
