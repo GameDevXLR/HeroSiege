@@ -35,15 +35,15 @@ MonoBehaviour:
       fxaaSettings:
         preset: 2
       taaSettings:
-        jitterSpread: 0.75
+        jitterSpread: 0.39
         sharpen: 0.3
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 0.67
-      radius: 0.48
+      intensity: 0.99
+      radius: 0.15
       sampleCount: 10
       downsampling: 1
       forceForwardCompatibility: 0
@@ -77,10 +77,10 @@ MonoBehaviour:
       useCameraFov: 0
       kernelSize: 1
   motionBlur:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
-      shutterAngle: 270
-      sampleCount: 10
+      shutterAngle: 186
+      sampleCount: 4
       frameBlending: 0
   eyeAdaptation:
     m_Enabled: 1
@@ -100,8 +100,8 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.2
-        threshold: 1
+        intensity: 0.06
+        threshold: 0.95
         softKnee: 0.5
         radius: 4
         antiFlicker: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
         neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
-        postExposure: 0.6
+        postExposure: 1
         temperature: 0
         tint: 0
         hueShift: 0
@@ -289,9 +289,9 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       colored: 1
-      intensity: 0.5
-      size: 1
-      luminanceContribution: 0.8
+      intensity: 0.37
+      size: 0.3
+      luminanceContribution: 1
   vignette:
     m_Enabled: 1
     m_Settings:
