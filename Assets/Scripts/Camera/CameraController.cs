@@ -130,8 +130,8 @@ public class CameraController : MonoBehaviour
     public void Initialize()
     {
         transform.position = Vector3.Lerp(transform.position, GameManager.instanceGM.playerObj.transform.position + vectCam * distance, speed * Time.deltaTime);
-        // Set the camera to look towards the Player model
-        transform.LookAt(GameManager.instanceGM.playerObj.transform);
+            // Set the camera to look towards the Player model
+            transform.LookAt(GameManager.instanceGM.playerObj.transform);
         behavior.SetBool("isReady", true);
         cameraCible = GetComponent<Camera>();
         layer_mask = Layers.Ground; // ground layer 10
