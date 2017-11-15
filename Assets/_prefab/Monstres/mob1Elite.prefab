@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 137783925004015216}
   - component: {fileID: 64131536048027976}
   - component: {fileID: 114696053604682006}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: skeleton_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +935,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1801836114149008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -94.4046, y: 6.310501, z: 10.237587}
+  m_LocalPosition: {x: -29.340881, y: 11.926788, z: 42.215057}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4539311064092378}
@@ -1769,6 +1769,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742c60d627e827f489b5603afb95e237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
+  originalCampNbr: 0
   isTeam1: 0
   agent: {fileID: 0}
   target: {fileID: 0}
