@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4889544067865752}
   - component: {fileID: 137058559775277558}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sphere_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4665296627940778}
   - component: {fileID: 137337290300312858}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1349,7 +1349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4029753282623390}
   - component: {fileID: 137151408356401874}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: RetopoGroup2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5131,7 +5131,7 @@ GameObject:
   - component: {fileID: 137666366552639262}
   - component: {fileID: 114715196269645330}
   - component: {fileID: 64626963676493146}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: RetopoGroup1_006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5574,7 +5574,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1005958469064112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -104.41, y: 6.310501, z: 2.16}
+  m_LocalPosition: {x: -50.385376, y: 5.9205627, z: 54.73352}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4290497107833764}
@@ -11288,6 +11288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742c60d627e827f489b5603afb95e237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
+  originalCampNbr: 0
   isTeam1: 0
   agent: {fileID: 0}
   target: {fileID: 0}

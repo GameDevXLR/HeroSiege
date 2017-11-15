@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 137251730625756412}
   - component: {fileID: 64365371647197914}
   - component: {fileID: 114162429769347378}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: RetopoGroup1_006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4832733646897952}
   - component: {fileID: 137176710737497224}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3067,7 +3067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4835368443378986}
   - component: {fileID: 137552474474132956}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sphere_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4643,7 +4643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4458525936586098}
   - component: {fileID: 137214314740210206}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: RetopoGroup2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5720,7 +5720,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1469047396771948}
-  m_LocalRotation: {x: 0.6613818, y: -0.32186097, z: 0.36608946, w: 0.570051}
+  m_LocalRotation: {x: 0.66138184, y: -0.321861, z: 0.3660895, w: 0.5700511}
   m_LocalPosition: {x: -0.26663175, y: -0.008684978, z: -0.044942692}
   m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 1.0000001}
   m_Children: []
@@ -7782,7 +7782,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499112743403724}
-  m_LocalRotation: {x: 0.6613819, y: -0.32186106, z: 0.36608964, w: 0.57005084}
+  m_LocalRotation: {x: 0.66138184, y: -0.32186103, z: 0.3660896, w: 0.5700508}
   m_LocalPosition: {x: -0.1434544, y: -0.008684998, z: -0.04494271}
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.9999999}
   m_Children:
@@ -9563,7 +9563,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911839666593776}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -63.67563, y: -0.079437256, z: 56.5654}
+  m_LocalPosition: {x: -30.715637, y: 13.926788, z: 40.75029}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4854927116217540}
@@ -11273,6 +11273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742c60d627e827f489b5603afb95e237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
+  originalCampNbr: 0
   isTeam1: 0
   agent: {fileID: 0}
   target: {fileID: 0}
