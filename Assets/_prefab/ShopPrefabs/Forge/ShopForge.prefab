@@ -74,6 +74,8 @@ GameObject:
   - component: {fileID: 23459750106594380}
   - component: {fileID: 64775919030042868}
   - component: {fileID: 114004631278571272}
+  - component: {fileID: 64120595629549320}
+  - component: {fileID: 114224902824793866}
   m_Layer: 0
   m_Name: Structure_Base002
   m_TagString: Untagged
@@ -260,8 +262,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1627647088720640}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.539, y: -0.163, z: -1.387}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.534, y: -0.07, z: -1.378}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4326111465265506}
@@ -814,6 +816,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1246694445962294}
   m_Mesh: {fileID: 4300010, guid: 475b8769edd5d2f468abb6dd8f7c042d, type: 3}
+--- !u!64 &64120595629549320
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1527820557447054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300004, guid: 475b8769edd5d2f468abb6dd8f7c042d, type: 3}
 --- !u!64 &64775919030042868
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -829,6 +845,22 @@ MeshCollider:
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 475b8769edd5d2f468abb6dd8f7c042d, type: 3}
 --- !u!114 &114004631278571272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1527820557447054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObj: {fileID: 0}
+  color: 1
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
+--- !u!114 &114224902824793866
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
