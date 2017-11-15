@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class PlayerCanalisage : NetworkBehaviour {
@@ -9,6 +10,18 @@ public class PlayerCanalisage : NetworkBehaviour {
     private bool interruption = false;
     public IEnumerator coroutine;
     public float timeBetweenCheck =0.1f;
+    public Slider slider;
+    public Canvas canvas;
+
+    
+    private void Awake()
+    {
+        canvas = GameObject.Find("CanalisationCanvas").GetComponent<Canvas>();
+        slider = GameObject.Find("CanalisationCanvas").GetComponent<Slider>();
+        slider.value = 0;
+        canvas.enabled = false;
+    }
+
 
     public void Update()
     {
@@ -30,8 +43,6 @@ public class PlayerCanalisage : NetworkBehaviour {
         {
             StartCoroutine(check(canalise));
         }
-        
-        
     }
 
     IEnumerator check(ICanalisage canalise, float delay = 0)
@@ -39,15 +50,19 @@ public class PlayerCanalisage : NetworkBehaviour {
         yield return new WaitForSeconds(delay);
         interruption = false;
         enabled = true;
+        canvas.enabled = true;
+        slider.value = 0;
         float time = 0;
         while (time < canalisage && !interruption)
         {
             time += timeBetweenCheck;
+            slider.value = time / canalisage;
             yield return new WaitForSeconds(timeBetweenCheck);
         }
         if (interruption)
         {
             canalise.interruption();
+            
         }
         else
         {
@@ -55,6 +70,8 @@ public class PlayerCanalisage : NetworkBehaviour {
         }
         enabled = false;
         interruption = false;
+        slider.value = 0;
+        canvas.enabled = false;
     }
 
     public bool checkInterruption()

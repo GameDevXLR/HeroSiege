@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerArcherCastArrowRain : NetworkBehaviour {
+public class PlayerArcherCastArrowRain : NetworkBehaviour, ICanalisage {
 	//deuxieme sort: a mettre sur l'objet joueur.
 	// sort de zone avec possibilité de target la ou on veut CC.
 	//le sort fait spawn un prefab qui est configuré ici (dégats etc/ durée du CC)
@@ -33,6 +33,9 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 	public LayerMask layer_mask;
 	public float durationShake = 1.5f;
 	public float amountShake = 2;
+    public float time = 0.5f;
+    public bool inCanalise = false;
+    Vector3 cible;
 	//	private GameObject spell1DescriptionObj;
 
 	void Start()
@@ -138,18 +141,8 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
-				CmdSoundSpell ();
-				castPosDesired = hit.point;
-				spellTargeter.transform.position = Vector3.zero;
-				CmdCastSpell(castPosDesired);
-				GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
-				isTargeting = false;
-				spellRangeArea.SetActive(false);
-
-				spellTargeter.transform.position = Vector3.zero;
-				StartCoroutine(SpellOnCD());
-
-				Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
+                cible = hit.point;
+                launch(time);
 				return;
 			}
 			spellTargeter.transform.position = hit.point;
@@ -292,4 +285,38 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour {
 
 
 	}
+
+    public void launchSpell(Vector3 cible)
+    {
+        CmdSoundSpell();
+        castPosDesired = cible;
+        spellTargeter.transform.position = Vector3.zero;
+        CmdCastSpell(castPosDesired);
+        GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
+        
+
+        spellTargeter.transform.position = Vector3.zero;
+        StartCoroutine(SpellOnCD());
+
+        Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
+    }
+
+    /// Interface ICanalisage ////
+
+    public void launch(float time)
+    {
+        isTargeting = false;
+        spellRangeArea.SetActive(false);
+        gameObject.GetComponent<PlayerCanalisage>().LaunchCanalisage(this, time);
+    }
+
+    public void interruption()
+    {
+        spellTargeter.transform.position = Vector3.zero;
+    }
+
+    public void success()
+    {
+        launchSpell(cible);
+    }
 }
