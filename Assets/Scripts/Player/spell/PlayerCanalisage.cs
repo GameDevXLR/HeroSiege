@@ -16,8 +16,6 @@ public class PlayerCanalisage : NetworkBehaviour {
     
     private void Awake()
     {
-        canvas = GameObject.Find("CanalisationCanvas").GetComponent<Canvas>();
-        slider = GameObject.Find("CanalisationCanvas").GetComponent<Slider>();
         slider.value = 0;
         canvas.enabled = false;
     }
@@ -52,11 +50,10 @@ public class PlayerCanalisage : NetworkBehaviour {
         enabled = true;
         canvas.enabled = true;
         slider.value = 0;
-        float time = 0;
-        while (time < canalisage && !interruption)
+        float time = Time.time;
+        while (Time.time < time + canalisage && !interruption)
         {
-            time += timeBetweenCheck;
-            slider.value = time / canalisage;
+            slider.value = (Time.time - time) / canalisage;
             yield return new WaitForSeconds(timeBetweenCheck);
         }
         if (interruption)

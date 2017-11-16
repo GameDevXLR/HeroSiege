@@ -498,7 +498,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
-//			heroArtPlaceholder.sprite = archerArtwork;
+//			heroArtPlaceholder.sprite = archerArtwork; 
 
 //			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
 //			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;

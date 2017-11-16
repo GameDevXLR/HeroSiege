@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerHealerCastUlti : NetworkBehaviour 
+public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
 {
 	//deuxieme sort: a mettre sur l'objet joueur.
 	// sort de zone avec possibilité de target la ou on veut CC.
@@ -34,9 +34,10 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 	public LayerMask layer_mask;
 	public float durationShake = 10;
 	public float amountShake = 10;
-	//	private GameObject spell1DescriptionObj;
+    GameObject spellObjActive;
+    //	private GameObject spell1DescriptionObj;
 
-	void Start()
+    void Start()
 	{
 		spellRangeArea.SetActive(false);
 		if (isLocalPlayer)
@@ -72,11 +73,11 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 	public void CmdCastSpell(Vector3 pos)
 	{
         RpcSoundSpell();
-		GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
-		go.GetComponent<SpellHealerUlti>().caster = gameObject;
-		go.GetComponent<SpellHealerUlti>().spellDamage = spellDmg;
-		go.GetComponent<SpellHealerUlti>().duration = spellDuration;
-		NetworkServer.Spawn(go);
+		spellObjActive = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
+		spellObjActive.GetComponent<SpellHealerUlti>().caster = gameObject;
+		spellObjActive.GetComponent<SpellHealerUlti>().spellDamage = spellDmg;
+		spellObjActive.GetComponent<SpellHealerUlti>().duration = spellDuration;
+		NetworkServer.Spawn(spellObjActive);
 
 	}
 
@@ -145,17 +146,9 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 					spellTargeter.transform.position = Vector3.zero;
 					return;
 				}
+                
 				castPosDesired = hit.point;
-				spellTargeter.transform.position = Vector3.zero;
-				CmdCastSpell(castPosDesired);
-				GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
-				isTargeting = false;
-				spellRangeArea.SetActive(false);
-
-				spellTargeter.transform.position = Vector3.zero;
-				StartCoroutine(SpellOnCD());
-
-				Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
+                launch(spellDuration);
 				return;
 			}
 			spellTargeter.transform.position = hit.point;
@@ -288,4 +281,38 @@ public class PlayerHealerCastUlti : NetworkBehaviour
 
 
 	}
+
+
+
+    public void launchSpell(Vector3 hitPoint)
+    {
+        spellTargeter.transform.position = Vector3.zero;
+        CmdCastSpell(hitPoint);
+        GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
+        isTargeting = false;
+        spellRangeArea.SetActive(false);
+
+        spellTargeter.transform.position = Vector3.zero;
+        StartCoroutine(SpellOnCD());
+
+        Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
+    }
+
+
+    // ICanalisage //
+
+    public void launch(float time)
+    {
+        gameObject.GetComponent<PlayerCanalisage>().LaunchCanalisage(this, time);
+        launchSpell(castPosDesired);
+    }
+
+    public void interruption()
+    {
+        NetworkServer.Destroy(spellObjActive);
+    }
+
+    public void success()
+    {
+    }
 }
