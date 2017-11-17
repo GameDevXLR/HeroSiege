@@ -66,17 +66,13 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 	[Command]
 	public void CmdCastSpell()
 	{
-		RpcCastSpell ();
+		
 		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
 
 	}
 
 	[ClientRpc]
-	public void RpcCastSpell()
-	{
-		GetComponent<AudioSource>().PlayOneShot(SpellCC);
-		StartCoroutine (AvatarProcedure (spellDuration));
-	}
+	
 
 	IEnumerator AvatarProcedure(float dur)
 	{

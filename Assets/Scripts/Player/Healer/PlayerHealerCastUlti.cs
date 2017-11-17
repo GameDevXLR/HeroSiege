@@ -72,7 +72,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
 	[Command]
 	public void CmdCastSpell(Vector3 pos)
 	{
-        RpcSoundSpell();
+        
 		spellObjActive = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
 		spellObjActive.GetComponent<SpellHealerUlti>().caster = gameObject;
 		spellObjActive.GetComponent<SpellHealerUlti>().spellDamage = spellDmg;
@@ -82,10 +82,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
 	}
 
     [ClientRpc]
-    public void RpcSoundSpell()
-    {
-        GetComponent<AudioSource>().PlayOneShot(SpellCC);
-    }
+    
     //cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
     //demander le lancement du sort sur le serveur...normal.
     public void CastThatSpell()

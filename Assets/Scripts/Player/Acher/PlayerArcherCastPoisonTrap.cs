@@ -169,7 +169,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
     [ClientRpc]
     public void RpcSoundSpell()
     {
-        GetComponent<AudioSource>().PlayOneShot(SpellSound);
+        
     }
 
     IEnumerator ShowTargeter()

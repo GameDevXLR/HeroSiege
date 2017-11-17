@@ -152,14 +152,10 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour, ICanalisage {
 	[Command]
 	public void CmdSoundSpell()
 	{
-		RpcSoundSpell ();
+		
 	}
 
     [ClientRpc]
-    public void RpcSoundSpell()
-    {
-        GetComponent<AudioSource>().PlayOneShot(SpellCC);
-    }
 
     IEnumerator ShowTargeter()
 	{
