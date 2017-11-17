@@ -7,11 +7,12 @@ using UnityEngine.Networking;
 public class PlayerCanalisage : NetworkBehaviour {
 
     public float canalisage = 3;
-    private bool interruption = false;
+    public bool interruption = false;
     public IEnumerator coroutine;
     public float timeBetweenCheck =0.1f;
     public Slider slider;
     public Canvas canvas;
+    public PlayerStatusHandler Status;
 
     
     private void Awake()
@@ -31,6 +32,7 @@ public class PlayerCanalisage : NetworkBehaviour {
     
     public void LaunchCanalisage(ICanalisage canalise, float time)
     {
+        GetComponent<PlayerClicToMove>().MovingProcedure(transform.position);
         canalisage = time;
         if (enabled)
         {
@@ -80,6 +82,7 @@ public class PlayerCanalisage : NetworkBehaviour {
                 || Input.GetKey(CommandesController.Instance.getKeycode(CommandesEnum.sort3))
             )
             || Input.GetMouseButtonDown(1)
+            || Status.underCC
             );
     }
     

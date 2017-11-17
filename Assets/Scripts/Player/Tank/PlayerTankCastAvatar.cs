@@ -70,10 +70,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
 
 	}
-
-	[ClientRpc]
-	
-
+    
 	IEnumerator AvatarProcedure(float dur)
 	{
 		GetComponent<PlayerIGManager>().deadAnimChildMesh.transform.localScale = new Vector3 (2f, 2f, 2f);

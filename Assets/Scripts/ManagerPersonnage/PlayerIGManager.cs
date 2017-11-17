@@ -132,6 +132,8 @@ public class PlayerIGManager : CharacterIGManager {
         int hpBefore = currentHp;
         base.takeDommage(dmg, trueDmg, attacker);
         gameObject.GetComponent<EventMessageServer>().receiveDegat(gameObject,currentHp - hpBefore);
+        if(dmg > 0)
+            GetComponent<PlayerCanalisage>().interruption = true;
     }
 
     public override void MakeHimDie()

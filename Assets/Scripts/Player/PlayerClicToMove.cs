@@ -191,7 +191,9 @@ public class PlayerClicToMove : NetworkBehaviour {
         attackScript.stopWalk = false;
     }
 
-	[Command]
+    
+
+    [Command]
 	public void CmdSendNewTarget(NetworkInstanceId targetID)
 	{
 		aggroArea.autoTargetting = true;
@@ -242,5 +244,32 @@ public class PlayerClicToMove : NetworkBehaviour {
 			speedDisplay.text = speedTmp.ToString ();
 		}
 	}
+
+
+    public void ReceiveStopMoving()
+    {
+        
+        CmdStopMoving();
+    }
+
+    [Command]
+    public void CmdStopMoving()
+    {
+        aggroArea.autoTargetting = false;
+        RpcStopMoving();
+    }
+
+    [ClientRpc]
+    public void RpcStopMoving()
+    {
+        if (isLocalPlayer)
+        {
+            return;
+        }
+        anim.SetBool("stopwalk", true);
+        attackScript.stopWalk = true;
+        attackScript.LooseTarget();
+        agentPlayer.isStopped = true;
+    }
 }
 

@@ -154,9 +154,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour, ICanalisage {
 	{
 		
 	}
-
-    [ClientRpc]
-
+    
     IEnumerator ShowTargeter()
 	{
 		yield return new WaitForEndOfFrame();
