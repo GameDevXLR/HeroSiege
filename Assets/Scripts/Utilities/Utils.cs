@@ -26,13 +26,13 @@ public static class Utils
 	 * */
     public static Boolean hadDetectTheLayer(Vector3 position, int layer_mask, out Vector3 hitPoint){
 		RaycastHit hit;
-		if (Physics.Raycast (position, -Vector3.up, out hit, layer_mask)) {	
+		if (Physics.Raycast (position, -Vector3.up, out hit, 100, layer_mask)) {	
 			//Debug.DrawLine(position, new Vector3(position.x, position.y - 50, position.z), Color.green);
 			hitPoint = hit.point;
 			return true;
 		}
 		//Debug.DrawLine(position, new Vector3(position.x, position.y - 50, position.z), Color.red);
-		if (Physics.Raycast (position, Vector3.up, out hit, layer_mask)) {	
+		if (Physics.Raycast (position, Vector3.up, out hit, 100, layer_mask)) {	
 			//Debug.DrawLine(position, new Vector3(position.x, position.y - 50, position.z), Color.green);
 			hitPoint = hit.point;
 

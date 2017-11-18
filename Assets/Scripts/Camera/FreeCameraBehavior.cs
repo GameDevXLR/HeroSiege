@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FreeCameraBehavior : CameraBehavior {
-    
+
+    Vector3 vecRef;
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+    {
+        base.OnStateEnter(animator, animatorStateInfo, layerIndex);
+        vecRef = cameraController.transform.position;
+        vecRef.y = cameraController.target.transform.position.y;
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -60,17 +68,25 @@ public class FreeCameraBehavior : CameraBehavior {
         {
             // Debug.Log("CameraCible position : " + cameraCible.transform.position);
             Vector3 destination = cameraController.cameraCible.transform.position + cameraController.cameraCible.transform.TransformDirection(new Vector3(xValueDeplacement, 0, zValueDeplacement));
-            destination.y = cameraController.cameraCible.transform.position.y;
+            destination.y = vecRef.y + cameraController.distance * cameraController.vectCam.y;
 
             Vector3 hitPointDest = new Vector3();
             Vector3 hitPointDepart = new Vector3();
 
             if (Utils.hadDetectTheLayer(destination, cameraController.layer_mask, out hitPointDest) && Utils.hadDetectTheLayer(cameraController.cameraCible.transform.position, cameraController.layer_mask, out hitPointDepart))
             {
-                destination.y = cameraController.cameraCible.transform.position.y - (hitPointDepart.y - hitPointDest.y);
+                destination.y = ((hitPointDest.y<0)? 0 : hitPointDest.y) + cameraController.distance * cameraController.vectCam.y;
+                vecRef = hitPointDest;
             }
             cameraController.cameraCible.transform.localPosition = Vector3.Lerp(cameraController.cameraCible.transform.position, destination, cameraController.speed * Time.deltaTime);
-
+            
+        }
+        else
+        {
+            Vector3 destination = vecRef;
+            destination.y = vecRef.y + cameraController.distance * cameraController.vectCam.y;
+            
+            cameraController.cameraCible.transform.localPosition = Vector3.Lerp(cameraController.transform.position, destination, cameraController.speed * Time.deltaTime);
         }
 
     }
