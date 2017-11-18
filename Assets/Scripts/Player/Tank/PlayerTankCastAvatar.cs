@@ -70,9 +70,7 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
 
 	}
-
-	[ClientRpc]
-	
+		
 
 	IEnumerator AvatarProcedure(float dur)
 	{

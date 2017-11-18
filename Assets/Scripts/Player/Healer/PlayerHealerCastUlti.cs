@@ -81,7 +81,6 @@ public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
 
 	}
 
-    [ClientRpc]
     
     //cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
     //demander le lancement du sort sur le serveur...normal.

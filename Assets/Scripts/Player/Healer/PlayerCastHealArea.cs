@@ -78,7 +78,6 @@ public class PlayerCastHealArea : NetworkBehaviour
 
 	}
 
-    [ClientRpc]
     //cette fonction est la car on veut vérifier en local déja si on peut lancer le sort avant de
     //demander le lancement du sort sur le serveur...normal.
     public void CastThatSpell()

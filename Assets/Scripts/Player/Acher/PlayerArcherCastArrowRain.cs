@@ -155,7 +155,6 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour, ICanalisage {
 		
 	}
 
-    [ClientRpc]
 
     IEnumerator ShowTargeter()
 	{
