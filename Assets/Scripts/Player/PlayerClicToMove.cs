@@ -250,6 +250,11 @@ public class PlayerClicToMove : NetworkBehaviour {
     {
         
         CmdStopMoving();
+        anim.SetBool("stopwalk", true);
+        attackScript.stopWalk = true;
+        attackScript.LooseTarget();
+        agentPlayer.isStopped = true;
+        agentPlayer.velocity = Vector3.zero;
     }
 
     [Command]
@@ -257,6 +262,7 @@ public class PlayerClicToMove : NetworkBehaviour {
     {
         aggroArea.autoTargetting = false;
         RpcStopMoving();
+
     }
 
     [ClientRpc]
@@ -270,6 +276,7 @@ public class PlayerClicToMove : NetworkBehaviour {
         attackScript.stopWalk = true;
         attackScript.LooseTarget();
         agentPlayer.isStopped = true;
+        agentPlayer.velocity = Vector3.zero;
     }
 }
 

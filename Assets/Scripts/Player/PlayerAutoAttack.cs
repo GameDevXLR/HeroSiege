@@ -43,6 +43,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 	public int critChance;
 	public int critFactor;
 	[SyncVar] public int bonusDamage;
+
 	void Start()
 	{
 

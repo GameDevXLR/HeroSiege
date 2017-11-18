@@ -32,7 +32,7 @@ public class PlayerCanalisage : NetworkBehaviour {
     
     public void LaunchCanalisage(ICanalisage canalise, float time)
     {
-        GetComponent<PlayerClicToMove>().MovingProcedure(transform.position);
+        GetComponent<PlayerClicToMove>().ReceiveStopMoving();
         canalisage = time;
         if (enabled)
         {
