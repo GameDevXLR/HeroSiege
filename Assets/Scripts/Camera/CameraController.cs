@@ -130,14 +130,15 @@ public class CameraController : MonoBehaviour
     public void Initialize()
     {
         transform.position = Vector3.Lerp(transform.position, GameManager.instanceGM.playerObj.transform.position + vectCam * distance, speed * Time.deltaTime);
-            // Set the camera to look towards the Player model
-            transform.LookAt(GameManager.instanceGM.playerObj.transform);
+        // Set the camera to look towards the Player model
+        transform.LookAt(GameManager.instanceGM.playerObj.transform);
         behavior.SetBool("isReady", true);
         cameraCible = GetComponent<Camera>();
         layer_mask = Layers.Ground; // ground layer 10
         enabled = true;
         
         behavior.SetBool("Lock", isLock);
+        setSaturation(isDead);
 
     }
 
@@ -146,17 +147,14 @@ public class CameraController : MonoBehaviour
 
         if (GameManager.instanceGM.playerObj && !isDead && GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
         {
-            var colograding = postProcessing.profile.colorGrading.settings;
-            colograding.basic.saturation = 0;
-            postProcessing.profile.colorGrading.settings = colograding;
             isDead = true;
+            setSaturation(isDead);
         }
         else if (isDead && !GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().isDead)
         {
-            var colograding = postProcessing.profile.colorGrading.settings;
-            colograding.basic.saturation = 1;
-            postProcessing.profile.colorGrading.settings = colograding;
+            
             isDead = false;
+            setSaturation(isDead);
 
         }
         if (!GameManager.instanceGM.isInTchat)
@@ -326,7 +324,12 @@ public class CameraController : MonoBehaviour
     }
 
 
-
+    public void setSaturation(bool isdead)
+    {
+        var colograding = postProcessing.profile.colorGrading.settings;
+        colograding.basic.saturation = (isdead)? 0:1;
+        postProcessing.profile.colorGrading.settings = colograding;
+    }
 
 }
 
