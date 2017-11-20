@@ -23,11 +23,6 @@ public class ClicToSelectManager : MonoBehaviour
                 {
                     objCollide.GetComponent<ShopScript>().OpenYourMenu();
                 }
-				    
-                else if (objCollide.GetComponent<CrystalManager>())
-                {
-                    GameManager.instanceGM.playerObj.GetComponent<EnergyManagerServer>().Request(objCollide, 10);
-                }
 			}
 		}
 	}
