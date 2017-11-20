@@ -614,10 +614,6 @@ public class GameManager : NetworkBehaviour
 	//détruit ce qui bloque le joueur pour qu'il puisse commencer a avancer.
 	public void StartTheGameForAll()
 	{
-//		GameObject.Find ("CastleToCampPortal").GetComponent<OneWayPortalScript> ().isBeingUsed = false;
-//		GameObject.Find ("CastleToCampPortalT2").GetComponent<OneWayPortalScript> ().isBeingUsed = false;
-//		NetworkServer.Destroy (GameObject.Find ("StartingBarricade1"));
-//		NetworkServer.Destroy (GameObject.Find ("StartingBarricade2"));
 		RpcInitializeTheGame();
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector2"));

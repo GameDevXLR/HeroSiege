@@ -325,7 +325,6 @@ GameObject:
   - component: {fileID: 4955847015328420}
   - component: {fileID: 95201227136708496}
   - component: {fileID: 114460892220706858}
-  - component: {fileID: 114209412070186790}
   - component: {fileID: 65725469985833762}
   m_Layer: 5
   m_Name: Cristal
@@ -889,8 +888,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1538573800582342}
   m_LocalRotation: {x: -0, y: -0.63718593, z: -0, w: 0.7707102}
-  m_LocalPosition: {x: 98.02155, y: 10.641696, z: -47.249065}
-  m_LocalScale: {x: 5.700185, y: 7.374641, z: 5.7001843}
+  m_LocalPosition: {x: 97.87, y: 3.1, z: 60.35}
+  m_LocalScale: {x: 5.700191, y: 7.37464, z: 5.700191}
   m_Children:
   - {fileID: 4127698155198270}
   - {fileID: 4923844206061824}
@@ -1681,24 +1680,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114209412070186790
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1538573800582342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6efddefcd01c7e540a10a101c67f2e80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  storageCapacitie: 100
-  currentEnergie: 100
-  secondToWait: 10
-  valueDecrease: 1
-  decrease: 0
-  listEnnemy: []
-  jungleCamp: {fileID: 0}
 --- !u!114 &114460892220706858
 MonoBehaviour:
   m_ObjectHideFlags: 1
