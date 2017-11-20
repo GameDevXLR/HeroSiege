@@ -82,11 +82,13 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Button lockHeroBtn;
 	public GameObject nextHeroBtn;
 	public GameObject previousHeroBtn;
-//	public override void OnStartClient ()
-//	{
-//		ChangeMyName (playerNickName);
-//		base.OnStartClient ();
-//	}
+
+	//remis récemment, ca avait été enlevé...C'est le bordel pour le sync des noms des joueurs. A optimiser soon. Voir si ca suffit a débug le tout cette fonction. A TEST
+	public override void OnStartClient ()
+	{
+		ChangeMyName (playerNickName);
+		base.OnStartClient ();
+	}
 
 	public override void OnStartLocalPlayer ()
 	{

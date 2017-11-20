@@ -49,7 +49,7 @@ public class MainMenuManager : MonoBehaviour
 		{
 			PlayerNameDisplay.text = "NewPlayer";
 		}
-		GetComponent<NetHostGame> ().roomName = PlayerNickname + "'s room.";
+		GetComponent<NetHostGame> ().SetRoomName (PlayerNickname);
 	}
 	public void ToggleFindGCanvas()
 	{
@@ -169,6 +169,7 @@ public class MainMenuManager : MonoBehaviour
 		}
 		PlayerNickname = nameField.text;
 		PlayerPrefs.SetString("PlayerNN", PlayerNickname);
+		GetComponent<NetHostGame> ().SetRoomName (PlayerNickname);
 		PlayerNameDisplay.text = nameField.text;
 		nameField.text = "";
 	}

@@ -51,7 +51,8 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcCallPartNexus()
 	{
-		endOfRoadParticles.GetComponent<ParticleSystem> ().Emit(315);
+		endOfRoadParticles.GetComponent<ParticleSystem> ().Emit(1000);
+		endOfRoadParticles.transform.GetChild(0).GetComponent<ParticleSystem> ().Emit(1000);
 
 	}
 }

@@ -69,8 +69,8 @@ public class AutoCastCatapulteOnPlayers : NetworkBehaviour
     }
     public void FireOnAPlayer()
     {
-        int iValue = Mathf.CeilToInt(spellDmg * 1.10f);
-        spellDmg = iValue;
+        int iValue = Mathf.CeilToInt(spellDmg * 1.05f);
+        spellDmg = iValue+1;
         //Dans tous les cas : la puissance augmente a chaque tir, que yé une cible ou pas, que le tir soit effectué ou pas.
         if (teamOfCataIs1)
         {
@@ -101,8 +101,8 @@ public class AutoCastCatapulteOnPlayers : NetworkBehaviour
     }
     public void FireOnAnEnemyPlayer()
     {
-        int iValue = Mathf.CeilToInt(spellDmg * 1.10f);
-        spellDmg = iValue;
+        int iValue = Mathf.CeilToInt(spellDmg * 1.05f);
+        spellDmg = iValue+1;
         //Dans tous les cas : la puissance augmente a chaque tir, que yé une cible ou pas, que le tir soit effectué ou pas.
         if (teamOfCataIs1)
         {
