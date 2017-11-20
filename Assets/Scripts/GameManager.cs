@@ -60,7 +60,6 @@ public class GameManager : NetworkBehaviour
 	public LocationManager locManager;
 	public LightManagerScript lightM;
     public GameObject[] jungCamps;
-    public CrystalManager[] crystaux;
     public Canvas tutorialPanel;
 	public Text tutoTip;
 
@@ -484,11 +483,6 @@ public class GameManager : NetworkBehaviour
 				{
 					go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
 				}
-                foreach (CrystalManager crystal in crystaux)
-                {
-                    crystal.replenish();
-                    crystal.launchDecrease();
-                }
             }
 		}
 	}
@@ -634,10 +628,6 @@ public class GameManager : NetworkBehaviour
 		{
 			go.GetComponent<JungleCampSpawnManager> ().ResetThisJungCamp ();
 		}
-        foreach(CrystalManager crystal in crystaux)
-        {
-            crystal.initialize();
-        }
 	}
 
 	[ClientRpc]

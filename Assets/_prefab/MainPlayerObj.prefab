@@ -2125,7 +2125,6 @@ GameObject:
   - component: {fileID: 114685893789081978}
   - component: {fileID: 114896777897577520}
   - component: {fileID: 114666143963175602}
-  - component: {fileID: 114875016887237836}
   - component: {fileID: 114524207174379058}
   - component: {fileID: 114532923662922726}
   - component: {fileID: 114096420365074746}
@@ -6337,6 +6336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canalisage: 3
+  interruption: 0
   timeBetweenCheck: 0.1
   slider: {fileID: 114234086884377942}
   canvas: {fileID: 223138842036081236}
@@ -7288,21 +7288,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncRot: 0
   timeBtwTic: 0.1
---- !u!114 &114875016887237836
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1677075611022148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee0a4d2d67c8440468ac7618b73b519e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energy: 0
-  energyTampon: 0
-  distanceAccess: 15
-  crystal: {fileID: 0}
 --- !u!114 &114896777897577520
 MonoBehaviour:
   m_ObjectHideFlags: 1
