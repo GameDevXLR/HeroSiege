@@ -209,7 +209,7 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 			inib3B = GameObject.Find ("Inib3B");
 			spawManager = GameObject.Find ("SpawnManager");
 			difficultyPanel = GameObject.Find ("NewDiffPan");
-		GetComponent<RectTransform> ().localPosition = new Vector3 (0f, 416f, 0f);
+//		GetComponent<RectTransform> ().localPosition = new Vector3 (0f, 416f, 0f);
 		if (isServer) {
 			normalBtn.interactable = true;
 			hardBtn.interactable = true;
