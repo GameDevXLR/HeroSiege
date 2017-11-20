@@ -143,7 +143,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
 				}
                 
 				castPosDesired = hit.point;
-                launch(spellDuration);
+                launch(spellDuration, castPosDesired);
 				return;
 			}
 			spellTargeter.transform.position = hit.point;
@@ -296,9 +296,9 @@ public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
 
     // ICanalisage //
 
-    public void launch(float time)
+    public void launch(float time, Vector3 direction)
     {
-        gameObject.GetComponent<PlayerCanalisage>().LaunchCanalisage(this, time);
+        gameObject.GetComponent<PlayerCanalisage>().LaunchCanalisage(this, time, direction);
         launchSpell(castPosDesired);
     }
 

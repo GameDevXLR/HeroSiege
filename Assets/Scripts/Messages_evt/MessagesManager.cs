@@ -154,6 +154,10 @@ public class MessagesManager : MonoBehaviour
         {
             Camera.main.GetComponent<CameraShaker>().ShakeCamera(amountShake, durationShake);
         }
+        else if (tab[0].Equals("\\cc"))
+        {
+            GameManager.instanceGM.playerObj.GetComponent<PlayerStatusHandler>().receiveCC(10);
+        }
         else
         {
             string sendmessage;

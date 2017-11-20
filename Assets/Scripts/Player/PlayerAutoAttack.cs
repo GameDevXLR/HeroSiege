@@ -70,7 +70,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		}
 		if (isServer) 
 		{
-			if (target && !target.GetComponent<EnnemyIGManager>().isDead) 
+			if (target && !target.GetComponent<EnnemyIGManager>().isDead && !isUnderCC) 
 			{
 				if (!isAttacking) 
 				{
@@ -102,7 +102,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 					}
 				}
 			}
-			if ((target == null || target.GetComponent<EnnemyIGManager>().isDead) && isAttacking) 
+			if ((target == null || target.GetComponent<EnnemyIGManager>().isDead || isUnderCC) && isAttacking) 
 			{
 				isActuStopAttacking = true;
 				RpcStopAttacking ();
@@ -380,4 +380,15 @@ public class PlayerAutoAttack: NetworkBehaviour
 
 		isUnderCC = false;
 	}
+
+    public void receiveSetUnderCC(bool isUnderCC)
+    {
+        CmdSetUnderCC(isUnderCC);
+    }
+
+    [Command]
+    public void CmdSetUnderCC(bool isUnderCC)
+    {
+        this.isUnderCC = isUnderCC;
+    }
 }

@@ -142,7 +142,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour, ICanalisage {
 					return;
 				}
                 cible = hit.point;
-                launch(time);
+                launch(time, cible);
 				return;
 			}
 			spellTargeter.transform.position = hit.point;
@@ -297,11 +297,11 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour, ICanalisage {
 
     /// Interface ICanalisage ////
 
-    public void launch(float time)
+    public void launch(float time, Vector3 direction)
     {
         isTargeting = false;
         spellRangeArea.SetActive(false);
-        gameObject.GetComponent<PlayerCanalisage>().LaunchCanalisage(this, time);
+        gameObject.GetComponent<PlayerCanalisage>().LaunchCanalisage(this, time, direction);
     }
 
     public void interruption()

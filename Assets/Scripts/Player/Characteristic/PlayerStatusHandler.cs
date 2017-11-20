@@ -14,7 +14,20 @@ public class PlayerStatusHandler : NetworkBehaviour {
 	public SpriteRenderer SlowImg;
 	public NavMeshAgent agent;
 
-	[Server]
+
+
+    public void receiveCC(float duration)
+    {
+        CmdGetCC(duration);
+    }
+
+    [Command]
+    public void CmdGetCC(float duration)
+    {
+        MakeHimCC(duration);
+    }
+
+    [Server]
 	public void MakeHimCC(float CCDuration)
 	{
         if (!GetComponent<PlayerIGManager>().isDead)

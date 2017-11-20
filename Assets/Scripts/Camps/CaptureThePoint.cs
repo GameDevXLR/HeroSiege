@@ -94,7 +94,6 @@ public class CaptureThePoint : NetworkBehaviour
             if (playersIn.Count == 0 && belongsTo == PointOwner.neutral)
             {
                 stopCapture();
-
             }
         }
         if (other.gameObject.layer == Layers.Ennemies)
@@ -105,7 +104,6 @@ public class CaptureThePoint : NetworkBehaviour
                 stopCapture();
             }
         }
-
     }
 
 

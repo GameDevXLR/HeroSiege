@@ -30,9 +30,11 @@ public class PlayerCanalisage : NetworkBehaviour {
         }
     }
     
-    public void LaunchCanalisage(ICanalisage canalise, float time)
+    public void LaunchCanalisage(ICanalisage canalise, float time, Vector3 direction)
     {
         GetComponent<PlayerClicToMove>().ReceiveStopMoving();
+        GetComponent<PlayerAutoAttack>().receiveSetUnderCC(true);
+        transform.LookAt(direction);
         canalisage = time;
         if (enabled)
         {
@@ -71,6 +73,7 @@ public class PlayerCanalisage : NetworkBehaviour {
         interruption = false;
         slider.value = 0;
         canvas.enabled = false;
+        GetComponent<PlayerAutoAttack>().receiveSetUnderCC(false);
     }
 
     public bool checkInterruption()
@@ -85,5 +88,20 @@ public class PlayerCanalisage : NetworkBehaviour {
             || Status.underCC
             );
     }
+
+
+    [Command]
+    public void CmdlookAt(Vector3 direction)
+    {
+        RpcLookAt(direction);
+    }
+
+    [ClientRpc]
+    public void RpcLookAt(Vector3 direction)
+    {
+        if(!isLocalPlayer)
+            transform.LookAt(direction);
+    }
+
     
 }

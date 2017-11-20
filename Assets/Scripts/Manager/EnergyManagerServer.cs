@@ -19,7 +19,7 @@ public class EnergyManagerServer : NetworkBehaviour, ICanalisage {
         this.crystal = crystal.GetComponent<CrystalManager>();
         if (this.crystal.canTake() && canAccess(crystal))
         {
-            launch(3);
+            launch(3, crystal.transform.position);
             CmdSendRequest(crystal, energy);
         }
     }
@@ -49,9 +49,9 @@ public class EnergyManagerServer : NetworkBehaviour, ICanalisage {
 
     /// Interface ICanalisage ////
 
-    public void launch(float time)
+    public void launch(float time, Vector3 direction)
     {
-        gameObject.GetComponent<PlayerCanalisage>().LaunchCanalisage(this, time);
+        gameObject.GetComponent<PlayerCanalisage>().LaunchCanalisage(this, time, direction);
     }
 
     public void interruption()

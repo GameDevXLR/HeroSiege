@@ -15,6 +15,8 @@ public class StatusHandlerScript : NetworkBehaviour
 	public SpriteRenderer CCTwistImg;
 	public SpriteRenderer SlowImg;
 
+    
+
 
     [Server]
 	public void MakeHimCC(float CCDuration)
