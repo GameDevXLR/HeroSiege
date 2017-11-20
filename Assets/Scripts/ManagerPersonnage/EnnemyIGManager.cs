@@ -35,6 +35,7 @@ public class EnnemyIGManager : CharacterIGManager
 	public bool isAbleToResurect;
 	public bool IsAbleToIgnoreAggro;
 	[SyncVar]public bool isAnInvisible;
+	public GameObject hitEffectObj;
 
 
     new void Start()
@@ -57,6 +58,8 @@ public class EnnemyIGManager : CharacterIGManager
 
 	public override void LooseHealth (int dmg, bool trueDmg, GameObject attacker)
 	{
+		GameObject.Instantiate (hitEffectObj, transform);
+
 		base.LooseHealth (dmg, trueDmg, attacker);
 		if (!myEnemies.Contains (attacker)) 
 		{

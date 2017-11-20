@@ -1937,7 +1937,7 @@ GameObject:
   - component: {fileID: 4165393126600490}
   - component: {fileID: 198243779410816424}
   - component: {fileID: 199221373683579570}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: RogueAttackParticle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2125,6 +2125,7 @@ GameObject:
   - component: {fileID: 114685893789081978}
   - component: {fileID: 114896777897577520}
   - component: {fileID: 114666143963175602}
+  - component: {fileID: 114875016887237836}
   - component: {fileID: 114524207174379058}
   - component: {fileID: 114532923662922726}
   - component: {fileID: 114096420365074746}
@@ -2375,13 +2376,13 @@ GameObject:
   - component: {fileID: 4252951232345744}
   - component: {fileID: 198619123691080188}
   - component: {fileID: 199060307061703234}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: RogueAttackParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1785873188744552
 GameObject:
   m_ObjectHideFlags: 1
@@ -3173,11 +3174,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1599768303739156}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.27300006, y: 1.3700001, z: 0.70900035}
-  m_LocalScale: {x: 1.9999999, y: 2.0000007, z: 2.0000007}
+  m_LocalPosition: {x: -0.267, y: 0.39600116, z: 0.847}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 4491569764805030}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4186215054506106
 Transform:
@@ -3337,11 +3338,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780813828800676}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.273, y: 1.37, z: 0.709}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -0.26699942, y: 0.396, z: 0.8469987}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 4491569764805030}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4255163828549738
 Transform:
@@ -3882,8 +3883,8 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4568128297618892}
-  - {fileID: 4252951232345744}
   - {fileID: 4165393126600490}
+  - {fileID: 4252951232345744}
   m_Father: {fileID: 4761200443502976}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4501,9 +4502,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4949546735290870}
   - {fileID: 4759887256541706}
-  - {fileID: 4788500101793666}
+  - {fileID: 4949546735290870}
   m_Father: {fileID: 4761200443502976}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4556,10 +4556,11 @@ Transform:
   m_GameObject: {fileID: 1687128396830088}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.25, y: 2.25, z: 1}
-  m_Children: []
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4788500101793666}
   m_Father: {fileID: 4732817891225612}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4761200443502976
 Transform:
@@ -4642,12 +4643,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749681239399628}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.25, y: 2.250001, z: 1.0000004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4732817891225612}
-  m_RootOrder: 2
+  m_Father: {fileID: 4759887256541706}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4789104379612818
 Transform:
@@ -5106,7 +5107,7 @@ Transform:
   m_Children:
   - {fileID: 4360264550134222}
   m_Father: {fileID: 4732817891225612}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &4951976495178572
 Transform:
@@ -5544,20 +5545,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -7288,6 +7275,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncRot: 0
   timeBtwTic: 0.1
+--- !u!114 &114875016887237836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677075611022148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0a4d2d67c8440468ac7618b73b519e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: 0
+  energyTampon: 0
+  distanceAccess: 15
+  crystal: {fileID: 0}
 --- !u!114 &114896777897577520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -23984,7 +23986,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 196024450
+  randomSeed: -1450209413
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -24032,7 +24034,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 13.5
+      scalar: 14
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -26253,14 +26255,14 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
-    multiplyColliderForceByCollisionAngle: 1
+    multiplyColliderForceByCollisionAngle: 0
     plane0: {fileID: 0}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
@@ -26391,7 +26393,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minKillSpeed: 0
-    maxKillSpeed: 0
+    maxKillSpeed: 50
     radiusScale: 3
     collidesWith:
       serializedVersion: 2
@@ -26399,11 +26401,11 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 1
   TriggerModule:
-    enabled: 0
+    enabled: 1
     collisionShape0: {fileID: 0}
     collisionShape1: {fileID: 0}
     collisionShape2: {fileID: 0}
@@ -33732,7 +33734,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1741387561
+  randomSeed: -1717830452
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -40256,7 +40258,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1273796391
+  randomSeed: 568941707
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -56449,7 +56451,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -619809447
+  randomSeed: -982473298
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -56497,7 +56499,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 13.5
+      scalar: 14
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -58864,7 +58866,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 1
   TriggerModule:
@@ -59716,7 +59718,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1210819747
+  randomSeed: -799966624
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -68424,7 +68426,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0
@@ -68574,7 +68576,7 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 1
   TriggerModule:
-    enabled: 0
+    enabled: 1
     collisionShape0: {fileID: 0}
     collisionShape1: {fileID: 0}
     collisionShape2: {fileID: 0}
@@ -74905,7 +74907,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0
@@ -75903,7 +75905,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1566548562
+  randomSeed: -1967857157
   InitialModule:
     serializedVersion: 3
     enabled: 1

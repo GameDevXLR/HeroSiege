@@ -1426,7 +1426,7 @@ MeshCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1607321022530426}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 1
@@ -1961,6 +1961,8 @@ MonoBehaviour:
   isAbleToResurect: 0
   IsAbleToIgnoreAggro: 0
   isAnInvisible: 0
+  hitEffectObj: {fileID: 1916352095888074, guid: beb9daecdaf15c740a78930e9a1f939e,
+    type: 2}
 --- !u!114 &114886597796118110
 MonoBehaviour:
   m_ObjectHideFlags: 1

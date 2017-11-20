@@ -187,7 +187,7 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
 		}
-		yield return new WaitForSecondsRealtime (10f);
+		yield return new WaitForSecondsRealtime (15f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Echec critique!";
@@ -203,7 +203,7 @@ public class NetHostGame :  MonoBehaviour{
 		}	
 		loadColoredBackground.CrossFadeAlpha (0f, 0.1f, true);
 		loadingCanvas.SetActive (false);
-		StartCoroutine(FadeTo(0f,0f));
+		StartCoroutine(FadeTo(0f,5f));
 
 		isCreating = false;
 	}
