@@ -203,9 +203,10 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 			isActuAttacking = false;
 		}
-		if (particule) 
+		if (particule && target != null) 
 		{
 			particule.Play ();
+			particule.trigger.SetCollider(0, target.GetComponent<MeshCollider>());
 		}
 
 	}
@@ -372,6 +373,8 @@ public class PlayerAutoAttack: NetworkBehaviour
 		{
 			if (particule != null) 
 			{
+				particule.trigger.SetCollider(0, target.GetComponent<MeshCollider>());
+
 				particule.Play ();
 			}
 			anim.SetBool ("attack", true);
