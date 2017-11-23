@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4066181138425598}
   - component: {fileID: 198049464147651532}
   - component: {fileID: 199724668059577742}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MobAttParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4010691362128460}
   - component: {fileID: 198684327383821770}
   - component: {fileID: 199383971786016654}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AttPtc1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 224514774197059896}
   - component: {fileID: 222327390748094852}
   - component: {fileID: 114945504005602324}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: ActualLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 212712244751808420}
   - component: {fileID: 114370631851369014}
   - component: {fileID: 114062637010648396}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SlowEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 135227181961460026}
   - component: {fileID: 23298053500481178}
   - component: {fileID: 114065134506643984}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: AggroArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 224038166771554554}
   - component: {fileID: 222071165076994190}
   - component: {fileID: 114832661875564788}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: WholeLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 4815663390780988}
   - component: {fileID: 212662082687382226}
   - component: {fileID: 114302414206816382}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: StunEffect (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 114288130823248640}
   - component: {fileID: 114955100654963934}
   - component: {fileID: 114126419554723612}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: LifeCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2087,6 +2087,8 @@ MonoBehaviour:
   isAbleToResurect: 0
   IsAbleToIgnoreAggro: 0
   isAnInvisible: 0
+  hitEffectObj: {fileID: 1916352095888074, guid: beb9daecdaf15c740a78930e9a1f939e,
+    type: 2}
 --- !u!114 &114235413880847742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3357,7 +3359,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1017784855
+  randomSeed: 1469084734
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6588,7 +6590,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1098186423
+  randomSeed: 682484878
   InitialModule:
     serializedVersion: 3
     enabled: 1

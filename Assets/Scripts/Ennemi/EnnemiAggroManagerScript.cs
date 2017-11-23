@@ -30,19 +30,11 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 			return;
 		}
 
-		if (!GetComponentInParent<EnnemyIGManager>().isDead && (autoAScript.target == null || autoAScript.target.layer != 8)) 
-		{
-			if (other.gameObject.layer == 8 || other.gameObject.layer == 9) {
-				if (transform.parent.gameObject.layer == 8 && other.gameObject.layer == 8) {
-					//en gros si t'es un pet et que tu target un joueur ben oubli...
-					return;
-				}
-				if (other.gameObject.layer != Layers.UI) {
-					GetComponentInParent<EnemyAutoAttackScript> ().SetTheTarget (other.gameObject);
-				} else 
-				{
-					Debug.Log ("code pansement XD : peut provoquer des problemes");
-				}
+		if (!GetComponentInParent<EnnemyIGManager> ().isDead && (autoAScript.target == null || autoAScript.target.layer != 8)) {
+			if (other.gameObject.layer == 8) {
+				
+				GetComponentInParent<EnemyAutoAttackScript> ().SetTheTarget (other.gameObject);
+
 			}
 		}
 	}

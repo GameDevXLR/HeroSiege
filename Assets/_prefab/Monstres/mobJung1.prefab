@@ -1405,7 +1405,7 @@ GameObject:
   - component: {fileID: 224039721495729844}
   - component: {fileID: 222842369974549310}
   - component: {fileID: 114630471763575212}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: WholeLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2404,7 +2404,7 @@ GameObject:
   - component: {fileID: 135661501899205928}
   - component: {fileID: 23660149846675092}
   - component: {fileID: 114317863660550886}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: AggroArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3309,7 +3309,7 @@ GameObject:
   - component: {fileID: 4651949832728874}
   - component: {fileID: 212653790874262472}
   - component: {fileID: 114596539837179648}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: StunEffect (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4552,7 +4552,7 @@ GameObject:
   - component: {fileID: 224359716515990726}
   - component: {fileID: 222882681150346382}
   - component: {fileID: 114731132493889176}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: ActualLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5142,7 +5142,7 @@ GameObject:
   - component: {fileID: 114379189777831496}
   - component: {fileID: 114181547020969054}
   - component: {fileID: 114174573080192852}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: LifeCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5448,7 +5448,7 @@ GameObject:
   - component: {fileID: 212928263612683436}
   - component: {fileID: 114964575524657210}
   - component: {fileID: 114971454174778818}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SlowEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5720,7 +5720,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1469047396771948}
-  m_LocalRotation: {x: 0.66138184, y: -0.321861, z: 0.3660895, w: 0.5700511}
+  m_LocalRotation: {x: 0.6613818, y: -0.32186097, z: 0.36608946, w: 0.570051}
   m_LocalPosition: {x: -0.26663175, y: -0.008684978, z: -0.044942692}
   m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 1.0000001}
   m_Children: []
@@ -7782,7 +7782,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499112743403724}
-  m_LocalRotation: {x: 0.66138184, y: -0.32186103, z: 0.3660896, w: 0.5700508}
+  m_LocalRotation: {x: 0.6613819, y: -0.32186106, z: 0.36608964, w: 0.57005084}
   m_LocalPosition: {x: -0.1434544, y: -0.008684998, z: -0.04494271}
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.9999999}
   m_Children:
@@ -11049,6 +11049,8 @@ MonoBehaviour:
   isAbleToResurect: 0
   IsAbleToIgnoreAggro: 0
   isAnInvisible: 0
+  hitEffectObj: {fileID: 1916352095888074, guid: beb9daecdaf15c740a78930e9a1f939e,
+    type: 2}
 --- !u!114 &114101529891299568
 MonoBehaviour:
   m_ObjectHideFlags: 1

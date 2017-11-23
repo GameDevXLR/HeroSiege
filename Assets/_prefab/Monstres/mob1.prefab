@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 4595675491272044}
   - component: {fileID: 212346173114512804}
   - component: {fileID: 114067623396550520}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: StunEffect (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 114665928832872106}
   - component: {fileID: 114094962021890272}
   - component: {fileID: 114886597796118110}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: LifeCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 224434525327728026}
   - component: {fileID: 222006265372786156}
   - component: {fileID: 114003594879340424}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: WholeLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 135633682344695856}
   - component: {fileID: 23626343745402192}
   - component: {fileID: 114183028007950294}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: AggroArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 4693602270704986}
   - component: {fileID: 198924087857188954}
   - component: {fileID: 199434926412316294}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: RezParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 224410816351006932}
   - component: {fileID: 222231660696998080}
   - component: {fileID: 114455571513128498}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: ActualLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 212790967586494710}
   - component: {fileID: 114197959074956008}
   - component: {fileID: 114909513483376538}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SlowEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1011,7 +1011,7 @@ Transform:
   m_GameObject: {fileID: 1607321022530426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -28.86206, y: 11.926788, z: 34.795807}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4232605768510818}
   - {fileID: 224282508279725032}
@@ -2163,7 +2163,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 604431244
+  randomSeed: -1179617429
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5636,7 +5636,7 @@ RectTransform:
   m_GameObject: {fileID: 1194526661273110}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 4, y: 2, z: 2}
   m_Children:
   - {fileID: 224434525327728026}
   - {fileID: 224410816351006932}
@@ -5645,7 +5645,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3.5}
+  m_AnchoredPosition: {x: 0, y: 2.68}
   m_SizeDelta: {x: 0.5, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224410816351006932

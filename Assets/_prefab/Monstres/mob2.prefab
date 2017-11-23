@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 4497315126025178}
   - component: {fileID: 212138473194838466}
   - component: {fileID: 114715287182687126}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: StunEffect (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 4156839682390846}
   - component: {fileID: 198170146606187860}
   - component: {fileID: 199694037577133008}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MobAttParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 135601847089593812}
   - component: {fileID: 23758295171851252}
   - component: {fileID: 114348377555897910}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: AggroArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 212075347313932812}
   - component: {fileID: 114272983072661226}
   - component: {fileID: 114645877797404282}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SlowEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 224272474977533500}
   - component: {fileID: 222955446822869246}
   - component: {fileID: 114507056319487786}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: WholeLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 114237225459989816}
   - component: {fileID: 114529035981421048}
   - component: {fileID: 114404794523604172}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: LifeCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 224013841328478006}
   - component: {fileID: 222777017117837482}
   - component: {fileID: 114644589171139748}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: ActualLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 4261477831074822}
   - component: {fileID: 198337402099472360}
   - component: {fileID: 199407035519304808}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AttPtc1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2201,6 +2201,8 @@ MonoBehaviour:
   isAbleToResurect: 0
   IsAbleToIgnoreAggro: 0
   isAnInvisible: 0
+  hitEffectObj: {fileID: 1916352095888074, guid: beb9daecdaf15c740a78930e9a1f939e,
+    type: 2}
 --- !u!114 &114621568014076468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3357,7 +3359,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1786186915
+  randomSeed: -957614246
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6588,7 +6590,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -857300480
+  randomSeed: -1328811165
   InitialModule:
     serializedVersion: 3
     enabled: 1

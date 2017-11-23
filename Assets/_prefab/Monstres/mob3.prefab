@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 135683812554900698}
   - component: {fileID: 23549610502903058}
   - component: {fileID: 114298750848883498}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: AggroArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 4004193464958496}
   - component: {fileID: 212529265744963308}
   - component: {fileID: 114128661877536874}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: StunEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 212304890698265106}
   - component: {fileID: 114934486860457372}
   - component: {fileID: 114121834747221180}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SlowEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 4684823915613542}
   - component: {fileID: 198280354678348582}
   - component: {fileID: 199986698616248902}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MobAttParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 224766238517520706}
   - component: {fileID: 222727665738282708}
   - component: {fileID: 114252200921075486}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: ActualLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 224207015543561126}
   - component: {fileID: 222525695464965274}
   - component: {fileID: 114271972807736794}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: WholeLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 4516712478683164}
   - component: {fileID: 198937620663048496}
   - component: {fileID: 199211304330408470}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: RezParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1353,7 +1353,7 @@ GameObject:
   - component: {fileID: 4640310102449402}
   - component: {fileID: 198328350658482056}
   - component: {fileID: 199071094213637132}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AttackParticle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1506,7 +1506,7 @@ GameObject:
   - component: {fileID: 114920441024994274}
   - component: {fileID: 114198599505708224}
   - component: {fileID: 114631584799000606}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: LifeCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3550,6 +3550,8 @@ MonoBehaviour:
   isAbleToResurect: 0
   IsAbleToIgnoreAggro: 0
   isAnInvisible: 0
+  hitEffectObj: {fileID: 1916352095888074, guid: beb9daecdaf15c740a78930e9a1f939e,
+    type: 2}
 --- !u!114 &114598284722986606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3928,7 +3930,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -213136682
+  randomSeed: -480873928
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7189,7 +7191,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -400497880
+  randomSeed: -1548978545
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10456,7 +10458,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -691331378
+  randomSeed: -1586796430
   InitialModule:
     serializedVersion: 3
     enabled: 1

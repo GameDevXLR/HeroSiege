@@ -8,6 +8,7 @@ using System.Collections;
 public class NetJoinGame : MonoBehaviour {
 
 	List<GameObject> roomList = new List<GameObject>();
+	public AudioClip refreshSound;
 
 	[SerializeField]
 	private Text status;
@@ -34,11 +35,11 @@ public class NetJoinGame : MonoBehaviour {
 
 	public void RefreshRoomList ()
 	{
+		GetComponent<AudioSource> ().PlayOneShot (refreshSound);
 		if (isLoadingRooms) {
 			return;
 		}
 		ClearRoomList();
-
 		if (networkManager.matchMaker == null)
 		{
 			networkManager.StartMatchMaker();

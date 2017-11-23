@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 82773986783238980}
   - component: {fileID: 114193306295930464}
   - component: {fileID: 120371820865694932}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: SpellTowerMage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 224592431442337066}
   - component: {fileID: 222911205235882708}
   - component: {fileID: 114117575977345912}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ActualLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 114325756425441066}
   - component: {fileID: 114837955276667364}
   - component: {fileID: 114156434191887150}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LifeCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 224185161448605672}
   - component: {fileID: 222230329456392336}
   - component: {fileID: 114373307530580320}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: WholeLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.986207, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1229,6 +1229,12 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 2
         time: 0
+        value: 0.4747467
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.9969037
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1265,7 +1271,7 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 5
     numCapVertices: 0
     alignment: 0
     textureMode: 3
@@ -1343,7 +1349,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 605841735
+  randomSeed: 196288694
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4509,7 +4515,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1536525050
+  randomSeed: -18023734
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7776,7 +7782,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1727458649
+  randomSeed: -1841112592
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10990,7 +10996,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 2118403152
+  randomSeed: -1804512809
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -14251,7 +14257,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1403420560
+  randomSeed: -1844399712
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -17513,7 +17519,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 894078542
+  randomSeed: 1856213971
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -20780,7 +20786,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1001332960
+  randomSeed: 1043655565
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -24042,7 +24048,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 128920348
+  randomSeed: -535956695
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -31011,17 +31017,17 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1374375050517432}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.09}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -2.24}
   m_LocalScale: {x: 10, y: 20, z: 10}
   m_Children:
   - {fileID: 224185161448605672}
   - {fileID: 224592431442337066}
   m_Father: {fileID: 4296708800575848}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.05, y: 8.45}
+  m_AnchoredPosition: {x: 0.05, y: 2.74}
   m_SizeDelta: {x: 0.5, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
