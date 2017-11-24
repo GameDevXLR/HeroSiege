@@ -16,16 +16,19 @@ public class FountainRegenScript : MonoBehaviour {
 		{
 			return;
 		}
-		if (other.gameObject.tag == "Player") //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
+		if (other.gameObject.tag == "Player" && !other.GetComponent<PlayerIGManager>().isDead) //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
 		{
 			int tmpHP = (regenHp * other.GetComponent<PlayerIGManager> ().maxHp) / 100;
 			if (tmpHP < 3) 
 			{
+				Debug.Log ("shit");
 				tmpHP = 2;
 			}
 			int tmpMP = (regenHp * other.GetComponent<GenericManaScript> ().maxMp) / 100;
 			if (tmpMP < 3) 
 			{
+				Debug.Log ("double shit");
+
 				tmpMP = 2;
 			}
 			other.GetComponent<PlayerIGManager> ().currentHp += tmpHP;
@@ -35,7 +38,7 @@ public class FountainRegenScript : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag == "Player") //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
+		if (other.gameObject.tag == "Player" && !other.GetComponent<PlayerIGManager>().isDead) //On utilise le tag et plus la layer; comme ca nos pnj peuvent po y regen... a voir si on veut changer ca.
 		{
 			other.gameObject.transform.GetChild (1).GetComponent<ParticleSystem> ().Play(true);
 			other.gameObject.transform.GetChild (2).GetComponent<ParticleSystem> ().Play(true);

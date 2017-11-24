@@ -33,10 +33,10 @@ public class ShopScript : MonoBehaviour
 	public void OpenYourMenu()
 	{
 		if (isAccessible) {
-			if (Vector3.Distance (gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) < 25f) {
+			if (Vector3.Distance (gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) < 30f) {
 				ShopIconObj.GetComponent<Image> ().sprite = openedShopImg;
 				shopPanel.gameObject.SetActive (true);
-				if (!tip1) 
+				if (!tip1 && GameManager.instanceGM.Days != 1) 
 				{
 					GameManager.instanceGM.ShowAGameTip (tipToShow);
 					tip1 = true;

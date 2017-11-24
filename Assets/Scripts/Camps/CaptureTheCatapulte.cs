@@ -45,5 +45,10 @@ public class CaptureTheCatapulte : CaptureThePoint
 		em.enabled = false;
 
 	}
+	[ClientRpc]
+	public void RpcActuPos(Vector3 newPos)
+	{
+		transform.position = newPos;
+	}
 
 }

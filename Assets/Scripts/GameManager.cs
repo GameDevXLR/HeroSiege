@@ -17,6 +17,16 @@ public class GameManager : NetworkBehaviour
 	//il gere également les evenements importants genre : event de nuit / jour.
 	//il gere aussi le spawn entre guillemets (active / désactive les spawners de mobs)
 	// gere pas grand chose lié au réseau parcontre : voir NetworkManagerObj pour ca (dans la hierarchy)
+	[Header("Interest Point Management.")]
+	public Transform[] eventPosT1;
+	public Transform[] eventPosT2;
+	public GameObject cataWestT1;
+	public GameObject cataEastT1;	
+	public GameObject cataWestT2;
+	public GameObject cataEastT2;
+
+//	public Dictionary<Transform, bool> isEventPosTaken;
+
 
 	public AudioClip[] MusicBackground;
 	public float delayTime;
@@ -68,7 +78,6 @@ public class GameManager : NetworkBehaviour
 
 
 	[Header("Reputation system.")]
-
 	[SyncVar (hook = "SyncReputation")]public float  actualReputation;
 	private float oldReputation;
 	public Slider reputSlider;
@@ -459,8 +468,8 @@ public class GameManager : NetworkBehaviour
 
 				}
 			}
-			playerObj.GetComponent<PlayerCastCatapulte> ().spellDmg = playerObj.GetComponent<PlayerCastCatapulte> ().startDmg* Days;
-			playerObj.GetComponent<PlayerCastCatapulte> ().ActualizeCataDmg ();
+//			playerObj.GetComponent<PlayerCastCatapulte> ().spellDmg = playerObj.GetComponent<PlayerCastCatapulte> ().startDmg* Days;
+//			playerObj.GetComponent<PlayerCastCatapulte> ().ActualizeCataDmg ();
 			GetComponent<BossSpawnManager> ().bossLvlT1 +=2;
 			GetComponent<BossSpawnManager> ().bossLvlT2 +=2;
 			dayNightDisplay.sprite = dayIcon;
@@ -610,11 +619,120 @@ public class GameManager : NetworkBehaviour
 		isQuest1Active = false;
 
 	}
+	#region InterestPoint Management
+
+	void TurnOnInterestPointManagement()
+	{
+		//pas besoin de rechercher si t'es serveur c préconfigurer.
+		if (isServer) 
+		{
+			return;
+		}
+		cataWestT1 = GameObject.Find ("CatapulteAreaT1");
+		cataEastT1 = GameObject.Find ("CatapulteAreaEst");
+		cataWestT2 = GameObject.Find ("CatapulteAreaT2");
+		cataEastT2 = GameObject.Find ("CatapulteAreaT2Est");
+
+	}
+//	int CalculateRandomRange(int length)
+//	{
+//		int iW1 = Random.Range (0,length);
+//		return iW1;
+//	}
+	void MoveCatapulteDaily()
+	{
+		
+
+		int i = Random.Range (0,4);
+		int j = Random.Range (0,4);
+		int k = Random.Range (0,4);
+		int l = Random.Range (0,4);
+		if (i == j) 
+		{
+			if (i == 0) 
+			{
+				j = i + Random.Range (1, 4);
+			} else 
+			{
+				j = i - 1;
+			}
+		}
+		if (k == l) 
+		{
+			if (k == 0) 
+			{
+				l = k + Random.Range (1, 4);
+			} else 
+			{
+				l = k - 1;
+			}
+		}
+		cataWestT1.transform.position = eventPosT1 [i].position;
+		cataEastT1.transform.position = eventPosT1 [j].position;
+		cataWestT2.transform.position = eventPosT2 [k].position;
+		cataEastT2.transform.position = eventPosT2 [l].position;
+
+		cataWestT1.GetComponent<CaptureTheCatapulte> ().RpcActuPos (eventPosT1 [i].position);
+		cataEastT1.GetComponent<CaptureTheCatapulte> ().RpcActuPos (eventPosT1 [j].position);
+		cataWestT2.GetComponent<CaptureTheCatapulte> ().RpcActuPos (eventPosT2 [k].position);
+		cataEastT2.GetComponent<CaptureTheCatapulte> ().RpcActuPos (eventPosT2 [l].position);
+//		for (int i = 0; i < eventPosT1.Length; i++) {
+//			bool tmpOpened = true;
+//
+//			isEventPosTaken.TryGetValue (eventPosT1 [i], out tmpOpened);
+//			if (tmpOpened) 
+//			{
+//				cataWestT1.transform.position = eventPosT1 [i].position;
+//				isEventPosTaken.Remove (eventPosT1 [i]);
+//				isEventPosTaken.Add (eventPosT1 [i], false);
+//				return;
+//			}
+//		}
+//		for (int i = 0; i < eventPosT1.Length; i++) {
+//			bool tmpOpened = true;
+//
+//			isEventPosTaken.TryGetValue (eventPosT1 [i], out tmpOpened);
+//			if (tmpOpened) 
+//			{
+//				cataEastT1.transform.position = eventPosT1 [i].position;
+//				isEventPosTaken.Remove (eventPosT1 [i]);
+//				isEventPosTaken.Add (eventPosT1 [i], false);
+//				return;
+//			}
+//		}
+//		//TEAM2
+//		for (int i = 0; i < eventPosT2.Length; i++) {
+//			bool tmpOpened = true;
+//
+//			isEventPosTaken.TryGetValue (eventPosT2 [i], out tmpOpened);
+//			if (tmpOpened) 
+//			{
+//				cataWestT1.transform.position = eventPosT2 [i].position;
+//				isEventPosTaken.Remove (eventPosT2 [i]);
+//				isEventPosTaken.Add (eventPosT2 [i], false);
+//				return;
+//			}
+//		}
+//		for (int i = 0; i < eventPosT2.Length; i++) {
+//			bool tmpOpened = true;
+//
+//			isEventPosTaken.TryGetValue (eventPosT2 [i], out tmpOpened);
+//			if (tmpOpened) 
+//			{
+//				cataEastT1.transform.position = eventPosT2 [i].position;
+//				isEventPosTaken.Remove (eventPosT2 [i]);
+//				isEventPosTaken.Add (eventPosT2 [i], false);
+//				return;
+//			}
+//		}
+	}
+	#endregion
 
 	//détruit ce qui bloque le joueur pour qu'il puisse commencer a avancer.
 	public void StartTheGameForAll()
 	{
 		RpcInitializeTheGame();
+		MoveCatapulteDaily ();
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector"));
 		NetworkServer.Destroy (GameObject.Find ("PlayerTeamDetector2"));
 		StopPlayerFromJoining ();
@@ -637,6 +755,7 @@ public class GameManager : NetworkBehaviour
 		nbrWavesText.text = "0";
 		TurnOnTheRepSystem ();
 		TurnOnTheMobCountSystem ();
+		TurnOnInterestPointManagement ();
 	}
 
 	[Server]
@@ -712,6 +831,8 @@ public class GameManager : NetworkBehaviour
 
 	public void DayStartingEvents(int nbrOfPlayers)
 	{
+		MoveCatapulteDaily ();
+
 		if (Days == 2) 
 		{
 			//si c'est le "premier vrai jour" : on multiplie le nombre de mobs par vague par le nombre de joueurs. ca fou direct le bordel. oh yeah.

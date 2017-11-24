@@ -94,7 +94,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = target.GetComponent<EnnemyIGManager> ().outlinemob;
 					target.GetComponent<EnnemyIGManager> ().outlinemob.eraseRenderer = false;
 					CmdSendNewTarget(target.GetComponent<NetworkIdentity> ().netId);
-
+					return;
 				} else 
 				{
 					StartCoroutine (MoveFirst ((float)nClient.GetRTT(), hit.point));

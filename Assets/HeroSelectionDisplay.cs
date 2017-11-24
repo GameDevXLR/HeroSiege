@@ -7,9 +7,12 @@ public class HeroSelectionDisplay : MonoBehaviour {
 
 	public Transform herosPanelObj;
 	public Transform[] HerosTransformPanels;
+	public AudioClip nextHeroSnd;
+	public AudioClip prevHeroSnd;
 
 	public void HeroScrollUp()
 	{
+		GameManager.instanceGM.GetComponent<AudioSource> ().PlayOneShot (nextHeroSnd);
 		for (int i = 0; i < HerosTransformPanels.Length; i++) 
 		{
 			int j = HerosTransformPanels[i].GetSiblingIndex ();
@@ -27,6 +30,8 @@ public class HeroSelectionDisplay : MonoBehaviour {
 
 	public void HeroScrollDown()
 	{
+		GameManager.instanceGM.GetComponent<AudioSource> ().PlayOneShot (prevHeroSnd);
+
 		for (int i = 0; i < HerosTransformPanels.Length; i++) 
 		{
 			int j = HerosTransformPanels[i].GetSiblingIndex ();

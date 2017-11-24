@@ -9,20 +9,25 @@ public class EventMessageServer : NetworkBehaviour
     public GameObject degatPrefab;
 
     public void receiveDegat(GameObject victime, GameObject bully,int degat)
-    {
-        TargetSendDegatMessage(bully.GetComponent<NetworkIdentity>().connectionToClient, victime, degat);
-    }
+	{
+		if (degat != 0) {
+			TargetSendDegatMessage (bully.GetComponent<NetworkIdentity> ().connectionToClient, victime, degat);
+		}
+	}
     
     public void receiveDegat(GameObject victime, int degat)
-    {
-        TargetSendDegatMessage(victime.GetComponent<NetworkIdentity>().connectionToClient, victime,degat);
-    }
+	{
+		if (degat != 0) {
+			TargetSendDegatMessage (victime.GetComponent<NetworkIdentity> ().connectionToClient, victime, degat);
+		}
+	}
 
 
 
     [TargetRpc]
     public void TargetSendDegatMessage(NetworkConnection target, GameObject victime, int degats)
     {
+
         GameObject eventMess = ObjectPooling.Instance.GetPooledObject(degatPrefab.tag);
         
         //eventMess.transform.SetParent(victime.transform, false);

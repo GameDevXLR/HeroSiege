@@ -251,14 +251,14 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			}
 		}
 		//si on clic sur level up; ca le dit au serveur.
-		[Command]
-		public void CmdLoadTheCata()
-		{
-		cataObj.GetComponent<CatapulteObjectScript>().chargesLoaded++;
-		cataCharges++;
-		GetComponent<PlayerGoldScript> ().ActualGold -= cataChargePrice;
-//			RpcLvlUpSpell();
-		}
+//		[Command]
+//		public void CmdLoadTheCata()
+//		{
+//		cataObj.GetComponent<CatapulteObjectScript>().chargesLoaded++;
+//		cataCharges++;
+//		GetComponent<PlayerGoldScript> ().ActualGold -= cataChargePrice;
+////			RpcLvlUpSpell();
+//		}
 //
 //		//le serveur dit a tous les clients y compris lui meme que
 //		//le sort de ce joueur est devenu plus puissant
@@ -290,7 +290,7 @@ public class PlayerCastCatapulte : NetworkBehaviour
 			return;
 		}
 		GetComponent<AudioSource> ().PlayOneShot (boughtACharge);
-			CmdLoadTheCata();
+//			CmdLoadTheCata();
 		spellCataBtn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = cataCharges.ToString();
 		if (!tip2) 
 		{

@@ -200,18 +200,18 @@ public class CaptureThePoint : NetworkBehaviour
             GetComponent<AudioSource>().PlayOneShot(Capture);
             GetComponent<Location>().IconColour = Color.green;
 
-            if (isOutpost)
-            {
+//            if (isOutpost)
+//            {
                 GetComponentInChildren<ShopScript>().isAccessible = true;
                 transform.GetChild(0).GetComponent<Location>().enabled = true;
-            }
-            if (isCatapulte)
-            {
-
-                GetComponent<CatapulteObjectScript>().userOfCata = playersIn[0];
-
-                GetComponent<CatapulteObjectScript>().ActivatePlayerBtn();
-            }
+//            }
+//            if (isCatapulte)
+//            {
+//
+//                GetComponent<CatapulteObjectScript>().userOfCata = playersIn[0];
+//
+//                GetComponent<CatapulteObjectScript>().ActivatePlayerBtn();
+//            }
             if (GameManager.instanceGM.isTeam1)
             {
                 if (belongsTo == PointOwner.team1)
@@ -258,10 +258,10 @@ public class CaptureThePoint : NetworkBehaviour
         else
         {
             GetComponent<Location>().IconColour = Color.yellow;
-            if (isCatapulte)
-            {
-                GetComponent<CatapulteObjectScript>().DesactivatePlayerBtn();
-            }
+//            if (isCatapulte)
+//            {
+//                GetComponent<CatapulteObjectScript>().DesactivatePlayerBtn();
+//            }
             if (isOutpost)
             {
 
