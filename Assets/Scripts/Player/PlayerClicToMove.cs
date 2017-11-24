@@ -132,6 +132,7 @@ public class PlayerClicToMove : NetworkBehaviour {
             cursorTargetter.transform.position = Vector3.zero;
             target = hit.collider.gameObject;
             CmdSendNewTarget(target.GetComponent<NetworkIdentity>().netId);
+			return;
 
         }
         else
