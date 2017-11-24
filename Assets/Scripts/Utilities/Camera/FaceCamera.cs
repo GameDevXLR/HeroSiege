@@ -5,12 +5,18 @@ using System.Collections;
 public class FaceCamera : MonoBehaviour {
 
 	public bool rotationActivated = true;
+	public Transform cam;
+	Vector3 standardPos = new Vector3 (0, 180, 0);
 
+	void Start()
+	{
+		cam = Camera.main.transform;
+		}
 	void LateUpdate() {
 
-			this.transform.LookAt (Camera.main.transform.position);
+			this.transform.LookAt (cam.position);
 		if(rotationActivated){
-			this.transform.Rotate (new Vector3 (0, 180, 0));
+			this.transform.Rotate (standardPos);
 		}
 	}
 }

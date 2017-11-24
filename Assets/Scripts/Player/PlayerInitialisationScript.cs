@@ -75,7 +75,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public Color selectedHeroColor;
 	public Color defaultHeroColor;
 
-	Image heroArtPlaceholder;
+//	Image heroArtPlaceholder;
 	public Sprite tankArtwork;
 	public Sprite ovateArtwork;
 	public Sprite archerArtwork;
@@ -120,7 +120,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		if (isLocalPlayer) 
 		{
 			
-			heroArtPlaceholder = GameObject.Find ("bg_select").GetComponent<Image> ();
+//			heroArtPlaceholder = GameObject.Find ("bg_select").GetComponent<Image> ();
 			selectedHero.AddListener (CapsuleSelectTank);
 			string playerNN;
 			playerNN = PlayerPrefs.GetString ("PlayerNN");

@@ -281,7 +281,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 		{
 			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
 			if (isServer) {
-				if (target.layer != Layers.UI) {
+				if (target.layer == Layers.Player) {
 					SetTheTarget (target);
 				}
 			}
@@ -316,10 +316,10 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 	[Server]
 	public void SetTheTarget(GameObject targ)
 	{
-		if (targ.layer == Layers.UI) 
-		{
-			Debug.Log ("mon debug a pas marcher ^^ca devrait pu arriver ce message!");
-		}
+//		if (targ.layer == Layers.UI) 
+//		{
+//			Debug.Log ("mon debug a pas marcher ^^ca devrait pu arriver ce message!");
+//		}
 		if (targ.GetComponent<NetworkIdentity> ()) {
 			targetID = targ.GetComponent<NetworkIdentity> ().netId;
 		} else 

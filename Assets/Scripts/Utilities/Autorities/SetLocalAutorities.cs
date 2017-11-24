@@ -17,8 +17,8 @@ public class SetLocalAutorities : NetworkBehaviour
     public void CmdSetAuthority(GameObject obj)
     {
         NetworkIdentity nIns = obj.GetComponent<NetworkIdentity>();
-        GameObject client = NetworkServer.FindLocalObject(nIns.netId);
-        NetworkIdentity ni = client.GetComponent<NetworkIdentity>();
+//        GameObject client = NetworkServer.FindLocalObject(nIns.netId);
+//        NetworkIdentity ni = client.GetComponent<NetworkIdentity>();
         nIns.AssignClientAuthority(connectionToClient);
         Debug.Log("miaou");
 

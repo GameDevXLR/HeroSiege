@@ -25,7 +25,7 @@ public class TowerPetAutoA : NetworkBehaviour
 	[SyncVar(hook ="GetTargetFromID" )]public NetworkInstanceId targetID; // la target.
 	public GameObject target; // qui est ma cible ? ( sur le serveur..retransmis)
 	public float rotSpeed = 5; // permet de tourner plus vite vers la cible. résoud un bug lié au fait que les objets étaient trop petit.
-	private Vector3 targetTempPos; //calcul de position (privé)
+//	private Vector3 targetTempPos; //calcul de position (privé)
 	private GameObject targetObj; // l'objet qui t'attaque ! 
 	private bool isActualizingPos; // suis je déja en train d'actualiser la position de ma cible?
 	private ParticleSystem particule;
@@ -218,7 +218,7 @@ public class TowerPetAutoA : NetworkBehaviour
 		if (target != null) {
 			//			if (agent.isOnNavMesh) {
 
-				targetTempPos = target.transform.localPosition;
+//				targetTempPos = target.transform.localPosition;
 
 		} else {
 //			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
@@ -266,7 +266,7 @@ public class TowerPetAutoA : NetworkBehaviour
 		targetID = id;
 		target = ClientScene.FindLocalObject (id);
 		if (target != null) {
-			targetTempPos = target.transform.position;
+//			targetTempPos = target.transform.position;
 		}
 		StartCoroutine (AcquireTargetProcess ());
 

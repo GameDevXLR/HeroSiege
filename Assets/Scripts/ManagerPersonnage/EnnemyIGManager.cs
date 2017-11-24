@@ -58,7 +58,8 @@ public class EnnemyIGManager : CharacterIGManager
 
 	public override void LooseHealth (int dmg, bool trueDmg, GameObject attacker)
 	{
-		GameObject.Instantiate (hitEffectObj, transform);
+		GameObject go = GameObject.Instantiate (hitEffectObj, transform);
+		go.transform.localPosition = Vector3.zero;
 
 		base.LooseHealth (dmg, trueDmg, attacker);
 		if (!myEnemies.Contains (attacker)) 

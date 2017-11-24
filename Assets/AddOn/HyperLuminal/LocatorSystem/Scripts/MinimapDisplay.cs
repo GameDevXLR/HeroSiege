@@ -216,9 +216,9 @@ public class MinimapDisplay : MonoBehaviour
 		}
 
 		// calculate the new direction using the 2D Angle.
-		Vector3 RotatedPosition = new Vector2(Position2D.x = Center2D.x + Final_Distance * Mathf.Cos(Mathf.Deg2Rad * (Final_Angle + 90.0f)),
-		                                      Position2D.y = Center2D.y + Final_Distance * Mathf.Sin(Mathf.Deg2Rad * (Final_Angle + 90.0f)));
-
+//		Vector3 RotatedPosition = new Vector2(Position2D.x = Center2D.x + Final_Distance * Mathf.Cos(Mathf.Deg2Rad * (Final_Angle + 90.0f)),
+//		                                      Position2D.y = Center2D.y + Final_Distance * Mathf.Sin(Mathf.Deg2Rad * (Final_Angle + 90.0f)));
+//
 		// slightly scale the icons based on their distance for a nice fade out to the edge.
 		float Final_Scale = 10.0f * Mathf.Clamp((1.5f - (Final_Distance/(Minimap_Scale * 0.5f))), 0.25f, 1.0f);
 

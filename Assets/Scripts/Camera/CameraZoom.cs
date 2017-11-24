@@ -14,12 +14,12 @@ public class CameraZoom : MonoBehaviour {
 	{
 		if(Input.GetAxis("Mouse ScrollWheel") > 0)
 		{
-			int variation = (int)(Input.GetAxis ("Mouse ScrollWheel") * 10);
-			zoom = Mathf.Clamp (zoom - 10 * variation, zoomInLimite, zoomOutLimite);
+//			int variation = (int)(Input.GetAxis ("Mouse ScrollWheel") * 10);
+//			zoom = Mathf.Clamp (zoom - 10 * variation, zoomInLimite, zoomOutLimite);
 		}
 		else if(Input.GetAxis("Mouse ScrollWheel") < 0 )
 		{
-			int variation = (int)(Input.GetAxis ("Mouse ScrollWheel") * 10);
+//			int variation = (int)(Input.GetAxis ("Mouse ScrollWheel") * 10);
 			zoom = Mathf.Clamp (zoom + 10, zoomInLimite, zoomOutLimite);
 
 		}
