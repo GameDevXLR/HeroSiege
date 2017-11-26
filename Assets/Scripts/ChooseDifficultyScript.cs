@@ -35,7 +35,12 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 
 	public Button startGameBtn;
 
-	public enum difficultySettings
+    private void Awake()
+    {
+        GameManager.instanceGM.setDificultiePanel(gameObject);
+    }
+
+    public enum difficultySettings
 	{
 		normal,
 		hard,

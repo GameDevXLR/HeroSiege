@@ -221,13 +221,7 @@ public class GameManager : NetworkBehaviour
 //			if(team1ID.Contains(playerObj.GetComponent<NetworkIdentity>().netId)){} //utliser ca pour voir si on est dans la list déja.
 			Destroy (gameObject);
 		}
-		difficultyPanel = GameObject.Find ("NewDiffPan");
-		camp1 = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1.GetComponent<SpawnManager> ();
-		camp2 = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2.GetComponent<SpawnManager> ();
-		camp3 = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3.GetComponent<SpawnManager> ();
-		camp1B = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib1B.GetComponent<SpawnManager> ();
-		camp2B = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib2B.GetComponent<SpawnManager> ();
-		camp3B = difficultyPanel.GetComponent<ChooseDifficultyScript> ().inib3B.GetComponent<SpawnManager> ();
+		
 	}
 	void Start()
 	{
@@ -243,6 +237,18 @@ public class GameManager : NetworkBehaviour
 			}
 		}
 	}
+
+
+    public void setDificultiePanel(GameObject panel)
+    {
+        difficultyPanel = panel;
+        camp1 = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib1.GetComponent<SpawnManager>();
+        camp2 = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib2.GetComponent<SpawnManager>();
+        camp3 = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib3.GetComponent<SpawnManager>();
+        camp1B = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib1B.GetComponent<SpawnManager>();
+        camp2B = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib2B.GetComponent<SpawnManager>();
+        camp3B = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib3B.GetComponent<SpawnManager>();
+    }
 	public bool IsItSolo()
 	{
 		coPlayers = NetworkServer.connections.Count;
