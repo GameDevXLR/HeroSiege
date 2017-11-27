@@ -20,7 +20,13 @@ public class ShopScript : MonoBehaviour
 	public string tipToShowFr = "AH! Travaux...";
 	public bool tip1;
 
-	public void Start()
+
+    private void Awake()
+    {
+        enabled = false;
+        Invoke("setEnableTrue", 1);
+    }
+    public void Start()
 	{
 		shopPanel = GameObject.Find (shopName).transform;
 		shopPanel.gameObject.SetActive (false);
@@ -30,28 +36,6 @@ public class ShopScript : MonoBehaviour
 
 	}
 
-	public void OpenYourMenu()
-	{
-		if (isAccessible) {
-			if (Vector3.Distance (gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) < 30f) {
-				ShopIconObj.GetComponent<Image> ().sprite = openedShopImg;
-				shopPanel.gameObject.SetActive (true);
-				if (!tip1 && GameManager.instanceGM.Days != 1) 
-				{
-					GameManager.instanceGM.ShowAGameTip (tipToShow);
-					tip1 = true;
-				}
-				isOpen = true;
-			}
-		}
-	}
-	public void CloseYourMenu()
-	{
-		ShopIconObj.GetComponent<Image> ().sprite = closedShopImg;
-		shopPanel.gameObject.SetActive (false);
-		isOpen = false;
-
-	}
 
 	public void Update()
 	{
@@ -77,4 +61,35 @@ public class ShopScript : MonoBehaviour
 			}
 		}
 	}
+
+
+    public void OpenYourMenu()
+    {
+        if (isAccessible)
+        {
+            if (Vector3.Distance(gameObject.transform.position, GameManager.instanceGM.playerObj.transform.position) < 30f)
+            {
+                ShopIconObj.GetComponent<Image>().sprite = openedShopImg;
+                shopPanel.gameObject.SetActive(true);
+                if (!tip1 && GameManager.instanceGM.Days != 1)
+                {
+                    GameManager.instanceGM.ShowAGameTip(tipToShow);
+                    tip1 = true;
+                }
+                isOpen = true;
+            }
+        }
+    }
+    public void CloseYourMenu()
+    {
+        ShopIconObj.GetComponent<Image>().sprite = closedShopImg;
+        shopPanel.gameObject.SetActive(false);
+        isOpen = false;
+
+    }
+
+    public void setEnableTrue()
+    {
+        enabled = true;
+    }
 }
