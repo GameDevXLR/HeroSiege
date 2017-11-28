@@ -49,22 +49,20 @@ public class ChooseDifficultyScript : MonoBehaviour,  IEventSystemHandler
 
 
     public difficultySettings gameMode;
-
-
-    private void Awake()
-    {
-        GameManager.instanceGM.setDifficultyPanel(gameObject);
-    }
+    
 
 
     void Start()
     {
+        GameManager.instanceGM.setDifficultyPanel(gameObject);
         if (GameMode == null)
         {
             GameMode = new UnityEvent();
         }
+
         GameMode.AddListener(NormalModeExe);
         StartCoroutine(StartProcedure());
+        
     }
 
 
