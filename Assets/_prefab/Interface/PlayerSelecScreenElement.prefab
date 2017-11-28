@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224599671057571858}
   - component: {fileID: 222263876033158072}
-  - component: {fileID: 114422162424638850}
   - component: {fileID: 114648398074197000}
   m_Layer: 5
   m_Name: PlayerSelecScreenElement
@@ -159,34 +158,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1e0483575227e734f9fccf38ab2bf424, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!114 &114422162424638850
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1340243578110806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 86aa606ae64c0324ca9777d9d0f96689, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22241ae86db54224dad2b64d82297ea8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -252,8 +224,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -191.99998, y: -57.00003}
-  m_SizeDelta: {x: 192, y: 30}
+  m_AnchoredPosition: {x: -128.14, y: 77.5}
+  m_SizeDelta: {x: 128.14, y: 38.89}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224554825656821384
 RectTransform:
@@ -292,7 +264,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 192, y: 144}
+  m_SizeDelta: {x: 240, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224798188059234288
 RectTransform:
@@ -309,6 +281,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 48.6, y: 0}
-  m_SizeDelta: {x: 104, y: 88}
+  m_AnchoredPosition: {x: 0, y: 12}
+  m_SizeDelta: {x: 156, y: 176}
   m_Pivot: {x: 0, y: 0.5}

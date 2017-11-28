@@ -11,7 +11,7 @@ public class SkinSelectionPref : MonoBehaviour
 	public void SetSkinColor(int i)
 	{
 		PlayerPrefs.SetInt ("SKIN_COLOR", i);
-		avatarImg.sprite = avatarDesired;
+//		avatarImg.sprite = avatarDesired;
 
 	}
 

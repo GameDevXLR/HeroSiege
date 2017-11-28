@@ -39,7 +39,7 @@ public class GameClockMinSec : MonoBehaviour
 				minutesTmp = "0" + minutes;
 			}
 
-			GetComponent<Text>().text = minutesTmp+ " : "+ secondsTmp;
+			GetComponent<Text>().text = minutesTmp+ "   :   "+ secondsTmp;
 		}
 	}
 }
