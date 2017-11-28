@@ -9,6 +9,54 @@ public class HeroSelectionDisplay : MonoBehaviour {
 	public Transform[] HerosTransformPanels;
 	public AudioClip nextHeroSnd;
 	public AudioClip prevHeroSnd;
+	public GameObject tankStatsPan;
+	public GameObject tankSpellsPan;
+	public GameObject healStatsPan;
+	public GameObject healSpellsPan;
+	public GameObject archerStatsPan;
+	public GameObject archerSpellsPan;
+
+	#region Show and hide heroes stats and spells
+
+	public void ShowTankStats()
+	{
+		tankStatsPan.SetActive (true);
+		tankSpellsPan.SetActive (false);
+	}
+	
+	public void ShowTankSpells()
+	{
+		tankStatsPan.SetActive (false);
+		tankSpellsPan.SetActive (true);
+	}
+
+	public void ShowHealStats()
+	{
+		healStatsPan.SetActive (true);
+		healSpellsPan.SetActive (false);
+	}
+
+	public void ShowHealSpells()
+	{
+		healStatsPan.SetActive (false);
+		healSpellsPan.SetActive (true);
+	}
+
+	public void ShowArcherStats()
+	{
+		archerStatsPan.SetActive (true);
+		archerSpellsPan.SetActive (false);
+	}
+
+	public void ShowArcherSpells()
+	{
+		archerStatsPan.SetActive (false);
+		archerSpellsPan.SetActive (true);
+	}
+
+
+	#endregion
+
 
 	public void HeroScrollUp()
 	{

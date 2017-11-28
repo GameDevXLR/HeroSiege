@@ -83,7 +83,19 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public GameObject nextHeroBtn;
 	public GameObject previousHeroBtn;
 
-	//remis récemment, ca avait été enlevé...C'est le bordel pour le sync des noms des joueurs. A optimiser soon. Voir si ca suffit a débug le tout cette fonction. A TEST
+	[Header("Gestion de ce qui se passe après le lockHero.")]
+	public Sprite cadreHeroSelectedEffect;
+	public Sprite mainCadreHeroSelectedEffect;
+
+	//permet de remplacer l'image cible par le artwork approprié de nassima
+//	public Sprite tankIllustration;
+//	public Sprite healIllustration;
+//	public Sprite archerIllustration;
+//
+//	[SerializeField]private Sprite TmpIllustration;
+
+
+	//remis récemment, ca avait été enlevé...C'est le bordel pour le sync des noms des joueurs. A optimiser soon. Voir si ca suffit a débug le tout cette fonction. A TEST (novembre2017)
 	public override void OnStartClient ()
 	{
 		ChangeMyName (playerNickName);
@@ -177,10 +189,21 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
-			heroSelectPanel.SetActive (false);
-			lockHeroBtn.enabled = false;
+//			GameObject.Find ("GraphicsBeneathHeroPan").SetActive (false);
+//			heroSelectPanel.SetActive (false);
+//			lockHeroBtn.enabled = false;
+			GameObject go = heroSelectPanel.transform.parent.Find("GraphicsBeneathHeroPan").gameObject;
+			go.transform.Find ("CadreSideL").gameObject.SetActive (false);
+			go.transform.Find ("CadreSideR").gameObject.SetActive (false);
+			go.transform.Find ("CadreHeroSelected").GetComponent<Image>().sprite = cadreHeroSelectedEffect ;
+			go.transform.Find ("CadreMain").GetComponent<Image>().sprite = mainCadreHeroSelectedEffect ;
+
+			lockHeroBtn.gameObject.SetActive(false);
 			nextHeroBtn.SetActive( false);
 			previousHeroBtn.SetActive( false);
+
+			//permet de remplacer l'image cible par le artwork approprié de nassima
+//			GameObject.Find ("bg_select").GetComponent<Image> ().sprite = TmpIllustration;
 		}
 //		GetComponent<PlayerManager> ().playerSelecHeroChosenImg.CrossFadeAlpha(255f,.5f,false) ;
 		GetComponent<PlayerManager> ().playerSelecUI.transform.Find ("LockImg").GetComponent<Image> ().enabled = true;
@@ -200,6 +223,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	public void CapsuleSelectTank()
 	{
+		//permet de remplacer l'image cible par le artwork approprié de nassima
+//		TmpIllustration = tankIllustration;
 		CmdSelectHeroTank1 ();
 		CmdSendColor(PlayerPrefs.GetInt("SKIN_COLOR", 1));
 	}
@@ -381,11 +406,14 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		selectedHero.AddListener (CapsuleSelectHeal);
 		//ajouter ici le code pour montrer son choix
 		CmdSayIAmHeal ();
+		//rendre le bouton interactif est, je crois, devenu inutile. A vérifier puis supprimer la ligne ci dessous dans toutes les méthodes "listenerSelectHeroXXXXX"
 		lockHeroBtn.interactable = true;
 //		lockHeroBtn.transform.GetComponent<Image> ().color = Color.black;
 	}
 	public void CapsuleSelectHeal()
 	{
+		//permet de remplacer l'image cible par le artwork approprié de nassima
+//		TmpIllustration = healIllustration;
 		CmdSelectHeroHeal1 ();
 		CmdSendColor(PlayerPrefs.GetInt("SKIN_COLOR", 1));
 
@@ -481,6 +509,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	public void CapsuleSelectDps()
 	{
+		//permet de remplacer l'image cible par le artwork approprié de nassima
+//		TmpIllustration = archerIllustration;
 		CmdSelectHeroDps1 ();
 		CmdSendColor(PlayerPrefs.GetInt("SKIN_COLOR", 1));
 
