@@ -229,25 +229,29 @@ public class GameManager : NetworkBehaviour
 		team2LivesDisplay = GameObject.Find ("LivesDisplayT2").GetComponent<Text> ();
 
 		if (isServer) {
-			ShowAGameTip ("The number of waves spawn points and the strenght of the enemies depends on the number of players by team and the game difficulty.On Nightmare and above, the number of enemy spawn points will increase.");
-			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
-			{
-				ShowAGameTip ("Le nombre de points de départ des vagues et la force des ennemis dépend du nombre de joueur de l'équipe et de la difficulté de la partie. En 'Cauchemar' et plus, le nombre de points de départ est augmenté.");
 
-			}
+            difficultyPanel.GetComponent<ChooseDifficultyScript>().setInteractableBtn(true);
 		}
+        else
+        {
+            difficultyPanel.GetComponent<ChooseDifficultyScript>().setInteractableBtn(false);
+        }
 	}
 
 
-    public void setDificultiePanel(GameObject panel)
+    public void setDifficultyPanel(GameObject panel)
     {
         difficultyPanel = panel;
-        camp1 = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib1.GetComponent<SpawnManager>();
-        camp2 = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib2.GetComponent<SpawnManager>();
-        camp3 = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib3.GetComponent<SpawnManager>();
-        camp1B = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib1B.GetComponent<SpawnManager>();
-        camp2B = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib2B.GetComponent<SpawnManager>();
-        camp3B = difficultyPanel.GetComponent<ChooseDifficultyScript>().inib3B.GetComponent<SpawnManager>();
+    }
+
+    public void setInib(SpawnManager inib1, SpawnManager inib2, SpawnManager inib3, SpawnManager inib1B, SpawnManager inib2B, SpawnManager inib3B)
+    {
+        camp1 = inib1;
+        camp2 = inib2;
+        camp3 = inib3;
+        camp1B = inib1B;
+        camp2B = inib2B;
+        camp3B = inib3B;
     }
 	public bool IsItSolo()
 	{
@@ -682,55 +686,6 @@ public class GameManager : NetworkBehaviour
 		cataEastT1.GetComponent<CaptureTheCatapulte> ().RpcActuPos (eventPosT1 [j].position);
 		cataWestT2.GetComponent<CaptureTheCatapulte> ().RpcActuPos (eventPosT2 [k].position);
 		cataEastT2.GetComponent<CaptureTheCatapulte> ().RpcActuPos (eventPosT2 [l].position);
-//		for (int i = 0; i < eventPosT1.Length; i++) {
-//			bool tmpOpened = true;
-//
-//			isEventPosTaken.TryGetValue (eventPosT1 [i], out tmpOpened);
-//			if (tmpOpened) 
-//			{
-//				cataWestT1.transform.position = eventPosT1 [i].position;
-//				isEventPosTaken.Remove (eventPosT1 [i]);
-//				isEventPosTaken.Add (eventPosT1 [i], false);
-//				return;
-//			}
-//		}
-//		for (int i = 0; i < eventPosT1.Length; i++) {
-//			bool tmpOpened = true;
-//
-//			isEventPosTaken.TryGetValue (eventPosT1 [i], out tmpOpened);
-//			if (tmpOpened) 
-//			{
-//				cataEastT1.transform.position = eventPosT1 [i].position;
-//				isEventPosTaken.Remove (eventPosT1 [i]);
-//				isEventPosTaken.Add (eventPosT1 [i], false);
-//				return;
-//			}
-//		}
-//		//TEAM2
-//		for (int i = 0; i < eventPosT2.Length; i++) {
-//			bool tmpOpened = true;
-//
-//			isEventPosTaken.TryGetValue (eventPosT2 [i], out tmpOpened);
-//			if (tmpOpened) 
-//			{
-//				cataWestT1.transform.position = eventPosT2 [i].position;
-//				isEventPosTaken.Remove (eventPosT2 [i]);
-//				isEventPosTaken.Add (eventPosT2 [i], false);
-//				return;
-//			}
-//		}
-//		for (int i = 0; i < eventPosT2.Length; i++) {
-//			bool tmpOpened = true;
-//
-//			isEventPosTaken.TryGetValue (eventPosT2 [i], out tmpOpened);
-//			if (tmpOpened) 
-//			{
-//				cataEastT1.transform.position = eventPosT2 [i].position;
-//				isEventPosTaken.Remove (eventPosT2 [i]);
-//				isEventPosTaken.Add (eventPosT2 [i], false);
-//				return;
-//			}
-//		}
 	}
 	#endregion
 
@@ -993,47 +948,22 @@ public class GameManager : NetworkBehaviour
 		}
 		NetworkManager.singleton.StopClient ();
 	}
-		
 
-//	public IEnumerator ChangeVolumeCurve()
-//	{
-//		float y = Time.time;
-//		bool z = true;
-//		while (z) 
-//		{
-//			yield return new WaitForSecondsRealtime (0.1f);
-//			if (Camera.main.GetComponent<AudioSource> ().volume > 0f) {
-//				Camera.main.GetComponent<AudioSource> ().volume -= 0.05f;
-//			}
-//			if (Time.time > y + delayTime) 
-//				{
-//				
-//				Camera.main.GetComponent<AudioSource> ().volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME");
-//				z = false;
-//				if (nightTime) {
-//
-//				} else {
-//
-//				}
-//			}
-//			yield break;
-//		}
-//
-//	}
-//	[ServerCallback]
-//	public void Update()
-//	{
-//		if(Input.GetKeyDown(KeyCode.P))
-//			{
-//				actualReputation +=(Random.Range(-.21f,.21f));
-//			if (actualReputation < 0) 
-//			{
-//				actualReputation = 0;
-//			}
-//			if (actualReputation >1) 
-//			{
-//				actualReputation = 1;
-//			}
-//			}
-//	}
+
+    public void receiveStartTheGame()
+    {
+        RpcStartTheGame();
+    }
+
+    [ClientRpc]
+    public void RpcStartTheGame()
+    {
+        CameraController.instanceCamera.target = GameManager.instanceGM.playerObj;
+        CameraController.instanceCamera.Initialize();
+        GameObject.Find("SelectionScreen").SetActive(false);
+        GameManager.instanceGM.playerObj.GetComponent<PlayerInitialisationScript>().selectedHero.Invoke();
+        CameraController.instanceCamera.target = GameManager.instanceGM.playerObj;
+        CameraController.instanceCamera.Initialize();
+        //		SelectedHero.Invoke ();
+    }
 }

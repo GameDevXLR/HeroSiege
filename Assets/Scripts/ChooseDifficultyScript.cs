@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
 
-public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
+public class ChooseDifficultyScript : MonoBehaviour,  IEventSystemHandler
 {
 
 	public UnityEvent GameMode;
@@ -35,21 +35,39 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 
 	public Button startGameBtn;
 
-    private void Awake()
-    {
-        GameManager.instanceGM.setDificultiePanel(gameObject);
-    }
 
     public enum difficultySettings
-	{
-		normal,
-		hard,
-		nightmare,
-		madness
-	}
+    {
+        normal,
+        hard,
+        nightmare,
+        madness
+    }
+    
+    public int diffLvl;
 
-	[SyncVar(hook="SyncDifficulty")]
-	public int diffLvl;
+
+
+    public difficultySettings gameMode;
+
+
+    private void Awake()
+    {
+        GameManager.instanceGM.setDifficultyPanel(gameObject);
+    }
+
+
+    void Start()
+    {
+        if (GameMode == null)
+        {
+            GameMode = new UnityEvent();
+        }
+        GameMode.AddListener(NormalModeExe);
+        StartCoroutine(StartProcedure());
+    }
+
+
 
 	public void SyncDifficulty (int diff)
 	{
@@ -78,20 +96,10 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 		}
 	}
 
-	public difficultySettings gameMode;
-
-	void Start()
-	{
-		if (GameMode == null) 
-		{
-			GameMode = new UnityEvent ();
-		}
-		GameMode.AddListener (NormalModeExe);
-		StartCoroutine (StartProcedure ());
-	}
+	
 	public void NormalMode()
 	{
-		diffLvl = 1;
+        GameManager.instanceGM.playerObj.GetComponent<EventMessageServer>().ReceiveDifficulty(1);
 		GameMode.RemoveAllListeners ();
 		GameMode.AddListener (NormalModeExe);
 //		Invoke ("NormalModeExe", 0.2f);
@@ -119,8 +127,8 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 	}
 	public void HardMode()
 	{
-		diffLvl = 2;
-		GameMode.RemoveAllListeners ();
+        GameManager.instanceGM.playerObj.GetComponent<EventMessageServer>().ReceiveDifficulty(2);
+        GameMode.RemoveAllListeners ();
 		GameMode.AddListener (HardModeExe);
 	}
 	public void HardModeExe()
@@ -138,14 +146,14 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 
 	public void NightmareMode()
 	{
-		diffLvl = 3;
-		GameMode.RemoveAllListeners ();
+        GameManager.instanceGM.playerObj.GetComponent<EventMessageServer>().ReceiveDifficulty(3);
+        GameMode.RemoveAllListeners ();
 		GameMode.AddListener (NightmareModeExe);
 	}
 	public void NightmareModeExe()
 	{
 		GameManager.instanceGM.gameDifficulty = 3;
-		gameMode = difficultySettings.nightmare;
+        gameMode = difficultySettings.nightmare;
 		inib2.GetComponent<SpawnManager>().enabled = true;
 		inib3.GetComponent<SpawnManager>().enabled = true;
 		if (isSolo) 
@@ -159,8 +167,8 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 
 	public void MadnessMode()
 	{
-		diffLvl = 4;
-		GameMode.RemoveAllListeners ();
+        GameManager.instanceGM.playerObj.GetComponent<EventMessageServer>().ReceiveDifficulty(4);
+        GameMode.RemoveAllListeners ();
 		GameMode.AddListener (MadnessModeExe);
 	}
 	public void MadnessModeExe()
@@ -194,7 +202,7 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 		{
 			isSolo = true;
 		}
-		RpcStartTheGame ();
+        GameManager.instanceGM.receiveStartTheGame();
 		GameObject.Find ("MainSun").GetComponent<DayNightCycle> ().speed = -1.2f;
 //		gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
 		GameMode.Invoke ();
@@ -206,38 +214,30 @@ public class ChooseDifficultyScript : NetworkBehaviour,  IEventSystemHandler
 	IEnumerator StartProcedure()
 	{
 		yield return new WaitForSeconds (0.05f);
-			inib1 = GameObject.Find ("Inib");
-			inib2 = GameObject.Find ("Inib2");
-			inib3 = GameObject.Find ("Inib3");
-			inib1B = GameObject.Find ("InibB");
-			inib2B = GameObject.Find ("Inib2B");
-			inib3B = GameObject.Find ("Inib3B");
-			spawManager = GameObject.Find ("SpawnManager");
-			difficultyPanel = GameObject.Find ("NewDiffPan");
-//		GetComponent<RectTransform> ().localPosition = new Vector3 (0f, 416f, 0f);
-		if (isServer) {
-			normalBtn.interactable = true;
-			hardBtn.interactable = true;
-			nightmareBtn.interactable = true;
-			madnessBtn.interactable = true;
-			startGameBtn.interactable = true;
-		} else {
-			startGameBtn.gameObject.SetActive (false);
-		}
+        setInib();
+		spawManager = GameObject.Find ("SpawnManager");		
 	}
+
+    public void setInteractableBtn(bool interactable)
+    {
+        normalBtn.interactable = interactable;
+        hardBtn.interactable = interactable;
+        nightmareBtn.interactable = interactable;
+        madnessBtn.interactable = interactable;
+        startGameBtn.interactable = interactable;
+        startGameBtn.gameObject.SetActive(interactable);
+    }
+    
+
+    public void setInib()
+    {
+        GameManager.instanceGM.setInib(inib1.GetComponent<SpawnManager>(), inib2.GetComponent<SpawnManager>(), inib3.GetComponent<SpawnManager>(),
+            inib1B.GetComponent<SpawnManager>(), inib2B.GetComponent<SpawnManager>(), inib3B.GetComponent<SpawnManager>());
+    }
+
 	public void StartGameButtonAvailable()
 	{
 		
 	}
-	[ClientRpc]
-	public void RpcStartTheGame()
-	{
-        CameraController.instanceCamera.target = GameManager.instanceGM.playerObj;
-        CameraController.instanceCamera.Initialize();
-        GameObject.Find ("SelectionScreen").SetActive (false);
-		GameManager.instanceGM.playerObj.GetComponent<PlayerInitialisationScript> ().selectedHero.Invoke ();
-        CameraController.instanceCamera.target = GameManager.instanceGM.playerObj;
-        CameraController.instanceCamera.Initialize();
-//		SelectedHero.Invoke ();
-	}
+	
 }

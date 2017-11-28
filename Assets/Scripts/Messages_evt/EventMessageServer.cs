@@ -60,5 +60,16 @@ public class EventMessageServer : NetworkBehaviour
         eventMess.GetComponentInChildren<InactivateByTime>().InactivateWithlifeTime();
         eventMess.GetComponent<InactivateByTime>().InactivateWithlifeTime();
     }
+
+    public void ReceiveDifficulty(int diffLvl)
+    {
+        RpcSetDifficulty(diffLvl);
+    }
+
+    [ClientRpc] 
+    public void RpcSetDifficulty(int diffLvl)
+    {
+        GameManager.instanceGM.difficultyPanel.GetComponent<ChooseDifficultyScript>().SyncDifficulty(diffLvl);
+    }
 }
 
