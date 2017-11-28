@@ -54,7 +54,6 @@ public class ChooseDifficultyScript : MonoBehaviour,  IEventSystemHandler
 
     void Start()
     {
-        GameManager.instanceGM.setDifficultyPanel(gameObject);
         if (GameMode == null)
         {
             GameMode = new UnityEvent();

@@ -228,22 +228,8 @@ public class GameManager : NetworkBehaviour
 		team1LivesDisplay = GameObject.Find ("LivesDisplayT1").GetComponent<Text> ();
 		team2LivesDisplay = GameObject.Find ("LivesDisplayT2").GetComponent<Text> ();
 
-        if (difficultyPanel)
-        {
-            setDifficultyInteractableBtn();
-        }
-        else
-        {
-            Invoke("setDifficultyInteractableBtn", 1);
-        }
-    }
-
-
-    public void setDifficultyInteractableBtn()
-    {
         if (isServer)
         {
-
             difficultyPanel.GetComponent<ChooseDifficultyScript>().setInteractableBtn(true);
         }
         else
@@ -251,6 +237,8 @@ public class GameManager : NetworkBehaviour
             difficultyPanel.GetComponent<ChooseDifficultyScript>().setInteractableBtn(false);
         }
     }
+
+    
 
     public void setDifficultyPanel(GameObject panel)
     {
