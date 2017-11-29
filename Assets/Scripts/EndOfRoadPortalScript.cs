@@ -22,8 +22,10 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 		
 		if (other.gameObject.layer == 9) { // layer9 is Ennemies.
 			RpcCallPartNexus();
-			other.gameObject.GetComponent<EnnemyIGManager> ().guyAttackingMe = null;
+			EnnemyIGManager EIG = other.gameObject.GetComponent<EnnemyIGManager> ();
+			EIG.guyAttackingMe = null;
 			other.gameObject.GetComponent<EnnemyIGManager> ().isAbleToResurect = false;
+			EIG.goldGiven = 0;
 			other.gameObject.GetComponent<EnnemyIGManager> ().MakeHimDie ();
 
 			if (teamNbr == 1) 

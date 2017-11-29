@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-[NetworkSettings(channel = 0, sendInterval = 0.3f)]
+[NetworkSettings(channel = 0, sendInterval = 0.2f)]
 public class PlayerIGManager : CharacterIGManager {
 
     // Audio
@@ -159,24 +159,25 @@ public class PlayerIGManager : CharacterIGManager {
         if (isServer)
         {
             GetComponentInChildren<PlayerEnnemyDetectionScript>().autoTargetting = false;
-            if (GetComponent<PlayerHealerCastInvokePet>())
-            { //si t'as un pet 
-                if (GetComponent<PlayerHealerCastInvokePet>().actualPet != null)
-                {
-                    GetComponent<PlayerHealerCastInvokePet>().actualPet.transform.position = Vector3.zero;
-                    GetComponent<PlayerHealerCastInvokePet>().actualPet.GetComponent<PetIGManager>().isDead = true;
-                    yield return new WaitForSeconds(0.2f);
-                    GetComponent<PlayerHealerCastInvokePet>().DestroyThePrevPet(); // détruit le quand tu meurs.
-                }
-            }
+//            if (GetComponent<PlayerHealerCastInvokePet>())
+//            { //si t'as un pet 
+//                if (GetComponent<PlayerHealerCastInvokePet>().actualPet != null)
+//                {
+//                    GetComponent<PlayerHealerCastInvokePet>().actualPet.transform.position = Vector3.zero;
+//                    GetComponent<PlayerHealerCastInvokePet>().actualPet.GetComponent<PetIGManager>().isDead = true;
+//                    yield return new WaitForSeconds(0.2f);
+//                    GetComponent<PlayerHealerCastInvokePet>().DestroyThePrevPet(); // détruit le quand tu meurs.
+//                }
+//            }
 
         }
 		GetComponent<PlayerStatusHandler> ().CCTwistImg.enabled = false;
+		GetComponentInChildren<Animator> ().enabled = true;
 		GetComponent<PlayerStatusHandler> ().SlowImg.enabled = false;
         deadAnimChildMesh.GetComponent<Animator>().SetBool("isDead", true);
         GetComponent<AudioSource>().PlayOneShot(PlayerDeath);
         playerDeathCount++;
-        respawnTime += playerDeathCount * 2;
+        respawnTime += playerDeathCount;
         GetComponent<GenericManaScript>().manaBar.GetComponentInParent<Canvas>().enabled = false;
         gameObject.layer = 16; //passe en layer Ignore
         GetComponent<PlayerAutoAttack>().StopAllCoroutines();
@@ -190,8 +191,8 @@ public class PlayerIGManager : CharacterIGManager {
 
         deadAnimChildMesh.transform.parent = null;
         GetComponent<PlayerClicToMove>().target = null;
+		GetComponent<PlayerClicToMove>().StopAllCoroutines();
         GetComponent<PlayerClicToMove>().enabled = false;
-        GetComponent<PlayerClicToMove>().StopAllCoroutines();
         GetComponent<NavMeshAgent>().SetDestination(respawnPoint.transform.position);
         deadAnimChildEffect.GetComponent<ParticleSystem>().Play(true);
         deadAnimChildEffect.transform.parent = null;

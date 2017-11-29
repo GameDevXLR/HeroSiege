@@ -41,6 +41,11 @@ public class EventMessageServer : NetworkBehaviour
 		{
 			tmpDegatScale = 20;
 		}
+		if (!victime) 
+		{
+			Debug.Log ("message perdu dans le néant, debug de guiz.");
+			return;
+		}
 		eventMess.transform.position = new Vector3( victime.transform.position.x,victime.transform.position.y+2f,victime.transform.position.z) ;
 		eventMess.transform.GetChild (0).GetComponent<RectTransform>().localScale = new Vector3 ( tmpDegatScale, tmpDegatScale, 1);
 		eventMess.transform.GetChild(0).GetComponentInChildren<Text>().text =  degats.ToString();

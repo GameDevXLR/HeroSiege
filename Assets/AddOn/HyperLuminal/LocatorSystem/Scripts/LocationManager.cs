@@ -102,6 +102,8 @@ namespace HyperLuminalGames
 						}
 					}
 
+					//petit debug
+					LocationSystem.SystemCamera = Camera.main;
 					// turn on visibility for only this players layer
 					LocationSystem.SystemCamera.cullingMask |= 1 << LayerMask.NameToLayer( DisplayLayerNames[LayerAssignment - 1]);
 					

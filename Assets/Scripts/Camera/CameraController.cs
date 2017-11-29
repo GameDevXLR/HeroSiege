@@ -331,6 +331,27 @@ public class CameraController : MonoBehaviour
         postProcessing.profile.colorGrading.settings = colograding;
     }
 
+	public void SetDayNightGeneralTone( bool isNight)
+	{
+		StartCoroutine (PostProcessTone (isNight));
+
+	}
+
+	IEnumerator PostProcessTone(bool isNight)
+	{
+		var colograding = postProcessing.profile.colorGrading.settings;
+
+		while (colograding.basic.temperature < 0 && !isNight ||colograding.basic.temperature > -35 && isNight ) 
+		{
+			colograding.basic.temperature += (isNight) ? -3 : 3;
+			colograding.basic.postExposure +=(isNight) ? -.03f : .03f;
+			postProcessing.profile.colorGrading.settings = colograding;
+						yield return new  WaitForSecondsRealtime (.5f);
+
+
+
+		}
+	}
 }
 
 

@@ -426,14 +426,13 @@ public class GameManager : NetworkBehaviour
 	public void DayNightEvents(bool night)
 	{
 		nightTime = night;
+		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
 		dayNightDisplay.sprite = nightIcon;
 		if (night) 
 		{
 //			StartCoroutine (ChangeVolumeCurve ());
 			Camera.main.transform.GetComponent<AudioSource> ().clip = MusicBackground[0];
 			Camera.main.transform.GetComponent<AudioSource> ().Play();
-
-
 
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{

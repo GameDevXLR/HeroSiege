@@ -68,12 +68,17 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 	{
 		
 		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
+		RpcAvatarMode ();
 
 	}
-    
+	[ClientRpc]
+	void RpcAvatarMode()
+	{
+		StartCoroutine(AvatarProcedure(spellDuration));
+	}
 	IEnumerator AvatarProcedure(float dur)
 	{
-		GetComponent<PlayerIGManager>().deadAnimChildMesh.transform.localScale = new Vector3 (2f, 2f, 2f);
+		GetComponent<PlayerIGManager>().deadAnimChildMesh.transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
 		if (isServer) 
 		{
 			GetComponent<PlayerIGManager> ().maxHp += spellDmg * 10;

@@ -78,9 +78,9 @@ public class PlayerGoldScript : NetworkBehaviour
 
         if (ennemi.myEnemies.Count > 0)
         {
-            double goldTemp = ennemi.goldGiven / (ennemi.myEnemies.Count * 0.9);
+			double goldTemp = (float)ennemi.goldGiven /(float) (ennemi.myEnemies.Count * 0.9);
             goldGiven = (int) Math.Ceiling(goldTemp);
-            goldTemp = ennemi.goldGiven / (ennemi.myEnemies.Count * 0.1);
+			goldTemp =(float) ennemi.goldGiven  * 0.1f;
             goldKiller = (int)Math.Ceiling(goldTemp);
 
             for (int i = 0; i < ennemi.myEnemies.Count; i++)

@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using cakeslice;
 
-[NetworkSettings(channel = 0, sendInterval = 0.3f)]
+[NetworkSettings(channel = 0, sendInterval = 0.2f)]
 public class EnnemyIGManager : CharacterIGManager
 {
     // xp
@@ -136,6 +136,20 @@ public class EnnemyIGManager : CharacterIGManager
     /// </summary>
     IEnumerator KillTheMob()
     {
+		//si il atteind la fontaine, la fontaine lui met son or de récompense a zero, du coup on en profite pour pas faire tout le reste:
+		if(goldGiven == 0)
+		{
+			if (isJungleMob) {
+				isDead = true;
+				RpcKillTheJungleMob ();
+
+			} else {
+				RpcKillTheMob ();
+			}
+			yield return new WaitForSeconds (0.1f);
+			NetworkServer.Destroy (gameObject);
+			yield return null;
+		}
         if (guyAttackingMe)
         {
             if (guyAttackingMe.tag == "Player")
@@ -148,16 +162,15 @@ public class EnnemyIGManager : CharacterIGManager
         }
         else
         {
+			ShareXPWithTheTeam (myEnemies [0].GetComponent<PlayerXPScript> ().isTeam1, xpGiven);
             GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript>().receiveGoldFromEnnemy(this);
         }
         //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
         if (isServer)
         {
-			int y = goldGiven;
 			if (myEnemies.Count > 0) 
 			{
-				 y = goldGiven / myEnemies.Count;
-			}
+				int y = goldGiven / myEnemies.Count;
 			for (int i = 0; i < myEnemies.Count; i++) 
 			{
 				myEnemies [i].GetComponent<PlayerGoldScript> ().GetGold (y);
@@ -165,6 +178,7 @@ public class EnnemyIGManager : CharacterIGManager
 				{
 					myEnemies.Clear ();
 				}
+			}
 			}
 
             if (isJungleMob)
