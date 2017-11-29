@@ -7,11 +7,7 @@ using UnityEngine.UI;
 public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 
 
-	//premier sort: a mettre sur l'objet joueur.
-	// sort de zone avec dégat over time aprés.
-	//le sort fait spawn un prefab qui est configuré ici (dégats etc)
-	//le prefab doit etre enregistrer par le networkmanagerObj
-	//le sort peut up.
+
 	public Sprite spellImg;
 	public AudioClip OOM;
 	public AudioClip Spell1;
@@ -46,12 +42,13 @@ public class PlayerArcherCastPassiveBoost : NetworkBehaviour {
 			cdCountdown.gameObject.SetActive (false);
 //			spell1Btn.onClick.AddListener(CastThatSpell);
 			spell1LvlUpBtn.onClick.AddListener(levelUp);
-			spellDescription = "Give you " + stunChances + "% chances to stun and deal "+ spellLvl/2+" times more damages and "+ dodgeChances+"% dodge chances.";
+			spellDescription = "[PASSIVE]Give you " + stunChances + "% chances to stun and deal "+ spellLvl/2+" times more damages and "+ dodgeChances+"% dodge chances.";
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
-				spellDescription = "Vous donne " + stunChances + "% de chances de stun et d'infliger "+ spellLvl/2+" fois plus de dégats et ajoute "+ dodgeChances+"% chances d'esquiver.";
+				spellDescription = "[PASSIF]Vous donne " + stunChances + "% de chances de stun et d'infliger "+ spellLvl/2+" fois plus de dégats et ajoute "+ dodgeChances+"% chances d'esquiver.";
 
 			}
+			spell1Btn.interactable = false;
 			spell1Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
 			spell1Btn.transform.GetChild(0).transform.Find ("MpCost").GetComponentInChildren<Text> ().text = "0";
 			spell1Btn.transform.GetChild(0).transform.Find ("CDTime").GetComponentInChildren<Text> ().text = "0";

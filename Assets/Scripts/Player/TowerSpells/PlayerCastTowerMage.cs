@@ -22,7 +22,7 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 	public int spellDmg = 50;
 	public float spellCD;
 	public float spellDuration = 1.5f;
-	public float spellRange = 25f;
+	public float spellRange = 20f;
 	public GameObject spellObj;
 	public int spellLvl = 1;
 	private bool onCD;
@@ -291,8 +291,8 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 	}
 	public void ReziseTheTargeters()
 	{
-		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
-		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
+		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (2f, 2f, 1f);
+		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (2f, 2f, 1f);
 
 		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (.5f, .5f, 1f);
 		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (.5f, .5f, 1f);

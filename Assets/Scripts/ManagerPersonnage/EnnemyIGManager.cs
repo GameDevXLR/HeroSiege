@@ -58,9 +58,9 @@ public class EnnemyIGManager : CharacterIGManager
 
 	public override void LooseHealth (int dmg, bool trueDmg, GameObject attacker)
 	{
-		GameObject go = GameObject.Instantiate (hitEffectObj, transform);
-		go.transform.localPosition = Vector3.zero;
-
+		GameObject go = GameObject.Instantiate (hitEffectObj, transform.position, Quaternion.identity);
+//		go.transform.localPosition = Vector3.zero;
+		NetworkServer.Spawn(go);
 		base.LooseHealth (dmg, trueDmg, attacker);
 		if (!myEnemies.Contains (attacker)) 
 		{
@@ -145,6 +145,14 @@ public class EnnemyIGManager : CharacterIGManager
 
 			} else {
 				RpcKillTheMob ();
+				if (!GetComponent<MinionsPathFindingScript> ().isBoss) {
+					if (GetComponent<MinionsPathFindingScript> ().isTeam1) {
+						GameManager.instanceGM.SyncMobCountT1 (GameManager.instanceGM.totalMobCountT1 -= 1);
+					} else {
+						GameManager.instanceGM.SyncMobCountT2 (GameManager.instanceGM.totalMobCountT2 -= 1);
+
+					}
+				}
 			}
 			yield return new WaitForSeconds (0.1f);
 			NetworkServer.Destroy (gameObject);

@@ -267,8 +267,8 @@ public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
 	}
 	public void ReziseTheTargeters()
 	{
-		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
-		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
+		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (2.5f, 2.5f, 1f);
+		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (2.5f, 2.5f, 1f);
 
 		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
 		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (1f, 1f, 1f);

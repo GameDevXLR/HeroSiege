@@ -18,7 +18,7 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour, ICanalisage {
 	public int spellDmg = 120;
 	public float spellCD = 35f;
 	public float spellDuration = 1.5f;
-	public float spellRange = 25f;
+	public float spellRange = 20f;
 	public GameObject spellObj;
 	public int spellLvl = 1;
 	private bool onCD;
@@ -270,12 +270,12 @@ public class PlayerArcherCastArrowRain : NetworkBehaviour, ICanalisage {
 	}
 	public void ReziseTheTargeters()
 	{
-		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
-		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
+		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (2f, 2f, 1f);
+		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (2f, 2f, 1f);
 
-		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
-		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (1f, 1f, 1f);
-		spellTargeter.transform.GetChild (0).localScale = new Vector3 (1f, 1f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (.6f, .6f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (.6f, .6f, 1f);
+		spellTargeter.transform.GetChild (0).localScale = new Vector3 (.6f, .6f, 1f);
 
 
 	}

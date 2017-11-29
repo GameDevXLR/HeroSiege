@@ -66,7 +66,8 @@ public class PlayerTankCastAvatar : NetworkBehaviour
 	[Command]
 	public void CmdCastSpell()
 	{
-		
+		GameObject spellObjTmp = Instantiate (spellObj, transform.position, Quaternion.identity);
+		NetworkServer.Spawn (spellObjTmp);
 		GetComponent<GenericManaScript>().CmdLooseManaPoints(spellCost);
 		RpcAvatarMode ();
 

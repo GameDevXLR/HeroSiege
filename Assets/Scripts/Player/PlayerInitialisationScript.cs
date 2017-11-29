@@ -478,8 +478,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myAutoAScript.damage = 8;
 			myAutoAScript.attackRate = .7f;
 			myAutoAScript.attackRange = 15;
-			myPlayerIGManager.levelUpBonusHP = 25;
-			myGeneManaScript.levelUpBonusMP = 45;
+			myPlayerIGManager.levelUpBonusHP = 45;
+			myGeneManaScript.levelUpBonusMP = 35;
 			myPlayerIGManager.armorScore = 10;
 			myAutoAScript.levelUpBonusDamage = 2;
 			myPlayerIGManager.levelUpBonusArmor = 1;
@@ -576,7 +576,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myAutoAScript.damage = 22;
 			myAutoAScript.attackRate = .8f;
 			myAutoAScript.attackRange = 20;
-			myPlayerIGManager.levelUpBonusHP = 35;
+			myPlayerIGManager.levelUpBonusHP = 55;
 			myGeneManaScript.levelUpBonusMP = 12;
 
 			myPlayerIGManager.armorScore = 15;
@@ -653,7 +653,25 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void RpcCallMessage(string mess)
 	{
 		GameManager.instanceGM.messageManager.SendAnAlertMess (mess, Color.green);
+		if (isLocalPlayer) 
+		{
+			StartCoroutine (HideTheLoadingScreen ());
+		}
 
+	}
+
+	IEnumerator HideTheLoadingScreen()
+	{
+		GameObject go = GameObject.Find ("LoadingCanvas");
+		go.GetComponent<CanvasScaler> ().uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+		while (go.GetComponent<CanvasScaler>().scaleFactor>0.02f) 
+		{
+			go.GetComponent<CanvasScaler>().scaleFactor -=.05f;
+			yield return new WaitForEndOfFrame ();
+		}
+
+		GameObject.Destroy (go);
+		
 	}
 
 	IEnumerator TellNewPlayerHasJoin()

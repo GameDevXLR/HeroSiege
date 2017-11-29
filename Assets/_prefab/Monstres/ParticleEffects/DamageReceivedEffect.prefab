@@ -71,6 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4492350796228666}
   - component: {fileID: 114669136338549692}
+  - component: {fileID: 114246194412735988}
   m_Layer: 0
   m_Name: DamageReceivedEffect
   m_TagString: Untagged
@@ -200,6 +201,38 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114246194412735988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1916352095888074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 190
+    i1: 185
+    i2: 218
+    i3: 236
+    i4: 218
+    i5: 241
+    i6: 92
+    i7: 116
+    i8: 10
+    i9: 120
+    i10: 147
+    i11: 14
+    i12: 154
+    i13: 31
+    i14: 147
+    i15: 158
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114669136338549692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,7 +328,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 808203209
+  randomSeed: 1934228187
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3544,7 +3577,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 49174049
+  randomSeed: -217975939
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6691,7 +6724,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1731799852
+  randomSeed: -2137226554
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6941,7 +6974,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -6982,7 +7015,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
