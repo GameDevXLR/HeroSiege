@@ -18,6 +18,7 @@ public class ShowAndHideImg : MonoBehaviour {
 	public Button camLockBtn;
 
 	public Transform bigMapBtn;
+	public GameObject smallMapBtn;
 	public RectTransform minimapArea;
 	public bool isBig;
 //	public Quaternion rotImgMinimap;
@@ -66,11 +67,17 @@ public class ShowAndHideImg : MonoBehaviour {
 		isBig = !isBig;
 		if (!isBig) 
 		{
+			bigMapBtn.gameObject.SetActive (true);
+			smallMapBtn.SetActive (false);
 			minimapArea.localScale = new Vector3 (1, 1, 1);
+			minimapArea.anchoredPosition = Vector3.zero;
 //			bigMapBtn.rotation = Quaternion.Inverse (rotImgMinimap);
 		} else 
 		{
+			bigMapBtn.gameObject.SetActive (false);
+			smallMapBtn.SetActive (true);
 			minimapArea.localScale = new Vector3 (2.45f,2.45f, 1f);
+			minimapArea.anchoredPosition = new Vector3 (0, 160f, 0f);
 //			bigMapBtn.rotation = rotImgMinimap;
 
 		}
