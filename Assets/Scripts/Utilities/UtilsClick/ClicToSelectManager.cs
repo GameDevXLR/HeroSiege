@@ -8,6 +8,7 @@ public class ClicToSelectManager : MonoBehaviour
 
 	//gere le clic to select. pour l'instant ya que des shops faudra ajuster ca un jour.
 	public LayerMask layer_mask;
+    GameObject target;
 
 	// Update is called once per frame
 	void Update ()
@@ -23,7 +24,15 @@ public class ClicToSelectManager : MonoBehaviour
                 {
                     objCollide.GetComponent<ShopScript>().OpenYourMenu();
                 }
-			}
+                else if (hit.collider.gameObject.layer == Layers.Ennemies 
+                    && (!hit.collider.gameObject.GetComponent<EnnemyIGManager>().isAnInvisible && hit.collider.gameObject.GetComponent<EnemyAutoAttackScript>().isAttacking))
+                {
+                    GameManager.instanceGM.playerObj.GetComponent<PlayerClicToMove>().ReceiveNewTarget(hit.collider.gameObject);
+
+                    Debug.Log("Miaou");
+                }
+
+            }
 		}
 	}
 }

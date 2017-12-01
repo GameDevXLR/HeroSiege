@@ -55,62 +55,53 @@ public class PlayerClicToMove : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
        
-		if (Input.GetMouseButtonUp (1) && isLocalPlayer) 
+		if ( isLocalPlayer) 
 		{
-			
-//			audioS.PlayOneShot (clicSound, .6f);
-
-			
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            int distance = 1;
-            RaycastHit[] hits = Physics.RaycastAll(ray, 2000f, layer_mask); ;
-
-            while (hits.Length > 0 && distance < 10 && hits[0].point.y >= CameraController.instanceCamera.yMinCamera) 
+            if (Input.GetMouseButtonUp(1))
             {
-                distance++;
-                Vector3 origin = ray.origin + (ray.direction * distance);
-                ray = new Ray(origin, ray.direction);
-                hits = Physics.RaycastAll(ray, 2000f, layer_mask);
+                bool next = true;
+    //			audioS.PlayOneShot (clicSound, .6f);
+
+			
+			    Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+                int distance = 1;
+                RaycastHit[] hits = Physics.RaycastAll(ray, 2000f, layer_mask); ;
+
+                while (hits.Length > 0 && distance < 10 && hits[0].point.y >= CameraController.instanceCamera.yMinCamera) 
+                {
+                    distance++;
+                    Vector3 origin = ray.origin + (ray.direction * distance);
+                    ray = new Ray(origin, ray.direction);
+                    hits = Physics.RaycastAll(ray, 2000f, layer_mask);
+                }
+                int i = 0;
+
+                while(i < hits.Length && next)
+                {
+                    RaycastHit hit = hits[i++];
+                    if (GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj) 
+				    {
+					    GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj.eraseRenderer = true;
+					    GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = null;
+				    }
+				     if(hit.collider.gameObject.layer == Layers.Ground )
+				    {
+					    StartCoroutine (MoveFirst ((float)nClient.GetRTT(), hit.point));
+					    cursorTargetter.transform.position = hit.point;
+    //					cursorTargetter.transform.position = new Vector3 (hit.point.x, 0.2f, hit.point.z);
+					    cursorTargetter.GetComponent<Animator> ().Play ("ClickArrowAnim");
+					    CmdSendNewDestination (hit.point);
+					    CancelInvoke ();
+    //					cursorTargetter.GetComponent<Animator> ().
+					    Invoke ("StopThePosTargeter", 1.5f);
+                        //					cursorTargetter.GetComponent<Animator> ().Play("ClickArrowAnim");
+                        next = false;
+				    }
+
+			    }
             }
-            int i = 0;
 
-            while(i < hits.Length )
-            {
-                RaycastHit hit = hits[i++];
-                if (GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj) 
-				{
-					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj.eraseRenderer = true;
-					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = null;
-				}
-				if (hit.collider.gameObject.layer == Layers.Ennemies) 
-				{
-					if (hit.collider.gameObject.GetComponent<EnnemyIGManager> ().isAnInvisible && !hit.collider.gameObject.GetComponent<EnemyAutoAttackScript> ().isAttacking) 
-					{
-						//rien faire si tu clic sur un invisible qui est pas en train d'attaquer.
-						return; 
-					}
-					cursorTargetter.transform.position = Vector3.zero;
-					target = hit.collider.gameObject;
-					GameManager.instanceGM.gameObject.GetComponent<MouseManager> ().selectedObj = target.GetComponent<EnnemyIGManager> ().outlinemob;
-					target.GetComponent<EnnemyIGManager> ().outlinemob.eraseRenderer = false;
-					CmdSendNewTarget(target.GetComponent<NetworkIdentity> ().netId);
-					return;
-				} else 
-				{
-					StartCoroutine (MoveFirst ((float)nClient.GetRTT(), hit.point));
-					cursorTargetter.transform.position = hit.point;
-//					cursorTargetter.transform.position = new Vector3 (hit.point.x, 0.2f, hit.point.z);
-					cursorTargetter.GetComponent<Animator> ().Play ("ClickArrowAnim");
-					CmdSendNewDestination (hit.point);
-					CancelInvoke ();
-//					cursorTargetter.GetComponent<Animator> ().
-					Invoke ("StopThePosTargeter", 1.5f);
-//					cursorTargetter.GetComponent<Animator> ().Play("ClickArrowAnim");
-				}
-
-			}
-		
-		}
+        }
 		if (target)  
 		{
 			if(Vector3.Distance(targetTmpPos, target.transform.localPosition)>1f && !GetComponent<PlayerAutoAttack>().holdPosition)
@@ -160,6 +151,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 		//audioS.Play ();
 		MovingProcedure (desti);
 	}
+
+
 	[Command]
 	public void CmdSendNewDestination(Vector3 dest)
 	{
@@ -192,7 +185,13 @@ public class PlayerClicToMove : NetworkBehaviour {
         attackScript.stopWalk = false;
     }
 
-    
+    public void ReceiveNewTarget(GameObject target)
+    {
+        cursorTargetter.transform.position = Vector3.zero;
+        GameManager.instanceGM.gameObject.GetComponent<MouseManager>().selectedObj = target.GetComponent<EnnemyIGManager>().outlinemob;
+        target.GetComponent<EnnemyIGManager>().outlinemob.eraseRenderer = false;
+        CmdSendNewTarget(target.GetComponent<NetworkIdentity>().netId);
+    }
 
     [Command]
 	public void CmdSendNewTarget(NetworkInstanceId targetID)
