@@ -10,8 +10,15 @@ public class ClicToSelectManager : MonoBehaviour
 	public LayerMask layer_mask;
     GameObject target;
 
-	// Update is called once per frame
-	void Update ()
+    void Start()
+    {
+        enabled = false;
+        Invoke("getEnable", 5f);
+    }
+
+    
+    // Update is called once per frame
+    void Update ()
 	{
 		if (Input.GetMouseButtonUp (0) ) 
 		{
@@ -25,14 +32,18 @@ public class ClicToSelectManager : MonoBehaviour
                     objCollide.GetComponent<ShopScript>().OpenYourMenu();
                 }
                 else if (hit.collider.gameObject.layer == Layers.Ennemies 
-                    && (!hit.collider.gameObject.GetComponent<EnnemyIGManager>().isAnInvisible && hit.collider.gameObject.GetComponent<EnemyAutoAttackScript>().isAttacking))
+                    && (!hit.collider.gameObject.GetComponent<EnnemyIGManager>().isAnInvisible || hit.collider.gameObject.GetComponent<EnemyAutoAttackScript>().isAttacking))
                 {
                     GameManager.instanceGM.playerObj.GetComponent<PlayerClicToMove>().ReceiveNewTarget(hit.collider.gameObject);
-
-                    Debug.Log("Miaou");
                 }
 
             }
 		}
 	}
+
+
+    void getEnable()
+    {
+        enabled = true;
+    }
 }
