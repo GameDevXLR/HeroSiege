@@ -96,11 +96,12 @@ public class PlayerInitialisationScript : NetworkBehaviour
 
 
 	//remis récemment, ca avait été enlevé...C'est le bordel pour le sync des noms des joueurs. A optimiser soon. Voir si ca suffit a débug le tout cette fonction. A TEST (novembre2017)
-	public override void OnStartClient ()
-	{
-		ChangeMyName (playerNickName);
-		base.OnStartClient ();
-	}
+	//Re enlevé le 30 novembre
+//	public override void OnStartClient ()
+//	{
+//		ChangeMyName (playerNickName);
+//		base.OnStartClient ();
+//	}
 
 	public override void OnStartLocalPlayer ()
 	{
@@ -136,7 +137,6 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			selectedHero.AddListener (CapsuleSelectTank);
 			string playerNN;
 			playerNN = PlayerPrefs.GetString ("PlayerNN");
-			ChangeMyName (playerNN);
 			CmdChangeName(playerNN);
 			GetComponent<PlayerLevelUpManager> ().enabled = true;
 			minimapIcon.color = mainPlayerColor;
@@ -171,6 +171,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	public void CmdChangeName (string nickName)
 	{
 		playerNickName = nickName;
+		ChangeMyName (nickName);
+
         NetworkUtils.Instance.listPlayer[nickName] = GetComponent<NetworkIdentity>().connectionToClient;
 
     }
@@ -605,11 +607,13 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	}
 	IEnumerator StartInitName(string str)
 	{
-		yield return new WaitForSeconds (2f);
-		playerNickName = str;
+		if (!isServer) {
+			playerNickName = str;
+		}
 		gameObject.name = playerNickName + netId.ToString();
 		GetComponent<PlayerManager> ().playerNickname = playerNickName;
 		//GetComponent<PlayerManager> ().playerSelecUI.GetComponentInChildren<Text> ().text = playerNickName;
+		yield return new WaitForSeconds (3f);
 		GetComponent<Location> ().Display_1_Text = playerNickName;
 		if (!isLocalPlayer) 
 		{
@@ -664,19 +668,22 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		GameObject go = GameObject.Find ("LoadingCanvas");
 		go.GetComponent<CanvasScaler> ().uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+		float tmp = go.GetComponent<CanvasScaler> ().scaleFactor;
 		while (go.GetComponent<CanvasScaler>().scaleFactor>0.02f) 
 		{
 			go.GetComponent<CanvasScaler>().scaleFactor -=.05f;
 			yield return new WaitForEndOfFrame ();
 		}
+		go.GetComponent<CanvasScaler> ().scaleFactor = tmp;
+		go.GetComponent<CanvasScaler> ().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 
-		GameObject.Destroy (go);
+		go.GetComponent<Canvas> ().enabled = false;
 		
 	}
 
 	IEnumerator TellNewPlayerHasJoin()
 	{
-		yield return new WaitForSeconds (1.5f);
+		yield return new WaitForSeconds (3f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") {
 			RpcCallMessage (playerNickName + " a rejoind la partie.");
 

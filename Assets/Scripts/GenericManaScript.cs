@@ -113,7 +113,11 @@ public class GenericManaScript : NetworkBehaviour
 	[ClientRpc]
 	public void RpcActualizeThatMana(int curMP)
 	{
-
+		if (!manaBar || !manaBarMain) 
+		{
+			Debug.Log ("pas encore config");
+			return;
+		}
 		float x = (float)curMP / maxMp;
 		manaBar.localScale = new Vector3 (x, 1f, 1f);
 		if (isLocalPlayer) {

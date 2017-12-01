@@ -196,7 +196,7 @@ public class CameraController : MonoBehaviour
                 }
                 else
                 {
-                    areLocking();
+                   IsLocking();
                 }
                 changeCamLockImg.Invoke();
             }
@@ -213,7 +213,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    public void areLocking()
+    public void IsLocking()
     {
         isLock = !isLock;
         behavior.SetBool("Lock", isLock);

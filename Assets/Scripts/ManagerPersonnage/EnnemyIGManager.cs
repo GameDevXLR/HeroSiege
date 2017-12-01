@@ -152,6 +152,23 @@ public class EnnemyIGManager : CharacterIGManager
 						GameManager.instanceGM.SyncMobCountT2 (GameManager.instanceGM.totalMobCountT2 -= 1);
 
 					}
+				} else 
+				{
+					if (GetComponent<MinionsPathFindingScript> ().isTeam1) {
+						GameManager.instanceGM.Team1LooseALife();
+						GameManager.instanceGM.Team1LooseALife();
+						GameManager.instanceGM.Team1LooseALife();
+						GameManager.instanceGM.Team1LooseALife();
+						GameManager.instanceGM.Team1LooseALife();
+
+					} else {
+						GameManager.instanceGM.Team2LooseALife();
+						GameManager.instanceGM.Team2LooseALife();
+						GameManager.instanceGM.Team2LooseALife();
+						GameManager.instanceGM.Team2LooseALife();
+						GameManager.instanceGM.Team2LooseALife();
+
+					}
 				}
 			}
 			yield return new WaitForSeconds (0.1f);

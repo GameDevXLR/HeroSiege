@@ -42,7 +42,7 @@ public class PlayerManager : NetworkBehaviour
 //		minimap = GameObject.Find("minimap");
 		if (!isLocalPlayer) 
 		{
-			SpawnPlayerUI ();
+			StartCoroutine (DelayTheMainSelecHeroUI ());
 //			playerUI.transform.GetChild (0).GetComponent<Text> ().text = playerNickname;
 			//systeme de nom provisoire juste pour distinguer : en attendant le menu avant jeu.
 		}else
@@ -56,7 +56,12 @@ public class PlayerManager : NetworkBehaviour
 		ActualizeKillCount (killCount);
 
 	}
+	IEnumerator DelayTheMainSelecHeroUI()
+	{
+		yield return new WaitForSeconds (2f);
+		SpawnPlayerUI ();
 
+	}
 	public void SpawnPlayerUI()
 	{
 
@@ -81,7 +86,7 @@ public class PlayerManager : NetworkBehaviour
 
 	IEnumerator DelayTheSelecHeroUI()
 	{
-		yield return new WaitForSecondsRealtime (2f);
+		yield return new WaitForSeconds (2f);
 		SpawnPlayerSelecUI ();
 
 	}
@@ -97,7 +102,7 @@ public class PlayerManager : NetworkBehaviour
 
 		}
 		playerSelecHeroChosenImg = playerSelecUI.transform.Find("Avatar").GetComponent<Image>();
-		playerSelecUI.GetComponentInChildren<Text> ().text = GetComponent<PlayerInitialisationScript>().playerNickName;
+		playerSelecUI.GetComponentInChildren<Text> ().text = playerNickname;
 		playerSelecUI.transform.localScale = new Vector3 (1f, 1f, 1f);
 	}
 
@@ -111,8 +116,9 @@ public class PlayerManager : NetworkBehaviour
 	public void ActualizeKillCount(int kills)
 	{
 		killCount = kills;
-
-		playerKillsTxt.text = killCount.ToString ();
+		if (playerKillsTxt) {
+			playerKillsTxt.text = killCount.ToString ();
+		}
 	}
 
 	public void ActuPlayerLvl(int lvl)

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class NetHostGame :  MonoBehaviour{
 
 		[SerializeField]
@@ -21,7 +22,14 @@ public class NetHostGame :  MonoBehaviour{
 
 		void Start ()
 		{
-//		roomName = "Default";
+		loadingCanvas = GameObject.Find ("LoadingCanvas");
+		loadColoredBackground = loadingCanvas.transform.Find ("FondLoadingColored").GetComponent<Image>();
+		loadingMessage = loadingCanvas.transform.Find ("LoadingPanel").transform.Find ("LoadText").GetComponent<Text> ();
+		loadingBar = loadingCanvas.transform.Find ("LoadingPanel").transform.Find ("LoadingBar").GetComponent<Slider> ();
+
+		loadingCanvas.GetComponent<Canvas> ().enabled = true;
+		loadingCanvas.SetActive (false);
+
 			networkManager = NetworkManager.singleton;
 			if (networkManager.matchMaker == null)
 			{
@@ -187,7 +195,7 @@ public class NetHostGame :  MonoBehaviour{
 		{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
 		}
-		yield return new WaitForSecondsRealtime (15f);
+		yield return new WaitForSecondsRealtime (30f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
 			loadingMessage.text = "Echec critique!";
@@ -202,8 +210,9 @@ public class NetHostGame :  MonoBehaviour{
 			loadingBar.value = Random.Range(0.1f, 0.5f);
 		}	
 		loadColoredBackground.CrossFadeAlpha (0f, 0.1f, true);
-		loadingCanvas.SetActive (false);
+
 		StartCoroutine(FadeTo(0f,5f));
+		loadingCanvas.SetActive (false);
 
 		isCreating = false;
 	}

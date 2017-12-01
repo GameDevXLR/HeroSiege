@@ -598,12 +598,12 @@ public class GameManager : NetworkBehaviour
 		//gestion de la récompense de quete:
 		if (isFirstTeam) 
 		{
-			SyncReputation( actualReputation - (float)((float)quest2Rep / 100f));
+			SyncReputation( actualReputation + (float)((float)quest2Rep / 100f));
 		}
 		else 
 		{
 
-			SyncReputation( actualReputation + (float)((float)quest2Rep / 100f));
+			SyncReputation( actualReputation - (float)((float)quest2Rep / 100f));
 		}
 		isQuest2Active = false;
 

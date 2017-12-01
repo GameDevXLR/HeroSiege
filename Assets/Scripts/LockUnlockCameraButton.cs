@@ -7,6 +7,6 @@ public class LockUnlockCameraButton : MonoBehaviour {
 
 	public void LockUnlock()
 	{
-		Camera.main.transform.GetComponent<CameraController> ().areLocking ();
+		Camera.main.transform.GetComponent<CameraController> ().IsLocking ();
 	}
 }

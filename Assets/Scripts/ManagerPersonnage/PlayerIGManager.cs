@@ -116,6 +116,10 @@ public class PlayerIGManager : CharacterIGManager {
         
         if (isLocalPlayer)
         {
+			if (!lifeBarMain) 
+			{
+				return;
+			}
             lifeBarMain.localScale = new Vector3(x, 1f, 1f);
             playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
 

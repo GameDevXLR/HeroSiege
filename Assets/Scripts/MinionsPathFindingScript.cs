@@ -14,6 +14,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 	public NavMeshAgent agent;
 //	[SyncVar] public Transform target;
 	public Transform target;
+	private Vector3 finalDest;
 //	public float stopTime = 2f;
 	// Use this for initialization
 	void Start () 
@@ -63,6 +64,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 		if(isBoss){
 			GoToEndGame ();
 		}
+		finalDest = agent.pathEndPosition;
 	}
 	
 	public void GoToEndGame()
@@ -78,16 +80,53 @@ public class MinionsPathFindingScript : NetworkBehaviour
 	IEnumerator GoToEndGameRoutine()
 	{
 
-			yield return new WaitForSeconds (0.66f);
+			yield return new WaitForSeconds (0.1f);
 		if (agent.isOnNavMesh) 
 		{
-			if (target == null) 
-			{
-				target = transform;
-
-			}
-			agent.SetDestination (target.position);
 			agent.isStopped = false;
+			switch (originalCampNbr) 
+			{
+			//jung mob: ne pas mettre de chiffre, donc zero.
+			case 0:
+		agent.SetDestination (target.position);
+
+				break;
+				//Team1
+			case 1:
+				agent.SetPath (GameManager.instanceGM.camp1.path);
+				break;
+			case 2:
+				agent.SetPath (GameManager.instanceGM.camp2.path);
+				break;
+			case 3:
+				agent.SetPath (GameManager.instanceGM.camp3.path);
+
+				break;
+				//team2
+			case 10:
+				agent.SetPath (GameManager.instanceGM.camp1B.path);
+				break;
+			case 20:
+				agent.SetPath (GameManager.instanceGM.camp2B.path);
+				break;
+			case 30:
+				agent.SetPath (GameManager.instanceGM.camp3B.path);
+
+				break;
+			default:
+				Debug.Log (originalCampNbr);
+				break;
+			}
+			if (agent.pathStatus == NavMeshPathStatus.PathInvalid) 
+			{
+				agent.SetDestination (finalDest);
+			}
+//			if (target == null) 
+//			{
+//				target = transform;
+//
+//			}
+//			agent.SetDestination (target.position);
 		}
 	}
 }

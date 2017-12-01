@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-[NetworkSettings(channel = 0, sendInterval = 0.3f)]
+[NetworkSettings(channel = 0, sendInterval = 0.2f)]
 public class EnemyAutoAttackScript : NetworkBehaviour {
 	
 
@@ -207,6 +207,11 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 	public void AcquireTarget(NetworkInstanceId id)
 		{
+		targetID = id;
+		target = ClientScene.FindLocalObject (id);
+		if (target != null) {
+			targetTempPos = target.transform.position;
+		}
 		StartCoroutine (AcquireTargetProcess ());
 
 	}
@@ -226,16 +231,17 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 				targetTempPos = target.transform.localPosition;
 			}
 		} else {
-			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
-			if (gameObject.layer != 8) 
-			{
-			StopAllCoroutines ();
-				if (target.layer != Layers.UI) 
-				{
-					GetTargetFromID (targetID);
-				}
-			}
-				anim.SetBool ("walk", walkAnim = false);
+//			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+//			if (gameObject.layer != 8) 
+//			{
+//			StopAllCoroutines ();
+//				if (target.layer != Layers.UI) 
+//				{
+//					GetTargetFromID (targetID);
+//				}
+//			}
+//				anim.SetBool ("walk", walkAnim = false);
+			Debug.Log("fuck");
 		}
 	}
 	public void LooseTarget()
@@ -276,10 +282,10 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 
 		isActualizingPos = true;
 		if ((target.gameObject.tag == "Player" && target.GetComponent<PlayerIGManager>().isDead) 
-            || (target.gameObject.tag == "Pet" && target.GetComponent<PetIGManager> ().isDead) 
+//            || (target.gameObject.tag == "Pet" && target.GetComponent<PetIGManager> ().isDead) 
             || Vector3.Distance (transform.localPosition, target.transform.localPosition) > detectionRange)
 		{
-			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
+//			target = GetComponent<MinionsPathFindingScript> ().target.gameObject;
 			if (isServer) {
 				if (target.layer == Layers.Player) {
 					SetTheTarget (target);
