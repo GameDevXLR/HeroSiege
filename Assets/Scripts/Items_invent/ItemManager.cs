@@ -29,6 +29,7 @@ public class ItemManager : NetworkBehaviour
 	public GameObject RunnerBootsPrefab;
 	public GameObject IgdraBraceletPrefab;
 	public GameObject OrbOfPowerPrefab;
+	public GameObject buyTomeParticle;
 	public AudioClip Gold;
 	public bool tip1Given;
 
@@ -106,6 +107,8 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcUpMyLife()
 	{
+		StopCoroutine (BuyTomeEffect ());
+		StartCoroutine (BuyTomeEffect ());
 		if (isServer) {
 			targetplayer = NetworkServer.FindLocalObject (targetID);
 			targetplayer.GetComponent<PlayerIGManager> ().maxHp += 50;
@@ -116,6 +119,8 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcUpMyMana()
 	{
+		StopCoroutine (BuyTomeEffect ());
+		StartCoroutine (BuyTomeEffect ());
 		if (isServer) {
 			targetplayer = NetworkServer.FindLocalObject (targetID);
 			targetplayer.GetComponent<GenericManaScript> ().maxMp += 30;
@@ -126,7 +131,8 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcUpMyDamage()
 	{
-
+		StopCoroutine (BuyTomeEffect ());
+		StartCoroutine (BuyTomeEffect ());
 		if (isServer) 
 		{
 			targetplayer = NetworkServer.FindLocalObject (targetID);
@@ -139,7 +145,8 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcUpMyExp()
 	{
-
+		StopCoroutine (BuyTomeEffect ());
+		StartCoroutine (BuyTomeEffect ());
 		if (isServer) 
 		{
 			targetplayer = NetworkServer.FindLocalObject (targetID);
@@ -150,7 +157,8 @@ public class ItemManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcUpMyRegen()
 	{
-
+		StopCoroutine (BuyTomeEffect ());
+		StartCoroutine (BuyTomeEffect ());
 		if (isServer) 
 		{
 			targetplayer = NetworkServer.FindLocalObject (targetID);
@@ -158,6 +166,14 @@ public class ItemManager : NetworkBehaviour
 			targetplayer.GetComponent<GenericManaScript> ().regenMp += 2;
 		}
 
+	}
+
+	IEnumerator BuyTomeEffect()
+	{
+		
+		buyTomeParticle.SetActive (true);
+		yield return new WaitForSeconds (2f);
+		buyTomeParticle.SetActive (false);
 	}
 	[ClientRpc]
 	public void RpcRecruteAGuard()

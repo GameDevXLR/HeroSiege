@@ -418,7 +418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1104426062719496
 GameObject:
   m_ObjectHideFlags: 1
@@ -5413,7 +5413,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -6452,7 +6452,7 @@ MonoBehaviour:
   timeBetweenGoldDrop: 2
   goldPerDrop: 1
   isDropping: 0
-  ActualGold: 300
+  ActualGold: 50000
   goldCanvasPrefab: {fileID: 1776901904842416, guid: 4ad2b4e1e6b57184cabd19456ffe1272,
     type: 2}
 --- !u!114 &114500921820713584
@@ -7094,6 +7094,7 @@ MonoBehaviour:
     type: 2}
   OrbOfPowerPrefab: {fileID: 1462563177764482, guid: 6105e080d374e244e821ffc265a431c3,
     type: 2}
+  buyTomeParticle: {fileID: 1098585033262152}
   Gold: {fileID: 8300000, guid: 14e423af532e2ed409465ec735b11cdb, type: 3}
   tip1Given: 0
 --- !u!114 &114648224865163368
@@ -27410,7 +27411,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -27460,7 +27461,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1363807215
+  randomSeed: 1230477336
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -40415,7 +40416,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -40465,7 +40466,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -153622881
+  randomSeed: -1904865547
   InitialModule:
     serializedVersion: 3
     enabled: 1
