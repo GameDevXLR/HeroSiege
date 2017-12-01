@@ -384,7 +384,7 @@ public class PlayerAutoAttack: NetworkBehaviour
 		isUnderCC = false;
 	}
 
-    public void receiveSetUnderCC(bool isUnderCC)
+    public void ReceiveSetUnderCC(bool isUnderCC)
     {
         CmdSetUnderCC(isUnderCC);
     }

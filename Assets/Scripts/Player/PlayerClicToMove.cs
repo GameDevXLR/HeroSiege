@@ -279,5 +279,19 @@ public class PlayerClicToMove : NetworkBehaviour {
         agentPlayer.isStopped = true;
         agentPlayer.velocity = Vector3.zero;
     }
+
+    public void ReceiveActiveAutoAttack( bool isAutoAAttack)
+    {
+
+        CmdActiveAutoAttack(isAutoAAttack);
+    }
+
+    [Command]
+    public void CmdActiveAutoAttack(bool isAutoAAttack)
+    {
+        aggroArea.autoTargetting = isAutoAAttack;
+
+    }
+
 }
 
