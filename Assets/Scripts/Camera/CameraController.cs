@@ -24,6 +24,11 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public GameObject target;
 
+    /// <summary>
+    /// Vecteur utilisé par la minimap
+    /// </summary>
+    public Vector3 targetVect;
+
     public Animator behavior;
 
     /// <summary>
@@ -204,14 +209,27 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void MoveCameraTo(Vector3 vect)
+    public void initialiseMinimapState()
+    {
+        isLock = false;
+        behavior.SetBool("isMinimap", true);
+        behavior.SetBool("Lock", isLock);
+    }
+
+    public void endMinimapState()
+    {
+        behavior.SetBool("isMinimap", false);
+    }
+
+    public void setTargetVect(Vector3 vect)
     {
         if (vect != Vector3.zero)
         {
-            gameObject.transform.position = vect + new Vector3(1, 2f, 0) * distance;
+            targetVect = vect + new Vector3(1, 2f, 0) * distance;
         }
 
     }
+    
 
     public void IsLocking()
     {

@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System;
 
-public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
+public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
    
     float minimapHeight;
@@ -20,6 +20,13 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         minimapHeight = GetComponent<RectTransform>().rect.height;
         minimapWidth = GetComponent<RectTransform>().rect.width;
         
+    }
+
+
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        GameManager.instanceGM.playerObj.GetComponent<PlayerClicToMove>().isInMiniMap = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -39,7 +46,10 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         }
 
         else if (Input.GetMouseButtonDown(0))
+        {
+            CameraController.instanceCamera.initialiseMinimapState();
             moveCamera(localHit);
+        }
         else if (Input.GetMouseButtonDown(1))
             movePLayer(localHit);
     }
@@ -57,6 +67,18 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         }
     }
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        CameraController.instanceCamera.endMinimapState();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        GameManager.instanceGM.playerObj.GetComponent<PlayerClicToMove>().isInMiniMap = false;
+    }
+
+    
+
     private void moveCamera(Vector3 localHit)
     {
         Vector3 vector = new Vector3(Math.Abs(localHit.x / minimapWidth), 1 - Math.Abs(localHit.y / minimapHeight), 0);
@@ -64,10 +86,7 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-			Camera.main.GetComponent<CameraController>().areLocking(false);
-            Camera.main.GetComponent<CameraController>().MoveCameraTo(hit.point);
-
-
+            Camera.main.GetComponent<CameraController>().setTargetVect(hit.point);
         }
     }
 
@@ -96,15 +115,17 @@ public class MiniMapClick : MonoBehaviour, IPointerDownHandler, IDragHandler
         }
     }
 
+
+
     //public void sendPing(Vector3 pingPos)
     //{
-        
-        
+
+
     //    Vector3 truePos = new Vector3(pingPos.x * Screen.width,pingPos.y * Screen.height,0);
     //    Debug.Log("position : " + truePos);
     //    //ping.transform.position = truePos;
     //    GameObject newPing = Instantiate(ping, truePos, ping.transform.rotation) as GameObject;
-        
+
     //    newPing.transform.SetParent(transform);
     //}
 

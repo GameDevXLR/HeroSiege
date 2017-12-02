@@ -21,7 +21,8 @@ public class PlayerClicToMove : NetworkBehaviour {
 	public Vector3 targetTmpPos;
 	public GameObject cursorTargetter;
 	int layer_mask;
-	NetworkClient nClient;
+    public bool isInMiniMap = false;
+    NetworkClient nClient;
 	[SyncVar(hook = "ActualizePSpeed")]public float playerSpeed; // c'est pas link au nameshagent.speed attention!!! a corriger a l'occase. voir itemmanager qui fait appel pour le moment lors de l'achat des boots
 	public Text speedDisplay;
 	//	[SyncVar]public Vector3 startingPos; inutil now c'était pour les pnj...héritage d'un temps révolu.
@@ -57,7 +58,7 @@ public class PlayerClicToMove : NetworkBehaviour {
        
 		if ( isLocalPlayer) 
 		{
-            if (Input.GetMouseButtonUp(1))
+            if (Input.GetMouseButtonUp(1) && !isInMiniMap)
             {
                 bool next = true;
     //			audioS.PlayOneShot (clicSound, .6f);

@@ -24,10 +24,7 @@ public class CameraBehavior : StateMachineBehaviour
 			cameraController.transform.position = Vector3.Lerp (cameraController.transform.position, cameraController.target.transform.position + cameraController.vectCam * cameraController.distance, cameraController.speed * Time.deltaTime);
 			// Set the camera to look towards the Player model
 			lookAt ();
-		} else 
-		{
-			Debug.Log ("ce correctif est-il génant?");
-		}
+		} 
     }
 
     protected float findDirection()
