@@ -1780,9 +1780,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemiAtt: {fileID: 8300000, guid: 819de7c6607003f47831a49f984395b8, type: 3}
   agent: {fileID: 195000901155981128}
-  attackRange: 2.5
-  attackRate: 0.5
-  damage: 5
+  attackRange: 5
+  attackRate: 1
+  damage: 15
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 15
@@ -2100,7 +2100,7 @@ NavMeshAgent:
   m_Acceleration: 5000
   avoidancePriority: 50
   m_AngularSpeed: 9999
-  m_StoppingDistance: 3
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
   m_AutoRepath: 0

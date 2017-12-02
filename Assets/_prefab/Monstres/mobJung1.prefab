@@ -11022,8 +11022,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeBar: {fileID: 224359716515990726}
   painSound: []
-  maxHp: 90
-  currentHp: 90
+  maxHp: 150
+  currentHp: 150
   bonusHp: 0
   regenHp: 0
   damageReduction: 0
@@ -11220,9 +11220,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemiAtt: {fileID: 8300000, guid: 819de7c6607003f47831a49f984395b8, type: 3}
   agent: {fileID: 195188654927422968}
-  attackRange: 3.5
-  attackRate: 1
-  damage: 2
+  attackRange: 5
+  attackRate: 1.5
+  damage: 10
   isAttacking: 0
   target: {fileID: 0}
   rotSpeed: 15
@@ -12006,7 +12006,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.6
-  m_Speed: 3
+  m_Speed: 2
   m_Acceleration: 5000
   avoidancePriority: 50
   m_AngularSpeed: 9999

@@ -21,19 +21,36 @@ public class MinionsPathFindingScript : NetworkBehaviour
 	{
 //		anim = GetComponentInChildren<Animator> ();
 		agent = GetComponent<NavMeshAgent> ();
-//		if (isTeam1) 
-//		{
-//			target = GameObject.Find ("EndPointForMobs").transform;
-//		} else 
-//		{
-//			target = GameObject.Find ("EndPointForMobsTeam2").transform;
-//
-//		}		
+		if(isBoss)
+		{
+		if (isTeam1) 
+		{
+			target = GameObject.Find ("EndPointForMobs").transform;
+		} else 
+		{
+			target = GameObject.Find ("EndPointForMobsTeam2").transform;
 
+		}		
+//		if(agent.pathStatus == NavMeshPathStatus.PathComplete){
+//			return;
+//		}
+
+			agent.isStopped = false;
+			if (target) {
+				agent.SetDestination (target.position);
+				finalDest = agent.pathEndPosition;
+
+				return;
+		}
+
+
+
+		}
 		switch (originalCampNbr) 
 		{
 		//jung mob: ne pas mettre de chiffre, donc zero.
 		case 0:
+
 			break;
 		//Team1
 		case 1:
@@ -61,10 +78,11 @@ public class MinionsPathFindingScript : NetworkBehaviour
 			Debug.Log (originalCampNbr);
 			break;
 		}
-		if(isBoss){
-			GoToEndGame ();
-		}
+
 		finalDest = agent.pathEndPosition;
+//		if(isBoss){
+//			GoToEndGame ();
+//		}
 	}
 	
 	public void GoToEndGame()
@@ -79,11 +97,16 @@ public class MinionsPathFindingScript : NetworkBehaviour
 
 	IEnumerator GoToEndGameRoutine()
 	{
+		yield return new WaitForSeconds (0.1f);
 
-			yield return new WaitForSeconds (0.1f);
 		if (agent.isOnNavMesh) 
+
 		{
 			agent.isStopped = false;
+			if(isBoss){
+				agent.SetDestination (target.position);
+				yield return null;
+			}
 			switch (originalCampNbr) 
 			{
 			//jung mob: ne pas mettre de chiffre, donc zero.
@@ -120,12 +143,17 @@ public class MinionsPathFindingScript : NetworkBehaviour
 			if (agent.pathStatus == NavMeshPathStatus.PathInvalid) 
 			{
 				agent.SetDestination (finalDest);
+				if (isBoss) {
+					agent.SetDestination (target.position);
+				}
+//				Debug.Log ("boss going to end game.");
 			}
-//			if (target == null) 
-//			{
-//				target = transform;
-//
-//			}
+			if (target == null) 
+			{
+				target = transform;
+
+			}
+//			if(isBoss){
 //			agent.SetDestination (target.position);
 		}
 	}
