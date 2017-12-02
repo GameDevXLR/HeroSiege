@@ -51,6 +51,11 @@ public class BossSpawnManager : NetworkBehaviour
 	{
 		GameObject bossTmpObj;
 		bossTmpObj = Instantiate (bossPrefab, tr.position, tr.rotation) as GameObject;
+		bossTmpObj.GetComponent<MinionsPathFindingScript> ().target = targetDest;
+		if (roadNbr == 2 || roadNbr == 3) 
+		{
+			bossTmpObj.GetComponent<MinionsPathFindingScript> ().isTeam1 = true;
+		} 
 		bossTmpObj.GetComponent<EnnemyIGManager> ().maxHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
 		bossTmpObj.GetComponent<EnnemyIGManager> ().currentHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
 		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor*GameManager.instanceGM.gameDifficulty*3;
@@ -58,7 +63,6 @@ public class BossSpawnManager : NetworkBehaviour
 		bossTmpObj.GetComponent<EnnemyIGManager> ().xpGiven += bonusFactor * bonusFactor;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().isCastingAoeCC = true;
 		bossTmpObj.GetComponent<MinionsPathFindingScript> ().originalCampNbr = roadNbr;
-		bossTmpObj.GetComponent<MinionsPathFindingScript> ().target = targetDest;
 
 		if (bonusFactor >= 10) 
 		{

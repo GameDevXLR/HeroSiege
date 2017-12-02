@@ -2871,14 +2871,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 77b1657738aac2d47acbbf106c5a42d9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 71e6deed25526714aa5dcfbefdd826d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2989,8 +2989,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeBar: {fileID: 224799649439388832}
   painSound: []
-  maxHp: 500
-  currentHp: 500
+  maxHp: 1000
+  currentHp: 1000
   bonusHp: 0
   regenHp: 25
   damageReduction: 0
@@ -3003,7 +3003,7 @@ MonoBehaviour:
   guyAttackingMe: {fileID: 0}
   isTaunt: 0
   xpGiven: 50
-  goldGiven: 5
+  goldGiven: 500
   goldDisplay: {fileID: 114438898843106408}
   goldCanvas: {fileID: 1678407210894732}
   isJungleMob: 0
@@ -3030,6 +3030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+  cam: {fileID: 0}
 --- !u!114 &114491183864383182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3054,6 +3055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+  cam: {fileID: 0}
 --- !u!114 &114510062978438894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3073,7 +3075,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4e17636d27e95aa49b50dee8b1780a95, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e04d68b54786781448a35918acc10547, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3213,6 +3215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+  cam: {fileID: 0}
 --- !u!114 &114754735642862784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3225,6 +3228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationActivated: 1
+  cam: {fileID: 0}
 --- !u!114 &114759398925377060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3500,7 +3504,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.69
-  m_Speed: 2.5
+  m_Speed: 3.5
   m_Acceleration: 5000
   avoidancePriority: 45
   m_AngularSpeed: 9999
@@ -3571,7 +3575,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 174676607
+  randomSeed: 1192760790
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6832,7 +6836,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 472218100
+  randomSeed: -745266380
   InitialModule:
     serializedVersion: 3
     enabled: 1

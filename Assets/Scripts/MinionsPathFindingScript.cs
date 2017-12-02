@@ -21,21 +21,18 @@ public class MinionsPathFindingScript : NetworkBehaviour
 	{
 //		anim = GetComponentInChildren<Animator> ();
 		agent = GetComponent<NavMeshAgent> ();
-//		if (isTeam1) 
-//		{
-//			target = GameObject.Find ("EndPointForMobs").transform;
-//		} else 
-//		{
-//			target = GameObject.Find ("EndPointForMobsTeam2").transform;
-//
-//		}		
 
+
+		if(isBoss){
+			return;
+		}
 		switch (originalCampNbr) 
 		{
 		//jung mob: ne pas mettre de chiffre, donc zero.
 		case 0:
+			
 			break;
-		//Team1
+			//Team1
 		case 1:
 			agent.SetPath (GameManager.instanceGM.camp1.path);
 			break;
@@ -44,7 +41,7 @@ public class MinionsPathFindingScript : NetworkBehaviour
 			break;
 		case 3:
 			agent.SetPath (GameManager.instanceGM.camp3.path);
-
+			
 			break;
 			//team2
 		case 10:
@@ -55,18 +52,42 @@ public class MinionsPathFindingScript : NetworkBehaviour
 			break;
 		case 30:
 			agent.SetPath (GameManager.instanceGM.camp3B.path);
-
+			
 			break;
 		default:
 			Debug.Log (originalCampNbr);
 			break;
 		}
-		if(isBoss){
-			GoToEndGame ();
-		}
+		
 		finalDest = agent.pathEndPosition;
 	}
-	
+
+
+	public override void OnStartClient()
+	{
+		base.OnStartClient ();
+		if(isBoss)
+		{
+			if (isTeam1) 
+			{
+				target = GameObject.Find ("EndPointForMobs").transform;
+			} else 
+			{
+				target = GameObject.Find ("EndPointForMobsTeam2").transform;
+
+			}		
+			//		if(agent.pathStatus == NavMeshPathStatus.PathComplete){
+			//			return;
+			//		}
+
+			agent.isStopped = false;
+//			if (target) {
+				agent.SetDestination (target.position);
+				finalDest = agent.pathEndPosition;
+
+			}
+	}
+
 	public void GoToEndGame()
 	{
 //		if (!isServer) 
@@ -79,11 +100,16 @@ public class MinionsPathFindingScript : NetworkBehaviour
 
 	IEnumerator GoToEndGameRoutine()
 	{
+		yield return new WaitForSeconds (0.1f);
 
-			yield return new WaitForSeconds (0.1f);
 		if (agent.isOnNavMesh) 
+
 		{
 			agent.isStopped = false;
+			if(isBoss){
+				agent.SetDestination (target.position);
+				yield return null;
+			}
 			switch (originalCampNbr) 
 			{
 			//jung mob: ne pas mettre de chiffre, donc zero.
@@ -120,12 +146,17 @@ public class MinionsPathFindingScript : NetworkBehaviour
 			if (agent.pathStatus == NavMeshPathStatus.PathInvalid) 
 			{
 				agent.SetDestination (finalDest);
+				if (isBoss) {
+					agent.SetDestination (target.position);
+				}
+//				Debug.Log ("boss going to end game.");
 			}
-//			if (target == null) 
-//			{
-//				target = transform;
-//
-//			}
+			if (target == null) 
+			{
+				target = transform;
+
+			}
+//			if(isBoss){
 //			agent.SetDestination (target.position);
 		}
 	}
