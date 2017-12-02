@@ -35,6 +35,16 @@ public class ChooseDifficultyScript : MonoBehaviour,  IEventSystemHandler
 
 	public Button startGameBtn;
 
+	public Sprite normalImg;
+	public Sprite hardImg;
+	public Sprite nightmareImg;
+	public Sprite madnessImg;
+
+	public Sprite normalHighlightImg;
+	public Sprite hardHighlightImg;
+	public Sprite nightmareHighlightImg;
+	public Sprite madnessHighlightImg;
+
 
     public enum difficultySettings
     {
@@ -72,20 +82,29 @@ public class ChooseDifficultyScript : MonoBehaviour,  IEventSystemHandler
 		hardBtn.animator.SetTrigger ("Normal");
 		nightmareBtn.animator.SetTrigger ("Normal");
 		madnessBtn.animator.SetTrigger ("Normal");
+		normalBtn.image.sprite = normalImg;
+		hardBtn.image.sprite = hardImg;
+		nightmareBtn.image.sprite = nightmareImg;
+		madnessBtn.image.sprite = madnessImg;
+
 		diffLvl = diff;
 		switch (diff) 
 		{
 		case 1:
 			normalBtn.animator.SetTrigger ("Highlighted");
+			normalBtn.image.sprite = normalHighlightImg;
 			break;
 		case 2:
 			hardBtn.animator.SetTrigger ("Highlighted");
+			hardBtn.image.sprite = hardHighlightImg;
 			break;
 		case 3:
 			nightmareBtn.animator.SetTrigger ("Highlighted");
+			nightmareBtn.image.sprite = nightmareHighlightImg;
 			break;
 		case 4:
 			madnessBtn.animator.SetTrigger ("Highlighted");
+			madnessBtn.image.sprite = madnessHighlightImg;
 			break;
 			
 		default:
