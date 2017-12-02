@@ -200,9 +200,19 @@ public class GameManager : NetworkBehaviour
 		{
 			if (y < 0) 
 			{
+				if (y < -.2f) 
+				{
+					GetComponent<AudioSource> ().PlayOneShot (looseRep2);
+					return;
+				}
 				GetComponent<AudioSource> ().PlayOneShot (looseRep1);
 			} else 
 			{
+				if (y > .2f) 
+				{
+					GetComponent<AudioSource> ().PlayOneShot (gainRep2);
+					return;
+				}
 				GetComponent<AudioSource> ().PlayOneShot (gainRep1);
 
 			}

@@ -231,9 +231,9 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 			if (tmp >= 0) 
 			{
 				cdCountdown.gameObject.GetComponentInChildren<Text> ().text = tmp.ToString ();
-				timeSpent += 0.2f;
+				timeSpent += 0.5f;
 			}
-			yield return new WaitForSecondsRealtime (0.2f);
+			yield return new WaitForSecondsRealtime (0.5f);
 		}
 	}
 	//si on clic sur level up; ca le dit au serveur.
@@ -276,7 +276,7 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 		spellLvl++;
 		spellCost += 16;
 		spellCD -= 3f;
-		spellDmg += 12;
+		spellDmg += 5*spellLvl;
 		if (onCD) 
 		{
 			timeSpent -= 3f;
@@ -291,12 +291,12 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 	}
 	public void ReziseTheTargeters()
 	{
-		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (2f, 2f, 1f);
-		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (2f, 2f, 1f);
+		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (2.2f, 2.2f, 1f);
+		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (2.2f, 2.2f, 1f);
 
-		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (.5f, .5f, 1f);
-		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (.5f, .5f, 1f);
-		spellTargeter.transform.GetChild (0).localScale = new Vector3 (.5f, .5f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (.3f, .3f, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (.3f, .3f, 1f);
+		spellTargeter.transform.GetChild (0).localScale = new Vector3 (.3f, .3f, 1f);
 
 
 	}
