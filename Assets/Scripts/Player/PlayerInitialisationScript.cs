@@ -379,12 +379,12 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneManaScript.currentMp = 150;
 			myGeneManaScript.regenMp = 4;
 			myPlayerIGManager.armorScore = 45;
-			myAutoAScript.damage = 20;
+			myAutoAScript.damage = 18;
 			myAutoAScript.attackRate = 1;
 			myAutoAScript.attackRange = 5;
 			myPlayerIGManager.levelUpBonusHP = 76;
 			myGeneManaScript.levelUpBonusMP = 18;
-			myAutoAScript.levelUpBonusDamage = 6;
+			myAutoAScript.levelUpBonusDamage = 5;
 			myPlayerIGManager.levelUpBonusArmor = 4;
 			myAutoAScript.attackSpeedStat = 0.8f;
 			myStatPlusScript.doubleHPBonus = true;
@@ -477,10 +477,10 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneManaScript.maxMp = 220;
 			myGeneManaScript.currentMp = 220;
 			myGeneManaScript.regenMp = 8;
-			myAutoAScript.damage = 8;
+			myAutoAScript.damage = 16;
 			myAutoAScript.attackRate = .7f;
 			myAutoAScript.attackRange = 15;
-			myPlayerIGManager.levelUpBonusHP = 53;
+			myPlayerIGManager.levelUpBonusHP = 43;
 			myGeneManaScript.levelUpBonusMP = 42;
 			myPlayerIGManager.armorScore = 10;
 			myAutoAScript.levelUpBonusDamage = 5;
@@ -575,15 +575,15 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myGeneManaScript.maxMp = 130;
 			myGeneManaScript.currentMp = 130;
 			myGeneManaScript.regenMp = 5;
-			myAutoAScript.damage = 22;
+			myAutoAScript.damage = 20;
 			myAutoAScript.attackRate = .8f;
 			myAutoAScript.attackRange = 20;
-			myPlayerIGManager.levelUpBonusHP = 64;
+			myPlayerIGManager.levelUpBonusHP = 54;
 			myGeneManaScript.levelUpBonusMP = 22;
 
 			myPlayerIGManager.armorScore = 15;
 			myPlayerIGManager.levelUpBonusArmor = 2;
-			myAutoAScript.levelUpBonusDamage = 8;
+			myAutoAScript.levelUpBonusDamage = 7;
 			myAutoAScript.attackSpeedStat = 1.25f;
 			myAutoAScript.attackAnimTime = 1.25f;
 			myStatPlusScript.doubleDpsBonus = true;
