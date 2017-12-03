@@ -16,6 +16,7 @@ public class ScoreManager : MonoBehaviour {
 	public GameObject endScorePanel;
 	public GameObject playerScoreDisplayPrefab;
 	Text endGameDisplayerTxt;
+	string bestplayerTxt;
 	// Use this for initialization
 	void Start () 
 	{
@@ -86,10 +87,10 @@ public class ScoreManager : MonoBehaviour {
 				GameObject go = GameObject.Instantiate (playerScoreDisplayPrefab, endScorePanel.transform, false);
 			go.transform.Find ("PlayerName").GetComponent<Text> ().text = score.playerName;
 			go.transform.Find ("PlayerScore").GetComponent<Text> ().text = score.score.ToString();
-			if (score.playerName == myName) 
+			if (score.playerName == myName && myBestScore == score.score) 
 			{
 				go.GetComponent<Image> ().color = Color.green;
-				if (j == 1) 
+				if (j == 1 ) 
 				{
 					endGameDisplayerTxt.text = "You are the best Worldwide!!!";
 					yield break;
@@ -107,7 +108,7 @@ public class ScoreManager : MonoBehaviour {
 
 	public void AddMyScoreToLeaderBoard()
 	{
-		if (myActualScore > myBestScore) {
+		if (myActualScore >= myBestScore) {
 			leaderBoard.AddScore (myName, myActualScore);
 		}
 	}
@@ -123,7 +124,26 @@ public class ScoreManager : MonoBehaviour {
 		int i = 0;
 		allScores = leaderBoard.ToListHighToLow ();
 		yield return allScores;
-		GameObject.Find ("DisclaimerMessage").GetComponent<Text> ().text = "The best score ever is: " + allScores [0].score + ". It was achieved by " + allScores [0].playerName;
+		Text disclaimer;
+		disclaimer = GameObject.Find ("DisclaimerMessage").GetComponent<Text> ();
+		bestplayerTxt =  "The best score ever is: " + allScores [0].score + ". It was achieved by " + allScores [0].playerName;
+		disclaimer.text= bestplayerTxt;
+		yield return new WaitForSecondsRealtime (5f);
+		if (myBestScore > 0) 
+		{
+			disclaimer.text = "Your best score is " + myBestScore.ToString () + ". Well done! Harder mods mean more points.";
+		}
+		yield return new WaitForSecondsRealtime (7f);
+		disclaimer.text = "You can clic on 'One Lane Game' to play only on one side in coop with your friends.";
+		yield return new WaitForSecondsRealtime (9f);
+		disclaimer.text = "Press Space to center the view on your hero, L to lock/unlock the camera view";
+		yield return new WaitForSecondsRealtime (11f);
+		disclaimer.text = "Capturing the jungle camp means: twice more problems for the enemy team!";
+		yield return new WaitForSecondsRealtime (15f);
+		disclaimer.text = bestplayerTxt;
+	}
+
+
 //
 //		foreach (dreamloLeaderBoard.Score score in allScores) 
 //		{
@@ -146,6 +166,5 @@ public class ScoreManager : MonoBehaviour {
 //					Debug.Log ("On a récup un score avec ton pseudo associé.");
 //				}
 //			}
-		}
 //	}
 }
