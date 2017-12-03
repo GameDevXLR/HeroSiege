@@ -244,6 +244,7 @@ public class GameManager : NetworkBehaviour
         if (isServer)
         {
             difficultyPanel.GetComponent<ChooseDifficultyScript>().setInteractableBtn(true);
+			replayBtn.gameObject.SetActive (true);
 			replayBtn.onClick.AddListener (ReplayTheGame);
         }
         else
@@ -418,7 +419,7 @@ public class GameManager : NetworkBehaviour
 	{
 		isRestarting = restarting;
 		scoreManager.AddMyScoreToLeaderBoard ();
-		Debug.Log ("game is considered being restarted");
+//		Debug.Log ("game is considered being restarted");
 		if ( soloGame ||teamWhoWon == 1 && isTeam1 || teamWhoWon == 2 && isTeam2) 
 		{
 //			gameOverTxt.text = "Victory!!!";

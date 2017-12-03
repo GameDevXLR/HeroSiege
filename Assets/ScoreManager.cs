@@ -64,13 +64,13 @@ public class ScoreManager : MonoBehaviour {
 		endScorePanel.SetActive (true);
 		endScorePanel.transform.Find ("MyScorePanel").GetChild (1).GetComponent<Text> ().text = myName;
 		endScorePanel.transform.Find ("MyScorePanel").GetChild (0).GetComponent<Text> ().text = myActualScore.ToString();
+		endGameDisplayerTxt = endScorePanel.transform.Find ("MyScorePanel").GetChild (3).GetComponent<Text> ();
 		if (myActualScore > myBestScore) 
 		{
 			myBestScore = myActualScore;
 			endGameDisplayerTxt.text = "CONGRATULATION! It's your highest score!";
 		}
 		endScorePanel.transform.Find ("MyScorePanel").GetChild (2).GetComponent<Text> ().text = myBestScore.ToString();
-		endGameDisplayerTxt = endScorePanel.transform.Find ("MyScorePanel").GetChild (3).GetComponent<Text> ();
 		PlayerPrefs.SetInt ("PlayerScore", myBestScore);
 
 
