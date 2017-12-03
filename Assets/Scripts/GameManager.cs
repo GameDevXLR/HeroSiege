@@ -17,7 +17,7 @@ public class GameManager : NetworkBehaviour
 	//il gere également les evenements importants genre : event de nuit / jour.
 	//il gere aussi le spawn entre guillemets (active / désactive les spawners de mobs)
 	// gere pas grand chose lié au réseau parcontre : voir NetworkManagerObj pour ca (dans la hierarchy)
-	ScoreManager scoreManager;
+	public ScoreManager scoreManager;
 	public Button replayBtn;
 	[Header("Interest Point Management.")]
 	public Transform[] eventPosT1;
@@ -447,6 +447,7 @@ public class GameManager : NetworkBehaviour
 	public void DayNightEvents(bool night)
 	{
 		nightTime = night;
+		scoreManager.myActualScore += 150 * gameDifficulty;
 		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
 		dayNightDisplay.sprite = nightIcon;
 		if (night) 
