@@ -7,8 +7,7 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 	//portail de fin de route pour les mobs : si ils l'atteignent  : on perd une vie. si le nombre de vie tombe a zero : on a perdu la game.
 
 	public int teamNbr; // détermine a quel équipe il fait perdre des vies. A CONFIGURER IMPERATIVEMENT.
-	public GameObject endOfRoadParticles;
-	// Use this for initialization
+	public GameObject endOfRoadParticles;	// Use this for initialization
 	void Start () 
 	{
 		if (!isServer) 
@@ -53,8 +52,9 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcCallPartNexus()
 	{
-		endOfRoadParticles.GetComponent<ParticleSystem> ().Emit(1000);
-		endOfRoadParticles.transform.GetChild(0).GetComponent<ParticleSystem> ().Emit(1000);
+		endOfRoadParticles.GetComponent<ParticleSystem> ().Play();
+		endOfRoadParticles.transform.GetChild (0).GetComponent<ParticleSystem> ().Play();
+		GetComponent<AudioSource> ().Play ();
 
 	}
 }
