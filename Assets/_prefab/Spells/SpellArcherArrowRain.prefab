@@ -168,8 +168,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775719636787020}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 5}
+  m_LocalPosition: {x: 0, y: 0.96, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 3}
   m_Children:
   - {fileID: 4646837809469134}
   - {fileID: 4620316457634620}
@@ -210,7 +210,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1764175826294820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -337.22687, y: 230.1865, z: -267.81992}
+  m_LocalPosition: {x: 625.3969, y: 351.42114, z: -1248.5995}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4619188665544730}
@@ -486,7 +486,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 827661559
+  randomSeed: -597445008
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3696,7 +3696,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1848191436611184}
   serializedVersion: 5
-  lengthInSec: 20
+  lengthInSec: 2
   simulationSpeed: 1
   looping: 1
   prewarm: 0
@@ -3748,14 +3748,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1191815418
+  randomSeed: 1259558892
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -7015,7 +7015,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1543845021
+  randomSeed: 1865833089
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16812,7 +16812,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1570961650
+  randomSeed: -55520714
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16860,7 +16860,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 8
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -16963,9 +16963,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     startSize:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 2
-      minScalar: 0.01
+      minMaxState: 0
+      scalar: 0.2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -16992,7 +16992,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -17021,7 +17021,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -17172,7 +17172,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 50
+    maxNumParticles: 30
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -17225,7 +17225,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
+    m_Position: {x: 0, y: 0, z: -2.57}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 10, y: 10, z: 0.1}
     placementMode: 0
@@ -17336,7 +17336,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -17670,7 +17670,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -20045,7 +20045,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4b294e20f51814785818b6a20b456aa8, type: 2}
+  - {fileID: 2100000, guid: b3a229b53bedbe849b80256ad01b296d, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -20067,8 +20067,8 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0.02
-  m_MaxParticleSize: 0.02
+  m_MinParticleSize: 0.05
+  m_MaxParticleSize: 0.1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

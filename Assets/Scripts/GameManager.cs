@@ -17,6 +17,8 @@ public class GameManager : NetworkBehaviour
 	//il gere également les evenements importants genre : event de nuit / jour.
 	//il gere aussi le spawn entre guillemets (active / désactive les spawners de mobs)
 	// gere pas grand chose lié au réseau parcontre : voir NetworkManagerObj pour ca (dans la hierarchy)
+	public ScoreManager scoreManager;
+	public Button replayBtn;
 	[Header("Interest Point Management.")]
 	public Transform[] eventPosT1;
 	public Transform[] eventPosT2;
@@ -237,16 +239,20 @@ public class GameManager : NetworkBehaviour
 	{
 		team1LivesDisplay = GameObject.Find ("LivesDisplayT1").GetComponent<Text> ();
 		team2LivesDisplay = GameObject.Find ("LivesDisplayT2").GetComponent<Text> ();
-
+		scoreManager = NetworkManager.singleton.transform.GetComponentInChildren<ScoreManager> ();
+		scoreManager.InitializeThisInGame ();
         if (isServer)
         {
             difficultyPanel.GetComponent<ChooseDifficultyScript>().setInteractableBtn(true);
+			replayBtn.gameObject.SetActive (true);
+			replayBtn.onClick.AddListener (ReplayTheGame);
         }
         else
         {
             difficultyPanel.GetComponent<ChooseDifficultyScript>().setInteractableBtn(false);
         }
     }
+
 
     
 
@@ -394,20 +400,26 @@ public class GameManager : NetworkBehaviour
 	IEnumerator RestartTheLevel()
 	{
 
-		yield return new WaitForSeconds (5f);
+		yield return new WaitForSeconds (1f);
+		scoreManager.ShowEndGamePanel ();
 		if (isServer) 
 		{
 			//penser a corriger ici le bug hyperluminal qui redémarre pas.
 			//ptete voir pour détruire tous les objets associés a hyperL avant de restart (tout sur layer player3)
-			NetworkManager.singleton.ServerChangeScene ("scene2");	//utilise onserverloadscene pour dire aux joueurs quoi faire une fois load.	
 		}
 
 	}
+	public void ReplayTheGame()
+	{
+		NetworkManager.singleton.ServerChangeScene ("scene2");	//utilise onserverloadscene pour dire aux joueurs quoi faire une fois load.	
+	}
+
 
 	public void GameRestarting(bool restarting)
 	{
 		isRestarting = restarting;
-
+		scoreManager.AddMyScoreToLeaderBoard ();
+//		Debug.Log ("game is considered being restarted");
 		if ( soloGame ||teamWhoWon == 1 && isTeam1 || teamWhoWon == 2 && isTeam2) 
 		{
 //			gameOverTxt.text = "Victory!!!";
@@ -436,6 +448,7 @@ public class GameManager : NetworkBehaviour
 	public void DayNightEvents(bool night)
 	{
 		nightTime = night;
+		scoreManager.myActualScore += 150 * gameDifficulty;
 		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
 		dayNightDisplay.sprite = nightIcon;
 		if (night) 

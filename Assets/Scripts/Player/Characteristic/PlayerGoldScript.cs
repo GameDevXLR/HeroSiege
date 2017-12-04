@@ -16,16 +16,6 @@ public class PlayerGoldScript : NetworkBehaviour
 	[SyncVar(hook ="GoldActualize" )]public int ActualGold;
     public GameObject goldCanvasPrefab;
 
-
-    public void GetGold(int gold)
-	{
-		if (!isServer) 
-		{
-			return;
-		}
-		ActualGold += gold;
-	}
-
 	void Start()
 	{
 		if (isLocalPlayer) 
@@ -50,6 +40,16 @@ public class PlayerGoldScript : NetworkBehaviour
 		}
 	}
 
+    public void GetGold(int gold)
+	{
+		if (!isServer) 
+		{
+			return;
+		}
+		RpcGetGold (gold);
+		ActualGold += gold;
+	}
+
 	public void GoldActualize(int goldygold)
 	{
 		ActualGold = goldygold;
@@ -61,6 +61,15 @@ public class PlayerGoldScript : NetworkBehaviour
 
 			}
 			goldDisplay.text = ActualGold.ToString ();
+		}
+	}
+
+	[ClientRpc]
+	public void RpcGetGold(int score)
+	{
+		if (isLocalPlayer) 
+		{
+			GameManager.instanceGM.scoreManager.myActualScore += score;
 		}
 	}
 

@@ -21,11 +21,14 @@ public class MainMenuManager : MonoBehaviour
 	public AudioClip clicSound2;
 //	public Toggle oneLaneTog;
 	public Slider generalVolume;
+	public GameObject NewPlayerPanel;
+
 	void Awake()
 	{
 		FindGamesCanvasObj.GetComponent<Canvas>().enabled = false;	
 		ProfileCanvasObj.GetComponent<Canvas>().enabled = false;
 		OptionsCanvasObj.GetComponent<Canvas> ().enabled = false;
+//		PlayerPrefs.DeleteKey ("PlayerNN");
 
 	}
 	public void Start()
@@ -36,7 +39,8 @@ public class MainMenuManager : MonoBehaviour
         //		}		
         if (!PlayerPrefs.HasKey("PlayerNN"))
         {
-            PlayerPrefs.SetString("PlayerNN", "John Doe");
+			PlayerPrefs.SetString("PlayerNN", "JohnDoe"+ Random.Range(1,999999).ToString() );
+			FirstTimePlaying ();
         }
 		PlayerNameDisplay.text = PlayerPrefs.GetString("PlayerNN");
         PlayerNickname = PlayerPrefs.GetString("PlayerNN") ;
@@ -51,6 +55,19 @@ public class MainMenuManager : MonoBehaviour
 		}
 		GetComponent<NetHostGame> ().SetRoomName (PlayerNickname);
 	}
+
+	public void FirstTimePlaying ()
+	{
+		ToggleProfileCanvas ();
+		NewPlayerPanel.SetActive (true);
+
+	}
+
+	public void CloseNewPlayerPanel(){
+		NewPlayerPanel.SetActive (false);
+
+	}
+
 	public void ToggleFindGCanvas()
 	{
 		GetComponent<AudioSource> ().PlayOneShot (clicSound1);

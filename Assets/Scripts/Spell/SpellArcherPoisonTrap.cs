@@ -102,10 +102,10 @@ public class SpellArcherPoisonTrap : NetworkBehaviour
 		childObj.SetActive (true); // activer l'effet de particule
 		Vector3 v = new Vector3 (exploRadius,exploRadius,exploRadius);
 		childObj.transform.localScale = v;
-		foreach (Transform t in effectsToResize) 
-		{
-			t.localScale = v;
-		}
+//		foreach (Transform t in effectsToResize) 
+//		{
+//			t.localScale = v;
+//		}
 		areaBeforeExplo.SetActive (false);
 		
 	}
