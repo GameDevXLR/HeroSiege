@@ -225,7 +225,7 @@ public class CameraController : MonoBehaviour
     {
         if (vect != Vector3.zero)
         {
-            targetVect = vect + new Vector3(1, 2f, 0) * distance;
+            targetVect = vect;
         }
 
     }
