@@ -239,7 +239,7 @@ public class GameManager : NetworkBehaviour
 	{
 		team1LivesDisplay = GameObject.Find ("LivesDisplayT1").GetComponent<Text> ();
 		team2LivesDisplay = GameObject.Find ("LivesDisplayT2").GetComponent<Text> ();
-		scoreManager = NetworkManager.singleton.transform.GetComponentInChildren<ScoreManager> ();
+		scoreManager = ExampleNetworkManager.singleton.transform.GetComponentInChildren<ScoreManager> ();
 		scoreManager.InitializeThisInGame ();
         if (isServer)
         {
@@ -411,7 +411,7 @@ public class GameManager : NetworkBehaviour
 	}
 	public void ReplayTheGame()
 	{
-		NetworkManager.singleton.ServerChangeScene ("scene2");	//utilise onserverloadscene pour dire aux joueurs quoi faire une fois load.	
+		ExampleNetworkManager.singleton.ServerChangeScene ("scene2");	//utilise onserverloadscene pour dire aux joueurs quoi faire une fois load.	
 	}
 
 
@@ -441,7 +441,7 @@ public class GameManager : NetworkBehaviour
 
 	public void StopPlayerFromJoining()
 	{
-			NetworkManager.singleton.matchMaker.SetMatchAttributes (NetworkManager.singleton.matchInfo.networkId, false, NetworkManager.singleton.matchInfo.domain, NetworkLobbyManager.singleton.OnSetMatchAttributes);
+		ExampleNetworkManager.singleton.matchMaker.SetMatchAttributes (ExampleNetworkManager.singleton.matchInfo.networkId, false, ExampleNetworkManager.singleton.matchInfo.domain, NetworkLobbyManager.singleton.OnSetMatchAttributes);
 
 	}
 		
@@ -966,10 +966,10 @@ public class GameManager : NetworkBehaviour
 		if (isServer) 
 		{
 			StopPlayerFromJoining ();
-			NetworkManager.singleton.StopHost ();
+			ExampleNetworkManager.singleton.StopHost ();
 			return;
 		}
-		NetworkManager.singleton.StopClient ();
+		ExampleNetworkManager.singleton.StopClient ();
 	}
 
 

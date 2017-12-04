@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
+using UnityEngine.Networking.Types;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class NetHostGame :  MonoBehaviour{
 
 		[SerializeField]
-		private uint roomSize = 10;
+		private uint roomSize = 6;
 	public GameObject loadingCanvas;
 	public Text loadingMessage;
 	public Slider loadingBar;
@@ -18,7 +19,7 @@ public class NetHostGame :  MonoBehaviour{
 	public Image loadColoredBackground;
 
 
-		private NetworkManager networkManager;
+	private NetworkManager exNetworkManager;
 
 		void Start ()
 		{
@@ -30,10 +31,10 @@ public class NetHostGame :  MonoBehaviour{
 		loadingCanvas.GetComponent<Canvas> ().enabled = true;
 		loadingCanvas.SetActive (false);
 
-			networkManager = NetworkManager.singleton;
-			if (networkManager.matchMaker == null)
+		exNetworkManager = ExampleNetworkManager.singleton;
+			if (exNetworkManager.matchMaker == null)
 			{
-				networkManager.StartMatchMaker();
+				exNetworkManager.StartMatchMaker();
 			}
 		}
 
@@ -53,7 +54,7 @@ public class NetHostGame :  MonoBehaviour{
 				Debug.Log("Creating Room: " + roomName + " with room for " + roomSize + " players.");
 //			LoadingScreenManager.LoadScene (2);
 			StartCoroutine (PreventDoubleGame ());
-			networkManager.matchMaker.CreateMatch (roomName, roomSize, true, "", "", "", 0, 0, networkManager.OnMatchCreate);
+			exNetworkManager.matchMaker.CreateMatch (roomName, roomSize, true, "", "", "", 0, 0, exNetworkManager.OnMatchCreate);
 		}
 		}
 	void FixedUpdate()
@@ -219,7 +220,7 @@ public class NetHostGame :  MonoBehaviour{
 	public void ToggleOneLaneTwoLanes()
 	{
 
-			networkManager.GetComponent<PlayerMenuSettings> ().isItOneLane = isItOneLane.isOn;
+			exNetworkManager.GetComponent<PlayerMenuSettings> ().isItOneLane = isItOneLane.isOn;
 
 	}
 

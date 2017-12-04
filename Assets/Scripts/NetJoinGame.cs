@@ -24,7 +24,7 @@ public class NetJoinGame : MonoBehaviour {
 	public bool isLoadingRooms;
 	void Start ()
 	{
-		networkManager = NetworkManager.singleton;
+		networkManager = ExampleNetworkManager.singleton;
 		if (networkManager.matchMaker == null)
 		{
 			networkManager.StartMatchMaker();

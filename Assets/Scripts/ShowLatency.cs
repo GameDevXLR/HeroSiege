@@ -14,7 +14,7 @@ public class ShowLatency : NetworkBehaviour {
 	{
 		if (isLocalPlayer)
 		{
-			nClient = GameObject.Find ("NetworkManagerObj").GetComponent<NetworkManager> ().client;
+			nClient = GameObject.Find ("NetworkManagerObj").GetComponent<ExampleNetworkManager> ().client;
 			latencyDisplay = GameObject.Find ("LatencyTxt").GetComponent<Text> ();
 		}
 	}

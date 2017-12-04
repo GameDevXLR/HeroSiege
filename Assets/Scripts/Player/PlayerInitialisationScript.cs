@@ -158,7 +158,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			if(isLocalPlayer)
 			{
 			    GameObject.Find ("NewDiffPan").GetComponent<ChooseDifficultyScript> ().enabled = true;
-				if (NetworkManager.singleton.GetComponent<PlayerMenuSettings> ().isItOneLane) 
+				if (ExampleNetworkManager.singleton.GetComponent<PlayerMenuSettings> ().isItOneLane) 
 				{
 					GameManager.instanceGM.soloGame = true;
 					Destroy( GameObject.Find ("SpawnPointT2"));

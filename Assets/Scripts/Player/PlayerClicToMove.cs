@@ -39,7 +39,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 			//audioS = GetComponent<AudioSource> ();
 			layer_mask = LayerMask.GetMask ("Ground", "Ennemies", "UI");
 			cursorTargetter = GameObject.Find ("ClickArrowFull");
-			nClient = GameObject.Find ("NetworkManagerObj").GetComponent<NetworkManager> ().client;
+			nClient = GameObject.Find ("NetworkManagerObj").GetComponent<ExampleNetworkManager> ().client;
 		}
 		if (isServer) 
 		{
