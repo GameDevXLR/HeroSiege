@@ -242,6 +242,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4373387322279042}
+  - component: {fileID: 95975547422447544}
   m_Layer: 0
   m_Name: MushroomTower
   m_TagString: Untagged
@@ -437,7 +438,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353536286067906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -77.77435, y: 17.923676, z: 17.646675}
+  m_LocalPosition: {x: -83.315056, y: 28.914734, z: 20.283192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4080653342002874}
@@ -1009,6 +1010,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95975547422447544
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686151072190456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 67e8f5c0c076f304fb48c636c5b2429b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114117575977345912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1363,7 +1381,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1713014608
+  randomSeed: 1767394480
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4589,7 +4607,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1046847256
+  randomSeed: 572662136
   InitialModule:
     serializedVersion: 3
     enabled: 1
