@@ -288,7 +288,7 @@ public class PlayerArcherCastPoisonTrap : NetworkBehaviour {
 		spellRangeArea.transform.GetChild (0).GetChild (0).localScale = new Vector3 (1.25f, 1.25f, 1f);
 		spellRangeArea.transform.GetChild (0).localScale = new Vector3 (1.25f, 1.25f, 1f);
 
-		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (explosionRadius, explosionRadius, 1f);
+		spellTargeter.transform.GetChild (0).GetChild (0).localScale = new Vector3 (.6f, .6f, 1f);
 		spellTargeter.transform.GetChild (0).GetChild (1).localScale = new Vector3 (.6f, .6f, 1f);
 		spellTargeter.transform.GetChild (0).localScale = new Vector3 (.6f, .6f, 1f);
 

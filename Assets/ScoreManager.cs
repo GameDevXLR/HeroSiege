@@ -129,17 +129,37 @@ public class ScoreManager : MonoBehaviour {
 		bestplayerTxt =  "The best score ever is: " + allScores [0].score + ". It was achieved by " + allScores [0].playerName;
 		disclaimer.text= bestplayerTxt;
 		yield return new WaitForSecondsRealtime (5f);
+		if (!disclaimer) 
+		{
+			yield break;
+		}
 		if (myBestScore > 0) 
 		{
 			disclaimer.text = "Your best score is " + myBestScore.ToString () + ". Well done! Harder mods mean more points.";
 		}
 		yield return new WaitForSecondsRealtime (7f);
+		if (!disclaimer) 
+		{
+			yield break;
+		}
 		disclaimer.text = "You can clic on 'One Lane Game' to play only on one side in coop with your friends.";
 		yield return new WaitForSecondsRealtime (9f);
+		if (!disclaimer) 
+		{
+			yield break;
+		}
 		disclaimer.text = "Press Space to center the view on your hero, L to lock/unlock the camera view";
 		yield return new WaitForSecondsRealtime (11f);
+		if (!disclaimer) 
+		{
+			yield break;
+		}
 		disclaimer.text = "Capturing the jungle camp means: twice more problems for the enemy team!";
 		yield return new WaitForSecondsRealtime (15f);
+		if (!disclaimer) 
+		{
+			yield break;
+		}
 		disclaimer.text = bestplayerTxt;
 	}
 

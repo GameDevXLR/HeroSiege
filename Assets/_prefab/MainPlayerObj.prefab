@@ -3390,8 +3390,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920286070158048}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.44, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 4083970540011950}
   m_Father: {fileID: 4761200443502976}
@@ -6119,6 +6119,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTmpPos: {x: 0, y: 0, z: 0}
   cursorTargetter: {fileID: 0}
+  isInMiniMap: 0
   playerSpeed: 7.5
   speedDisplay: {fileID: 0}
 --- !u!114 &114367673872765966
@@ -6306,7 +6307,7 @@ MonoBehaviour:
   timeBetweenGoldDrop: 2
   goldPerDrop: 1
   isDropping: 0
-  ActualGold: 50000
+  ActualGold: 300
   goldCanvasPrefab: {fileID: 1776901904842416, guid: 4ad2b4e1e6b57184cabd19456ffe1272,
     type: 2}
 --- !u!114 &114500921820713584
@@ -80392,7 +80393,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1e0483575227e734f9fccf38ab2bf424, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59e2ad3c9e403904e80b5253ba95010c, type: 3}
   m_Color: {r: 0.4789024, g: 0.5955882, b: 0.33720803, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -80734,7 +80735,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1041870083046566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224674208357469024}
@@ -80742,8 +80743,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.5, y: 0.1}
+  m_AnchoredPosition: {x: 0.0251, y: 0}
+  m_SizeDelta: {x: 0.45, y: 0.1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224674208357469024
 RectTransform:
@@ -80810,7 +80811,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1105702721004842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000000029802322}
+  m_LocalPosition: {x: 0, y: 0, z: 0.002}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 224717109260449924}
@@ -80818,8 +80819,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000038146973, y: -0.0311}
-  m_SizeDelta: {x: 0.5, y: 0.1}
+  m_AnchoredPosition: {x: 0.0256, y: -0.0311}
+  m_SizeDelta: {x: 0.45, y: 0.1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224949652384289892
 RectTransform:

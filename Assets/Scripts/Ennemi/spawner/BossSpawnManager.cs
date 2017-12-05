@@ -56,9 +56,9 @@ public class BossSpawnManager : NetworkBehaviour
 		{
 			bossTmpObj.GetComponent<MinionsPathFindingScript> ().isTeam1 = true;
 		} 
-		bossTmpObj.GetComponent<EnnemyIGManager> ().maxHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
-		bossTmpObj.GetComponent<EnnemyIGManager> ().currentHp += (bonusFactor *10*GameManager.instanceGM.gameDifficulty);
-		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor*GameManager.instanceGM.gameDifficulty*3;
+		bossTmpObj.GetComponent<EnnemyIGManager> ().maxHp += (bonusFactor *100*GameManager.instanceGM.gameDifficulty);
+		bossTmpObj.GetComponent<EnnemyIGManager> ().currentHp += (bonusFactor *100*GameManager.instanceGM.gameDifficulty);
+		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor*GameManager.instanceGM.gameDifficulty*10;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().goldGiven += bonusFactor * bonusFactor;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().xpGiven += bonusFactor * bonusFactor;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().isCastingAoeCC = true;
