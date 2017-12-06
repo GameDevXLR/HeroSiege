@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class PlayerManager : NetworkBehaviour 
 {
@@ -77,8 +79,10 @@ public class PlayerManager : NetworkBehaviour
 		playerDeathsTxt = playerUI.transform.Find ("AllyDeathsTxt").GetComponent<Text> ();
 		playerLvlDisplay = playerUI.transform.Find ("AllyLvl").GetComponent<Text> ();
 		avatarImg = playerUI.transform.Find ("allyAvatar").GetComponent<Image> ();
-		deadAvatarImg = playerUI.transform.Find ("allyDeadAvatar").GetComponent<Image> ();
-		playerLifeTxt.text = "250 / 250";
+        avatarImg.gameObject.GetComponent<Button>().onClick.AddListener(() => setCameraTarget());
+        deadAvatarImg = playerUI.transform.Find ("allyDeadAvatar").GetComponent<Image> ();
+        deadAvatarImg.gameObject.GetComponent<Button>().onClick.AddListener(() => setCameraTarget());
+        playerLifeTxt.text = "250 / 250";
 		playerManaTxt.text = "100 / 100";
 		playerKillsTxt.text = "0";
 		StartCoroutine (DelayTheUIActu ());
@@ -105,6 +109,8 @@ public class PlayerManager : NetworkBehaviour
 		playerSelecUI.GetComponentInChildren<Text> ().text = playerNickname;
 		playerSelecUI.transform.localScale = new Vector3 (1f, 1f, 1f);
 	}
+
+
 
 	IEnumerator DelayTheUIActu()
 	{
@@ -149,5 +155,8 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
-    
+    public void setCameraTarget()
+    {
+        CameraController.instanceCamera.setCameraTargetOnAnotherPlayerWithLock(gameObject);
+    }
 }

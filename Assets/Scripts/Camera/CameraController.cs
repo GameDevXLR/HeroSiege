@@ -243,17 +243,32 @@ public class CameraController : MonoBehaviour
         this.isLock = islock;
     }
 
-    public void setCameraTarget(GameObject target)
+    public void setCameraTargetWithLock(GameObject target)
     {
         this.target = target;
         areLocking(true);
 
     }
 
+    public void setCameraTargetOnAnotherPlayerWithLock(GameObject target)
+    {
+        this.target = target;
+        areLocking(true);
+        isAnotherPlayer = true;
+    }
+    public void setCameraTargetWithoutLock(GameObject target)
+    {
+        this.target = target;
+        areLocking(true);
+        areLocking(false);
+        this.target = GameManager.instanceGM.playerObj;
+
+    }
+
 
     public void revertTargetToPlayer()
     {
-        setCameraTarget(GameManager.instanceGM.playerObj);
+        setCameraTargetWithLock(GameManager.instanceGM.playerObj);
     }
 
     public bool switchToOtherPlayer()
