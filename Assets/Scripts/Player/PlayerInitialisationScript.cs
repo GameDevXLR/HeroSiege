@@ -667,19 +667,21 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	IEnumerator HideTheLoadingScreen()
 	{
 		GameObject go = GameObject.Find ("LoadingCanvas");
-		go.GetComponent<CanvasScaler> ().uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
-		float tmp = go.GetComponent<CanvasScaler> ().scaleFactor;
-		while (go.GetComponent<CanvasScaler>().scaleFactor>0.02f) 
-		{
-			go.GetComponent<CanvasScaler>().scaleFactor -=.05f;
-			yield return new WaitForEndOfFrame ();
-		}
-		go.GetComponent<CanvasScaler> ().scaleFactor = tmp;
-		go.GetComponent<CanvasScaler> ().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        if (go) // en cas de retour menu pendant le chargement
+        {
+            go.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+            float tmp = go.GetComponent<CanvasScaler>().scaleFactor;
+            while (go.GetComponent<CanvasScaler>().scaleFactor > 0.02f)
+            {
+                go.GetComponent<CanvasScaler>().scaleFactor -= .05f;
+                yield return new WaitForEndOfFrame();
+            }
+            go.GetComponent<CanvasScaler>().scaleFactor = tmp;
+            go.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 
-		go.GetComponent<Canvas> ().enabled = false;
-		
-	}
+            go.GetComponent<Canvas>().enabled = false;
+        }
+    }
 
 	IEnumerator TellNewPlayerHasJoin()
 	{
