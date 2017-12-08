@@ -47,6 +47,7 @@ public class PlayerIGManager : CharacterIGManager {
     [Range(0, 100)]
     public int threshold = 25;
     public bool underThreshold = false;
+    public bool lifeClientIsConfig = false;
 
 	public string heroChosen;
 
@@ -124,14 +125,10 @@ public class PlayerIGManager : CharacterIGManager {
             playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
 
         }
-        else
+        else if(lifeClientIsConfig)
         {
-			if (!lifeBarMain) 
-			{
-				return;
-			}
-            GetComponent<PlayerManager>().playerLifeBar.localScale = new Vector3(x, 1f, 1f);
-            GetComponent<PlayerManager>().playerLifeTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
+            lifeBarMain.localScale = new Vector3(x, 1f, 1f);
+            playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
         }
     }
 
@@ -314,6 +311,13 @@ public class PlayerIGManager : CharacterIGManager {
         {
                 GetComponent<PlayerManager>().deadAvatarImg.enabled = isHeDead;
         }
+    }
+
+    public void configLifeBarClient(Text lifeTxt, RectTransform lifeBar)
+    {
+        lifeBarMain = lifeBar;
+        playerHPTxt = lifeTxt;
+        lifeClientIsConfig = true;
     }
 
 }

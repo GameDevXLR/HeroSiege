@@ -28,6 +28,7 @@ public class GenericManaScript : NetworkBehaviour
 	public RectTransform manaBar;
 	public RectTransform manaBarMain;
 	public Text playerMPTxt;
+    public bool manaClientIsConfig = false;
 
 
 	void Start () 
@@ -42,7 +43,13 @@ public class GenericManaScript : NetworkBehaviour
 			playerMPTxt = GameObject.Find ("PlayerMpText").GetComponent<Text>();
 			playerMPTxt.text = currentMp.ToString () + " / " + maxMp.ToString ();
 
-		}
+	    }
+  //      else
+  //      {
+  //          manaBarMain = gameObject.GetComponent<PlayerManager>().playerUI.transform.Find("AllyActualManaBar").GetComponent<RectTransform>();
+  //          playerMPTxt = gameObject.GetComponent<PlayerManager>().playerUI.transform.Find("AllyMpText").GetComponent<Text>(); 
+  //          playerMPTxt.text = currentMp.ToString() + " / " + maxMp.ToString();
+  //      }
 	}
 	
 	//La mise a jour des mp se fait sur le serveur qui retransmet a tous les clients grace a la fonction Rpc.
@@ -113,15 +120,11 @@ public class GenericManaScript : NetworkBehaviour
 	[ClientRpc]
 	public void RpcActualizeThatMana(int curMP)
 	{
-		if (!manaBar || !manaBarMain) 
-		{
-			Debug.Log ("pas encore config");
-			return;
-		}
 		float x = (float)curMP / maxMp;
-		manaBar.localScale = new Vector3 (x, 1f, 1f);
 		if (isLocalPlayer) {
-			if (manaBarMain == null) {
+
+            manaBar.localScale = new Vector3(x, 1f, 1f);
+            if (manaBarMain == null) {
 				manaBarMain = GameObject.Find ("PlayerManaBarMain").GetComponent<RectTransform> ();
 
 			}
@@ -131,23 +134,30 @@ public class GenericManaScript : NetworkBehaviour
 			}
 			manaBarMain.localScale = new Vector3 (x, 1f, 1f);
 			playerMPTxt.text = curMP.ToString () + " / " + maxMp.ToString ();
+            if (curMP < maxMp)
+            {
+                manaBar.GetComponentInParent<Canvas>().enabled = true;
+            }
+            else
+            {
+                manaBar.GetComponentInParent<Canvas>().enabled = false;
+            }
+            if (GetComponent<PlayerIGManager>().isDead)
+            {
+                manaBar.GetComponentInParent<Canvas>().enabled = false;
+            }
 
-		} else 
+        } else if(manaClientIsConfig)
 		{
-			GetComponent<PlayerManager> ().playerManaBar.localScale = new Vector3 (x, 1f, 1f);
-			GetComponent<PlayerManager>().playerManaTxt.text = curMP.ToString () + " / " + maxMp.ToString ();
-		}
-		if (curMP < maxMp) 
-		{
-			manaBar.GetComponentInParent<Canvas> ().enabled = true;
-		} else 
-		{
-			manaBar.GetComponentInParent<Canvas> ().enabled = false;
-		}
-		if(GetComponent<PlayerIGManager>().isDead)
-		{
-			manaBar.GetComponentInParent<Canvas> ().enabled = false;
-		}
-
+            manaBarMain.localScale = new Vector3(x, 1f, 1f);
+            playerMPTxt.text = curMP.ToString() + " / " + maxMp.ToString();
+        }
 	}
+
+    public void configManaBarClient(Text lifeTxt, RectTransform lifeBar)
+    {
+        manaBarMain = lifeBar;
+        playerMPTxt = lifeTxt;
+        manaClientIsConfig = true;
+    }
 }

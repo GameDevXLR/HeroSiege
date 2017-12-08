@@ -22,6 +22,7 @@ public class GenericLifeScript : NetworkBehaviour
 	private Transform animParent;
     public RectTransform lifeBarMain; // lifebar de l'interface player.
     public Text playerHPTxt;
+    private bool lifeClientIsConfig =false;
     [SyncVar] public int maxHp = 1000;
     [SyncVar(hook = "RescaleTheLifeBarIG")] public int currentHp = 800;
 	[SyncVar]public int	bonusHp;
@@ -285,13 +286,10 @@ public class GenericLifeScript : NetworkBehaviour
             playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
 
         }
-        else
+        else if (gameObject.layer == Layers.Player && gameObject.tag == "Player" && lifeClientIsConfig)
         {
-			if (gameObject.layer == Layers.Player && gameObject.tag == "Player")
-            {
-                GetComponent<PlayerManager>().playerLifeBar.localScale = new Vector3(x, 1f, 1f);
-                GetComponent<PlayerManager>().playerLifeTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
-            }
+            lifeBarMain.localScale = new Vector3(x, 1f, 1f);
+            playerHPTxt.text = currentHp.ToString() + " / " + maxHp.ToString();
         }
     }
     public void RegenYourHP()
@@ -611,4 +609,11 @@ public class GenericLifeScript : NetworkBehaviour
 			}
 		}
 	}
+
+    public void configLifeBarClient(Text lifeTxt, RectTransform lifeBar)
+    {
+        lifeBarMain = lifeBar;
+        playerHPTxt = lifeTxt;
+        lifeClientIsConfig = true;
+    }
 }

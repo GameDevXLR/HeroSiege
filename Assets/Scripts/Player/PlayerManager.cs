@@ -18,8 +18,8 @@ public class PlayerManager : NetworkBehaviour
 	public Text playerKillsTxt;
 	public Text playerLifeTxt; // en gros : 200/250 par exemple.
 	public Text playerManaTxt;
-	public Transform playerLifeBar; // a rescale en fonction des pv. lié au script Genericlifescript.
-	public Transform playerManaBar; //a noté que c'est que pour les alliés.
+	public RectTransform playerLifeBar; // a rescale en fonction des pv. lié au script Genericlifescript.
+	public RectTransform playerManaBar; //a noté que c'est que pour les alliés.
 	public Image avatarImg;
 	public Image deadAvatarImg;
 	public GameObject pingPrefab;
@@ -71,11 +71,15 @@ public class PlayerManager : NetworkBehaviour
 		playerKillsTxt = playerUI.transform.GetChild (2).GetComponent<Text> ();
 		playerNNTxt = playerUI.transform.GetChild (0).GetComponent<Text> ();
 		playerUI.transform.localScale = Vector3.one;
+
 		playerLifeTxt = playerUI.transform.Find ("AllyLifeBarMain/AllyHPTxt").GetComponent<Text> ();
-		playerLifeBar = playerUI.transform.Find ("AllyLifeBarMain/AllyActualLifeBar").transform;
+		playerLifeBar = playerUI.transform.Find ("AllyLifeBarMain/AllyActualLifeBar").GetComponent<RectTransform>();
 		playerManaTxt = playerUI.transform.Find ("AllyManaBarMain/AllyMpText").GetComponent<Text> ();
-		playerManaBar = playerUI.transform.Find ("AllyManaBarMain/AllyActualManaBar").transform;
-		myTeamIcon = playerUI.transform.Find ("allyTeam").GetComponent<Image> ();
+		playerManaBar = playerUI.transform.Find ("AllyManaBarMain/AllyActualManaBar").GetComponent<RectTransform>();
+        gameObject.GetComponent<PlayerIGManager>().configLifeBarClient(playerLifeTxt, playerLifeBar);
+        gameObject.GetComponent<GenericManaScript>().configManaBarClient(playerManaTxt, playerManaBar);
+
+        myTeamIcon = playerUI.transform.Find ("allyTeam").GetComponent<Image> ();
 		playerDeathsTxt = playerUI.transform.Find ("AllyDeathsTxt").GetComponent<Text> ();
 		playerLvlDisplay = playerUI.transform.Find ("AllyLvl").GetComponent<Text> ();
 		avatarImg = playerUI.transform.Find ("allyAvatar").GetComponent<Image> ();
