@@ -230,7 +230,7 @@ public class ChooseDifficultyScript : MonoBehaviour,  IEventSystemHandler
 	IEnumerator StartProcedure()
 	{
 		yield return new WaitForSeconds (0.05f);
-        setInib();
+        //setInib();
 		spawManager = GameObject.Find ("SpawnManager");		
 	}
 
