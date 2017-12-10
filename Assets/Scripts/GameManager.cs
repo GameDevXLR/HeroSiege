@@ -376,8 +376,9 @@ public class GameManager : NetworkBehaviour
 		{
 			teamWhoWon = 2;
 			isRestarting = true;
-			StartCoroutine (RestartTheLevel ());
-		}
+            
+            RpcRestartTheLevel();
+        }
 	}
 
 	public void Team2LooseALife()
@@ -392,10 +393,16 @@ public class GameManager : NetworkBehaviour
 		{
 			teamWhoWon = 1;
 			isRestarting = true;
-
-			StartCoroutine (RestartTheLevel ());
+            
+            RpcRestartTheLevel();
 		}
 	}
+
+    [ClientRpc]
+    public void RpcRestartTheLevel()
+    {
+        StartCoroutine(RestartTheLevel());
+    }
 
 	IEnumerator RestartTheLevel()
 	{
