@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicBackgroundSwitch : MonoBehaviour {
 
-	private AudioSource audioSource;
+	public AudioSource audioSource;
 	public AudioClip Menu;
 	public AudioClip Night;
 	public AudioClip Day;
@@ -32,6 +32,10 @@ public class MusicBackgroundSwitch : MonoBehaviour {
 
 	public void LoadMenuMusic()
 	{
+//		if (audioSource.isPlaying) 
+//		{
+//			return;
+//		}
 		audioSource.clip = Menu;
 		audioSource.Play ();
 	}

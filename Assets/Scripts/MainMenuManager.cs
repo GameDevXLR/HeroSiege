@@ -35,6 +35,7 @@ public class MainMenuManager : MonoBehaviour
 
 	void OnEnable()
 	{
+		menuMusic = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().audioSource;
 		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().LoadMenuMusic ();
 	}
 	public void Start()
@@ -50,11 +51,11 @@ public class MainMenuManager : MonoBehaviour
         }
 		PlayerNameDisplay.text = PlayerPrefs.GetString("PlayerNN");
         PlayerNickname = PlayerPrefs.GetString("PlayerNN") ;
-		menuMusic.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME", 0.5f);
-		menuMusicVolume.value = menuMusic.volume;
+		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME", 0.5f);
+		menuMusicVolume.value = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
 		langage = PlayerPrefs.GetString ("LANGAGE", "Eng");
-		AudioListener.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME", 0.5f);
-		generalVolume.value = AudioListener.volume;
+		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME", 0.5f);
+		generalVolume.value = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
 		if (PlayerNameDisplay.text == "") 
 		{
 			PlayerNameDisplay.text = "NewPlayer";

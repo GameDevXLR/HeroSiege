@@ -457,14 +457,16 @@ public class GameManager : NetworkBehaviour
 		NetworkManager.singleton.transform.GetComponent<MusicBackgroundSwitch> ().StartDayNightMusic (night);
 		nightTime = night;
 		scoreManager.myActualScore += 150 * gameDifficulty;
+
 		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
 		dayNightDisplay.sprite = nightIcon;
+
 		if (night) 
 		{
 //			StartCoroutine (ChangeVolumeCurve ());
-			Camera.main.transform.GetComponent<AudioSource> ().clip = MusicBackground[0];
-			Camera.main.transform.GetComponent<AudioSource> ().Play();
-
+//			Camera.main.transform.GetComponent<AudioSource> ().clip = MusicBackground[0];
+//			Camera.main.transform.GetComponent<AudioSource> ().Play();
+//
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
 				messageManager.SendAnAlertMess ("La nuit tombe. Préparez-vous!", Color.red);
@@ -488,8 +490,8 @@ public class GameManager : NetworkBehaviour
 		{
 //			StartCoroutine (ChangeVolumeCurve ());
 
-			Camera.main.transform.GetComponent<AudioSource> ().clip = MusicBackground[1];
-			Camera.main.transform.GetComponent<AudioSource> ().Play();
+//			Camera.main.transform.GetComponent<AudioSource> ().clip = MusicBackground[1];
+//			Camera.main.transform.GetComponent<AudioSource> ().Play();
 			Days++;
 			if (Days == 2) 
 			{

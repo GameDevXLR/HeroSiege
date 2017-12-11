@@ -1724,7 +1724,7 @@ MonoBehaviour:
   OptionsCanvasObj: {fileID: 1936432548}
   PlayerNickname: NewPlayer
   menuMusicVolume: {fileID: 1939214286}
-  menuMusic: {fileID: 1572631131}
+  menuMusic: {fileID: 0}
   langage: 
   clicSound1: {fileID: 8300000, guid: ccb5b38b76e4be84d841a93328a40c41, type: 3}
   clicSound2: {fileID: 8300000, guid: 07d340c09d9a26b4b8b4d47e59df1972, type: 3}
@@ -2064,6 +2064,11 @@ Prefab:
     - target: {fileID: 4570286692455482, guid: 57a189d9da793d245827a03338d244dc, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114395821510757714, guid: 57a189d9da793d245827a03338d244dc,
+        type: 2}
+      propertyPath: matchMaker
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114009289559484576, guid: 57a189d9da793d245827a03338d244dc,
         type: 2}
@@ -4217,7 +4222,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ae27659eaf3233748bb45afe2665bd3d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: db3c97dd6dbeb27438893bcd62af62bd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4535,7 +4540,6 @@ GameObject:
   - component: {fileID: 1572631134}
   - component: {fileID: 1572631133}
   - component: {fileID: 1572631132}
-  - component: {fileID: 1572631131}
   - component: {fileID: 1572631137}
   m_Layer: 0
   m_Name: Main Camera
@@ -4544,87 +4548,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &1572631131
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1572631130}
-  m_Enabled: 0
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243765118687429670, guid: f53275b0b299b98478e54f8554ae7abc,
-    type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2911f23c8f3918b4586c01b198d978d8, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.21
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!81 &1572631132
 AudioListener:
   m_ObjectHideFlags: 0
@@ -5824,8 +5747,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1712572800}
   m_HandleRect: {fileID: 1712572799}
   m_Direction: 0
-  m_Value: 0.25
-  m_Size: 0.99999976
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

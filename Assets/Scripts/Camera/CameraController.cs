@@ -372,6 +372,10 @@ public class CameraController : MonoBehaviour
 
 	IEnumerator PostProcessTone(bool isNight)
 	{
+		if (GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager> ().isDead) 
+		{
+			yield return new WaitForSecondsRealtime(GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager> ().respawnTime);
+		}
 		var colograding = postProcessing.profile.colorGrading.settings;
 
 		while (colograding.basic.temperature < 0 && !isNight ||colograding.basic.temperature > -35 && isNight ) 

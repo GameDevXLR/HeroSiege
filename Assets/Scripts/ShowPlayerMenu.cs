@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 
 public class ShowPlayerMenu: MonoBehaviour {
@@ -14,13 +15,14 @@ public class ShowPlayerMenu: MonoBehaviour {
 	{
 		ChildMenu = gameObject;
 		ChildMenu.GetComponent<Canvas>().enabled = false;	
+		musicSource = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().audioSource;
 	}
 	void Start()
 	{
-		musicSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME");
+		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME");
 		AudioListener.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME");
-		myVol.value = AudioListener.volume;
-		musicVol.value = musicSource.volume;
+		myVol.value = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
+		musicVol.value = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
 	}
 	public void ToggleMenu()
 	{
