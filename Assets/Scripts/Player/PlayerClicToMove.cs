@@ -61,6 +61,8 @@ public class PlayerClicToMove : NetworkBehaviour {
             if (Input.GetMouseButtonUp(1) && !isInMiniMap)
             {
                 bool next = true;
+				GetComponent<PlayerAutoAttack> ().particule.gameObject.SetActive (false);
+				GetComponent<PlayerAutoAttack> ().particule.gameObject.SetActive (true);
     //			audioS.PlayOneShot (clicSound, .6f);
 
 			
