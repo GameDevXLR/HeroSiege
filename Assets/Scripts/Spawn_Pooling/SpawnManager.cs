@@ -37,8 +37,8 @@ public class SpawnManager : NetworkBehaviour
 	public int difficultyFactor; // permet de gérer la difficulté du jeu. cette variable est rechercher sur le GameManager au lancement du script.
 	void Awake()
 	{
-		partEffectPortal= transform.GetChild (0).Find ("Portail_Démoniaque").Find ("PortailParticule").gameObject;
-		partEffectPortal.SetActive (false);
+//		partEffectPortal= transform.GetChild (0).Find ("Portail_Démoniaque").Find ("PortailParticule").gameObject;
+//		partEffectPortal.SetActive (false);
 		path = new NavMeshPath ();
 		NavMesh.CalculatePath (spawnpoint.position, targetDestination.position, NavMesh.AllAreas, path);
 
@@ -73,7 +73,7 @@ public class SpawnManager : NetworkBehaviour
 	}
 	[ClientRpc]
 	public void RpcStartPortal (){
-		partEffectPortal.SetActive (true);
+//		partEffectPortal.SetActive (true);
 		path = new NavMeshPath ();
 
 		NavMesh.CalculatePath (spawnpoint.position, targetDestination.position, NavMesh.AllAreas, path);
@@ -81,7 +81,7 @@ public class SpawnManager : NetworkBehaviour
 	}
 	[ClientRpc]
 	public void RpcStopPortal (){
-		partEffectPortal.SetActive (false);
+//		partEffectPortal.SetActive (false);
 
 	}
 	public void LevelUpTheWaves()
@@ -350,13 +350,13 @@ public class SpawnManager : NetworkBehaviour
 	[ClientRpc]
 	public void RpcSpawnPartEffect()
 	{
-		spawnPartEffects.SetActive (true);
-		Invoke("unactivateEffect", 3);
+//		spawnPartEffects.SetActive (true);
+//		Invoke("unactivateEffect", 3);
 	}
 
 	public void unactivateEffect()
 	{
-		spawnPartEffects.SetActive (false);
+//		spawnPartEffects.SetActive (false);
 
 	}
 

@@ -25,7 +25,7 @@ public class EnnemiAggroManagerScript : MonoBehaviour
 
 	void OnTriggerStay(Collider other)
 	{
-		if (!autoAScript) 
+		if (!autoAScript || other.gameObject.layer != Layers.Player) 
 		{
 			return;
 		}
