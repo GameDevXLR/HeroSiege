@@ -7,11 +7,25 @@ public class MobGetCollider : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		GetComponent<ParticleSystem> ().trigger.SetCollider (0, GameManager.instanceGM.playerObj.GetComponent<MeshCollider>());
+		int i = 0;
+
+		if (GetComponentInParent<MinionsPathFindingScript> ().isTeam1) 
+		{
+			foreach (GameObject player in GameManager.instanceGM.team1Players) 
+			{
+				GetComponent<ParticleSystem> ().trigger.SetCollider (i++, player.GetComponent<MeshCollider> ());
+			}
+		} 
+
+		else 
+		{
+			foreach (GameObject player in GameManager.instanceGM.team2Players) 
+			{
+				GetComponent<ParticleSystem> ().trigger.SetCollider (i++, player.GetComponent<MeshCollider> ());
+			}
+			
+		}
+
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
