@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 4156839682390846}
   - component: {fileID: 198170146606187860}
   - component: {fileID: 199694037577133008}
+  - component: {fileID: 114300140646484240}
   m_Layer: 0
   m_Name: MobAttParticle
   m_TagString: Untagged
@@ -1696,7 +1697,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853418556211758}
   m_LocalRotation: {x: 0, y: -0.811574, z: 0, w: 0.58424973}
-  m_LocalPosition: {x: -208.02403, y: 9.186064, z: -28.106346}
+  m_LocalPosition: {x: -127.29782, y: 2.6556687, z: 23.35191}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4958784758136238}
@@ -1994,6 +1995,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationSpeed: 0.93
+--- !u!114 &114300140646484240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268626945557690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91228b1c03185f749a248d7fd5dea74c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114348377555897910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3365,7 +3377,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1478698667
+  randomSeed: 643894505
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5749,12 +5761,10 @@ ParticleSystem:
     interiorCollisions: 1
   TriggerModule:
     enabled: 1
-    collisionShape0: {fileID: 4491569764805030, guid: d533b97bfb3e8eb4eaafd710e696cf82,
+    collisionShape0: {fileID: 4761200443502976, guid: d533b97bfb3e8eb4eaafd710e696cf82,
       type: 2}
-    collisionShape1: {fileID: 4573260869419516, guid: d533b97bfb3e8eb4eaafd710e696cf82,
-      type: 2}
-    collisionShape2: {fileID: 4007066699569982, guid: d533b97bfb3e8eb4eaafd710e696cf82,
-      type: 2}
+    collisionShape1: {fileID: 0}
+    collisionShape2: {fileID: 0}
     collisionShape3: {fileID: 0}
     collisionShape4: {fileID: 0}
     collisionShape5: {fileID: 0}

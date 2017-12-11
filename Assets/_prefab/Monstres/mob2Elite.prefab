@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4066181138425598}
   - component: {fileID: 198049464147651532}
   - component: {fileID: 199724668059577742}
+  - component: {fileID: 114536744812792438}
   m_Layer: 0
   m_Name: MobAttParticle
   m_TagString: Untagged
@@ -1080,7 +1081,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1552877025250526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -211.53166, y: 8.4430485, z: -25.198391}
+  m_LocalPosition: {x: -127.06129, y: 2.308363, z: 22.459398}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4665760871657974}
@@ -2172,6 +2173,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationSpeed: 0.93
+--- !u!114 &114536744812792438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000599656240710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91228b1c03185f749a248d7fd5dea74c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114562621533684094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3365,7 +3377,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1478698667
+  randomSeed: -1439502968
   InitialModule:
     serializedVersion: 3
     enabled: 1
