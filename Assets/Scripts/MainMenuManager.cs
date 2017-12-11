@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class MainMenuManager : MonoBehaviour 
 {
@@ -30,6 +31,11 @@ public class MainMenuManager : MonoBehaviour
 		OptionsCanvasObj.GetComponent<Canvas> ().enabled = false;
 //		PlayerPrefs.DeleteKey ("PlayerNN");
 
+	}
+
+	void OnEnable()
+	{
+		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().LoadMenuMusic ();
 	}
 	public void Start()
 	{
@@ -190,4 +196,6 @@ public class MainMenuManager : MonoBehaviour
 		PlayerNameDisplay.text = nameField.text;
 		nameField.text = "";
 	}
+
+
 }

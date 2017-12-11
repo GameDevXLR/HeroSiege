@@ -454,6 +454,7 @@ public class GameManager : NetworkBehaviour
 		
 	public void DayNightEvents(bool night)
 	{
+		NetworkManager.singleton.transform.GetComponent<MusicBackgroundSwitch> ().StartDayNightMusic (night);
 		nightTime = night;
 		scoreManager.myActualScore += 150 * gameDifficulty;
 		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
