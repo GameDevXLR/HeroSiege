@@ -65,7 +65,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4020075706344524}
   - component: {fileID: 33514949011225384}
-  - component: {fileID: 65306285786481806}
   - component: {fileID: 23300161619421398}
   - component: {fileID: 114196182043369784}
   - component: {fileID: 195422198213826926}
@@ -78,6 +77,7 @@ GameObject:
   - component: {fileID: 114506459767818940}
   - component: {fileID: 114571150185662158}
   - component: {fileID: 114706519917618674}
+  - component: {fileID: 64763828238782300}
   m_Layer: 9
   m_Name: mobJung2
   m_TagString: Enemy
@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1069815805328080
 GameObject:
   m_ObjectHideFlags: 1
@@ -5574,7 +5574,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1005958469064112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -135.83626, y: 25.134083, z: 55.333675}
+  m_LocalPosition: {x: -209.58212, y: 9.541662, z: -27.38404}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4290497107833764}
@@ -10728,8 +10728,8 @@ MeshCollider:
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 2de911d45fd8d124c90453569b0194ca, type: 3}
---- !u!65 &65306285786481806
-BoxCollider:
+--- !u!64 &64763828238782300
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -10738,8 +10738,10 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 0.2
+  m_Mesh: {fileID: 4300000, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
 --- !u!82 &82334878603509866
 AudioSource:
   m_ObjectHideFlags: 1
@@ -11969,7 +11971,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1725393579
+  randomSeed: -1478698667
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -14353,9 +14355,12 @@ ParticleSystem:
     interiorCollisions: 1
   TriggerModule:
     enabled: 1
-    collisionShape0: {fileID: 0}
-    collisionShape1: {fileID: 0}
-    collisionShape2: {fileID: 0}
+    collisionShape0: {fileID: 4491569764805030, guid: d533b97bfb3e8eb4eaafd710e696cf82,
+      type: 2}
+    collisionShape1: {fileID: 4573260869419516, guid: d533b97bfb3e8eb4eaafd710e696cf82,
+      type: 2}
+    collisionShape2: {fileID: 4007066699569982, guid: d533b97bfb3e8eb4eaafd710e696cf82,
+      type: 2}
     collisionShape3: {fileID: 0}
     collisionShape4: {fileID: 0}
     collisionShape5: {fileID: 0}
@@ -15200,7 +15205,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -945340783
+  randomSeed: -192307080
   InitialModule:
     serializedVersion: 3
     enabled: 1

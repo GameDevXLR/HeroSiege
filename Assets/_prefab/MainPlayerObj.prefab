@@ -34,6 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4573260869419516}
+  - component: {fileID: 64393685760990874}
   m_Layer: 8
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -940,6 +941,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4491569764805030}
+  - component: {fileID: 64496626856035302}
   m_Layer: 8
   m_Name: RoguePrefab
   m_TagString: Untagged
@@ -1213,6 +1215,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4007066699569982}
+  - component: {fileID: 64675214567053316}
   m_Layer: 8
   m_Name: OvatePrefab
   m_TagString: Untagged
@@ -4552,7 +4555,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677075611022148}
   m_LocalRotation: {x: 0, y: 0.48259464, z: 0, w: 0.8758439}
-  m_LocalPosition: {x: -81.92978, y: 9.923675, z: 27.576263}
+  m_LocalPosition: {x: -153.85, y: 35.595528, z: 65.62}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
   m_Children:
   - {fileID: 4385223683264028}
@@ -5334,6 +5337,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 2
+--- !u!64 &64393685760990874
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1017182390241064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 0.2
+  m_Mesh: {fileID: 4300000, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
+--- !u!64 &64496626856035302
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1250623514196712}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 0.2
+  m_Mesh: {fileID: 4300000, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
+--- !u!64 &64675214567053316
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1312091570629416}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 0.2
+  m_Mesh: {fileID: 4300000, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
 --- !u!82 &82404099967014830
 AudioSource:
   m_ObjectHideFlags: 1
@@ -6204,6 +6249,7 @@ MonoBehaviour:
   amountShake: 4
   threshold: 25
   underThreshold: 0
+  lifeClientIsConfig: 0
   heroChosen: 
 --- !u!114 &114478854671164318
 MonoBehaviour:
@@ -7064,6 +7110,7 @@ MonoBehaviour:
   manaBar: {fileID: 224744315606201176}
   manaBarMain: {fileID: 0}
   playerMPTxt: {fileID: 0}
+  manaClientIsConfig: 0
 --- !u!114 &114719342194745844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -24049,7 +24096,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1145067615
+  randomSeed: -1426052612
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -26469,12 +26516,18 @@ ParticleSystem:
     interiorCollisions: 1
   TriggerModule:
     enabled: 1
-    collisionShape0: {fileID: 0}
-    collisionShape1: {fileID: 0}
-    collisionShape2: {fileID: 0}
-    collisionShape3: {fileID: 0}
-    collisionShape4: {fileID: 0}
-    collisionShape5: {fileID: 0}
+    collisionShape0: {fileID: 4484915551070368, guid: f6021e0b8d532eb40b6298fc871d1c49,
+      type: 2}
+    collisionShape1: {fileID: 4300301342829042, guid: 25fb1ef0035caa44bb8925e08a7b7ece,
+      type: 2}
+    collisionShape2: {fileID: 4995238067389070, guid: 105d8c58bbcf7f143bc03b90a42dd95a,
+      type: 2}
+    collisionShape3: {fileID: 4130001798730658, guid: 63c6dbc233058ab49a5be6f1aa0e7277,
+      type: 2}
+    collisionShape4: {fileID: 4757163218974384, guid: 6e1c6fc78d4673b45ae4f4cdaf17e7f6,
+      type: 2}
+    collisionShape5: {fileID: 4905928041325656, guid: fa39bb0b38746ab42aeb2fbbf1c3587b,
+      type: 2}
     inside: 1
     outside: 0
     enter: 0
@@ -30578,7 +30631,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1258080567
+  randomSeed: -424491586
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -53361,7 +53414,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 501819628
+  randomSeed: 1372208423
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -59781,7 +59834,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -982473298
+  randomSeed: 1232473256
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -66267,7 +66320,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 543092759
+  randomSeed: -551393167
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -68639,12 +68692,18 @@ ParticleSystem:
     interiorCollisions: 1
   TriggerModule:
     enabled: 1
-    collisionShape0: {fileID: 0}
-    collisionShape1: {fileID: 0}
-    collisionShape2: {fileID: 0}
-    collisionShape3: {fileID: 0}
-    collisionShape4: {fileID: 0}
-    collisionShape5: {fileID: 0}
+    collisionShape0: {fileID: 4484915551070368, guid: f6021e0b8d532eb40b6298fc871d1c49,
+      type: 2}
+    collisionShape1: {fileID: 4300301342829042, guid: 25fb1ef0035caa44bb8925e08a7b7ece,
+      type: 2}
+    collisionShape2: {fileID: 4995238067389070, guid: 105d8c58bbcf7f143bc03b90a42dd95a,
+      type: 2}
+    collisionShape3: {fileID: 4130001798730658, guid: 63c6dbc233058ab49a5be6f1aa0e7277,
+      type: 2}
+    collisionShape4: {fileID: 4757163218974384, guid: 6e1c6fc78d4673b45ae4f4cdaf17e7f6,
+      type: 2}
+    collisionShape5: {fileID: 4905928041325656, guid: fa39bb0b38746ab42aeb2fbbf1c3587b,
+      type: 2}
     inside: 1
     outside: 0
     enter: 0
@@ -69486,7 +69545,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -125061324
+  randomSeed: 706691436
   InitialModule:
     serializedVersion: 3
     enabled: 1
