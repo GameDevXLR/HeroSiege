@@ -12,6 +12,7 @@ public class DayNightCycle : NetworkBehaviour {
 	public float timeOfDay = 1;
 	public AudioClip Night;
 	public AudioClip Day;
+	bool asSwitchAlready;
 
 	bool firstdayTrigger;
 
@@ -29,10 +30,23 @@ public class DayNightCycle : NetworkBehaviour {
 			firstdayTrigger = true;
 		} 
 
+		if (timeOfDay > 25f && !isNight && !asSwitchAlready) 
+		{
+			asSwitchAlready = !asSwitchAlready;
+			LightManagerScript.lightM.SwitchTheTorches ();
+			
+		}
+		if (timeOfDay > 125f && !isNight && asSwitchAlready) 
+		{
+			asSwitchAlready = !asSwitchAlready;
+			LightManagerScript.lightM.SwitchTheTorches ();
+		}
+
 		if (timeOfDay > 180f ) 
 		{
 			
 			timeOfDay = 0f;
+//			isNight = !isNight;
 			if (isServer) 
 			{
 				sunRot = transform.rotation;

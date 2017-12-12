@@ -79,8 +79,8 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 		GameObject go = Instantiate(spellObj, pos, spellTargeter.transform.rotation);
 		go.GetComponent<TowerPetAutoA> ().towerOwner = gameObject;
 		go.GetComponent<TowerPetAutoA> ().damage = spellDmg;
-		go.GetComponent<TowerIGManager> ().maxHp = spellDmg * 2;
-		go.GetComponent<TowerIGManager> ().currentHp = spellDmg * 2;
+		go.GetComponent<TowerIGManager> ().maxHp = spellDmg * 5;
+		go.GetComponent<TowerIGManager> ().currentHp = spellDmg * 5;
 		go.GetComponent<TowerIGManager> ().regenHp = -1;
 //		actualPet = go;
 		NetworkServer.Spawn(go);

@@ -455,11 +455,12 @@ public class GameManager : NetworkBehaviour
 		
 	public void DayNightEvents(bool night)
 	{
+//		LightManagerScript.lightM.SwitchTheTorches ();
 		NATTraversal.NetworkManager.singleton.transform.GetComponent<MusicBackgroundSwitch> ().StartDayNightMusic (night);
 		nightTime = night;
 		scoreManager.myActualScore += 150 * gameDifficulty;
 
-		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
+//		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
 		dayNightDisplay.sprite = nightIcon;
 
 		if (night) 
@@ -525,7 +526,7 @@ public class GameManager : NetworkBehaviour
 			{
 				messageManager.SendAnAlertMess ("The sun is shining again...It's day " + Days + ".", Color.green);
 			}
-			lightM.isSwitchingOFF = true;
+//			lightM.isSwitchingOFF = true;
 
 			if (isServer) 
 			{
