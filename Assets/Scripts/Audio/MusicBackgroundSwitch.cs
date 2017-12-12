@@ -11,9 +11,9 @@ public class MusicBackgroundSwitch : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		audioSource = GetComponent<AudioSource> ();
-		audioSource.clip = Menu;
-		audioSource.Play ();
+//		audioSource = GetComponent<AudioSource> ();
+//		audioSource.clip = Menu;
+//		audioSource.Play ();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +36,7 @@ public class MusicBackgroundSwitch : MonoBehaviour {
 //		{
 //			return;
 //		}
+		audioSource.Stop();
 		audioSource.clip = Menu;
 		audioSource.Play ();
 	}

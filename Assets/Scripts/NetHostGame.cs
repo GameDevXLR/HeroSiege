@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
+using NATTraversal;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class NetHostGame :  MonoBehaviour{
@@ -30,7 +30,7 @@ public class NetHostGame :  MonoBehaviour{
 		loadingCanvas.GetComponent<Canvas> ().enabled = true;
 		loadingCanvas.SetActive (false);
 
-			networkManager = NetworkManager.singleton;
+		networkManager = (NetworkManager) NATTraversal.NetworkManager.singleton;
 			if (networkManager.matchMaker == null)
 			{
 				networkManager.StartMatchMaker();
@@ -53,7 +53,9 @@ public class NetHostGame :  MonoBehaviour{
 				Debug.Log("Creating Room: " + roomName + " with room for " + roomSize + " players.");
 //			LoadingScreenManager.LoadScene (2);
 			StartCoroutine (PreventDoubleGame ());
-			networkManager.matchMaker.CreateMatch (roomName, roomSize, true, "", "", "", 0, 0, networkManager.OnMatchCreate);
+//			networkManager.matchMaker.CreateMatch (roomName, roomSize, true, "", "", "", 0, 0, networkManager.OnMatchCreate);
+			networkManager.StartHostAll(roomName, roomSize, true,"", 0,0,0, networkManager.OnMatchCreate);
+
 		}
 		}
 	void FixedUpdate()

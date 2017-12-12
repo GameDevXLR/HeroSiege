@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using NATTraversal;
 
 public class MainMenuManager : MonoBehaviour 
 {
@@ -35,8 +36,17 @@ public class MainMenuManager : MonoBehaviour
 
 	void OnEnable()
 	{
-		menuMusic = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().audioSource;
-		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().LoadMenuMusic ();
+//		if (NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().audioSource !=null) {
+//			ConfSound ();
+//		} else 
+//		{
+			Invoke ("ConfSound", 3f);
+//		}
+	}
+	public void ConfSound()
+	{
+		menuMusic = NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().audioSource;
+		NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().LoadMenuMusic ();
 	}
 	public void Start()
 	{
@@ -51,11 +61,11 @@ public class MainMenuManager : MonoBehaviour
         }
 		PlayerNameDisplay.text = PlayerPrefs.GetString("PlayerNN");
         PlayerNickname = PlayerPrefs.GetString("PlayerNN") ;
-		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME", 0.5f);
-		menuMusicVolume.value = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
+		NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME", 0.5f);
+		menuMusicVolume.value = NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
 		langage = PlayerPrefs.GetString ("LANGAGE", "Eng");
-		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME", 0.5f);
-		generalVolume.value = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
+		NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME", 0.5f);
+		generalVolume.value = NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
 		if (PlayerNameDisplay.text == "") 
 		{
 			PlayerNameDisplay.text = "NewPlayer";
@@ -169,6 +179,10 @@ public class MainMenuManager : MonoBehaviour
 
 	public void ChangeMusicMenuVolume()
 	{
+		if (!menuMusic) 
+		{
+			return;
+		}
 		menuMusic.volume = menuMusicVolume.value;
 		PlayerPrefs.SetFloat ("MUSIC_VOLUME", menuMusicVolume.value);
 	}

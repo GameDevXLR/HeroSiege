@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using System.Collections;
+using NATTraversal;
 
 public class NetJoinGame : MonoBehaviour {
 
@@ -24,7 +25,7 @@ public class NetJoinGame : MonoBehaviour {
 	public bool isLoadingRooms;
 	void Start ()
 	{
-		networkManager = NetworkManager.singleton;
+		networkManager = (NetworkManager)NATTraversal.NetworkManager.singleton;
 		if (networkManager.matchMaker == null)
 		{
 			networkManager.StartMatchMaker();
@@ -114,8 +115,8 @@ public class NetJoinGame : MonoBehaviour {
 
 	public void JoinRoom (MatchInfoSnapshot _match)
 	{
-		
-		networkManager.matchMaker.JoinMatch(_match.networkId, "", "", "", 0, 0, networkManager.OnMatchJoined);
+		networkManager.StartClientAll (_match);
+//		networkManager.matchMaker.JoinMatch(_match.networkId, "", "", "", 0, 0, networkManager.OnMatchJoined);
 		StartCoroutine(WaitForJoin());
 
 		StartCoroutine (GetComponent<NetHostGame> ().PreventDoubleGame ());
@@ -168,7 +169,7 @@ public class NetJoinGame : MonoBehaviour {
 		{
 			status.text = "Echec de la connection.";
 		}
-		yield return new WaitForSecondsRealtime(1);
+		yield return new WaitForSecondsRealtime(30);
 
 		MatchInfo matchInfo = networkManager.matchInfo;
 		if (matchInfo != null)

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using NATTraversal;
 
 
 public class ShowPlayerMenu: MonoBehaviour {
@@ -15,14 +16,14 @@ public class ShowPlayerMenu: MonoBehaviour {
 	{
 		ChildMenu = gameObject;
 		ChildMenu.GetComponent<Canvas>().enabled = false;	
-		musicSource = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().audioSource;
+		musicSource = NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch> ().audioSource;
 	}
 	void Start()
 	{
-		NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME");
+		NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume = PlayerPrefs.GetFloat ("MUSIC_VOLUME");
 		AudioListener.volume = PlayerPrefs.GetFloat ("GENERAL_VOLUME");
-		myVol.value = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
-		musicVol.value = NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
+		myVol.value = NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
+		musicVol.value = NATTraversal.NetworkManager.singleton.GetComponent<MusicBackgroundSwitch>().audioSource.volume;
 	}
 	public void ToggleMenu()
 	{

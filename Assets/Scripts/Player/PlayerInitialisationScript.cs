@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using HyperLuminalGames;
 using UnityEngine.Events;
+using NATTraversal;
 
 [NetworkSettings(channel = 0, sendInterval =0.5f)]
 
@@ -158,7 +159,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			if(isLocalPlayer)
 			{
 			    GameObject.Find ("NewDiffPan").GetComponent<ChooseDifficultyScript> ().enabled = true;
-				if (NetworkManager.singleton.GetComponent<PlayerMenuSettings> ().isItOneLane) 
+				if (NATTraversal.NetworkManager.singleton.GetComponent<PlayerMenuSettings> ().isItOneLane) 
 				{
 					GameManager.instanceGM.soloGame = true;
 					Destroy( GameObject.Find ("SpawnPointT2"));
