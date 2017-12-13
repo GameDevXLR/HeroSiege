@@ -33,13 +33,13 @@ public class DayNightCycle : NetworkBehaviour {
 		if (timeOfDay > 25f && !isNight && !asSwitchAlready) 
 		{
 			asSwitchAlready = !asSwitchAlready;
-			LightManagerScript.lightM.SwitchTheTorches ();
+			//LightManagerScript.lightM.SwitchTheTorches ();
 			
 		}
 		if (timeOfDay > 125f && !isNight && asSwitchAlready) 
 		{
 			asSwitchAlready = !asSwitchAlready;
-			LightManagerScript.lightM.SwitchTheTorches ();
+			//LightManagerScript.lightM.SwitchTheTorches ();
 		}
 
 		if (timeOfDay > 180f ) 
