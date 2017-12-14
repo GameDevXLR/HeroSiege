@@ -27,7 +27,7 @@ public class MessagesManager : MonoBehaviour
     // shake de la camera
     public float durationShake = 5;
     public float amountShake = 10;
-
+	bool asCheated;
 
     public void Update()
     {
@@ -141,15 +141,20 @@ public class MessagesManager : MonoBehaviour
         }
         else if (tab[0].Equals("\\whoisyourdaddy"))
         {
-            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().maxHp += 200000;
-            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp += 200000;
-			GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager> ().regenHp += 555;
-            GameManager.instanceGM.playerObj.GetComponent<PlayerAutoAttack>().damage += 2000;
+            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().maxHp = 20000;
+            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp = 20000;
+			GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager> ().regenHp = 50;
+            GameManager.instanceGM.playerObj.GetComponent<PlayerAutoAttack>().damage = 500;
 
         }
 		else if (tab[0].Equals("\\greedisgood"))
 			{
+			if (asCheated) 
+			{
+				return;
+			}
 			GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript> ().ActualGold += 10000;
+			asCheated = true;
 			}
 		else if (tab[0].Equals("\\norcam"))
 		{
