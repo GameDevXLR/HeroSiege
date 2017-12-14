@@ -43,6 +43,11 @@ public class MessagesManagerServer : NetworkBehaviour
     [ClientRpc]
     public void RpcSendMessage(string message)
     {
+		if (isLocalPlayer) 
+		{
+			GameManager.instanceGM.messageManager.SendAnAlertMess(message, Color.white);
+			return;
+		}
         GameManager.instanceGM.messageManager.SendAnAlertMess(message, Color.blue);
     }
 

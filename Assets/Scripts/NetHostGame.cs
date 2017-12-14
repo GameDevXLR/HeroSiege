@@ -87,12 +87,12 @@ public class NetHostGame :  MonoBehaviour{
 
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			loadingMessage.text = "Construction des constructions.";
+			loadingMessage.text = "Utilisez clic droit pour vous déplacer, clic gauche pour attaquer.";
 
 
 		} else 
 		{
-			loadingMessage.text = "Building the buildings.";
+			loadingMessage.text = "Use right clic to move, left clic to attack.";
 		}
 		loadingBar.value += Random.Range(0.1f, 0.5f);
 		if (loadingBar.value >= loadingBar.maxValue) 
@@ -102,11 +102,11 @@ public class NetHostGame :  MonoBehaviour{
 		yield return new WaitForSecondsRealtime (.5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			loadingMessage.text = "Construction des constructions..";
+			loadingMessage.text = "Les catapultes doivent être recapturé tous les matins.";
 
 		} else 
 		{
-			loadingMessage.text = "Building the buildings..";
+			loadingMessage.text = "Catapults need to be capture every morning.";
 		}
 		loadingBar.value += Random.Range(0.1f, 0.5f);
 		if (loadingBar.value >= loadingBar.maxValue) 
@@ -116,11 +116,11 @@ public class NetHostGame :  MonoBehaviour{
 		yield return new WaitForSecondsRealtime (.5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			loadingMessage.text = "Construction des constructions...";
+			loadingMessage.text = "Elles tirent sur la team adverse si capturés.";
 
 		} else 
 		{
-			loadingMessage.text = "Building the buildings...";
+			loadingMessage.text = "They will fire on the enemy team if captured.";
 		}
 		loadingBar.value += Random.Range(0.1f, 0.5f);
 		if (loadingBar.value >= loadingBar.maxValue) 
@@ -144,11 +144,11 @@ public class NetHostGame :  MonoBehaviour{
 		yield return new WaitForSecondsRealtime (2.5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			loadingMessage.text = "Dragons enlevés..";
+			loadingMessage.text = "Nourrissez les bêtes depuis le magasin de l'avant-poste.";
 
 		} else 
 		{
-			loadingMessage.text = "Removing dragons..";
+			loadingMessage.text = "Feed the beasts in the outpost shop.";
 		}
 		loadingBar.value += Random.Range(0.1f, 0.5f);
 		if (loadingBar.value >= loadingBar.maxValue) 
@@ -158,11 +158,11 @@ public class NetHostGame :  MonoBehaviour{
 		yield return new WaitForSecondsRealtime (5f);
 		if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 		{
-			loadingMessage.text = "Dragons enlevés...";
+			loadingMessage.text = "Attention! N'allez pas trop loin dans l'arêne sans préparations.";
 
 		} else 
 		{
-			loadingMessage.text = "Removing dragons...";
+			loadingMessage.text = "Beware ! Don't go too deep in the arena too early...";
 		}
 		loadingBar.value += Random.Range(0.2f, 0.7f);
 		if (loadingBar.value >= loadingBar.maxValue) 

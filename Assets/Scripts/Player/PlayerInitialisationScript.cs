@@ -385,7 +385,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myAutoAScript.attackRange = 5;
 			myPlayerIGManager.levelUpBonusHP = 76;
 			myGeneManaScript.levelUpBonusMP = 18;
-			myAutoAScript.levelUpBonusDamage = 5;
+			myAutoAScript.levelUpBonusDamage = 7;
 			myPlayerIGManager.levelUpBonusArmor = 4;
 			myAutoAScript.attackSpeedStat = 0.8f;
 			myStatPlusScript.doubleHPBonus = true;
@@ -472,8 +472,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 		{
 			GetComponentInChildren<PlayerEnnemyDetectionScript> ().gameObject.GetComponent<SphereCollider> ().radius = 1f;
 
-			myPlayerIGManager.maxHp = 350;
-			myPlayerIGManager.currentHp = 300;
+			myPlayerIGManager.maxHp = 400;
+			myPlayerIGManager.currentHp = 400;
 			myPlayerIGManager.regenHp = 6;
 			myGeneManaScript.maxMp = 220;
 			myGeneManaScript.currentMp = 220;
@@ -481,10 +481,10 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myAutoAScript.damage = 16;
 			myAutoAScript.attackRate = .7f;
 			myAutoAScript.attackRange = 15;
-			myPlayerIGManager.levelUpBonusHP = 43;
+			myPlayerIGManager.levelUpBonusHP = 53;
 			myGeneManaScript.levelUpBonusMP = 42;
 			myPlayerIGManager.armorScore = 10;
-			myAutoAScript.levelUpBonusDamage = 5;
+			myAutoAScript.levelUpBonusDamage = 6;
 			myPlayerIGManager.levelUpBonusArmor = 1;
 			myAutoAScript.attackSpeedStat = 1.1f;
 			myStatPlusScript.doubleMPBonus = true;
@@ -579,7 +579,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 			myAutoAScript.damage = 20;
 			myAutoAScript.attackRate = .8f;
 			myAutoAScript.attackRange = 20;
-			myPlayerIGManager.levelUpBonusHP = 54;
+			myPlayerIGManager.levelUpBonusHP = 60;
 			myGeneManaScript.levelUpBonusMP = 22;
 
 			myPlayerIGManager.armorScore = 15;

@@ -56,11 +56,11 @@ public class BossSpawnManager : NetworkBehaviour
 		{
 			bossTmpObj.GetComponent<MinionsPathFindingScript> ().isTeam1 = true;
 		} 
-		bossTmpObj.GetComponent<EnnemyIGManager> ().maxHp += (bonusFactor *100*GameManager.instanceGM.gameDifficulty);
-		bossTmpObj.GetComponent<EnnemyIGManager> ().currentHp += (bonusFactor *100*GameManager.instanceGM.gameDifficulty);
-		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor*GameManager.instanceGM.gameDifficulty*10;
-		bossTmpObj.GetComponent<EnnemyIGManager> ().goldGiven += bonusFactor * bonusFactor;
-		bossTmpObj.GetComponent<EnnemyIGManager> ().xpGiven += bonusFactor * bonusFactor;
+		bossTmpObj.GetComponent<EnnemyIGManager> ().maxHp += (bonusFactor *100*GetComponent<GameManager>().Days*GameManager.instanceGM.gameDifficulty);
+		bossTmpObj.GetComponent<EnnemyIGManager> ().currentHp += (bonusFactor *100*GetComponent<GameManager>().Days*GameManager.instanceGM.gameDifficulty);
+		bossTmpObj.GetComponent<EnemyAutoAttackScript>().damage += bonusFactor*GetComponent<GameManager>().Days*GameManager.instanceGM.gameDifficulty*10;
+		bossTmpObj.GetComponent<EnnemyIGManager> ().goldGiven += bonusFactor *GetComponent<GameManager>().Days* bonusFactor;
+		bossTmpObj.GetComponent<EnnemyIGManager> ().xpGiven += bonusFactor *GetComponent<GameManager>().Days* bonusFactor;
 		bossTmpObj.GetComponent<EnnemyIGManager> ().isCastingAoeCC = true;
 		bossTmpObj.GetComponent<MinionsPathFindingScript> ().originalCampNbr = roadNbr;
 

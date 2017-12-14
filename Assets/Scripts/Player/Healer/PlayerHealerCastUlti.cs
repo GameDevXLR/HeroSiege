@@ -16,7 +16,7 @@ public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
 	public AudioClip OOM;
 	string spellDescription;
 	public int spellCost = 80;
-	public int spellDmg = 50;
+	public int spellDmg = 60;
 	public float spellCD;
 	public float spellDuration = 1.5f;
 	public float spellRange = 25f;
@@ -252,12 +252,12 @@ public class PlayerHealerCastUlti : NetworkBehaviour , ICanalisage
         spellLvl++;
         spellCost += 35;
         spellCD -= 3f;
-        spellDmg += 15;
+		spellDmg += 10*spellLvl;
         spellDuration += 1f;
-		if (onCD) 
-		{
-			timeSpent -= 3f;
-		}
+//		if (onCD) 
+//		{
+//			timeSpent -= 3f;
+//		}
     }
 
     //suffit de linké ca a un bouton d'interface et boom

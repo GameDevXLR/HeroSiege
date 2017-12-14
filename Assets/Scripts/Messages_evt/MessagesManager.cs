@@ -141,11 +141,20 @@ public class MessagesManager : MonoBehaviour
         }
         else if (tab[0].Equals("\\whoisyourdaddy"))
         {
-            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().maxHp = 200000;
-            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp = 200000;
-            GameManager.instanceGM.playerObj.GetComponent<PlayerAutoAttack>().damage = 2000;
+            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().maxHp += 200000;
+            GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp += 200000;
+			GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager> ().regenHp += 555;
+            GameManager.instanceGM.playerObj.GetComponent<PlayerAutoAttack>().damage += 2000;
 
         }
+		else if (tab[0].Equals("\\greedisgood"))
+			{
+			GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript> ().ActualGold += 10000;
+			}
+		else if (tab[0].Equals("\\norcam"))
+		{
+			GameManager.instanceGM.GetComponent<BossSpawnManager>().SpawnBosses();
+		}
         else if (tab[0].Equals("\\suicide"))
         {
             GameManager.instanceGM.playerObj.GetComponent<PlayerIGManager>().currentHp = 0;

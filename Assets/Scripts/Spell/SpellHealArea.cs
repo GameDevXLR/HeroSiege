@@ -49,8 +49,8 @@ public class SpellHealArea : NetworkBehaviour {
 					spellTargets.Add(other.gameObject);
                     if (other.gameObject.tag == "Player")
                         other.gameObject.GetComponent<PlayerIGManager>().LooseHealth((int)-healAmount, true, gameObject);
-                    else
-                        other.gameObject.GetComponent<PetIGManager>().LooseHealth((int)-healAmount, true, gameObject);
+//                    else
+//                        other.gameObject.GetComponent<PetIGManager>().LooseHealth((int)-healAmount, true, gameObject);
 				}
 			}
 

@@ -52,10 +52,10 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 			spell2Btn.onClick.AddListener(CastThatSpell);
 			spell2LvlUpBtn.onClick.AddListener(levelUp);
 			//			int x = (int)spellDmg / 5;
-			spellDescription = "Invoke a tower dealing "+ spellDmg.ToString()+" damage. Last "+spellDmg*6+" seconds. The more it attacks, the less it stay. Can be recharged.";
+			spellDescription = "Invoke a mushroom dealing "+ spellDmg.ToString()+" damage. Last "+spellDmg*6+" seconds. The more it attacks, the less it stay. Can be recharged.";
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
-				spellDescription = "Invoque une tour infligeant "+ spellDmg.ToString()+" dégâts. Reste "+spellDmg*6+" secondes max.Peut être rechargé.";
+				spellDescription = "Invoque un champignon infligeant "+ spellDmg.ToString()+" dégâts. Reste "+spellDmg*6+" secondes max.Peut être rechargé.";
 
 			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;
@@ -254,10 +254,10 @@ public class PlayerCastTowerMage : NetworkBehaviour {
 
 			upgradeSpell();
 			//            int x = (int)spellDmg / 5;
-			spellDescription = "Invoke a tower dealing "+ spellDmg.ToString()+" damage. Last "+spellDmg*6+" seconds. The more it attacks, the less it stay. Can be recharged.";
+			spellDescription = "Invoke a mushroom dealing "+ spellDmg.ToString()+" damage. Last "+spellDmg*6+" seconds. The more it attacks, the less it stay. Can be recharged.";
 			if (PlayerPrefs.GetString ("LANGAGE") == "Fr") 
 			{
-				spellDescription = "Invoque une tour infligeant "+ spellDmg.ToString()+" dégâts. Reste "+spellDmg*6+" secondes max.Peut être rechargé.";
+				spellDescription = "Invoque un champignon infligeant "+ spellDmg.ToString()+" dégâts. Reste "+spellDmg*6+" secondes max.Peut être rechargé.";
 
 			}
 			spell2Btn.transform.GetChild(0).GetComponentInChildren<Text>().text = spellDescription;

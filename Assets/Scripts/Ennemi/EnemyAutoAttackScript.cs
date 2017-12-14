@@ -241,7 +241,7 @@ public class EnemyAutoAttackScript : NetworkBehaviour {
 //				}
 //			}
 //				anim.SetBool ("walk", walkAnim = false);
-			Debug.Log("fuck");
+//			Debug.Log("fuck");
 		}
 	}
 	public void LooseTarget()

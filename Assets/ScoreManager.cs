@@ -63,6 +63,7 @@ public class ScoreManager : MonoBehaviour {
 		allScores = leaderBoard.ToListHighToLow ();
 		yield return allScores;
 		endScorePanel.SetActive (true);
+		endScorePanel.transform.parent.GetComponent<Canvas> ().enabled = true;
 		endScorePanel.transform.Find ("MyScorePanel").GetChild (1).GetComponent<Text> ().text = myName;
 		endScorePanel.transform.Find ("MyScorePanel").GetChild (0).GetComponent<Text> ().text = myActualScore.ToString();
 		endGameDisplayerTxt = endScorePanel.transform.Find ("MyScorePanel").GetChild (3).GetComponent<Text> ();

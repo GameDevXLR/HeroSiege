@@ -107,15 +107,15 @@ public class SpawnManager : NetworkBehaviour
 		switch (day) 
 		{
 		case 1:
-			StartCoroutine(SpawnProcedure(5,0,0,0,0,0));
+			StartCoroutine(SpawnProcedure(3,0,0,0,0,0));
 			break;
 		case 2:
-			StartCoroutine(SpawnProcedure(0,3,0,0,0,0));
+			StartCoroutine(SpawnProcedure(0,2,0,0,0,0));
 			GameManager.instanceGM.StartQuest2KillAllMobs ();
 
 			break;
 		case 3:
-			StartCoroutine(SpawnProcedure(0,2,0,3,0,0));
+			StartCoroutine(SpawnProcedure(0,1,0,2,0,0));
 
 			break;
 		case 4:
@@ -127,7 +127,7 @@ public class SpawnManager : NetworkBehaviour
 
 			break;
 		case 6:
-			StartCoroutine(SpawnProcedure(0,0,1,4,0,0));
+			StartCoroutine(SpawnProcedure(0,0,1,3,0,0));
 
 			break;
 		case 7:
@@ -135,11 +135,11 @@ public class SpawnManager : NetworkBehaviour
 
 			break;
 		case 8:
-			StartCoroutine(SpawnProcedure(0,0,0,4,2,1));
+			StartCoroutine(SpawnProcedure(0,0,0,3,2,1));
 
 			break;
 		case 9:
-			StartCoroutine(SpawnProcedure(0,0,0,5,3,1));
+			StartCoroutine(SpawnProcedure(0,0,0,3,2,1));
 
 			break;
 		case 10:

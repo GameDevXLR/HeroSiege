@@ -10,11 +10,13 @@ public class MainMenuManager : MonoBehaviour
 	private bool actifTabFG;
 	private bool actifTabProfile;
 	public bool actifTabOptions;
+	public bool actifTabCredits;
 	public InputField nameField;
 	public Text PlayerNameDisplay;
 	public GameObject FindGamesCanvasObj;
 	public GameObject ProfileCanvasObj;
 	public GameObject OptionsCanvasObj;
+	public GameObject CreditsCanvasObj;
 	public string PlayerNickname;
 	public Slider menuMusicVolume;
 	public AudioSource menuMusic;
@@ -30,6 +32,7 @@ public class MainMenuManager : MonoBehaviour
 		FindGamesCanvasObj.GetComponent<Canvas>().enabled = false;	
 		ProfileCanvasObj.GetComponent<Canvas>().enabled = false;
 		OptionsCanvasObj.GetComponent<Canvas> ().enabled = false;
+		CreditsCanvasObj.GetComponent<Canvas> ().enabled = false;
 //		PlayerPrefs.DeleteKey ("PlayerNN");
 
 	}
@@ -102,7 +105,10 @@ public class MainMenuManager : MonoBehaviour
 			{
 				ToggleOptionsCanvas ();
 			}
-
+			if (actifTabCredits) 
+			{
+				ToggleCreditsCanvas ();
+			}
 			return;
 		}
 		if (actifTabFG == true)
@@ -130,6 +136,10 @@ public class MainMenuManager : MonoBehaviour
 			{
 				ToggleOptionsCanvas ();
 			}
+			if (actifTabCredits) 
+			{
+				ToggleCreditsCanvas ();
+			}
 			return;
 		}
 		if (actifTabProfile == true)
@@ -137,6 +147,37 @@ public class MainMenuManager : MonoBehaviour
 
 			ProfileCanvasObj.GetComponent<Canvas>().enabled = false;
 			actifTabProfile = false;			
+		}
+
+	}
+	public void ToggleCreditsCanvas()
+	{
+		GetComponent<AudioSource> ().PlayOneShot (clicSound1);
+
+		if (actifTabCredits == false)
+		{
+
+			CreditsCanvasObj.GetComponent<Canvas>().enabled = true;
+			actifTabCredits = true;
+			if (actifTabFG) 
+			{
+				ToggleFindGCanvas ();
+			}
+			if (actifTabOptions) 
+			{
+				ToggleOptionsCanvas ();
+			}
+			if (actifTabProfile) 
+			{
+				ToggleProfileCanvas ();
+			}
+			return;
+		}
+		if (actifTabCredits == true)
+		{
+
+			CreditsCanvasObj.GetComponent<Canvas>().enabled = false;
+			actifTabCredits = false;			
 		}
 
 	}
@@ -156,6 +197,10 @@ public class MainMenuManager : MonoBehaviour
 			if (actifTabProfile) 
 			{
 				ToggleProfileCanvas ();
+			}
+			if (actifTabCredits) 
+			{
+				ToggleCreditsCanvas ();
 			}
 			return;
 		}
