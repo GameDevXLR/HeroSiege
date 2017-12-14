@@ -195,6 +195,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 //			GameObject.Find ("GraphicsBeneathHeroPan").SetActive (false);
 //			heroSelectPanel.SetActive (false);
 //			lockHeroBtn.enabled = false;
+			heroSelectPanel.transform.parent.Find("HeroLockArt").GetComponent<Image> ().enabled = true;
 			GameObject go = heroSelectPanel.transform.parent.Find("GraphicsBeneathHeroPan").gameObject;
 			go.transform.Find ("CadreSideL").gameObject.SetActive (false);
 			go.transform.Find ("CadreSideR").gameObject.SetActive (false);
@@ -343,6 +344,7 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
+			heroSelectPanel.transform.parent.Find ("HeroLockArt").GetComponent<Image> ().sprite = tankArtwork;
 //			heroArtPlaceholder.sprite = tankArtwork;
 //			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
 //			selectHeroHealer1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
@@ -436,6 +438,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
+			heroSelectPanel.transform.parent.Find ("HeroLockArt").GetComponent<Image> ().sprite = ovateArtwork;
+
 //			heroArtPlaceholder.sprite = ovateArtwork;
 
 //			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = selectedHeroColor;
@@ -533,6 +537,8 @@ public class PlayerInitialisationScript : NetworkBehaviour
 	{
 		if (isLocalPlayer) 
 		{
+			heroSelectPanel.transform.parent.Find ("HeroLockArt").GetComponent<Image> ().sprite = archerArtwork;
+
 //			heroArtPlaceholder.sprite = archerArtwork; 
 
 //			selectHeroDps1.transform.parent.parent.GetComponent<Image> ().color = defaultHeroColor;
