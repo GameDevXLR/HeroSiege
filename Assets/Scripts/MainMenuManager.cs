@@ -40,7 +40,7 @@ public class MainMenuManager : MonoBehaviour
 //			ConfSound ();
 //		} else 
 //		{
-			Invoke ("ConfSound", 3f);
+			Invoke ("ConfSound", 1f);
 //		}
 	}
 	public void ConfSound()

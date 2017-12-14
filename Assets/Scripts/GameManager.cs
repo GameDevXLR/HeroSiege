@@ -460,7 +460,7 @@ public class GameManager : NetworkBehaviour
 		nightTime = night;
 		scoreManager.myActualScore += 150 * gameDifficulty;
 
-//		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
+		Camera.main.GetComponent<CameraController> ().SetDayNightGeneralTone (nightTime);
 		dayNightDisplay.sprite = nightIcon;
 
 		if (night) 
