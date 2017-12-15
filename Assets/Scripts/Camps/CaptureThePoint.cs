@@ -200,11 +200,11 @@ public class CaptureThePoint : NetworkBehaviour
             GetComponent<AudioSource>().PlayOneShot(Capture);
             GetComponent<Location>().IconColour = Color.green;
 
-//            if (isOutpost)
-//            {
+            if (isOutpost)
+           {
                 GetComponentInChildren<ShopScript>().isAccessible = true;
                 transform.GetChild(0).GetComponent<Location>().enabled = true;
-//            }
+            }
 //            if (isCatapulte)
 //            {
 //

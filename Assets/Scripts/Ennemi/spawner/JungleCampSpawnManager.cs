@@ -77,7 +77,15 @@ public class JungleCampSpawnManager : NetworkBehaviour
 
         for (int indexBoss = 0; indexBoss < jungCampBoss.Count; indexBoss++)
         {
-            RpcUpdateBoss(jungCampBoss[indexBoss].GetComponent<NetworkIdentity>().netId, indexBoss);
+            try
+            {
+
+                RpcUpdateBoss(jungCampBoss[indexBoss].GetComponent<NetworkIdentity>().netId, indexBoss);
+            }
+            catch (System.IO.IOException e)
+            {
+                Debug.Log("JungleCampSpawnManager, error = " + e.Message);
+            }
         }
     }
 
