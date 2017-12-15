@@ -169,10 +169,10 @@ public class EnnemyIGManager : CharacterIGManager
 						GameManager.instanceGM.Team2LooseALife();
 
 					}
-				}
-			}
-			yield return new WaitForSeconds (0.1f);
-			NetworkServer.Destroy (gameObject);
+                }
+                yield return new WaitForSeconds(0.1f);
+                NetworkServer.Destroy(gameObject);
+            }
 			yield return null;
 		}
         if (guyAttackingMe)

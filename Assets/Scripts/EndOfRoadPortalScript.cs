@@ -23,9 +23,9 @@ public class EndOfRoadPortalScript : NetworkBehaviour {
 			RpcCallPartNexus();
 			EnnemyIGManager EIG = other.gameObject.GetComponent<EnnemyIGManager> ();
 			EIG.guyAttackingMe = null;
-			other.gameObject.GetComponent<EnnemyIGManager> ().isAbleToResurect = false;
+            EIG.isAbleToResurect = false;
 			EIG.goldGiven = 0;
-			other.gameObject.GetComponent<EnnemyIGManager> ().MakeHimDie ();
+            EIG.MakeHimDie ();
 
 			if (teamNbr == 1) 
 			{
