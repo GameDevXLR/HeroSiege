@@ -175,59 +175,67 @@ public class EnnemyIGManager : CharacterIGManager
             }
 			yield return null;
 		}
-        if (guyAttackingMe)
-        {
-            if (guyAttackingMe.tag == "Player")
-            {
-                guyAttackingMe.GetComponent<PlayerXPScript>().GetXP(xpGiven/10);
-                //guyAttackingMe.GetComponent<PlayerGoldScript>().GetGold(goldGiven/10);
-				ShareXPWithTheTeam (guyAttackingMe.GetComponent<PlayerXPScript> ().isTeam1, xpGiven);
-                GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript>().receiveGoldFromEnnemy(this,guyAttackingMe);
-            }
-        }
         else
         {
-			ShareXPWithTheTeam (myEnemies [0].GetComponent<PlayerXPScript> ().isTeam1, xpGiven);
-            GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript>().receiveGoldFromEnnemy(this);
-        }
-        //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
-        if (isServer)
-        {
-			if (myEnemies.Count > 0) 
-			{
-				int y = goldGiven / myEnemies.Count;
-			for (int i = 0; i < myEnemies.Count; i++) 
-			{
-				myEnemies [i].GetComponent<PlayerGoldScript> ().GetGold (y);
-				if (i == myEnemies.Count - 1) 
-				{
-					myEnemies.Clear ();
-				}
-			}
-			}
-
-            if (isJungleMob)
+            if (guyAttackingMe)
             {
-                isDead = true;
-                RpcKillTheJungleMob();
+                if (guyAttackingMe.tag == "Player")
+                {
+                    guyAttackingMe.GetComponent<PlayerXPScript>().GetXP(xpGiven / 10);
+                    //guyAttackingMe.GetComponent<PlayerGoldScript>().GetGold(goldGiven/10);
+                    ShareXPWithTheTeam(guyAttackingMe.GetComponent<PlayerXPScript>().isTeam1, xpGiven);
+                    GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript>().receiveGoldFromEnnemy(this, guyAttackingMe);
+                }
             }
             else
             {
-                RpcKillTheMob();
-				if (!GetComponent<MinionsPathFindingScript> ().isBoss) {
-					if (GetComponent<MinionsPathFindingScript> ().isTeam1) {
-						GameManager.instanceGM.SyncMobCountT1 (GameManager.instanceGM.totalMobCountT1 -= 1);
-					} else {
-						GameManager.instanceGM.SyncMobCountT2 (GameManager.instanceGM.totalMobCountT2 -= 1);
-
-					}
-				}
-                yield return new WaitForSeconds(0.1f);
-                NetworkServer.Destroy(gameObject);
-                //faire ici la remise dans le pool.
+                ShareXPWithTheTeam(myEnemies[0].GetComponent<PlayerXPScript>().isTeam1, xpGiven);
+                GameManager.instanceGM.playerObj.GetComponent<PlayerGoldScript>().receiveGoldFromEnnemy(this);
             }
+            //		Anim.SetBool ("isDead", true); pour lancer l'anim mort.
+            if (isServer)
+            {
+                if (myEnemies.Count > 0)
+                {
+                    int y = goldGiven / myEnemies.Count;
+                    for (int i = 0; i < myEnemies.Count; i++)
+                    {
+                        myEnemies[i].GetComponent<PlayerGoldScript>().GetGold(y);
+                        if (i == myEnemies.Count - 1)
+                        {
+                            myEnemies.Clear();
+                        }
+                    }
+                }
 
+                if (isJungleMob)
+                {
+                    isDead = true;
+                    RpcKillTheJungleMob();
+                }
+                else
+                {
+                    RpcKillTheMob();
+                    if (!GetComponent<MinionsPathFindingScript>().isBoss)
+                    {
+                        if (GetComponent<MinionsPathFindingScript>().isTeam1)
+                        {
+                            GameManager.instanceGM.SyncMobCountT1(GameManager.instanceGM.totalMobCountT1 -= 1);
+                        }
+                        else
+                        {
+                            GameManager.instanceGM.SyncMobCountT2(GameManager.instanceGM.totalMobCountT2 -= 1);
+
+                        }
+                    }
+                    yield return new WaitForSeconds(0.1f);
+                    NetworkServer.Destroy(gameObject);
+                    //faire ici la remise dans le pool.
+                }
+
+            }
         }
+        
 
     }
     [ClientRpc]
