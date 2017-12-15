@@ -25,6 +25,9 @@ public class PlayerClicToMove : NetworkBehaviour {
     NetworkClient nClient;
 	[SyncVar(hook = "ActualizePSpeed")]public float playerSpeed; // c'est pas link au nameshagent.speed attention!!! a corriger a l'occase. voir itemmanager qui fait appel pour le moment lors de l'achat des boots
 	public Text speedDisplay;
+    public int clickAMount = 0;
+    public int clickAmountMax = 4;
+    public float clickResetTime = 1;
 	//	[SyncVar]public Vector3 startingPos; inutil now c'était pour les pnj...héritage d'un temps révolu.
 	// Use this for initialization
 	void Start () 
@@ -40,6 +43,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 			layer_mask = LayerMask.GetMask ("Ground", "Ennemies", "UI");
 			cursorTargetter = GameObject.Find ("ClickArrowFull");
 			nClient = GameObject.Find ("NetworkManagerObj").GetComponent<NetworkManager> ().client;
+            StartCoroutine(ResetAmountClick());
 		}
 		if (isServer) 
 		{
@@ -56,10 +60,14 @@ public class PlayerClicToMove : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
        
-		if ( isLocalPlayer) 
+		if ( isLocalPlayer ) 
 		{
-            if (Input.GetMouseButtonUp(1) && !isInMiniMap)
+            
+            
+            
+            if (clickAMount <= clickAmountMax && Input.GetMouseButtonUp(1) && !isInMiniMap)
             {
+                clickAMount++;
                 bool next = true;
 				if(GetComponent<PlayerAutoAttack>().particule)
 				{
@@ -108,7 +116,7 @@ public class PlayerClicToMove : NetworkBehaviour {
 
 			    }
             }
-
+            
         }
 		if (target)  
 		{
@@ -298,6 +306,16 @@ public class PlayerClicToMove : NetworkBehaviour {
     {
         aggroArea.autoTargetting = isAutoAAttack;
 
+    }
+
+
+    IEnumerator ResetAmountClick()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(clickResetTime);
+            clickAMount = 0;
+        }
     }
 
 }
